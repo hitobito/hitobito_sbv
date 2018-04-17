@@ -1,7 +1,10 @@
-#  Copyright (c) 2012-2018, TODO: Customer Name. This file is part of
+#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
+
+#  You can use YAML anchors to avoid duplication
+#  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
 
 de:
   activerecord:
@@ -12,13 +15,106 @@ de:
       group/root:
         one: Hauptgruppe
         other: Hauptgruppen
+      group/root_geschaeftsstelle: &office
+        one: Geschäftsstelle
+        other: Geschäftsstellen
+      group/root_vorstand: &vorstand
+        one: Vorstand
+        other: Vorstände
+      group/root_musikkommission: &musikkommission
+        one: Musikkommission
+        other: Musikkommissionen
+      group/root_arbeitsgruppe: &arbeitsgruppe
+        one: Arbeitsgruppe
+        other: Arbeitsgruppen
+      group/root_ehrenmitglieder: &ehrenmitglieder
+        one: Ehrenmitglieder
+        other: Ehrenmitglieder
+      group/root_kontakte: &kontakte
+        one: Kontakte
+        other: Kontakte
 
+      group/mitgliederverband:
+        one: Mitgliederverband
+        other: Mitgliederverbände
+      group/mitgliederverband_geschaeftsstelle:
+        *office
+      group/mitgliederverband_vorstand:
+        *vorstand
+      group/mitgliederverband_musikkommission:
+        *musikkommission
+      group/mitgliederverband_arbeitsgruppe:
+        *arbeitsgruppe
+      group/mitgliederverband_ehrenmitglieder:
+        *ehrenmitglieder
+      group/mitgliederverband_kontakte:
+        *kontakte
 
       ### ROLES
 
-      group/root/leader:
-        one: Leitung
-        description: Leitungspersonen verwalten die Applikation.
-      group/root/member:
+      #### General
+
+      role/admin:
+        one: Administrator
+        other: Administratoren
+      role/adressverwaltung:
+        one: Adressverwaltung
+        other: Adressverwaltung
+
+
+      #### Geschaeftsstelle Roles
+
+      role/geschaeftsstelle_manager:
+        one: Geschäftsführung
+        other: Geschäftsführung
+      role/geschaeftsstelle_staff:
+        one: MitarbeiterIn
+        other: MitarbeiterInnen
+      role/geschaeftsstelle_help:
+        one: Hilfe
+        other: Hilfen
+
+      #### Vorstand Roles
+
+      role/vorstand_kassier:
+        one: Kassier
+        other: Kassiere
+      role/vorstand_mitglied: &mitglied
         one: Mitglied
-        description: Mitglieder sind alle anderen.
+        other: Mitglieder
+      role/vorstand_praesident: &praesident
+        one: PräsidentIn
+        other: PräsidentInnen
+      role/vorstand_vize_praesident:
+        one: VizepräsidentIn
+        other: VizepräsidentInnen
+      role/vorstand_veteran_geschaeftssteller:
+        one: Veteranenchef
+        other: Veteranenchefs
+
+      #### Musikkommission Roles
+
+      role/musikkommission_praesident:
+        *praesident
+      role/musikkommission_mitglied:
+        *mitglied
+
+      #### Arbeitsgruppen Roles
+
+      role/arbeitsgruppe_leitung:
+        one: Leitung
+        other: Leitung
+      role/arbeitsgruppe_mitglied:
+        *mitglied
+
+      #### Ehrenmitglieder
+
+      role/ehrenmitglieder:
+        one: Ehrenmitglied
+        other: Ehrenmitglieder
+
+      #### Kontakte Roles
+
+      role/kontakt:
+        one: Kontakt
+        other: Kontakte

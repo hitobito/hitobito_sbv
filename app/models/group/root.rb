@@ -1,29 +1,34 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2018, TODO: Customer Name. This file is part of
+#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-# TODO: rename class to specific name and change all references
 class Group::Root < ::Group
 
   self.layer = true
+  self.default_children = [Group::RootGeschaeftsstelle, 
+                           Group::RootVorstand,
+                           Group::RootMusikkommission,
+                           Group::RootKontakte,
+                           Group::RootEhrenmitglieder
+                          ]
 
-  # TODO: define actual child group types
-  children Group::Root
+  children Group::RootGeschaeftsstelle,
+           Group::RootVorstand,
+           Group::RootMusikkommission,
+           Group::RootArbeitsgruppe,
+           Group::RootKontakte,
+           Group::RootEhrenmitglieder,
+           Group::Mitgliederverband
 
   ### ROLES
 
-  # TODO: define actual role types
-  class Leader < ::Role
-    self.permissions = [:layer_and_below_full, :admin]
+  class Admin < Role::Admin
+    self.permissions = [:layer_and_below_full, :admin, :impersonation]
   end
 
-  class Member < ::Role
-    self.permissions = [:group_read]
-  end
-
-  roles Leader, Member
+  roles Admin
 
 end

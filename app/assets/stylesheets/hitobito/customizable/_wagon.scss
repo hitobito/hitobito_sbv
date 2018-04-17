@@ -1,0 +1,47 @@
+//  Copyright (c) 2012-2016, Dachverband Schweizer Jugendparlamente. This file is part of
+//  hitobito_dsj and licensed under the Affero General Public License version 3
+//  or later. See the COPYING file at the top-level directory or at
+//  https://github.com/hitobito/hitobito_dsj.
+
+.brand {
+  width: 231px;
+  height: 89px;
+  padding: 0;
+  background: image-url("logo-sbv.png") transparent no-repeat;
+  background-size: contain;
+}
+
+.btn {
+  .icon,
+  [class^="icon-"],
+  [class*=" icon-"] {
+    background-image: image-url("glyphicons-halflings-red.png");
+  }
+}
+
+#page-navigation .nav li:not(.active) a:not(:hover),
+#page-header .options > ul > li > a,
+#page-header .options > ul > li > a:hover {
+  color: $bsv_color_f;
+}
+
+.nav-left .inner {
+  background-color: $white;
+}
+
+.sheet.parent {
+  background-color: $bsv_color_g;
+}
+
+.nav-left-title.active,
+.nav-left-list .active > a {
+  background-color: $bsv_color_a;
+}
+.nav-left-title.active:hover,
+.nav-left-list .active > a:hover {
+  background-color: $bsv_color_c;
+}
+.nav-left-list .active > a,
+.nav-left-title.active a {
+  color: $white;
+}
