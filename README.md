@@ -11,7 +11,7 @@ of the Schweizer Blasmusikverband.
 
 ## ToDos
 
-* hitobito-bsv@puzzle.ch Alias erstellen und in settings.yml als rootuser hinterlegen. Bittea auf hitobito-intern@puzzle.ch weiterleiten lassen (wie bei den anderen).
+* hitobito-sbv@puzzle.ch Alias erstellen und in settings.yml als rootuser hinterlegen. Bittea auf hitobito-intern@puzzle.ch weiterleiten lassen (wie bei den anderen).
 * Merhsprachigkeit abklären und anpassen in `config/settings.yml`
 * Seeds zum Ausprobieren aufsetzen
 
