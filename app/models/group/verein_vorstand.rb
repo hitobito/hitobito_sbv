@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_generic.
 
-class Group::RootVorstand < Group
+class Group::VereinVorstand < Group
 
 	class Praesident < Role::VorstandPraesident
 	end
@@ -13,14 +13,17 @@ class Group::RootVorstand < Group
 	class VizePraesident < Role::VorstandVizePraesident
 	end
 
-	class Finanzchef < Role::VorstandFinanzchef
+	class Kassier < Role::VorstandKassier
 	end
 
 	class Veteranenchef < Role::VorstandVeteranenchef
 	end
 
+	class Materialverwaltung < Role::VorstandMaterialverwaltung
+	end
+
 	class Mitglied < Role::VorstandMitglied
 	end
 
-	roles Praesident, VizePraesident, Finanzchef, Veteranenchef, Mitglied
+	roles Praesident, VizePraesident, Kassier, Veteranenchef, Materialverwaltung, Mitglied
 end

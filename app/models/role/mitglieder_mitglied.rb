@@ -5,6 +5,6 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_generic.
 
-class Role::VorstandVeteranOfficer < Role
-  self.permissions = [:layer_and_below_read, :contact_data]
+class Role::MitgliederMitglied < Role
+  self.permissions = [:layer_read]
 end

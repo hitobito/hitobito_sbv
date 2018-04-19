@@ -18,7 +18,9 @@ class Group::Mitgliederverband < ::Group
            Group::MitgliederverbandVorstand,
            Group::MitgliederverbandMusikkommission,
            Group::MitgliederverbandArbeitsgruppe,
-           Group::MitgliederverbandKontakte
+           Group::MitgliederverbandKontakte,
+           Group::Regionalverband,
+           Group::Verein
 
 
   ### ROLES

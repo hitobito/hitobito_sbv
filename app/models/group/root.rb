@@ -21,7 +21,8 @@ class Group::Root < ::Group
            Group::RootArbeitsgruppe,
            Group::RootKontakte,
            Group::RootEhrenmitglieder,
-           Group::Mitgliederverband
+           Group::Mitgliederverband,
+           Group::Verein
 
   ### ROLES
 

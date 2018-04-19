@@ -13,8 +13,8 @@ de:
       ### GROUPS
 
       group/root:
-        one: Hauptgruppe
-        other: Hauptgruppen
+        one: Dachverband
+        other: Dachverbände
       group/root_geschaeftsstelle: &office
         one: Geschäftsstelle
         other: Geschäftsstellen
@@ -50,6 +50,38 @@ de:
       group/mitgliederverband_kontakte:
         *kontakte
 
+      group/regionalverband:
+        one: Regionalverband
+        other: Regionalverbände
+      group/regionalverband_geschaeftsstelle:
+        *office
+      group/regionalverband_vorstand:
+        *vorstand
+      group/regionalverband_musikkommission:
+        *musikkommission
+      group/regionalverband_arbeitsgruppe:
+        *arbeitsgruppe
+      group/regionalverband_ehrenmitglieder:
+        *ehrenmitglieder
+      group/regionalverband_kontakte:
+        *kontakte
+
+      group/verein:
+        one: Verein
+        other: Vereine
+      group/verein_vorstand:
+        *vorstand
+      group/verein_musikkommission:
+        *musikkommission
+      group/verein_arbeitsgruppe:
+        *arbeitsgruppe
+      group/verein_mitglieder:
+        one: Mitglieder
+        oter: Mitglieder
+      group/verein_kontakte:
+        *kontakte
+
+
       ### ROLES
 
       #### General
@@ -79,6 +111,9 @@ de:
       role/vorstand_kassier:
         one: Kassier
         other: Kassiere
+      role/vorstand_finanzchef:
+        one: Finanzchef
+        other: Finanzchefs
       role/vorstand_mitglied: &mitglied
         one: Mitglied
         other: Mitglieder
@@ -88,9 +123,12 @@ de:
       role/vorstand_vize_praesident:
         one: VizepräsidentIn
         other: VizepräsidentInnen
-      role/vorstand_veteran_geschaeftssteller:
+      role/vorstand_veteranenchef:
         one: Veteranenchef
         other: Veteranenchefs
+      role/vorstand_materialverwaltung:
+        one: Materialverwaltung
+        other: Materialverwaltung
 
       #### Musikkommission Roles
 
@@ -118,3 +156,12 @@ de:
       role/kontakt:
         one: Kontakt
         other: Kontakte
+
+
+      #### Mitglider Roles
+
+      role/mitglieder_mitglied:
+        *mitglied
+      role/mitglieder_passivmitglied:
+        one: Passivmitglied
+        other: Passivmitglieder

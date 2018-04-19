@@ -16,11 +16,11 @@ class Group::MitgliederverbandVorstand < Group
 	class Kassier < Role::VorstandKassier
 	end
 
-	class VeteranOfficer < Role::VorstandVeteranOfficer
+	class Veteranenchef < Role::VorstandVeteranenchef
 	end
 
 	class Mitglied < Role::VorstandMitglied
 	end
 
-	roles Praesident, VizePraesident, Kassier, VeteranOfficer, Mitglied
+	roles Praesident, VizePraesident, Kassier, Veteranenchef, Mitglied
 end
