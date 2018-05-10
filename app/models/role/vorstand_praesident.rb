@@ -6,5 +6,5 @@
 #  https://github.com/hitobito/hitobito_generic.
 
 class Role::VorstandPraesident < Role
-  self.permissions = [:layer_and_below_read, :group_and_below_full, :contact_data]
+  self.permissions = [:layer_full, :group_and_below_full, :contact_data]
 end
