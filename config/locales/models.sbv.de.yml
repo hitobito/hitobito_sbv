@@ -18,9 +18,9 @@ de:
       group/root_geschaeftsstelle: &office
         one: Geschäftsstelle
         other: Geschäftsstellen
-      group/root_vorstand: &vorstand
-        one: Vorstand
-        other: Vorstände
+      group/root_vorstand: 
+        one: Verbandsleitung
+        other: Verbandsleitung
       group/root_musikkommission: &musikkommission
         one: Musikkommission
         other: Musikkommissionen
@@ -39,8 +39,9 @@ de:
         other: Mitgliederverbände
       group/mitgliederverband_geschaeftsstelle:
         *office
-      group/mitgliederverband_vorstand:
-        *vorstand
+      group/mitgliederverband_vorstand: &vorstand
+        one: Vorstand
+        other: Vorstände
       group/mitgliederverband_musikkommission:
         *musikkommission
       group/mitgliederverband_arbeitsgruppe:

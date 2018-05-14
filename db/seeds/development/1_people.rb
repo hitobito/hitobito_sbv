@@ -31,7 +31,7 @@ puzzlers = ['Pascal Zumkehr',
           ]
 
 devs = {
-  'Bernhard Lippuner' => 'bernhard.lippuner@quickline.ch',
+  'Bernhard Lippuner' => 'bernhard.lippuner@windband.ch',
   'Sigi Aulbach' => 'sigi.aulbach@windband.ch',
   'Hans Seeberger' => 'hans.seeberger@windband.ch'
 }
