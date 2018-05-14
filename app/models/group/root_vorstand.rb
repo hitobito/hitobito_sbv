@@ -7,20 +7,20 @@
 
 class Group::RootVorstand < Group
 
-	class Praesident < Role::VorstandPraesident
-	end
+  class Praesident < Role::VorstandPraesident
+  end
 
-	class VizePraesident < Role::VorstandVizePraesident
-	end
+  class VizePraesident < Role::VorstandVizePraesident
+  end
 
-	class Finanzchef < Role::VorstandFinanzchef
-	end
+  class Finanzchef < Role::VorstandFinanzchef
+  end
 
-	class Veteranenchef < Role::VorstandVeteranenchef
-	end
+  class Veteranenchef < Role::VorstandVeteranenchef
+  end
 
-	class Mitglied < Role::VorstandMitglied
-	end
+  class Mitglied < Role::VorstandMitglied
+  end
 
-	roles Praesident, VizePraesident, Finanzchef, Veteranenchef, Mitglied
+  roles Praesident, VizePraesident, Finanzchef, Veteranenchef, Mitglied
 end

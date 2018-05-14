@@ -7,13 +7,13 @@
 
 class Group::RootEhrenmitglieder < Group
 
-	children Group::RootEhrenmitglieder
+  children Group::RootEhrenmitglieder
 
-	class Adressverwaltung < Role::Adressverwaltung
-	end
+  class Adressverwaltung < Role::Adressverwaltung
+  end
 
-	class Ehrenmitglied < Role::Ehrenmitglied
-	end
+  class Ehrenmitglied < Role::Ehrenmitglied
+  end
 
-	roles Adressverwaltung, Ehrenmitglied
+  roles Adressverwaltung, Ehrenmitglied
 end

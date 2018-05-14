@@ -9,10 +9,9 @@ class Group::Mitgliederverband < ::Group
 
   self.layer = true
   self.default_children = [Group::MitgliederverbandGeschaeftsstelle,
-  						   Group::MitgliederverbandVorstand,
-  						   Group::MitgliederverbandKontakte,
-  						   Group::MitgliederverbandMusikkommission
-  						  ]
+                           Group::MitgliederverbandVorstand,
+                           Group::MitgliederverbandKontakte,
+                           Group::MitgliederverbandMusikkommission]
 
   children Group::MitgliederverbandGeschaeftsstelle,
            Group::MitgliederverbandVorstand,

@@ -6,16 +6,16 @@
 #  https://github.com/hitobito/hitobito_generic.
 
 class Group::RootGeschaeftsstelle < Group
-	
-	class Manager < Role::GeschaeftsstelleManager
-		self.permissions = [:layer_and_below_full, :contact_data, :impersonation]
-	end
 
-	class Staff < Role::GeschaeftsstelleStaff
-	end
+  class Manager < Role::GeschaeftsstelleManager
+    self.permissions = [:layer_and_below_full, :contact_data, :impersonation]
+  end
 
-	class Help < Role::GeschaeftsstelleHelp
-	end
+  class Staff < Role::GeschaeftsstelleStaff
+  end
 
-	roles Manager, Staff, Help
+  class Help < Role::GeschaeftsstelleHelp
+  end
+
+  roles Manager, Staff, Help
 end

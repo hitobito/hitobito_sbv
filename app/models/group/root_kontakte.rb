@@ -7,13 +7,13 @@
 
 class Group::RootKontakte < Group
 
-	children Group::RootKontakte
+  children Group::RootKontakte
 
-	class Adressverwaltung < Role::Adressverwaltung
-	end
+  class Adressverwaltung < Role::Adressverwaltung
+  end
 
-	class Kontakt < Role::Kontakt
-	end
+  class Kontakt < Role::Kontakt
+  end
 
-	roles Adressverwaltung, Kontakt
+  roles Adressverwaltung, Kontakt
 end

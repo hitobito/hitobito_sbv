@@ -7,14 +7,14 @@
 
 class Group::RegionalverbandArbeitsgruppe < Group
 
-	children Group::RegionalverbandArbeitsgruppe
+  children Group::RegionalverbandArbeitsgruppe
 
 
-	class Leitung < Role::ArbeitsgruppeLeitung
-	end
+  class Leitung < Role::ArbeitsgruppeLeitung
+  end
 
-	class Mitglied < Role::ArbeitsgruppeMitglied
-	end
+  class Mitglied < Role::ArbeitsgruppeMitglied
+  end
 
-	roles Leitung, Mitglied
+  roles Leitung, Mitglied
 end

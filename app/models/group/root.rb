@@ -8,12 +8,11 @@
 class Group::Root < ::Group
 
   self.layer = true
-  self.default_children = [Group::RootGeschaeftsstelle, 
+  self.default_children = [Group::RootGeschaeftsstelle,
                            Group::RootVorstand,
                            Group::RootMusikkommission,
                            Group::RootKontakte,
-                           Group::RootEhrenmitglieder
-                          ]
+                           Group::RootEhrenmitglieder]
 
   children Group::RootGeschaeftsstelle,
            Group::RootVorstand,

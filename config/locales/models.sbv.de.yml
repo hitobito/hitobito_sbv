@@ -148,7 +148,7 @@ de:
 
       #### Ehrenmitglieder
 
-      role/ehrenmitglieder:
+      role/ehrenmitglied:
         one: Ehrenmitglied
         other: Ehrenmitglieder
 

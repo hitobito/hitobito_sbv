@@ -7,13 +7,13 @@
 
 class Group::MitgliederverbandKontakte < Group
 
-	children Group::MitgliederverbandKontakte
+  children Group::MitgliederverbandKontakte
 
-	class Adressverwaltung < Role::Adressverwaltung
-	end
+  class Adressverwaltung < Role::Adressverwaltung
+  end
 
-	class Kontakt < Role::Kontakt
-	end
+  class Kontakt < Role::Kontakt
+  end
 
-	roles Adressverwaltung, Kontakt
+  roles Adressverwaltung, Kontakt
 end

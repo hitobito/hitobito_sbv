@@ -7,14 +7,14 @@
 
 class Group::VereinArbeitsgruppe < Group
 
-	children Group::VereinArbeitsgruppe
+  children Group::VereinArbeitsgruppe
 
 
-	class Leitung < Role::ArbeitsgruppeLeitung
-	end
+  class Leitung < Role::ArbeitsgruppeLeitung
+  end
 
-	class Mitglied < Role::ArbeitsgruppeMitglied
-	end
+  class Mitglied < Role::ArbeitsgruppeMitglied
+  end
 
-	roles Leitung, Mitglied
+  roles Leitung, Mitglied
 end
