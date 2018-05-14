@@ -7,21 +7,21 @@
 
 class Group::VereinMitglieder < Group
 
-	children Group::VereinMitglieder
+  children Group::VereinMitglieder
 
-	class Adressverwaltung < Role::Adressverwaltung
-	end
+  class Adressverwaltung < Role::Adressverwaltung
+  end
 
-	class Mitglied < Role::MitgliederMitglied
-	end
+  class Mitglied < Role::MitgliederMitglied
+  end
 
-	
-	class Passivmitglied < Role::MitgliederPassivmitglied
-	end
 
-	
-	class Ehrenmitglied < Role::Ehrenmitglied
-	end
+  class Passivmitglied < Role::MitgliederPassivmitglied
+  end
 
-	roles Adressverwaltung, Mitglied, Passivmitglied, Ehrenmitglied
+
+  class Ehrenmitglied < Role::Ehrenmitglied
+  end
+
+  roles Adressverwaltung, Mitglied, Passivmitglied, Ehrenmitglied
 end

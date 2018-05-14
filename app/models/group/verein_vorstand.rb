@@ -7,23 +7,23 @@
 
 class Group::VereinVorstand < Group
 
-	class Praesident < Role::VorstandPraesident
-	end
+  class Praesident < Role::VorstandPraesident
+  end
 
-	class VizePraesident < Role::VorstandVizePraesident
-	end
+  class VizePraesident < Role::VorstandVizePraesident
+  end
 
-	class Kassier < Role::VorstandKassier
-	end
+  class Kassier < Role::VorstandKassier
+  end
 
-	class Veteranenchef < Role::VorstandVeteranenchef
-	end
+  class Veteranenchef < Role::VorstandVeteranenchef
+  end
 
-	class Materialverwaltung < Role::VorstandMaterialverwaltung
-	end
+  class Materialverwaltung < Role::VorstandMaterialverwaltung
+  end
 
-	class Mitglied < Role::VorstandMitglied
-	end
+  class Mitglied < Role::VorstandMitglied
+  end
 
-	roles Praesident, VizePraesident, Kassier, Veteranenchef, Materialverwaltung, Mitglied
+  roles Praesident, VizePraesident, Kassier, Veteranenchef, Materialverwaltung, Mitglied
 end

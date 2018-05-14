@@ -7,15 +7,15 @@
 
 class Group::MitgliederverbandGeschaeftsstelle < Group
 
-	class Manager < Role::GeschaeftsstelleManager
-	end
+  class Manager < Role::GeschaeftsstelleManager
+  end
 
-	class Staff < Role::GeschaeftsstelleStaff
-	end
+  class Staff < Role::GeschaeftsstelleStaff
+  end
 
-	class Help < Role::GeschaeftsstelleHelp
-	end
+  class Help < Role::GeschaeftsstelleHelp
+  end
 
-	roles Manager, Staff, Help
+  roles Manager, Staff, Help
 
 end

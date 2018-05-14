@@ -8,11 +8,11 @@
 class Group::RootMusikkommission < Group
 
 
-	class Praesident < Role::MusikkommissionPraesident
-	end
+  class Praesident < Role::MusikkommissionPraesident
+  end
 
-	class Mitglied < Role::MusikkommissionMitglied
-	end
+  class Mitglied < Role::MusikkommissionMitglied
+  end
 
-	roles Praesident, Mitglied
+  roles Praesident, Mitglied
 end

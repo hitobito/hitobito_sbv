@@ -9,10 +9,9 @@ class Group::Regionalverband < ::Group
 
   self.layer = true
   self.default_children = [Group::RegionalverbandGeschaeftsstelle,
-  						   Group::RegionalverbandVorstand,
-  						   Group::RegionalverbandKontakte,
-  						   Group::RegionalverbandMusikkommission
-  						  ]
+                           Group::RegionalverbandVorstand,
+                           Group::RegionalverbandKontakte,
+                           Group::RegionalverbandMusikkommission]
 
   children Group::RegionalverbandGeschaeftsstelle,
            Group::RegionalverbandVorstand,

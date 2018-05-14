@@ -8,11 +8,10 @@
 class Group::Verein < ::Group
 
   self.layer = true
-  self.default_children = [ Group::VereinVorstand,
-  						              Group::VereinKontakte,
-                            Group::VereinMitglieder,
-  						              Group::VereinMusikkommission
-  						             ]
+  self.default_children = [Group::VereinVorstand,
+                           Group::VereinKontakte,
+                           Group::VereinMitglieder,
+                           Group::VereinMusikkommission]
 
   children Group::VereinVorstand,
            Group::VereinMusikkommission,
