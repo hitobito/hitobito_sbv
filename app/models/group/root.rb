@@ -14,19 +14,21 @@ class Group::Root < ::Group
                            Group::RootKontakte,
                            Group::RootEhrenmitglieder]
 
+  self.event_types = [Event, Event::Course]
+
   children Group::RootGeschaeftsstelle,
            Group::RootVorstand,
            Group::RootMusikkommission,
            Group::RootArbeitsgruppe,
            Group::RootKontakte,
            Group::RootEhrenmitglieder,
-           Group::Mitgliederverband,
+           Group::Mitgliederverband
            Group::Verein
 
   ### ROLES
 
   class Admin < Role::Admin
-    self.permissions = [:layer_and_below_full, :admin, :impersonation]
+    self.permissions = [:layer_and_below_full, :admin, :impersonation, :finance]
   end
 
   roles Admin

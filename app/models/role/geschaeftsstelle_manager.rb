@@ -6,5 +6,5 @@
 #  https://github.com/hitobito/hitobito_generic.
 
 class Role::GeschaeftsstelleManager < Role
-  self.permissions = [:layer_and_below_full, :contact_data]
+  self.permissions = [:layer_and_below_full, :contact_data, :finance]
 end
