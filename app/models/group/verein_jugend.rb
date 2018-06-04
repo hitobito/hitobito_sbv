@@ -13,16 +13,6 @@ class Group::VereinJugend < ::Group
   #                          Group::VereinMitglieder,
   #                          Group::VereinMusikkommission]
 
-  class Vorstand < Group
-  end
-  class Musikkommission < Group
-  end
-  # # class Mitglieder < Group::VereinMitglieder ;
-  # # class Arbeitsgruppe < Group::VereinArbeitsgruppe ;
-  # # class Kontakte < Group::VereinKontakte ;
-
-  children Vorstand
-
   self.used_attributes += [:founding_year, 
                            :correspondence_language, 
                            :besetzung_value, 
