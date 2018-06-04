@@ -18,7 +18,8 @@ class Group::Regionalverband < ::Group
            Group::RegionalverbandMusikkommission,
            Group::RegionalverbandArbeitsgruppe,
            Group::RegionalverbandKontakte,
-           Group::Verein
+           Group::Verein,
+           Group::VereinJugend
 
 
   ### ROLES
