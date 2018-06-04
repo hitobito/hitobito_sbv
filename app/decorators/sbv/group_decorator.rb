@@ -1,7 +1,7 @@
 module Sbv::GroupDecorator
   extend ActiveSupport::Concern
 
-  I18NKEY = "#{activerecord.attributes.group}".freeze
+  I18NKEY = "activerecord.attributes.group".freeze
   BESETZUNGEN = %w(brass_band harmonie fanfare_benelux fanfare_mixte).freeze
   KLASSEN = %w(1 2 3 4 5).freeze
   UNTERHALTUNGSMUSIK = %w(oberstufe mittelstufe unterstufe)
