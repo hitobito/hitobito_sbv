@@ -19,6 +19,14 @@ class Group::Verein < ::Group
            Group::VereinArbeitsgruppe,
            Group::VereinKontakte
 
+  self.used_attributes += [:founding_year, 
+                           :correspondence_language, 
+                           :besetzung_value, 
+                           :klasse_value, 
+                           :unterhaltungsmusik_value, 
+                           :subventionen]
+
+  # TODO: Validierungen der verschiedenen Values, refactoring, exports
 
   ### ROLES
 

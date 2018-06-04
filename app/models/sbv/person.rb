@@ -5,11 +5,18 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-module Sbv::Group
+module Sbv::Person
   extend ActiveSupport::Concern
 
   included do
-    root_types Group::Root
+    Person::PUBLIC_ATTRS << :correspondence_language
+
+    validates :correspondence_language,
+              inclusion: { in: lambda do |_|
+                                 Settings.application.languages.to_hash.keys.collect(&:to_s)
+                               end,
+                           allow_blank: true }
+
   end
 
 end

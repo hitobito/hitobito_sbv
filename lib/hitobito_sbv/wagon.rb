@@ -21,7 +21,13 @@ module HitobitoSbv
     config.to_prepare do
       # rubocop:disable SingleSpaceBeforeFirstArg
       # extend application classes here
+      # models
       Group.send        :include, Sbv::Group
+      Person.send        :include, Sbv::Person
+
+      # decorators
+      GroupDecorator.send :include, Sbv::GroupDecorator
+
       # rubocop:enable SingleSpaceBeforeFirstArg
     end
 

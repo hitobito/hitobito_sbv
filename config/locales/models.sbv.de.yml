@@ -24,6 +24,7 @@ de:
       group/root_musikkommission: &musikkommission
         one: Musikkommission
         other: Musikkommissionen
+
       group/root_arbeitsgruppe: &arbeitsgruppe
         one: Arbeitsgruppe
         other: Arbeitsgruppen
@@ -166,3 +167,35 @@ de:
       role/mitglieder_passivmitglied:
         one: Passivmitglied
         other: Passivmitglieder
+    
+    attributes:
+      person:
+        correspondence_language: &correspondence_language Korrespondenzsprache
+        profession: Beruf
+      group:
+        vereinssitz: Vereinssitz
+        founding_year: Gründungsjahr
+        klasse: &klasse Klasse 
+        klasse_value: *klasse
+        besetzung: &besetzung Besetzung
+        besetzung_value: *besetzung
+        unterhaltungsmusik: &unterhaltungsmusik Unterhaltungsmusik
+        unterhaltungsmusik_value: *unterhaltungsmusik
+        correspondence_language: *correspondence_language
+        subventionen: Subventionen
+        besetzungen:
+          brass_band: Brass Band
+          harmonie: Harmonie
+          fanfare_benelux: Fanfare Benelux
+          fanfare_mixte: Fanfare Mixte
+        unterhaltungsmusik_stufen:
+          oberstufe: Oberstufe
+          mittelstufe: Mittelstufe
+          unterstufe: Unterstufe
+        klassen:
+          '1': Höchstklasse
+          '2': 1. Klasse
+          '3': 2. Klasse
+          '4': 3. Klasse
+          '5': 4. Klasse
+
