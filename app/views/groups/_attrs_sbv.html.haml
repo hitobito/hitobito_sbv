@@ -1,2 +1,2 @@
-= render_attrs(entry, *entry.used_attributes(:vereinssitz, :founding_year, :klasse, :besetzung_value, :klasse_value, :unterhaltungsmusik_value))
+= render_attrs(entry, *entry.used_attributes(:vereinssitz, :founding_year, :besetzung, :klasse_value, :unterhaltungsmusik_value))
 = render_attrs(entry, *entry.used_attributes(:subventionen)) if can?(:show_details, @group)

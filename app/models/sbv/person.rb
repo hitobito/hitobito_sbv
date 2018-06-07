@@ -11,11 +11,11 @@ module Sbv::Person
   included do
     Person::PUBLIC_ATTRS << :correspondence_language
 
-    validates :correspondence_language,
-              inclusion: { in: lambda do |_|
-                                 Settings.application.languages.to_hash.keys.collect(&:to_s)
-                               end,
-                           allow_blank: true }
+    # validates :correspondence_language,
+    #           inclusion: { in: lambda do |_|
+    #                              Settings.application.languages.to_hash.keys.collect(&:to_s)
+    #                            end,
+    #                        allow_blank: true }
 
   end
 

@@ -20,9 +20,12 @@ class Group::Verein < ::Group
            Group::VereinKontakte
 
   self.used_attributes += [:founding_year, 
-                           :correspondence_language, 
+                           :correspondence_language,
+                           :besetzung,
                            :besetzung_value, 
+                           :klasse,
                            :klasse_value, 
+                           :unterhaltungsmusik,
                            :unterhaltungsmusik_value, 
                            :subventionen]
 

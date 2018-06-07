@@ -5,3 +5,5 @@
   = f.labeled_collection_select :besetzung, entry.available_besetzungen, :first, :last, {include_blank: :true}
   = f.labeled_collection_select :klasse, entry.available_klassen, :first, :last, {include_blank: :true}
   = f.labeled_collection_select :unterhaltungsmusik, entry.available_unterhaltungsmusik, :first, :last, {include_blank: :true}
+= field_set_tag do
+  = f.labeled_input_fields :subventionen 
