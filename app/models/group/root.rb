@@ -23,8 +23,7 @@ class Group::Root < ::Group
            Group::RootKontakte,
            Group::RootEhrenmitglieder,
            Group::Mitgliederverband,
-           Group::Verein,
-           Group::VereinJugend
+           Group::Verein
 
   ### ROLES
 
