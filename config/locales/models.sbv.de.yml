@@ -24,13 +24,24 @@ de:
       group/root_musikkommission: &musikkommission
         one: Musikkommission
         other: Musikkommissionen
-
       group/root_arbeitsgruppe: &arbeitsgruppe
         one: Arbeitsgruppe
         other: Arbeitsgruppen
       group/root_ehrenmitglieder: &ehrenmitglieder
         one: Ehrenmitglieder
         other: Ehrenmitglieder
+      group/root_veteranen: &veteranen
+        one: Veteranen
+        other: Veteranen
+      group/root_veteranen/veteran:
+        one: Eidgenössiche(r) VeteranIn
+        other: Eidgenössiche VeteranInnen
+      group/root_veteranen/ehrenveteran:
+        one: Eidgenössiche(r) EhrenveteranIn
+        other: Eidgenössiche EhrenveteranInnen
+      group/root_veteranen/cism_veteran:
+        one: CISM VeteranIn
+        other: CISM VeteranInnen
       group/root_kontakte: &kontakte
         one: Kontakte
         other: Kontakte
@@ -48,7 +59,16 @@ de:
       group/mitgliederverband_arbeitsgruppe:
         *arbeitsgruppe
       group/mitgliederverband_ehrenmitglieder:
-        *ehrenmitglieder
+        *ehrenmitglieder      
+      group/mitgliederverband_veteranen:
+        *veteranen
+      group/mitgliederverband_veteranen/veteran:
+        one: Kantonale(r) VeteranIn
+        other: Kantonale VeteranInnen
+      group/mitgliederverband_veteranen/ehrenveteran:
+        one: Kantonale(r) EhrenveteranIn
+        other: Kantonale EhrenveteranInnen
+
       group/mitgliederverband_kontakte:
         *kontakte
 
@@ -82,9 +102,16 @@ de:
         oter: Mitglieder
       group/verein_kontakte:
         *kontakte
+      group/verein/conductor:
+        one: DirigentIn
+        other: DirigentInnen
+      group/verein/suisa_admin:
+        one: Vorantwortliche(r) Suisa
+        other: Vorantwortliche Suisa
 
 
-      ### ROLES
+
+      ### ROLES FOR ALL LAYERS
 
       #### General
 
@@ -160,14 +187,14 @@ de:
         other: Kontakte
 
 
-      #### Mitglider Roles
+      #### Mitglieder Roles
 
       role/mitglieder_mitglied:
         *mitglied
       role/mitglieder_passivmitglied:
         one: Passivmitglied
         other: Passivmitglieder
-    
+
     attributes:
       person:
         correspondence_language: &correspondence_language Korrespondenzsprache

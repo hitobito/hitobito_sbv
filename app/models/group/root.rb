@@ -12,7 +12,8 @@ class Group::Root < ::Group
                            Group::RootVorstand,
                            Group::RootMusikkommission,
                            Group::RootKontakte,
-                           Group::RootEhrenmitglieder]
+                           Group::RootEhrenmitglieder,
+                           Group::RootVeteranen]
 
   self.event_types = [Event, Event::Course]
 
@@ -22,6 +23,7 @@ class Group::Root < ::Group
            Group::RootArbeitsgruppe,
            Group::RootKontakte,
            Group::RootEhrenmitglieder,
+           Group::RootVeteranen,
            Group::Mitgliederverband,
            Group::Verein
 

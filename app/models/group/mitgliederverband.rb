@@ -11,13 +11,15 @@ class Group::Mitgliederverband < ::Group
   self.default_children = [Group::MitgliederverbandGeschaeftsstelle,
                            Group::MitgliederverbandVorstand,
                            Group::MitgliederverbandKontakte,
-                           Group::MitgliederverbandMusikkommission]
+                           Group::MitgliederverbandMusikkommission,
+                           Group::MitgliederverbandVeteranen]
 
   children Group::MitgliederverbandGeschaeftsstelle,
            Group::MitgliederverbandVorstand,
            Group::MitgliederverbandMusikkommission,
            Group::MitgliederverbandArbeitsgruppe,
            Group::MitgliederverbandKontakte,
+           Group::MitgliederverbandVeteranen,
            Group::Regionalverband,
            Group::Verein
 

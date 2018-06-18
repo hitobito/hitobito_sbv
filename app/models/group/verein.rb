@@ -37,5 +37,12 @@ class Group::Verein < ::Group
     self.permissions = [:layer_and_below_full]
   end
 
-  roles Admin
+  class Conductor < Role
+    self.permissions = [:contact_data]
+  end
+
+  class SuisaAdmin < Role
+  end
+
+  roles Admin, Conductor, SuisaAdmin
 end
