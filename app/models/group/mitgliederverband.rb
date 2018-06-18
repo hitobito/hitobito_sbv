@@ -19,8 +19,7 @@ class Group::Mitgliederverband < ::Group
            Group::MitgliederverbandArbeitsgruppe,
            Group::MitgliederverbandKontakte,
            Group::Regionalverband,
-           Group::Verein,
-           Group::VereinJugend
+           Group::Verein
 
 
   ### ROLES

@@ -71,9 +71,6 @@ de:
       group/verein:
         one: Verein
         other: Vereine
-      group/verein_jugend:
-        one: Jugendmusik
-        other: Jugendmusiken
       group/verein_vorstand:
         *vorstand
       group/verein_musikkommission:
