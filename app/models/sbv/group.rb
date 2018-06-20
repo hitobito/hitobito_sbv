@@ -10,6 +10,21 @@ module Sbv::Group
 
   included do
     root_types Group::Root
+
+    include I18nSettable
+    include I18nEnums
+
+    BESETZUNGEN = %w(brass_band harmonie fanfare_benelux fanfare_mixte).freeze
+    KLASSEN = %w(hoechste erste zweite dritte vierte).freeze
+    UNTERHALTUNGSMUSIK = %w(oberstufe mittelstufe unterstufe).freeze
+
+    i18n_enum :besetzung, BESETZUNGEN, key: :besetzungen
+    i18n_enum :klasse, KLASSEN, key: :klassen
+    i18n_enum :unterhaltungsmusik, UNTERHALTUNGSMUSIK, key: :unterhaltungsmusik_stufen
+
+    i18n_setter :besetzung, (BESETZUNGEN + [nil])
+    i18n_setter :klasse, (KLASSEN + [nil])
+    i18n_setter :unterhaltungsmusik, (UNTERHALTUNGSMUSIK + [nil])
   end
 
 end
