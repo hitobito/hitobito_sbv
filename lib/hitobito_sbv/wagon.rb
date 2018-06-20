@@ -35,6 +35,11 @@ module HitobitoSbv
 
       ### helpers
       GroupsHelper.send :include, Sbv::GroupsHelper
+
+      ### domain
+      Export::Tabular::Groups::Row.send(
+        :include, Sbv::Export::Tabular::Groups::Row
+      )
       # rubocop:enable SingleSpaceBeforeFirstArg
     end
 
