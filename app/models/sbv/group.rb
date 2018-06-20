@@ -25,6 +25,15 @@ module Sbv::Group
     i18n_setter :besetzung, (BESETZUNGEN + [nil])
     i18n_setter :klasse, (KLASSEN + [nil])
     i18n_setter :unterhaltungsmusik, (UNTERHALTUNGSMUSIK + [nil])
+
+    validates :reported_members, :numericality => { greater_than_or_equal_to: 0 }
+
+  end
+
+  def recognized_members
+    return unless is_a?(Group::Verein)
+
+    Group::VereinMitglieder::Mitglied.joins(:group).where(groups: { parent_id: self.id }).count
   end
 
 end

@@ -8,3 +8,5 @@
     = f.labeled_collection_select :unterhaltungsmusik, Group.unterhaltungsmusik_labels.to_a, :first, :last, include_blank: true
   = field_set_tag do
     = f.labeled_input_fields :subventionen
+  = field_set_tag do
+    = f.labeled_input_field :reported_members, type: :number

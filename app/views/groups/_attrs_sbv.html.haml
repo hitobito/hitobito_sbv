@@ -1,2 +1,4 @@
 = render_attrs(entry, *entry.used_attributes(:correspondence_language, :vereinssitz, :founding_year, :besetzung, :klasse, :unterhaltungsmusik))
 = render_attrs(entry, *entry.used_attributes(:subventionen)) if can?(:show_details, @group)
+= render_attrs(entry, *entry.used_attributes(:recognized_members, :reported_members)) do |attr|
+  - entry.send(attr).present?

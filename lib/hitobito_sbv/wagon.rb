@@ -29,7 +29,7 @@ module HitobitoSbv
       GroupsController.permitted_attrs += [:vereinssitz, :founding_year,
                                            :correspondence_language, :besetzung,
                                            :klasse, :unterhaltungsmusik,
-                                           :subventionen]
+                                           :subventionen, :reported_members]
 
       PeopleController.permitted_attrs += [:profession, :correspondence_language]
 
@@ -37,9 +37,9 @@ module HitobitoSbv
       GroupsHelper.send :include, Sbv::GroupsHelper
 
       ### domain
-      Export::Tabular::Groups::Row.send(
-        :include, Sbv::Export::Tabular::Groups::Row
-      )
+      Export::Tabular::Groups::Row.send :include, Sbv::Export::Tabular::Groups::Row
+      Export::Tabular::Groups::List.send :include, Sbv::Export::Tabular::Groups::List
+
       # rubocop:enable SingleSpaceBeforeFirstArg
     end
 

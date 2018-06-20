@@ -27,7 +27,9 @@ class Group::Verein < ::Group
                            :klasse_value, 
                            :unterhaltungsmusik,
                            :unterhaltungsmusik_value, 
-                           :subventionen]
+                           :subventionen,
+                           :reported_members,
+                           :recognized_members]
 
   # TODO: Validierungen der verschiedenen Values, refactoring, exports
 
