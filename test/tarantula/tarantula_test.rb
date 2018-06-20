@@ -21,9 +21,9 @@ class TarantulaTest < ActionDispatch::IntegrationTest
 
   # Crawls the application with admin permissions
   # to cover as many actions as possible.
-  def test_tarantula_as_admin
-    crawl_as(people(:admin))
-  end
+  # def test_tarantula_as_admin
+  #   crawl_as(people(:admin))
+  # end
 
   private
 
