@@ -20,7 +20,7 @@ end
 def build_verein_attrs(parent_id, name)
   { name: name, parent_id: parent_id,
     address: Faker::Address.street_address,
-    zip_code: Faker::Address.zip,
+    zip_code: Faker::Address.zip[0..3],
     town: Faker::Address.city
   }
 end
