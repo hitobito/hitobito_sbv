@@ -18,7 +18,7 @@ de:
       group/root_geschaeftsstelle: &office
         one: Geschäftsstelle
         other: Geschäftsstellen
-      group/root_vorstand: 
+      group/root_vorstand:
         one: Verbandsleitung
         other: Verbandsleitung
       group/root_musikkommission: &musikkommission
@@ -59,7 +59,7 @@ de:
       group/mitgliederverband_arbeitsgruppe:
         *arbeitsgruppe
       group/mitgliederverband_ehrenmitglieder:
-        *ehrenmitglieder      
+        *ehrenmitglieder
       group/mitgliederverband_veteranen:
         *veteranen
       group/mitgliederverband_veteranen/veteran:
@@ -202,7 +202,7 @@ de:
       group:
         vereinssitz: Vereinssitz
         founding_year: Gründungsjahr
-        klasse: &klasse Klasse 
+        klasse: &klasse Klasse
         klasse_value: *klasse
         besetzung: &besetzung Besetzung
         besetzung_value: *besetzung
