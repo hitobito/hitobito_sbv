@@ -10,8 +10,8 @@ require Rails.root.join('db', 'seeds', 'support', 'person_seeder')
 class SbvPersonSeeder < PersonSeeder
 
   def amount(role_type)
-    case role_type.name.demodulize
-    when 'Member' then 5
+    case role_type.name
+    when 'Group::VereinMitglieder::Mitglied' then Rails.env.development? ? 4 : 20
     else 1
     end
   end
