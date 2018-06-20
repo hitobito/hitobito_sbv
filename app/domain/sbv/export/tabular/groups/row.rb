@@ -25,6 +25,10 @@ module Sbv
             translated_label(:unterhaltungsmusik)
           end
 
+          def correspondence_language
+            Settings.application.languages.to_h.stringify_keys[entry.correspondence_language]
+          end
+
           private
 
           def translated_label(method)
