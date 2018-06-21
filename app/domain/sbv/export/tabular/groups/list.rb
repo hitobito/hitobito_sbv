@@ -12,7 +12,7 @@ module Sbv
       module Groups
         module List
           extend ActiveSupport::Concern
-          
+
           included do
             alias_method_chain :attributes, :recognized_members
           end
