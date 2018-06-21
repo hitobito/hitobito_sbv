@@ -40,6 +40,9 @@ module HitobitoSbv
       Export::Tabular::Groups::Row.send :include, Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.send :include, Sbv::Export::Tabular::Groups::List
 
+      # load this class after all abilities have been defined
+      Ability.store.register SongAbility
+
       # rubocop:enable SingleSpaceBeforeFirstArg
     end
 

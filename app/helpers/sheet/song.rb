@@ -5,14 +5,9 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-Rails.application.routes.draw do
 
-  extend LanguageRouteScope
+module Sheet
+  class Song < Sheet::Admin
 
-  language_scope do
-    # Define wagon routes here
-
-    resources :songs
   end
-
 end

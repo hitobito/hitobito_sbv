@@ -195,6 +195,10 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
 
+      song:
+        one: Werk
+        other: Werke
+
     attributes:
       person:
         correspondence_language: &correspondence_language Korrespondenzsprache
@@ -230,4 +234,8 @@ de:
           zweite: 2. Klasse
           dritte: 3. Klasse
           vierte: 4. Klasse
-
+      song:
+        title: Titel
+        composed_by: Komponist
+        arranged_by: Arrangeur
+        published_by: Verlag

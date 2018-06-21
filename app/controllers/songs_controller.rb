@@ -5,14 +5,9 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-Rails.application.routes.draw do
+class SongsController < SimpleCrudController
 
-  extend LanguageRouteScope
-
-  language_scope do
-    # Define wagon routes here
-
-    resources :songs
-  end
+  self.search_columns = [:title, :composed_by, :arranged_by, :published_by]
+  self.permitted_attrs = [:title, :composed_by, :arranged_by, :published_by]
 
 end

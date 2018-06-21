@@ -5,14 +5,11 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-Rails.application.routes.draw do
+class SongAbility < AbilityDsl::Base
 
-  extend LanguageRouteScope
-
-  language_scope do
-    # Define wagon routes here
-
-    resources :songs
+  on(Song) do
+    class_side(:index).everybody
+    permission(:any).may(:manage).all
   end
 
 end
