@@ -45,6 +45,9 @@ de:
       group/root_kontakte: &kontakte
         one: Kontakte
         other: Kontakte
+      group/root/suisa_admin:
+        one: Vorantwortliche(r) Suisa
+        other: Vorantwortliche Suisa
 
       group/mitgliederverband:
         one: Mitgliederverband
@@ -68,9 +71,12 @@ de:
       group/mitgliederverband_veteranen/ehrenveteran:
         one: Kantonale(r) EhrenveteranIn
         other: Kantonale EhrenveteranInnen
-
       group/mitgliederverband_kontakte:
         *kontakte
+      group/mitgliederverband/suisa_admin:
+        one: Vorantwortliche(r) Suisa
+        other: Vorantwortliche Suisa
+
 
       group/regionalverband:
         one: Regionalverband
@@ -87,6 +93,9 @@ de:
         *ehrenmitglieder
       group/regionalverband_kontakte:
         *kontakte
+      group/regionalverband/suisa_admin:
+        one: Vorantwortliche(r) Suisa
+        other: Vorantwortliche Suisa
 
       group/verein:
         one: Verein
