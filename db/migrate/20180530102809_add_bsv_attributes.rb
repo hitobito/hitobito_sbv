@@ -11,5 +11,7 @@ class AddBsvAttributes < ActiveRecord::Migration
 
     add_column :people, :profession, :string
     add_column :people, :correspondence_language, :string, limit: 5
+
+    Group.reset_column_information
   end
 end

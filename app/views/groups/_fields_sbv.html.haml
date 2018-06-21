@@ -1,9 +1,10 @@
-= field_set_tag do
-  = f.labeled_input_fields :vereinssitz
-  = f.labeled_input_fields :founding_year 
-  = f.labeled_collection_select :correspondence_language, Settings.application.languages.to_hash, :first, :last
-  = f.labeled_collection_select :besetzung, entry.available_besetzungen, :first, :last, {include_blank: :true}
-  = f.labeled_collection_select :klasse, entry.available_klassen, :first, :last, {include_blank: :true}
-  = f.labeled_collection_select :unterhaltungsmusik, entry.available_unterhaltungsmusik, :first, :last, {include_blank: :true}
-= field_set_tag do
-  = f.labeled_input_fields :subventionen 
+- if entry.is_a?(Group::Verein)
+  = field_set_tag do
+    = f.labeled_input_fields :vereinssitz
+    = f.labeled_input_fields :founding_year
+    = f.labeled_collection_select :correspondence_language, Settings.application.languages.to_hash, :first, :last
+    = f.labeled_collection_select :besetzung, Group.besetzung_labels.to_a, :first, :last, include_blank: true
+    = f.labeled_collection_select :klasse, Group.klasse_labels.to_a, :first, :last, include_blank: true
+    = f.labeled_collection_select :unterhaltungsmusik, Group.unterhaltungsmusik_labels.to_a, :first, :last, include_blank: true
+  = field_set_tag do
+    = f.labeled_input_fields :subventionen

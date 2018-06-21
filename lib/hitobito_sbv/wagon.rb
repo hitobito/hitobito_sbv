@@ -25,9 +25,21 @@ module HitobitoSbv
       Group.send        :include, Sbv::Group
       Person.send        :include, Sbv::Person
 
-      # decorators
-      GroupDecorator.send :include, Sbv::GroupDecorator
+      ### controllers
+      GroupsController.permitted_attrs += [:vereinssitz, :founding_year,
+                                           :correspondence_language, :besetzung,
+                                           :klasse, :unterhaltungsmusik,
+                                           :subventionen]
 
+      PeopleController.permitted_attrs += [:profession, :correspondence_language]
+
+      ### helpers
+      GroupsHelper.send :include, Sbv::GroupsHelper
+
+      ### domain
+      Export::Tabular::Groups::Row.send(
+        :include, Sbv::Export::Tabular::Groups::Row
+      )
       # rubocop:enable SingleSpaceBeforeFirstArg
     end
 

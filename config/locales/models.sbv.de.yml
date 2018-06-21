@@ -18,7 +18,7 @@ de:
       group/root_geschaeftsstelle: &office
         one: Geschäftsstelle
         other: Geschäftsstellen
-      group/root_vorstand: 
+      group/root_vorstand:
         one: Verbandsleitung
         other: Verbandsleitung
       group/root_musikkommission: &musikkommission
@@ -59,7 +59,7 @@ de:
       group/mitgliederverband_arbeitsgruppe:
         *arbeitsgruppe
       group/mitgliederverband_ehrenmitglieder:
-        *ehrenmitglieder      
+        *ehrenmitglieder
       group/mitgliederverband_veteranen:
         *veteranen
       group/mitgliederverband_veteranen/veteran:
@@ -202,7 +202,7 @@ de:
       group:
         vereinssitz: Vereinssitz
         founding_year: Gründungsjahr
-        klasse: &klasse Klasse 
+        klasse: &klasse Klasse
         klasse_value: *klasse
         besetzung: &besetzung Besetzung
         besetzung_value: *besetzung
@@ -211,18 +211,21 @@ de:
         correspondence_language: *correspondence_language
         subventionen: Subventionen
         besetzungen:
+          _nil: unbekannt
           brass_band: Brass Band
           harmonie: Harmonie
           fanfare_benelux: Fanfare Benelux
           fanfare_mixte: Fanfare Mixte
         unterhaltungsmusik_stufen:
+          _nil: unbekannt
           oberstufe: Oberstufe
           mittelstufe: Mittelstufe
           unterstufe: Unterstufe
         klassen:
-          '1': Höchstklasse
-          '2': 1. Klasse
-          '3': 2. Klasse
-          '4': 3. Klasse
-          '5': 4. Klasse
+          _nil: unbekannt
+          hoechste: Höchstklasse
+          erste: 1. Klasse
+          zweite: 2. Klasse
+          dritte: 3. Klasse
+          vierte: 4. Klasse
 
