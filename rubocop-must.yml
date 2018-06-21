@@ -3,7 +3,6 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-
 # Rubocop configuration that MUST hold for every build.
 
 inherit_from: ../hitobito/rubocop-must.yml
