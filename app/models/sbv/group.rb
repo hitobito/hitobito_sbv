@@ -26,7 +26,8 @@ module Sbv::Group
     i18n_setter :klasse, (KLASSEN + [nil])
     i18n_setter :unterhaltungsmusik, (UNTERHALTUNGSMUSIK + [nil])
 
-    validates :reported_members, :numericality => { greater_than_or_equal_to: 0 }
+    validates :reported_members,
+      numericality: { greater_than_or_equal_to: 0 }, if: :reported_members
 
   end
 
