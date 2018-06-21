@@ -31,12 +31,12 @@ class SongCensus < ActiveRecord::Base
   class << self
     # The last census defined (may be the current one)
     def last
-      order('start_at DESC').first
+      order(:start_at).last
     end
 
     # The currently active census
     def current
-      where('start_at <= ?', Time.zone.today).order('start_at DESC').first
+      where('start_at <= ?', Time.zone.today).last
     end
   end
 
@@ -47,14 +47,13 @@ class SongCensus < ActiveRecord::Base
   private
 
   def set_defaults
-    if new_record?
-      self.start_at ||= Time.zone.today
-      self.year ||= start_at.year
-      if Settings.census
-        self.finish_at ||= Date.new(year,
-                                    Settings.census.default_finish_month,
-                                    Settings.census.default_finish_day)
-      end
+    return unless new_record?
+    self.start_at ||= Time.zone.today
+    self.year ||= start_at.year
+    if Settings.census
+      self.finish_at ||= Date.new(year,
+                                  Settings.census.default_finish_month,
+                                  Settings.census.default_finish_day)
     end
   end
 
