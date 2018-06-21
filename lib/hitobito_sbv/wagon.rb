@@ -50,7 +50,7 @@ module HitobitoSbv
 
     initializer 'sbv.add_inflections' do |_app|
       ActiveSupport::Inflector.inflections do |inflect|
-        # inflect.irregular 'census', 'censuses'
+        inflect.irregular 'song_census', 'song_censuses'
       end
     end
 
