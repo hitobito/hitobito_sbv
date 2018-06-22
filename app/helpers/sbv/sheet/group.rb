@@ -5,10 +5,17 @@ module Sbv::Sheet::Group
     tabs.insert(4,
                 Sheet::Tab.new('group.suisa_tab',
                                :group_root_song_census_path,
-                               params: { returning: true },
                                if: lambda do |view, group|
-                                 group.is_a?(Group::Root) &&
+                                 !group.is_a?(Group::Verein) &&
+                                   view.can?(:index, SongCensus)
+                               end),
+
+                Sheet::Tab.new('group.suisa_tab',
+                               :group_verein_song_census_path,
+                               if: lambda do |view, group|
+                                 group.is_a?(Group::Verein) &&
                                    view.can?(:index, SongCensus)
                                end))
+
   end
 end
