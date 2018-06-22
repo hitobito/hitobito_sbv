@@ -208,6 +208,9 @@ de:
         one: Werk
         other: Werke
 
+      song_census:
+        one: Meldeliste
+
     attributes:
       person:
         correspondence_language: &correspondence_language Korrespondenzsprache

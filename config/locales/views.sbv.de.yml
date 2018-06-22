@@ -10,6 +10,6 @@ de:
     suisa_tab: Suisa
   song_census_evaluation:
     total: Total
-    root:
+    base:
       show:
         no_data_for_this_year: Für dieses Jahr sind keine Angaben vorhanden.

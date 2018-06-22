@@ -1,5 +1,4 @@
 module Sheet::SongCensusEvaluation
-  class Root < Sheet::Base
-    self.parent_sheet = Sheet::Group
+  class Root < Base
   end
 end
