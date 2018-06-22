@@ -247,7 +247,7 @@ de:
         class:
           permission:
             description:
-              song_census: Darf Werk Meldelisten verwalten.
+              song_census: Darf Suisa-Meldungen verwalten.
       song:
         title: Titel
         composed_by: Komponist
