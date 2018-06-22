@@ -24,7 +24,7 @@
 
 admin:
   person: admin
-  group: root
+  group: hauptgruppe_1
   type: Group::Root::Leader
 
 # TODO use group and type of the main base leader
