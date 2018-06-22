@@ -49,5 +49,6 @@ class Group::RegionalverbandKontakte < Group
   class Kontakt < Role::Kontakt
   end
 
+  self.default_role = Kontakt
   roles Adressverwaltung, Kontakt
 end

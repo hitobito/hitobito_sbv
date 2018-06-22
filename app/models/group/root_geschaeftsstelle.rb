@@ -51,5 +51,6 @@ class Group::RootGeschaeftsstelle < Group
   class Help < Role::GeschaeftsstelleHelp
   end
 
+  self.default_role = Staff
   roles Manager, Staff, Help
 end

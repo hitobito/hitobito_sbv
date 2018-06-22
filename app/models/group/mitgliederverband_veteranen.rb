@@ -51,6 +51,7 @@ class Group::MitgliederverbandVeteranen < ::Group
   class Ehrenveteran < Role
   end
 
+  self.default_role = Veteran
   roles Veteran, Ehrenveteran
 
 end

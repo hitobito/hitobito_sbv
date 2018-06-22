@@ -56,5 +56,6 @@ class Group::RootVorstand < Group
   class Mitglied < Role::VorstandMitglied
   end
 
+  self.default_role = Mitglied
   roles Praesident, VizePraesident, Finanzchef, Veteranenchef, Mitglied
 end

@@ -50,5 +50,6 @@ class Group::VereinArbeitsgruppe < Group
   class Mitglied < Role::ArbeitsgruppeMitglied
   end
 
+  self.default_role = Mitglied
   roles Leitung, Mitglied
 end
