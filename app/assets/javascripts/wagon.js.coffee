@@ -11,4 +11,6 @@ app.Songs = {
     song = JSON.parse(e)
     $("form.new_song_count :input[name='song_count[song_id]']").val(song.id)
     $("form.new_song_count").submit()
+    $(":input[data-updater='Songs.update']")[0].value = ''
+    song.label
 }
