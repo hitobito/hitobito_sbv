@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :songs
     resources :groups do
       scope module: 'song_census_evaluation' do
-        get 'root' => 'root#show'
+        get 'root' => 'root#show', as: :root_song_census
       end
     end
   end

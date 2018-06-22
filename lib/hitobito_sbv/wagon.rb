@@ -37,6 +37,9 @@ module HitobitoSbv
       ### helpers
       GroupsHelper.send :include, Sbv::GroupsHelper
 
+      ### sheets
+      Sheet::Group.send :include, Sbv::Sheet::Group
+
       ### domain
       Export::Tabular::Groups::Row.send :include, Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.send :include, Sbv::Export::Tabular::Groups::List

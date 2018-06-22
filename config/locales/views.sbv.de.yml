@@ -6,6 +6,8 @@
 #  You can use YAML anchors to avoid duplication
 #  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
 de:
+  group:
+    suisa_tab: Suisa
   song_census_evaluation:
     total: Total
     root:
