@@ -4,7 +4,6 @@
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
-
 # == Schema Information
 #
 # Table name: groups
@@ -38,7 +37,6 @@
 #  unterhaltungsmusik          :string(255)
 #  subventionen                :string(255)
 #  reported_members            :integer
-#  song_census_completed       :boolean          default(FALSE), not null
 #
 
 class Group::RootMusikkommission < Group
