@@ -18,6 +18,8 @@
 
 class Song < ActiveRecord::Base
 
+  scope :list, -> { order(:title) }
+
   validates_by_schema
 
   def to_s

@@ -26,6 +26,14 @@ class SongCount < ActiveRecord::Base
   belongs_to :regionalverband, class_name: 'Group::Regionalverband'
   belongs_to :mitgliederverband, class_name: 'Group::Mitgliederverband'
 
+  scope :in, ->(year) { where(year: year) }
+
   validates_by_schema
+
+  validates :song_id, uniqueness: [:verein_id, :year]
+
+  def to_s
+    song.to_s
+  end
 
 end
