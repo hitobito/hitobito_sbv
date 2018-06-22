@@ -243,6 +243,11 @@ de:
           zweite: 2. Klasse
           dritte: 3. Klasse
           vierte: 4. Klasse
+      role:
+        class:
+          permission:
+            description:
+              song_census: Darf Werk Meldelisten verwalten.
       song:
         title: Titel
         composed_by: Komponist

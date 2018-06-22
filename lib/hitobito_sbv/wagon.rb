@@ -23,7 +23,8 @@ module HitobitoSbv
       # extend application classes here
       # models
       Group.send        :include, Sbv::Group
-      Person.send        :include, Sbv::Person
+      Person.send       :include, Sbv::Person
+      Role.send         :include, Sbv::Role
 
       ### controllers
       GroupsController.permitted_attrs += [:vereinssitz, :founding_year,

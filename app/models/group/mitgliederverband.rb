@@ -66,7 +66,7 @@ class Group::Mitgliederverband < ::Group
     self.permissions = [:layer_and_below_full]
   end
 
-  class SuisaAdmin < Role
+  class SuisaAdmin < Sbv::Role::SuisaAdmin
   end
 
   roles Admin, SuisaAdmin
