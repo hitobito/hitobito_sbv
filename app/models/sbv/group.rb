@@ -33,7 +33,7 @@ module Sbv::Group
 
   def recognized_members
     return unless is_a?(Group::Verein)
-      
+
     Group::VereinMitglieder::Mitglied.joins(:group).where(groups: { layer_group_id: self.id }).count
   end
 
