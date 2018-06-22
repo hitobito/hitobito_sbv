@@ -13,8 +13,16 @@ srand(42)
 
 require 'csv'
 
-def limited(collection)
-  Rails.env.development? ? collection.take(4) : collection
+def limited(collection, selection: nil)
+  if Rails.env.development?
+    if selection
+      collection & selection
+    else
+      collection.take(4)
+    end
+  else
+    collection
+  end
 end
 
 def build_verein_attrs(parent_id, name)
@@ -26,7 +34,12 @@ def build_verein_attrs(parent_id, name)
 end
 
 csv = CSV.parse(Wagons.find('sbv').root.join('db/seeds/development/vereine.csv').read, headers: true)
-limited(csv.by_col['Verband'].uniq).each do |name|
+limited(csv.by_col['Verband'].uniq, selection: [
+  'Bernischer Kantonal-Musikverband',
+  'St. Galler Blasmusikverband',
+  'Société cantonale des musiques fribourgeoises / Freiburger Kantonal-Musikverband',
+  'Federazione Bandistica Ticinese',
+]).each do |name|
   mv = Group::Mitgliederverband.seed(:name, :parent_id, name: name, parent_id: root.id).first
 
   verein_attrs = csv.select { |row| row['Verband'] == name }.collect do |row|
