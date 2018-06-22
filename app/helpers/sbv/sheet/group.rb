@@ -11,7 +11,7 @@ module Sbv::Sheet::Group
                                end),
 
                 Sheet::Tab.new('group.suisa_tab',
-                               :group_verein_song_census_path,
+                               :group_song_counts_path,
                                if: lambda do |view, group|
                                  group.is_a?(Group::Verein) &&
                                    view.can?(:index, SongCensus)
