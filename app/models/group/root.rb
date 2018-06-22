@@ -64,7 +64,7 @@ class Group::Root < ::Group
   ### ROLES
 
   class Admin < Role::Admin
-    self.permissions = [:layer_and_below_full, :admin, :impersonation, :finance]
+    self.permissions = [:layer_and_below_full, :admin, :impersonation, :finance, :song_census]
   end
 
   class SuisaAdmin < Sbv::Role::SuisaAdmin
