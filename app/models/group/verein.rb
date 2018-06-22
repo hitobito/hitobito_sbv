@@ -55,14 +55,11 @@ class Group::Verein < ::Group
            Group::VereinArbeitsgruppe,
            Group::VereinKontakte
 
-  self.used_attributes += [:founding_year, 
+  self.used_attributes += [:founding_year,
                            :correspondence_language,
                            :besetzung,
-                           :besetzung_value, 
                            :klasse,
-                           :klasse_value, 
                            :unterhaltungsmusik,
-                           :unterhaltungsmusik_value, 
                            :subventionen,
                            :reported_members,
                            :recognized_members]
