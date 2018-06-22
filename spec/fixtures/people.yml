@@ -16,16 +16,16 @@ leader:
   last_name: Leader
   email: a.leader@hitobito.example.com
   contact_data_visible: true
-  primary_group: musikgesellschaft_alterswil_35
+  primary_group: musikgesellschaft_alterswil
 
 member:
   first_name: My
   last_name: Member
   email: member0@hitobito.example.com
-  primary_group: musikverband_hastdutoene_40
+  primary_group: musikverband_hastdutoene
 
 suisa_admin:
   first_name: Suisa
   last_name: Boy
   email: suisa@hitobito.example.com
-  primary_group: musikgesellschaft_alterswil_35
+  primary_group: musikgesellschaft_alterswil

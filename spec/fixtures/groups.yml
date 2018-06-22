@@ -306,9 +306,9 @@ musikkommission_34:
   rgt: 69
   name: Musikkommission
   type: Group::RegionalverbandMusikkommission
-musikgesellschaft_alterswil_35:
+musikgesellschaft_alterswil:
   parent: alt_thiesdorf_30
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil_35) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
   lft: 58
   rgt: 67
   name: Musikgesellschaft Alterswil
@@ -317,36 +317,36 @@ musikgesellschaft_alterswil_35:
   zip_code: 7400
   town: Nord Boland
 vorstand_36:
-  parent: musikgesellschaft_alterswil_35
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil_35) %>
+  parent: musikgesellschaft_alterswil
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
   lft: 65
   rgt: 66
   name: Vorstand
   type: Group::VereinVorstand
 kontakte_37:
-  parent: musikgesellschaft_alterswil_35
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil_35) %>
+  parent: musikgesellschaft_alterswil
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
   lft: 59
   rgt: 60
   name: Kontakte
   type: Group::VereinKontakte
 mitglieder_38:
-  parent: musikgesellschaft_alterswil_35
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil_35) %>
+  parent: musikgesellschaft_alterswil
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
   lft: 61
   rgt: 62
   name: Mitglieder
   type: Group::VereinMitglieder
 musikkommission_39:
-  parent: musikgesellschaft_alterswil_35
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil_35) %>
+  parent: musikgesellschaft_alterswil
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
   lft: 63
   rgt: 64
   name: Musikkommission
   type: Group::VereinMusikkommission
-musikverband_hastdutoene_40:
+musikverband_hastdutoene:
   parent: bernischer_kantonal_musikverband_8
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene_40) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
   lft: 29
   rgt: 38
   name: Musikverband HastDuTöne
@@ -355,29 +355,29 @@ musikverband_hastdutoene_40:
   zip_code: 7892
   town: Neu Maddoxscheid
 vorstand_41:
-  parent: musikverband_hastdutoene_40
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene_40) %>
+  parent: musikverband_hastdutoene
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
   lft: 36
   rgt: 37
   name: Vorstand
   type: Group::VereinVorstand
 kontakte_42:
-  parent: musikverband_hastdutoene_40
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene_40) %>
+  parent: musikverband_hastdutoene
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
   lft: 30
   rgt: 31
   name: Kontakte
   type: Group::VereinKontakte
 mitglieder_43:
-  parent: musikverband_hastdutoene_40
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene_40) %>
+  parent: musikverband_hastdutoene
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
   lft: 32
   rgt: 33
   name: Mitglieder
   type: Group::VereinMitglieder
 musikkommission_44:
-  parent: musikverband_hastdutoene_40
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene_40) %>
+  parent: musikverband_hastdutoene
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
   lft: 34
   rgt: 35
   name: Musikkommission

@@ -12,10 +12,10 @@ describe SongAbility do
   subject { ability }
 
   let(:ability) { Ability.new(role.person.reload) }
-  let(:verein)  { groups(:musikgesellschaft_alterswil_35) }
+  let(:verein)  { groups(:musikgesellschaft_alterswil) }
 
   [
-  %w(Group::Verein::Admin musikgesellschaft_alterswil_35),
+  %w(Group::Verein::Admin musikgesellschaft_alterswil),
   %w(Group::VereinMitglieder::Mitglied mitglieder_43)
   ].each do |role, group|
     context role do
@@ -33,7 +33,7 @@ describe SongAbility do
 
       context 'in own group' do
         let(:song_count)  { SongCount.new(verein: verein) }
-   
+
         if role.match(/Mitglied$/)
           it 'may not read on song_count' do
             is_expected.not_to be_able_to(:read, song_count)

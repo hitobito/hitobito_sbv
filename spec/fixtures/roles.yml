@@ -29,15 +29,15 @@ admin:
 
 leader:
   person: leader
-  group: musikgesellschaft_alterswil_35
+  group: musikgesellschaft_alterswil
   type: Group::Verein::Admin
 
 member:
   person: member
-  group: musikverband_hastdutoene_40
+  group: musikverband_hastdutoene
   type: Group::VereinMitglieder::Mitglied
 
 suisa_admin:
   person: suisa_admin
-  group: musikgesellschaft_alterswil_35
+  group: musikgesellschaft_alterswil
   type: Group::Verein::SuisaAdmin
