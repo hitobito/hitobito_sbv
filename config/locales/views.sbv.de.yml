@@ -13,3 +13,5 @@ de:
     base:
       show:
         no_data_for_this_year: Für dieses Jahr sind keine Angaben vorhanden.
+    verein:
+      search: Werk suchen ..
