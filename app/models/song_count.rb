@@ -4,25 +4,19 @@
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
-
 # == Schema Information
 #
 # Table name: song_counts
 #
 #  id                      :integer          not null, primary key
-#  census_id               :integer          not null
 #  song_id                 :integer          not null
 #  verein_id               :integer          not null
 #  mitgliederverband_id_id :integer
 #  regionalverband_id_id   :integer
+#  song_cenus_id           :integer
+#  year                    :integer          not null
 #  count                   :integer          default(1), not null
 #
-
-
-#  Copyright (c) 2012-2013, Puzzle ITC GmbH. This file is part of
-#  hitobito_generic and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_generic.
 
 class SongCount < ActiveRecord::Base
 

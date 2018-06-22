@@ -15,17 +15,11 @@
 #  finish_at :date
 #
 
-
-#  Copyright (c) 2012-2013, Puzzle ITC GmbH. This file is part of
-#  hitobito_generic and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_generic.
-
 class SongCensus < ActiveRecord::Base
 
   after_initialize :set_defaults
 
-  has_many :song_census_counts, dependent: :destroy
+  has_many :song_counts, dependent: :destroy
 
   validates_by_schema
 
