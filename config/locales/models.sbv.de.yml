@@ -211,6 +211,10 @@ de:
       song_census:
         one: Meldeliste
 
+      song_count:
+        one: Werkmeldung
+        other: Werkmeldungen
+
     attributes:
       person:
         correspondence_language: &correspondence_language Korrespondenzsprache
@@ -256,3 +260,8 @@ de:
         composed_by: Komponist
         arranged_by: Arrangeur
         published_by: Verlag
+
+      song_count:
+        song: Werk
+        song_id: Werk
+        count: Anzahl

@@ -1,0 +1,9 @@
+= list_table do |t|
+  - t.sortable_attrs(:song_id, :count)
+  - action_col(t) do |e|
+    - if  can?(:destroy, e) && (!e.respond_to?(:deleted?) || !e.deleted?)
+      = link_to(icon(:trash), group_song_count_path(e.verein, e),
+                class: 'action',
+                title: ti(:"link.delete"),
+                alt: ti(:"link.delete"),
+                data: { remote: true, method: :delete })

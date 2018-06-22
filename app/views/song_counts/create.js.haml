@@ -1,0 +1,5 @@
+- if entry.valid?
+  $('#song_counts').html("#{j(render("list", year: entry.year, list: @list))}");
+
+$('#flash').html("#{j(render(partial: "layouts/flash", collection: [:notice, :alert], as: :level))}");
+$(":input[data-updater='Songs.update']")[0].value = '';
