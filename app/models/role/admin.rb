@@ -26,5 +26,5 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class Role::Admin < Role
-  self.permissions = [:layer_and_below_full, :admin, :impersonation, :finance]
+  self.permissions = [:layer_and_below_full, :admin, :impersonation, :finance, :song_census]
 end
