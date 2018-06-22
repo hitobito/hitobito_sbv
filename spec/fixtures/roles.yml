@@ -25,16 +25,19 @@
 admin:
   person: admin
   group: hauptgruppe_1
-  type: Group::Root::Leader
+  type: Group::Root::Admin
 
-# TODO use group and type of the main base leader
-# leader:
-#   person: leader
-#   group: root
-#   type: Group::Root::Leader
+leader:
+  person: leader
+  group: musikgesellschaft_alterswil_35
+  type: Group::Verein::Admin
 
-# # TODO use group and type of the main base member
-# member:
-#   person: member
-#   group: root
-#   type: Group::Root::Member
+member:
+  person: member
+  group: musikverband_hastdutoene_40
+  type: Group::VereinMitglieder::Mitglied
+
+suisa_admin:
+  person: suisa_admin
+  group: musikgesellschaft_alterswil_35
+  type: Group::Verein::SuisaAdmin
