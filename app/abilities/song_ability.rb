@@ -12,4 +12,9 @@ class SongAbility < AbilityDsl::Base
     permission(:any).may(:manage).all
   end
 
+  on(SongCensus) do
+    class_side(:index).everybody
+    permission(:any).may(:manage).all
+  end
+
 end

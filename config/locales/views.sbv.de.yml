@@ -5,4 +5,9 @@
 
 #  You can use YAML anchors to avoid duplication
 #  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
-de: {}
+de:
+  song_census_evaluation:
+    total: Total
+    root:
+      show:
+        no_data_for_this_year: Für dieses Jahr sind keine Angaben vorhanden.

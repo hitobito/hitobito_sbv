@@ -13,6 +13,11 @@ Rails.application.routes.draw do
     # Define wagon routes here
 
     resources :songs
+    resources :groups do
+      scope module: 'song_census_evaluation' do
+        get 'root' => 'root#show'
+      end
+    end
   end
 
 end
