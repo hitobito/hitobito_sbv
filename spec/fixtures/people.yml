@@ -9,7 +9,7 @@ admin:
   email: admin@hitobito.example.comt
   gender: m
   contact_data_visible: true
-  primary_group: root
+  primary_group: hauptgruppe_1
 
 # leader:
 #   first_name: A
