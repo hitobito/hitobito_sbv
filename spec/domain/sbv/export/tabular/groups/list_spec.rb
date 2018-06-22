@@ -9,7 +9,7 @@ require 'spec_helper'
 
 describe Export::Tabular::Groups::List do
 
-  let(:subject) { Export::Tabular::Groups::List.new([groups(:root)]) }
+  let(:subject) { Export::Tabular::Groups::List.new([groups(:hauptgruppe_1)]) }
 
   it 'does includes computed recognized_members attribute' do
     expect(subject.attributes).to include(:recognized_members)
