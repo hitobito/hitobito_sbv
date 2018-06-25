@@ -32,6 +32,8 @@ class SongCount < ActiveRecord::Base
 
   validates :song_id, uniqueness: [:verein_id, :year]
 
+  delegate :title, :composed_by, :arranged_by, :produced_by, to: :song
+
   def to_s
     song.to_s
   end

@@ -1,7 +1,14 @@
 = list_table do |t|
-  - t.sortable_attrs(:song_id, :count)
+  - t.col do |s|
+    = song_counts_count(s)
+
+  - t.col(t.sort_header(:title)) do |s|
+    = content_tag(:strong, link_to(s.song, s.song))
+
+  - t.sortable_attrs(:composed_by, :arranged_by)
+
   - action_col(t) do |e|
-    - if  can?(:destroy, e) && (!e.respond_to?(:deleted?) || !e.deleted?)
+    - if can?(:destroy, e) && (!e.respond_to?(:deleted?) || !e.deleted?)
       = link_to(icon(:trash), group_song_count_path(e.verein, e),
                 class: 'action',
                 title: ti(:"link.delete"),

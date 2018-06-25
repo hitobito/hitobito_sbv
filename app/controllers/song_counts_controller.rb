@@ -3,7 +3,9 @@ class SongCountsController < SimpleCrudController
 
   self.nesting = Group
   self.permitted_attrs = [:song_id, :year]
-  self.sort_mappings = { song_id: 'songs.title' }
+  self.sort_mappings = { title: 'songs.title',
+                         composed_by: 'songs.composed_by',
+                         arranged_by: 'songs.arranged_by' }
 
   respond_to :js
 
