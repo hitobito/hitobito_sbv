@@ -16,13 +16,16 @@ class SongAbility < AbilityDsl::Base
     permission(:layer_and_below_read).may(:read).in_verein
   end
 
-  on(SongCount) do
-    class_side(:index).everybody
-    permission(:any).may(:manage).all
-  end
-
   on(SongCensus) do
     permission(:song_census).may(:manage).in_layer
+  end
+
+  on(Group) do
+    permission(:song_census).may(:index_song_counts).in_same_group
+  end
+
+  def in_same_group
+    permission_in_group?(subject.id)
   end
 
   def in_verein

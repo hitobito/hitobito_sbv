@@ -48,4 +48,8 @@ class SongCountsController < SimpleCrudController
     @year_range ||= (year - 3)..(year + 1)
   end
 
+  def authorize_class
+    authorize!(:index_song_counts, parent)
+  end
+
 end

@@ -50,7 +50,7 @@ describe SongAbility do
   context 'suisa_admin' do
     let(:role) { Fabricate(Group::Verein::SuisaAdmin.name.to_sym, group: verein) }
 
-    %w(Song SongCount SongCensus).each do |model|
+    %w(Song SongCensus).each do |model|
       it "may index #{model}" do
         is_expected.to be_able_to(:index, model.constantize)
       end
@@ -59,5 +59,19 @@ describe SongAbility do
         is_expected.to be_able_to(:manage, model.constantize)
       end
     end
+
+    context SongCount do
+      context 'in same verein' do
+
+        it "may index_song_counts in verein" do
+          is_expected.to be_able_to(:index_song_counts, verein)
+        end
+
+        it "may manage SongCounts owned by verein" do
+          is_expected.to be_able_to(:manage, verein.song_counts.new)
+        end
+      end
+    end
+
   end
 end

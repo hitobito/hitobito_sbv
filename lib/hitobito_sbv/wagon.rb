@@ -45,6 +45,7 @@ module HitobitoSbv
       Export::Tabular::Groups::List.send :include, Sbv::Export::Tabular::Groups::List
 
       # load this class after all abilities have been defined
+      AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census
       Ability.store.register SongAbility
 
       # rubocop:enable SingleSpaceBeforeFirstArg
