@@ -2,7 +2,7 @@ class SongCountsController < SimpleCrudController
   include YearBasedPaging
 
   self.nesting = Group
-  self.permitted_attrs = [:song_id, :year]
+  self.permitted_attrs = [:song_id, :year, :count]
   self.sort_mappings = { title: 'songs.title',
                          composed_by: 'songs.composed_by',
                          arranged_by: 'songs.arranged_by' }
