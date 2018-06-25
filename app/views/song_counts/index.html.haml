@@ -8,7 +8,7 @@
 
   = standard_form(Song.new, remote: true) do |f|
     = f.labeled_input_fields :title, :composed_by, :arranged_by, :published_by
-    = save_form_buttons(f, nil, '#')
+    = save_form_buttons(f, nil, "javascript:$('form#new_song').hide();")
 
   = form_for([parent, parent.song_counts.build(year: year)], remote: true) do |f|
     = f.hidden_field :song_id

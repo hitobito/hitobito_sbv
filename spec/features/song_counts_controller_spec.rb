@@ -57,4 +57,15 @@ describe SongCountsController, js: true do
     expect(page).to have_content(/Werkmeldung.*wurde erfolgreich erstellt./)
   end
 
+  it 'hides new song form' do
+    visit group_song_counts_path(group_id: verein.id, year: 2018)
+    within('.song-counts') do
+      fill_in :q, with: 'Fortu'
+      click_link 'Werk erstellen'
+      expect(page).to have_button 'Speichern'
+      click_link 'Abbrechen'
+      expect(page).not_to have_button 'Speichern'
+    end
+  end
+
 end
