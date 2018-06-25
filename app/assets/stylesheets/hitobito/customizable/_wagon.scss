@@ -45,3 +45,11 @@
 .nav-left-title.active a {
   color: $white;
 }
+
+.song-counts input[name=q] {
+  width: 100%;
+}
+
+.song-counts form#new_song {
+  display: none;
+}

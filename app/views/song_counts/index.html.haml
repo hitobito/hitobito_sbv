@@ -1,15 +1,18 @@
 = render 'shared/page_per_year'
-
-#main.row-fluid
+#main.row-fluid.song-counts
   = text_field_tag('q', nil,
     placeholder: I18n.t('song_census_evaluation.verein.search'),
       data: { provide: 'entity',
         updater: 'Songs.update',
           url: songs_path(format: :json) })
 
+  = standard_form(Song.new, remote: true) do |f|
+    = f.labeled_input_fields :title, :composed_by, :arranged_by, :published_by
+    = save_form_buttons(f, nil, '#')
+
   = form_for([parent, parent.song_counts.build(year: year)], remote: true) do |f|
     = f.hidden_field :song_id
     = f.hidden_field :year
 
-  #song_counts
+  .list
     = render 'list', list: @list

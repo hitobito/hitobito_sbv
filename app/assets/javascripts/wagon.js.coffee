@@ -9,8 +9,13 @@ app = window.App ||= {}
 app.Songs = {
   update: (e) ->
     song = JSON.parse(e)
-    $("form.new_song_count :input[name='song_count[song_id]']").val(song.id)
-    $("form.new_song_count").submit()
+
+    if song.id
+      $("form.new_song_count :input[name='song_count[song_id]']").val(song.id)
+      $("form.new_song_count").submit()
+      song.label
+    else
+      $('form#new_song').show().find('#song_title').focus()
+
     $(":input[data-updater='Songs.update']")[0].value = ''
-    song.label
 }
