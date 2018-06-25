@@ -10,6 +10,7 @@ class SongCountsController < SimpleCrudController
   respond_to :js
 
   def create
+    @year = model_params[:year]
     assign_attributes
     respond_with_flash { save_entry }
   end
