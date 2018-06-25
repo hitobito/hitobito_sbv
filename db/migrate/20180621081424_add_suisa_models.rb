@@ -19,8 +19,8 @@ class AddSuisaModels < ActiveRecord::Migration
       t.belongs_to :song, null: false
 
       t.belongs_to :verein, null: false
-      t.belongs_to :mitgliederverband_id, index: true
-      t.belongs_to :regionalverband_id, index: true
+      t.belongs_to :mitgliederverband, index: true
+      t.belongs_to :regionalverband, index: true
 
       t.belongs_to :song_cenus
 

@@ -8,14 +8,14 @@
 #
 # Table name: song_counts
 #
-#  id                      :integer          not null, primary key
-#  song_id                 :integer          not null
-#  verein_id               :integer          not null
-#  mitgliederverband_id_id :integer
-#  regionalverband_id_id   :integer
-#  song_cenus_id           :integer
-#  year                    :integer          not null
-#  count                   :integer          default(1), not null
+#  id                   :integer          not null, primary key
+#  song_id              :integer          not null
+#  verein_id            :integer          not null
+#  mitgliederverband_id :integer
+#  regionalverband_id   :integer
+#  song_cenus_id        :integer
+#  year                 :integer          not null
+#  count                :integer          default(1), not null
 #
 
 class SongCount < ActiveRecord::Base
@@ -25,6 +25,8 @@ class SongCount < ActiveRecord::Base
   belongs_to :verein, class_name: 'Group::Verein'
   belongs_to :regionalverband, class_name: 'Group::Regionalverband'
   belongs_to :mitgliederverband, class_name: 'Group::Mitgliederverband'
+
+  before_validation :set_verband_ids, on: :create
 
   scope :in, ->(year) { where(year: year) }
 
@@ -36,6 +38,18 @@ class SongCount < ActiveRecord::Base
 
   def to_s
     song.to_s
+  end
+
+  private
+
+  def set_verband_ids
+    case verein.parent
+    when Group::Regionalverband then
+      self.regionalverband_id = verein.parent.id
+      self.mitgliederverband_id = verein.parent.parent.id
+    when Group::Mitgliederverband then
+      self.mitgliederverband_id = verein.parent.id
+    end
   end
 
 end
