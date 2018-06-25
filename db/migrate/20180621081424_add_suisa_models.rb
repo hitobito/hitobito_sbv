@@ -28,7 +28,7 @@ class AddSuisaModels < ActiveRecord::Migration
       t.integer :count, default: 1, null: false
     end
 
-    add_index :song_counts, [:song_id, :verein_id], unique: true
+    add_index :song_counts, [:song_id, :verein_id, :year], unique: true
 
     create_table :song_censuses do |t|
       t.integer :year, null: false, index: :unique

@@ -32,7 +32,7 @@ class SongCount < ActiveRecord::Base
 
   validates_by_schema
 
-  validates :song_id, uniqueness: [:verein_id, :year]
+  validates :song_id, uniqueness: { scope: [:verein_id, :year] }
 
   delegate :title, :composed_by, :arranged_by, :produced_by, to: :song
 
