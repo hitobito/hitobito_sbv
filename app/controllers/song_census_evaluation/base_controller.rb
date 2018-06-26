@@ -27,6 +27,5 @@ module SongCensusEvaluation
     def year_range
       @year_range ||= (year - 3)..(year + 1)
     end
-
   end
 end
