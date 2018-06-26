@@ -22,7 +22,7 @@ class AddSuisaModels < ActiveRecord::Migration
       t.belongs_to :mitgliederverband, index: true
       t.belongs_to :regionalverband, index: true
 
-      t.belongs_to :song_cenus
+      t.belongs_to :song_census
 
       t.integer :year, null: false
       t.integer :count, default: 1, null: false
