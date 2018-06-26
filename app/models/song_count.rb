@@ -1,9 +1,8 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
+
 # == Schema Information
 #
 # Table name: song_counts
@@ -32,7 +31,7 @@ class SongCount < ActiveRecord::Base
 
   validates_by_schema
 
-  validates :song_id, uniqueness: { scope: [:verein_id, :year] }
+  validates :song_id, uniqueness: { scope: [:verein_id, :song_census] }
 
   delegate :title, :composed_by, :arranged_by, :produced_by, to: :song
 

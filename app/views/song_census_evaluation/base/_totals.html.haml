@@ -1,0 +1,38 @@
+- mitgliederverbaende = @group.descendants.where(type: Group::Mitgliederverband)
+- regionalverbaende = @group.descendants.where(type: Group::Regionalverband)
+- vereine = @group.children.where(type: Group::Verein)
+
+- if mitgliederverbaende.any?
+  %h2 Mitgliederverbände
+
+  %table
+    - mitgliederverbaende.each do |verband|
+      %tr
+        %td= verband.name
+        %td
+          = @total[:mitgliederverband][verband.id].to_a.size
+          von
+          = verband.descendants.where(type: Group::Verein).size
+          eingereicht
+
+- if regionalverbaende.any?
+  %h2 Regionalverbände
+
+  %table
+    - regionalverbaende.each do |verband|
+      %tr
+        %td= verband.name
+        %td
+          = @total[:regionalverband][verband.id].to_a.size
+          von
+          = verband.descendants.where(type: Group::Verein).size
+          eingereicht
+
+- if vereine.any?
+  %h2 Vereine
+
+  %table
+    - vereine.each do |verein|
+      %tr
+        %td= "#{verein.name}"
+        %td= t(@total[:verein][verein.id] ? 'Eingereicht': 'nicht eingereicht')

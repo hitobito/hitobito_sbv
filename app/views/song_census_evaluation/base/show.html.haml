@@ -3,9 +3,9 @@
 = render 'infos'
 
 #main.row-fluid
-  -if @total
+  - if @total
     %article.span8
       = render 'totals'
 
-  -else
+  - else
     %p= t('.no_data_for_this_year')

@@ -22,13 +22,13 @@ class AddSuisaModels < ActiveRecord::Migration
       t.belongs_to :mitgliederverband, index: true
       t.belongs_to :regionalverband, index: true
 
-      t.belongs_to :song_cenus
+      t.belongs_to :song_census
 
       t.integer :year, null: false
       t.integer :count, default: 1, null: false
     end
 
-    add_index :song_counts, [:song_id, :verein_id, :year], unique: true
+    add_index :song_counts, [:song_id, :verein_id, :song_census_id], unique: true
 
     create_table :song_censuses do |t|
       t.integer :year, null: false, index: :unique

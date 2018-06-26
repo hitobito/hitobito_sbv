@@ -36,7 +36,7 @@ def build_verein_attrs(parent_id, name, besetzung, lang)
 end
 
 def build_regionalverband_attrs(parent_id, name = nil)
-  build_verein_attrs(parent_id, (name || Faker::Address.city), nil, nil)
+  build_verein_attrs(parent_id, (name || "Region #{%w[Nord Ost Süd West].sample}"), nil, nil)
 end
 
 csv = CSV.parse(Wagons.find('sbv').root.join('db/seeds/development/vereine.csv').read, headers: true)
@@ -61,7 +61,7 @@ limited(csv.by_col['Verband'].uniq, selection: [
       build_verein_attrs(rv.id, row['Verein'], row['Besetzung'], row['Amtssprache'])
     end
 
-    Group::Verein.seed(:name, :parent_id, limited(verein_attrs))
+    Group::Verein.seed_once(:name, :parent_id, limited(verein_attrs))
   end
 
   mv.default_children.each do |child_class|
