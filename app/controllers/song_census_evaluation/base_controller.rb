@@ -8,6 +8,11 @@ module SongCensusEvaluation
 
     def show
       @group = Group.find(params[:group_id])
+      @census = if params[:year]
+                  SongCensus.where(year: params[:year].to_i).last
+                else
+                  SongCensus.current
+                end
     end
 
     private
