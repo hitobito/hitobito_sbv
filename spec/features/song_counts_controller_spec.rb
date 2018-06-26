@@ -7,7 +7,7 @@ describe SongCountsController, js: true do
 
   before { sign_in(people(:suisa_admin)) }
 
-  pending 'adds song count to list' do
+  it 'adds song count to list' do
     visit group_song_counts_path(group_id: verein.id, year: 2018)
 
     within('.song-counts') do
@@ -20,7 +20,7 @@ describe SongCountsController, js: true do
     expect(page).to have_content(/Werkmeldung.*wurde erfolgreich erstellt./)
   end
 
-  pending 'increments and decrements song count' do
+  it 'increments and decrements song count' do
     verein.song_counts.create!(song: songs(:papa), year: 2018, count: 3)
     visit group_song_counts_path(group_id: verein.id, year: 2018)
 
@@ -32,7 +32,7 @@ describe SongCountsController, js: true do
     expect(find(first_column)).to have_text '3'
   end
 
-  pending 'removes song count from list' do
+  it 'removes song count from list' do
     verein.song_counts.create!(song: songs(:papa), year: 2018, count: 3)
     visit group_song_counts_path(group_id: verein.id, year: 2018)
     within('.song-counts .list') do
@@ -42,7 +42,7 @@ describe SongCountsController, js: true do
     expect(page).to have_content(/Werkmeldung.*wurde erfolgreich gelöscht./)
   end
 
-  pending 'adds new song and song count' do
+  it 'adds new song and song count' do
     visit group_song_counts_path(group_id: verein.id, year: 2018)
 
     within('.song-counts') do
@@ -57,7 +57,7 @@ describe SongCountsController, js: true do
     expect(page).to have_content(/Werkmeldung.*wurde erfolgreich erstellt./)
   end
 
-  pending 'hides new song form' do
+  it 'hides new song form' do
     visit group_song_counts_path(group_id: verein.id, year: 2018)
     within('.song-counts') do
       fill_in :q, with: 'Fortu'
