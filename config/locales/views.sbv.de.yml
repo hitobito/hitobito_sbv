@@ -8,10 +8,12 @@
 de:
   group:
     suisa_tab: Suisa
-  song_census_evaluation:
+  song_censuses:
+    index:
+      no_data_for_this_year: Für dieses Jahr sind keine Angaben vorhanden.
     total: Total
-    base:
-      show:
-        no_data_for_this_year: Für dieses Jahr sind keine Angaben vorhanden.
+    totals:
+      submitted: eingereicht
+      not_submitted: nicht eingerichtet
     verein:
       search: Werk suchen ..

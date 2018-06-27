@@ -1,7 +1,7 @@
 = render 'shared/page_per_year'
 #main.row-fluid.song-counts
   = text_field_tag('q', nil,
-    placeholder: I18n.t('song_census_evaluation.verein.search'),
+    placeholder: I18n.t('song_censuses.verein.search'),
       data: { provide: 'entity',
         updater: 'Songs.update',
           url: songs_path(format: :json) })
