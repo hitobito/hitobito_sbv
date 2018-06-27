@@ -70,6 +70,10 @@ describe SongAbility do
         it "may manage SongCounts owned by verein" do
           is_expected.to be_able_to(:manage, verein.song_counts.new)
         end
+
+        it "may submit SongCounts owned by verein" do
+          is_expected.to be_able_to(:submit, verein.song_counts.new)
+        end
       end
     end
 

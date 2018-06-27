@@ -32,7 +32,7 @@ class SongCountsController < SimpleCrudController
   end
 
   def list_entries
-    super.includes(:song).references(:song).in(year)
+    super.includes(:song, :song_census).references(:song).in(year)
   end
 
   def failure_notice

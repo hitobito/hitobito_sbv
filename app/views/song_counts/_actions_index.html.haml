@@ -1,0 +1,2 @@
+- unless entries.all?(&:song_census)
+  = action_button(t('song_censuses.submit'), group_song_censuses_path(@group), nil, method: :post)

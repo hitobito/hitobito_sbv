@@ -13,6 +13,7 @@ class SongAbility < AbilityDsl::Base
 
   on(SongCount) do
     permission(:song_census).may(:manage).in_verein
+    permission(:song_census).may(:submit).in_verein
     permission(:layer_and_below_read).may(:read).in_verein
   end
 
