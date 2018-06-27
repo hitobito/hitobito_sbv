@@ -14,15 +14,8 @@ srand(42)
 require 'csv'
 
 def limited(collection, selection: nil)
-  if Rails.env.development?
-    if selection
-      collection & selection
-    else
-      collection.take(4)
-    end
-  else
-    collection
-  end
+  return collection unless Rails.env.development?
+  selection ? collection & selection : collection.take(4)
 end
 
 def build_verein_attrs(parent_id, name, besetzung, lang)
