@@ -15,6 +15,7 @@ de:
     totals:
       submitted: eingereicht
       not_submitted: nicht eingereicht
+      censuses_submitted: "%{submitted} von %{total} eingereicht"
     verein:
       search: Werk suchen…
     submit: Meldeliste einreichen

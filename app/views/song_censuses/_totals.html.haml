@@ -10,10 +10,7 @@
       = verband.name
 
     - t.col do |verband|
-      = @total[:mitgliederverband][verband.id].to_a.size
-      von
-      = verband.descendants.where(type: Group::Verein).size
-      eingereicht
+      = t('.censuses_submitted', submitted: @total[:mitgliederverband][verband.id].to_a.size, total: verband.descendants.where(type: Group::Verein).size)
 
 - if regionalverbaende.any?
   %h2 Regionalverbände
@@ -22,10 +19,7 @@
     - t.col do |verband|
       = verband.name
     - t.col do |verband|
-      = @total[:regionalverband][verband.id].to_a.size
-      von
-      = verband.descendants.where(type: Group::Verein).size
-      eingereicht
+      = t('.censuses_submitted', submitted: @total[:regionalverband][verband.id].to_a.size, total: verband.descendants.where(type: Group::Verein).size)
 
 - if vereine.any?
   %h2 Vereine
