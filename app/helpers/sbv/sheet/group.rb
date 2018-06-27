@@ -14,7 +14,7 @@ module Sbv::Sheet::Group
                                :group_song_counts_path,
                                if: lambda do |view, group|
                                  group.is_a?(Group::Verein) &&
-                                   view.can?(:index, SongCensus)
+                                   view.can?(:index_song_counts, group)
                                end))
 
   end
