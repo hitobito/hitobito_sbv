@@ -12,9 +12,8 @@ describe Songs::Importer do
   it 'puts file not found if file does not exist' do
     expect(File).to receive(:exist?).and_return(false)
 
-    expect do
-      described_class.new('unknown.csv').compose
-    end.to output("File not found\n").to_stdout
+    result = described_class.new('unknown.csv').compose
+    expect(result).to eql "File not found"
   end
 
   it 'should import songs correctly' do
@@ -22,10 +21,9 @@ describe Songs::Importer do
     expect(CSV).to receive(:read).and_return(example_csv)
 
     expect do
-      expect do
-        described_class.new('example.csv').compose
-      end.to change{ Song.count }.by(3)
-    end.to output(/Successfully inserted 3 songs/).to_stdout
+      result = described_class.new('example.csv').compose
+      expect(result).to match(/Successfully inserted 3 songs/)
+    end.to change{ Song.count }.by(3)
 
     expect(Song.find_by(title: 'title1').composed_by).to eq('composer1')
     expect(Song.find_by(title: 'title1').arranged_by).to eq('arrangor1')
