@@ -5,34 +5,33 @@
 - if mitgliederverbaende.any?
   %h2 Mitgliederverbände
 
-  %table
-    - mitgliederverbaende.each do |verband|
-      %tr
-        %td= verband.name
-        %td
-          = @total[:mitgliederverband][verband.id].to_a.size
-          von
-          = verband.descendants.where(type: Group::Verein).size
-          eingereicht
+  = table(mitgliederverbaende, class: 'table table-striped table-hover') do |t|
+    - t.col do |verband|
+      = verband.name
+
+    - t.col do |verband|
+      = @total[:mitgliederverband][verband.id].to_a.size
+      von
+      = verband.descendants.where(type: Group::Verein).size
+      eingereicht
 
 - if regionalverbaende.any?
   %h2 Regionalverbände
 
-  %table
-    - regionalverbaende.each do |verband|
-      %tr
-        %td= verband.name
-        %td
-          = @total[:regionalverband][verband.id].to_a.size
-          von
-          = verband.descendants.where(type: Group::Verein).size
-          eingereicht
+  = table(regionalverbaende, class: 'table table-striped table-hover') do |t|
+    - t.col do |verband|
+      = verband.name
+    - t.col do |verband|
+      = @total[:regionalverband][verband.id].to_a.size
+      von
+      = verband.descendants.where(type: Group::Verein).size
+      eingereicht
 
 - if vereine.any?
   %h2 Vereine
 
-  %table
-    - vereine.each do |verein|
-      %tr
-        %td= "#{verein.name}"
-        %td= t(@total[:verein][verein.id] ? 'Eingereicht': 'nicht eingereicht')
+  = table(vereine, class: 'table table-striped table-hover') do |t|
+    - t.col do |verein|
+      = verein.name
+    - t.col do |verein|
+      = t(@total[:verein][verein.id] ? '.submitted': '.not_submitted')
