@@ -6,8 +6,7 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 namespace :songs do
-  task :import, [:csv_songs_filepath] => :environment do |t, args|
-    Songs::Importer.new(args[:csv_songs_filepath]).compose
+  task :import, [:csv_songs_filepath] => :environment do |_t, args|
+    puts Songs::Importer.new(args[:csv_songs_filepath]).compose
   end
 end
-

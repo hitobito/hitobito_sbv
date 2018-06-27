@@ -9,14 +9,14 @@ require 'csv'
 
 class Songs::Importer
   attr_accessor :filepath
-  
+
   def initialize(filepath)
     @filepath = filepath
   end
 
   def compose
-    return puts 'File not found' unless File.exists?(filepath)
-  
+    return 'File not found' unless File.exist?(filepath)
+
     csv_rows = CSV.read(filepath).drop(1)
     ActiveRecord::Base.connection.execute(insert_songs_statement(csv_rows))
     task_done_output(csv_rows.count)
@@ -25,9 +25,9 @@ class Songs::Importer
   private
 
   def task_done_output(count)
-    puts "\n=============== DONE ==============="
-    puts "\nSuccessfully inserted #{count} songs"
-    puts "\n====================================\n"
+    "\n=============== DONE ===============" \
+    "\nSuccessfully inserted #{count} songs" \
+    "\n====================================\n"
   end
 
   def insert_songs_statement(rows)
