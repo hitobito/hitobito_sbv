@@ -66,6 +66,11 @@ class Group::Verein < ::Group
 
   # TODO: Validierungen der verschiedenen Values, refactoring, exports
 
+  def suisa_admins
+    Person.joins(:roles)
+      .where("roles.type = 'Group::Verein::SuisaAdmin' AND roles.group_id = #{self.id}")
+  end
+
   ### ROLES
 
   class Admin < Role::Admin

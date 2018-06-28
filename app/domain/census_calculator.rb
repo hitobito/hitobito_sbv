@@ -1,5 +1,5 @@
 class CensusCalculator
-  attr_reader :census
+  attr_reader :census, :group
 
   def initialize(census, group)
     @census = census
@@ -11,7 +11,7 @@ class CensusCalculator
   # end
 
   def total
-    return nil unless @census
+    return unless census
 
     {
       verein:            vereins_total,
@@ -20,17 +20,17 @@ class CensusCalculator
     }
   end
 
-  private
-
   def vereins_total
-    @census
+    census
       .song_counts
-      .where(verein: @group.descendants.where(type: Group::Verein))
+      .where(verein: group.descendants.where(type: Group::Verein))
       .group(:verein_id).count
   end
 
+  private
+
   def verbands_total(type)
-    @census
+    census
       .song_counts
       .where(verein: vereins_total.keys)
       .distinct

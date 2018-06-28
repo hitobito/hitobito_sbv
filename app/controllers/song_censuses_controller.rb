@@ -10,28 +10,46 @@ class SongCensusesController < ApplicationController
 
   def index
     authorize!(:index, SongCensus)
-    @group = Group.find(params[:group_id])
     @census = if params[:year]
                 SongCensus.where(year: params[:year].to_i).last
               else
                 SongCensus.current
               end
-    @total = CensusCalculator.new(@census, @group).total
+    @total = CensusCalculator.new(@census, group).total
+  end
+
+  def remind
+    authorize!(:index, SongCensus)
+
+    census = SongCensus.find(params[:song_census_id])
+    vereins_total = CensusCalculator.new(census, group).vereins_total
+
+    count = group.descendants.where(type: Group::Verein).collect do |verein|
+      next if vereins_total[verein.id]
+      verein.suisa_admins.each do |suisa_admin|
+        SongCensusMailer.reminder(suisa_admin, verein).deliver_now
+      end
+    end.compact.count
+
+    redirect_to :back, notice: t('.success', verein_count: count)
   end
 
   # FIXME: simplify/clean up with dry_crud
   def create
     authorize!(:submit, SongCount)
-    @group = Group.find(params[:group_id])
-    if CensusSubmission.new(@group, SongCensus.current).submit
+    if CensusSubmission.new(group, SongCensus.current).submit
       flash[:notice] = flash_message(:success)
     else
       flash[:alert] = flash_message(:failure)
     end
-    redirect_to group_song_counts_path(@group)
+    redirect_to group_song_counts_path(group)
   end
 
   private
+
+  def group
+    @group ||= Group.find(params[:group_id])
+  end
 
   def default_year
     @default_year ||= SongCensus.current.try(:year) || current_year

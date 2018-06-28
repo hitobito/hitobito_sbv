@@ -38,6 +38,10 @@ class SongCensus < ActiveRecord::Base
     end
   end
 
+  def reminder_period?
+    Time.now > start_at && Time.now < finish_at
+  end
+
   def to_s
     year
   end

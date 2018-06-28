@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     resources :songs
     resources :groups, only: [] do
       resources :song_counts
-      resources :song_censuses, only: [:index, :create]
+      resources :song_censuses, only: [:index, :create] do
+        post 'remind', to: 'song_censuses#remind'
+      end
     end
   end
 

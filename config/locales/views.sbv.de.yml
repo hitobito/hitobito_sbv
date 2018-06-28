@@ -19,3 +19,9 @@ de:
     verein:
       search: Werk suchen…
     submit: Meldeliste einreichen
+    remind:
+      success: "Erinnerung wurde erfolgreich an %{verein_count} Vereine versendet."
+      send: Erinnerung senden
+      send_confirm: Schickt allen Suisaverantworlichen, die noch keine Liste eingereicht haben eine Erinnerung.
+                    Jeder erhhält ein E-Mail in seiner Korrespondenzsprache.
+                    Der Text vom E-Mail kann von einem Administrator unter Einstellungen angepasst werden.
