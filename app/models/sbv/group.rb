@@ -27,14 +27,14 @@ module Sbv::Group
     i18n_setter :unterhaltungsmusik, (UNTERHALTUNGSMUSIK + [nil])
 
     validates :reported_members,
-      numericality: { greater_than_or_equal_to: 0 }, if: :reported_members
+              numericality: { greater_than_or_equal_to: 0 }, if: :reported_members
 
   end
 
   def recognized_members
     return unless is_a?(Group::Verein)
 
-    Group::VereinMitglieder::Mitglied.joins(:group).where(groups: { layer_group_id: self.id }).count
+    Group::VereinMitglieder::Mitglied.joins(:group).where(groups: { layer_group_id: id }).count
   end
 
 end

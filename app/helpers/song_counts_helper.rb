@@ -14,7 +14,7 @@ module SongCountsHelper
     count = action == :inc ? object.count + 1 : object.count - 1
     path = group_song_count_path(object.verein, object, song_count: { count: count })
     options = { method: :put, remote: true, data: { song_count: action } }
-    options[:disabled] = true if action == :dec && object.count == 0
+    options[:disabled] = true if action == :dec && object.count.zero?
     action_button('', path, icon, options)
   end
 

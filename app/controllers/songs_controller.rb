@@ -34,7 +34,7 @@ class SongsController < SimpleCrudController
 
   def with_create(list)
     return list if list.size > 3
-    list + [ { label: I18n.t('crud.new.title', model: model_class.model_name.human) } ]
+    list + [{ label: I18n.t('crud.new.title', model: model_class.model_name.human) }]
   end
 
   def for_typeahead(entries)
@@ -47,7 +47,7 @@ class SongsController < SimpleCrudController
     error_messages.presence || flash_message(:failure)
   end
 
-  def set_created_js_flash_message(created)
+  def set_created_js_flash_message(created) # rubocop:disable Naming/AccessorMethodName
     if created
       flash.now[:notice] = flash_message(:success)
     else
