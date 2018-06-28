@@ -13,9 +13,11 @@ srand(42)
 
 require 'csv'
 
-def limited(collection, selection: nil)
+def limited(collection, selection: nil, limit: nil)
   return collection unless Rails.env.development?
-  selection ? collection & selection : collection.take(4)
+  collection = collection & selection if selection
+  collection = collection.take(limit) if limit
+  collection
 end
 
 def build_verein_attrs(parent_id, name, besetzung, lang)
@@ -45,16 +47,16 @@ limited(csv.by_col['Verband'].uniq, selection: [
     build_regionalverband_attrs(mv.id, row['Regionalverband'])
   end
 
-  rvs = Group::Regionalverband.seed(:name, :parent_id, limited(regionalverband_attrs))
+  rvs = Group::Regionalverband.seed_once(:name, :parent_id, limited(regionalverband_attrs))
 
-  rvs.each do |rv|
+  rvs.compact.each do |rv|
     verein_attrs = csv.select do |row|
       row['Verband'] == name && (row['Regionalverband'] == rv.name || row['Regionalverband'].nil?)
     end.collect do |row|
       build_verein_attrs(rv.id, row['Verein'], row['Besetzung'], row['Amtssprache'])
     end
 
-    Group::Verein.seed_once(:name, :parent_id, limited(verein_attrs))
+    Group::Verein.seed_once(:name, :parent_id, limited(verein_attrs, limit: 4))
   end
 
   mv.default_children.each do |child_class|
