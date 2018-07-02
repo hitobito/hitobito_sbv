@@ -4,14 +4,14 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 CustomContent.seed_once(:key,
-  { 
+  {
     key: SongCensusMailer::SONG_CENSUS_REMINDER,
     placeholders_optional: 'recipient-name, recipient-first-name, verein, census-url'
   },
 )
 
 CustomContent::Translation.seed_once(:custom_content_id, :locale,
-  { 
+  {
     custom_content_id: CustomContent.where(key: SongCensusMailer::SONG_CENSUS_REMINDER).first.id,
     locale: 'de',
     label: 'Meldeliste: E-Mail Erinnerung',
