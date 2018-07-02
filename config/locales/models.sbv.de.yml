@@ -269,3 +269,6 @@ de:
         song: Werk
         song_id: Werk
         count: Anzahl
+        title: Titel
+        composed_by: Komponist
+        arranged_by: Arrangeur
