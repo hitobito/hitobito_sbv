@@ -18,6 +18,8 @@
 
 class Song < ActiveRecord::Base
 
+  has_many :song_counts, dependent: :destroy
+
   scope :list, -> { order(:title) }
 
   validates_by_schema
