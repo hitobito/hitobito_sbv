@@ -19,4 +19,8 @@ module SongCountsHelper
     link_to(icon(action == :inc ? 'chevron-right' : 'chevron-left'), path, options)
   end
 
+  def song_counts_export_dropdown
+    Dropdown::SongCounts.new(self, params, :download).export
+  end
+
 end
