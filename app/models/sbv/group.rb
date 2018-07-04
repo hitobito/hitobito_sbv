@@ -31,6 +31,11 @@ module Sbv::Group
 
   end
 
+  def song_counts
+    verein_ids = descendants.where(type: Group::Verein).pluck(:id)
+    SongCount.where("verein_id IN (#{verein_ids.join(',')})")
+  end
+
   def recognized_members
     return unless is_a?(Group::Verein)
 

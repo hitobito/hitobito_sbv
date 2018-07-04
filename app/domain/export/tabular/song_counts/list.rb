@@ -7,11 +7,16 @@ module Export::Tabular::SongCounts
   class List < Export::Tabular::Base
 
     INCLUDED_ATTRS = %w(count title composed_by arranged_by).freeze
+    GROUP_ATTRS = %w(verein verein_id).freeze
 
     self.model_class = SongCount
 
     def attributes
-      INCLUDED_ATTRS.collect(&:to_sym)
+      if list.group(:verein_id).one?
+        INCLUDED_ATTRS
+      else
+        INCLUDED_ATTRS + GROUP_ATTRS
+      end.collect(&:to_sym)
     end
   end
 end

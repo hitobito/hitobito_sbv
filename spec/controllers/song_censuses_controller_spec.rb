@@ -31,8 +31,8 @@ describe SongCensusesController do
     before do
       sign_in(admin)
 
-      SongCount.create(song: songs(:papa), verein: admin.primary_group, year: 2018, song_census: nil)
-      SongCount.create(song: songs(:girl), verein: admin.primary_group, year: 2018, song_census: nil)
+      song_counts(:girl_count).update(song_census: nil)
+      song_counts(:papa_count).update(verein: admin.primary_group, song_census: nil)
     end
 
     it 'connects open song-counts to the current song-census' do

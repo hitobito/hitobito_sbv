@@ -36,7 +36,15 @@ class SongCountsController < SimpleCrudController
 
   def render_song_counts_tabular(format)
     list = Export::Tabular::SongCounts::List.send(format, list_entries)
-    send_data list, type: format, filename: "#{SongCount.model_name.human}-#{year}.#{format}"
+    send_data list, type: format, filename: export_filename(format)
+  end
+
+  def export_filename(format)
+    str = SongCount.model_name.human
+    if @group.is_a?(Group::Verein)
+      str << "-#{@group.name.tr(' ', '_').underscore}"
+    end
+    str + "-#{year}.#{format}"
   end
 
   def respond_with_flash
