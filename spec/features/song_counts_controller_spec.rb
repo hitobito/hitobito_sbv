@@ -5,7 +5,10 @@ describe SongCountsController, js: true do
 
   let(:verein) { groups(:musikgesellschaft_alterswil) }
 
-  before { sign_in(people(:suisa_admin)) }
+  before do
+    SongCount.delete_all
+    sign_in(people(:suisa_admin))
+  end
 
   it 'adds song count to list' do
     visit group_song_counts_path(group_id: verein.id, year: 2018)
