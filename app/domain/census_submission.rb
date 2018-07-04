@@ -12,7 +12,7 @@ class CensusSubmission
 
   def submit
     changed_rows = attach_counts_to_census
-    changed_rows.positive?
+    changed_rows > 0
   end
 
   private
