@@ -15,7 +15,7 @@ describe Export::Tabular::SongCounts::List do
 
   context 'verein' do
 
-    let(:list) { groups(:musikgesellschaft_aarberg_19).song_counts }
+    let(:list) { groups(:musikgesellschaft_aarberg).song_counts }
 
     its(:headers) do
       should == %w(Anzahl Titel Komponist Arrangeur)
@@ -67,7 +67,7 @@ describe Export::Tabular::SongCounts::List do
       its(['Komponist']) { should == 'John Fogerty' }
       its(['Arrangeur']) { should == 'Creedence Clearwater Revival' }
       its(['Verein']) { should == 'Musikgesellschaft Aarberg' }
-      its(['Vereins ID']) { should == groups(:musikgesellschaft_aarberg_19).id.to_s }
+      its(['Vereins ID']) { should == groups(:musikgesellschaft_aarberg).id.to_s }
     end
 
     context 'second row' do
@@ -79,7 +79,7 @@ describe Export::Tabular::SongCounts::List do
       its(['Komponist']) { should == 'Barrett Strong / Norman Whitfield' }
       its(['Arrangeur']) { should == 'The Temptations' }
       its(['Verein']) { should == 'Musikgesellschaft Aarberg' }
-      its(['Vereins ID']) { should == groups(:musikgesellschaft_aarberg_19).id.to_s }
+      its(['Vereins ID']) { should == groups(:musikgesellschaft_aarberg).id.to_s }
     end
 
     context 'third row' do

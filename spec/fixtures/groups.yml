@@ -186,9 +186,9 @@ musikkommission_18:
   rgt: 23
   name: Musikkommission
   type: Group::RegionalverbandMusikkommission
-musikgesellschaft_aarberg_19:
+musikgesellschaft_aarberg:
   parent: mittleres_seeland_14
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg_19) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
   lft: 12
   rgt: 21
   name: Musikgesellschaft Aarberg
@@ -197,29 +197,29 @@ musikgesellschaft_aarberg_19:
   zip_code: 6648
   town: Thiloscheid
 vorstand_20:
-  parent: musikgesellschaft_aarberg_19
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg_19) %>
+  parent: musikgesellschaft_aarberg
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
   lft: 19
   rgt: 20
   name: Vorstand
   type: Group::VereinVorstand
 kontakte_21:
-  parent: musikgesellschaft_aarberg_19
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg_19) %>
+  parent: musikgesellschaft_aarberg
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
   lft: 13
   rgt: 14
   name: Kontakte
   type: Group::VereinKontakte
 mitglieder_22:
-  parent: musikgesellschaft_aarberg_19
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg_19) %>
+  parent: musikgesellschaft_aarberg
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
   lft: 15
   rgt: 16
   name: Mitglieder
   type: Group::VereinMitglieder
 musikkommission_23:
-  parent: musikgesellschaft_aarberg_19
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg_19) %>
+  parent: musikgesellschaft_aarberg
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
   lft: 17
   rgt: 18
   name: Musikkommission
