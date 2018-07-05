@@ -7,9 +7,9 @@ class SongCensusesController < ApplicationController
   include YearBasedPaging
 
   helper_method :year, :group
+  before_action :authorize_action
 
   def index
-    authorize!(:index, SongCensus)
     @census = if params[:year]
                 SongCensus.where(year: params[:year].to_i).last
               else
@@ -19,8 +19,6 @@ class SongCensusesController < ApplicationController
   end
 
   def remind # rubocop:disable Metrics/AbcSize
-    authorize!(:index, SongCensus)
-
     census = SongCensus.find(params[:song_census_id])
     vereins_total = CensusCalculator.new(census, group).vereins_total
 
@@ -35,7 +33,6 @@ class SongCensusesController < ApplicationController
   end
 
   def create
-    authorize!(:submit, SongCount)
     if CensusSubmission.new(group, SongCensus.current).submit
       flash[:notice] = flash_message(:success)
     else
@@ -45,6 +42,10 @@ class SongCensusesController < ApplicationController
   end
 
   private
+
+  def authorize_action
+    authorize!(:manage_song_census, group)
+  end
 
   def group
     @group ||= Group.find(params[:group_id])

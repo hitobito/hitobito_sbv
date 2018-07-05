@@ -43,11 +43,12 @@ describe SongCensusesController do
   end
 
   context 'remind' do
-    let(:song_census)  { song_censuses(:two_o_18) }
+    let(:song_census) { song_censuses(:two_o_18) }
 
     before do
       sign_in(people(:suisa_admin))
 
+      Fabricate(Group::Regionalverband::SuisaAdmin.name.to_sym, group: group, person: people(:suisa_admin))
       2.times { Fabricate(Group::Verein::SuisaAdmin.name.to_sym, group: verein1)}
       Fabricate(Group::Verein::SuisaAdmin.name.to_sym, group: verein2)
     end

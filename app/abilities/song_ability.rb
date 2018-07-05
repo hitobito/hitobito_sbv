@@ -17,12 +17,9 @@ class SongAbility < AbilityDsl::Base
     permission(:layer_and_below_read).may(:read).in_verein
   end
 
-  on(SongCensus) do
-    permission(:song_census).may(:manage).in_layer
-  end
-
   on(Group) do
     permission(:song_census).may(:index_song_counts).in_same_group
+    permission(:song_census).may(:manage_song_census).in_layer
   end
 
   def in_same_group
@@ -34,7 +31,9 @@ class SongAbility < AbilityDsl::Base
   end
 
   def in_layer
-    user.groups_with_permission(:song_census).collect(&:layer_group).include?(subject.group)
+    subject.self_and_ancestors.any? do |group|
+      user.groups_with_permission(:song_census).include?(group)
+    end
   end
 
 end
