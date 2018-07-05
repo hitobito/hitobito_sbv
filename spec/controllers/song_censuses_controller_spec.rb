@@ -7,8 +7,6 @@ require 'spec_helper'
 
 describe SongCensusesController do
   let(:group)   { Fabricate(Group::Regionalverband.name.to_sym) }
-  let(:verein1) { Fabricate(Group::Verein.name.to_sym, parent: group) }
-  let(:verein2) { Fabricate(Group::Verein.name.to_sym, parent: group) }
 
   context 'index' do
     let(:admin) { people(:admin) }
@@ -27,6 +25,8 @@ describe SongCensusesController do
 
   context 'remind' do
     let(:song_census) { song_censuses(:two_o_18) }
+    let(:verein1) { Fabricate(Group::Verein.name.to_sym, parent: group) }
+    let(:verein2) { Fabricate(Group::Verein.name.to_sym, parent: group) }
 
     before do
       sign_in(people(:suisa_admin))
