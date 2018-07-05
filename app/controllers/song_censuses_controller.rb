@@ -34,7 +34,6 @@ class SongCensusesController < ApplicationController
     redirect_to :back, notice: t('.success', verein_count: count)
   end
 
-  # FIXME: simplify/clean up with dry_crud
   def create
     authorize!(:submit, SongCount)
     if CensusSubmission.new(group, SongCensus.current).submit
