@@ -25,23 +25,6 @@ describe SongCensusesController do
     end
   end
 
-  context 'create' do
-    let(:admin) { people(:suisa_admin) }
-
-    before do
-      sign_in(admin)
-
-      song_counts(:girl_count).update(song_census: nil)
-      song_counts(:papa_count).update(verein: admin.primary_group, song_census: nil)
-    end
-
-    it 'connects open song-counts to the current song-census' do
-      expect do
-        post :create, group_id: admin.primary_group
-      end.to change { SongCount.where(song_census: nil).count }.by(-2)
-    end
-  end
-
   context 'remind' do
     let(:song_census) { song_censuses(:two_o_18) }
 

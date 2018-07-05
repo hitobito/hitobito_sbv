@@ -25,6 +25,11 @@ de:
       send_confirm: Schickt allen Suisaverantworlichen, die noch keine Liste eingereicht haben eine Erinnerung.
                     Jeder erhhält ein E-Mail in seiner Korrespondenzsprache.
                     Der Text vom E-Mail kann von einem Administrator unter Einstellungen angepasst werden.
+  song_counts:
+    submit:
+      flash:
+        success: Meldeliste eingereicht.
+        failure: Es ist ein Fehler beim Einreichen der Meldeliste aufgetreten.
 
   dropdown/song_counts:
       button: Export

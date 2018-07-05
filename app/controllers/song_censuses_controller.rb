@@ -32,15 +32,6 @@ class SongCensusesController < ApplicationController
     redirect_to :back, notice: t('.success', verein_count: count)
   end
 
-  def create
-    if CensusSubmission.new(group, SongCensus.current).submit
-      flash[:notice] = flash_message(:success)
-    else
-      flash[:alert] = flash_message(:failure)
-    end
-    redirect_to group_song_counts_path(group)
-  end
-
   private
 
   def authorize_action
@@ -63,17 +54,4 @@ class SongCensusesController < ApplicationController
     @year_range ||= (year - 3)..(year + 1)
   end
 
-
-  @@helper = Object.new
-                   .extend(ActionView::Helpers::TranslationHelper)
-                   .extend(ActionView::Helpers::OutputSafetyHelper)
-
-  def flash_message(state)
-    scope = "#{action_name}.flash.#{state}"
-    keys = [:"#{controller_name}.#{scope}_html",
-            :"#{controller_name}.#{scope}",
-            :"crud.#{scope}_html",
-            :"crud.#{scope}"]
-    @@helper.t(keys.shift, model: SongCensus.name.humanize, default: keys)
-  end
 end

@@ -34,4 +34,27 @@ describe SongCountsController do
       expect(response.content_type).to eq('application/xlsx')
     end
   end
+
+  context 'submit' do
+    let(:admin) { people(:suisa_admin) }
+
+    before do
+      sign_in(admin)
+
+      song_counts(:girl_count).update(song_census: nil)
+      song_counts(:papa_count).update(verein: admin.primary_group, song_census: nil)
+    end
+
+    it 'connects open song-counts to the current song-census' do
+      expect do
+        post :submit, group_id: admin.primary_group
+      end.to change { SongCount.where(song_census: nil).count }.by(-2)
+    end
+
+    it 'displays a message about song-count submission' do
+      post :submit, group_id: admin.primary_group
+      expect(flash[:notice]).to match(/Meldeliste eingereicht/)
+    end
+  end
+
 end
