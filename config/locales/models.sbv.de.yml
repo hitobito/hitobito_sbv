@@ -46,8 +46,8 @@ de:
         one: Kontakte
         other: Kontakte
       group/root/suisa_admin:
-        one: Vorantwortliche(r) Suisa
-        other: Vorantwortliche Suisa
+        one: Verantworliche(r) Suisa
+        other: Verantworliche Suisa
 
       group/mitgliederverband:
         one: Mitgliederverband
@@ -74,8 +74,8 @@ de:
       group/mitgliederverband_kontakte:
         *kontakte
       group/mitgliederverband/suisa_admin:
-        one: Vorantwortliche(r) Suisa
-        other: Vorantwortliche Suisa
+        one: Verantworliche(r) Suisa
+        other: Verantworliche Suisa
 
 
       group/regionalverband:
@@ -94,8 +94,8 @@ de:
       group/regionalverband_kontakte:
         *kontakte
       group/regionalverband/suisa_admin:
-        one: Vorantwortliche(r) Suisa
-        other: Vorantwortliche Suisa
+        one: Verantworliche(r) Suisa
+        other: Verantworliche Suisa
 
       group/verein:
         one: Verein
@@ -115,8 +115,8 @@ de:
         one: DirigentIn
         other: DirigentInnen
       group/verein/suisa_admin:
-        one: Vorantwortliche(r) Suisa
-        other: Vorantwortliche Suisa
+        one: Verantworliche(r) Suisa
+        other: Verantworliche Suisa
 
 
 
