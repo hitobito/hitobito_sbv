@@ -18,7 +18,7 @@ class SongCensusesController < ApplicationController
     @total = CensusCalculator.new(@census, group).total
   end
 
-  def remind
+  def remind # rubocop:disable Metrics/AbcSize
     authorize!(:index, SongCensus)
 
     census = SongCensus.find(params[:song_census_id])
