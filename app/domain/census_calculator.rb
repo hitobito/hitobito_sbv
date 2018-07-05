@@ -11,10 +11,6 @@ class CensusCalculator
     @group  = group
   end
 
-  # def count
-  #   @census.song_counts.where(verein: @group)
-  # end
-
   def total
     return unless census
 
