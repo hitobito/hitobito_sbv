@@ -15,6 +15,8 @@ class SongCensusesController < ApplicationController
               else
                 SongCensus.current
               end
+
+    @year = year
     @total = CensusCalculator.new(@census, group).total
   end
 
