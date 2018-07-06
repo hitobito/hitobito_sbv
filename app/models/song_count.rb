@@ -25,13 +25,15 @@ class SongCount < ActiveRecord::Base
   belongs_to :regionalverband, class_name: 'Group::Regionalverband'
   belongs_to :mitgliederverband, class_name: 'Group::Mitgliederverband'
 
-  before_validation :set_verband_ids, on: :create
+  before_validation :set_verband_ids, on: :create, if: :verein
 
   scope :in, ->(year) { where(year: year) }
 
   validates_by_schema
 
   validates :song_id, uniqueness: { scope: [:verein_id, :year] }
+  validates :count,
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 30 }, if: :count
 
   delegate :title, :composed_by, :arranged_by, :produced_by, to: :song
 
