@@ -1,3 +1,3 @@
-- if can?(:index, SongCensus) &&  SongCensus.current.reminder_period?
+- if can?(:manage_song_census, @group) &&  SongCensus.current.reminder_period?
   = action_button(t('.send'), group_song_census_remind_path(@group.id, @census), nil,
     { data: { confirm: "#{t('.send_confirm')}" }, method: 'post' })

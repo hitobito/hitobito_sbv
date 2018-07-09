@@ -39,7 +39,7 @@ class SongCensus < ActiveRecord::Base
   end
 
   def reminder_period?
-    Time.now > start_at && Time.now < finish_at
+    Time.zone.now > start_at && Time.zone.now < finish_at
   end
 
   def to_s
