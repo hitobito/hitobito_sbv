@@ -30,7 +30,7 @@ describe SongCount do
     expect(song_count.regionalverband).to be_nil
     expect(song_count.mitgliederverband).to be_nil
   end
-  
+
   context 'validations' do
     it 'cannot set count over 30' do
       song_count = SongCount.create(count: 31)
