@@ -6,17 +6,11 @@
 class SongCensusesController < ApplicationController
   include YearBasedPaging
 
-  helper_method :year, :group
+  helper_method :group
   before_action :authorize_action
 
   def index
-    @census = if params[:year]
-                SongCensus.where(year: params[:year].to_i).last
-              else
-                SongCensus.current
-              end
-
-    @year = year
+    @census = SongCensus.where(year: year).last
     @total = CensusCalculator.new(@census, group).total
   end
 
