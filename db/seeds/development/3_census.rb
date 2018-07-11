@@ -7,18 +7,18 @@
 [Date.today.year - 2, Date.today.year - 1].each do |year|
   SongCensus.seed_once(:year) do |census|
     census.year = year
-    census.start_at = Date.new(year, 10, 3)
+    census.start_at = Date.new(year - 1, 12, 1)
     census.finish_at = Date.new(year, 11).end_of_month
   end
 end
 
 # current census
-#
-# Seeding will be weird in the first week of the year...
-SongCensus.seed_once(:year) do |census|
-  census.year = Date.today.year
-  census.start_at = 1.week.ago.to_date
-  census.finish_at = Date.today.end_of_year
+[Date.today.year].each do |year|
+  SongCensus.seed_once(:year) do |census|
+    census.year = year
+    census.start_at = Date.new(year - 1, 12, 1)
+    census.finish_at = Date.new(year, 11).end_of_month
+  end
 end
 
 vereine = Group::Verein.all.shuffle.take(10)
