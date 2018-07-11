@@ -34,7 +34,7 @@ class SongCensus < ActiveRecord::Base
 
     # The currently active census
     def current
-      where('start_at <= ?', Time.zone.today).last
+      where('start_at <= ?', Time.zone.today).order(:start_at).last
     end
   end
 
