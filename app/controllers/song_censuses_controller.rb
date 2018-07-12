@@ -3,11 +3,14 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class SongCensusesController < ApplicationController
+class SongCensusesController < CrudController
+
   include YearBasedPaging
 
   helper_method :group
-  before_action :authorize_action
+
+  skip_authorize_resource
+  before_action :authorize_class
 
   def index
     @census = SongCensus.where(year: year).last
@@ -30,7 +33,7 @@ class SongCensusesController < ApplicationController
 
   private
 
-  def authorize_action
+  def authorize_class
     authorize!(:manage_song_census, group)
   end
 
