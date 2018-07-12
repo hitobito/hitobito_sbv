@@ -17,16 +17,10 @@ class SongCensusesController < CrudController
     @total = CensusCalculator.new(@census, group).total
   end
 
-  def remind # rubocop:disable Metrics/AbcSize
+  def remind
     census = SongCensus.find(params[:song_census_id])
     vereins_total = CensusCalculator.new(census, group).vereins_total
-
-    count = group.descendants.where(type: Group::Verein).collect do |verein|
-      next if vereins_total[verein.id]
-      verein.suisa_admins.each do |suisa_admin|
-        SongCensusMailer.reminder(suisa_admin, verein).deliver_now
-      end
-    end.compact.count
+    count = deliver_reminders(vereins_total)
 
     redirect_to :back, notice: t('.success', verein_count: count)
   end
@@ -51,6 +45,18 @@ class SongCensusesController < CrudController
 
   def year_range
     @year_range ||= (year - 3)..(year + 1)
+  end
+
+
+  # extracted methods
+
+  def deliver_reminders(vereins_total)
+    group.descendants.where(type: Group::Verein).collect do |verein|
+      next if vereins_total[verein.id]
+      verein.suisa_admins.each do |suisa_admin|
+        SongCensusMailer.reminder(suisa_admin, verein).deliver_now
+      end
+    end.compact.count
   end
 
 end

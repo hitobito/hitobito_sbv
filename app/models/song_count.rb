@@ -45,10 +45,10 @@ class SongCount < ActiveRecord::Base
 
   def set_verband_ids
     case verein.parent
-    when Group::Regionalverband then
+    when Group::Regionalverband
       self.regionalverband_id = verein.parent.id
       self.mitgliederverband_id = verein.parent.parent.id
-    when Group::Mitgliederverband then
+    when Group::Mitgliederverband
       self.mitgliederverband_id = verein.parent.id
     end
   end
