@@ -44,6 +44,14 @@ class SongCensus < ActiveRecord::Base
     Time.zone.now > start_at && Time.zone.now < finish_at
   end
 
+  def finished?
+    finish_at.past?
+  end
+
+  def current?
+    self.class.current == self
+  end
+
   def to_s
     year
   end

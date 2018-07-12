@@ -19,7 +19,7 @@ Rails.application.routes.draw do
           post 'submit'
         end
       end
-      resources :song_censuses, only: [:index] do
+      resources :song_censuses, only: [:new, :create, :index] do
         post 'remind', to: 'song_censuses#remind'
       end
     end
