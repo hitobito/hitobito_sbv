@@ -46,12 +46,21 @@
   color: $white;
 }
 
-.song-counts input[name=q] {
-  width: 100%;
-}
+.song-counts {
+  input[name=q] {
+    width: 100%;
+  }
 
-.song-counts form#new_song {
-  display: none;
+  form#new_song {
+    display: none;
+  }
+
+  strong.count {
+    padding: 0em 1em;
+    display: inline-block;
+    width: 1em;
+    text-align: center;
+  }
 }
 
 .table-hover tbody tr:hover > td,
