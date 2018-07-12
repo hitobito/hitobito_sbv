@@ -7,6 +7,8 @@ class SongCensusesController < CrudController
 
   include YearBasedPaging
 
+  self.permitted_attrs = [:song_id, :year, :count]
+
   helper_method :group
 
   skip_authorize_resource
@@ -15,6 +17,11 @@ class SongCensusesController < CrudController
   def index
     @census = SongCensus.where(year: year).last
     @total = CensusCalculator.new(@census, group).total
+  end
+
+  def create
+    SongCensus.current.touch(:finish_at) # rubocop:disable Rails/SkipsModelValidations if this makes a census invalid, it reflects an invalid reality...
+    super(location: group_song_censuses_path(group))
   end
 
   def remind
