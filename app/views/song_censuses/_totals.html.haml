@@ -7,7 +7,7 @@
 
   = table(mitgliederverbaende, class: 'table table-striped table-hover') do |t|
     - t.col do |verband|
-      = verband.name
+      = link_to(verband.name, group_song_censuses_path(verband, year: year))
 
     - t.col do |verband|
       = t('.censuses_submitted', submitted: @total[:mitgliederverband][verband.id].to_a.size, total: verband.descendants.where(type: Group::Verein).size)
@@ -17,7 +17,7 @@
 
   = table(regionalverbaende, class: 'table table-striped table-hover') do |t|
     - t.col do |verband|
-      = verband.name
+      = link_to(verband.name, group_song_censuses_path(verband, year: year))
     - t.col do |verband|
       = t('.censuses_submitted', submitted: @total[:regionalverband][verband.id].to_a.size, total: verband.descendants.where(type: Group::Verein).size)
 
@@ -26,6 +26,6 @@
 
   = table(vereine, class: 'table table-striped table-hover') do |t|
     - t.col do |verein|
-      = verein.name
+      = link_to(verein.name, group_song_censuses_path(verein, year: year))
     - t.col do |verein|
       = t(@total[:verein][verein.id] ? '.submitted': '.not_submitted')
