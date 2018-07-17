@@ -21,8 +21,9 @@ end
   end
 end
 
-vereine = Group::Verein.all.shuffle.take(10)
-songs   = Song.all.shuffle.take(10)
+current_census = SongCensus.current
+vereine        = Group::Verein.all.shuffle.take(10)
+songs          = Song.all.shuffle.take(10)
 
 SongCensus.all.each do |census|
   vereine.each do |verein|
@@ -34,6 +35,7 @@ SongCensus.all.each do |census|
         count.mitgliederverband_id = verein.parent.parent.id if verein.parent.try(:parent).is_a?(Group::Mitgliederverband)
         count.song_id = song.id
         count.year = census.year
+        count.editable = (census == current_census)
       end
     end
   end

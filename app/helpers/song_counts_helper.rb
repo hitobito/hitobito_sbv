@@ -2,11 +2,11 @@ module SongCountsHelper
 
   def song_counts_count(object)
     content = []
-    content << song_counts_update_button(object, :dec)
+    content << song_counts_update_button(object, :dec) unless object.readonly?
     content << content_tag(:strong, class: 'count') do
       object.count.to_s
     end
-    content << song_counts_update_button(object, :inc)
+    content << song_counts_update_button(object, :inc) unless object.readonly?
     safe_join(content)
   end
 
