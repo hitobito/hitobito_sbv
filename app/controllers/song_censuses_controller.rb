@@ -7,12 +7,13 @@ class SongCensusesController < CrudController
 
   include YearBasedPaging
 
-  self.permitted_attrs = [:song_id, :year, :count]
+  self.permitted_attrs = [:year, :start_at, :finish_at]
 
   helper_method :group
 
   skip_authorize_resource
   before_action :authorize_class
+  around_create :switch_census_period
 
   def index
     @census = SongCensus.where(year: year).last
@@ -20,7 +21,6 @@ class SongCensusesController < CrudController
   end
 
   def create
-    SongCensus.current.touch(:finish_at) # rubocop:disable Rails/SkipsModelValidations if this makes a census invalid, it reflects an invalid reality...
     super(location: group_song_censuses_path(group))
   end
 
@@ -54,6 +54,13 @@ class SongCensusesController < CrudController
     @year_range ||= (year - 3)..(year + 1)
   end
 
+  def switch_census_period
+    old = SongCensus.current
+    return false unless yield
+    new = SongCensus.current
+
+    CensusPeriodSwitch.new(old, new).perform
+  end
 
   # extracted methods
 
