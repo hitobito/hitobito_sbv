@@ -22,11 +22,10 @@ end
 end
 
 current_census = SongCensus.current
-vereine        = Group::Verein.all.shuffle.take(10)
 songs          = Song.all.shuffle.take(10)
 
 SongCensus.all.each do |census|
-  vereine.each do |verein|
+  Group::Verein.all.shuffle.take(10).each do |verein|
     songs.each do |song|
       SongCount.seed_once(:song_census_id, :verein_id, :song_id) do |count|
         count.song_census_id = census.id
