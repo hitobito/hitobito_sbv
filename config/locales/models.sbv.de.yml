@@ -34,22 +34,22 @@ de:
         one: Veteranen
         other: Veteranen
       group/root_veteranen/veteran:
-        one: Eidgenössiche(r) VeteranIn
-        other: Eidgenössiche VeteranInnen
+        one: Eidgenössischer Veteran
+        other: Eidgenössiche Veteranen
       group/root_veteranen/ehrenveteran:
-        one: Eidgenössiche(r) EhrenveteranIn
-        other: Eidgenössiche EhrenveteranInnen
+        one: Eidgenössicher Ehrenveteran
+        other: Eidgenössiche Ehrenveteranen
       group/root_veteranen/cism_veteran:
-        one: CISM VeteranIn
-        other: CISM VeteranInnen
+        one: CISM Veteran
+        other: CISM Veteranen
       group/root_kontakte: &kontakte
         one: Kontakte
         other: Kontakte
       group/root/suisa_admin:
-        one: Verantworliche(r) Suisa
+        one: Verantwortlicher Suisa
         other: Verantworliche Suisa
 
-      group/mitgliederverband:
+      group/mitgliederverband: &suisa_verantwortlicher
         one: Mitgliederverband
         other: Mitgliederverbände
       group/mitgliederverband_geschaeftsstelle:
@@ -66,16 +66,15 @@ de:
       group/mitgliederverband_veteranen:
         *veteranen
       group/mitgliederverband_veteranen/veteran:
-        one: Kantonale(r) VeteranIn
-        other: Kantonale VeteranInnen
+        one: Kantonaler Veteran
+        other: Kantonale Veteranen
       group/mitgliederverband_veteranen/ehrenveteran:
-        one: Kantonale(r) EhrenveteranIn
-        other: Kantonale EhrenveteranInnen
+        one: Kantonaler Ehrenveteran
+        other: Kantonale Ehrenveteranen
       group/mitgliederverband_kontakte:
         *kontakte
       group/mitgliederverband/suisa_admin:
-        one: Verantworliche(r) Suisa
-        other: Verantworliche Suisa
+        *suisa_verantwortlicher
 
 
       group/regionalverband:
@@ -94,8 +93,7 @@ de:
       group/regionalverband_kontakte:
         *kontakte
       group/regionalverband/suisa_admin:
-        one: Verantworliche(r) Suisa
-        other: Verantworliche Suisa
+        *suisa_verantwortlicher
 
       group/verein:
         one: Verein
@@ -115,10 +113,7 @@ de:
         one: DirigentIn
         other: DirigentInnen
       group/verein/suisa_admin:
-        one: Verantworliche(r) Suisa
-        other: Verantworliche Suisa
-
-
+        *suisa_verantwortlicher
 
       ### ROLES FOR ALL LAYERS
 
@@ -138,8 +133,8 @@ de:
         one: Geschäftsführung
         other: Geschäftsführung
       role/geschaeftsstelle_staff:
-        one: MitarbeiterIn
-        other: MitarbeiterInnen
+        one: Mitarbeiter
+        other: Mitarbeiter
       role/geschaeftsstelle_help:
         one: Hilfe
         other: Hilfen
@@ -156,11 +151,11 @@ de:
         one: Mitglied
         other: Mitglieder
       role/vorstand_praesident: &praesident
-        one: PräsidentIn
-        other: PräsidentInnen
+        one: Präsident
+        other: Präsidenten
       role/vorstand_vize_praesident:
-        one: VizepräsidentIn
-        other: VizepräsidentInnen
+        one: Vizepräsident
+        other: Vizepräsidenten
       role/vorstand_veteranenchef:
         one: Veteranenchef
         other: Veteranenchefs
@@ -243,12 +238,12 @@ de:
           f/b: *fanfare_benelux
           t/p: *fanfare_mixte
         unterhaltungsmusik_stufen:
-          _nil: unbekannt
+          _nil: &unbekannt unbekannt
           oberstufe: Oberstufe
           mittelstufe: Mittelstufe
           unterstufe: Unterstufe
         klassen:
-          _nil: unbekannt
+          _nil: *unbekannt
           hoechste: Höchstklasse
           erste: 1. Klasse
           zweite: 2. Klasse
