@@ -6,9 +6,5 @@
 module Sheet
   class SongCensus < Base
     self.parent_sheet = Group
-
-    def title
-      SongCensus.model_name.human
-    end
   end
 end

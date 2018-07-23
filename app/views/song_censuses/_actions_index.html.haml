@@ -1,3 +1,5 @@
 = render 'remind'
+= render 'finish'
+
 - if can?(:manage_song_census, group)
   = song_counts_export_dropdown

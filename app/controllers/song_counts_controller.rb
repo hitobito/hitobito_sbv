@@ -13,6 +13,7 @@ class SongCountsController < SimpleCrudController
                          arranged_by: 'songs.arranged_by' }
 
   respond_to :js
+  helper_method :census
 
   def index
     respond_to do |format|
@@ -34,7 +35,7 @@ class SongCountsController < SimpleCrudController
 
   def submit
     submitted = with_callbacks(:create, :save) do
-      CensusSubmission.new(parent, SongCensus.current).submit
+      CensusSubmission.new(parent, census).submit
     end
     respond_with(parent, success: submitted, location: group_song_counts_path(parent))
   end
@@ -72,8 +73,12 @@ class SongCountsController < SimpleCrudController
     error_messages.presence || flash_message(:failure)
   end
 
+  def census
+    SongCensus.current
+  end
+
   def default_year
-    @default_year ||= SongCensus.current.try(:year) || current_year
+    @default_year ||= census.try(:year) || current_year
   end
 
   def current_year

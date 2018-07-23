@@ -25,6 +25,12 @@ de:
       send_confirm: Schickt allen Suisaverantworlichen, die noch keine Liste eingereicht haben eine Erinnerung.
                     Jeder erhhält ein E-Mail in seiner Korrespondenzsprache.
                     Der Text vom E-Mail kann von einem Administrator unter Einstellungen angepasst werden.
+    finish:
+      submit: Meldeliste abschliessen
+      start_new_census: Mit dem Abschliessen der Meldeliste werden alle bis jetzt eingereichten Meldungen gesperrt.
+        Es wird eine neue Meldeliste angelegt, noch offene Meldungen werden dann allenfalls
+        dieser Liste hinzugefügt.
+
   song_counts:
     submit:
       flash:

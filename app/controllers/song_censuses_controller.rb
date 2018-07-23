@@ -3,40 +3,38 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class SongCensusesController < ApplicationController
+class SongCensusesController < CrudController
+
   include YearBasedPaging
 
-  helper_method :year, :group
-  before_action :authorize_action
+  self.permitted_attrs = [:year, :start_at, :finish_at]
+
+  helper_method :group
+
+  skip_authorize_resource
+  before_action :authorize_class
+  around_create :switch_census_period
 
   def index
-    @census = if params[:year]
-                SongCensus.where(year: params[:year].to_i).last
-              else
-                SongCensus.current
-              end
-
-    @year = year
+    @census = SongCensus.where(year: year).last
     @total = CensusCalculator.new(@census, group).total
   end
 
-  def remind # rubocop:disable Metrics/AbcSize
+  def create
+    super(location: group_song_censuses_path(group))
+  end
+
+  def remind
     census = SongCensus.find(params[:song_census_id])
     vereins_total = CensusCalculator.new(census, group).vereins_total
-
-    count = group.descendants.where(type: Group::Verein).collect do |verein|
-      next if vereins_total[verein.id]
-      verein.suisa_admins.each do |suisa_admin|
-        SongCensusMailer.reminder(suisa_admin, verein).deliver_now
-      end
-    end.compact.count
+    count = deliver_reminders(vereins_total)
 
     redirect_to :back, notice: t('.success', verein_count: count)
   end
 
   private
 
-  def authorize_action
+  def authorize_class
     authorize!(:manage_song_census, group)
   end
 
@@ -54,6 +52,25 @@ class SongCensusesController < ApplicationController
 
   def year_range
     @year_range ||= (year - 3)..(year + 1)
+  end
+
+  def switch_census_period
+    old = SongCensus.current
+    return false unless yield
+    new = SongCensus.current
+
+    CensusPeriodSwitch.new(old, new).perform
+  end
+
+  # extracted methods
+
+  def deliver_reminders(vereins_total)
+    group.descendants.where(type: Group::Verein).collect do |verein|
+      next if vereins_total[verein.id]
+      verein.suisa_admins.each do |suisa_admin|
+        SongCensusMailer.reminder(suisa_admin, verein).deliver_now
+      end
+    end.compact.count
   end
 
 end

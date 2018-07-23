@@ -26,6 +26,7 @@ class SongCount < ActiveRecord::Base
   belongs_to :mitgliederverband, class_name: 'Group::Mitgliederverband'
 
   before_validation :set_verband_ids, on: :create, if: :verein
+  after_initialize :set_readonly
 
   scope :in, ->(year) { where(year: year) }
 
@@ -45,12 +46,16 @@ class SongCount < ActiveRecord::Base
 
   def set_verband_ids
     case verein.parent
-    when Group::Regionalverband then
+    when Group::Regionalverband
       self.regionalverband_id = verein.parent.id
       self.mitgliederverband_id = verein.parent.parent.id
-    when Group::Mitgliederverband then
+    when Group::Mitgliederverband
       self.mitgliederverband_id = verein.parent.id
     end
+  end
+
+  def set_readonly
+    readonly! unless editable?
   end
 
 end
