@@ -36,4 +36,32 @@ describe VeteranYears do
     expect((first + second + third).years).to be == 31
   end
 
+  context 'has some helper methods to' do
+    it 'sort' do
+      first = described_class.new(1978, 1981)
+      second = described_class.new(1983, 2010)
+      third = described_class.new(2012, 2013)
+
+      expect([third, second, first].sort).to be == [first, second, third]
+    end
+
+    describe 'add, which' do
+      let(:first) { described_class.new(1978, 1981) }
+      let(:second) { described_class.new(1983, 2010) }
+      let(:result) { first + second }
+
+      it 'returns a new VeteranYears-Object' do
+        expect(result).to be_a described_class
+      end
+
+      it 'uses the earliest start year' do
+        expect(result.start_year).to be == 1978
+      end
+
+      it 'uses the latest end_year' do
+        expect(result.end_year).to be == 2010
+      end
+    end
+  end
+
 end
