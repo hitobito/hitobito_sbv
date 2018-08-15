@@ -9,7 +9,7 @@ class VeteranYears
   end
 
   def years
-    @end_year - @start_year - @passive_years.size
+    @end_year - @start_year - passive_and_starting_years.size
   end
 
   def <=>(other)
@@ -28,6 +28,12 @@ class VeteranYears
 
   def year_list
     (@start_year..@end_year).to_a - @passive_years
+  end
+
+  private
+
+  def passive_and_starting_years
+    @passive_years.map { |y| [y, y.succ] }.flatten.uniq
   end
 
 end
