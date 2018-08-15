@@ -61,6 +61,18 @@ describe VeteranYears do
       it 'uses the latest end_year' do
         expect(result.end_year).to be == 2010
       end
+
+      it 'calculates gaps' do
+        expect(result.passive_years).to be == [1982]
+      end
+
+      it 'combines gaps' do
+        first = described_class.new(1978, 2010, [1982])
+        second = described_class.new(2010, 2015, [2013])
+        result = first + second
+
+        expect(result.passive_years).to be == [1982, 2013]
+      end
     end
   end
 
