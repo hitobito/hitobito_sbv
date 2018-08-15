@@ -78,6 +78,10 @@ describe VeteranYears do
 
         expect(result.passive_years).to be == [1982, 2013]
       end
+
+      it 'can be used to sum up an array' do
+        expect([first, second].sum).to be_a described_class
+      end
     end
   end
 
