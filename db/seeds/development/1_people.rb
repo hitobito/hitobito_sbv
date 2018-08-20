@@ -31,9 +31,15 @@ puzzlers = ['Pascal Zumkehr',
           ]
 
 devs = {
-  'Bernhard Lippuner' => 'bernhard.lippuner@windband.ch',
-  'Sigi Aulbach' => 'sigi.aulbach@windband.ch',
-  'Hans Seeberger' => 'hans.seeberger@windband.ch'
+  'Sigi Aulbach'       => 'sigi.aulbach@windband.ch',
+  'Valentin Bischof'   => 'valentin.bischof@windband.ch',
+  'Peter Börlin'       => 'peter.boerlin@windband.ch',
+  'Didier Froidevaux'  => 'didier.froidevaux@windband.ch',
+  'Heini Füllemann'    => 'heini.fuellemann@windband.ch',
+  'Andy Kollegger'     => 'andy.kollegger@windband.ch',
+  'Bernhard Lippuner'  => 'bernhard.lippuner@windband.ch',
+  'Luana Menoud-Baldi' => 'luana.menoud-baldi@windband.ch',
+  'Hans Seeberger'     => 'hans.seeberger@windband.ch',
 }
 
 puzzlers.each do |puz|
