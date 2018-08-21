@@ -11,6 +11,8 @@ module Sbv::Person
   included do
     Person::PUBLIC_ATTRS << :correspondence_language
 
+    validates :first_name, :last_name, :birthday, presence: true
+
     # validates :correspondence_language,
     #           inclusion: { in: lambda do |_|
     #                              Settings.application.languages.to_hash.keys.collect(&:to_s)

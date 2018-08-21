@@ -10,6 +10,7 @@ admin:
   gender: m
   contact_data_visible: true
   primary_group: hauptgruppe_1
+  birthday: 26.04.1965
 
 leader:
   first_name: A
@@ -17,15 +18,18 @@ leader:
   email: a.leader@hitobito.example.com
   contact_data_visible: true
   primary_group: musikgesellschaft_alterswil
+  birthday: 10.11.1970
 
 member:
   first_name: My
   last_name: Member
   email: member0@hitobito.example.com
   primary_group: musikverband_hastdutoene
+  birthday: 01.02.1990
 
 suisa_admin:
   first_name: Suisa
   last_name: Boy
   email: suisa@hitobito.example.com
   primary_group: musikgesellschaft_alterswil
+  birthday: 10.01.1980
