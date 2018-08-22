@@ -8,6 +8,7 @@
 require 'spec_helper'
 
 describe SongCensus do
+  include ActiveSupport::Testing::TimeHelpers
 
   describe '.last' do
     subject { described_class.last }
@@ -18,11 +19,14 @@ describe SongCensus do
   describe '.current' do
     subject { described_class.current }
 
-    it { is_expected.to eq(song_censuses(:two_o_17)) }
+    it 'should eq 2017 census' do
+      travel_to Time.new(2018, 01, 01) do
+        is_expected.to eq(song_censuses(:two_o_17))
+      end
+    end
   end
 
   describe 'defaults' do
-    include ActiveSupport::Testing::TimeHelpers
 
     it { is_expected.to have_attributes(year: Time.zone.today.year )}
 
