@@ -21,8 +21,8 @@ module Sbv::Person
 
   def active_years
     roles.with_deleted.where("type LIKE '%Mitglied'").map do |role|
-      VeteranYears.new(role.created_at.year, role.deleted_at.year || Time.zone.now.year)
-    end.sum.years
+      VeteranYears.new(role.created_at.year, (role.deleted_at || Time.zone.now).year)
+    end.sum.years.to_i
   end
 
 end
