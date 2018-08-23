@@ -1,0 +1,274 @@
+#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  hitobito_sbv and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_sbv.
+
+#  You can use YAML anchors to avoid duplication
+#  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
+
+fr:
+  activerecord:
+    models:
+
+      ### GROUPS
+
+      group/root:
+        one: Organisation faîtière
+        other: Organisations faîtières
+      group/root_geschaeftsstelle: &office
+        one: Secrétariat
+        other: Secrétariats
+      group/root_vorstand:
+        one: Direction de l'association
+        other: Direction de l'association
+      group/root_musikkommission: &musikkommission
+        one: Commission de musique
+        other: Commissions de musique
+      group/root_arbeitsgruppe: &arbeitsgruppe
+        one: Groupe de travail
+        other: Groupes de travail
+      group/root_ehrenmitglieder: &ehrenmitglieder
+        one: Membre d'honneur
+        other: Membres d'honneur
+      group/root_veteranen: &veteranen
+        one: Vétéran
+        other: Vétérans
+      group/root_veteranen/veteran:
+        one: Vétéran fédéral
+        other: Vétérans fédéraux
+      group/root_veteranen/ehrenveteran:
+        one: 'Vétéran d’honneur fédéral '
+        other: Vétérans d’honneur fédéraux
+      group/root_veteranen/cism_veteran:
+        one: Vétérans CISM
+        other: Vétérans CISM
+      group/root_kontakte: &kontakte
+        one: Contacts
+        other: Contacts
+      group/root/suisa_admin:
+        one: Responsable SUISA
+        other: Responsables SUISA
+
+      group/mitgliederverband: &suisa_verantwortlicher
+        one: Association membre
+        other: Associations membres
+      group/mitgliederverband_geschaeftsstelle:
+        *office
+      group/mitgliederverband_vorstand: &vorstand
+        one: Comité
+        other: Comités
+      group/mitgliederverband_musikkommission:
+        *musikkommission
+      group/mitgliederverband_arbeitsgruppe:
+        *arbeitsgruppe
+      group/mitgliederverband_ehrenmitglieder:
+        *ehrenmitglieder
+      group/mitgliederverband_veteranen:
+        *veteranen
+      group/mitgliederverband_veteranen/veteran:
+        one: Vétéran cantonal
+        other: Vétérans cantonaux
+      group/mitgliederverband_veteranen/ehrenveteran:
+        one: Vétéran d'honneur cantonal
+        other: Vétérans d'honneur cantonaux
+      group/mitgliederverband_kontakte:
+        *kontakte
+      group/mitgliederverband/suisa_admin:
+        *suisa_verantwortlicher
+
+
+      group/regionalverband:
+        one: Association régionale
+        other: Associations régionales
+      group/regionalverband_geschaeftsstelle:
+        *office
+      group/regionalverband_vorstand:
+        *vorstand
+      group/regionalverband_musikkommission:
+        *musikkommission
+      group/regionalverband_arbeitsgruppe:
+        *arbeitsgruppe
+      group/regionalverband_ehrenmitglieder:
+        *ehrenmitglieder
+      group/regionalverband_kontakte:
+        *kontakte
+      group/regionalverband/suisa_admin:
+        *suisa_verantwortlicher
+
+      group/verein:
+        one: Société
+        other: Sociétés
+      group/verein_vorstand:
+        *vorstand
+      group/verein_musikkommission:
+        *musikkommission
+      group/verein_arbeitsgruppe:
+        *arbeitsgruppe
+      group/verein_mitglieder:
+        one: Membres
+        oter: Membres
+      group/verein_kontakte:
+        *kontakte
+      group/verein/conductor:
+        one: Directeur-trice
+        other: Directeur-trice-s
+
+      group/verein/suisa_admin:
+        *suisa_verantwortlicher
+
+      ### ROLES FOR ALL LAYERS
+
+      #### General
+
+      role/admin:
+        one: Administrateur
+        other: Administrateurs
+      role/adressverwaltung:
+        one: Gestion des adresses
+        other: Gestion des adresses
+
+
+      #### Geschaeftsstelle Roles
+
+      role/geschaeftsstelle_manager:
+        one: Direction du secrétariat
+        other: Direction du secrétariat
+      role/geschaeftsstelle_staff:
+        one: Collaborateur
+        other: Collaborateurs
+      role/geschaeftsstelle_help:
+        one: Aide
+        other: Aides
+
+      #### Vorstand Roles
+
+      role/vorstand_kassier:
+        one: Caissier
+        other: Caissiers
+      role/vorstand_finanzchef:
+        one: Chef des finances
+        other: ' Chefs des finances'
+      role/vorstand_mitglied: &mitglied
+        one: Membre
+        other: Membres
+      role/vorstand_praesident: &praesident
+        one: Président
+        other: Présidents
+      role/vorstand_vize_praesident:
+        one: Vice-président
+        other: Vice-Présidents
+      role/vorstand_veteranenchef:
+        one: Chef des vétérans
+        other: Chefs des vétérans
+      role/vorstand_materialverwaltung:
+        one: Responsable matériel
+        other: Responsable matériel
+
+      #### Musikkommission Roles
+
+      role/musikkommission_praesident:
+        *praesident
+      role/musikkommission_mitglied:
+        *mitglied
+
+      #### Arbeitsgruppen Roles
+
+      role/arbeitsgruppe_leitung:
+        one: Direction
+        other: Direction
+      role/arbeitsgruppe_mitglied:
+        *mitglied
+
+      #### Ehrenmitglieder
+
+      role/ehrenmitglied:
+        one: Membre d'honneur
+        other: Membres d'honneur
+
+      #### Kontakte Roles
+
+      role/kontakt:
+        one: Contact
+        other: Contacts
+
+
+      #### Mitglieder Roles
+
+      role/mitglieder_mitglied:
+        *mitglied
+      role/mitglieder_passivmitglied:
+        one: Membre passif
+        other: Membres passifs
+
+
+      song:
+        one: Oeuvre
+        other: Oeuvres
+
+
+      song_census:
+        one: Liste d'annonce
+
+      song_count:
+        one: Annonce d'oeuvre
+        other: Annonces d'oeuvres
+
+
+    attributes:
+      person:
+        correspondence_language: &correspondence_language Langue de correspondance
+        profession: Profession
+      group:
+        vereinssitz: Siège de la société
+        founding_year: Année de fondation
+        klasse: &klasse Classe
+        klasse_value: *klasse
+        besetzung: &besetzung "Formation\nType de formation"
+        besetzung_value: *besetzung
+        unterhaltungsmusik: &unterhaltungsmusik Musique de divertissement
+        unterhaltungsmusik_value: *unterhaltungsmusik
+        correspondence_language: *correspondence_language
+        subventionen: Subventions
+        reported_members: Membres annoncés
+        recognized_members: Membres saisis
+        besetzungen:
+          _nil: Inconnu
+          brass_band: &brass_band Brass Band
+          harmonie: &harmonie Harmonie
+          fanfare_benelux: &fanfare_benelux Fanfare Benelux
+          fanfare_mixte: &fanfare_mixte Fanfare Mixte
+          bb: *brass_band
+          h: *harmonie
+          f/b: *fanfare_benelux
+          t/p: *fanfare_mixte
+        unterhaltungsmusik_stufen:
+          _nil: &unbekannt Inconnu
+          oberstufe: Catégorie supérieure
+          mittelstufe: Catégorie moyenne
+          unterstufe: Catégorie inférieure
+        klassen:
+          _nil: *unbekannt
+          hoechste: Classe excellente
+          erste: 1ère classe
+          zweite: 2ème classe
+          dritte: 3ème classe
+          vierte: 4ème classe
+      role:
+        class:
+          permission:
+            description:
+              song_census: Peut administrer les annonces Suisa
+      song:
+        title: Titre
+        composed_by: Compositeur
+        arranged_by: Arrangeur
+        published_by: Edition
+
+      song_count:
+        song: Oeuvre
+        song_id: Oeuvre
+        count: Nombre
+        title: Titre
+        composed_by: Compositeur
+        arranged_by: Arrangeur
+        verein_id: ID société
