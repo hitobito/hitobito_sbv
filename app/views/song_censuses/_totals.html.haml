@@ -3,7 +3,8 @@
 - vereine = @group.children.where(type: Group::Verein)
 
 - if mitgliederverbaende.any?
-  %h2 Mitgliederverbände
+  %h2
+    =t('activerecord.models.group/mitgliederverband.other')
 
   = table(mitgliederverbaende, class: 'table table-striped table-hover') do |t|
     - t.col do |verband|
@@ -13,7 +14,8 @@
       = t('.censuses_submitted', submitted: @total[:mitgliederverband][verband.id].to_a.size, total: verband.descendants.where(type: Group::Verein).size)
 
 - if regionalverbaende.any?
-  %h2 Regionalverbände
+  %h2
+    =t('activerecord.models.group/regionalverband.other')
 
   = table(regionalverbaende, class: 'table table-striped table-hover') do |t|
     - t.col do |verband|
@@ -22,7 +24,8 @@
       = t('.censuses_submitted', submitted: @total[:regionalverband][verband.id].to_a.size, total: verband.descendants.where(type: Group::Verein).size)
 
 - if vereine.any?
-  %h2 Vereine
+  %h2
+    =t('activerecord.models.group/verein.other')
 
   = table(vereine, class: 'table table-striped table-hover') do |t|
     - t.col do |verein|
