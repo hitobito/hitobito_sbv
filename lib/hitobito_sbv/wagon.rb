@@ -43,6 +43,7 @@ module HitobitoSbv
       ### domain
       Export::Tabular::Groups::Row.send :include, Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.send :include, Sbv::Export::Tabular::Groups::List
+      Export::Tabular::People::PeopleFull.send :include, Sbv::Export::Tabular::People::PeopleFull
 
       # load this class after all abilities have been defined
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census
