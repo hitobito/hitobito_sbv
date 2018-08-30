@@ -22,6 +22,9 @@ Rails.application.routes.draw do
       resources :song_censuses, only: [:new, :create, :index] do
         post 'remind', to: 'song_censuses#remind'
       end
+      resource :roles, only: [] do
+        post 'create_history_member'
+      end
     end
   end
 

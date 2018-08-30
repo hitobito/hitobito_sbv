@@ -251,6 +251,7 @@ de:
           dritte: 3. Klasse
           vierte: 4. Klasse
       role:
+        created_at: Eintritt
         class:
           permission:
             description:
@@ -269,3 +270,8 @@ de:
         composed_by: Komponist
         arranged_by: Arrangeur
         verein_id: Vereins ID
+
+  errors:
+    messages:
+      cannot_be_later_than_today: kann nicht später als heute sein
+      cannot_be_later_than_deleted_at: muss vor oder am selben Tag wie der Austritt sein

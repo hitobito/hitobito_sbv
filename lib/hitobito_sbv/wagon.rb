@@ -24,6 +24,9 @@ module HitobitoSbv
       Person.send       :include, Sbv::Person
       Role.send         :include, Sbv::Role
 
+      ### abilities
+      RoleAbility.send :include, Sbv::RoleAbility
+
       ### controllers
       GroupsController.permitted_attrs += [:vereinssitz, :founding_year,
                                            :correspondence_language, :besetzung,
@@ -31,6 +34,8 @@ module HitobitoSbv
                                            :subventionen, :reported_members]
 
       PeopleController.permitted_attrs += [:profession, :correspondence_language]
+
+      RolesController.send :include, Sbv::RolesController
 
       ### helpers
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
