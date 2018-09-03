@@ -68,7 +68,7 @@ class Group::Verein < ::Group
 
   def suisa_admins
     Person.joins(:roles)
-      .where("roles.type = 'Group::Verein::SuisaAdmin' AND roles.group_id = #{self.id}")
+          .where("roles.type = 'Group::Verein::SuisaAdmin' AND roles.group_id = #{id}")
   end
 
   ### ROLES

@@ -214,6 +214,7 @@ de:
       person:
         correspondence_language: &correspondence_language Korrespondenzsprache
         profession: Beruf
+        active_years: Aktivjahre
       group:
         vereinssitz: Vereinssitz
         founding_year: Gründungsjahr
