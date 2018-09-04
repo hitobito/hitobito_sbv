@@ -10,6 +10,7 @@ module Sbv::Person
 
   included do
     Person::PUBLIC_ATTRS << :correspondence_language
+    Person::FILTER_ATTRS << :active_years
 
     validates :first_name, :last_name, :birthday, presence: true
 
