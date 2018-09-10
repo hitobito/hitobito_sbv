@@ -214,7 +214,8 @@ de:
       person:
         correspondence_language: &correspondence_language Korrespondenzsprache
         profession: Beruf
-        active_years: Aktivjahre
+        active_years: Aktivjahre aktuell
+        prognostic_active_years: Aktivjahre Prognose
       group:
         vereinssitz: Vereinssitz
         founding_year: Gründungsjahr
