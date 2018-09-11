@@ -31,6 +31,15 @@ de:
         Es wird eine neue Meldeliste angelegt, noch offene Meldungen werden dann allenfalls
         dieser Liste hinzugefügt.
 
+  person:
+    history:
+      history_members_form_sbv:
+        verein: Verein
+        new_role: Neue Rolle
+        start_date: Eintritt
+        end_date: Austritt
+        save: Speichern
+
   song_counts:
     submit:
       flash:
