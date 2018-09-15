@@ -12,17 +12,17 @@ N = 1_000
 
 FETCH_YEARS_TIME = 0.1
 
-describe 'VeteranYears', performance: true do
-  let(:person) do
-    person = people(:member)
-    Role.create!(person: person, group: groups(:mitglieder_mg_aarberg), created_at: 20.years.ago, deleted_at: 17.years.ago, type: 'Group::VereinMitglieder::Mitglied')
-    Role.create!(person: person, group: groups(:mitglieder_mg_aarberg), created_at: 15.years.ago, deleted_at: 13.years.ago, type: 'Group::VereinMitglieder::Mitglied')
-    Role.create!(person: person, group: groups(:mitglieder_mg_aarberg), created_at: 10.years.ago, deleted_at:  7.years.ago, type: 'Group::VereinMitglieder::Mitglied')
-    Role.create!(person: person, group: groups(:mitglieder_mg_aarberg), created_at:  5.years.ago, deleted_at:  3.years.ago, type: 'Group::VereinMitglieder::Mitglied')
-    person.active_years = person.calculate_active_years
-    person.active_role  = person.active_member_role?
-    person.save
-    person
+# describe 'VeteranYears', performance: true do
+describe 'VeteranYears' do
+  let(:group) { groups(:mitglieder_mg_aarberg) }
+  let(:person) { people(:member) }
+
+  before :each do
+    Role.create!(person: person, group: group, created_at: 20.years.ago, deleted_at: 17.years.ago, type: 'Group::VereinMitglieder::Mitglied')
+    Role.create!(person: person, group: group, created_at: 15.years.ago, deleted_at: 13.years.ago, type: 'Group::VereinMitglieder::Mitglied')
+    Role.create!(person: person, group: group, created_at: 10.years.ago, deleted_at:  7.years.ago, type: 'Group::VereinMitglieder::Mitglied')
+    Role.create!(person: person, group: group, created_at:  5.years.ago, deleted_at:  3.years.ago, type: 'Group::VereinMitglieder::Mitglied')
+    person.save # trigger callback to update year-cache
   end
 
   def measure(max_time, &block)

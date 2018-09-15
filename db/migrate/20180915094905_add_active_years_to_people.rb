@@ -15,7 +15,7 @@ class AddActiveYearsToPeople < ActiveRecord::Migration
 
             person.active_years = active_years
             person.active_role  = active_roles
-            person.save
+            person.save(validate: false)
           end
         end
       end
