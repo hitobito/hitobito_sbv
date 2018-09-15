@@ -20,7 +20,6 @@ module Sbv::Person
     #                            end,
     #                        allow_blank: true }
 
-    before_validation :cache_active_years
   end
 
   def prognostic_active_years

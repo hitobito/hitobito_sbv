@@ -12,8 +12,7 @@ N = 1_000
 
 FETCH_YEARS_TIME = 0.1
 
-# describe 'VeteranYears', performance: true do
-describe 'VeteranYears' do
+describe 'VeteranYears', performance: true do
   let(:group) { groups(:mitglieder_mg_aarberg) }
   let(:person) { people(:member) }
 
@@ -22,7 +21,6 @@ describe 'VeteranYears' do
     Role.create!(person: person, group: group, created_at: 15.years.ago, deleted_at: 13.years.ago, type: 'Group::VereinMitglieder::Mitglied')
     Role.create!(person: person, group: group, created_at: 10.years.ago, deleted_at:  7.years.ago, type: 'Group::VereinMitglieder::Mitglied')
     Role.create!(person: person, group: group, created_at:  5.years.ago, deleted_at:  3.years.ago, type: 'Group::VereinMitglieder::Mitglied')
-    person.save # trigger callback to update year-cache
   end
 
   def measure(max_time, &block)
