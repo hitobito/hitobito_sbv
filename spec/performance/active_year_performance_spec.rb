@@ -10,7 +10,7 @@ require 'benchmark'
 
 N = 1_000
 
-FETCH_YEARS_TIME = 0.5
+FETCH_YEARS_TIME = 0.1
 
 describe 'VeteranYears', performance: true do
   let(:person) do
@@ -19,6 +19,9 @@ describe 'VeteranYears', performance: true do
     Role.create!(person: person, group: groups(:mitglieder_mg_aarberg), created_at: 15.years.ago, deleted_at: 13.years.ago, type: 'Group::VereinMitglieder::Mitglied')
     Role.create!(person: person, group: groups(:mitglieder_mg_aarberg), created_at: 10.years.ago, deleted_at:  7.years.ago, type: 'Group::VereinMitglieder::Mitglied')
     Role.create!(person: person, group: groups(:mitglieder_mg_aarberg), created_at:  5.years.ago, deleted_at:  3.years.ago, type: 'Group::VereinMitglieder::Mitglied')
+    person.active_years = person.calculate_active_years
+    person.active_role  = person.active_member_role?
+    person.save
     person
   end
 
