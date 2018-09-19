@@ -40,6 +40,13 @@ devs = {
   'Bernhard Lippuner'  => 'bernhard.lippuner@windband.ch',
   'Luana Menoud-Baldi' => 'luana.menoud-baldi@windband.ch',
   'Hans Seeberger'     => 'hans.seeberger@windband.ch',
+  'Norber Kappeler'    => 'info@windband.ch',
+  'Didier Bérard'      => 'didier.berard@bluewin.ch',
+  'Simon Betschmann'   => 'simon.betschmann@aarg-musikverband.ch',
+  'Martin Scherer'     => 'tins@hispeed.ch',
+  'Kantonalverband Jura' => 'jp.bendit@jinfo.ch',
+  'Julien Schumacher'  => 'julien.schumacher@jesly.ch',
+  'Martin Eckenfels'   => 'm.eckenfels@bluewin.ch'
 }
 
 puzzlers.each do |puz|
