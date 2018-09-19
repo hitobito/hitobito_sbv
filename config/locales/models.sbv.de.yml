@@ -45,11 +45,11 @@ de:
       group/root_kontakte: &kontakte
         one: Kontakte
         other: Kontakte
-      group/root/suisa_admin:
+      group/root/suisa_admin: &suisa_verantwortlicher
         one: Verantwortlicher Suisa
         other: Verantworliche Suisa
 
-      group/mitgliederverband: &suisa_verantwortlicher
+      group/mitgliederverband:
         one: Mitgliederverband
         other: Mitgliederverbände
       group/mitgliederverband_geschaeftsstelle:
