@@ -23,16 +23,6 @@ class SongCountsController < SimpleCrudController
     end
   end
 
-  def create
-    @year = model_params[:year]
-    assign_attributes
-    respond_with_flash { save_entry }
-  end
-
-  def destroy
-    respond_with_flash { entry.destroy }
-  end
-
   private
 
   def render_song_counts_tabular(format)
@@ -48,22 +38,17 @@ class SongCountsController < SimpleCrudController
     str + "-#{year}.#{format}"
   end
 
-  def respond_with_flash
-    if yield
-      flash.now[:notice] = flash_message(:success)
-    else
-      flash.now[:alert] = failure_notice
-    end
-
-    respond_with(entry)
+  def model_scope
+    model_class.where(concerts: { verein_id: parent })
   end
 
   def list_entries
-    super.includes(:song, :song_census, :verein).references(:song).in(year)
-  end
-
-  def failure_notice
-    error_messages.presence || flash_message(:failure)
+    # TODO: eager loading
+    super.joins(:concert, :song)
+         .group(:song_id)
+         .select('song_counts.id, song_id, song_counts.year, SUM(count) AS count, concert_id')
+         .in(year)
+         .merge(Song.list)
   end
 
   def census
