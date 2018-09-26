@@ -62,7 +62,8 @@ class Group::Verein < ::Group
                            :reported_members,
                            :recognized_members]
 
-  has_many :song_counts, dependent: :destroy
+  has_many :concerts, dependent: :destroy
+  has_many :song_counts, through: :concerts
 
   # TODO: Validierungen der verschiedenen Values, refactoring, exports
 

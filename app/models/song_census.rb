@@ -17,7 +17,8 @@ class SongCensus < ActiveRecord::Base
 
   after_initialize :set_defaults
 
-  has_many :song_counts, dependent: :destroy
+  has_many :concerts, dependent: :destroy
+  has_many :song_counts, through: :concerts, dependent: :destroy
 
   validates_by_schema
 

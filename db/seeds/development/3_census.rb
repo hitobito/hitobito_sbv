@@ -26,15 +26,25 @@ songs          = Song.all.shuffle.take(10)
 
 SongCensus.all.each do |census|
   Group::Verein.all.shuffle.take(10).each do |verein|
-    songs.each do |song|
-      SongCount.seed_once(:song_census_id, :verein_id, :song_id) do |count|
-        count.song_census_id = census.id
-        count.verein_id = verein.id
-        count.regionalverband_id = verein.parent.id if verein.parent.is_a?(Group::Regionalverband)
-        count.mitgliederverband_id = verein.parent.parent.id if verein.parent.try(:parent).is_a?(Group::Mitgliederverband)
-        count.song_id = song.id
-        count.year = census.year
-        count.editable = (census == current_census)
+    rand(1..6).times do
+      Concert.seed_once(:name, :song_census_id, :verein_id) do |concert|
+        concert.name = Faker::Company.name
+        concert.song_census_id = census.id
+        concert.verein_id = verein.id
+        concert.regionalverband_id = verein.parent.id if verein.parent.is_a?(Group::Regionalverband)
+        concert.mitgliederverband_id = verein.parent.parent.id if verein.parent.try(:parent).is_a?(Group::Mitgliederverband)
+        concert.year = census.year
+        concert.editable = (census == current_census)
+      end
+    end
+    Concert.all.each do |concert|
+      songs.shuffle.take(10).each do |song|
+        SongCount.seed_once(:concert_id, :song_id) do |count|
+          count.concert_id = concert.id
+          count.song_id = song.id
+          count.year = census.year
+          count.count = Faker::Number.between(0, 30)
+        end
       end
     end
   end

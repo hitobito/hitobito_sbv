@@ -2,37 +2,31 @@
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
-
 # == Schema Information
 #
 # Table name: song_counts
 #
-#  id                   :integer          not null, primary key
-#  song_id              :integer          not null
-#  verein_id            :integer          not null
-#  mitgliederverband_id :integer
-#  regionalverband_id   :integer
-#  song_cenus_id        :integer
-#  year                 :integer          not null
-#  count                :integer          default(1), not null
+#  id         :integer          not null, primary key
+#  song_id    :integer          not null
+#  year       :integer          not null
+#  count      :integer          default(1), not null
+#  concert_id :integer
+#
 
 papa_count:
   song: papa
-  verein: musikgesellschaft_aarberg
   year: 2018
   count: 8
-  song_census: two_o_18
+  concert: first_concert
 
 son_count:
   song: son
-  verein: musikgesellschaft_aarberg
   year: 2018
   count: 12
-  song_census: two_o_18
+  concert: second_concert
 
 girl_count:
   song: girl
-  verein: musikgesellschaft_alterswil
   year: 2018
   count: 2
-  song_census: two_o_18
+  concert: third_concert
