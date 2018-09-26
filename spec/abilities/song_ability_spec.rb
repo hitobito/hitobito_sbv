@@ -12,6 +12,7 @@ describe SongAbility do
   subject { ability }
 
   let(:ability) { Ability.new(role.person.reload) }
+  let(:concert) { concerts(:third_concert) }
   let(:verein)  { groups(:musikgesellschaft_alterswil) }
   let(:group)   { groups(:bernischer_kantonal_musikverband_8) }
 
@@ -33,7 +34,7 @@ describe SongAbility do
       end
 
       context 'in own group' do
-        let(:song_count)  { SongCount.new(verein: verein) }
+        let(:song_count)  { SongCount.new(concert: concert) }
 
         if role.match(/Mitglied$/)
           it 'may not read on song_count' do
@@ -69,11 +70,11 @@ describe SongAbility do
         end
 
         it 'may manage SongCounts owned by verein' do
-          is_expected.to be_able_to(:manage, verein.song_counts.new)
+          is_expected.to be_able_to(:manage, concert.song_counts.new)
         end
 
         it 'may submit SongCounts owned by verein' do
-          is_expected.to be_able_to(:submit, verein.song_counts.new)
+          is_expected.to be_able_to(:submit, concert.song_counts.new)
         end
       end
     end
