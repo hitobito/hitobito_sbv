@@ -1,0 +1,11 @@
+.count.span1
+  = song_counts_update_button(:dec)
+  = f.input_field :count, min: 0, max: 30
+  = song_counts_update_button(:inc)
+
+.attrs
+  = label_tag :song_title, "#{(f.object.song.title if f.object.song)}", class: 'span4'
+  = f.hidden_field :year, value: year
+  = f.hidden_field :song_id, class: 'song_id'
+  = f.link_to_remove(I18n.t('global.associations.remove'))
+

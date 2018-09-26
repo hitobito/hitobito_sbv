@@ -67,3 +67,38 @@
 .table-hover tbody tr:hover > th {
   background-color: lighten($gray, 36%);
 }
+
+#concert-form {
+  border-top: 1px solid #E8EBF0;
+}
+
+#song-counts-form {
+  .count i{
+    margin-top: -3px;  
+  }
+  .fields {
+    clear: both;
+    width: 100%;
+    height: 30px;
+  }
+  a.add_nested_fields {
+    display: none;
+  }
+
+  .count input{
+    width: 15px;
+  }
+
+  .attrs {
+    margin-bottom: 20px;
+  }
+}
+
+.concert-info {
+  h3, h2, .actions{
+    clear: both;
+    display: inline-block;
+    margin-right: 20px;
+  }
+}
+

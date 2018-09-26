@@ -1,0 +1,25 @@
+#main.row-fluid.song-counts
+  = field_set_tag nil, id: 'song_counts_typeahead' do
+    = text_field_tag('q', nil,
+      placeholder: I18n.t('song_censuses.verein.search'),
+      data: { provide: 'entity',
+      updater: 'SongCounts.add',
+      url: songs_path(format: :json) })
+
+    = standard_form(Song.new, remote: true) do |f|
+      = f.labeled_input_fields :title, :composed_by, :arranged_by, :published_by
+      .btn-toolbar
+        = submit_button(f, nil)
+        = link_to(ti(:"button.cancel"), '#',
+          class: 'link cancel',
+          onclick: "$('.song-counts #new_song').hide(); return false;")
+
+= entry_form(buttons_top: false) do |f|
+  #song-counts-form
+    = f.nested_fields_for :song_counts, 'song_counts/form', class: ''
+
+  #concert-form
+    = field_set_tag do
+      = f.labeled_input_fields :name, :performed_at
+      = f.hidden_field :verein_id, value: parent.id
+      = f.hidden_field :year, value: year

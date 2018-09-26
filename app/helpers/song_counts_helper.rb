@@ -10,12 +10,9 @@ module SongCountsHelper
     safe_join(content)
   end
 
-  def song_counts_update_button(object, action)
-    count = action == :inc ? object.count + 1 : object.count - 1
-    path = group_song_count_path(object.verein, object, song_count: { count: count })
+  def song_counts_update_button(action)
     icon = icon(action == :inc ? 'chevron-right' : 'chevron-left')
-    options = song_counts_update_options(object, action)
-    link_to(icon, path, options)
+    link_to(icon, '#', class: "#{action}_song_count")
   end
 
   def song_counts_export_dropdown
