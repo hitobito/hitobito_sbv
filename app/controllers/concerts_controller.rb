@@ -12,7 +12,8 @@ class ConcertsController < SimpleCrudController
                             :id,
                             :count,
                             :song_id,
-                            :year
+                            :year,
+                            :_destroy
                           ]]
 
   helper_method :census
