@@ -1,2 +1,4 @@
 = action_button(t('.add_concert'), new_group_concert_path(@group), :plus)
 = song_counts_export_dropdown
+- unless entries.all?(&:song_census)
+  = action_button(t('song_censuses.submit'), submit_group_concerts_path(@group), nil, method: :post)

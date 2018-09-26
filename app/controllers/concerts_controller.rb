@@ -23,6 +23,13 @@ class ConcertsController < SimpleCrudController
     end
   end
 
+  def submit
+    submitted = with_callbacks(:create, :save) do
+      CensusSubmission.new(parent, census).submit
+    end
+    respond_with(parent, success: submitted, location: group_concerts_path(parent))
+  end
+
   private
 
   def find_entry

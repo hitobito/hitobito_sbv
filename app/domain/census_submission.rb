@@ -11,14 +11,14 @@ class CensusSubmission
   end
 
   def submit
-    changed_rows = attach_counts_to_census
+    changed_rows = attach_concerts_to_census
     changed_rows > 0
   end
 
   private
 
-  def attach_counts_to_census
-    SongCount
+  def attach_concerts_to_census
+    Concert
       .where(verein: @group, song_census: nil)
       .update_all(song_census_id: @census.id) # rubocop:disable Rails/SkipsModelValidations
   end

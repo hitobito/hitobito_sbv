@@ -33,13 +33,6 @@ class SongCountsController < SimpleCrudController
     respond_with_flash { entry.destroy }
   end
 
-  def submit
-    submitted = with_callbacks(:create, :save) do
-      CensusSubmission.new(parent, census).submit
-    end
-    respond_with(parent, success: submitted, location: group_song_counts_path(parent))
-  end
-
   private
 
   def render_song_counts_tabular(format)
