@@ -26,6 +26,7 @@ class SongCount < ActiveRecord::Base
   delegate :verein, :verein_id, :song_census, to: :concert
 
   scope :in, ->(year) { where(year: year) }
+  scope :ordered, -> { joins(:song).order('songs.title') }
 
   def to_s
     song.to_s

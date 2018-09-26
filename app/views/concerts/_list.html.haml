@@ -6,7 +6,7 @@
       = link_action_edit(edit_group_concert_path(parent, concert))
       = link_action_destroy(group_concert_path(parent, concert))
 
-  = table(concert.song_counts, class: 'table table-striped table-hover') do |t|
+  = table(concert.song_counts.ordered, class: 'table table-striped table-hover') do |t|
     - t.col do |s|
       = "#{s.count}x"
 

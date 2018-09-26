@@ -24,7 +24,7 @@ class Concert < ActiveRecord::Base
   belongs_to :regionalverband, class_name: 'Group::Regionalverband'
   belongs_to :mitgliederverband, class_name: 'Group::Mitgliederverband'
 
-  has_many :song_counts, -> { joins(:song).order('songs.title') }, dependent: :destroy
+  has_many :song_counts, dependent: :destroy
 
   after_initialize :set_readonly
 
