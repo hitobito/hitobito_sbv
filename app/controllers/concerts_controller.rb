@@ -17,6 +17,12 @@ class ConcertsController < SimpleCrudController
 
   helper_method :census
 
+  def new
+    entry.song_counts = parent.last_played_song_ids.map do |id|
+      SongCount.new(song_id: id, count: 0)
+    end
+  end
+
   private
 
   def find_entry

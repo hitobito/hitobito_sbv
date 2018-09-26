@@ -67,6 +67,14 @@ class Group::Verein < ::Group
 
   # TODO: Validierungen der verschiedenen Values, refactoring, exports
 
+  def last_played_song_ids
+    year = Time.zone.now.year
+
+    SongCount.where(concert: concerts.in([year, year - 1]))
+             .pluck(:song_id)
+             .uniq
+  end
+
   def suisa_admins
     Person.joins(:roles)
           .where("roles.type = 'Group::Verein::SuisaAdmin' AND roles.group_id = #{id}")
