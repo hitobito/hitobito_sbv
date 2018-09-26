@@ -43,9 +43,15 @@ app.SongCounts = {
         elm.value = song[name] if song[name]
         elm.value = song.id if name == 'song_id'
       else
-        elm.append(song.title)
+        $(elm).append($(app.SongCounts.formattedTitle(song)))
     fields = $('#song_counts_fields .fields').last()
     app.SongCounts.highlight(fields)
+
+  formattedTitle: (song) ->
+    "<strong>#{song.title}</strong> " +
+    "<small>#{song.composed_by} - " +
+    "#{song.arranged_by} - " +
+    "#{song.published_by}</small>"
 
   incExistingCount: (elm) ->
     fields = $(elm).closest('.fields')

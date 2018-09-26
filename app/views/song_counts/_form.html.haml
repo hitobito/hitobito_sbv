@@ -1,11 +1,18 @@
-.count.span1
+.count.pull-left.nowrap{style: "margin-right: 1rem"}
   = song_counts_update_button(:dec)
-  = f.input_field :count, min: 0, max: 30
+  = f.input_field :count, min: 0, max: 30, style: 'min-width: 2rem;'
   = song_counts_update_button(:inc)
 
 .attrs
-  = label_tag :song_title, "#{(f.object.song.title if f.object.song)}", class: 'span4'
+  .pull-right{style: "height: 2rem; margin-left: 0.5rem;"}
+    = f.link_to_remove(I18n.t('global.associations.remove'))
+
+  = label_tag :song_title do
+    - if f.object.song
+      %strong= f.object.song.title
+      %small
+        = f.object.song.composed_by + " - "
+        = f.object.song.arranged_by + " - "
+        = f.object.song.published_by
   = f.hidden_field :year, value: year
   = f.hidden_field :song_id, class: 'song_id'
-  = f.link_to_remove(I18n.t('global.associations.remove'))
-
