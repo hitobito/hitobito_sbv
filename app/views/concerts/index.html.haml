@@ -1,0 +1,6 @@
+= content_for(:toolbar, render('actions_index'))
+= render 'shared/page_per_year'
+
+#main.row-fluid.song-counts
+  .list
+    = render 'list', list: @list

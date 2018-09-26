@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
     resources :songs
     resources :groups, only: [] do
-      resources :song_counts do
+      resources :song_counts
+      resources :concerts do
         collection do
           post 'submit'
         end

@@ -50,3 +50,6 @@ de:
       button: Export
       csv: CSV
       xlsx: XLSX
+  concerts:
+    actions_index:
+      add_concert: Aufführung hinzufügen
