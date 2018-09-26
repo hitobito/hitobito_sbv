@@ -10,7 +10,7 @@ module Sbv::Sheet::Group
                                    view.can?(:manage_song_census, group)
                                end),
                 Sheet::Tab.new('group.suisa_tab',
-                               :group_song_counts_path,
+                               :group_concerts_path,
                                if: lambda do |view, group|
                                  group.is_a?(Group::Verein) &&
                                    view.can?(:index_song_counts, group)

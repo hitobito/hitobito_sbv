@@ -24,8 +24,9 @@ class CensusCalculator
   def vereins_total
     census
       .song_counts
-      .where(verein: group.descendants.where(type: Group::Verein))
-      .group(:verein_id).count
+      .joins(:concert)
+      .where(concerts: { verein_id: group.descendants.where(type: Group::Verein) })
+      .group('concerts.verein_id').count
   end
 
   private
@@ -33,7 +34,7 @@ class CensusCalculator
   def verbands_total(type)
     census
       .song_counts
-      .where(verein: vereins_total.keys)
+      .where(concerts: { verein_id: vereins_total.keys })
       .distinct
       .pluck(:verein_id, :"#{type}_id")
       .each_with_object(Hash.new([])) do |(verein, verband), memo|

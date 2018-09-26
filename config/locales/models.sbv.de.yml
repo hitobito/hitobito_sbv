@@ -210,6 +210,10 @@ de:
         one: Werkmeldung
         other: Werkmeldungen
 
+      concert:
+        one: Aufführung
+        other: Aufführungen
+
     attributes:
       person:
         correspondence_language: &correspondence_language Korrespondenzsprache
@@ -264,13 +268,23 @@ de:
         published_by: Verlag
 
       song_count:
-        song: Werk
-        song_id: Werk
+        song: &song Werk
+        song_id: *song
         count: Anzahl
         title: Titel
         composed_by: Komponist
         arranged_by: Arrangeur
+        verein: Verein
         verein_id: Vereins ID
+
+      song_counts:
+        song: *song
+        song_id: *song
+
+      concert:
+        song_counts: Werkeintrag
+        performed_at: Datum
+        name: Aufführung
 
   errors:
     messages:

@@ -33,7 +33,7 @@ module Sbv::Group
 
   def song_counts
     verein_ids = descendants.where(type: Group::Verein).pluck(:id)
-    SongCount.where("verein_id IN (#{verein_ids.join(',')})")
+    SongCount.joins(:concert).where("concerts.verein_id IN (#{verein_ids.join(',')})")
   end
 
   def recognized_members

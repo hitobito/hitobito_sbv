@@ -2,60 +2,37 @@
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
-
 # == Schema Information
 #
 # Table name: song_counts
 #
-#  id                   :integer          not null, primary key
-#  song_id              :integer          not null
-#  verein_id            :integer          not null
-#  mitgliederverband_id :integer
-#  regionalverband_id   :integer
-#  song_cenus_id        :integer
-#  year                 :integer          not null
-#  count                :integer          default(1), not null
+#  id         :integer          not null, primary key
+#  song_id    :integer          not null
+#  year       :integer          not null
+#  count      :integer          default(1), not null
+#  concert_id :integer
 #
 
 class SongCount < ActiveRecord::Base
 
   belongs_to :song
-  belongs_to :song_census
-  belongs_to :verein, class_name: 'Group::Verein'
-  belongs_to :regionalverband, class_name: 'Group::Regionalverband'
-  belongs_to :mitgliederverband, class_name: 'Group::Mitgliederverband'
+  belongs_to :concert
 
-  before_validation :set_verband_ids, on: :create, if: :verein
-  after_initialize :set_readonly
-
-  scope :in, ->(year) { where(year: year) }
-
-  validates_by_schema
-
-  validates :song_id, uniqueness: { scope: [:verein_id, :year] }
   validates :count,
-            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 30 }, if: :count
+            numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 30 }, if: :count
+  validates :song_id, uniqueness: { scope: :concert }
 
   delegate :title, :composed_by, :arranged_by, :produced_by, to: :song
+  delegate :verein, :verein_id, :song_census, to: :concert
+
+  scope :in, ->(year) { where(year: year) }
 
   def to_s
     song.to_s
   end
 
-  private
-
-  def set_verband_ids
-    case verein.parent
-    when Group::Regionalverband
-      self.regionalverband_id = verein.parent.id
-      self.mitgliederverband_id = verein.parent.parent.id
-    when Group::Mitgliederverband
-      self.mitgliederverband_id = verein.parent.id
-    end
-  end
-
-  def set_readonly
-    readonly! unless editable?
+  def empty?
+    count.zero?
   end
 
 end

@@ -6,16 +6,16 @@ describe CensusSubmission do
   subject { described_class.new(group, census) }
 
   it 'submits song_counts by linking them to a census' do
-    song_counts(:son_count).update(song_census: nil)
+    concerts(:first_concert).update(song_census: nil)
 
     expect do
       expect( subject.submit ).to be_truthy
-    end.to change { SongCount.where(song_census: nil).count }.by(-1)
+    end.to change { Concert.where(song_census: nil).count }.by(-1)
   end
 
   it 'does not change rows if everything is submitted already' do
     expect do
       expect( subject.submit ).to be_falsey
-    end.to_not change { SongCount.where(song_census: nil).count }
+    end.to_not change { Concert.where(song_census: nil).count }
   end
 end

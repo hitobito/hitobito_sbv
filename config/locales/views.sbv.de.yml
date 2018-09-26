@@ -40,13 +40,17 @@ de:
         end_date: Austritt
         save: Speichern
 
-  song_counts:
-    submit:
-      flash:
-        success: Meldeliste eingereicht.
-        failure: Es ist ein Fehler beim Einreichen der Meldeliste aufgetreten.
-
   dropdown/song_counts:
       button: Export
       csv: CSV
       xlsx: XLSX
+  concerts:
+    submit:
+      flash:
+        success: Meldeliste eingereicht.
+        failure: Es ist ein Fehler beim Einreichen der Meldeliste aufgetreten.
+    actions_index:
+      add_concert: Aufführung hinzufügen
+      title: Suisa Erfassung
+      concerts: Aufführungen
+      summary: Zusammenfassung

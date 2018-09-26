@@ -62,9 +62,18 @@ class Group::Verein < ::Group
                            :reported_members,
                            :recognized_members]
 
-  has_many :song_counts, dependent: :destroy
+  has_many :concerts, dependent: :destroy
+  has_many :song_counts, through: :concerts
 
   # TODO: Validierungen der verschiedenen Values, refactoring, exports
+
+  def last_played_song_ids
+    year = Time.zone.now.year
+
+    SongCount.where(concert: concerts.in([year, year - 1]))
+             .pluck(:song_id)
+             .uniq
+  end
 
   def suisa_admins
     Person.joins(:roles)
