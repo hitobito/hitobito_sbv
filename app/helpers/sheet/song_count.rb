@@ -4,7 +4,6 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 module Sheet
-  class SongCount < Base
-    self.parent_sheet = Group
+  class SongCount < Sheet::Concert
   end
 end
