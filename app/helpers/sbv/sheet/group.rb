@@ -13,7 +13,8 @@ module Sbv::Sheet::Group
                                :group_concerts_path,
                                if: lambda do |view, group|
                                  group.is_a?(Group::Verein) &&
-                                   view.can?(:index_song_counts, group)
+                                   (view.can?(:index_song_counts, group) ||
+                                   view.can?(:manage_song_census, group))
                                end))
 
   end
