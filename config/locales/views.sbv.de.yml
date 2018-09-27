@@ -7,7 +7,7 @@
 #  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
 de:
   group:
-    suisa_tab: Suisa
+    suisa_tab: SUISA
   song_censuses:
     index:
       no_data_for_this_year: Für dieses Jahr sind keine Angaben vorhanden.
@@ -51,6 +51,6 @@ de:
         failure: Es ist ein Fehler beim Einreichen der Meldeliste aufgetreten.
     actions_index:
       add_concert: Aufführung hinzufügen
-      title: Suisa Erfassung
+      title: SUISA Erfassung
       concerts: Aufführungen
       summary: Zusammenfassung

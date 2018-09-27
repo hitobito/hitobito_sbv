@@ -46,8 +46,8 @@ de:
         one: Kontakte
         other: Kontakte
       group/root/suisa_admin: &suisa_verantwortlicher
-        one: Verantwortlicher Suisa
-        other: Verantworliche Suisa
+        one: Verantwortlicher SUISA
+        other: Verantworliche SUISA
 
       group/mitgliederverband:
         one: Mitgliederverband
@@ -260,7 +260,7 @@ de:
         class:
           permission:
             description:
-              song_census: Darf Suisa-Meldungen verwalten.
+              song_census: Darf SUISA-Meldungen verwalten.
       song:
         title: Titel
         composed_by: Komponist
