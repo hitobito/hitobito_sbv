@@ -38,10 +38,6 @@ class SongCountsController < SimpleCrudController
     str + "-#{year}.#{format}"
   end
 
-  def model_scope
-    model_class.where(concerts: { verein_id: parent })
-  end
-
   def list_entries
     super.joins(:concert, :song)
          .preload(:song)
