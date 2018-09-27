@@ -43,8 +43,8 @@ class SongCountsController < SimpleCrudController
   end
 
   def list_entries
-    # TODO: eager loading
     super.joins(:concert, :song)
+         .preload(:song)
          .group(:song_id)
          .select('song_counts.id, song_id, song_counts.year, SUM(count) AS count, concert_id')
          .in(year)
