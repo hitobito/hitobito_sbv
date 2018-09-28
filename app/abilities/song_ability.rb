@@ -8,7 +8,8 @@
 class SongAbility < AbilityDsl::Base
 
   on(Song) do
-    permission(:song_census).may(:manage).all
+    permission(:song_census).may(:create, :index, :show).all
+    permission(:song_census).may(:manage).in_dachverband
   end
 
   on(SongCount) do
@@ -23,7 +24,8 @@ class SongAbility < AbilityDsl::Base
   end
 
   on(Group) do
-    permission(:song_census).may(:index_song_counts).in_same_group
+    permission(:song_census).may(:index_concerts).in_layer
+    permission(:song_census).may(:index_song_counts).in_layer
     permission(:song_census).may(:manage_song_census).in_layer
   end
 
@@ -39,6 +41,10 @@ class SongAbility < AbilityDsl::Base
     subject.self_and_ancestors.any? do |group|
       user.groups_with_permission(:song_census).include?(group)
     end
+  end
+
+  def in_dachverband
+    user.groups_with_permission(:song_census).include?(Group::Root.first)
   end
 
 end

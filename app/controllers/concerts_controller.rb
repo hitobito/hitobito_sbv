@@ -56,4 +56,9 @@ class ConcertsController < SimpleCrudController
   def year_range
     @year_range ||= (year - 3)..(year + 1)
   end
+
+  def authorize_class
+    authorize!(:index_concerts, parent)
+  end
+
 end

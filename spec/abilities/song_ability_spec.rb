@@ -23,14 +23,12 @@ describe SongAbility do
     context role do
     let(:role) { Fabricate(role.to_sym, group: groups(group)) }
 
-      %w(Song SongCensus).each do |model|
-        it "may not index #{model}" do
-          is_expected.not_to be_able_to(:index, model.constantize)
-        end
+      it 'may not index SongCensu' do
+        is_expected.not_to be_able_to(:index, SongCensus)
+      end
 
-        it "may not manage #{model}" do
-          is_expected.not_to be_able_to(:manage, model.constantize)
-        end
+      it 'may not manage SongCensus' do
+        is_expected.not_to be_able_to(:manage, SongCensus)
       end
 
       context 'in own group' do
@@ -53,16 +51,35 @@ describe SongAbility do
     let(:role) { Fabricate(Group::Verein::SuisaAdmin.name.to_sym, group: verein) }
 
     context Song do
+      %w(create show).each do |action|
+        it "may #{action} Song" do
+          is_expected.to be_able_to(action.to_sym, Song.first)
+        end
+      end
+
       it 'may index Song' do
         is_expected.to be_able_to(:index, Song)
       end
 
-      it 'may manage Song' do
-        is_expected.to be_able_to(:manage, Song)
+      %w(destroy edit update manage).each do |action|
+        it "may not #{action} Song" do
+          is_expected.not_to be_able_to(action.to_sym, Song.first)
+        end
       end
+
     end
 
     context SongCount do
+
+      context 'layer above' do
+        let(:role) { Fabricate("#{verein.parent.class}::SuisaAdmin".to_sym,
+                               group: verein.parent) }
+
+        it 'may index_song_counts' do
+          is_expected.to be_able_to(:index_song_counts, verein)
+        end
+      end
+
       context 'in same verein' do
 
         it 'may index_song_counts in verein' do
