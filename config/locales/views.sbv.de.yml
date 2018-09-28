@@ -54,3 +54,5 @@ de:
       title: SUISA Erfassung
       concerts: Aufführungen
       summary: Zusammenfassung
+    edit:
+      updated_at: "Letzte Änderung: %{date}"
