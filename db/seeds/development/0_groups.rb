@@ -7,6 +7,11 @@
 
 require Rails.root.join('db', 'seeds', 'support', 'group_seeder')
 
+BESETZUNGEN_MEMO = { 'bb' => 'brass_band',
+                     'h' => 'harmonie',
+                     'f/b' => 'fanfare_benelux',
+                     'f/p' => 'Fanfare Mixte' }.freeze
+
 seeder = GroupSeeder.new
 root = Group.roots.first
 srand(42)
@@ -25,7 +30,7 @@ def build_verein_attrs(parent_id, name, besetzung, lang)
     address: Faker::Address.street_address,
     zip_code: Faker::Address.zip[0..3],
     town: Faker::Address.city,
-    besetzung: besetzung,
+    besetzung: BESETZUNGEN_MEMO.fetch(besetzung, nil),
     correspondence_language: lang,
   }
 end

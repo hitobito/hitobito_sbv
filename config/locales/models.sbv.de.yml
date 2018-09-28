@@ -235,14 +235,10 @@ de:
         recognized_members: Erfasste Mitglieder
         besetzungen:
           _nil: unbekannt
-          brass_band: &brass_band Brass Band
-          harmonie: &harmonie Harmonie
-          fanfare_benelux: &fanfare_benelux Fanfare Benelux
-          fanfare_mixte: &fanfare_mixte Fanfare Mixte
-          bb: *brass_band
-          h: *harmonie
-          f/b: *fanfare_benelux
-          t/p: *fanfare_mixte
+          brass_band: Brass Band
+          harmonie: Harmonie
+          fanfare_benelux: Fanfare Benelux
+          fanfare_mixte: Fanfare Mixte
         unterhaltungsmusik_stufen:
           _nil: &unbekannt unbekannt
           oberstufe: Oberstufe
