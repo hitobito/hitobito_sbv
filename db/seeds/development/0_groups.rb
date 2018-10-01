@@ -10,7 +10,7 @@ require Rails.root.join('db', 'seeds', 'support', 'group_seeder')
 BESETZUNGEN_MEMO = { 'bb' => 'brass_band',
                      'h' => 'harmonie',
                      'f/b' => 'fanfare_benelux',
-                     'f/p' => 'Fanfare Mixte' }.freeze
+                     't/p' => 'fanfare_mixte' }.freeze
 
 seeder = GroupSeeder.new
 root = Group.roots.first
