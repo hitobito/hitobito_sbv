@@ -1,6 +1,7 @@
 - if entry.valid?
   $(".song-counts form.new_song_count :input[name='song_count[song_id]']").val("#{entry.id}");
   $(".song-counts form.new_song_count").submit();
+  $("#new_song")[0].reset();
   $('.song-counts #new_song').hide();
   window.App.SongCounts.add('#{j(entry.to_json.html_safe)}')
 

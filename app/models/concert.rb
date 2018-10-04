@@ -48,7 +48,7 @@ class Concert < ActiveRecord::Base
 
   def set_name
     100.times do |i|
-      self.name = "#{I18n.t('activerecord.models.concert.one')} ##{i + 1}"
+      self.name = "#{I18n.t('activerecord.models.concert.without_date')}"
       break if valid? || errors[:name].blank?
     end
   end

@@ -213,6 +213,7 @@ de:
       concert:
         one: Aufführung
         other: Aufführungen
+        without_date: Aufführung ohne Datum
 
     attributes:
       person:

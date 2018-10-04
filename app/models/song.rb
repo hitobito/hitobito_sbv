@@ -24,15 +24,17 @@ class Song < ActiveRecord::Base
   scope :list, -> { order(:title) }
 
   validates_by_schema
-  validates :title, uniqueness: true
+  validates :title,
+            :uniqueness => {:scope => [:composed_by, :arranged_by, :published_by]}
 
   def to_s
     title
   end
 
   def full_label
-    ("<strong>#{title}</strong> " + 
-     [composed_by, arranged_by, published_by].join(' | ')).html_safe
+    ("<strong>#{title}</strong> <span class='muted'>" +
+     [composed_by, arranged_by, published_by].reject(&:empty?).join(' | ') +
+     "</span>").html_safe
   end
 
 end

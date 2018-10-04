@@ -49,9 +49,9 @@ app.SongCounts = {
 
   formattedTitle: (song) ->
     "<strong>#{song.title}</strong> " +
-    "<small>#{song.composed_by} - " +
-    "#{song.arranged_by} - " +
-    "#{song.published_by}</small>"
+    "<span class='muted'>#{song.composed_by} | " +
+    "#{song.arranged_by} | " +
+    "#{song.published_by}</span>"
 
   incExistingCount: (elm) ->
     fields = $(elm).closest('.fields')

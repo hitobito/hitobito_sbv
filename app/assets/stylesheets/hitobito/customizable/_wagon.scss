@@ -54,3 +54,12 @@
     flex-grow: 0;
   } 
 }
+
+.typeahead {
+  .muted {
+    color: $gray;
+  }
+  .active .muted {
+    color: $white;
+  }
+}
