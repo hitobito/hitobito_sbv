@@ -19,9 +19,9 @@ namespace :migration do
     rm_f 'db/seeds/development/events.rb'
 
     cp 'db/seeds/production/0_groups.rb', 'db/seeds/0_groups.rb'
-    cp 'db/seeds/production/1_people.rb', 'db/seeds/1_people.rb'
-    cp 'db/seeds/production/2_songs.rb',  'db/seeds/2_songs.rb'
-    cp 'db/seeds/production/3_census.rb', 'db/seeds/3_census.rb'
+    # cp 'db/seeds/production/1_people.rb', 'db/seeds/1_people.rb'
+    # cp 'db/seeds/production/2_songs.rb',  'db/seeds/2_songs.rb'
+    # cp 'db/seeds/production/3_census.rb', 'db/seeds/3_census.rb'
   end
 end
 
