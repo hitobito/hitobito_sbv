@@ -39,6 +39,11 @@ def build_regionalverband_attrs(parent_id, name = nil)
   build_verein_attrs(parent_id, (name || "Region #{%w[Nord Ost Süd West].sample}"), nil, nil)
 end
 
+Group.skip_callback(:create, :before, :set_default_left_and_right)
+Group.skip_callback(:save,   :after,  :move_to_new_parent)
+Group.skip_callback(:save,   :after,  :set_depth!)
+Group.skip_callback(:save,   :after,  :move_to_alphabetic_position)
+
 csv = CSV.parse(Wagons.find('sbv').root.join('db/seeds/development/vereine.csv').read, headers: true)
 limited(csv.by_col['Verband'].uniq, selection: [
   'Bernischer Kantonal-Musikverband',
@@ -69,4 +74,8 @@ limited(csv.by_col['Verband'].uniq, selection: [
   end
 end
 
-Group.rebuild!
+Group.set_callback(:create, :before, :set_default_left_and_right)
+Group.set_callback(:save,   :after,  :move_to_new_parent)
+Group.set_callback(:save,   :after,  :set_depth!)
+Group.set_callback(:save,   :after,  :move_to_alphabetic_position)
+Group.rebuild!(false)
