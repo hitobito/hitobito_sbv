@@ -30,4 +30,9 @@ class Song < ActiveRecord::Base
     title
   end
 
+  def full_label
+    ("<strong>#{title}</strong> " + 
+     [composed_by, arranged_by, published_by].join(' | ')).html_safe
+  end
+
 end
