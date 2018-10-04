@@ -78,4 +78,9 @@ Group.set_callback(:create, :before, :set_default_left_and_right)
 Group.set_callback(:save,   :after,  :move_to_new_parent)
 Group.set_callback(:save,   :after,  :set_depth!)
 Group.set_callback(:save,   :after,  :move_to_alphabetic_position)
+
+puts "Rebuilding nested set..."
 Group.rebuild!(false)
+puts "Moving Groups in alphabetical order..."
+Group.find_each { |group| group.send(:move_to_alphabetic_position) }
+puts "Done."
