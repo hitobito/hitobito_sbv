@@ -8,7 +8,6 @@
 require Rails.root.join('db', 'seeds', 'support', 'group_seeder')
 
 seeder = GroupSeeder.new
-root = Group.roots.first
 mitglieder_verbaende = {}
 
 srand(42)
@@ -21,7 +20,19 @@ Group.skip_callback(:save,   :after,  :set_depth!)
 Group.skip_callback(:save,   :after,  :move_to_alphabetic_position)
 
 if Wagons.find('sbv').root.join('db/seeds/production/verbaende.csv').exist?
+  CSV.parse(Wagons.find('sbv').root.join('db/seeds/production/verbaende.csv').read, headers: true, converters: :numeric).each do |dachverband|
+    next unless dachverband.to_hash['type'] == 'Group::Root'
+
+    Group::Root.seed_once(:name, dachverband.to_hash)
+
+    break # only import the first Dachverband...
+  end
+
+  root = Group.roots.first
+
   CSV.parse(Wagons.find('sbv').root.join('db/seeds/production/verbaende.csv').read, headers: true, converters: :numeric).each do |verband|
+    next if verband.to_hash['type'] == 'Group::Root' # we imported that one before
+
     mv = Group::Mitgliederverband.seed_once(:name, :parent_id, verband.to_hash.merge(parent_id: root.id)).first
 
     next unless mv
