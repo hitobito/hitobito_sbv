@@ -3,6 +3,10 @@
 //  or later. See the COPYING file at the top-level directory or at
 //  https://github.com/hitobito/hitobito_sbv.
 
+.nav-left a.is-active, .nav-left li.is-active > a {
+  background-color: lighten(desaturate($linkColor,60%), 55%);
+}
+
 .song-counts {
   input[name=q] {
     width: 100%;
