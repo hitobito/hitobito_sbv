@@ -1,7 +1,10 @@
 .row
   .col.no-wrap.count
     = song_counts_update_button(:dec)
-    = f.input_field :count, min: 0, size: 2, max: 30, class: 'auto-size text-right', style: 'width: unset'
+    = f.input_field :count, min: 0, size: 2, max: 30, 
+                    class: 'auto-size text-right', 
+                    style: 'width: unset', 
+                    autofocus: (f.object.id == params[:focus].to_i)
     = song_counts_update_button(:inc)
   .col{style: "margin: 0;"}
     = f.label :count do
