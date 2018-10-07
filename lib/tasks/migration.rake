@@ -3,6 +3,7 @@ namespace :migration do
     rm_f 'db/seeds/production/verbaende.csv'
     rm_f 'db/seeds/production/vereine.csv'
     rm_f 'db/seeds/production/mitglieder.csv'
+    rm_f 'db/seeds/production/suisa_werke.csv'
     # rm_f 'db/seeds/production/chargen.csv'
   end
 
@@ -10,6 +11,7 @@ namespace :migration do
     'db/seeds/production/verbaende.csv',
     'db/seeds/production/vereine.csv',
     'db/seeds/production/mitglieder.csv',
+    'db/seeds/production/suisa_werke.csv',
     # 'db/seeds/production/chargen.csv',
   ]
 
@@ -20,7 +22,7 @@ namespace :migration do
 
     cp 'db/seeds/production/0_groups.rb', 'db/seeds/0_groups.rb'
     # cp 'db/seeds/production/1_people.rb', 'db/seeds/1_people.rb'
-    # cp 'db/seeds/production/2_songs.rb',  'db/seeds/2_songs.rb'
+    cp 'db/seeds/production/2_songs.rb', 'db/seeds/2_songs.rb'
     # cp 'db/seeds/production/3_census.rb', 'db/seeds/3_census.rb'
   end
 end
@@ -108,15 +110,48 @@ file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
+# imported manually into swoffice_sbvnew
+# LOAD DATA LOCAL INFILE './SUISA_SBV_Tarif_B6_Werkdatei_20180710.csv' INTO TABLE werkliste CHARACTER SET 'latin1' FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n' (suisaid, title, compositionyear, typ, name);
+file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task| # rubocop:disable Metrics/BlockLength
+  migrator = Migration.new(task.name, 'swoffice_sbvnew')
+  migrator.headers = 'suisa_id,title,composed_by,arranged_by,published_by'
+  migrator.query(<<-TABLE.strip_heredoc, <<-FIELDS.strip_heredoc)
+    (SELECT
+      suisaid                                             AS suisa_id,
+      max(title)                                          AS title,
+      COUNT(IF(typ IN ('C','CA'), name, NULL))            AS composer_count,
+      COUNT(IF(typ = 'AR', name, NULL))                   AS arranger_count,
+      COUNT(IF(typ = 'E', name, NULL))                    AS publisher_count,
+      GROUP_CONCAT(IF(typ IN ('C','CA','A'), name, NULL)) AS composed_by,
+      GROUP_CONCAT(IF(typ = 'AR', name, NULL))            AS arranged_by,
+      GROUP_CONCAT(IF(typ = 'E', name, NULL))             AS published_by,
+      MAX(IF(typ IN ('C','CA'), name, NULL))              AS composed_by_one,
+      MAX(IF(typ = 'AR', name, NULL))                     AS arranged_by_one,
+      MAX(IF(typ = 'E', name, NULL))                      AS published_by_one
+    FROM swoffice_sbvnew.werkliste
+    where typ in ('C', 'CA', 'AR', 'E', 'A')
+    GROUP BY suisaid
+    ) AS pivoted_suisa
+  TABLE
+    suisa_id,
+    title,
+    IF(composer_count < 3, composed_by, composed_by_one)    AS composed_by,
+    IF(arranger_count < 3, arranged_by, arranged_by_one)    AS arranged_by,
+    IF(publisher_count < 2, published_by, published_by_one) AS published_by
+  FIELDS
+  migrator.dump
+end
+
 class Migration
   include FileUtils
 
   attr_reader :filename
   attr_writer :headers
 
-  def initialize(filename)
+  def initialize(filename, database)
     @filename = filename
     @headers  = ''
+    @database = database
   end
 
   def headers
@@ -142,12 +177,12 @@ class Migration
     SQL
   end
 
-  def dump
+  def dump(database = @database)
     sh "sudo rm -f #{tmp_out}"
     sh <<-CMD.strip_heredoc
-      mysql -u#{ENV['RAILS_DB_USERNAME']} -p#{ENV['RAILS_DB_PASSWORD']} -e \"#{query}\" swoffice_sbvnew
+      mysql -u#{ENV['RAILS_DB_USERNAME']} -p#{ENV['RAILS_DB_PASSWORD']} -e \"#{query}\" #{database}
     CMD
-    sh "echo '#{headers}' > #{filename}"
+    sh "echo '#{headers}' > #{filename}" if database == @database # otherwise only append data
     sh "sudo cat #{tmp_out} >> #{filename}"
     sh "sudo rm -f #{tmp_out}"
   end
