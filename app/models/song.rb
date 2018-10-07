@@ -14,6 +14,7 @@
 #  composed_by  :string(255)      not null
 #  arranged_by  :string(255)
 #  published_by :string(255)
+#  suisa_id     :integer
 #
 
 class Song < ActiveRecord::Base

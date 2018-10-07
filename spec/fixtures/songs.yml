@@ -12,6 +12,7 @@
 #  composed_by  :string(255)      not null
 #  arranged_by  :string(255)
 #  published_by :string(255)
+#  suisa_id     :integer
 #
 
 #  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
