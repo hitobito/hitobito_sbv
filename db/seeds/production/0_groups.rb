@@ -10,8 +10,6 @@ require Rails.root.join('db', 'seeds', 'support', 'group_seeder')
 seeder = GroupSeeder.new
 mitglieder_verbaende = {}
 
-srand(42)
-
 require 'csv'
 
 Group.skip_callback(:create, :before, :set_default_left_and_right)
@@ -45,21 +43,26 @@ if Wagons.find('sbv').root.join('db/seeds/production/verbaende.csv').exist?
   end
 end
 
-if Wagons.find('sbv').root.join('db/seeds/production/vereine.csv').exist?
-  CSV.parse(Wagons.find('sbv').root.join('db/seeds/production/vereine.csv').read, headers: true, converters: :numeric).each do |verein|
-    parent_id = mitglieder_verbaende[verein.delete('verband').last]
-    kreis_name = verein.delete('kreis').last
+CSV::Converters[:nil] = lambda { |f| f == "\\N" ? nil : f.encode(CSV::ConverterEncoding) rescue f }
+CSV::Converters[:all] = [:numeric, :nil]
 
-    if kreis_name.present?
-      Group::Regionalverband.seed_once(
-        :name, :parent_id, { parent_id: parent_id, name: kreis_name, type: 'Group::Regionalverband' }
-      )
-      parent_id = Group::Regionalverband.find_by(name: kreis_name, parent_id: parent_id).id
+%w(vereine vereine_musicgest).each do |fn|
+  if Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").exist?
+    CSV.parse(Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").read.gsub('\"', '""'), headers: true, converters: :all).each do |verein|
+      parent_id = mitglieder_verbaende[verein.delete('verband').last]
+      kreis_name = verein.delete('kreis').last
+
+      if kreis_name.present?
+        Group::Regionalverband.seed_once(
+          :name, :parent_id, { parent_id: parent_id, name: kreis_name, type: 'Group::Regionalverband' }
+        )
+        parent_id = Group::Regionalverband.find_by(name: kreis_name, parent_id: parent_id).id
+      end
+
+      vereins_attrs = verein.to_hash.merge(parent_id: parent_id)
+
+      Group::Verein.seed_once(:name, :parent_id, vereins_attrs)
     end
-
-    vereins_attrs = verein.to_hash.merge(parent_id: parent_id)
-
-    Group::Verein.seed_once(:name, :parent_id, vereins_attrs)
   end
 end
 

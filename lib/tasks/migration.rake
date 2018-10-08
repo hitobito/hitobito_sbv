@@ -1,8 +1,11 @@
+# rubocop:disable Metrics/BlockLength
 namespace :migration do
   task :clean do
     rm_f 'db/seeds/production/verbaende.csv'
     rm_f 'db/seeds/production/vereine.csv'
+    rm_f 'db/seeds/production/vereine_musicgest.csv'
     rm_f 'db/seeds/production/mitglieder.csv'
+    rm_f 'db/seeds/production/mitglieder_musicgest.csv'
     rm_f 'db/seeds/production/suisa_werke.csv'
     # rm_f 'db/seeds/production/chargen.csv'
   end
@@ -10,7 +13,9 @@ namespace :migration do
   task extract: [
     'db/seeds/production/verbaende.csv',
     'db/seeds/production/vereine.csv',
+    'db/seeds/production/vereine_musicgest.csv',
     'db/seeds/production/mitglieder.csv',
+    'db/seeds/production/mitglieder_musicgest.csv',
     'db/seeds/production/suisa_werke.csv',
     # 'db/seeds/production/chargen.csv',
   ]
@@ -21,7 +26,7 @@ namespace :migration do
     rm_f 'db/seeds/development/events.rb'
 
     cp 'db/seeds/production/0_groups.rb', 'db/seeds/0_groups.rb'
-    # cp 'db/seeds/production/1_people.rb', 'db/seeds/1_people.rb'
+    cp 'db/seeds/production/1_people.rb', 'db/seeds/1_people.rb'
     cp 'db/seeds/production/2_songs.rb', 'db/seeds/2_songs.rb'
     # cp 'db/seeds/production/3_census.rb', 'db/seeds/3_census.rb'
   end
@@ -30,7 +35,7 @@ end
 directory 'db/seeds/production'
 
 file 'db/seeds/production/verbaende.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name)
+  migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
     name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type
   TEXT
@@ -45,8 +50,8 @@ file 'db/seeds/production/verbaende.csv' => 'db/seeds/production' do |task|
     COALESCE(NULLIF(gruendungsjahr, ''), 0) AS founding_year,
     subvention AS subventionen,
     CASE typ
-    WHEN 'bund' THEN 'Group::Root'
-    WHEN 'verband' THEN 'Group::Mitgliederverband'
+      WHEN 'bund' THEN 'Group::Root'
+      WHEN 'verband' THEN 'Group::Mitgliederverband'
     END AS 'type'
   SQL
     WHERE typ IN ('bund', 'verband')
@@ -56,12 +61,12 @@ file 'db/seeds/production/verbaende.csv' => 'db/seeds/production' do |task|
 end
 
 file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name)
+  migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
     name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,reported_members,kreis
   TEXT
   migrator.query('tbl_person', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
-    CONCAT(tbl_person.name, ' ', tbl_person.domizil) AS name,
+    CONCAT_WS(' ', tbl_person.name, tbl_person.domizil) AS name,
     tbl_person.email,
     tbl_person.laendercode AS country,
     tbl_person.ort AS town,
@@ -79,13 +84,50 @@ file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
   SQL
     INNER JOIN tbl_person AS verbaende ON ( tbl_person.parentId = verbaende.id )
     WHERE tbl_person.typ IN ('verein')
+    AND tbl_person.parentId NOT IN (1577, 1743, 2784, 4729, 4751, 4809)
   CONDITIONS
   # faxGeschaeft, faxPrivat, telGeschaeft, homepage, hinweis, zusatz, konto, kreisverbaende,
   migrator.dump
 end
 
+file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |task|
+  migrator = Migration.new(task.name, 'musicgest10')
+  migrator.headers = <<-TEXT.strip_heredoc
+    name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,reported_members,kreis
+  TEXT
+  migrator.query('societes', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+    CONCAT_WS(' ', nomSociete, nomVilleSoc) AS name,
+    NULL AS email,
+    NULL AS country,
+    nomLocalite AS town,
+    cpLocalite AS zip_code,
+    adresseSociete AS address,
+    nomVilleSoc AS vereinssitz,
+    dateFondation AS founding_year,
+    subventionCommunale AS subventionen,
+    'Group::Verein' AS type,
+    CASE societes.mandant
+      WHEN 10 THEN 'Kantonaler Musikverband Wallis / Association cantonale des musiques valaisannes'
+      WHEN 11 THEN 'Fédération Jurassienne de Musique'
+      WHEN 12 THEN 'Société cantonale des musiques vaudoises'
+      WHEN 16 THEN 'Société cantonale des musiques fribourgeoises / Freiburger Kantonal-Musikverband'
+      WHEN 17 THEN 'Association cantonale des musiques neuchâteloises'
+      WHEN 18 THEN 'Association cantonale des musiques genevoises'
+    END AS verband,
+    NULL AS besetzung,
+    NULL AS correspondence_language,
+    NULL AS reported_members,
+    NULL AS kreis
+  SQL
+    INNER JOIN localites USING (mandant, autoLocalite)
+  CONDITIONS
+  migrator.dump('musicgest10') # start-DB
+  migrator.dump('music_1_db') # append data from another DB
+  migrator.dump('music_2_db') # append data from another DB
+end
+
 file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name)
+  migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
     anrede,first_name,last_name,email,birthday,address,zip_code,town,country,verein_name,verein_ort,bemerkung,zusatz
   TEXT
@@ -106,13 +148,56 @@ file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
   SQL
     INNER JOIN swoffice_sbvnew.tbl_person AS verein ON (tbl_person.parentId = verein.id)
     WHERE tbl_person.typ = 'mitglied' AND tbl_person.aktivmitglied = 1
+    AND verein.parentId NOT IN (1577, 1743, 2784, 4729, 4751, 4809)
   CONDITIONS
   migrator.dump
 end
 
-# imported manually into swoffice_sbvnew
-# LOAD DATA LOCAL INFILE './SUISA_SBV_Tarif_B6_Werkdatei_20180710.csv' INTO TABLE werkliste CHARACTER SET 'latin1' FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n' (suisaid, title, compositionyear, typ, name);
-file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task| # rubocop:disable Metrics/BlockLength
+file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do |task|
+  migrator = Migration.new(task.name, 'musicgest10')
+  migrator.headers = <<-TEXT.strip_heredoc
+    anrede,first_name,last_name,email,birthday,address,zip_code,town,country,verein_name,verein_ort,bemerkung,zusatz
+  TEXT
+  migrator.query('musiciens', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+    CASE autoTitre
+      WHEN 1 THEN 'Herr'
+      WHEN 2 THEN 'Frau'
+      WHEN 3 THEN 'Frau'
+    END AS anrede,
+    prenomMusicien,
+    nomMusicien,
+    emailMusicien,
+    naissanceMusicien,
+    adresseMusicien,
+    localites.cpLocalite,
+    localites.nomLocalite,
+    NULL AS country,
+    societes.nomSociete AS vereins_name,
+    societes.nomVilleSoc AS vereins_domizil,
+    remarqueMusicien,
+    NULL AS zusatz
+  SQL
+    INNER JOIN localites
+      ON (musiciens.mandant = localites.mandant AND musiciens.autoLocalite = localites.autoLocalite)
+    LEFT JOIN lienmusicienssocietes
+      ON (musiciens.mandant = lienmusicienssocietes.mandant AND musiciens.autoMusicien = lienmusicienssocietes.autoMusicien AND lienmusicienssocietes.anneeSortie = 0)
+    LEFT JOIN societes
+      ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
+  CONDITIONS
+  migrator.dump('musicgest10') # start-DB
+  migrator.dump('music_1_db') # append data from another DB
+  migrator.dump('music_2_db') # append data from another DB
+end
+
+# imported manually into swoffice_sbvnew with
+#
+# LOAD DATA LOCAL INFILE './SUISA_SBV_Tarif_B6_Werkdatei_20180710.csv'
+#   INTO TABLE werkliste
+#   CHARACTER SET 'latin1'
+#   FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+#   (suisaid, title, compositionyear, typ, name);
+#
+file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = 'suisa_id,title,composed_by,arranged_by,published_by'
   migrator.query(<<-TABLE.strip_heredoc, <<-FIELDS.strip_heredoc)
@@ -141,6 +226,7 @@ file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task| # 
   FIELDS
   migrator.dump
 end
+# rubocop:enable Metrics/BlockLength
 
 class Migration
   include FileUtils

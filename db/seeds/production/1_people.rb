@@ -38,11 +38,12 @@ end
 vereine = Group.pluck(:name, :id).to_h
 mitglieder_ids = {}
 
-if Wagons.find('sbv').root.join("db/seeds/production/mitglieder.csv").exist?
+%w(mitglieder mitglieder_musicgest).each do |fn|
+if Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").exist?
   CSV::Converters[:nil] = lambda { |f| f == "\\N" ? nil : f.encode(CSV::ConverterEncoding) rescue f }
   CSV::Converters[:all] = [:numeric, :nil]
 
-  CSV.parse(Wagons.find('sbv').root.join("db/seeds/production/mitglieder.csv").read.gsub('\"', '""'), headers: true, converters: :all).each do |person|
+  CSV.parse(Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").read.gsub('\"', '""'), headers: true, converters: :all).each do |person|
     person_attrs = person.to_hash
 
     vereins_name = [person['verein_name'], person['verein_ort']].join(' ')
@@ -67,7 +68,8 @@ if Wagons.find('sbv').root.join("db/seeds/production/mitglieder.csv").exist?
     email = person['email'].presence
     additional_information = [person['bemerkung'], person['zusatz']].join(' ').presence
     birthday = begin
-                 Date.parse(person['birthday']).to_s
+                 date = Date.parse(person['birthday'])
+                 date.to_s if date.year > 1900
                rescue ArgumentError, TypeError
                  nil
                end
@@ -104,10 +106,13 @@ if Wagons.find('sbv').root.join("db/seeds/production/mitglieder.csv").exist?
                )
              end
 
+    next unless db_person
+
     Role.seed_once(:person_id, :group_id, :type, { person_id: db_person.id,
                                                    group_id:  vereins_mitglieder_id,
                                                    type:      'Group::VereinMitglieder::Mitglied' })
   end
+end
 end
 
 seeder = PersonSeeder.new
