@@ -74,5 +74,12 @@ Group.set_callback(:save,   :after,  :move_to_alphabetic_position)
 puts "Rebuilding nested set..."
 Group.rebuild!(false)
 puts "Moving Groups in alphabetical order..."
-Group.find_each { |group| group.send(:move_to_alphabetic_position) }
+Group.find_each do |group|
+  begin
+    group.send(:move_to_alphabetic_position)
+  rescue => e
+    puts e
+    puts group
+  end
+end
 puts "Done."
