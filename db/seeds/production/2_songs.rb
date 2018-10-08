@@ -5,16 +5,13 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-def one_or_many
-  3.times.collect { Faker::Book.author }.sample(rand(1..3)).join(' / ')
-end
+require 'csv'
 
-attrs = 25.times.collect do
-  { title: Faker::Book.title,
-    composed_by: one_or_many,
-    arranged_by: one_or_many,
-    published_by: one_or_many
-  }
-end
+CSV::Converters[:nil] = lambda { |f| f == "\\N" ? nil : f.encode(CSV::ConverterEncoding) rescue f }
+CSV::Converters[:all] = [:numeric, :nil]
 
-Song.seed(:title, attrs)
+if Wagons.find('sbv').root.join('db/seeds/production/suisa_werke.csv').exist?
+  CSV.parse(Wagons.find('sbv').root.join('db/seeds/production/suisa_werke.csv').read.gsub('\"', '""'), headers: true, converters: :all).each do |song|
+    Song.seed_once(:suisa_id, song.to_hash)
+  end
+end
