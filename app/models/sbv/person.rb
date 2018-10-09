@@ -10,7 +10,7 @@ module Sbv::Person
 
   included do
     Person::PUBLIC_ATTRS << :correspondence_language
-    Person::FILTER_ATTRS += [ :active_years, :prognostic_active_years ]
+    Person::FILTER_ATTRS += [:active_years, :prognostic_active_years]
 
     validates :first_name, :last_name, :birthday, presence: true
 
@@ -23,12 +23,27 @@ module Sbv::Person
   end
 
   def prognostic_active_years
-    active_years(1.year.from_now)
+    if active_role?
+      active_years.succ
+    else
+      active_years
+    end
   end
 
-  def active_years(year = Time.zone.now)
+  private
+
+  def cache_active_years
+    self.active_role = active_member_role?
+    self.active_years = calculate_active_years
+  end
+
+  def active_member_role?
+    roles.where("type LIKE '%Mitglied'").any?
+  end
+
+  def calculate_active_years(end_date = Time.zone.now)
     roles.with_deleted.where("type LIKE '%Mitglied'").map do |role|
-      VeteranYears.new(role.created_at.year, (role.deleted_at || year).year)
+      VeteranYears.new(role.created_at.year, (role.deleted_at || end_date).year)
     end.sort.sum.years.to_i
   end
 

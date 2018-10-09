@@ -8,9 +8,9 @@
 require 'spec_helper'
 
 describe Role do
-  
+
   let(:role) { roles(:member) }
-  
+
   it "validates presence of created_at if deleted_at is present" do
     role.update_attribute(:deleted_at, Time.zone.now)
     role.update_attribute(:created_at, nil)
@@ -27,7 +27,7 @@ describe Role do
     expect(role.errors.full_messages).
       to include('Eintritt kann nicht später als heute sein')
   end
-  
+
   it "validate created_at can be equal with today" do
     role.update_attribute(:created_at, Time.zone.today)
 

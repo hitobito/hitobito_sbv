@@ -210,7 +210,7 @@ kontakte_21:
   rgt: 14
   name: Kontakte
   type: Group::VereinKontakte
-mitglieder_22:
+mitglieder_mg_aarberg:
   parent: musikgesellschaft_aarberg
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
   lft: 15
