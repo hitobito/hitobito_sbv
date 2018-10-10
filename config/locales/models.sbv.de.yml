@@ -283,6 +283,13 @@ de:
         performed_at: Datum
         name: Aufführung
 
+    errors:
+      models:
+        song:
+          attributes:
+            title:
+              taken: mit demselben Komponisten existiert bereits in diesem Verlag
+
   errors:
     messages:
       cannot_be_later_than_today: kann nicht später als heute sein
