@@ -23,7 +23,7 @@ class SongCount < ActiveRecord::Base
             numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 30 }, if: :count
   validates :song_id, uniqueness: { scope: :concert }
 
-  delegate :title, :composed_by, :arranged_by, :produced_by, to: :song
+  delegate :title, :composed_by, :arranged_by, :published_by, to: :song
   delegate :verein, :verein_id, :song_census, to: :concert
 
   scope :in, ->(year) { where(year: year) }
