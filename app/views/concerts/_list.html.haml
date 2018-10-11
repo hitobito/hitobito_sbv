@@ -6,6 +6,8 @@
         %span.muted= I18n.l(concert.performed_at) if concert.performed_at
         = link_action_edit(edit_group_concert_path(parent, concert))
         = link_action_destroy(group_concert_path(parent, concert))
+      = content_tag(:small, t('global.last_change',
+        date: I18n.localize(concert.updated_at, format: :date_time)))
     .concert-song-list
       - concert.song_counts.each do |song_count|
         .concert-song-item.row{style: "border-top: 1px solid #eee; padding: 0.5rem 0;"}

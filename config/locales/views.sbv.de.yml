@@ -6,6 +6,8 @@
 #  You can use YAML anchors to avoid duplication
 #  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
 de:
+  global:
+    last_change: "Letzte Änderung: %{date}"
   group:
     suisa_tab: SUISA
   song_censuses:
@@ -54,5 +56,3 @@ de:
       title: SUISA Erfassung
       concerts: Aufführungen
       summary: Zusammenfassung
-    edit:
-      updated_at: "Letzte Änderung: %{date}"
