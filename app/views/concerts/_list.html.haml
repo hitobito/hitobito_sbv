@@ -12,4 +12,4 @@
           .concert-song-count.col{style: "max-width: 2.5rem;"}
             = link_to("#{song_count.count}x", edit_group_concert_path(parent, concert, focus: song_count.id))
           .concert-song-description.col
-            = song_count.song.full_label
+            = song_count.song.decorate.full_label

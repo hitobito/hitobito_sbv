@@ -31,10 +31,4 @@ class Song < ActiveRecord::Base
     title
   end
 
-  def full_label
-    ("<strong>#{title}</strong> <span class='muted'>" +
-     [composed_by, arranged_by, published_by].reject(&:empty?).join(' | ') +
-     "</span>").html_safe
-  end
-
 end

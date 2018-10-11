@@ -8,6 +8,8 @@ class SongsController < SimpleCrudController
   self.search_columns = [:title]
   self.permitted_attrs = [:title, :composed_by, :arranged_by, :published_by]
 
+  decorates :song
+
   respond_to :json, :js
 
   def create
@@ -39,7 +41,8 @@ class SongsController < SimpleCrudController
 
   def for_typeahead(entries)
     entries.collect do |entry|
-      entry.attributes.merge(label: entry.full_label)
+      attributes = entry.attributes.map { |key, value| [key, h(value)] }.to_h
+      attributes.merge(label: entry.decorate.full_label)
     end
   end
 
