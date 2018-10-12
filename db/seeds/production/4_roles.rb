@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-require Wagon.find('sbv').root.join('db', 'seeds', 'support', 'data_migrator')
+require Wagons.find('sbv').root.join('db', 'seeds', 'support', 'data_migrator')
 
 require 'csv'
 CSV::Converters[:nil] = lambda { |f| f == "\\N" ? nil : f.encode(CSV::ConverterEncoding) rescue f }

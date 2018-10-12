@@ -18,10 +18,10 @@ class DataMigrator
     vereins_name = [verein_name, verein_ort].join(' ')
     verband_name = verein_name
 
-    vereins_id = [vereine[vereins_name], vereine[verband_name]].compact.first
+    vereins_id = [@vereine[vereins_name], @vereine[verband_name]].compact.first
 
     if vereins_id
-      mitglieder_ids[vereins_id] ||= load_mitglieder_verein_id(verein_id)
+      @mitglieder_ids[vereins_id] ||= load_mitglieder_verein_id(vereins_id)
     else
       nil
     end

@@ -6,7 +6,7 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 require Rails.root.join('db', 'seeds', 'support', 'person_seeder')
-require Wagon.find('sbv').root.join('db', 'seeds', 'support', 'data_migrator')
+require Wagons.find('sbv').root.join('db', 'seeds', 'support', 'data_migrator')
 require 'csv'
 
 puzzlers = ['Pascal Zumkehr',
