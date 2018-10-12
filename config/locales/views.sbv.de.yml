@@ -45,7 +45,7 @@ de:
   dropdown/song_counts:
       button: Export
       csv: CSV
-      xlsx: XLSX
+      xlsx: Excel
   concerts:
     submit:
       flash:
