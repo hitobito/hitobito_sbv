@@ -21,3 +21,6 @@ root_email: hitobito@puzzle.ch
 census:
   default_finish_month: 11
   default_finish_day: 30
+
+pdf:
+  font_size: 8
