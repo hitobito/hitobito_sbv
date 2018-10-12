@@ -7,7 +7,7 @@ namespace :migration do
     rm_f 'db/seeds/production/mitglieder.csv'
     rm_f 'db/seeds/production/mitglieder_musicgest.csv'
     rm_f 'db/seeds/production/suisa_werke.csv'
-    # rm_f 'db/seeds/production/chargen.csv'
+    rm_f 'db/seeds/production/rollen_musicgest.csv'
   end
 
   task extract: [
@@ -17,7 +17,7 @@ namespace :migration do
     'db/seeds/production/mitglieder.csv',
     'db/seeds/production/mitglieder_musicgest.csv',
     'db/seeds/production/suisa_werke.csv',
-    # 'db/seeds/production/chargen.csv',
+    'db/seeds/production/rollen_musicgest.csv'
   ]
 
   task prepare_seed: [:extract] do
@@ -28,6 +28,7 @@ namespace :migration do
     cp 'db/seeds/production/1_people.rb', 'db/seeds/1_people.rb'
     cp 'db/seeds/production/2_songs.rb', 'db/seeds/2_songs.rb'
     # cp 'db/seeds/production/3_census.rb', 'db/seeds/3_census.rb'
+    cp 'db/seeds/production/4_roles.rb', 'db/seeds/4_roles.rb'
   end
 
   task :repair_after_seed do
@@ -232,6 +233,31 @@ file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
     IF(publisher_count < 2, published_by, published_by_one) AS published_by
   FIELDS
   migrator.dump
+end
+
+file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |task|
+  migrator = Migration.new(task.name, 'musicgest10')
+  migrator.headers = <<-TEXT.strip_heredoc
+    first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum
+  TEXT
+  migrator.query('lienmusicienssocietes', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+    prenomMusicien,
+    nomMusicien,
+    emailMusicien,
+    naissanceMusicien,
+    societes.nomSociete AS vereins_name,
+    societes.nomVilleSoc AS vereins_domizil,
+    lienmusicienssocietes.anneeEntree AS role_begin,
+    lienmusicienssocietes.anneeSortie AS role_end
+  SQL
+    LEFT JOIN musiciens ON (lienmusicienssocietes.mandant = musiciens.mandant AND musiciens.autoMusicien = lienmusicienssocietes.autoMusicien)
+    LEFT JOIN societes ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
+
+    WHERE lienmusicienssocietes.anneeSortie != 0
+  CONDITIONS
+  migrator.dump('musicgest10') # start-DB
+  migrator.dump('music_1_db') # append data from another DB
+  migrator.dump('music_2_db') # append data from another DB
 end
 # rubocop:enable Metrics/BlockLength
 
