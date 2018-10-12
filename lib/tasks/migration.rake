@@ -206,7 +206,7 @@ end
 #   (suisaid, title, compositionyear, typ, name);
 #
 file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name, 'swoffice_sbvnew')
+  migrator = Migration.new(task.name, 'suisa')
   migrator.headers = 'suisa_id,title,composed_by,arranged_by,published_by'
   migrator.query(<<-TABLE.strip_heredoc, <<-FIELDS.strip_heredoc)
     (SELECT
@@ -221,7 +221,7 @@ file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
       MAX(IF(typ IN ('C','CA'), name, NULL))              AS composed_by_one,
       MAX(IF(typ = 'AR', name, NULL))                     AS arranged_by_one,
       MAX(IF(typ = 'E', name, NULL))                      AS published_by_one
-    FROM swoffice_sbvnew.werkliste
+    FROM werkliste
     where typ in ('C', 'CA', 'AR', 'E', 'A')
     GROUP BY suisaid
     ) AS pivoted_suisa
@@ -284,7 +284,7 @@ class Migration
   def query(table = nil, field_sql = '*', condition_sql = '')
     raise ArgumentError, 'Table needs to be passed' if @query.nil? && table.nil?
 
-    @query ||= <<-SQL.strip_heredoc.split("\n").map(&:strip).join(' ')
+    @query ||= <<-SQL.strip_heredoc.split("\n").map(&:strip).join(' ').gsub(/\s+/, ' ')
       SELECT #{field_sql}
       INTO OUTFILE '#{tmp_out}'
         CHARACTER SET utf8
