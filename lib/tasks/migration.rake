@@ -134,7 +134,7 @@ end
 file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
-    anrede,first_name,last_name,email,birthday,address,zip_code,town,country,verein_name,verein_ort,bemerkung,zusatz
+    anrede,first_name,last_name,email,birthday,address,zip_code,town,country,verein_name,verein_ort,eintrittsdatum,bemerkung,zusatz
   TEXT
   migrator.query('tbl_person', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
     NULLIF(tbl_person.anrede, ''),
@@ -148,6 +148,7 @@ file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
     tbl_person.laendercode,
     verein.name,
     verein.domizil,
+    NULLIF(tbl_person.eintrittsdatum, '0000-00-00'),
     tbl_person.bemerkung,
     tbl_person.zusatz
   SQL
@@ -161,7 +162,7 @@ end
 file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
-    anrede,first_name,last_name,email,birthday,address,zip_code,town,country,verein_name,verein_ort,bemerkung,zusatz
+    anrede,first_name,last_name,email,birthday,address,zip_code,town,country,verein_name,verein_ort,eintrittsdatum,bemerkung,zusatz
   TEXT
   migrator.query('musiciens', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
     CASE autoTitre
@@ -179,6 +180,7 @@ file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do 
     NULL AS country,
     societes.nomSociete AS vereins_name,
     societes.nomVilleSoc AS vereins_domizil,
+    CONCAT(lienmusicienssocietes.anneeEntree, '-01-01') AS eintrittsdatum,
     remarqueMusicien,
     NULL AS zusatz
   SQL
