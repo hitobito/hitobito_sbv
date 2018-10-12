@@ -27,7 +27,7 @@ class SongsController < SimpleCrudController
 
   def index
     respond_to do |format|
-      format.html
+      format.html { @songs = entries.page(params[:page]) }
       format.json { render json: with_create(for_typeahead(entries)) }
     end
   end
