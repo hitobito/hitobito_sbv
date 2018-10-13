@@ -183,7 +183,7 @@ file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do 
     NULL AS country,
     societes.nomSociete AS vereins_name,
     societes.nomVilleSoc AS vereins_domizil,
-    CONCAT(lienmusicienssocietes.anneeEntree, '-01-01') AS eintrittsdatum,
+    CONCAT(SUBSTR(lienmusicienssocietes.anneeEntree FROM 1 FOR 4), '-01-01')  AS eintrittsdatum,
     remarqueMusicien,
     NULL AS zusatz
   SQL
@@ -286,8 +286,8 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
     naissanceMusicien,
     societes.nomSociete AS vereins_name,
     societes.nomVilleSoc AS vereins_domizil,
-    CONCAT(lienmusicienssocietes.anneeEntree, '-01-01') AS role_begin,
-    CONCAT(lienmusicienssocietes.anneeSortie, '-12-31') AS role_end
+    CONCAT(SUBSTR(lienmusicienssocietes.anneeEntree FROM 1 FOR 4), '-01-01') AS role_begin,
+    CONCAT(SUBSTR(lienmusicienssocietes.anneeSortie FROM 1 FOR 4), '-12-31') AS role_end
   SQL
     LEFT JOIN musiciens ON (lienmusicienssocietes.mandant = musiciens.mandant AND musiciens.autoMusicien = lienmusicienssocietes.autoMusicien)
     LEFT JOIN societes ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)

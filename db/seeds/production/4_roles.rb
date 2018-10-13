@@ -19,6 +19,10 @@ migrator = DataMigrator.new
 
     CSV.parse(Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").read.gsub('\"', '""'), headers: true, converters: :all).each do |person|
 
+      entry_date = migrator.parse_date(person['eintrittsdatum'], default: nil)
+      exit_date = migrator.parse_date(person['austrittsdatum'], default: nil)
+
+      next unless entry_date && exit_date
 
       vereins_mitglieder_id = migrator.infer_mitgliederverein(person['verein_name'], person['verein_ort'])
 
@@ -41,8 +45,8 @@ migrator = DataMigrator.new
       Role.seed_once( :person_id, :group_id, :type, {
         person_id:  db_person.id,
         group_id:   vereins_mitglieder_id,
-        created_at: person['eintrittsdatum'],
-        deleted_at: person['austrittsdatum'],
+        created_at: entry_date,
+        deleted_at: exit_date,
         type:       'Group::VereinMitglieder::Mitglied'
       })
     end
