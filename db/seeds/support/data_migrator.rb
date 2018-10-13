@@ -30,4 +30,5 @@ class DataMigrator
   def load_mitglieder_verein_id(vereins_id)
     Group.find(vereins_id).children.where(name: 'Mitglieder').pluck(:id).first
   end
+
 end
