@@ -30,12 +30,12 @@ module Sbv::Person
     end
   end
 
-  private
-
   def cache_active_years
     self.active_role = active_member_role?
     self.active_years = calculate_active_years
   end
+
+  private
 
   def active_member_role?
     roles.where("type LIKE '%Mitglied'").any?

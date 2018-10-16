@@ -29,7 +29,7 @@ class Role::MitgliederMitglied < Role
   private
 
   def update_active_years_on_person
-    person.send(:cache_active_years)
+    person.cache_active_years
   end
 
 end
