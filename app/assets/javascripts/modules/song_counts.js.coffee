@@ -64,8 +64,9 @@ app.SongCounts = {
 
   changeCount: (e, action) ->
     counter = $(e.target).closest('.count').find('input')
-    count = parseInt(counter.val()) + action
-    counter.val(count)
+    count = parseInt(counter.val())
+    count = 0 if isNaN(count)
+    counter.val(count + action)
     counter.trigger('change')
     false
 
