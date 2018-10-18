@@ -36,6 +36,7 @@ class SongsController < SimpleCrudController
 
   def with_create(list)
     return list if list.size > 3
+
     list + [{ label: I18n.t('crud.new.title', model: model_class.model_name.human) }]
   end
 

@@ -54,7 +54,6 @@ module HitobitoSbv
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census
       Ability.store.register SongAbility
 
-      # rubocop:enable SingleSpaceBeforeFirstArg
     end
 
     initializer 'sbv.add_settings' do |_app|

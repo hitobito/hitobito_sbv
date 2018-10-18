@@ -61,6 +61,7 @@ class SongCensus < ActiveRecord::Base
 
   def set_defaults
     return unless new_record?
+
     self.start_at  ||= Time.zone.today
     self.finish_at ||= future_finish_at
     self.year      ||= (finish_at || start_at).year

@@ -57,6 +57,7 @@ class SongCensusesController < CrudController
   def switch_census_period
     old = SongCensus.current
     return false unless yield
+
     new = SongCensus.current
 
     CensusPeriodSwitch.new(old, new).perform
@@ -67,6 +68,7 @@ class SongCensusesController < CrudController
   def deliver_reminders(vereins_total)
     group.descendants.where(type: Group::Verein).collect do |verein|
       next if vereins_total[verein.id]
+
       verein.suisa_admins.each do |suisa_admin|
         SongCensusMailer.reminder(suisa_admin, verein).deliver_now
       end
