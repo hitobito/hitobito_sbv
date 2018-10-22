@@ -14,7 +14,7 @@ module Sbv::Group
     include I18nSettable
     include I18nEnums
 
-    BESETZUNGEN = %w(brass_band harmonie fanfare_benelux fanfare_mixte).freeze
+    BESETZUNGEN = %w(brass_band harmonie fanfare_benelux fanfare_mixte tambour_percussion).freeze
     KLASSEN = %w(hoechste erste zweite dritte vierte).freeze
     UNTERHALTUNGSMUSIK = %w(oberstufe mittelstufe unterstufe).freeze
 

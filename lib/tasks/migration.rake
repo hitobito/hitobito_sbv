@@ -90,6 +90,7 @@ file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
       WHEN 'H'   THEN 'harmonie'
       WHEN 'F/B' THEN 'fanfare_benelux'
       WHEN 'F/M' THEN 'fanfare_mixte'
+      WHEN 'T/P' THEN 'tambour_percussion'
       ELSE            NULL
     END AS besetzung,
     tbl_person.amtssprache AS correspondence_language,
