@@ -71,7 +71,7 @@ end
 file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
-    name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,reported_members,kreis
+    name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,reported_members,kreis,swoffice_id
   TEXT
   migrator.query('tbl_person', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
     CONCAT_WS(' ', tbl_person.name, tbl_person.domizil) AS name,
@@ -95,7 +95,8 @@ file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
     END AS besetzung,
     tbl_person.amtssprache AS correspondence_language,
     tbl_person.anzahlmitgliederSoll AS reported_members,
-    tbl_person.kreis
+    tbl_person.kreis,
+    tbl_person.id AS swoffice_id
   SQL
     INNER JOIN tbl_person AS verbaende ON ( tbl_person.parentId = verbaende.id )
     WHERE tbl_person.typ IN ('verein')
@@ -108,7 +109,7 @@ end
 file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
-    name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,reported_members,kreis
+    name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,reported_members,kreis,swoffice_id
   TEXT
   migrator.query('societes', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
     CONCAT_WS(' ', nomSociete, nomVilleSoc) AS name,
@@ -132,7 +133,8 @@ file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |ta
     NULL AS besetzung,
     NULL AS correspondence_language,
     NULL AS reported_members,
-    NULL AS kreis
+    NULL AS kreis,
+    NULL AS swoffice_id
   SQL
     INNER JOIN localites USING (mandant, autoLocalite)
   CONDITIONS
