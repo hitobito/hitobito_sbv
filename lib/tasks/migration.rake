@@ -85,7 +85,13 @@ file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
     tbl_person.subvention AS subventionen,
     'Group::Verein' AS 'type',
     concat(verbaende.name) AS verband,
-    tbl_person.besetzung,
+    CASE tbl_person.besetzung
+      WHEN 'BB'  THEN 'brass_band'
+      WHEN 'H'   THEN 'harmonie'
+      WHEN 'F/B' THEN 'fanfare_benelux'
+      WHEN 'F/M' THEN 'fanfare_mixte'
+      ELSE            NULL
+    END AS besetzung,
     tbl_person.amtssprache AS correspondence_language,
     tbl_person.anzahlmitgliederSoll AS reported_members,
     tbl_person.kreis
