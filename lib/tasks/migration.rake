@@ -7,7 +7,6 @@ namespace :migration do
     rm_f 'db/seeds/production/mitglieder.csv'
     rm_f 'db/seeds/production/mitglieder_musicgest.csv'
     rm_f 'db/seeds/production/suisa_werke.csv'
-    # rm_f 'db/seeds/production/suisa_meldungen.csv'
     rm_f 'db/seeds/production/rollen_musicgest.csv'
   end
 
@@ -18,7 +17,6 @@ namespace :migration do
     'db/seeds/production/mitglieder.csv',
     'db/seeds/production/mitglieder_musicgest.csv',
     'db/seeds/production/suisa_werke.csv',
-    # 'db/seeds/production/suisa_meldungen.csv',
     'db/seeds/production/rollen_musicgest.csv'
   ]
 
@@ -29,7 +27,6 @@ namespace :migration do
     cp 'db/seeds/production/0_groups.rb', 'db/seeds/0_groups.rb'
     cp 'db/seeds/production/1_people.rb', 'db/seeds/1_people.rb'
     cp 'db/seeds/production/2_songs.rb', 'db/seeds/2_songs.rb'
-    # cp 'db/seeds/production/3_census.rb', 'db/seeds/3_census.rb'
     cp 'db/seeds/production/4_roles.rb', 'db/seeds/4_roles.rb'
   end
 
@@ -243,43 +240,6 @@ file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
     IF(arranger_count < 3, arranged_by, arranged_by_one)    AS arranged_by,
     IF(publisher_count < 2, published_by, published_by_one) AS published_by
   FIELDS
-  migrator.dump
-end
-
-file 'db/seeds/production/suisa_meldungen.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name, 'swoffice_sbvnew')
-  migrator.headers = 'suisa_id,verein_name,verein_ort,datum,count,year'
-  migrator.query('tbl_suisameldungen AS m', <<-SQL, <<-CONDITIONS)
-    m.id, m.datum, m.title, m.composer, m.editor, m.numbers,
-    t.suisaid, t.composed_by, t.arranged_by,
-    p.name AS verein, p.domizil,
-    m.bookperiod
-  SQL
-    INNER JOIN tbl_person p ON ( m.person_id = p.id )
-    LEFT JOIN (
-      SELECT
-        suisaid                                             AS suisaid,
-        max(title)                                          AS title,
-        COUNT(IF(typ IN ('C','CA'), name, NULL))            AS composer_count,
-        COUNT(IF(typ = 'AR', name, NULL))                   AS arranger_count,
-        COUNT(IF(typ = 'E', name, NULL))                    AS publisher_count,
-        GROUP_CONCAT(IF(typ IN ('C','CA','A'), name, NULL)) AS composed_by,
-        GROUP_CONCAT(IF(typ = 'AR', name, NULL))            AS arranged_by,
-        GROUP_CONCAT(IF(typ = 'E', name, NULL))             AS published_by,
-        MAX(IF(typ IN ('C','CA'), name, NULL))              AS composed_by_one,
-        MAX(IF(typ = 'AR', name, NULL))                     AS arranged_by_one,
-        MAX(IF(typ = 'E', name, NULL))                      AS published_by_one
-      FROM suisa.werkliste
-      WHERE typ IN ('C', 'CA', 'AR', 'E', 'A')
-      GROUP BY suisaid
-     ) AS t ON (
-       m.title = t.title
-     )
-     WHERE p.typ = 'verein' AND bookperiod = 2018
-  CONDITIONS
-  # more join-conditions for m-t
-  # -- AND FIND_IN_SET(m.composer, t.composed_by)
-  # -- AND FIND_IN_SET(m.editor, t.published_by)
   migrator.dump
 end
 
