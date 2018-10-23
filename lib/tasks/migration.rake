@@ -130,10 +130,12 @@ file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |ta
     NULL AS besetzung,
     NULL AS correspondence_language,
     NULL AS reported_members,
-    NULL AS kreis,
+    federations.nomFederation AS kreis,
     NULL AS swoffice_id
   SQL
     INNER JOIN localites USING (mandant, autoLocalite)
+    LEFT JOIN liensocietesfederations USING (mandant, autoSociete)
+    LEFT JOIN federations USING (mandant, autoFederation)
   CONDITIONS
   migrator.dump('musicgest10') # start-DB
   migrator.dump('music_1_db') # append data from another DB
