@@ -15,7 +15,7 @@
           onclick: "$('.song-counts #new_song').hide(); return false;")
 
 = entry_form(buttons_top: false) do |f|
-  #song-counts-form
+  #song-counts-form{data: {focus: params[:focus]}}
     = f.nested_fields_for :song_counts, 'song_counts/form', class: ''
 
   #concert-form

@@ -3,6 +3,10 @@
 //  or later. See the COPYING file at the top-level directory or at
 //  https://github.com/hitobito/hitobito_sbv.
 
+.nav-left a.is-active, .nav-left li.is-active > a {
+  background-color: lighten(desaturate($linkColor,60%), 55%);
+}
+
 .song-counts {
   input[name=q] {
     width: 100%;
@@ -29,33 +33,33 @@
   border-top: 1px solid #E8EBF0;
 }
 
+
 #song-counts-form {
-  .count i{
-    margin-top: -3px;  
-  }
-  .fields {
-    clear: both;
-    width: 100%;
-    height: 30px;
-  }
-  a.add_nested_fields {
+  position: relative;
+  .add_nested_fields {
     display: none;
   }
-
-  .count input{
-    width: 15px;
+  .dec_song_count, .inc_song_count, .remove_nested_fields {
+    padding: 0.5rem;
+    margin: -0.5rem;
   }
-
-  .attrs label{
-    padding-top: 5px;
+  .row {
+    border-top: 1px solid $grayLight;
+    align-items: center;
+    padding-top: 0.2rem;
   }
+  .col.count {
+    min-width: 7rem;
+    margin-right: -3rem;
+    flex-grow: 0;
+  } 
 }
 
-.concert-info {
-  h3, h2, .actions{
-    clear: both;
-    display: inline-block;
-    margin-right: 20px;
+.typeahead {
+  .muted {
+    color: $gray;
+  }
+  .active .muted {
+    color: $white;
   }
 }
-

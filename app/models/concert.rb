@@ -33,7 +33,6 @@ class Concert < ActiveRecord::Base
   before_validation :remove_empty_song_count
 
   validates_by_schema
-  validates :name, presence: true, uniqueness: { scope: [:verein, :year] }
 
   accepts_nested_attributes_for :song_counts, allow_destroy: true
 
@@ -47,10 +46,7 @@ class Concert < ActiveRecord::Base
   private
 
   def set_name
-    100.times do |i|
-      self.name = "#{I18n.t('activerecord.models.concert.one')} ##{i + 1}"
-      break if valid? || errors[:name].blank?
-    end
+    self.name = I18n.t('activerecord.models.concert.without_date')
   end
 
   def remove_empty_song_count

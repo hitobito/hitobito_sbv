@@ -5,8 +5,10 @@
 
 class SongsController < SimpleCrudController
 
-  self.search_columns = [:title, :composed_by, :arranged_by, :published_by]
+  self.search_columns = [:title]
   self.permitted_attrs = [:title, :composed_by, :arranged_by, :published_by]
+
+  decorates :song
 
   respond_to :json, :js
 
@@ -25,7 +27,7 @@ class SongsController < SimpleCrudController
 
   def index
     respond_to do |format|
-      format.html
+      format.html { @songs = entries.page(params[:page]) }
       format.json { render json: with_create(for_typeahead(entries)) }
     end
   end
@@ -34,12 +36,14 @@ class SongsController < SimpleCrudController
 
   def with_create(list)
     return list if list.size > 3
+
     list + [{ label: I18n.t('crud.new.title', model: model_class.model_name.human) }]
   end
 
   def for_typeahead(entries)
     entries.collect do |entry|
-      entry.attributes.merge(label: entry.to_s)
+      attributes = entry.attributes.map { |key, value| [key, h(value)] }.to_h
+      attributes.merge(label: entry.decorate.full_label)
     end
   end
 

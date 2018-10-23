@@ -18,7 +18,7 @@ describe Export::Tabular::SongCounts::List do
     let(:list) { groups(:musikgesellschaft_aarberg).song_counts }
 
     its(:headers) do
-      should == %w(Anzahl Titel Komponist Arrangeur)
+      should == %w(Anzahl Titel Komponist Arrangeur Verlag)
     end
 
     it 'has 2 items' do
@@ -33,6 +33,7 @@ describe Export::Tabular::SongCounts::List do
       its(['Titel']) { should == 'Fortunate Son' }
       its(['Komponist']) { should == 'John Fogerty' }
       its(['Arrangeur']) { should == 'Creedence Clearwater Revival' }
+      its(['Verlag']) { should == 'Fantasy' }
     end
 
     context 'second row' do
@@ -43,6 +44,7 @@ describe Export::Tabular::SongCounts::List do
       its(['Titel']) { should == "Papa Was a Rollin' Stone" }
       its(['Komponist']) { should == 'Barrett Strong / Norman Whitfield' }
       its(['Arrangeur']) { should == 'The Temptations' }
+      its(['Verlag']) { should == 'Motown' }
     end
   end
 
@@ -51,7 +53,7 @@ describe Export::Tabular::SongCounts::List do
     let(:list) { groups(:hauptgruppe_1).song_counts }
 
     its(:headers) do
-      should == ['Anzahl', 'Titel', 'Komponist', 'Arrangeur', 'Verein', 'Vereins ID']
+      should == ['Anzahl', 'Titel', 'Komponist', 'Arrangeur', 'Verlag', 'Verein', 'Vereins ID']
     end
 
     it 'has 3 items' do
@@ -67,6 +69,7 @@ describe Export::Tabular::SongCounts::List do
       its(['Komponist']) { should == 'John Fogerty' }
       its(['Arrangeur']) { should == 'Creedence Clearwater Revival' }
       its(['Verein']) { should == 'Musikgesellschaft Aarberg' }
+      its(['Verlag']) { should == 'Fantasy' }
       its(['Vereins ID']) { should == groups(:musikgesellschaft_aarberg).id.to_s }
     end
 
@@ -78,6 +81,7 @@ describe Export::Tabular::SongCounts::List do
       its(['Titel']) { should == "Papa Was a Rollin' Stone" }
       its(['Komponist']) { should == 'Barrett Strong / Norman Whitfield' }
       its(['Arrangeur']) { should == 'The Temptations' }
+      its(['Verlag']) { should == 'Motown' }
       its(['Verein']) { should == 'Musikgesellschaft Aarberg' }
       its(['Vereins ID']) { should == groups(:musikgesellschaft_aarberg).id.to_s }
     end

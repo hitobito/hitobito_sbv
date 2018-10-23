@@ -213,6 +213,7 @@ de:
       concert:
         one: Aufführung
         other: Aufführungen
+        without_date: Aufführung ohne Datum
 
     attributes:
       person:
@@ -270,6 +271,7 @@ de:
         title: Titel
         composed_by: Komponist
         arranged_by: Arrangeur
+        published_by: Verlag
         verein: Verein
         verein_id: Vereins ID
 
@@ -281,6 +283,13 @@ de:
         song_counts: Werkeintrag
         performed_at: Datum
         name: Aufführung
+
+    errors:
+      models:
+        song:
+          attributes:
+            title:
+              taken: mit demselben Komponisten existiert bereits in diesem Verlag
 
   errors:
     messages:
