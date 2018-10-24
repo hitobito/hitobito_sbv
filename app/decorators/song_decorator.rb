@@ -9,7 +9,7 @@ class SongDecorator < ApplicationDecorator
   def full_label
     html = content_tag(:strong, h.h(title))
     html << ' '
-    formatted_extension = [composed_by, arranged_by, published_by].reject(&:empty?).join(' | ')
+    formatted_extension = [composed_by, arranged_by, published_by].reject(&:blank?).join(' | ')
     html << content_tag(:span, h.h(formatted_extension), class: 'muted')
     html
   end
