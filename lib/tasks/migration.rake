@@ -7,6 +7,7 @@ namespace :migration do
     rm_f 'db/seeds/production/mitglieder.csv'
     rm_f 'db/seeds/production/mitglieder_musicgest.csv'
     rm_f 'db/seeds/production/suisa_werke.csv'
+    rm_f 'db/seeds/production/rollen_swoffice.csv'
     rm_f 'db/seeds/production/rollen_musicgest.csv'
   end
 
@@ -17,6 +18,7 @@ namespace :migration do
     'db/seeds/production/mitglieder.csv',
     'db/seeds/production/mitglieder_musicgest.csv',
     'db/seeds/production/suisa_werke.csv',
+    'db/seeds/production/rollen_swoffice.csv',
     'db/seeds/production/rollen_musicgest.csv'
   ]
 
@@ -248,7 +250,7 @@ end
 file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
-    first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum
+    first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
   TEXT
   migrator.query('lienmusicienssocietes', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
     prenomMusicien,
@@ -258,7 +260,8 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
     societes.nomSociete AS vereins_name,
     societes.nomVilleSoc AS vereins_domizil,
     CONCAT(SUBSTR(lienmusicienssocietes.anneeEntree FROM 1 FOR 4), '-01-01') AS role_begin,
-    CONCAT(SUBSTR(lienmusicienssocietes.anneeSortie FROM 1 FOR 4), '-12-31') AS role_end
+    CONCAT(SUBSTR(lienmusicienssocietes.anneeSortie FROM 1 FOR 4), '-12-31') AS role_end,
+    'Group::VereinMitglieder::Mitglied' AS rolle
   SQL
     LEFT JOIN musiciens ON (lienmusicienssocietes.mandant = musiciens.mandant AND musiciens.autoMusicien = lienmusicienssocietes.autoMusicien)
     LEFT JOIN societes ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
@@ -269,6 +272,31 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
   migrator.dump('music_1_db') # append data from another DB
   migrator.dump('music_2_db') # append data from another DB
 end
+
+file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task|
+  migrator = Migration.new(task.name, 'swoffice_sbvnew')
+  migrator.headers = <<-TEXT.strip_heredoc
+    first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
+  TEXT
+  migrator.query('tbl_person_chargen pc', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+    p.vorname,
+    p.name,
+    p.email,
+    p.geburtsdatum,
+    v.name AS verein_name,
+    v.domizil AS verein_ort,
+    pc.von AS entrittsdatum,
+    NULL AS austrittsdatum,
+    'Group::Verein::SuisaAdmin' as rolle
+  SQL
+    INNER JOIN tbl_person p ON (pc.person_id = p.id)
+    INNER JOIN tbl_aemter a ON (pc.aemter_id = a.id)
+    INNER JOIN tbl_person v ON (p.parentId = v.id)
+    WHERE a.bezeichnung = 'Suisa' AND pc.bis IS NULL
+  CONDITIONS
+  migrator.dump
+end
+
 # rubocop:enable Metrics/BlockLength
 
 class Migration

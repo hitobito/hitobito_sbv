@@ -19,14 +19,29 @@ migrator = DataMigrator.new
 
     CSV.parse(Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").read.gsub('\"', '""'), headers: true, converters: :all).each do |person|
 
-      entry_date = migrator.parse_date(person['eintrittsdatum'], default: nil)
-      exit_date = migrator.parse_date(person['austrittsdatum'], default: nil)
+      enough_dates = case fn
+                     when 'rollen_musicgest'
+                       entry_date = migrator.parse_date(person['eintrittsdatum'], default: nil)
+                       exit_date = migrator.parse_date(person['austrittsdatum'], default: nil)
 
-      next unless entry_date && exit_date
+                       entry_date && exit_date
+                     when 'rollen_swoffice'
+                       entry_date = migrator.parse_date(person['eintrittsdatum'])
+                       exit_date = migrator.parse_date(person['austrittsdatum'], default: nil)
 
-      vereins_mitglieder_id = migrator.infer_mitgliederverein(person['verein_name'], person['verein_ort'])
+                       entry_date.present?
+                     end
 
-      next unless vereins_mitglieder_id
+      next unless enough_dates
+
+      group_id = case person['rolle']
+                 when 'Group::VereinMitglieder::Mitglied'
+                   migrator.infer_mitgliederverein(person['verein_name'], person['verein_ort'])
+                 when 'Group::Verein::SuisaAdmin'
+                   migrator.infer_verein(person['verein_name'], person['verein_ort'])
+                 end
+
+      next unless group_id
 
       birthday = migrator.parse_date(person['birthday'], default: nil)
 
@@ -44,10 +59,10 @@ migrator = DataMigrator.new
 
       Role.seed_once( :person_id, :group_id, :type, {
         person_id:  db_person.id,
-        group_id:   vereins_mitglieder_id,
+        group_id:   group_id,
         created_at: entry_date,
         deleted_at: exit_date,
-        type:       'Group::VereinMitglieder::Mitglied'
+        type:       person['rolle']
       })
     end
   end
