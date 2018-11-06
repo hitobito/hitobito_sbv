@@ -14,7 +14,7 @@ CSV::Converters[:all] = [:numeric, :nil]
 
 migrator = DataMigrator.new
 
-%w(rollen_musicgest).each do |fn|
+%w(rollen_musicgest rollen_swoffice).each do |fn|
   if Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").exist?
 
     CSV.parse(Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").read.gsub('\"', '""'), headers: true, converters: :all).each do |person|
