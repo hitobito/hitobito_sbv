@@ -5,20 +5,8 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-require Rails.root.join('db', 'seeds', 'support', 'person_seeder')
 require Wagons.find('sbv').root.join('db', 'seeds', 'support', 'data_migrator')
 require 'csv'
-
-puzzlers = [
-            'Andre Kunz',
-            'Roland Studer',
-          ]
-
-devs = {}
-
-puzzlers.each do |puz|
-  devs[puz] = "#{puz.split.last.downcase}@puzzle.ch"
-end
 
 migrator = DataMigrator.new
 
@@ -87,11 +75,4 @@ migrator = DataMigrator.new
                                                      type:       'Group::VereinMitglieder::Mitglied' })
     end
   end
-end
-
-seeder = PersonSeeder.new
-
-root = Group.root
-devs.each do |name, email|
-  seeder.seed_developer(name, email, root, Group::Root::Admin)
 end
