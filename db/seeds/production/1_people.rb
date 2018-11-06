@@ -9,28 +9,12 @@ require Rails.root.join('db', 'seeds', 'support', 'person_seeder')
 require Wagons.find('sbv').root.join('db', 'seeds', 'support', 'data_migrator')
 require 'csv'
 
-puzzlers = ['Pascal Zumkehr',
-            'Andreas Maierhofer',
-            'Mathis Hofer',
+puzzlers = [
             'Andre Kunz',
-            'Pascal Simon',
             'Roland Studer',
-            'Matthias Viehweger',
-            'Janiss Binder',
-            'Bruno Santschi',
           ]
 
-devs = {
-  'Sigi Aulbach'       => 'sigi.aulbach@windband.ch',
-  'Valentin Bischof'   => 'valentin.bischof@windband.ch',
-  'Peter Börlin'       => 'peter.boerlin@windband.ch',
-  'Didier Froidevaux'  => 'didier.froidevaux@windband.ch',
-  'Heini Füllemann'    => 'heini.fuellemann@windband.ch',
-  'Andy Kollegger'     => 'andy.kollegger@windband.ch',
-  'Bernhard Lippuner'  => 'bernhard.lippuner@windband.ch',
-  'Luana Menoud-Baldi' => 'luana.menoud-baldi@windband.ch',
-  'Hans Seeberger'     => 'hans.seeberger@windband.ch',
-}
+devs = {}
 
 puzzlers.each do |puz|
   devs[puz] = "#{puz.split.last.downcase}@puzzle.ch"
