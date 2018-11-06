@@ -14,6 +14,13 @@ class DataMigrator
     default
   end
 
+  def infer_verein(verein_name, verein_ort)
+    vereins_name = [verein_name, verein_ort].join(' ')
+    verband_name = verein_name
+
+    [@vereine[vereins_name], @vereine[verband_name]].compact.first
+  end
+
   def infer_mitgliederverein(verein_name, verein_ort)
     vereins_name = [verein_name, verein_ort].join(' ')
     verband_name = verein_name
