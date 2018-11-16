@@ -10,6 +10,20 @@ de:
     last_change: "Letzte Änderung: %{date}"
   group:
     suisa_tab: SUISA
+    merge:
+      select:
+        explanation: Beim Fusionieren zweier Gruppen werden sämtliche Untergruppen, Anlässe und Personen
+          samt Rollen beider Gruppen zusammengeführt. Listen werden nicht übernommen.
+          Die bisherigen Gruppen werden danach unter 'Gelöscht' weiterhin einsehbar sein.
+    person_add_requests:
+      index:
+        explanation: >
+            Wenn aktiv, werden Personen dieser Ebene erst zu Gruppen, Anlässen und Listen hinzugefügt,
+            nachdem eine zugriffsberechtigte Person die Freigabe erteilt.
+  mailing_lists:
+    global:
+      link:
+        add: Liste erstellen
   song_censuses:
     index:
       no_data_for_this_year: Für dieses Jahr sind keine Angaben vorhanden.
@@ -41,6 +55,32 @@ de:
         start_date: Eintritt
         end_date: Austritt
         save: Speichern
+    add_requests:
+      creator:
+        mailing_list:
+          success: Wir haben eine Zugrmffsanfrage für %{person} versendet. Die Person wird zur Liste hinzugefügt, sobald die Anfrage freigegeben wird.
+
+  roles:
+    info:
+      role_only_public: >
+        Die Rolle %{role} in der Gruppe %{group} kann nur öffentliche Daten
+        (Gruppen, Anlässe und Listen; keine anderen Personen) sehen.
+
+  subscriber:
+      group:
+        form:
+          subgroups_selectable: Es können nur Gruppen unterhalb der Listengruppe ausgewählt werden
+          subgroups_and_siblings_selectable: Es können nur Gruppen unterhalb der Listengruppe oder unterhalb der benachbarten Gruppen vom Typ %{type} ausgewählt werden
+
+  subscriber/user:
+    success: Du wurdest der Liste erfolgreich hinzugefügt.
+    failure: 'Du konntest der Liste nicht hinzugefügt werden: %{errors}'
+    unsubscribed: Du wurdest erfolgreich von der Liste entfernt.
+
+  subscriptions:
+    list:
+      export_not_allowed: Du darfst die Abonnenten dieser Liste nicht exportieren, da diese auch Rollen und/oder Anlässe ausserhalb deines Berechtigungsbereiches enthalten.
+
 
   dropdown/song_counts:
       button: Export
@@ -56,3 +96,7 @@ de:
       title: SUISA Erfassung
       concerts: Aufführungen
       summary: Zusammenfassung
+
+  contactable:
+    additional_email_fields:
+      tooltip_mailings: Versände von Listen, Bestätigungen per E-Mail usw. werden zusätzlich an alle hier markierten Adressen verschickt.

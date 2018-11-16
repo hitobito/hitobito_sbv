@@ -215,6 +215,10 @@ de:
         other: Aufführungen
         without_date: Aufführung ohne Datum
 
+      mailing_list:
+        one: Liste
+        other: Listen
+
     attributes:
       person:
         correspondence_language: &correspondence_language Korrespondenzsprache
@@ -259,6 +263,8 @@ de:
           permission:
             description:
               song_census: Darf SUISA-Meldungen verwalten.
+              layer_full: Alles Lesen und Schreiben auf dieser Ebene. Erstellen von Anlässen und Listen auf dieser Ebene.
+              group_full: Lesen und Schreiben auf der Gruppe. Erstellen von Anlässen und Listen auf der Gruppe.
       song:
         title: Titel
         composed_by: Komponist
