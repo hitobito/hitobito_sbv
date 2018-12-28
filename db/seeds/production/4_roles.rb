@@ -11,21 +11,18 @@ require 'csv'
 CSV::Converters[:nil] = lambda { |f| f == "\\N" ? nil : f.encode(CSV::ConverterEncoding) rescue f }
 CSV::Converters[:all] = [:numeric, :nil]
 
-
-migrator = DataMigrator.new
-
 %w(rollen_musicgest rollen_swoffice).each do |fn|
   if Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").exist?
+    migrator = DataMigrator.new(fn)
 
     CSV.parse(Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").read.gsub('\"', '""'), headers: true, converters: :all).each do |person|
 
-      enough_dates = case fn
-                     when 'rollen_musicgest'
+      enough_dates = if migrator.musicgest?
                        entry_date = migrator.parse_date(person['eintrittsdatum'], default: nil)
                        exit_date = migrator.parse_date(person['austrittsdatum'], default: nil)
 
                        entry_date && exit_date
-                     when 'rollen_swoffice'
+                     else
                        entry_date = migrator.parse_date(person['eintrittsdatum'])
                        exit_date = migrator.parse_date(person['austrittsdatum'], default: nil)
 

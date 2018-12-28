@@ -1,10 +1,15 @@
 class DataMigrator
 
-  def initialize
+  def initialize(fn = nil)
     @import_date = Time.zone.now
 
     @vereine = Group.pluck(:name, :id).to_h
     @mitglieder_ids = {}
+    @musicgest = fn.to_s.match(/musicgest/)
+  end
+
+  def musicgest?
+    @musicgest
   end
 
   def parse_date(string, default: @import_date)
