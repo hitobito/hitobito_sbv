@@ -200,7 +200,11 @@ file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do 
     INNER JOIN localites
       ON (musiciens.mandant = localites.mandant AND musiciens.autoLocalite = localites.autoLocalite)
     LEFT JOIN lienmusicienssocietes
-      ON (musiciens.mandant = lienmusicienssocietes.mandant AND musiciens.autoMusicien = lienmusicienssocietes.autoMusicien AND lienmusicienssocietes.anneeSortie = 0)
+      ON (musiciens.mandant = lienmusicienssocietes.mandant AND musiciens.autoMusicien = lienmusicienssocietes.autoMusicien
+          AND lienmusicienssocietes.anneeSortie = 0
+          AND musiciens.autoStatut = 1
+          AND lienmusicienssocietes.cotisation = 1
+          )
     LEFT JOIN societes
       ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
   CONDITIONS
@@ -267,6 +271,8 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
     LEFT JOIN societes ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
 
     WHERE lienmusicienssocietes.anneeSortie != 0
+          AND musiciens.autoStatut = 1
+          AND lienmusicienssocietes.cotisation = 1
   CONDITIONS
   migrator.dump('musicgest10') # start-DB
   migrator.dump('music_1_db') # append data from another DB
