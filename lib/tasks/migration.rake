@@ -41,6 +41,7 @@ end
 
 directory 'db/seeds/production'
 
+file('db/seeds/production/verbaende.csv').clear
 file 'db/seeds/production/verbaende.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -67,6 +68,7 @@ file 'db/seeds/production/verbaende.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
+file('db/seeds/production/vereine.csv').clear
 file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -105,6 +107,7 @@ file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
+file('db/seeds/production/vereine_musicgest.csv').clear
 file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -144,6 +147,7 @@ file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |ta
   migrator.dump('music_2_db') # append data from another DB
 end
 
+file('db/seeds/production/mitglieder.csv').clear
 file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -172,6 +176,7 @@ file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
+file('db/seeds/production/mitglieder_musicgest.csv').clear
 file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -221,6 +226,7 @@ end
 #   FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
 #   (suisaid, title, compositionyear, typ, name);
 #
+file('db/seeds/production/suisa_werke.csv').clear
 file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'suisa')
   migrator.headers = 'suisa_id,title,composed_by,arranged_by,published_by'
@@ -251,6 +257,7 @@ file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
+file('db/seeds/production/rollen_musicgest.csv').clear
 file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -279,6 +286,7 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
   migrator.dump('music_2_db') # append data from another DB
 end
 
+file('db/seeds/production/rollen_swoffice.csv').clear
 file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
