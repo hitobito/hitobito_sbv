@@ -362,6 +362,10 @@ class Migration
     SQL
   end
 
+  def show_query
+    puts @query.gsub(/INTO OUTFILE.*FROM/, 'FROM')
+  end
+
   def dump(database = @database)
     sh "sudo rm -f #{tmp_out}"
     sh <<-CMD.strip_heredoc
