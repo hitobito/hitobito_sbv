@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# vim:foldlevel=0
+
 # rubocop:disable Metrics/BlockLength
 namespace :migration do
   task :clean do
@@ -136,9 +140,19 @@ file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |ta
     NULL AS correspondence_language,
     NULL AS reported_members,
     federations.nomFederation AS kreis,
-    NULL AS swoffice_id
+    CASE societes.mandant
+      WHEN 10 THEN IF(nomCanton = 'Valais', NULL, -1)
+      WHEN 11 THEN IF(nomCanton = 'Jura', NULL, -1)
+      WHEN 12 THEN IF(nomCanton = 'Vaud', NULL, -1)
+      WHEN 16 THEN IF(nomCanton = 'Fribourg', NULL, -1)
+      WHEN 17 THEN IF(nomCanton = 'Neuchâtel', NULL, -1)
+      WHEN 18 THEN IF(nomCanton = 'Genève', NULL, -1)
+    END AS swoffice_id
   SQL
     INNER JOIN localites USING (mandant, autoLocalite)
+    LEFT JOIN districts USING (mandant, autoDistrict)
+    LEFT JOIN regions USING (mandant, autoRegion)
+    LEFT JOIN cantons USING (mandant, autoCanton)
     LEFT JOIN liensocietesfederations USING (mandant, autoSociete)
     LEFT JOIN federations USING (mandant, autoFederation)
   CONDITIONS
