@@ -302,6 +302,13 @@ end
 
 file('db/seeds/production/rollen_swoffice.csv').clear
 file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task|
+  role_map = {
+    'Suisa'        => 'Group::Verein::SuisaAdmin',
+    'Präsident/in' => 'Group::VereinVorstand::Praesident',
+    'Presidente'   => 'Group::VereinVorstand::Praesident',
+    'Präsident/e'  => 'Group::VereinVorstand::Praesident'
+  }
+
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
     first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
@@ -315,12 +322,14 @@ file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task
     v.domizil AS verein_ort,
     pc.von AS entrittsdatum,
     NULL AS austrittsdatum,
-    'Group::Verein::SuisaAdmin' as rolle
+    CASE a.bezeichnung
+      #{role_map.map { |name, role| "WHEN '#{name}' THEN '#{role}'" }.join(' ')}
+    END AS rolle
   SQL
     INNER JOIN tbl_person p ON (pc.person_id = p.id)
     INNER JOIN tbl_aemter a ON (pc.aemter_id = a.id)
     INNER JOIN tbl_person v ON (p.parentId = v.id)
-    WHERE a.bezeichnung = 'Suisa' AND pc.bis IS NULL
+    WHERE a.bezeichnung IN ('#{role_map.keys.join("', '")}') AND pc.bis IS NULL
   CONDITIONS
   migrator.dump
 end
