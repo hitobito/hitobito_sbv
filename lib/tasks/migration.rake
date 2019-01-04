@@ -156,9 +156,9 @@ file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |ta
     LEFT JOIN liensocietesfederations USING (mandant, autoSociete)
     LEFT JOIN federations USING (mandant, autoFederation)
   CONDITIONS
-  migrator.dump('musicgest10') # start-DB
-  migrator.dump('music_1_db') # append data from another DB
-  migrator.dump('music_2_db') # append data from another DB
+  migrator.dump # musicgest10')
+  migrator.append('music_1_db')
+  migrator.append('music_2_db')
 end
 
 file('db/seeds/production/mitglieder.csv').clear
@@ -227,9 +227,9 @@ file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do 
     LEFT JOIN societes
       ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
   CONDITIONS
-  migrator.dump('musicgest10') # start-DB
-  migrator.dump('music_1_db') # append data from another DB
-  migrator.dump('music_2_db') # append data from another DB
+  migrator.dump # musicgest10')
+  migrator.append('music_1_db')
+  migrator.append('music_2_db')
 end
 
 # imported manually into swoffice_sbvnew with
@@ -295,9 +295,9 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
           AND musiciens.autoStatut = 1
           AND lienmusicienssocietes.cotisation = 1
   CONDITIONS
-  migrator.dump('musicgest10') # start-DB
-  migrator.dump('music_1_db') # append data from another DB
-  migrator.dump('music_2_db') # append data from another DB
+  migrator.dump # musicgest10
+  migrator.append('music_1_db')
+  migrator.append('music_2_db')
 end
 
 file('db/seeds/production/rollen_swoffice.csv').clear
@@ -375,12 +375,30 @@ class Migration
     puts @query.gsub(/INTO OUTFILE.*FROM/, 'FROM')
   end
 
-  def dump(database = @database)
+  def dump
+    start_csv
+    append(@database)
+  end
+
+  def append(database = @database)
+    fetch(database)
+    append_data
+  end
+
+  private
+
+  def fetch(database = @database)
     sh "sudo rm -f #{tmp_out}"
     sh <<-CMD.strip_heredoc
       mysql -u#{ENV['RAILS_DB_USERNAME']} -p#{ENV['RAILS_DB_PASSWORD']} -e \"#{query}\" #{database}
     CMD
-    sh "echo '#{headers}' > #{filename}" if database == @database # otherwise only append data
+  end
+
+  def start_csv
+    sh "echo '#{headers}' > #{filename}"
+  end
+
+  def append_data
     sh "sudo cat #{tmp_out} >> #{filename}"
     sh "sudo rm -f #{tmp_out}"
   end
