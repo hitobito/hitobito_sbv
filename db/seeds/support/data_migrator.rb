@@ -19,28 +19,23 @@ class DataMigrator
     default
   end
 
-  def infer_verein(verein_name, verein_ort)
-    vereins_name = [verein_name, verein_ort].join(' ')
-    verband_name = verein_name
-
-    [@vereine[vereins_name], @vereine[verband_name]].compact.first
-  end
-
-  def infer_mitgliederverein(verein_name, verein_ort)
-    vereins_name = [verein_name, verein_ort].join(' ')
-    verband_name = verein_name
+  def infer_verein(vereins_name, vereins_ort, vereins_typ = nil)
+    vereins_name = [vereins_name, vereins_ort].join(' ')
+    verband_name = vereins_name
 
     vereins_id = [@vereine[vereins_name], @vereine[verband_name]].compact.first
 
+    return vereins_id if vereins_typ.nil?
+
     if vereins_id
-      @mitglieder_ids[vereins_id] ||= load_mitglieder_verein_id(vereins_id)
+      @mitglieder_ids[vereins_id] ||= load_verein(vereins_id, vereins_typ)
     else
       nil
     end
   end
 
-  def load_mitglieder_verein_id(vereins_id)
-    Group.find(vereins_id).children.where(name: 'Mitglieder').pluck(:id).first
+  def load_verein(vereins_id, vereins_typ = 'Mitglieder')
+    Group.find(vereins_id).children.where(name: vereins_typ).pluck(:id).first
   end
 
 end

@@ -33,7 +33,9 @@ CSV::Converters[:all] = [:numeric, :nil]
 
       group_id = case person['rolle']
                  when 'Group::VereinMitglieder::Mitglied'
-                   migrator.infer_mitgliederverein(person['verein_name'], person['verein_ort'])
+                   migrator.infer_verein(person['verein_name'], person['verein_ort'], 'Mitglieder')
+                 when 'Group::VereinVorstand::Praesident'
+                   migrator.infer_verein(person['verein_name'], person['verein_ort'], 'Vorstand')
                  when 'Group::Verein::SuisaAdmin'
                    migrator.infer_verein(person['verein_name'], person['verein_ort'])
                  end

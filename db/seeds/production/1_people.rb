@@ -18,7 +18,7 @@ migrator = DataMigrator.new
     CSV.parse(Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").read.gsub('\"', '""'), headers: true, converters: :all).each do |person|
       person_attrs = person.to_hash
 
-      vereins_mitglieder_id = migrator.infer_mitgliederverein(person['verein_name'], person['verein_ort'])
+      vereins_mitglieder_id = migrator.infer_verein(person['verein_name'], person['verein_ort'], 'Mitglieder')
 
       gender = case person['anrede']
                when /^Herrn?/, /^Hr\.?$/, /M[o]{1,2}[nh]{0,2}sieu?r/, /Si[gn]{2}[uo]re?/, /Sig\.?/, /^Mr\.?$/, /^M\.?$/
