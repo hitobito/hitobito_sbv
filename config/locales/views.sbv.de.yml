@@ -60,6 +60,10 @@ de:
         mailing_list:
           success: Wir haben eine Zugrmffsanfrage für %{person} versendet. Die Person wird zur Liste hinzugefügt, sobald die Anfrage freigegeben wird.
 
+  people:
+    fields_sbv:
+      allow_personal_data_usage: Ich akzeptiere eine Verwendung meiner Adressdaten
+
   roles:
     info:
       role_only_public: >

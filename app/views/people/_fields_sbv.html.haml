@@ -6,3 +6,6 @@
 = field_set_tag do
   = f.labeled_collection_select :correspondence_language, Settings.application.languages.to_hash, :first, :last
   = f.labeled_input_fields :profession
+
+= field_set_tag do
+  = f.labeled_boolean_field :personal_data_usage, caption: t('.allow_personal_data_usage')
