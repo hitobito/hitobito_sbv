@@ -6,7 +6,7 @@
 module Export::Tabular::SongCounts
   class List < Export::Tabular::Base
 
-    INCLUDED_ATTRS = %w(count title composed_by arranged_by published_by).freeze
+    INCLUDED_ATTRS = %w(count title composed_by arranged_by published_by suisa_id).freeze
     GROUP_ATTRS = %w(verein verein_id).freeze
 
     self.model_class = SongCount

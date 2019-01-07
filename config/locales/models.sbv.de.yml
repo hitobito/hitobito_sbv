@@ -271,6 +271,7 @@ de:
         composed_by: Komponist
         arranged_by: Arrangeur
         published_by: Verlag
+        suisa_id: SUISA-ID
 
       song_count:
         song: &song Werk
@@ -280,6 +281,7 @@ de:
         composed_by: Komponist
         arranged_by: Arrangeur
         published_by: Verlag
+        suisa_id: SUISA-ID
         verein: Verein
         verein_id: Vereins ID
 
