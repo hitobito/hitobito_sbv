@@ -2,6 +2,8 @@ module Sbv::Role
   extend ActiveSupport::Concern
 
   included do
+    self.used_attributes += [:created_at]
+
     validates :created_at, presence: true, if: :deleted_at
 
     validates_date :created_at,

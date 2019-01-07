@@ -258,6 +258,7 @@ de:
           dritte: 3. Klasse
           vierte: 4. Klasse
       role:
+        dates: Daten
         created_at: Eintritt
         class:
           permission:
