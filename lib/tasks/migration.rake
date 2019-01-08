@@ -298,6 +298,26 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
   migrator.dump # musicgest10
   migrator.append('music_1_db')
   migrator.append('music_2_db')
+
+  migrator.query('lienmusicienssocietes', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+    prenomMusicien,
+    nomMusicien,
+    emailMusicien,
+    naissanceMusicien,
+    nomSociete AS vereins_name,
+    nomVilleSoc AS vereins_domizil,
+    lienfonctionsmusiciens.since,
+    NULL AS until,
+    'Group::VereinVorstand::Praesident' AS rolle
+  SQL
+    INNER JOIN musiciens USING (mandant, autoMusicien)
+    INNER JOIN societes USING (mandant, autoSociete)
+    INNER JOIN lienfonctionsmusiciens USING (mandant, autoMusicien)
+    WHERE fonctionMusicien = 1 AND until IS NULL
+  CONDITIONS
+  migrator.append('musicgest10')
+  migrator.append('music_1_db')
+  migrator.append('music_2_db')
 end
 
 file('db/seeds/production/rollen_swoffice.csv').clear
