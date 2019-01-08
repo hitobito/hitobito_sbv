@@ -58,7 +58,7 @@ de:
     add_requests:
       creator:
         mailing_list:
-          success: Wir haben eine Zugrmffsanfrage für %{person} versendet. Die Person wird zur Liste hinzugefügt, sobald die Anfrage freigegeben wird.
+          success: Wir haben eine Zugriffsanfrage für %{person} versendet. Die Person wird zur Liste hinzugefügt, sobald die Anfrage freigegeben wird.
 
   people:
     fields_sbv:
