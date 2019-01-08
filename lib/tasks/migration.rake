@@ -37,9 +37,9 @@ namespace :migration do
   end
 
   task :repair_after_seed do
-    puts 'git checkout db/seeds/development'
-    puts 'git checkout db/seeds/groups.rb'
-    puts 'git clean -f'
+    sh 'git checkout db/seeds/development'
+    sh 'git checkout db/seeds/groups.rb'
+    sh 'git clean -f'
   end
 end
 
