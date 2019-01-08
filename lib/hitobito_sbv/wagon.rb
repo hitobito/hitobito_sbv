@@ -33,7 +33,8 @@ module HitobitoSbv
                                            :klasse, :unterhaltungsmusik,
                                            :subventionen, :reported_members]
 
-      PeopleController.permitted_attrs += [:profession, :correspondence_language]
+      PeopleController.permitted_attrs += [:profession, :correspondence_language,
+                                           :personal_data_usage]
 
       RolesController.send :include, Sbv::RolesController
 
