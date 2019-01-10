@@ -30,6 +30,7 @@ class Role::MitgliederMitglied < Role
 
   def update_active_years_on_person
     person.cache_active_years
+    person.save(validate: false)
   end
 
 end
