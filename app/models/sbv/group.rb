@@ -9,6 +9,8 @@ module Sbv::Group
   extend ActiveSupport::Concern
 
   included do
+    used_attributes << :secondary_parent_id << :tertiary_parent_id
+
     root_types Group::Root
 
     include I18nSettable
@@ -29,6 +31,14 @@ module Sbv::Group
     validates :reported_members,
               numericality: { greater_than_or_equal_to: 0 }, if: :reported_members
 
+    belongs_to :secondary_parent, class_name: 'Group'
+    belongs_to :tertiary_parent, class_name: 'Group'
+
+    def self.secondary_parents
+      where(type: %w(Group::Mitgliederverband Group::Regionalverband))
+        .order(:name)
+        .select(:id, :name)
+    end
   end
 
   def song_counts
@@ -40,6 +50,13 @@ module Sbv::Group
     return unless is_a?(Group::Verein)
 
     Group::VereinMitglieder::Mitglied.joins(:group).where(groups: { layer_group_id: id }).count
+  end
+
+  def secondary_parents
+    [
+      Group.find_by(id: secondary_parent_id),
+      Group.find_by(id: tertiary_parent_id)
+    ].compact
   end
 
 end

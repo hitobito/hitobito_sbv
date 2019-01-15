@@ -31,6 +31,7 @@ module HitobitoSbv
       GroupsController.permitted_attrs += [:vereinssitz, :founding_year,
                                            :correspondence_language, :besetzung,
                                            :klasse, :unterhaltungsmusik,
+                                           :secondary_parent_id, :tertiary_parent_id,
                                            :subventionen, :reported_members]
 
       PeopleController.permitted_attrs += [:profession, :correspondence_language,
