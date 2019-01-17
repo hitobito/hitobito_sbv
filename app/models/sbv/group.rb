@@ -9,8 +9,6 @@ module Sbv::Group
   extend ActiveSupport::Concern
 
   included do
-    used_attributes << :secondary_parent_id << :tertiary_parent_id
-
     root_types Group::Root
 
     include I18nSettable
@@ -34,12 +32,23 @@ module Sbv::Group
     belongs_to :secondary_parent, class_name: 'Group'
     belongs_to :tertiary_parent, class_name: 'Group'
 
-    def self.secondary_parents
-      where(type: %w(Group::Mitgliederverband Group::Regionalverband))
-        .order(:name)
-        .select(:id, :name)
+    used_attributes << :secondary_parent_id << :tertiary_parent_id
+
+    class << self
+      def secondary_parents
+        where(type: %w(Group::Mitgliederverband Group::Regionalverband))
+          .order(:name)
+          .select(:id, :name)
+      end
+
+      def order_by_type_stmt_with_name(parent_group = nil)
+        order_by_type_stmt_without_name(parent_group).gsub(/ lft$/, ' name')
+      end
+
+      alias_method_chain :order_by_type_stmt, :name
     end
   end
+
 
   def song_counts
     verein_ids = descendants.where(type: Group::Verein).pluck(:id)
