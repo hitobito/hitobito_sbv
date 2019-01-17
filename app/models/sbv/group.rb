@@ -35,20 +35,28 @@ module Sbv::Group
     used_attributes << :secondary_parent_id << :tertiary_parent_id
 
     class << self
-      def secondary_parents
-        where(type: %w(Group::Mitgliederverband Group::Regionalverband))
-          .order(:name)
-          .select(:id, :name)
-      end
-
       def order_by_type_stmt_with_name(parent_group = nil)
         order_by_type_stmt_without_name(parent_group).gsub(/ lft$/, ' name')
       end
 
       alias_method_chain :order_by_type_stmt, :name
     end
+
+    # potential other parents, dropdown data
+    def self.secondary_parents
+      where(type: %w(Group::Mitgliederverband Group::Regionalverband))
+        .order(:type, :name)
+        .select(:id, :name)
+    end
   end
 
+  # actual other parents, secondary and tertiary
+  def secondary_parents
+    [
+      Group.find_by(id: secondary_parent_id),
+      Group.find_by(id: tertiary_parent_id)
+    ].compact
+  end
 
   def song_counts
     verein_ids = descendants.where(type: Group::Verein).pluck(:id)
@@ -59,13 +67,6 @@ module Sbv::Group
     return unless is_a?(Group::Verein)
 
     Group::VereinMitglieder::Mitglied.joins(:group).where(groups: { layer_group_id: id }).count
-  end
-
-  def secondary_parents
-    [
-      Group.find_by(id: secondary_parent_id),
-      Group.find_by(id: tertiary_parent_id)
-    ].compact
   end
 
 end
