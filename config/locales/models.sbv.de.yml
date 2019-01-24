@@ -258,6 +258,9 @@ de:
           zweite: 2. Klasse
           dritte: 3. Klasse
           vierte: 4. Klasse
+        secondary_parent_groups: weitere Gruppenzugehörigkeiten
+        secondary_parent_id: sekundär
+        tertiary_parent_id: weitere
       role:
         dates: Daten
         created_at: Eintritt

@@ -1,0 +1,9 @@
+-#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
+-#  hitobito_sbv and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_sbv.
+
+= section_table(Group.human_attribute_name(:secondary_parent_groups), entry.secondary_parents) do |item|
+  %td
+    = link_to(item.to_s, group_path(item.id))
+

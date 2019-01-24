@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -23,6 +23,7 @@ module HitobitoSbv
       Group.send        :include, Sbv::Group
       Person.send       :include, Sbv::Person
       Role.send         :include, Sbv::Role
+      Subscription.send :prepend, Sbv::Subscription
 
       ### abilities
       RoleAbility.send :include, Sbv::RoleAbility
@@ -31,6 +32,7 @@ module HitobitoSbv
       GroupsController.permitted_attrs += [:vereinssitz, :founding_year,
                                            :correspondence_language, :besetzung,
                                            :klasse, :unterhaltungsmusik,
+                                           :secondary_parent_id, :tertiary_parent_id,
                                            :subventionen, :reported_members]
 
       PeopleController.permitted_attrs += [:profession, :correspondence_language,

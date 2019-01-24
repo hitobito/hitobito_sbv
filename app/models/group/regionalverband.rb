@@ -54,6 +54,7 @@ class Group::Regionalverband < ::Group
            Group::RegionalverbandKontakte,
            Group::Verein
 
+  include SecondaryChildren
 
   ### ROLES
 

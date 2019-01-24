@@ -1,4 +1,4 @@
--#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+-#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
 -#  hitobito_sbv and licensed under the Affero General Public License version 3
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_sbv.
@@ -11,7 +11,13 @@
     = f.labeled_collection_select :besetzung, Group.besetzung_labels.to_a, :first, :last, include_blank: true
     = f.labeled_collection_select :klasse, Group.klasse_labels.to_a, :first, :last, include_blank: true
     = f.labeled_collection_select :unterhaltungsmusik, Group.unterhaltungsmusik_labels.to_a, :first, :last, include_blank: true
+
   = field_set_tag do
     = f.labeled_input_fields :subventionen
+
   = field_set_tag do
     = f.labeled_input_field :reported_members, type: :number
+
+  = field_set_tag Group.human_attribute_name(:secondary_parent_groups) do
+    = f.labeled_collection_select :secondary_parent_id, Group.secondary_parents, :id, :name, include_blank: true
+    = f.labeled_collection_select :tertiary_parent_id, Group.secondary_parents, :id, :name, include_blank: true

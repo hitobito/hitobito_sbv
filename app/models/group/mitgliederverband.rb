@@ -57,6 +57,7 @@ class Group::Mitgliederverband < ::Group
            Group::Regionalverband,
            Group::Verein
 
+  include SecondaryChildren
 
   ### ROLES
 

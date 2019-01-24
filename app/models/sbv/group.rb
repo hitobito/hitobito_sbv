@@ -29,6 +29,33 @@ module Sbv::Group
     validates :reported_members,
               numericality: { greater_than_or_equal_to: 0 }, if: :reported_members
 
+    belongs_to :secondary_parent, class_name: 'Group'
+    belongs_to :tertiary_parent, class_name: 'Group'
+
+    used_attributes << :secondary_parent_id << :tertiary_parent_id
+
+    class << self
+      def order_by_type_stmt_with_name(parent_group = nil)
+        order_by_type_stmt_without_name(parent_group).gsub(/ lft$/, ' name')
+      end
+
+      alias_method_chain :order_by_type_stmt, :name
+    end
+
+    # potential other parents, dropdown data
+    def self.secondary_parents
+      where(type: %w(Group::Mitgliederverband Group::Regionalverband))
+        .order(:type, :name)
+        .select(:id, :name)
+    end
+  end
+
+  # actual other parents, secondary and tertiary
+  def secondary_parents
+    [
+      Group.find_by(id: secondary_parent_id),
+      Group.find_by(id: tertiary_parent_id)
+    ].compact
   end
 
   def song_counts
