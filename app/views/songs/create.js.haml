@@ -3,6 +3,6 @@
   $(".song-counts form.new_song_count").submit();
   $("#new_song")[0].reset();
   $('.song-counts #new_song').hide();
-  window.App.SongCounts.add('#{j(entry.to_json.html_safe)}')
+  window.App.SongCounts.add('#{j(entry.attributes.merge(label: entry.decorate.full_label).to_json.html_safe)}')
 
 $('#flash').html("#{j(render(partial: "layouts/flash", collection: [:notice, :alert], as: :level))}");
