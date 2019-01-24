@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2018 - 2019, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -11,21 +11,18 @@ require 'csv'
 CSV::Converters[:nil] = lambda { |f| f == "\\N" ? nil : f.encode(CSV::ConverterEncoding) rescue f }
 CSV::Converters[:all] = [:numeric, :nil]
 
-
-migrator = DataMigrator.new
-
 %w(rollen_musicgest rollen_swoffice).each do |fn|
   if Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").exist?
+    migrator = DataMigrator.new(fn)
 
     CSV.parse(Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").read.gsub('\"', '""'), headers: true, converters: :all).each do |person|
 
-      enough_dates = case fn
-                     when 'rollen_musicgest'
+      enough_dates = if migrator.musicgest?
                        entry_date = migrator.parse_date(person['eintrittsdatum'], default: nil)
                        exit_date = migrator.parse_date(person['austrittsdatum'], default: nil)
 
                        entry_date && exit_date
-                     when 'rollen_swoffice'
+                     else
                        entry_date = migrator.parse_date(person['eintrittsdatum'])
                        exit_date = migrator.parse_date(person['austrittsdatum'], default: nil)
 
@@ -36,7 +33,9 @@ migrator = DataMigrator.new
 
       group_id = case person['rolle']
                  when 'Group::VereinMitglieder::Mitglied'
-                   migrator.infer_mitgliederverein(person['verein_name'], person['verein_ort'])
+                   migrator.infer_verein(person['verein_name'], person['verein_ort'], 'Mitglieder')
+                 when 'Group::VereinVorstand::Praesident'
+                   migrator.infer_verein(person['verein_name'], person['verein_ort'], 'Vorstand')
                  when 'Group::Verein::SuisaAdmin'
                    migrator.infer_verein(person['verein_name'], person['verein_ort'])
                  end
@@ -67,3 +66,10 @@ migrator = DataMigrator.new
     end
   end
 end
+
+puts "Deleting groups that were only needed for migrating the active veteran years..."
+Group.where(swoffice_id: -1).find_each do |group|
+  group.children.destroy_all
+  group.destroy!
+end
+puts "Done."

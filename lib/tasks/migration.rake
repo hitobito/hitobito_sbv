@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# vim:foldlevel=0
+
 # rubocop:disable Metrics/BlockLength
 namespace :migration do
   task :clean do
@@ -33,14 +37,15 @@ namespace :migration do
   end
 
   task :repair_after_seed do
-    puts 'git checkout db/seeds/development'
-    puts 'git checkout db/seeds/groups.rb'
-    puts 'git clean -f'
+    sh 'git checkout db/seeds/development'
+    sh 'git checkout db/seeds/groups.rb'
+    sh 'git clean -f'
   end
 end
 
 directory 'db/seeds/production'
 
+file('db/seeds/production/verbaende.csv').clear
 file 'db/seeds/production/verbaende.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -67,6 +72,7 @@ file 'db/seeds/production/verbaende.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
+file('db/seeds/production/vereine.csv').clear
 file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -105,6 +111,7 @@ file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
+file('db/seeds/production/vereine_musicgest.csv').clear
 file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -133,17 +140,28 @@ file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |ta
     NULL AS correspondence_language,
     NULL AS reported_members,
     federations.nomFederation AS kreis,
-    NULL AS swoffice_id
+    CASE societes.mandant
+      WHEN 10 THEN IF(nomCanton = 'Valais', NULL, -1)
+      WHEN 11 THEN IF(nomCanton = 'Jura', NULL, -1)
+      WHEN 12 THEN IF(nomCanton = 'Vaud', NULL, -1)
+      WHEN 16 THEN IF(nomCanton = 'Fribourg', NULL, -1)
+      WHEN 17 THEN IF(nomCanton = 'Neuchâtel', NULL, -1)
+      WHEN 18 THEN IF(nomCanton = 'Genève', NULL, -1)
+    END AS swoffice_id
   SQL
     INNER JOIN localites USING (mandant, autoLocalite)
+    LEFT JOIN districts USING (mandant, autoDistrict)
+    LEFT JOIN regions USING (mandant, autoRegion)
+    LEFT JOIN cantons USING (mandant, autoCanton)
     LEFT JOIN liensocietesfederations USING (mandant, autoSociete)
     LEFT JOIN federations USING (mandant, autoFederation)
   CONDITIONS
-  migrator.dump('musicgest10') # start-DB
-  migrator.dump('music_1_db') # append data from another DB
-  migrator.dump('music_2_db') # append data from another DB
+  migrator.dump # musicgest10')
+  migrator.append('music_1_db')
+  migrator.append('music_2_db')
 end
 
+file('db/seeds/production/mitglieder.csv').clear
 file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -172,6 +190,7 @@ file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
+file('db/seeds/production/mitglieder_musicgest.csv').clear
 file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -200,13 +219,17 @@ file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do 
     INNER JOIN localites
       ON (musiciens.mandant = localites.mandant AND musiciens.autoLocalite = localites.autoLocalite)
     LEFT JOIN lienmusicienssocietes
-      ON (musiciens.mandant = lienmusicienssocietes.mandant AND musiciens.autoMusicien = lienmusicienssocietes.autoMusicien AND lienmusicienssocietes.anneeSortie = 0)
+      ON (musiciens.mandant = lienmusicienssocietes.mandant AND musiciens.autoMusicien = lienmusicienssocietes.autoMusicien
+          AND lienmusicienssocietes.anneeSortie = 0
+          AND musiciens.autoStatut = 1
+          AND lienmusicienssocietes.cotisation = 1
+          )
     LEFT JOIN societes
       ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
   CONDITIONS
-  migrator.dump('musicgest10') # start-DB
-  migrator.dump('music_1_db') # append data from another DB
-  migrator.dump('music_2_db') # append data from another DB
+  migrator.dump # musicgest10')
+  migrator.append('music_1_db')
+  migrator.append('music_2_db')
 end
 
 # imported manually into swoffice_sbvnew with
@@ -217,6 +240,7 @@ end
 #   FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
 #   (suisaid, title, compositionyear, typ, name);
 #
+file('db/seeds/production/suisa_werke.csv').clear
 file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'suisa')
   migrator.headers = 'suisa_id,title,composed_by,arranged_by,published_by'
@@ -247,6 +271,7 @@ file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
+file('db/seeds/production/rollen_musicgest.csv').clear
 file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
@@ -267,13 +292,43 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
     LEFT JOIN societes ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
 
     WHERE lienmusicienssocietes.anneeSortie != 0
+          AND musiciens.autoStatut = 1
+          AND lienmusicienssocietes.cotisation = 1
   CONDITIONS
-  migrator.dump('musicgest10') # start-DB
-  migrator.dump('music_1_db') # append data from another DB
-  migrator.dump('music_2_db') # append data from another DB
+  migrator.dump # musicgest10
+  migrator.append('music_1_db')
+  migrator.append('music_2_db')
+
+  migrator.query('lienmusicienssocietes', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+    prenomMusicien,
+    nomMusicien,
+    emailMusicien,
+    naissanceMusicien,
+    nomSociete AS vereins_name,
+    nomVilleSoc AS vereins_domizil,
+    lienfonctionsmusiciens.since,
+    NULL AS until,
+    'Group::VereinVorstand::Praesident' AS rolle
+  SQL
+    INNER JOIN musiciens USING (mandant, autoMusicien)
+    INNER JOIN societes USING (mandant, autoSociete)
+    INNER JOIN lienfonctionsmusiciens USING (mandant, autoMusicien)
+    WHERE fonctionMusicien = 1 AND until IS NULL
+  CONDITIONS
+  migrator.append('musicgest10')
+  migrator.append('music_1_db')
+  migrator.append('music_2_db')
 end
 
+file('db/seeds/production/rollen_swoffice.csv').clear
 file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task|
+  role_map = {
+    'Suisa'        => 'Group::Verein::SuisaAdmin',
+    'Präsident/in' => 'Group::VereinVorstand::Praesident',
+    'Presidente'   => 'Group::VereinVorstand::Praesident',
+    'Präsident/e'  => 'Group::VereinVorstand::Praesident'
+  }
+
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
     first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
@@ -287,12 +342,14 @@ file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task
     v.domizil AS verein_ort,
     pc.von AS entrittsdatum,
     NULL AS austrittsdatum,
-    'Group::Verein::SuisaAdmin' as rolle
+    CASE a.bezeichnung
+      #{role_map.map { |name, role| "WHEN '#{name}' THEN '#{role}'" }.join(' ')}
+    END AS rolle
   SQL
     INNER JOIN tbl_person p ON (pc.person_id = p.id)
     INNER JOIN tbl_aemter a ON (pc.aemter_id = a.id)
     INNER JOIN tbl_person v ON (p.parentId = v.id)
-    WHERE a.bezeichnung = 'Suisa' AND pc.bis IS NULL
+    WHERE a.bezeichnung IN ('#{role_map.keys.join("', '")}') AND pc.bis IS NULL
   CONDITIONS
   migrator.dump
 end
@@ -334,12 +391,34 @@ class Migration
     SQL
   end
 
-  def dump(database = @database)
+  def show_query
+    puts @query.gsub(/INTO OUTFILE.*FROM/, 'FROM')
+  end
+
+  def dump
+    start_csv
+    append(@database)
+  end
+
+  def append(database = @database)
+    fetch(database)
+    append_data
+  end
+
+  private
+
+  def fetch(database = @database)
     sh "sudo rm -f #{tmp_out}"
     sh <<-CMD.strip_heredoc
       mysql -u#{ENV['RAILS_DB_USERNAME']} -p#{ENV['RAILS_DB_PASSWORD']} -e \"#{query}\" #{database}
     CMD
-    sh "echo '#{headers}' > #{filename}" if database == @database # otherwise only append data
+  end
+
+  def start_csv
+    sh "echo '#{headers}' > #{filename}"
+  end
+
+  def append_data
     sh "sudo cat #{tmp_out} >> #{filename}"
     sh "sudo rm -f #{tmp_out}"
   end

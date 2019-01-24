@@ -52,7 +52,7 @@ CSV::Converters[:all] = [:numeric, :nil]
       parent_id = mitglieder_verbaende[verein.delete('verband').last]
       kreis_name = verein.delete('kreis').last
 
-      if kreis_name.present?
+      if kreis_name.present? and verein['swoffice_id'].to_s != '6510'
         Group::Regionalverband.seed_once(
           :name, :parent_id, { parent_id: parent_id, name: kreis_name, type: 'Group::Regionalverband' }
         )
