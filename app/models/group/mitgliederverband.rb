@@ -57,16 +57,7 @@ class Group::Mitgliederverband < ::Group
            Group::Regionalverband,
            Group::Verein
 
-
-  def children
-    primary = super
-    secondary = ::Group::Verein.where(secondary_parent_id: id)
-    tertiary  = ::Group::Verein.where(tertiary_parent_id: id)
-
-    ids = (primary | secondary | tertiary).map(&:id)
-
-    Group.where(id: ids)
-  end
+  include SecondaryChildren
 
   ### ROLES
 
