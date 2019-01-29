@@ -379,7 +379,7 @@ class Migration
   def query(table = nil, field_sql = '*', condition_sql = '')
     raise ArgumentError, 'Table needs to be passed' if @query.nil? && table.nil?
 
-    @query ||= <<-SQL.strip_heredoc.split("\n").map(&:strip).join(' ').gsub(/\s+/, ' ')
+    @query = <<-SQL.strip_heredoc.split("\n").map(&:strip).join(' ').gsub(/\s+/, ' ')
       SELECT #{field_sql}
       INTO OUTFILE '#{tmp_out}'
         CHARACTER SET utf8
@@ -408,9 +408,11 @@ class Migration
   private
 
   def fetch(database = @database)
+    raise 'No Query set, please use Migration#query(table, fields, joins) to set one' unless @query
+
     sh "sudo rm -f #{tmp_out}"
     sh <<-CMD.strip_heredoc
-      mysql -u#{ENV['RAILS_DB_USERNAME']} -p#{ENV['RAILS_DB_PASSWORD']} -e \"#{query}\" #{database}
+      mysql -u#{ENV['RAILS_DB_USERNAME']} -p#{ENV['RAILS_DB_PASSWORD']} -e \"#{@query}\" #{database}
     CMD
   end
 
