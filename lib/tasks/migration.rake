@@ -326,7 +326,11 @@ file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task
     'Suisa'        => 'Group::Verein::SuisaAdmin',
     'Präsident/in' => 'Group::VereinVorstand::Praesident',
     'Presidente'   => 'Group::VereinVorstand::Praesident',
-    'Präsident/e'  => 'Group::VereinVorstand::Praesident'
+    'Präsident/e'  => 'Group::VereinVorstand::Praesident',
+    'Sekretär/in'  => 'Group::Verein::Admin',
+    'Segretario/a' => 'Group::Verein::Admin',
+    'Secrétaire'   => 'Group::Verein::Admin',
+    'Adjoint'      => 'Group::Verein::Admin'
   }
 
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
