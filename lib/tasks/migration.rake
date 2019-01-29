@@ -292,9 +292,7 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
   SQL
     LEFT JOIN musiciens ON (lienmusicienssocietes.mandant = musiciens.mandant AND musiciens.autoMusicien = lienmusicienssocietes.autoMusicien)
     LEFT JOIN societes ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
-
-    WHERE lienmusicienssocietes.anneeSortie != 0
-          AND musiciens.autoStatut = 1
+    WHERE lienmusicienssocietes.anneeSortie != 0 AND lienmusicienssocietes.anneeEntree != 0
           AND lienmusicienssocietes.cotisation = 1
   CONDITIONS
   migrator.dump # musicgest10
