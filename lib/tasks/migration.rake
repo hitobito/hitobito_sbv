@@ -145,7 +145,7 @@ file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |ta
     CASE societes.mandant
       WHEN 10 THEN IF(nomCanton = 'Valais', NULL, -1)
       WHEN 11 THEN IF(nomCanton = 'Jura', NULL, -1)
-      WHEN 12 THEN IF(nomCanton = 'Vaud', NULL, -1)
+      WHEN 12 THEN IF(nomDistrict = 'vaudois', NULL, -1)
       WHEN 16 THEN IF(nomCanton = 'Fribourg', NULL, -1)
       WHEN 17 THEN IF(nomCanton = 'Neuchâtel', NULL, -1)
       WHEN 18 THEN IF(nomCanton = 'Genève', NULL, -1)
