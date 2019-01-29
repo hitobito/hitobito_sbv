@@ -24,3 +24,4 @@ rubocop-results.xml
 .pry_history
 .tool-versions
 db/seeds/production/*.csv
+NOTES
