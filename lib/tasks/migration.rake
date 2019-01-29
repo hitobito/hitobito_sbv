@@ -12,6 +12,7 @@ namespace :migration do
     rm_f 'db/seeds/production/mitglieder_musicgest.csv'
     rm_f 'db/seeds/production/suisa_werke.csv'
     rm_f 'db/seeds/production/rollen_swoffice.csv'
+    rm_f 'db/seeds/production/rollen_swoffice_admin.csv'
     rm_f 'db/seeds/production/rollen_musicgest.csv'
   end
 
@@ -23,6 +24,7 @@ namespace :migration do
     'db/seeds/production/mitglieder_musicgest.csv',
     'db/seeds/production/suisa_werke.csv',
     'db/seeds/production/rollen_swoffice.csv',
+    'db/seeds/production/rollen_swoffice_admin.csv',
     'db/seeds/production/rollen_musicgest.csv'
   ]
 
@@ -352,6 +354,36 @@ file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task
     WHERE a.bezeichnung IN ('#{role_map.keys.join("', '")}') AND pc.bis IS NULL
   CONDITIONS
   migrator.dump
+end
+
+file('db/seeds/production/rollen_swoffice_admin.csv').clear
+file 'db/seeds/production/rollen_swoffice_admin.csv' => 'db/seeds/production' do |task|
+  migrator = Migration.new(task.name, 'swoffice_sbvnew')
+  migrator.headers = <<-TEXT.strip_heredoc
+    first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
+  TEXT
+  table = 'tbl_settings s'
+  fields = <<-SQL.strip_heredoc
+    p.vorname,
+    p.name,
+    p.email,
+    p.geburtsdatum,
+    v.name AS verein_name,
+    v.domizil AS verein_ort,
+    CAST(NOW() AS date) AS entrittsdatum,
+    NULL AS austrittsdatum,
+    '__ROLLENNAME__' AS rolle
+  SQL
+  joins = <<-SQL.strip_heredoc
+    INNER JOIN tbl_person p ON (s.person_id = p.id)
+    INNER JOIN tbl_person v ON (p.parentId = v.id)
+  SQL
+
+  migrator.query(table, fields.gsub('__ROLLENNAME__', 'Group::Verein::SuisaAdmin'), joins)
+  migrator.dump
+
+  migrator.query(table, fields.gsub('__ROLLENNAME__', 'Group::Verein::Admin'), joins)
+  migrator.append
 end
 
 # rubocop:enable Metrics/BlockLength
