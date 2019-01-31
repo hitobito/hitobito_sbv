@@ -11,7 +11,7 @@ require 'csv'
 CSV::Converters[:nil] = lambda { |f| f == "\\N" ? nil : f.encode(CSV::ConverterEncoding) rescue f }
 CSV::Converters[:all] = [:numeric, :nil]
 
-%w(rollen_musicgest rollen_swoffice).each do |fn|
+%w(rollen_musicgest rollen_swoffice rollen_swoffice_admin).each do |fn|
   if Wagons.find('sbv').root.join("db/seeds/production/#{fn}.csv").exist?
     migrator = DataMigrator.new(fn)
 

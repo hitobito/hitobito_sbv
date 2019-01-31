@@ -12,6 +12,7 @@ namespace :migration do
     rm_f 'db/seeds/production/mitglieder_musicgest.csv'
     rm_f 'db/seeds/production/suisa_werke.csv'
     rm_f 'db/seeds/production/rollen_swoffice.csv'
+    rm_f 'db/seeds/production/rollen_swoffice_admin.csv'
     rm_f 'db/seeds/production/rollen_musicgest.csv'
   end
 
@@ -23,6 +24,7 @@ namespace :migration do
     'db/seeds/production/mitglieder_musicgest.csv',
     'db/seeds/production/suisa_werke.csv',
     'db/seeds/production/rollen_swoffice.csv',
+    'db/seeds/production/rollen_swoffice_admin.csv',
     'db/seeds/production/rollen_musicgest.csv'
   ]
 
@@ -143,7 +145,7 @@ file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |ta
     CASE societes.mandant
       WHEN 10 THEN IF(nomCanton = 'Valais', NULL, -1)
       WHEN 11 THEN IF(nomCanton = 'Jura', NULL, -1)
-      WHEN 12 THEN IF(nomCanton = 'Vaud', NULL, -1)
+      WHEN 12 THEN IF(nomDistrict = 'vaudois', NULL, -1)
       WHEN 16 THEN IF(nomCanton = 'Fribourg', NULL, -1)
       WHEN 17 THEN IF(nomCanton = 'Neuchâtel', NULL, -1)
       WHEN 18 THEN IF(nomCanton = 'Genève', NULL, -1)
@@ -290,9 +292,7 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
   SQL
     LEFT JOIN musiciens ON (lienmusicienssocietes.mandant = musiciens.mandant AND musiciens.autoMusicien = lienmusicienssocietes.autoMusicien)
     LEFT JOIN societes ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
-
-    WHERE lienmusicienssocietes.anneeSortie != 0
-          AND musiciens.autoStatut = 1
+    WHERE lienmusicienssocietes.anneeSortie != 0 AND lienmusicienssocietes.anneeEntree != 0
           AND lienmusicienssocietes.cotisation = 1
   CONDITIONS
   migrator.dump # musicgest10
@@ -326,7 +326,11 @@ file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task
     'Suisa'        => 'Group::Verein::SuisaAdmin',
     'Präsident/in' => 'Group::VereinVorstand::Praesident',
     'Presidente'   => 'Group::VereinVorstand::Praesident',
-    'Präsident/e'  => 'Group::VereinVorstand::Praesident'
+    'Präsident/e'  => 'Group::VereinVorstand::Praesident',
+    'Sekretär/in'  => 'Group::Verein::Admin',
+    'Segretario/a' => 'Group::Verein::Admin',
+    'Secrétaire'   => 'Group::Verein::Admin',
+    'Adjoint'      => 'Group::Verein::Admin'
   }
 
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
@@ -354,6 +358,36 @@ file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task
   migrator.dump
 end
 
+file('db/seeds/production/rollen_swoffice_admin.csv').clear
+file 'db/seeds/production/rollen_swoffice_admin.csv' => 'db/seeds/production' do |task|
+  migrator = Migration.new(task.name, 'swoffice_sbvnew')
+  migrator.headers = <<-TEXT.strip_heredoc
+    first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
+  TEXT
+  table = 'tbl_settings s'
+  fields = <<-SQL.strip_heredoc
+    p.vorname,
+    p.name,
+    p.email,
+    p.geburtsdatum,
+    v.name AS verein_name,
+    v.domizil AS verein_ort,
+    CAST(NOW() AS date) AS entrittsdatum,
+    NULL AS austrittsdatum,
+    '__ROLLENNAME__' AS rolle
+  SQL
+  joins = <<-SQL.strip_heredoc
+    INNER JOIN tbl_person p ON (s.person_id = p.id)
+    INNER JOIN tbl_person v ON (p.parentId = v.id)
+  SQL
+
+  migrator.query(table, fields.gsub('__ROLLENNAME__', 'Group::Verein::SuisaAdmin'), joins)
+  migrator.dump
+
+  migrator.query(table, fields.gsub('__ROLLENNAME__', 'Group::Verein::Admin'), joins)
+  migrator.append
+end
+
 # rubocop:enable Metrics/BlockLength
 
 class Migration
@@ -379,7 +413,7 @@ class Migration
   def query(table = nil, field_sql = '*', condition_sql = '')
     raise ArgumentError, 'Table needs to be passed' if @query.nil? && table.nil?
 
-    @query ||= <<-SQL.strip_heredoc.split("\n").map(&:strip).join(' ').gsub(/\s+/, ' ')
+    @query = <<-SQL.strip_heredoc.split("\n").map(&:strip).join(' ').gsub(/\s+/, ' ')
       SELECT #{field_sql}
       INTO OUTFILE '#{tmp_out}'
         CHARACTER SET utf8
@@ -408,9 +442,11 @@ class Migration
   private
 
   def fetch(database = @database)
+    raise 'No Query set, please use Migration#query(table, fields, joins) to set one' unless @query
+
     sh "sudo rm -f #{tmp_out}"
     sh <<-CMD.strip_heredoc
-      mysql -u#{ENV['RAILS_DB_USERNAME']} -p#{ENV['RAILS_DB_PASSWORD']} -e \"#{query}\" #{database}
+      mysql -u#{ENV['RAILS_DB_USERNAME']} -p#{ENV['RAILS_DB_PASSWORD']} -e \"#{@query}\" #{database}
     CMD
   end
 

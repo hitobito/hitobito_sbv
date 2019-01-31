@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2018-2019, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -9,6 +9,7 @@ require Rails.root.join('db', 'seeds', 'support', 'group_seeder')
 
 seeder = GroupSeeder.new
 mitglieder_verbaende = {}
+seed_ran = false
 
 require 'csv'
 
@@ -41,6 +42,8 @@ if Wagons.find('sbv').root.join('db/seeds/production/verbaende.csv').exist?
 
     mitglieder_verbaende[mv.name] = mv.id # store for verein-import
   end
+
+  seed_ran = true
 end
 
 CSV::Converters[:nil] = lambda { |f| f == "\\N" ? nil : f.encode(CSV::ConverterEncoding) rescue f }
@@ -63,6 +66,8 @@ CSV::Converters[:all] = [:numeric, :nil]
 
       Group::Verein.seed_once(:name, :parent_id, vereins_attrs)
     end
+
+    seed_ran = true
   end
 end
 
@@ -71,15 +76,17 @@ Group.set_callback(:save,   :after,  :move_to_new_parent)
 Group.set_callback(:save,   :after,  :set_depth!)
 Group.set_callback(:save,   :after,  :move_to_alphabetic_position)
 
-puts "Rebuilding nested set..."
-Group.rebuild!(false)
-puts "Moving Groups in alphabetical order..."
-Group.find_each do |group|
-  begin
-    group.send(:move_to_alphabetic_position)
-  rescue => e
-    puts e
-    puts group
+if seed_ran
+  puts "Rebuilding nested set..."
+  Group.rebuild!(false)
+  puts "Moving Groups in alphabetical order..."
+  Group.find_each do |group|
+    begin
+      group.send(:move_to_alphabetic_position)
+    rescue => e
+      puts e
+      puts group
+    end
   end
+  puts "Done."
 end
-puts "Done."
