@@ -68,7 +68,7 @@ CSV::Converters[:all] = [:numeric, :nil]
 end
 
 puts "Deleting groups that were only needed for migrating the active veteran years..."
-Group.where(swoffice_id: -1).find_each do |group|
+Group.without_deleted.where(swoffice_id: -1).find_each do |group|
   group.children.destroy_all
   group.destroy!
 end
