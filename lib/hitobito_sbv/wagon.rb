@@ -39,6 +39,7 @@ module HitobitoSbv
                                            :personal_data_usage]
 
       RolesController.send :include, Sbv::RolesController
+      Person::HistoryController.send :prepend, Sbv::Person::HistoryController
 
       ### helpers
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
