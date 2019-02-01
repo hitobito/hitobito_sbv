@@ -21,7 +21,11 @@ CSV::Converters[:all] = [:numeric, :nil]
                        entry_date = migrator.parse_date(person['eintrittsdatum'], default: nil)
                        exit_date = migrator.parse_date(person['austrittsdatum'], default: nil)
 
-                       entry_date && exit_date
+                       if person['rolle'] == 'Group::VereinMitglieder::Mitglied'
+                         entry_date && exit_date
+                       else
+                         entry_date.present?
+                       end
                      else
                        entry_date = migrator.parse_date(person['eintrittsdatum'])
                        exit_date = migrator.parse_date(person['austrittsdatum'], default: nil)
@@ -36,8 +40,9 @@ CSV::Converters[:all] = [:numeric, :nil]
                    migrator.infer_verein(person['verein_name'], person['verein_ort'], 'Mitglieder')
                  when 'Group::VereinVorstand::Praesident'
                    migrator.infer_verein(person['verein_name'], person['verein_ort'], 'Vorstand')
-                 when 'Group::Verein::SuisaAdmin'
+                 when 'Group::Verein::SuisaAdmin', 'Group::Verein::Admin'
                    migrator.infer_verein(person['verein_name'], person['verein_ort'])
+
                  end
 
       next unless group_id
