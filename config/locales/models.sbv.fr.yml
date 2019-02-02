@@ -247,7 +247,7 @@ fr:
           fanfare_mixte: Fanfare Mixte
           tambour_percussion: Tambours et percussion
         unterhaltungsmusik_stufen:
-          _nil: Inconnu
+          _nil: &unbekannt Inconnu
           oberstufe: Catégorie supérieure
           mittelstufe: Catégorie moyenne
           unterstufe: Catégorie inférieure
