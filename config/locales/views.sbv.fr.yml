@@ -6,8 +6,21 @@
 #  You can use YAML anchors to avoid duplication
 #  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
 fr:
+  global:
+    last_change: "Dernière modification: %{date}"
   group:
-    suisa_tab: Suisa
+    suisa_tab: SUISA
+    merge:
+      select:
+        explanation: "Lorsque deux groupes sont fusionnés, tous les sous-groupes, manifestations et personnes, y compris les rôles des deux groupes, sont réunis. Les listes ne sont pas reprises. Les groupes précédents resteront alors visibles sous \"Supprimé\"."
+    person_add_requests:
+      index:
+        explanation: >
+          Lorsqu'elles sont actives, les personnes de ce niveau sont ajoutées aux groupes, aux manifestations et aux listes après l'approbation par une personne autorisée.
+  mailing_lists:
+    global:
+      link:
+        add: Créer une liste
   song_censuses:
     index:
       no_data_for_this_year: Aucune donnée disponible pour cette année.
@@ -22,18 +35,63 @@ fr:
     remind:
       success: "Le rappel a été envoyé avec succès à la société %{verein_count}."
       send: Envoyer un rappel.
-      send_confirm: Envoie un rappel à tous les responsables Suis qui n'ont pas encore soumis de liste. Chacun reçoit un e-mail dans sa langue de correspondance. Le texte de l'e-mail peut être adapté par un administrateur selon paramétrage.
+      send_confirm: "Envoie un rappel à tous les responsables SUISA, qui n'ont pas encore établi de liste. Chacun reçoit un courriel dans sa langue de correspondance. Le texte du courriel peut être modifié sous Paramètres par un administrateur."
     finish:
       submit: Clôturer la liste d'annonces
       start_new_census: "En clôturant la liste d'annonces, toutes les annonces effectuées jusqu'ici seront sauvegardées. Une nouvelle liste de messages sera créée, les nouvelles annonces seront ajoutées à cette liste."
 
-  song_counts:
-    submit:
-      flash:
-        success: Liste d'annonce soumise.
-        failure: Une erreur s'est produite lors de la soumission de la liste d'annonce.
+  person:
+    history:
+      history_members_form_sbv:
+        verein: Société
+        new_role: Nouveau rôle
+        start_date: Admission
+        end_date: Démission
+        save: Sauvegarder
+    add_requests:
+      creator:
+        mailing_list:
+          success: "Nous avons envoyé une demande d'accès pour %{person}. La personne sera ajoutée à la liste dès que la demande aura été approuvée."
+
+  people:
+    fields_sbv:
+      allow_personal_data_usage: J'accepte l'utilisation de mes données d'adresse
+
+  roles:
+    info:
+      role_only_public: >
+        Le rôle %{role} du groupe %{group} ne peut voir que des données publiques (groupes, manifestations et listes; aucune autre personne).
+  subscriber:
+      group:
+        form:
+          subgroups_selectable: Seuls les groupes situés au niveau inférieur du groupe de listes peuvent être sélectionnés
+          subgroups_and_siblings_selectable: "Seuls les groupes situés au niveau inférieur du groupe des listes ou en dessous des groupes voisins du type %{type} peuvent être sélectionnés"
+
+  subscriber/user:
+    success: Vous avez été ajouté avec succès à la liste.
+    failure: 'Vous ne pouvez pas être ajouté à la liste: %{errors}'
+    unsubscribed: Vous avez été supprimé de la liste avec succès.
+
+  subscriptions:
+    list:
+      export_not_allowed: "Vous n'êtes pas autorisé à exporter les abonnés de cette liste, car ils contiennent également des rôles et / ou des manifestations extérieurs qui dépassent vos droits."
+
 
   dropdown/song_counts:
       button: Exportation
       csv: CSV
-      xlsx: XLSX
+      xlsx: Excel
+  concerts:
+    submit:
+      flash:
+        success: Liste d'annonces soumise.
+        failure: Une erreur s'est produite lors de l'enregistrement de la liste des oeuvres.
+    actions_index:
+      add_concert: Ajouter une interprétation
+      title: Saisie SUISA
+      concerts: Interprétations
+      summary: Résumé
+
+  contactable:
+    additional_email_fields:
+      tooltip_mailings: "Les envois de listes, de confirmations par e-mail, etc. sont également envoyés à toutes les adresses marquées ici."

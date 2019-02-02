@@ -45,11 +45,11 @@ fr:
       group/root_kontakte: &kontakte
         one: Contacts
         other: Contacts
-      group/root/suisa_admin:
+      group/root/suisa_admin: &suisa_verantwortlicher
         one: Responsable SUISA
         other: Responsables SUISA
 
-      group/mitgliederverband: &suisa_verantwortlicher
+      group/mitgliederverband:
         one: Association membre
         other: Associations membres
       group/mitgliederverband_geschaeftsstelle:
@@ -112,7 +112,6 @@ fr:
       group/verein/conductor:
         one: Directeur-trice
         other: Directeur-trice-s
-
       group/verein/suisa_admin:
         *suisa_verantwortlicher
 
@@ -200,11 +199,9 @@ fr:
         one: Membre passif
         other: Membres passifs
 
-
       song:
         one: Oeuvre
         other: Oeuvres
-
 
       song_census:
         one: Liste d'annonce
@@ -213,11 +210,22 @@ fr:
         one: Annonce d'oeuvre
         other: Annonces d'oeuvres
 
+      concert:
+        one: Interprétation
+        other: Interprétations
+        without_date: Interprétation sans date
+
+      mailing_list:
+        one: Liste
+        other: Listes
 
     attributes:
       person:
         correspondence_language: &correspondence_language Langue de correspondance
         profession: Profession
+        active_years: Années d'activité actuelles
+        prognostic_active_years: Années d'activité - projection
+        personal_data_usage: Utilisation des données d'adresse
       group:
         vereinssitz: Siège de la société
         founding_year: Année de fondation
@@ -233,16 +241,13 @@ fr:
         recognized_members: Membres saisis
         besetzungen:
           _nil: Inconnu
-          brass_band: &brass_band Brass Band
-          harmonie: &harmonie Harmonie
-          fanfare_benelux: &fanfare_benelux Fanfare Benelux
-          fanfare_mixte: &fanfare_mixte Fanfare Mixte
-          bb: *brass_band
-          h: *harmonie
-          f/b: *fanfare_benelux
-          t/p: *fanfare_mixte
+          brass_band: Brass Band
+          harmonie: Harmonie
+          fanfare_benelux: Fanfare Benelux
+          fanfare_mixte: Fanfare Mixte
+          tambour_percussion: Tambours et percussion
         unterhaltungsmusik_stufen:
-          _nil: &unbekannt Inconnu
+          _nil: Inconnu
           oberstufe: Catégorie supérieure
           mittelstufe: Catégorie moyenne
           unterstufe: Catégorie inférieure
@@ -254,21 +259,50 @@ fr:
           dritte: 3ème classe
           vierte: 4ème classe
       role:
+        dates: Données
+        created_at: Entrée
         class:
           permission:
             description:
-              song_census: Peut administrer les annonces Suisa
+              song_census: Peut gérer les annonces SUISA.
+              layer_full: Tout lire et écrire à ce niveau. Créer des manifestations et des listes à ce niveau.
+              group_full: Lire et écrire sur le groupe. Créer des manifestations et des listes sur le groupe.
       song:
         title: Titre
         composed_by: Compositeur
         arranged_by: Arrangeur
         published_by: Edition
+        suisa_id: Identifiant SUISA ou ID-SUISA
 
       song_count:
-        song: Oeuvre
-        song_id: Oeuvre
+        song: &song Oeuvre
+        song_id: *song
         count: Nombre
         title: Titre
         composed_by: Compositeur
         arranged_by: Arrangeur
+        published_by: Edition
+        suisa_id: ID-SUISA
+        verein: Société
         verein_id: ID société
+
+      song_counts:
+        song: *song
+        song_id: *song
+
+      concert:
+        song_counts: Saisie de l'oeuvre
+        performed_at: Date
+        name: Interprétation
+
+    errors:
+      models:
+        song:
+          attributes:
+            title:
+              taken: existe déjà avec le même compositeur chez cet éditeur
+
+  errors:
+    messages:
+      cannot_be_later_than_today: ne peut pas être postérieur à aujourd'hui
+      cannot_be_later_than_deleted_at: doit être antérieur à ou le jour même de la démission
