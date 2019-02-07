@@ -29,9 +29,14 @@ module Reactivator
   module_function
 
   def restore_group(deleted_group)
+    swoffice_id = if deleted_group.swoffice_id == -1
+                    nil # prevent deletion with next seeding, -1 is a magic value
+                  else
+                    deleted_group.swoffice_id
+                  end
     deleted_group.update(
-      swoffice_id: nil, # prevent deletion with next seeding
-      deleted_at: nil   # restore deleted group
+      swoffice_id: swoffice_id,
+      deleted_at: nil # restore deleted group
     )
   end
 
