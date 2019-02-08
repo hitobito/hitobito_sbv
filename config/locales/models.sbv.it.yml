@@ -56,6 +56,7 @@ it:
 
       group/mitgliederverband_geschaeftsstelle:
         *office
+      group/mitgliederverband_vorstand: &vorstand
         one: Comitato
         other: Comitati
 
@@ -259,7 +260,7 @@ it:
         klasse_value: *klasse
         besetzung: &besetzung Formazione
         besetzung_value: *besetzung
-        unterhaltungsmusik: Musica d'intrattenimento
+        unterhaltungsmusik: &unterhaltungsmusik Musica d'intrattenimento
         unterhaltungsmusik_value: *unterhaltungsmusik
         correspondence_language: *correspondence_language
         subventionen: Sovvenzioni
