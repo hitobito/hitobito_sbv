@@ -1,0 +1,97 @@
+#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  hitobito_sbv and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_sbv.
+
+#  You can use YAML anchors to avoid duplication
+#  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
+it:
+  global:
+    last_change: "Ultima modifica: %{date}"
+  group:
+    suisa_tab: SUISA
+    merge:
+      select:
+        explanation: "Quando due gruppi vengono fusionati, tutti i sottogruppi, gli eventi e le persone, compresi i ruoli di entrambi i gruppi, vengono uniti. Gli elenchi non vengono ripresi. I gruppi precedenti continueranno a essere visibili nel campo \"Eliminato\"."
+    person_add_requests:
+      index:
+        explanation: >
+          Quando sono attive, le persone a questo livello vengono aggiunte a gruppi, eventi ed elenchi solo dopo l'approvazione di una persona autorizzata.
+  mailing_lists:
+    global:
+      link:
+        add: Redigere elenchi
+  song_censuses:
+    index:
+      no_data_for_this_year: Per quest'anno non si sono indicazioni a disposizioni
+    total: Totale
+    totals:
+      submitted: inoltrato
+      not_submitted: non inoltrato
+      censuses_submitted: "%{submitted} di %{total}inoltrato"
+    verein:
+      search: ricercare composizione
+    submit: inoltrare modello elenco
+    remind:
+      success: "Promemoria inoltrato con succeso a %{verein_count}delle società bandistiche"
+      send: spedire promemoria
+      send_confirm: Invia un promemoria a ogni responsabile SUISA che non abbia ancora inoltrato l'elenco. Ognuno riceve una e-mail nella loro lingua di corrispondenza. Il testo dell'e-mail può essere modificato da un amministratore nel campo "Impostazioni".
+    finish:
+      submit: completare elenco
+      start_new_census: "Con il completamento dell'elenco, tutte le notifiche inviate fino ad oggi verranno bloccate. Verrà creato un nuovo elenco. Tutte le notiifiche ancora aperte verranno aggiunte a questo elenco."
+
+  person:
+    history:
+      history_members_form_sbv:
+        verein: Società bandistica
+        new_role: Nuovo ruolo
+        start_date: Entrata
+        end_date: Uscita
+        save: Memorizzare
+    add_requests:
+      creator:
+        mailing_list:
+          success: "Abbiamo inviato una richiesta di accesso per %{person}. La persona verrà aggiunta alla lista non appena viene accettata la richiesta."
+
+  people:
+    fields_sbv:
+      allow_personal_data_usage: Accetto l'uso dei dettagli del mio indirizzo
+
+  roles:
+    info:
+      role_only_public: >
+        Il ruolo %{role} nel gruppo %{group}può visionare solo dati pubblici (gruppi, eventi ed elenchi, nessuna altra persona).
+  subscriber:
+      group:
+        form:
+          subgroups_selectable: Si possono scegliere gruppi nell'elenco gruppi.
+          subgroups_and_siblings_selectable: "Possono essere selezionati unicamente gruppi di questo elenco o nei gruppi contigui del tipo%{type}."
+
+  subscriber/user:
+    success: Sei stato aggiunto con successo alla lista.
+    failure: 'Non sei stato aggiunto alla lista%{errors}'
+    unsubscribed: Sei stato eliminato con successo dalla lista
+
+  subscriptions:
+    list:
+      export_not_allowed: "Non è consentito esportare abbonati da questo elenco, perché rappresentano ruoli e/o eventi al di fuori del campo autorizzato."
+
+
+  dropdown/song_counts:
+      button: Esportazione
+      csv: CSV
+      xlsx: Excel
+  concerts:
+    submit:
+      flash:
+        success: Elenco inoltrato
+        failure: Un errore è occorso durante l'inoltro dell'elenco
+    actions_index:
+      add_concert: Includere l'esecuzione
+      title: Registrazione SUISA
+      concerts: Esecuzioni
+      summary: Riassunto
+
+  contactable:
+    additional_email_fields:
+      tooltip_mailings: "L'invio degli elechi, le conferme via e-mail ecc. vengono pure inviati a tutti gli indirizzi qui indicati."

@@ -1,0 +1,334 @@
+#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  hitobito_sbv and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_sbv.
+
+#  You can use YAML anchors to avoid duplication
+#  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
+
+it:
+  activerecord:
+    models:
+
+      ### GROUPS
+
+      group/root:
+        one: Associazione Mantello
+        other: Associazioni mantello
+      group/root_geschaeftsstelle: &office
+        one: Segretariato
+        other: Segretariati
+      group/root_vorstand:
+        one: Direzione
+        other: Direzione
+      group/root_musikkommission: &musikkommission
+        one: Commisione di musica
+        other: Commissioni di musica
+      group/root_arbeitsgruppe: &arbeitsgruppe
+        one: Gruppo di lavoro
+        other: Gruppi di lavoro
+      group/root_ehrenmitglieder: &ehrenmitglieder
+        one: Membro d'onore
+        other: Membri onorari
+      group/root_veteranen: &veteranen
+        one: Veterani
+        other: Veterani
+      group/root_veteranen/veteran:
+        one: Veterano federale
+        other: Veterani federali
+      group/root_veteranen/ehrenveteran:
+        one: Veterano federale onorario
+        other: Veterani federali onorari
+      group/root_veteranen/cism_veteran:
+        one: Veterano CISM
+        other: Veterani CISM
+      group/root_kontakte: &kontakte
+        one: Contatti
+        other: Contatti
+      group/root/suisa_admin: &suisa_verantwortlicher
+        one: Responsabile SUISA
+        other: Responsabili SUISA
+
+
+      group/mitgliederverband:
+        one: Membro dell'associazione
+        other: Membri delle associazioni
+
+      group/mitgliederverband_geschaeftsstelle:
+        *office
+        one: Comitato
+        other: Comitati
+
+      group/mitgliederverband_musikkommission:
+        *musikkommission
+      group/mitgliederverband_arbeitsgruppe:
+        *arbeitsgruppe
+      group/mitgliederverband_ehrenmitglieder:
+        *ehrenmitglieder
+      group/mitgliederverband_veteranen:
+        *veteranen
+      group/mitgliederverband_veteranen/veteran:
+        one: Veterano cantonale
+        other: Veterani cantonali
+
+      group/mitgliederverband_veteranen/ehrenveteran:
+        one: Veterano onorario cantonale
+        other: Veterani onorari cantonali
+
+      group/mitgliederverband_kontakte:
+        *kontakte
+      group/mitgliederverband/suisa_admin:
+        *suisa_verantwortlicher
+
+
+      group/regionalverband:
+        one: Associazione regionale
+        other: Associazioni regionali
+
+      group/regionalverband_geschaeftsstelle:
+        *office
+      group/regionalverband_vorstand:
+        *vorstand
+      group/regionalverband_musikkommission:
+        *musikkommission
+      group/regionalverband_arbeitsgruppe:
+        *arbeitsgruppe
+      group/regionalverband_ehrenmitglieder:
+        *ehrenmitglieder
+      group/regionalverband_kontakte:
+        *kontakte
+      group/regionalverband/suisa_admin:
+        *suisa_verantwortlicher
+
+      group/verein:
+        one: Società bandistica
+        other: Società bandistiche
+
+      group/verein_vorstand:
+        *vorstand
+      group/verein_musikkommission:
+        *musikkommission
+      group/verein_arbeitsgruppe:
+        *arbeitsgruppe
+      group/verein_mitglieder:
+        one: Membro
+        oter: Membri
+      group/verein_kontakte:
+        *kontakte
+      group/verein/conductor:
+        one: Direttrice
+        other: Direttrici
+
+      group/verein/suisa_admin:
+        *suisa_verantwortlicher
+
+      ### ROLES FOR ALL LAYERS
+
+      #### General
+
+      role/admin:
+        one: Amministratore
+        other: Amministratori
+
+      role/adressverwaltung:
+        one: Gestione indirizzi
+        other: Gestione indirizzi
+
+
+
+      #### Geschaeftsstelle Roles
+
+      role/geschaeftsstelle_manager:
+        one: Direzione Amministrazione
+        other: Direzione Amministrazione
+
+      role/geschaeftsstelle_staff:
+        one: Collaboratore
+        other: Collaboratori
+
+      role/geschaeftsstelle_help:
+        one: Aiuto
+        other: Aiuti
+
+
+      #### Vorstand Roles
+
+      role/vorstand_kassier:
+        one: Cassiere
+        other: Cassieri
+
+      role/vorstand_finanzchef:
+        one: Responsabile Finanze
+        other: Responsabili Finanze
+
+      role/vorstand_mitglied: &mitglied
+        one: Membro
+        other: Membri
+
+      role/vorstand_praesident: &praesident
+        one: Presidente
+        other: Presidenti
+
+      role/vorstand_vize_praesident:
+        one: Vice Presidente
+        other: Vice Presidenti
+
+      role/vorstand_veteranenchef:
+        one: Responsabile Veterani
+        other: Responsabili Veterani
+
+      role/vorstand_materialverwaltung:
+        one: Gestione materiale
+        other: Gestione materiale
+
+
+      #### Musikkommission Roles
+
+      role/musikkommission_praesident:
+        *praesident
+      role/musikkommission_mitglied:
+        *mitglied
+
+      #### Arbeitsgruppen Roles
+
+      role/arbeitsgruppe_leitung:
+        one: Direzione
+        other: Direzione
+
+      role/arbeitsgruppe_mitglied:
+        *mitglied
+
+      #### Ehrenmitglieder
+
+      role/ehrenmitglied:
+        one: Membro onorario
+        other: Membri onorari
+
+
+      #### Kontakte Roles
+
+      role/kontakt:
+        one: Contatto
+        other: Contatti
+
+
+
+      #### Mitglieder Roles
+
+      role/mitglieder_mitglied:
+        *mitglied
+      role/mitglieder_passivmitglied:
+        one: Membro passivo
+        other: Membri passivi
+
+
+      song:
+        one: Brano
+        other: Brani
+
+
+      song_census:
+        one: Elenchi iscritti
+
+      song_count:
+        one: Annuncio brani
+        other: Annunci brani
+
+
+      concert:
+        one: Esecuzione
+        other: Esecuzioni
+        without_date: Esecuzione senza data
+
+      mailing_list:
+        one: Elenco
+        other: Elenchi
+
+
+    attributes:
+      person:
+        correspondence_language: &correspondence_language Lingua di corrispondenza
+        profession: Lavoro
+        active_years: Anni attivi fino ad oggi
+        prognostic_active_years: Stima anni attivi
+        personal_data_usage: Utilizzo dettagli indirizzi
+      group:
+        vereinssitz: Sede società bandistica
+        founding_year: Anno di fondazione
+        klasse: &klasse Classe
+        klasse_value: *klasse
+        besetzung: &besetzung Formazione
+        besetzung_value: *besetzung
+        unterhaltungsmusik: Musica d'intrattenimento
+        unterhaltungsmusik_value: *unterhaltungsmusik
+        correspondence_language: *correspondence_language
+        subventionen: Sovvenzioni
+        reported_members: Membri annunciati
+        recognized_members: Membri recensiti
+        besetzungen:
+          _nil: sconosciuto
+          brass_band: Brass Band
+          harmonie: Armonia
+          fanfare_benelux: Fanfara Benelux
+          fanfare_mixte: Fanfara Mista
+          tambour_percussion: Tamburi e Percussione
+        unterhaltungsmusik_stufen:
+          _nil: &unbekannt sconosciuto
+          oberstufe: Categoria Superiore
+          mittelstufe: Categoria Media
+          unterstufe: Categoria Inferiore
+        klassen:
+          _nil: *unbekannt
+          hoechste: Eccellenza
+          erste: 1a Classe
+          zweite: 2a Classe
+          dritte: 3a Classe
+          vierte: 4a Classe
+      role:
+        dates: Dati
+        created_at: Entrata
+        class:
+          permission:
+            description:
+              song_census: Può gestire annunci SUISA
+              layer_full: "A questo livello può leggere tutto e scrivere. \nA questo livello può creare eventi e liste."
+              group_full: "Leggere e scrivere nel gruppo.\nCreare eventi e liste nel gruppo."
+      song:
+        title: Titolo
+        composed_by: Compositore
+        arranged_by: Arrangemento
+        published_by: Casa Editrice
+        suisa_id: SUISA-ID
+
+      song_count:
+        song: &song Composizione
+        song_id: *song
+        count: Quantità
+        title: Titolo
+        composed_by: Compositore
+        arranged_by: Arrangiamento
+        published_by: Casa Editrice
+        suisa_id: SUISA-ID
+        verein: Società bandistica
+        verein_id: ID Società di musica
+
+      song_counts:
+        song: *song
+        song_id: *song
+
+      concert:
+        song_counts: Registrazione brano
+        performed_at: Data
+        name: Esecuzione
+
+    errors:
+      models:
+        song:
+          attributes:
+            title:
+              taken: esiste già con lo stesso compositore in questa casa editrice
+
+  errors:
+    messages:
+      cannot_be_later_than_today: non può essere più tardi di oggi
+      cannot_be_later_than_deleted_at: deve essere prima o allo stesso giorno del ritiro
