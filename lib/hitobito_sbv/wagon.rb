@@ -49,6 +49,9 @@ module HitobitoSbv
       ### sheets
       Sheet::Group.send :include, Sbv::Sheet::Group
 
+      ### jobs
+      Export::SubgroupsExportJob.send :prepend, Sbv::Export::SubgroupsExportJob
+
       ### domain
       Export::Tabular::Groups::Row.send :include, Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.send :include, Sbv::Export::Tabular::Groups::List
