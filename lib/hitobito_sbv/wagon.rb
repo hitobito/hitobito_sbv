@@ -21,6 +21,7 @@ module HitobitoSbv
       # extend application classes here
       # models
       Group.send        :include, Sbv::Group
+      Group.send        :include, Sbv::Group::NestedSet
       Person.send       :include, Sbv::Person
       Role.send         :include, Sbv::Role
       Subscription.send :prepend, Sbv::Subscription
