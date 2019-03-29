@@ -35,6 +35,10 @@ class DataMigrator
 
     return vereins_id if vereins_typ.nil?
 
+    mitglieder_verein(vereins_is, vereins_typ)
+  end
+
+  def mitglieder_verein(vereins_id, vereins_typ)
     if vereins_id
       @mitglieder_ids[vereins_id] ||= load_verein(vereins_id, vereins_typ)
     else
@@ -44,6 +48,18 @@ class DataMigrator
 
   def load_verein(vereins_id, vereins_typ = 'Mitglieder')
     Group.find(vereins_id).children.where(name: vereins_typ).pluck(:id).first
+  end
+
+  def load_person(person_data)
+    if person_data['email'].present?
+      Person.find_by(email: person_data['email'])
+    else
+      Person.find_by(
+        first_name: person_data['first_name'],
+        last_name:  person_data['last_name'],
+        birthday:   parse_date(person_data['birthday'], default: nil),
+      )
+    end
   end
 
 end
