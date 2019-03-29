@@ -3,8 +3,10 @@ namespace :reactivate do
     restore_list = Wagons.find('sbv').root.join('db/seeds/production/deleted.csv')
     raise unless restore_list.exist?
 
-    MigrationDate  = Date.new(2019, 1, 30)
-    DeploymentDate = Date.new(2019, 2, 2)
+    reactivator = Reactivator.new(
+      Date.new(2019, 1, 30), # migration date
+      Date.new(2019, 2, 2)   # deployment date
+    )
 
     CSV.parse(restore_list.read, headers: true).each do |group|
       named_group = Group.deleted.find_by(name: group['verein'])
@@ -12,21 +14,30 @@ namespace :reactivate do
       groups = if named_group.present?
                  [named_group]
                else
-                 Group.deleted.where(['name LIKE ?', group['nomSociete'] + '%']).to_a
+                 Group.deleted.where(
+                   ['name LIKE ? AND town = ?', group['nomSociete'] + '%', group['nomLocalite']]
+                 ).to_a
                end
 
       groups.each do |deleted_group|
-        puts "Restoring #{deleted_group.name}"
-        Reactivator.restore_group(deleted_group)
-        Reactivator.restore_roles(deleted_group)
-        Reactivator.restore_subgroups(deleted_group)
+        reactivator.restore(deleted_group)
       end
     end
   end
 end
 
-module Reactivator
-  module_function
+class Reactivator
+  def initialize(start_date, end_date)
+    @start_date = start_date
+    @end_date   = end_date
+  end
+
+  def restore(deleted_group)
+    puts "Restoring #{deleted_group.name}"
+    restore_group(deleted_group)
+    restore_roles(deleted_group)
+    restore_subgroups(deleted_group)
+  end
 
   def restore_group(deleted_group)
     swoffice_id = if deleted_group.swoffice_id == -1
@@ -53,7 +64,7 @@ module Reactivator
 
   def restore_roles(group)
     group.roles.with_deleted.where(
-      deleted_at: (MigrationDate.prev_day..DeploymentDate.next_day)
+      deleted_at: (@start_date.prev_day..@end_date.next_day)
     ).each do |role|
       role.restore!
     end
