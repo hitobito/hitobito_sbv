@@ -10,7 +10,7 @@ module Sbv::Person
 
   included do
     Person::PUBLIC_ATTRS << :correspondence_language << :personal_data_usage
-    Person::FILTER_ATTRS << :active_years << :prognostic_active_years
+    Person::FILTER_ATTRS << :active_years <<  [:prognostic_active_years, :integer]
 
     validates :first_name, :last_name, :birthday, presence: true
 
