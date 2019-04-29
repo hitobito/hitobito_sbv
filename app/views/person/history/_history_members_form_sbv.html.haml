@@ -1,26 +1,20 @@
+%br
 .accordion
-  %a.accordion-toggle.collapsed.header{ href: "#new_role", data: { toggle: :collapse } }
+  %a.btn.btn-small.accordion-toggle.collapsed.header{ href: "#new_role", data: { toggle: :collapse } }
     = t('.new_role')
 
 
   .accordion-body.collapse{ id: 'new_role' }
-    .accordion-inner{ style: 'height: 350px;'}
+    .accordion-inner{ style: 'height: 380px; border: 0px'}
       %fieldset
         %legend
-        - @group_selection = Group::Verein.all
-
         = standard_form(Role.new, { url: create_history_member_group_roles_path }) do |f|
           .span6
             = f.hidden_field(:person_id, value: @person.id)
             = f.hidden_field(:person, value: @person)
 
             = f.labeled(:verein, t('.verein')) do
-              = f.select(:group_id,
-                group_options,
-                  { },
-                    { class: 'chosen-select absolute',
-                      data: { remote: true,
-                        url: role_types_group_roles_path(@group), chosen_no_results: t('global.chosen_no_results') } })
+              = f.select(:group_id, Group::Verein.order(:name).collect { |g| [g.name, g.id] }, {}, { class: 'chosen-select absolute' })
 
 
             = field_set_tag  do
