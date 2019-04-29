@@ -46,6 +46,7 @@ module HitobitoSbv
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
       admin[:active_for] << 'songs'
       GroupsHelper.send :include, Sbv::GroupsHelper
+      GroupDecorator.send :prepend, Sbv::GroupDecorator
 
       ### sheets
       Sheet::Group.send :include, Sbv::Sheet::Group

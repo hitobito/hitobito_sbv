@@ -6,11 +6,24 @@
 class HistoryRolesController < ApplicationController
   skip_load_and_authorize_resource
 
+  def create
+    role = build_role(find_or_create_group)
+    person = role.person
+    authorize!(:create_history_member, role)
+
+    if role.save!
+      person.update_active_years
+      flash[:notice] = I18n.t('crud.create.flash.success', model: role.to_s)
+      redirect_to return_path(role.person)
+    end
+  end
+
   def destroy
     role = Role.find(params[:id])
     person = role.person
+    authorize!(:destroy, role)
 
-    if authorize!(:destroy, role) && role.really_destroy!
+    if role.really_destroy!
       person.update_active_years
       flash[:notice] = I18n.t('crud.destroy.flash.success', model: role.to_s)
 
@@ -30,6 +43,23 @@ class HistoryRolesController < ApplicationController
     else
       group_path(group)
     end
+  end
+
+  def build_role(group)
+    Group::VereinMitglieder::Mitglied.new(
+      group: group,
+      person_id: params[:role][:person_id],
+      created_at: params[:role][:start_date].presence || Time.zone.now.to_date,
+      deleted_at: params[:role][:end_date]
+    )
+  end
+
+  def find_or_create_group(scope = Group::Verein::VereinMitglieder)
+    scope.find_by(id: params[:role][:group_id]) ||
+      scope.deleted.find_by(name: params[:role][:group][:name]) ||
+      scope.create(parent: Group::Verein.hidden,
+                   name: params[:role][:group][:name],
+                   deleted_at: Time.zone.now)
   end
 
 end
