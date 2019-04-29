@@ -55,6 +55,10 @@ de:
         start_date: Eintritt
         end_date: Austritt
         save: Speichern
+        create_deleted_verein: Gelöschten Verein erfassen
+        select_existing_verein: Verein auswählen
+        text_with_alternative_link_html: "%{text} <small>oder %{link}</small>"
+
     add_requests:
       creator:
         mailing_list:

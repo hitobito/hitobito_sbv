@@ -41,6 +41,8 @@
 
 class Group::Verein < ::Group
 
+  HIDDEN_ROOT_VEREIN_NAME = 'Ehemalige aus Verlauf'.freeze
+
   self.layer = true
   self.default_children = [Group::VereinVorstand,
                            Group::VereinKontakte,
@@ -64,6 +66,20 @@ class Group::Verein < ::Group
 
   has_many :concerts, dependent: :destroy
   has_many :song_counts, through: :concerts
+
+
+  def self.hidden
+    root = Group::Root.first
+    verein = Group::Verein.deleted.find_by(name: HIDDEN_ROOT_VEREIN_NAME, parent: root)
+    return verein if verein
+
+    # NOTE: we piggy-back on created_at to avoid default childresn to be created
+    Group::Verein.create!(name: HIDDEN_ROOT_VEREIN_NAME,
+                          parent: root,
+                          created_at: 1.minute.ago,
+                          deleted_at: Time.zone.now)
+  end
+
 
   # TODO: Validierungen der verschiedenen Values, refactoring, exports
 

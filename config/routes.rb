@@ -26,8 +26,8 @@ Rails.application.routes.draw do
       resource :roles, only: [] do
         post 'create_history_member'
       end
+      resources :history_roles, only: [:create, :destroy]
     end
-    resources :history_roles, only: [:destroy]
   end
 
 end

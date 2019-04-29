@@ -39,13 +39,13 @@ module HitobitoSbv
       PeopleController.permitted_attrs += [:profession, :correspondence_language,
                                            :personal_data_usage]
 
-      RolesController.send :include, Sbv::RolesController
       Person::HistoryController.send :prepend, Sbv::Person::HistoryController
 
       ### helpers
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
       admin[:active_for] << 'songs'
       GroupsHelper.send :include, Sbv::GroupsHelper
+      GroupDecorator.send :prepend, Sbv::GroupDecorator
 
       ### sheets
       Sheet::Group.send :include, Sbv::Sheet::Group
