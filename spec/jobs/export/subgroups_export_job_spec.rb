@@ -11,7 +11,7 @@ describe Export::SubgroupsExportJob do
 
   it 'only exports address columns' do
     csv = CSV.parse(subject.data, col_sep: ';', headers: true)
-    expect(csv.headers).to eq ["Name", "Gruppentyp", "Adresse", "PLZ", "Ort", "Land"]
+    expect(csv.headers).to eq ["Name", "Gruppentyp", "Adresse", "PLZ", "Ort", "Land", "Gemeldete Mitglieder"]
   end
 
 end
