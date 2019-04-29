@@ -9,12 +9,19 @@ class HistoryRolesController < ApplicationController
   def create
     role = build_role(find_or_create_group)
     person = role.person
-    authorize!(:create_history_member, role)
 
-    if role.save!
-      person.update_active_years
-      flash[:notice] = I18n.t('crud.create.flash.success', model: role.to_s)
-      redirect_to return_path(role.person)
+    if role_group_id || role_group_name
+      authorize!(:create_history_member, role)
+
+      if role.save!
+        person.update_active_years
+        flash[:notice] = I18n.t('crud.create.flash.success', model: role.to_s)
+        redirect_to return_path(role.person)
+      end
+    else
+      authorize!(:show, current_user) # make cancan happy
+      flash.now[:alert] = [role, role.group].flat_map { |m| m.errors.full_messages }.compact
+      render 'shared/update_flash'
     end
   end
 
@@ -55,11 +62,19 @@ class HistoryRolesController < ApplicationController
   end
 
   def find_or_create_group(scope = Group::Verein::VereinMitglieder)
-    scope.find_by(id: params[:role][:group_id]) ||
+    scope.find_by(id: role_group_id) ||
       scope.deleted.find_by(name: params[:role][:group][:name]) ||
       scope.create(parent: Group::Verein.hidden,
-                   name: params[:role][:group][:name],
+                   name: role_group_name,
                    deleted_at: Time.zone.now)
+  end
+
+  def role_group_id
+    params[:role][:group_id].presence
+  end
+
+  def role_group_name
+    params[:role][:group][:name].presence
   end
 
 end

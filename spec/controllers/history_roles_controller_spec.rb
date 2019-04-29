@@ -50,7 +50,7 @@ describe HistoryRolesController do
     person = role.person
     person.update_active_years
 
-    sign_in(root)
+    sign_in(people(:leader))
     expect do
       delete :destroy, group_id: role.group_id, id: role.id
     end.to change { role.person.roles.with_deleted.count }.by(-1)
