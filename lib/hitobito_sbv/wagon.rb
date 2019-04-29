@@ -39,7 +39,6 @@ module HitobitoSbv
       PeopleController.permitted_attrs += [:profession, :correspondence_language,
                                            :personal_data_usage]
 
-      RolesController.send :include, Sbv::RolesController
       Person::HistoryController.send :prepend, Sbv::Person::HistoryController
 
       ### helpers
