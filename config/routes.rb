@@ -27,6 +27,7 @@ Rails.application.routes.draw do
         post 'create_history_member'
       end
     end
+    resources :history_roles, only: [:destroy]
   end
 
 end

@@ -30,6 +30,11 @@ module Sbv::Person
     end
   end
 
+  def update_active_years
+    cache_active_years
+    save(validate: false)
+  end
+
   def cache_active_years
     self.active_role = active_member_role?
     self.active_years = calculate_active_years
