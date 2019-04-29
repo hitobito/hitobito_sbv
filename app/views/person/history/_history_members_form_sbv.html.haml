@@ -8,10 +8,9 @@
     .accordion-inner{ style: 'height: 450px; border: 0px'}
       %fieldset
         %legend
-        = standard_form(Role.new, { url: history_roles_path(group_id: @group.id) }) do |f|
+        = standard_form(Role.new, { url: group_history_roles_path(@group) }) do |f|
           .span6
             = f.hidden_field(:person_id, value: @person.id)
-            = f.hidden_field(:person, value: @person)
 
             = swappable_group_add_fieldset(:create_deleted_verein, :select_existing_verein) do
               = f.labeled(:verein, t('.verein')) do
