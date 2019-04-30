@@ -6,7 +6,7 @@ module Sbv::Sheet::Group
                 Sheet::Tab.new('group.suisa_tab',
                                :group_song_censuses_path,
                                if: lambda do |view, group|
-                                 !group.is_a?(Group::Verein) &&
+                                 !group.is_a?(Group::Verein) && group.layer? &&
                                    view.can?(:manage_song_census, group)
                                end),
                 Sheet::Tab.new('group.suisa_tab',
