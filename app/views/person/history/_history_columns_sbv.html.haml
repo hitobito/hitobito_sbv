@@ -1,2 +1,2 @@
-- action_col_destroy(t) do |role|
-  - group_history_role_path(@group, role.id)
+- action_col(t) do |role|
+  = link_action_destroy(group_history_role_path(@group, role.id)) if can?(:destroy, role)

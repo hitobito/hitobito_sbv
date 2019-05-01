@@ -26,7 +26,7 @@ class HistoryRolesController < ApplicationController
   end
 
   def destroy
-    role = Role.find(params[:id])
+    role = Role.with_deleted.find(params[:id])
     person = role.person
     authorize!(:destroy, role)
 
