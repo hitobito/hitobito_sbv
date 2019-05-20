@@ -7,6 +7,25 @@ require 'spec_helper'
 
 describe HistoryRolesController do
 
+  render_views
+  it 'POST#create handles invalid start date' do
+    sign_in(people(:admin))
+    leader = people(:leader)
+    group = groups(:mitglieder_mg_aarberg)
+
+    role_params = {
+      person_id: leader.id,
+      group_id: group.id,
+      start_date: 2019
+    }
+    expect do
+      post :create, group_id: group.id, role: role_params, format: :js
+      expect(response).to render_template('shared/update_flash')
+    end.not_to change { leader.roles.count }
+    expect(leader.reload.active_years).to be_nil
+    expect(flash.now[:alert]).to eq ['Eintritt ist kein gültiges Datum']
+  end
+
   it 'POST#create creates new role for existing VereinMitglieder group' do
     sign_in(people(:admin))
     leader = people(:leader)
