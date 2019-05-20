@@ -2,6 +2,7 @@ class AddActiveYearsToPeople < ActiveRecord::Migration
   def change
     add_column :people, :active_years, :integer
     add_column :people, :active_role, :boolean, default: false, null: false
+    Person.reset_column_information
     reversible do |dir|
       dir.up do
         say_with_time("Calculating active years") do
