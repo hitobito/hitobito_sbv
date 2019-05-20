@@ -6,7 +6,7 @@
 module Sbv::GroupDecorator
 
   def link_with_layer
-    model.parent == Group::Verein.hidden ? model.name : super
+    model.parent_id == Group::Verein.hidden.id ? model.name : super
   end
 
 end

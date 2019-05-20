@@ -73,7 +73,7 @@ class Group::Verein < ::Group
     verein = Group::Verein.deleted.find_by(name: HIDDEN_ROOT_VEREIN_NAME, parent: root)
     return verein if verein
 
-    # NOTE: we piggy-back on created_at to avoid default childresn to be created
+    # NOTE: we piggy-back on created_at to avoid default children to be created
     Group::Verein.create!(name: HIDDEN_ROOT_VEREIN_NAME,
                           parent: root,
                           created_at: 1.minute.ago,
