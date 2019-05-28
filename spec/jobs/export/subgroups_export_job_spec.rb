@@ -9,9 +9,11 @@ describe Export::SubgroupsExportJob do
     expect(names).to eq ["Group::Mitgliederverband", "Group::Regionalverband", "Group::Verein"]
   end
 
-  it 'only exports address columns' do
+  it ' exports address and special columns7' do
     csv = CSV.parse(subject.data, col_sep: ';', headers: true)
-    expect(csv.headers).to eq ["Name", "Gruppentyp", "Adresse", "PLZ", "Ort", "Land", "Gemeldete Mitglieder"]
+    expect(csv.headers).to eq ["Name", "Gruppentyp", "Mitgliederverband", "Kontaktperson", 
+                               "Adresse", "PLZ", "Ort", "Land", "Gemeldete Mitglieder", 
+                               "Besetzung", "Klasse", "Unterhaltungsmusik"]
   end
 
 end

@@ -50,6 +50,10 @@ module Sbv::Group
     end
   end
 
+  def mitgliederverband
+    self.ancestors.where(type: Group::Mitgliederverband).first
+  end
+
   # actual other parents, secondary and tertiary
   def secondary_parents
     [
