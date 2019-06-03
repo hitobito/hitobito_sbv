@@ -258,6 +258,7 @@ fr:
           zweite: 2ème classe
           dritte: 3ème classe
           vierte: 4ème classe
+        mitgliederverband: Association membre
       role:
         dates: Données
         created_at: Entrée

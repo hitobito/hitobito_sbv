@@ -285,6 +285,8 @@ it:
           zweite: 2a Classe
           dritte: 3a Classe
           vierte: 4a Classe
+        mitgliederverband: Membro dell'associazione
+
       role:
         dates: Dati
         created_at: Entrata
