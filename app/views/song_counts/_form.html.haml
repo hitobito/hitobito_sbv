@@ -1,7 +1,7 @@
 .row
-  .col.no-wrap.count
+  .col.no-wrap.count{style: "z-index: 10"}
     = song_counts_update_button(:dec)
-    = f.input_field :count, min: 0, size: 2, max: 30, 
+    = f.input_field :count, min: 0, size: 2, max: 30,
                     class: 'auto-size text-right', 
                     style: 'width: unset', 
                     autofocus: (f.object.id == params[:focus].to_i)
