@@ -17,6 +17,8 @@ rvm:
   - 2.4.0
 matrix:
   allow_failures:
+    - rvm: 2.1.7
+    - rvm: 2.3.1
     - rvm: 2.4.0
 install:
   - wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
