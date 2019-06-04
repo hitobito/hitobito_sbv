@@ -6,7 +6,7 @@
 class HistoryRolesController < ApplicationController
   skip_load_and_authorize_resource
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize,MethodLength
     role = build_role(find_or_create_group)
     person = role.person
 
