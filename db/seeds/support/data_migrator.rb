@@ -11,9 +11,12 @@ class DataMigrator
   def initialize(fn = nil)
     @import_date = Time.zone.now
 
-    @vereine = Group.pluck(:name, :id).to_h
     @mitglieder_ids = {}
     @musicgest = fn.to_s.match(/musicgest/)
+  end
+
+  def vereine
+    @vereine ||= Group.pluck(:name, :id).to_h
   end
 
   def musicgest?
@@ -31,7 +34,7 @@ class DataMigrator
     vereins_name = [vereins_name, vereins_ort].join(' ')
     verband_name = vereins_name
 
-    vereins_id = [@vereine[vereins_name], @vereine[verband_name]].compact.first
+    vereins_id = [vereine[vereins_name], vereine[verband_name]].compact.first
 
     return vereins_id if vereins_typ.nil?
 
