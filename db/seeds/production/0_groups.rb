@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2018-2019, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -10,6 +8,9 @@ require Rails.root.join('db', 'seeds', 'support', 'group_seeder')
 seeder = GroupSeeder.new
 mitglieder_verbaende = {}
 seed_ran = false
+
+Group::Generalverband.seed_once(:name, name: 'hitobito', parent_id: nil)
+superstructure = Group::Generalverband.first
 
 require 'csv'
 
@@ -22,12 +23,12 @@ if Wagons.find('sbv').root.join('db/seeds/production/verbaende.csv').exist?
   CSV.parse(Wagons.find('sbv').root.join('db/seeds/production/verbaende.csv').read, headers: true, converters: :numeric).each do |dachverband|
     next unless dachverband.to_hash['type'] == 'Group::Root'
 
-    Group::Root.seed_once(:name, dachverband.to_hash)
+    Group::Root.seed_once(:name, dachverband.to_hash, parent_id: superstructure.id)
 
     break # only import the first Dachverband...
   end
 
-  root = Group.roots.first
+  root = Group::Root.first
 
   CSV.parse(Wagons.find('sbv').root.join('db/seeds/production/verbaende.csv').read, headers: true, converters: :numeric).each do |verband|
     next if verband.to_hash['type'] == 'Group::Root' # we imported that one before
