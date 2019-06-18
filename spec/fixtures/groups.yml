@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -37,67 +37,74 @@
 #  reported_members            :integer
 #
 
-hauptgruppe_1:
+superstructure:
   parent:
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:hauptgruppe_1) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:superstructure) %>
   lft: 1
-  rgt: 88
+  rgt: 90
+  name: hitobito
+  type: Group::Generalverband
+hauptgruppe_1:
+  parent: superstructure
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:hauptgruppe_1) %>
+  lft: 2
+  rgt: 89
   name: Hauptgruppe
   type: Group::Root
 geschaeftsstelle_2:
   parent: hauptgruppe_1
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:hauptgruppe_1) %>
-  lft: 46
-  rgt: 47
+  lft: 47
+  rgt: 48
   name: Geschäftsstelle
   type: Group::RootGeschaeftsstelle
 verbandsleitung_3:
   parent: hauptgruppe_1
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:hauptgruppe_1) %>
-  lft: 84
-  rgt: 85
+  lft: 85
+  rgt: 86
   name: Verbandsleitung
   type: Group::RootVorstand
 musikkommission_4:
   parent: hauptgruppe_1
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:hauptgruppe_1) %>
-  lft: 50
-  rgt: 51
+  lft: 51
+  rgt: 52
   name: Musikkommission
   type: Group::RootMusikkommission
 kontakte_5:
   parent: hauptgruppe_1
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:hauptgruppe_1) %>
-  lft: 48
-  rgt: 49
+  lft: 49
+  rgt: 50
   name: Kontakte
   type: Group::RootKontakte
 ehrenmitglieder_6:
   parent: hauptgruppe_1
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:hauptgruppe_1) %>
-  lft: 44
-  rgt: 45
+  lft: 45
+  rgt: 46
   name: Ehrenmitglieder
   type: Group::RootEhrenmitglieder
 veteranen_7:
   parent: hauptgruppe_1
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:hauptgruppe_1) %>
-  lft: 86
-  rgt: 87
+  lft: 87
+  rgt: 88
   name: Veteranen
   type: Group::RootVeteranen
 bernischer_kantonal_musikverband_8:
   parent: hauptgruppe_1
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
-  lft: 2
-  rgt: 43
+  lft: 3
+  rgt: 44
   name: Bernischer Kantonal-Musikverband
   type: Group::Mitgliederverband
 geschaeftsstelle_9:
   parent: bernischer_kantonal_musikverband_8
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
-  lft: 3
-  rgt: 4
+  lft: 4
+  rgt: 5
   name: Geschäftsstelle
   type: Group::MitgliederverbandGeschaeftsstelle
   email: hosea@example.org
@@ -107,8 +114,8 @@ geschaeftsstelle_9:
 vorstand_10:
   parent: bernischer_kantonal_musikverband_8
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
-  lft: 41
-  rgt: 42
+  lft: 42
+  rgt: 43
   name: Vorstand
   type: Group::MitgliederverbandVorstand
   email: eulalia@example.com
@@ -118,8 +125,8 @@ vorstand_10:
 kontakte_11:
   parent: bernischer_kantonal_musikverband_8
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
-  lft: 5
-  rgt: 6
+  lft: 6
+  rgt: 7
   name: Kontakte
   type: Group::MitgliederverbandKontakte
   email: annamarie@example.org
@@ -129,8 +136,8 @@ kontakte_11:
 musikkommission_12:
   parent: bernischer_kantonal_musikverband_8
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
-  lft: 27
-  rgt: 28
+  lft: 28
+  rgt: 29
   name: Musikkommission
   type: Group::MitgliederverbandMusikkommission
   email: lambert@example.com
@@ -140,8 +147,8 @@ musikkommission_12:
 veteranen_13:
   parent: bernischer_kantonal_musikverband_8
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
-  lft: 39
-  rgt: 40
+  lft: 40
+  rgt: 41
   name: Veteranen
   type: Group::MitgliederverbandVeteranen
   email: duncan_lang@example.org
@@ -151,8 +158,8 @@ veteranen_13:
 mittleres_seeland_14:
   parent: bernischer_kantonal_musikverband_8
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:mittleres_seeland_14) %>
-  lft: 7
-  rgt: 26
+  lft: 8
+  rgt: 27
   name: Mittleres Seeland
   type: Group::Regionalverband
   address: Schellingstr. 8
@@ -161,36 +168,36 @@ mittleres_seeland_14:
 geschaeftsstelle_15:
   parent: mittleres_seeland_14
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:mittleres_seeland_14) %>
-  lft: 8
-  rgt: 9
+  lft: 9
+  rgt: 10
   name: Geschäftsstelle
   type: Group::RegionalverbandGeschaeftsstelle
 vorstand_16:
   parent: mittleres_seeland_14
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:mittleres_seeland_14) %>
-  lft: 24
-  rgt: 25
+  lft: 25
+  rgt: 26
   name: Vorstand
   type: Group::RegionalverbandVorstand
 kontakte_17:
   parent: mittleres_seeland_14
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:mittleres_seeland_14) %>
-  lft: 10
-  rgt: 11
+  lft: 11
+  rgt: 12
   name: Kontakte
   type: Group::RegionalverbandKontakte
 musikkommission_18:
   parent: mittleres_seeland_14
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:mittleres_seeland_14) %>
-  lft: 22
-  rgt: 23
+  lft: 23
+  rgt: 24
   name: Musikkommission
   type: Group::RegionalverbandMusikkommission
 musikgesellschaft_aarberg:
   parent: mittleres_seeland_14
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
-  lft: 12
-  rgt: 21
+  lft: 13
+  rgt: 22
   name: Musikgesellschaft Aarberg
   type: Group::Verein
   address: Bielertstr. 91c
@@ -199,78 +206,78 @@ musikgesellschaft_aarberg:
 vorstand_20:
   parent: musikgesellschaft_aarberg
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
-  lft: 19
-  rgt: 20
+  lft: 20
+  rgt: 21
   name: Vorstand
   type: Group::VereinVorstand
 kontakte_21:
   parent: musikgesellschaft_aarberg
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
-  lft: 13
-  rgt: 14
+  lft: 14
+  rgt: 15
   name: Kontakte
   type: Group::VereinKontakte
 mitglieder_mg_aarberg:
   parent: musikgesellschaft_aarberg
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
-  lft: 15
-  rgt: 16
+  lft: 16
+  rgt: 17
   name: Mitglieder
   type: Group::VereinMitglieder
 musikkommission_23:
   parent: musikgesellschaft_aarberg
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
-  lft: 17
-  rgt: 18
+  lft: 18
+  rgt: 19
   name: Musikkommission
   type: Group::VereinMusikkommission
 societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24:
   parent: hauptgruppe_1
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24) %>
-  lft: 52
-  rgt: 83
+  lft: 53
+  rgt: 84
   name: Société cantonale des musiques fribourgeoises / Freiburger Kantonal-Musikverband
   type: Group::Mitgliederverband
 geschaeftsstelle_25:
   parent: societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24) %>
-  lft: 73
-  rgt: 74
+  lft: 74
+  rgt: 75
   name: Geschäftsstelle
   type: Group::MitgliederverbandGeschaeftsstelle
 vorstand_26:
   parent: societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24) %>
-  lft: 81
-  rgt: 82
+  lft: 82
+  rgt: 83
   name: Vorstand
   type: Group::MitgliederverbandVorstand
 kontakte_27:
   parent: societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24) %>
-  lft: 75
-  rgt: 76
+  lft: 76
+  rgt: 77
   name: Kontakte
   type: Group::MitgliederverbandKontakte
 musikkommission_28:
   parent: societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24) %>
-  lft: 77
-  rgt: 78
+  lft: 78
+  rgt: 79
   name: Musikkommission
   type: Group::MitgliederverbandMusikkommission
 veteranen_29:
   parent: societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24) %>
-  lft: 79
-  rgt: 80
+  lft: 80
+  rgt: 81
   name: Veteranen
   type: Group::MitgliederverbandVeteranen
 alt_thiesdorf_30:
   parent: societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:alt_thiesdorf_30) %>
-  lft: 53
-  rgt: 72
+  lft: 54
+  rgt: 73
   name: Alt Thiesdorf
   type: Group::Regionalverband
   address: Karl-Ulitzka-Str. 23
@@ -279,36 +286,36 @@ alt_thiesdorf_30:
 geschaeftsstelle_31:
   parent: alt_thiesdorf_30
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:alt_thiesdorf_30) %>
-  lft: 54
-  rgt: 55
+  lft: 55
+  rgt: 56
   name: Geschäftsstelle
   type: Group::RegionalverbandGeschaeftsstelle
 vorstand_32:
   parent: alt_thiesdorf_30
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:alt_thiesdorf_30) %>
-  lft: 70
-  rgt: 71
+  lft: 71
+  rgt: 72
   name: Vorstand
   type: Group::RegionalverbandVorstand
 kontakte_33:
   parent: alt_thiesdorf_30
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:alt_thiesdorf_30) %>
-  lft: 56
-  rgt: 57
+  lft: 57
+  rgt: 58
   name: Kontakte
   type: Group::RegionalverbandKontakte
 musikkommission_34:
   parent: alt_thiesdorf_30
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:alt_thiesdorf_30) %>
-  lft: 68
-  rgt: 69
+  lft: 69
+  rgt: 70
   name: Musikkommission
   type: Group::RegionalverbandMusikkommission
 musikgesellschaft_alterswil:
   parent: alt_thiesdorf_30
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
-  lft: 58
-  rgt: 67
+  lft: 59
+  rgt: 68
   name: Musikgesellschaft Alterswil
   type: Group::Verein
   address: Am Junkernkamp 2
@@ -317,36 +324,36 @@ musikgesellschaft_alterswil:
 vorstand_36:
   parent: musikgesellschaft_alterswil
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
-  lft: 65
-  rgt: 66
+  lft: 66
+  rgt: 67
   name: Vorstand
   type: Group::VereinVorstand
 kontakte_37:
   parent: musikgesellschaft_alterswil
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
-  lft: 59
-  rgt: 60
+  lft: 60
+  rgt: 61
   name: Kontakte
   type: Group::VereinKontakte
 mitglieder_38:
   parent: musikgesellschaft_alterswil
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
-  lft: 61
-  rgt: 62
+  lft: 62
+  rgt: 63
   name: Mitglieder
   type: Group::VereinMitglieder
 musikkommission_39:
   parent: musikgesellschaft_alterswil
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
-  lft: 63
-  rgt: 64
+  lft: 64
+  rgt: 65
   name: Musikkommission
   type: Group::VereinMusikkommission
 musikverband_hastdutoene:
   parent: bernischer_kantonal_musikverband_8
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
-  lft: 29
-  rgt: 38
+  lft: 30
+  rgt: 39
   name: Musikverband HastDuTöne
   type: Group::Verein
   address: Friedrich-Engels-Str. 98c
@@ -355,28 +362,28 @@ musikverband_hastdutoene:
 vorstand_41:
   parent: musikverband_hastdutoene
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
-  lft: 36
-  rgt: 37
+  lft: 37
+  rgt: 38
   name: Vorstand
   type: Group::VereinVorstand
 kontakte_42:
   parent: musikverband_hastdutoene
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
-  lft: 30
-  rgt: 31
+  lft: 31
+  rgt: 32
   name: Kontakte
   type: Group::VereinKontakte
 mitglieder_43:
   parent: musikverband_hastdutoene
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
-  lft: 32
-  rgt: 33
+  lft: 33
+  rgt: 34
   name: Mitglieder
   type: Group::VereinMitglieder
 musikkommission_44:
   parent: musikverband_hastdutoene
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
-  lft: 34
-  rgt: 35
+  lft: 35
+  rgt: 36
   name: Musikkommission
   type: Group::VereinMusikkommission
