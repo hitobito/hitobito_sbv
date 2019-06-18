@@ -6,7 +6,7 @@
 module Sbv::Export::SubgroupsExportJob
 
   def initialize(user_id, group, options)
-    super(user_id, group, options)
+    super(user_id, group.id, options)
     @exporter = Export::Tabular::Groups::AddressList
   end
 
