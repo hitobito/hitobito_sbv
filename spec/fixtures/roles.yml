@@ -24,8 +24,8 @@
 
 admin:
   person: admin
-  group: hauptgruppe_1
-  type: Group::Root::Admin
+  group: superstructure
+  type: Group::Generalverband::Admin
 
 leader:
   person: leader
