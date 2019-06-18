@@ -7,7 +7,7 @@ module Sbv::Group
   extend ActiveSupport::Concern
 
   included do # rubocop:disable Metrics/BlockLength
-    root_types Group::Root
+    root_types Group::Generalverband
 
     include I18nSettable
     include I18nEnums
