@@ -17,8 +17,8 @@ describe SongAbility do
   let(:group)   { groups(:bernischer_kantonal_musikverband_8) }
 
   [
-  %w(Group::Verein::Admin musikgesellschaft_alterswil),
-  %w(Group::VereinMitglieder::Mitglied mitglieder_43)
+    %w(Group::Verein::Admin musikgesellschaft_alterswil),
+    %w(Group::VereinMitglieder::Mitglied mitglieder_43)
   ].each do |role, group|
     context role do
     let(:role) { Fabricate(role.to_sym, group: groups(group)) }
