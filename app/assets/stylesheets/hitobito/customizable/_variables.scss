@@ -3,14 +3,6 @@
 //  or later. See the COPYING file at the top-level directory or at
 //  https://github.com/hitobito/hitobito_sbv.
 
-$logoUrl:               "logo-sbv.png"; // put under app/assets/images
-$logoWidth:             200px;      // has to bet set as the logo is a background image
-$logoHeight:            60px;       // will also set the minimal width of the navigation
-                                    // must be set in pixel
-
-// optional backgroundcolor, creates a box around the logo, if changed from 'none'
-$logoBackgroundColor:   white;    
-
 
 $bsv_color_a:           #C00000;
 $bsv_color_b:           #FF424B;

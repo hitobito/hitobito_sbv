@@ -6,6 +6,12 @@
 # Settings relevant for the hitobito_sbv wagon
 # Overrides settings from the main application
 application:
+  logo:
+    image: logo-sbv.png
+    width: 200
+    height: 60
+    background_color: white
+
   languages:
     de: Deutsch
     fr: Français
