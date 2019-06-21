@@ -10,6 +10,12 @@ BESETZUNGEN_MEMO = { 'bb' => 'brass_band',
                      'f/b' => 'fanfare_benelux',
                      't/p' => 'fanfare_mixte' }.freeze
 
+Group::Generalverband.seed_once(:name, name: 'hitobito', parent_id: nil)
+
+superstructure = Group::Generalverband.first
+
+Group::Root.seed_once(:parent_id, name: 'SBV', parent_id: superstructure.id)
+
 seeder = GroupSeeder.new
 root = Group::Root.order(:id).first
 srand(42)
