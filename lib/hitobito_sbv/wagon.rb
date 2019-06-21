@@ -17,7 +17,7 @@ module HitobitoSbv
       #{config.root}/app/jobs
     ]
 
-    config.to_prepare do
+    config.to_prepare do # rubocop:disable Metrics/BlockLength
       # extend application classes here
       # models
       Group.send        :include, Sbv::Group
@@ -34,12 +34,13 @@ module HitobitoSbv
                                            :correspondence_language, :besetzung,
                                            :klasse, :unterhaltungsmusik,
                                            :secondary_parent_id, :tertiary_parent_id,
-                                           :subventionen, :reported_members]
+                                           :subventionen, :reported_members, :hostname]
 
       PeopleController.permitted_attrs += [:profession, :correspondence_language,
                                            :personal_data_usage]
 
       Person::HistoryController.send :prepend, Sbv::Person::HistoryController
+      DeviseController.send :include, HostnamedGroups
 
       ### helpers
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }

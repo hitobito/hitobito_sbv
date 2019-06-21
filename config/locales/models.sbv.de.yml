@@ -266,6 +266,7 @@ de:
         secondary_parent_groups: weitere Gruppenzugehörigkeiten
         secondary_parent_id: sekundär
         tertiary_parent_id: weitere
+        hostname: Hostname
       role:
         dates: Daten
         created_at: Eintritt
