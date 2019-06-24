@@ -4,3 +4,4 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 Person.reset_column_information
+Group.reset_column_information
