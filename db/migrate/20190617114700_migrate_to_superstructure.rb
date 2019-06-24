@@ -3,10 +3,12 @@ class MigrateToSuperstructure < ActiveRecord::Migration
     admin_layer = nil
 
     say_with_time 'Create new admin-group' do
-      admin_layer = Group.create(
+      admin_layer = Group.new(
         name: 'hitobito',
         type: 'Group::Generalverband',
       )
+      admin_layer.save(validate: false)
+      admin_layer.reload
     end
 
     say_with_time 'Move current root to new admin-group' do
