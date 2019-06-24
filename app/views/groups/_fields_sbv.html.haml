@@ -21,3 +21,7 @@
   = field_set_tag Group.human_attribute_name(:secondary_parent_groups) do
     = f.labeled_collection_select :secondary_parent_id, Group.secondary_parents, :id, :name, include_blank: true
     = f.labeled_collection_select :tertiary_parent_id, Group.secondary_parents, :id, :name, include_blank: true
+
+- if entry.is_a?(Group::Root)
+  = field_set_tag do
+    = f.labeled_input_fields :hostname

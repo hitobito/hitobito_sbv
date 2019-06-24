@@ -26,6 +26,7 @@ module Sbv::Group
 
     validates :reported_members,
               numericality: { greater_than_or_equal_to: 0 }, if: :reported_members
+    validates :hostname, uniqueness: true, allow_blank: true
 
     belongs_to :secondary_parent, class_name: 'Group'
     belongs_to :tertiary_parent, class_name: 'Group'

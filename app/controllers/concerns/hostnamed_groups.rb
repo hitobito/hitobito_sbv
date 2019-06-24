@@ -3,5 +3,14 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-Person.reset_column_information
-Group.reset_column_information
+module HostnamedGroups
+  extend ActiveSupport::Concern
+
+  included do
+    prepend_before_action :determine_group_by_hostname
+  end
+
+  def determine_group_by_hostname
+    @group ||= Group.where(hostname: request.host).first
+  end
+end
