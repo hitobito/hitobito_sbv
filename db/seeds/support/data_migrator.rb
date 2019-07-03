@@ -23,9 +23,9 @@ class DataMigrator
     @musicgest
   end
 
-  def parse_date(string, default: @import_date)
+  def parse_date(string, default: @import_date, lower_limit: 1900)
     date = Date.parse(string)
-    date.to_s if date.year > 1900
+    date.to_s if date.year > lower_limit
   rescue ArgumentError, TypeError
     default
   end
@@ -53,14 +53,18 @@ class DataMigrator
     Group.find(vereins_id).children.where(name: vereins_typ).pluck(:id).first
   end
 
-  def load_person(person_data)
+  def load_person(person_data, birthday_default: nil, lower_limit: 1900)
     if person_data['email'].present?
       Person.find_by(email: person_data['email'])
     else
       Person.find_by(
         first_name: person_data['first_name'],
         last_name:  person_data['last_name'],
-        birthday:   parse_date(person_data['birthday'], default: nil),
+        birthday:   parse_date(
+          person_data['birthday'],
+          default: birthday_default,
+          lower_limit: lower_limit
+        ),
       )
     end
   end
