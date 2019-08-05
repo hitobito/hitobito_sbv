@@ -43,6 +43,23 @@ namespace :migration do
     sh 'git checkout db/seeds/groups.rb'
     sh 'git clean -f'
   end
+
+  task map_primary_contact: [:environment] do
+    potential_primary_contacts = %w(
+      Group::Mitgliederverband::Admin
+      Group::Regionalverband::Admin
+      Group::Verein::Admin
+    )
+
+    Group.transaction do
+      roles = Role.where(type: potential_primary_contacts)
+                  .joins(:group).where('groups.contact_id IS NULL')
+
+      roles.each do |role|
+        role.group.update_attribute(:contact_id, role.person_id) # rubocop:disable Rails/SkipsModelValidations
+      end
+    end
+  end
 end
 
 directory 'db/seeds/production'
