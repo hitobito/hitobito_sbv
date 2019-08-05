@@ -27,7 +27,7 @@ namespace :import do
         next
       end
 
-      vereins_id = migrator.mitglieder_verein(row['Hitobito-Id'], %w(Mitglieder Membres))
+      vereins_id = migrator.mitglieder_verein(row['Hitobito-Id'], %w(Mitglieder Membres Membre))
       if vereins_id.nil?
         puts "Mitgliederverein #{row['Hitobito-Id']} / #{row['Verein']} nicht gefunden."
         next
@@ -40,6 +40,7 @@ namespace :import do
       if entry_date.nil? && exit_date.nil?
         puts 'Fehler im Eintritts- oder Austrittsjahr von ' \
              "Person '#{person_data.values.compact.join(', ')}'."
+        next
       end
 
       Role.new(
