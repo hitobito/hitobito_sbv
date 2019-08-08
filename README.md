@@ -119,7 +119,25 @@ of the Schweizer Blasmusikverband.
 (Output of rake app:hitobito:roles)
 
 
+## weiteren Musikerverband hinzufügen
 
+Die Gruppenstruktur ist darauf ausgelegt, mehrere Dachverbände in einer
+Superstruktur (dem Generalverband) zu organisieren.
 
+Um einen weiteren Verband von Musikern hinzuzufügen, sind jedoch ein paar
+manuelle Schritte nötig, die nicht alle in hitobito direkt erledigt werden
+können:
 
+* neue Dachverband-Gruppe in hitobito Generalverband anlegen
+  * Domain auf Dachverband-Gruppe eintragen
+  * Logo für Musikerverband hochladen
+* DNS-Eintrag machen, um Domain auf SBV-Hitobito zeigen zu lassen
+  * Verantwortlichkeit: Domaininhaber
+* OpenShift-Route anlegen, um Domain von SBV-Hitobito verarbeiten zu lassen
+  * Route ins kustomize-git aufnehmen
+  * Verantwortlichkeit: Ops-Team Hitobito
+* Eintrag in Mailkonfiguration machen, um mail an neue Domain in das richtige Postfach zu schieben
+  * analog dem bestehenden catch-call regexp für SBV:
+  * `/(.+)@hitobito\.domain\.tld/ mailaccount+$1@maildomain.tld`
+  * Verantwortlichkeit: Sys-Team Hitobito
 
