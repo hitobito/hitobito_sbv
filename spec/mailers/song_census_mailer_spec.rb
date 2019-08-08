@@ -26,6 +26,7 @@ describe SongCensusMailer do
       its(:to)      { should == [person.email] }
       its(:body)    { should =~ /Hallo Suisa Boy/ }
       its(:body)    { should =~ /die Meldeliste für den Verein 'Musikgesellschaft Alterswil'/ }
+      its(:body)    { should =~ /Dein Hauptgruppe/ }
     end
 
   end

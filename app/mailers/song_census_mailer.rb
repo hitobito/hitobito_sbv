@@ -7,17 +7,30 @@ class SongCensusMailer < ApplicationMailer
   SONG_CENSUS_REMINDER = 'cong_census_reminder'.freeze
 
   def reminder(recipient, verein)
-    custom_content_mail(recipient.email, SONG_CENSUS_REMINDER, mail_values(recipient, verein))
+    @recipient = recipient
+    @verein    = verein
+    compose(recipient, SONG_CENSUS_REMINDER)
   end
 
   private
 
-  def mail_values(recipient, verein)
-    {
-      'recipient-name' => recipient.last_name,
-      'recipient-first-name' => recipient.first_name,
-      'verein' => verein.name,
-      'census-url' => link_to(group_song_counts_url(verein.id))
-    }
+  def placeholder_dachverband
+    @verein.self_and_ancestors.find_by(type: Group::Root.sti_name).to_s
+  end
+
+  def placeholder_recipient_name
+    @recipient.last_name
+  end
+
+  def placeholder_recipient_first_name
+    @recipient.first_name
+  end
+
+  def placeholder_verein
+    @verein.name
+  end
+
+  def placeholder_census_url
+    link_to(group_song_counts_url(@verein.id))
   end
 end

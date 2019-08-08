@@ -54,6 +54,9 @@ module HitobitoSbv
       ### jobs
       Export::SubgroupsExportJob.send :prepend, Sbv::Export::SubgroupsExportJob
 
+      ### mailers
+      Person::LoginMailer.send :prepend, Sbv::Person::LoginMailer
+
       ### domain
       Export::Tabular::Groups::Row.send :include, Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.send :include, Sbv::Export::Tabular::Groups::List
