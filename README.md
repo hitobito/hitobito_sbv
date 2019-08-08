@@ -6,9 +6,12 @@ of the Schweizer Blasmusikverband.
 
 ## Organization Hierarchy
 
+* Generalverband
+  * Generalverband
+    * Administrator: [:layer_and_below_full, :admin, :impersonation, :finance]
 * Dachverband
   * Dachverband
-    * Administrator: [:layer_and_below_full, :admin, :impersonation, :finance, :song_census]
+    * Administrator: [:group_and_below_full, :admin, :impersonation, :finance, :song_census]
     * Verantwortlicher SUISA: [:group_read, :song_census]
   * Geschäftsstelle
     * Geschäftsführung: [:layer_and_below_full, :contact_data, :impersonation]
