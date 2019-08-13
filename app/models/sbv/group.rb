@@ -31,6 +31,8 @@ module Sbv::Group
     belongs_to :secondary_parent, class_name: 'Group'
     belongs_to :tertiary_parent, class_name: 'Group'
 
+    before_validation :nullify_blank_hostname
+
     used_attributes << :secondary_parent_id << :tertiary_parent_id
 
     class << self
@@ -74,6 +76,10 @@ module Sbv::Group
 
   def hostname_from_hierarchy
     self_and_ancestors.find { |g| g.hostname.present? }.try(:hostname).presence
+  end
+
+  def nullify_blank_hostname
+    self.hostname = nil if hostname.blank?
   end
 
 end

@@ -12,6 +12,11 @@ describe Group do
   include_examples 'group types'
   let(:group) { groups(:kontakte_5) }
 
+  it 'nullifies blank hostname' do
+    expect(group.update(hostname: ''))
+    expect(group.reload.hostname).to eq nil
+  end
+
   context '#hostname_from_hierarchy' do
     subject { group.hostname_from_hierarchy }
 
