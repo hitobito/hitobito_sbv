@@ -25,6 +25,7 @@ module HitobitoSbv
       Person.send       :include, Sbv::Person
       Role.send         :include, Sbv::Role
       Subscription.send :prepend, Sbv::Subscription
+      MailingList.send  :prepend, Sbv::MailingList
 
       ### abilities
       RoleAbility.send :include, Sbv::RoleAbility
@@ -56,11 +57,14 @@ module HitobitoSbv
 
       ### mailers
       Person::LoginMailer.send :prepend, Sbv::Person::LoginMailer
+      ApplicationMailer.send   :prepend, Sbv::ApplicationMailer
 
       ### domain
       Export::Tabular::Groups::Row.send :include, Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.send :include, Sbv::Export::Tabular::Groups::List
       Export::Tabular::People::PeopleFull.send :include, Sbv::Export::Tabular::People::PeopleFull
+
+      MailRelay::Lists.send :prepend, Sbv::MailRelay::Lists
 
       # load this class after all abilities have been defined
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census

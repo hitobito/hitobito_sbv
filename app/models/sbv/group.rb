@@ -72,4 +72,8 @@ module Sbv::Group
     Group::VereinMitglieder::Mitglied.joins(:group).where(groups: { layer_group_id: id }).count
   end
 
+  def hostname_from_hierarchy
+    self_and_ancestors.find { |g| g.hostname.present? }.try(:hostname).presence
+  end
+
 end

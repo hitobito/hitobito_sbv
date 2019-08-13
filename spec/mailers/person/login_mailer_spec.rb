@@ -7,7 +7,8 @@ require 'spec_helper'
 
 describe Person::LoginMailer do
 
-  it 'populates dachverband placeholder' do
+  before do
+
     content = CustomContent.new(key: Person::LoginMailer::CONTENT_LOGIN,
                                 placeholders_required: 'login-url',
                                 placeholders_optional: 'recipient-name, sender-name, dachverband')
@@ -17,16 +18,32 @@ describe Person::LoginMailer do
                                        locale: 'de',
                                        label: 'Login senden',
                                        subject: "Willkommen bei #{Settings.application.name}",
-                                       body: "Hallo {recipient-name}<br/><br/>Dein {dachverband}")
+                                       body: body)
 
-
-
-
-    mail = Person::LoginMailer.login(people(:member),
-                                     people(:leader),
-                                     'abcdef')
-
-    expect(mail.body).to match /Dein Hauptgruppe/
   end
 
+  let(:mail) { Person::LoginMailer.login(people(:member), people(:leader), 'abcdef') }
+  let(:body) { 'Hallo' }
+
+  context 'placeholders' do
+    let(:body) { "Hallo {recipient-name}<br/><br/>Dein {dachverband}" }
+
+    subject { mail.body }
+
+    it 'populates dachverband placeholder' do
+      expect(subject).to match /Dein Hauptgruppe/
+    end
+  end
+
+  context '#return_path' do
+    subject { mail.return_path.split('@').last }
+    it 'defaults to localhost domain' do
+      expect(subject).to eq 'localhost'
+    end
+
+    it 'reads hostname from top_level group' do
+      people(:leader).primary_group.update(hostname: 'example.com')
+      expect(subject).to eq 'example.com'
+    end
+  end
 end

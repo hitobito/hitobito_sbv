@@ -1,33 +1,29 @@
-# encoding: utf-8
-
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
 require 'spec_helper'
 
-describe Group do
+describe MailingList do
 
-  include_examples 'group types'
   let(:group) { groups(:kontakte_5) }
 
-  context '#hostname_from_hierarchy' do
-    subject { group.hostname_from_hierarchy }
+  context '#mail_domain' do
+    subject { MailingList.new(group: group).mail_domain }
 
-    it '#hostname_from_hierarchy might be nil' do
-      expect(subject).to be_nil
+    it '#mail_domain falls back to settings' do
+      expect(subject).to eq Settings.email.list_domain
     end
 
-    it '#hostname_from_hierarchy might read hostname from group' do
+    it '#mail_domain might read hostname from group' do
       group.update(hostname: 'example.com')
       expect(subject).to eq 'example.com'
     end
 
-    it '#hostname_from_hierarchy might read hostname from hierarchy' do
+    it '#mail_domain might read hostname from hierarchy' do
       group.parent.update(hostname: 'example.com')
       expect(subject).to eq 'example.com'
     end
   end
-
 end
