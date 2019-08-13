@@ -15,7 +15,8 @@ class AddPlaceholdersToSelectedCustomContents < ActiveRecord::Migration
 
   def each_applicable_custom_content
     [SongCensusMailer::SONG_CENSUS_REMINDER, Person::LoginMailer::CONTENT_LOGIN ].each do |key|
-      yield CustomContent.find_by(key: key)
+      custom_content = CustomContent.find_by(key: key)
+      yield custom_content if custom_content
     end
   end
 end
