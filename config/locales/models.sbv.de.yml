@@ -3,9 +3,6 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-#  You can use YAML anchors to avoid duplication
-#  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
-
 de:
   activerecord:
     models:
@@ -19,22 +16,22 @@ de:
       group/root:
         one: Dachverband
         other: Dachverbände
-      group/root_geschaeftsstelle: &office
+      group/root_geschaeftsstelle:
         one: Geschäftsstelle
         other: Geschäftsstellen
       group/root_vorstand:
         one: Verbandsleitung
         other: Verbandsleitung
-      group/root_musikkommission: &musikkommission
+      group/root_musikkommission:
         one: Musikkommission
         other: Musikkommissionen
-      group/root_arbeitsgruppe: &arbeitsgruppe
+      group/root_arbeitsgruppe:
         one: Arbeitsgruppe
         other: Arbeitsgruppen
-      group/root_ehrenmitglieder: &ehrenmitglieder
+      group/root_ehrenmitglieder:
         one: Ehrenmitglieder
         other: Ehrenmitglieder
-      group/root_veteranen: &veteranen
+      group/root_veteranen:
         one: Veteranen
         other: Veteranen
       group/root_veteranen/veteran:
@@ -46,10 +43,10 @@ de:
       group/root_veteranen/cism_veteran:
         one: CISM Veteran
         other: CISM Veteranen
-      group/root_kontakte: &kontakte
+      group/root_kontakte:
         one: Kontakte
         other: Kontakte
-      group/root/suisa_admin: &suisa_verantwortlicher
+      group/root/suisa_admin:
         one: Verantwortlicher SUISA
         other: Verantworliche SUISA
 
@@ -57,18 +54,23 @@ de:
         one: Mitgliederverband
         other: Mitgliederverbände
       group/mitgliederverband_geschaeftsstelle:
-        *office
-      group/mitgliederverband_vorstand: &vorstand
+        one: Geschäftsstelle
+        other: Geschäftsstellen
+      group/mitgliederverband_vorstand:
         one: Vorstand
         other: Vorstände
       group/mitgliederverband_musikkommission:
-        *musikkommission
+        one: Musikkommission
+        other: Musikkommissionen
       group/mitgliederverband_arbeitsgruppe:
-        *arbeitsgruppe
+        one: Arbeitsgruppe
+        other: Arbeitsgruppen
       group/mitgliederverband_ehrenmitglieder:
-        *ehrenmitglieder
+        one: Ehrenmitglieder
+        other: Ehrenmitglieder
       group/mitgliederverband_veteranen:
-        *veteranen
+        one: Veteranen
+        other: Veteranen
       group/mitgliederverband_veteranen/veteran:
         one: Kantonaler Veteran
         other: Kantonale Veteranen
@@ -76,48 +78,62 @@ de:
         one: Kantonaler Ehrenveteran
         other: Kantonale Ehrenveteranen
       group/mitgliederverband_kontakte:
-        *kontakte
+        one: Kontakte
+        other: Kontakte
       group/mitgliederverband/suisa_admin:
-        *suisa_verantwortlicher
+        one: Verantwortlicher SUISA
+        other: Verantworliche SUISA
 
 
       group/regionalverband:
         one: Regionalverband
         other: Regionalverbände
       group/regionalverband_geschaeftsstelle:
-        *office
+        one: Geschäftsstelle
+        other: Geschäftsstellen
       group/regionalverband_vorstand:
-        *vorstand
+        one: Vorstand
+        other: Vorstände
       group/regionalverband_musikkommission:
-        *musikkommission
+        one: Musikkommission
+        other: Musikkommissionen
       group/regionalverband_arbeitsgruppe:
-        *arbeitsgruppe
+        one: Arbeitsgruppe
+        other: Arbeitsgruppen
       group/regionalverband_ehrenmitglieder:
-        *ehrenmitglieder
+        one: Ehrenmitglieder
+        other: Ehrenmitglieder
       group/regionalverband_kontakte:
-        *kontakte
+        one: Kontakte
+        other: Kontakte
       group/regionalverband/suisa_admin:
-        *suisa_verantwortlicher
+        one: Verantwortlicher SUISA
+        other: Verantworliche SUISA
 
       group/verein:
         one: Verein
         other: Vereine
       group/verein_vorstand:
-        *vorstand
+        one: Vorstand
+        other: Vorstände
       group/verein_musikkommission:
-        *musikkommission
+        one: Musikkommission
+        other: Musikkommissionen
       group/verein_arbeitsgruppe:
-        *arbeitsgruppe
+        one: Arbeitsgruppe
+        other: Arbeitsgruppen
       group/verein_mitglieder:
         one: Mitglieder
         oter: Mitglieder
       group/verein_kontakte:
-        *kontakte
+        one: Kontakte
+        other: Kontakte
       group/verein/conductor:
         one: DirigentIn
         other: DirigentInnen
       group/verein/suisa_admin:
-        *suisa_verantwortlicher
+        one: Verantwortlicher SUISA
+        other: Verantworliche SUISA
 
       ### ROLES FOR ALL LAYERS
 
@@ -151,10 +167,10 @@ de:
       role/vorstand_finanzchef:
         one: Finanzchef
         other: Finanzchefs
-      role/vorstand_mitglied: &mitglied
+      role/vorstand_mitglied:
         one: Mitglied
         other: Mitglieder
-      role/vorstand_praesident: &praesident
+      role/vorstand_praesident:
         one: Präsident
         other: Präsidenten
       role/vorstand_vize_praesident:
@@ -170,9 +186,11 @@ de:
       #### Musikkommission Roles
 
       role/musikkommission_praesident:
-        *praesident
+        one: Präsident
+        other: Präsidenten
       role/musikkommission_mitglied:
-        *mitglied
+        one: Mitglied
+        other: Mitglieder
 
       #### Arbeitsgruppen Roles
 
@@ -180,7 +198,8 @@ de:
         one: Leitung
         other: Leitung
       role/arbeitsgruppe_mitglied:
-        *mitglied
+        one: Mitglied
+        other: Mitglieder
 
       #### Ehrenmitglieder
 
@@ -198,7 +217,8 @@ de:
       #### Mitglieder Roles
 
       role/mitglieder_mitglied:
-        *mitglied
+        one: Mitglied
+        other: Mitglieder
       role/mitglieder_passivmitglied:
         one: Passivmitglied
         other: Passivmitglieder
@@ -225,7 +245,7 @@ de:
 
     attributes:
       person:
-        correspondence_language: &correspondence_language Korrespondenzsprache
+        correspondence_language: Korrespondenzsprache
         profession: Beruf
         active_years: Aktivjahre aktuell
         prognostic_active_years: Aktivjahre Prognose
@@ -233,13 +253,13 @@ de:
       group:
         vereinssitz: Vereinssitz
         founding_year: Gründungsjahr
-        klasse: &klasse Klasse
-        klasse_value: *klasse
-        besetzung: &besetzung Besetzung
-        besetzung_value: *besetzung
-        unterhaltungsmusik: &unterhaltungsmusik Unterhaltungsmusik
-        unterhaltungsmusik_value: *unterhaltungsmusik
-        correspondence_language: *correspondence_language
+        klasse: Klasse
+        klasse_value: Klasse
+        besetzung: Besetzung
+        besetzung_value: Besetzung
+        unterhaltungsmusik: Unterhaltungsmusik
+        unterhaltungsmusik_value: Unterhaltungsmusik
+        correspondence_language: Korrespondenzsprache
         subventionen: Subventionen
         reported_members: Gemeldete Mitglieder
         recognized_members: Erfasste Mitglieder
@@ -251,12 +271,12 @@ de:
           fanfare_mixte: Fanfare Mixte
           tambour_percussion: Tambouren und Perkussion
         unterhaltungsmusik_stufen:
-          _nil: &unbekannt unbekannt
+          _nil: unbekannt
           oberstufe: Oberstufe
           mittelstufe: Mittelstufe
           unterstufe: Unterstufe
         klassen:
-          _nil: *unbekannt
+          _nil: unbekannt
           hoechste: Höchstklasse
           erste: 1. Klasse
           zweite: 2. Klasse
@@ -284,8 +304,8 @@ de:
         suisa_id: SUISA-ID
 
       song_count:
-        song: &song Werk
-        song_id: *song
+        song: Werk
+        song_id: Werk
         count: Anzahl
         title: Titel
         composed_by: Komponist
@@ -296,8 +316,8 @@ de:
         verein_id: Vereins ID
 
       song_counts:
-        song: *song
-        song_id: *song
+        song: Werk
+        song_id: Werk
 
       concert:
         song_counts: Werkeintrag
