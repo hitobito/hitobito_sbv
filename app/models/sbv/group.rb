@@ -24,14 +24,20 @@ module Sbv::Group
     i18n_setter :klasse, (KLASSEN + [nil])
     i18n_setter :unterhaltungsmusik, (UNTERHALTUNGSMUSIK + [nil])
 
+    FQDN_REGEX = '(?=\A.{1,254}\z)(\A(([a-z0-9][a-z0-9\-]{1,61}[a-z0-9])\.)+([a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))\z'.freeze # rubocop:disable Metrics/LineLength
+
     validates :reported_members,
               numericality: { greater_than_or_equal_to: 0 }, if: :reported_members
-    validates :hostname, uniqueness: true, allow_blank: true
+    validates :hostname,
+              uniqueness: true,
+              format: { with: Regexp.new(FQDN_REGEX, Regexp::IGNORECASE) },
+              allow_blank: true
 
     belongs_to :secondary_parent, class_name: 'Group'
     belongs_to :tertiary_parent, class_name: 'Group'
 
     before_validation :nullify_blank_hostname
+    before_validation :downcase_hostname
 
     used_attributes << :secondary_parent_id << :tertiary_parent_id
 
@@ -80,6 +86,10 @@ module Sbv::Group
 
   def nullify_blank_hostname
     self.hostname = nil if hostname.blank?
+  end
+
+  def downcase_hostname
+    self.hostname = hostname.downcase if hostname.present?
   end
 
 end
