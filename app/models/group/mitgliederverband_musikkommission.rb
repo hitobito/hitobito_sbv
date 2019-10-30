@@ -36,7 +36,6 @@
 #  klasse                      :string(255)
 #  unterhaltungsmusik          :string(255)
 #  subventionen                :string(255)
-#  reported_members            :integer
 #
 
 class Group::MitgliederverbandMusikkommission < Group

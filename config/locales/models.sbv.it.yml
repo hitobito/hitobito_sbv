@@ -264,7 +264,6 @@ it:
         unterhaltungsmusik_value: *unterhaltungsmusik
         correspondence_language: *correspondence_language
         subventionen: Sovvenzioni
-        reported_members: Membri annunciati
         recognized_members: Membri recensiti
         besetzungen:
           _nil: sconosciuto

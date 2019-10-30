@@ -26,8 +26,6 @@ module Sbv::Group
 
     FQDN_REGEX = '(?=\A.{1,254}\z)(\A(([a-z0-9][a-z0-9\-]{1,61}[a-z0-9])\.)+([a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))\z'.freeze # rubocop:disable Metrics/LineLength
 
-    validates :reported_members,
-              numericality: { greater_than_or_equal_to: 0 }, if: :reported_members
     validates :hostname,
               uniqueness: true,
               format: { with: Regexp.new(FQDN_REGEX, Regexp::IGNORECASE) },

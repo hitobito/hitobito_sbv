@@ -237,7 +237,6 @@ fr:
         unterhaltungsmusik_value: *unterhaltungsmusik
         correspondence_language: *correspondence_language
         subventionen: Subventions
-        reported_members: Membres annoncés
         recognized_members: Membres saisis
         besetzungen:
           _nil: Inconnu

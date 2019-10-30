@@ -90,7 +90,6 @@ namespace :import do
           parent_id:         parent.id,
           name:              choir['Verein'],
           description:       choir['Status'],
-          reported_members:  choir['Anzahl Vereins-Mitglieder'],
           email:             choir['E-Mail'],
           address:           choir['Adresse'],
           town:              choir['Ort'],

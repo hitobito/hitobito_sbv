@@ -95,7 +95,7 @@ file('db/seeds/production/vereine.csv').clear
 file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
-    name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,reported_members,kreis,swoffice_id
+    name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,kreis,swoffice_id
   TEXT
   migrator.query('tbl_person', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
     CONCAT_WS(' ', tbl_person.name, tbl_person.domizil) AS name,
@@ -118,7 +118,6 @@ file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
       ELSE            NULL
     END AS besetzung,
     tbl_person.amtssprache AS correspondence_language,
-    tbl_person.anzahlmitgliederSoll AS reported_members,
     tbl_person.kreis,
     tbl_person.id AS swoffice_id
   SQL
@@ -134,7 +133,7 @@ file('db/seeds/production/vereine_musicgest.csv').clear
 file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |task|
   migrator = Migration.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
-    name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,reported_members,kreis,swoffice_id
+    name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,kreis,swoffice_id
   TEXT
   migrator.query('societes', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
     CONCAT_WS(' ', nomSociete, nomVilleSoc) AS name,
@@ -157,7 +156,6 @@ file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |ta
     END AS verband,
     NULL AS besetzung,
     NULL AS correspondence_language,
-    NULL AS reported_members,
     federations.nomFederation AS kreis,
     CASE societes.mandant
       WHEN 10 THEN IF(nomCanton = 'Valais', NULL, -1)
