@@ -47,7 +47,9 @@ admins = {
   'Martin Eckenfels'   => 'm.eckenfels@bluewin.ch'
 }
 
-devs = {}
+devs = {
+  'Aleksandar Radunovic' => 'aleksandar.radunovic@consulteer.com'
+}
 
 puzzlers.each do |puz|
   devs[puz] = "#{puz.split.last.downcase}@puzzle.ch"
