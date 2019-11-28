@@ -11,7 +11,7 @@ require 'spec_helper'
 describe GroupAbility do
 
   subject { ability }
-  let(:role) { Fabricate(Group::Root::Admin.name.to_sym, group: groups(:top_group)) }
+  let(:role) { Fabricate(Group::Root::Admin.name.to_sym, group: groups(:hauptgruppe_1)) }
   let(:ability) { Ability.new(role.person.reload) }
   let(:group) { role.group }
 
