@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe SongCount do
 
+  it '#empty? treats blank count as true' do
+    subject.count = nil
+    expect(subject).to be_empty
+    subject.count = ''
+    expect(subject).to be_empty
+  end
+
   context 'validations' do
     it 'cannot set count over 30' do
       song_count = SongCount.create(count: 31)

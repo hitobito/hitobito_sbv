@@ -34,7 +34,7 @@ class SongCount < ActiveRecord::Base
   end
 
   def empty?
-    count.zero?
+    count.to_i.zero?
   end
 
 end
