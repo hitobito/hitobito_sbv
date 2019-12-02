@@ -27,8 +27,19 @@ describe SongCensus do
   end
 
   describe 'defaults' do
+    include ActiveSupport::Testing::TimeHelpers
 
-    it { is_expected.to have_attributes(year: Time.zone.today.year )}
+    it 'sets defaults to this year when current time is before december ' do
+      travel_to('2019-03-05 10:00:00') do
+        is_expected.to have_attributes(year: 2019, finish_at: Date.new(2019,11, 30))
+      end
+    end
+
+    it 'sets defaults to next year when current time is past december' do
+      travel_to('2019-12-01 10:00:00') do
+        is_expected.to have_attributes(year: 2020, finish_at: Date.new(2020,11, 30))
+      end
+    end
 
     context 'without census-settings' do
       before do
