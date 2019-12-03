@@ -12,11 +12,15 @@ module Export::Tabular::SongCounts
     self.model_class = SongCount
 
     def attributes
-      if list.map(&:verein_id).uniq.one?
+      if multiple?
         INCLUDED_ATTRS
       else
         INCLUDED_ATTRS + GROUP_ATTRS
       end.collect(&:to_sym)
+    end
+
+    def multiple?
+      @single_verein ||= Concert.where(id: list.collect(&:concert_id)).having('count(distinct verein_id) = 1').empty?
     end
   end
 end

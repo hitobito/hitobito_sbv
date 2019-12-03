@@ -18,7 +18,7 @@ describe Export::Tabular::SongCounts::List do
     let(:list) { groups(:musikgesellschaft_aarberg).song_counts }
 
     its(:headers) do
-      should == %w(Anzahl Titel Komponist Arrangeur Verlag SUISA-ID)
+      should == ['Anzahl', 'Titel', 'Komponist', 'Arrangeur', 'Verlag', 'SUISA-ID', 'Verein', 'Vereins ID']
     end
 
     it 'has 2 items' do
@@ -35,6 +35,8 @@ describe Export::Tabular::SongCounts::List do
       its(['Arrangeur']) { should == 'Creedence Clearwater Revival' }
       its(['Verlag']) { should == 'Fantasy' }
       its(['SUISA-ID']) { should == '12345' }
+      its(['Verein']) { should == 'Musikgesellschaft Aarberg' }
+      its(['Vereins ID']) { should == groups(:musikgesellschaft_aarberg).id.to_s }
     end
 
     context 'second row' do
@@ -47,6 +49,8 @@ describe Export::Tabular::SongCounts::List do
       its(['Arrangeur']) { should == 'The Temptations' }
       its(['Verlag']) { should == 'Motown' }
       its(['SUISA-ID']) { should == '23456' }
+      its(['Verein']) { should == 'Musikgesellschaft Aarberg' }
+      its(['Vereins ID']) { should == groups(:musikgesellschaft_aarberg).id.to_s }
     end
   end
 
@@ -55,7 +59,7 @@ describe Export::Tabular::SongCounts::List do
     let(:list) { groups(:hauptgruppe_1).song_counts }
 
     its(:headers) do
-      should == ['Anzahl', 'Titel', 'Komponist', 'Arrangeur', 'Verlag', 'SUISA-ID', 'Verein', 'Vereins ID']
+      should == ['Anzahl', 'Titel', 'Komponist', 'Arrangeur', 'Verlag', 'SUISA-ID']
     end
 
     it 'has 3 items' do
@@ -70,10 +74,7 @@ describe Export::Tabular::SongCounts::List do
       its(['Titel']) { should == 'Fortunate Son' }
       its(['Komponist']) { should == 'John Fogerty' }
       its(['Arrangeur']) { should == 'Creedence Clearwater Revival' }
-      its(['Verein']) { should == 'Musikgesellschaft Aarberg' }
       its(['Verlag']) { should == 'Fantasy' }
-      its(['SUISA-ID']) { should == '12345' }
-      its(['Vereins ID']) { should == groups(:musikgesellschaft_aarberg).id.to_s }
     end
 
     context 'second row' do
@@ -86,8 +87,6 @@ describe Export::Tabular::SongCounts::List do
       its(['Arrangeur']) { should == 'The Temptations' }
       its(['Verlag']) { should == 'Motown' }
       its(['SUISA-ID']) { should == '23456' }
-      its(['Verein']) { should == 'Musikgesellschaft Aarberg' }
-      its(['Vereins ID']) { should == groups(:musikgesellschaft_aarberg).id.to_s }
     end
 
     context 'third row' do
@@ -99,8 +98,6 @@ describe Export::Tabular::SongCounts::List do
       its(['Komponist']) { should == 'Peter Brown / Robert Rans' }
       its(['Arrangeur']) { should == 'Madonna' }
       its(['SUISA-ID']) { should == '34567' }
-      its(['Verein']) { should == 'Musikgesellschaft Alterswil' }
-      its(['Vereins ID']) { should == groups(:musikgesellschaft_alterswil).id.to_s }
     end
   end
 end
