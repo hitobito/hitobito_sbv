@@ -35,7 +35,9 @@ class SongCountsController < SimpleCrudController
 
   def render_tabular_in_background(format)
     target = verein? ? group_concerts_path(@group) : group_song_censuses_path(@group)
-    with_async_download_cookie(format, export_filename(format), redirection_target: target) do |filename|
+    with_async_download_cookie(format, export_filename(format), {
+      redirection_target: target
+    }) do |filename|
       Export::SongCountsExportJob.new(format,
                                       current_person.id,
                                       parent.id,

@@ -20,7 +20,10 @@ module Export::Tabular::SongCounts
     end
 
     def multiple?
-      @single_verein ||= Concert.where(id: list.collect(&:concert_id)).having('count(distinct verein_id) = 1').empty?
+      @single_verein ||=
+        Concert.where(id: list.collect(&:concert_id))
+        .having('count(distinct verein_id) = 1')
+        .empty?
     end
   end
 end
