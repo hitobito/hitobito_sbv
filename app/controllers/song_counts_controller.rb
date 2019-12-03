@@ -5,6 +5,7 @@
 
 class SongCountsController < SimpleCrudController
   include YearBasedPaging
+  include Concerns::AsyncDownload
 
   self.nesting = Group
   self.permitted_attrs = [:song_id, :year, :count]
@@ -18,24 +19,37 @@ class SongCountsController < SimpleCrudController
   def index
     respond_to do |format|
       format.html { super }
-      format.csv  { render_song_counts_tabular(:csv) }
-      format.xlsx { render_song_counts_tabular(:xlsx) }
+      format.csv  { render_tabular_in_background(:csv) }
+      format.xlsx { render_tabular_in_background(:xlsx) }
     end
   end
 
   private
 
-  def render_song_counts_tabular(format)
-    list = Export::Tabular::SongCounts::List.send(format, list_entries)
-    send_data list, type: format, filename: export_filename(format)
+  def redirection_target
+  end
+
+  def verein?
+    @group.is_a?(Group::Verein)
+  end
+
+  def render_tabular_in_background(format)
+    target = verein? ? group_concerts_path(@group) : group_song_censuses_path(@group)
+    with_async_download_cookie(format, export_filename(format), redirection_target: target) do |filename|
+      Export::SongCountsExportJob.new(format,
+                                      current_person.id,
+                                      parent.id,
+                                      year,
+                                      filename: filename).enqueue!
+    end
   end
 
   def export_filename(format)
     str = SongCount.model_name.human
-    if @group.is_a?(Group::Verein)
+    if verein?
       str << "-#{@group.name.tr(' ', '_').underscore}"
     end
-    str + "-#{year}.#{format}"
+    str + "-#{year}"
   end
 
   def list_entries

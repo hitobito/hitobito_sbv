@@ -20,19 +20,15 @@ describe SongCountsController do
 
     it 'exports csv' do
       get :index, group_id: verein, format: :csv
-      expect(response.header['Content-Disposition']).
-        to match(/Werkmeldung-harmonie_sursee-\d{4}.csv/)
-
-      expect(response.content_type).to eq('text/csv')
+      expect(flash[:notice]).to eq 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
+      expect(response).to redirect_to group_concerts_path(verein)
     end
 
     it 'exports xlsx' do
       get :index, group_id: group, format: :xlsx
-      expect(response.header['Content-Disposition']).
-        to match(/Werkmeldung-\d{4}.xlsx/)
-
-      expect(response.content_type).to eq('application/xlsx')
+      expect(flash[:notice]).to eq 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
+      expect(response).to redirect_to group_song_censuses_path(group)
     end
   end
-  
+
 end

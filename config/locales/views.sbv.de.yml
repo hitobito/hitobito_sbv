@@ -72,6 +72,9 @@ de:
         Die Rolle %{role} in der Gruppe %{group} kann nur öffentliche Daten
         (Gruppen, Anlässe und Listen; keine anderen Personen) sehen.
 
+  song_counts:
+    export_enqueued: 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
+
   subscriber:
       group:
         form:
