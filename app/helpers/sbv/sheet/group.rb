@@ -1,3 +1,8 @@
+#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
+#  hitobito_sbv and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_sbv.
+
 module Sbv::Sheet::Group
   extend ActiveSupport::Concern
 
@@ -17,12 +22,12 @@ module Sbv::Sheet::Group
                                    view.can?(:manage_song_census, group))
                                end))
     tabs.insert(5,
-                Sheet::Tab.new('group.festival_tab', :festival_group_events_path,
-                                params: { returning: true },
-                                if: (lambda do |view, group|
-                                  group.event_types.include?(::Event::Festival) &&
-                                    view.can?(:'index_event/festivals', group)
-                                end)
-               ))
+                Sheet::Tab.new('group.festival_tab',
+                               :festivals_group_events_path,
+                               params: { returning: true },
+                               if: lambda do |view, group|
+                                 group.event_types.include?(::Event::Festival) &&
+                                   view.can?(:'index_event/festivals', group)
+                               end))
   end
 end
