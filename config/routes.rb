@@ -20,6 +20,13 @@ Rails.application.routes.draw do
           post 'submit'
         end
       end
+
+      resources :events, only: [] do
+        collection do
+          get 'festival' => 'events#index', type: 'Event::Festival'
+        end
+      end
+
       resources :song_censuses, only: [:new, :create, :index] do
         post 'remind', to: 'song_censuses#remind'
       end

@@ -16,6 +16,13 @@ module Sbv::Sheet::Group
                                    (view.can?(:index_song_counts, group) ||
                                    view.can?(:manage_song_census, group))
                                end))
-
+    tabs.insert(5,
+                Sheet::Tab.new('group.festival_tab', :festival_group_events_path,
+                                params: { returning: true },
+                                if: (lambda do |view, group|
+                                  group.event_types.include?(::Event::Festival) &&
+                                    view.can?(:'index_event/festivals', group)
+                                end)
+               ))
   end
 end

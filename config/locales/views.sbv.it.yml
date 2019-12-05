@@ -9,6 +9,7 @@ it:
   global:
     last_change: "Ultima modifica: %{date}"
   group:
+    festival_tab: Festival
     suisa_tab: SUISA
     merge:
       select:
