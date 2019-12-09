@@ -107,6 +107,10 @@ de:
       concerts: Aufführungen
       summary: Zusammenfassung
 
+  group_participations:
+    actions_new:
+      title: "Vereinsanmeldung"
+
   contactable:
     additional_email_fields:
       tooltip_mailings: Versände von Listen, Bestätigungen per E-Mail usw. werden zusätzlich an alle hier markierten Adressen verschickt.
