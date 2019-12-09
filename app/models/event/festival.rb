@@ -4,4 +4,17 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class Event::Festival < Event
+
+  self.used_attributes -= [
+    :application_conditions,
+    :applications_cancelable,
+    :cost,
+    :external_applications,
+    :maximum_participants,
+    :motto,
+    :signature,
+    :signature_confirmation,
+    :signature_confirmation_text
+  ]
+
 end
