@@ -17,4 +17,12 @@ class Event::Festival < Event
     :signature_confirmation_text
   ]
 
+  def participant_types
+    [] # this disables the selection of required person-attributes
+  end
+
+  def supports_application_details?
+    true
+  end
+
 end
