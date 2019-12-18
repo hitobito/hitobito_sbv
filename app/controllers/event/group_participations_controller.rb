@@ -8,10 +8,39 @@ class Event::GroupParticipationsController < ApplicationController
 
   decorates :event, :group
 
-  def new
-    @group = Group.find(params[:group_id])
-    @event = Event.find(params[:id])
+  def index
+    @participations = Event.GroupParticipation.where(event: event) 
   end
 
-  def create; end
+  def new
+    @group         = group
+    @event         = event
+    @participation = Event::GroupParticipation.new(group: group, event: event)
+  end
+
+  def create
+    @participation = Event::GroupParticipation.create!(group: group, event: event)
+
+    redirect_to group_event_path(group, event), notice: t('.success')
+  end
+
+  def edit
+    @group         = group
+    @event         = event
+    @participation = Event::GroupParticipation.find(params[:id])
+  end
+
+  def update
+
+  end
+
+  private
+
+  def group
+    @_group ||= Group.find(params[:group_id])
+  end
+
+  def event
+    @_event ||= Event.find(params[:id])
+  end
 end

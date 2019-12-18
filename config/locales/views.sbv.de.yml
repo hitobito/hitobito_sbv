@@ -107,9 +107,12 @@ de:
       concerts: Aufführungen
       summary: Zusammenfassung
 
-  group_participations:
-    actions_new:
-      title: "Vereinsanmeldung"
+  event:
+    group_participations:
+      actions_new:
+        title: "Vereinsanmeldung"
+      create:
+        success: "Anmeldung erfolgreich hinzugefügt"
 
   contactable:
     additional_email_fields:

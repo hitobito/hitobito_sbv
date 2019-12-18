@@ -27,8 +27,10 @@ Rails.application.routes.draw do
 
       resources :event, only: [] do
         member do
+          get 'group_participations_list' => 'event/group_participations#index'
           get 'group_participations'  => 'event/group_participations#new'
           post 'group_participations' => 'event/group_participations#create'
+          patch 'group_participations' => 'event/group_participations#edit'
         end
       end
 

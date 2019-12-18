@@ -1,0 +1,10 @@
+= crud_form(@participation,
+  url: group_participations_group_event_path(@group, @event),
+  cancel_url: group_event_path(@group, @event),
+  method: :patch) do |f|
+
+  - if @participation.initial?
+    f.select :music_type, Event::GroupParticipation::MUSIC_TYPES, prompt: 'Select'
+  - if @participation.music_type_selected?
+    f.select :music_level, Event::GroupParticipation::MUSIC_LEVELS, prompt: 'Select'
+

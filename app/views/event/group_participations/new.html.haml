@@ -5,3 +5,8 @@
     Suche nach anderem Verein, wenn man Spielgemeinschaft bilden möchte
   %li
     speichern und weiter zur Auswahl des Musiktyps
+
+= crud_form(@participation,
+  url: group_participations_group_event_path(@group, @event),
+  cancel_url: group_event_path(@group, @event),
+  method: :post)
