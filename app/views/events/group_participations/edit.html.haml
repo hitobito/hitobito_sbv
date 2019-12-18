@@ -1,0 +1,12 @@
+= crud_form([@group, @event, @participation],
+  cancel_url: group_event_path(@group, @event),
+  method: :patch, buttons_bottom: true, buttons_top: false) do |f|
+
+  - if @participation.initial?
+    = f.label :music_style
+    = f.select :music_style, Event::GroupParticipation::MUSIC_CLASSIFICATIONS.map { |h| h[:style] }, prompt: 'Select'
+  - if @participation.music_style_selected?
+    = f.label :music_type
+    = f.select :music_type, Event::GroupParticipation::MUSIC_CLASSIFICATIONS.find { |h| h[:style] == @participation.music_style }[:types].keys, prompt: 'Select'
+    = f.label :music_level
+    = f.select :music_level, [], { disabled: true }

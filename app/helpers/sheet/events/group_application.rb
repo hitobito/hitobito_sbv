@@ -4,7 +4,7 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 module Sheet
-  class Event
+  class Events
     class GroupParticipation < Base
       self.parent_sheet = Sheet::Event
 

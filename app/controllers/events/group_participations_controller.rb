@@ -3,13 +3,13 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class Event::GroupParticipationsController < ApplicationController
+class Events::GroupParticipationsController < ApplicationController
   skip_authorization_check
 
   decorates :event, :group
 
   def index
-    @participations = Event.GroupParticipation.where(event: event) 
+    @participations = Event.GroupParticipation.where(event: event)
   end
 
   def new
@@ -31,7 +31,13 @@ class Event::GroupParticipationsController < ApplicationController
   end
 
   def update
+    @participation = Event::GroupParticipation.find(params[:id])
 
+    @participation.assign_attributes(participation_params)
+
+    @participation.select_music_style! if @participation.save
+
+    redirect_to group_event_path(group, event), notice: t('.success')
   end
 
   private
@@ -41,6 +47,10 @@ class Event::GroupParticipationsController < ApplicationController
   end
 
   def event
-    @_event ||= Event.find(params[:id])
+    @_event ||= Event.find(params[:event_id])
+  end
+
+  def participation_params
+    params.require(:event_group_participation).permit(:music_style)
   end
 end

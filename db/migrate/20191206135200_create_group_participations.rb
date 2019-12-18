@@ -6,6 +6,10 @@ class CreateGroupParticipations < ActiveRecord::Migration
       t.references :event, null: false
       t.references :group, null: false
 
+      t.string :music_style
+      t.string :music_type
+      t.string :music_level
+
       t.timestamps null: false
     end
 

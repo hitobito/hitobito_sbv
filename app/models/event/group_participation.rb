@@ -7,8 +7,52 @@ class Event::GroupParticipation < ActiveRecord::Base
   require_dependency 'aasm'
   include ::AASM
 
-  MUSIC_TYPES = %w[Type\ 1 Type\ 2 Type\ 3].freeze
-  MUSIC_LEVELS = %w[Level\ 1 Level\ 2 Level\ 3].freeze
+  MUSIC_CLASSIFICATIONS = [
+    {
+      style: "Konzertmusik",
+      types: {
+        "Harmonie" => [
+            "Höchstklasse",
+            "1. Klasse",
+            "2. Klasse",
+            "3. Klasse",
+            "4. Klasse"
+      ],
+      }}
+
+        # Brass Band
+        #     Höchstklasse
+        #     "1. Klasse"
+        #     "2. Klasse"
+        #     "3. Klasse"
+        #     "4. Klasse"
+        # Fanfare Benelux Harmonie
+        #     "1. Klasse"
+        #     "2. Klasse"
+        #     "3. Klasse"
+        # Fanfare Benelux Brass Band
+        #     "1. Klasse"
+        #     "2. Klasse"
+        #     "3. Klasse"
+        # Fanfare mixte Harmonie
+        #     "4. Klasse"
+        # Fanfare mixte Brass Band
+        #     "4. Klasse"
+
+    # Unterhaltungsmusik
+        # Harmonie
+        #     Oberstufe
+        #     Mittelstufe
+        #     Unterstufe
+        # Brass Band
+        #     Oberstufe
+        #     Mittelstufe
+        #     Unterstufe
+
+    # Parademusik
+        # traditionelle Parademusik
+        # Parademusik mit Evolution und Showparade
+  ].freeze
 
   self.demodulized_route_keys = true
 
@@ -24,17 +68,17 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   aasm column: 'state' do
     state :initial, initial: true
-    state :music_type_selected
-    state :music_level_selected
+    state :music_style_selected
+    state :music_type_and_level_selected
     state :completed
 
-    event :select_music_type do
-      transition from :initial, to: :music_type_selected
-      transition from :music_level_selected, to: :music_type_selected
+    event :select_music_style do
+      transitions from: :initial, to: :music_style_selected
+      transitions from: :music_type_and_level_selected, to: :music_style_selected
     end
 
-    event :select_music_level do
-      transition from :music_type_selected, to: :music_level_selected
+    event :select_music_type do
+      transitions from: :music_style_selected, to: :music_type_and_level_selected
     end
   end
 end
