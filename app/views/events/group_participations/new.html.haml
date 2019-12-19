@@ -1,0 +1,15 @@
+%p
+  Anmeldung bei
+  = @event
+  als
+  %b
+    = @group
+  -# %li
+  -#   Suche nach anderem Verein, wenn man Spielgemeinschaft bilden möchte
+  -# %li
+  -#   speichern und weiter zur Auswahl des Musiktyps
+
+= crud_form(@participation,
+  url: group_event_group_participations_path(@group, @event),
+  cancel_url: group_event_path(@group, @event),
+  method: :post)

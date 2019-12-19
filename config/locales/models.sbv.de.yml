@@ -323,6 +323,30 @@ de:
         performed_at: Datum
         name: Aufführung
 
+      event/group_participation:
+        music_styles:
+          concert_music: Konzertmusik
+          contemporary_music: Unterhaltungsmusik
+          parade_music: Parademusik
+        music_types:
+          harmony: Harmonie
+          brass_band: Brass Band
+          fanfare_benelux_harmony: Fanfare Benelux Harmonie
+          fanfare_benelux_brass_band: Fanfare Benelux Brass Band
+          fanfare_mixte_harmony: Fanfare mixte Harmonie
+          fanfare_mixte_brass_band: Fanfare mixte Brass Band
+          traditional_parade: traditionelle Parademusik
+          show_parade: Parademusik mit Evolution und Showparade
+        music_levels:
+          high: Oberstufe
+          medium: Mittelstufe
+          low: Unterstufe
+          highest: Höchstklasse
+          first: 1. Klasse
+          second: 2. Klasse
+          third: 3. Klasse
+          fourth: 4. Klasse
+
     errors:
       models:
         song:

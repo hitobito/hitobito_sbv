@@ -1,0 +1,3 @@
+- if entry.type == 'Event::Festival'
+  = action_button(I18n.t('event_decorator.apply'), new_group_event_group_participation_url(event_id: entry.id), :check)
+  = action_button(I18n.t('event.group_participation.list'), group_event_group_participations_url(event_id: entry.id), :list)

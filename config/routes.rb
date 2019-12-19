@@ -20,8 +20,9 @@ Rails.application.routes.draw do
       end
 
       resources :events, only: [] do
+        resources :group_participations, controller: 'events/group_participations'
         collection do
-          get 'festivals' => 'events#index', type: 'Event::Festival'
+          get 'festival' => 'events#index', type: 'Event::Festival'
         end
       end
 

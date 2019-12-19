@@ -7,7 +7,7 @@ de:
   global:
     last_change: "Letzte Änderung: %{date}"
   group:
-    festival_tab: Festivals
+    festival_tab: Musikfeste
     suisa_tab: SUISA
     merge:
       select:
@@ -106,6 +106,13 @@ de:
       title: SUISA Erfassung
       concerts: Aufführungen
       summary: Zusammenfassung
+
+  events:
+    group_participations:
+      actions_new:
+        title: "Vereinsanmeldung"
+      create:
+        success: "Anmeldung erfolgreich hinzugefügt"
 
   contactable:
     additional_email_fields:

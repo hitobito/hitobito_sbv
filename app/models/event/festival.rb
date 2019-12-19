@@ -4,4 +4,25 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class Event::Festival < Event
+
+  self.used_attributes -= [
+    :application_conditions,
+    :applications_cancelable,
+    :cost,
+    :external_applications,
+    :maximum_participants,
+    :motto,
+    :signature,
+    :signature_confirmation,
+    :signature_confirmation_text
+  ]
+
+  def participant_types
+    [] # this disables the selection of required person-attributes
+  end
+
+  def supports_application_details?
+    true
+  end
+
 end
