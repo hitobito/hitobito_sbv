@@ -107,7 +107,7 @@ de:
       concerts: Aufführungen
       summary: Zusammenfassung
 
-  event:
+  events:
     group_participations:
       actions_new:
         title: "Vereinsanmeldung"

@@ -4,14 +4,14 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 module Sheet
-  class Events
+  module Events
     class GroupParticipation < Base
       self.parent_sheet = Sheet::Event
 
       delegate :t, to: :I18n
 
       def title
-        t('event.group_participations.actions_new.title')
+        t('events.group_participations.actions_new.title')
       end
     end
   end
