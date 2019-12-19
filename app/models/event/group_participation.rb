@@ -9,49 +9,30 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   MUSIC_CLASSIFICATIONS = [
     {
-      style: "Konzertmusik",
+      style: 'concert_music',
       types: {
-        "Harmonie" => [
-            "Höchstklasse",
-            "1. Klasse",
-            "2. Klasse",
-            "3. Klasse",
-            "4. Klasse"
-      ],
-      }}
-
-        # Brass Band
-        #     Höchstklasse
-        #     "1. Klasse"
-        #     "2. Klasse"
-        #     "3. Klasse"
-        #     "4. Klasse"
-        # Fanfare Benelux Harmonie
-        #     "1. Klasse"
-        #     "2. Klasse"
-        #     "3. Klasse"
-        # Fanfare Benelux Brass Band
-        #     "1. Klasse"
-        #     "2. Klasse"
-        #     "3. Klasse"
-        # Fanfare mixte Harmonie
-        #     "4. Klasse"
-        # Fanfare mixte Brass Band
-        #     "4. Klasse"
-
-    # Unterhaltungsmusik
-        # Harmonie
-        #     Oberstufe
-        #     Mittelstufe
-        #     Unterstufe
-        # Brass Band
-        #     Oberstufe
-        #     Mittelstufe
-        #     Unterstufe
-
-    # Parademusik
-        # traditionelle Parademusik
-        # Parademusik mit Evolution und Showparade
+        'harmony' => %w(highest first second third fourth),
+        'brass_band' => %w(highest first second third fourth),
+        'fanfare_benelux_harmony' => %w(first second third),
+        'fanfare_benelux_brass_band' => %w(first second third),
+        'fanfare_mixte_harmony' => %w(fourth),
+        'fanfare_mixte_brass_band' => %w(fourth)
+      }
+    },
+    {
+      style: 'contemporary_music',
+      types: {
+        'harmony' => %w(high medium low),
+        'brass_band' => %w(high medium low)
+      }
+    },
+    {
+      style: 'parade_music',
+      types: {
+        'traditional_parade' => %w(),
+        'show_parade' => %w()
+      }
+    }
   ].freeze
 
   self.demodulized_route_keys = true
