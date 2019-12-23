@@ -56,13 +56,20 @@ class Event::GroupParticipation < ActiveRecord::Base
     state :music_type_and_level_selected
     state :completed
 
+
+    event :progress_in_application do
+      transitions from: :initial,                       to: :music_style_selected
+      transitions from: :music_style_selected,          to: :music_type_and_level_selected
+      transitions from: :music_type_and_level_selected, to: :completed
+    end
+
     event :select_music_style do
-      transitions from: :initial, to: :music_style_selected
+      transitions from: :initial,                       to: :music_style_selected
       transitions from: :music_type_and_level_selected, to: :music_style_selected
     end
 
     event :select_music_type do
-      transitions from: :music_style_selected, to: :music_type_and_level_selected
+      transitions from: :music_style_selected,          to: :music_type_and_level_selected
     end
   end
 end

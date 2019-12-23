@@ -33,7 +33,7 @@ class Events::GroupParticipationsController < ApplicationController
 
     @participation.assign_attributes(participation_params)
 
-    @participation.select_music_style! if @participation.save
+    @participation.progress_in_application! if @participation.save
 
     redirect_to group_event_path(group, event), notice: t('.success')
   end
@@ -49,6 +49,7 @@ class Events::GroupParticipationsController < ApplicationController
   end
 
   def participation_params
-    params.require(:event_group_participation).permit(:music_style)
+    params.require(:event_group_participation)
+          .permit([:music_style, :music_level])
   end
 end
