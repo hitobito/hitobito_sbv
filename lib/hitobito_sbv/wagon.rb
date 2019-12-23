@@ -27,6 +27,10 @@ module HitobitoSbv
       Subscription.send :prepend, Sbv::Subscription
       MailingList.send  :prepend, Sbv::MailingList
 
+      # festival_participation allows to manage your group's participation to a festival
+      # manage_participations allows to manage all participations to a festival
+      Role::Permissions << :festival_participation << :manage_participations
+
       ### abilities
       RoleAbility.send :include, Sbv::RoleAbility
       GroupAbility.send :include, Sbv::GroupAbility
