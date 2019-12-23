@@ -4,17 +4,17 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class Events::GroupParticipationsController < ApplicationController
-  skip_authorization_check
+  skip_authorization_check # FIXME: implement this
 
   decorates :event, :group
 
+  before_action :event, :group, only: [:index, :new, :edit]
+
   def index
-    @participations = Event.GroupParticipation.where(event: event)
+    @participations = Event::GroupParticipation.where(event: event)
   end
 
   def new
-    @group         = group
-    @event         = event
     @participation = Event::GroupParticipation.new(group: group, event: event)
   end
 
@@ -25,8 +25,6 @@ class Events::GroupParticipationsController < ApplicationController
   end
 
   def edit
-    @group         = group
-    @event         = event
     @participation = Event::GroupParticipation.find(params[:id])
   end
 
@@ -43,11 +41,11 @@ class Events::GroupParticipationsController < ApplicationController
   private
 
   def group
-    @_group ||= Group.find(params[:group_id])
+    @group ||= Group.find(params[:group_id])
   end
 
   def event
-    @_event ||= Event.find(params[:event_id])
+    @event ||= Event.find(params[:event_id])
   end
 
   def participation_params
