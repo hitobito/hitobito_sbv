@@ -42,7 +42,7 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   ### ASSOCIATIONS
 
-  belongs_to :event
+  belongs_to :event, class_name: 'Event::Festival'
   belongs_to :group
 
   ### VALIDATIONS
