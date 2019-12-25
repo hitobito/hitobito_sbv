@@ -10,8 +10,8 @@ class Event::GroupParticipationAbility < AbilityDsl::Base
   end
 
   def in_layer
-    subject.self_and_ancestors.any? do |group|
-      user.groups_with_permission(:song_census).include?(group)
+    subject.group.self_and_ancestors.any? do |group|
+      user.groups_with_permission(:festival_participation).include?(group)
     end
   end
 end

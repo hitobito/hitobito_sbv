@@ -27,14 +27,6 @@ module HitobitoSbv
       Subscription.send :prepend, Sbv::Subscription
       MailingList.send  :prepend, Sbv::MailingList
 
-      # festival_participation allows to manage your group's participation to a festival
-      # manage_participations allows to manage all participations to a festival
-      Role::Permissions << :festival_participation << :manage_participations
-
-      ### abilities
-      RoleAbility.send :include, Sbv::RoleAbility
-      GroupAbility.send :include, Sbv::GroupAbility
-
       ### controllers
       GroupsController.permitted_attrs += [:vereinssitz, :founding_year,
                                            :correspondence_language, :besetzung,
@@ -71,10 +63,18 @@ module HitobitoSbv
 
       MailRelay::Lists.send :prepend, Sbv::MailRelay::Lists
 
+      ### abilities
+      RoleAbility.send :include, Sbv::RoleAbility
+      GroupAbility.send :include, Sbv::GroupAbility
+
+      # festival_participation allows to manage your group's participation to a festival
+      # manage_participations allows to manage all participations to a festival
+      Role::Permissions << :festival_participation << :manage_participations
+
       # load this class after all abilities have been defined
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census
       Ability.store.register SongAbility
-
+      Ability.store.register Event::GroupParticipationAbility
     end
 
     initializer 'sbv.add_settings' do |_app|

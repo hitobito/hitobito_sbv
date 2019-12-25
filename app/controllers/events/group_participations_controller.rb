@@ -3,7 +3,19 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class Events::GroupParticipationsController < ApplicationController
+class Events::GroupParticipationsController < CrudController
+  self.nesting = [Group, Event]
+
+  decorates :event
+
+  skip_authorize_resource
+  skip_authorization_check
+
+  def self.model_class
+    Event::GroupParticipation
+  end
+
+=begin
   skip_authorization_check # FIXME: implement this
 
   decorates :event, :group
@@ -52,4 +64,5 @@ class Events::GroupParticipationsController < ApplicationController
     params.require(:event_group_participation)
           .permit([:music_style, :music_level])
   end
+=end
 end
