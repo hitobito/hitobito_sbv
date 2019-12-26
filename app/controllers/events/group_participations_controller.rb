@@ -5,6 +5,7 @@
 
 class Events::GroupParticipationsController < CrudController
   self.nesting = [Group, Event]
+  self.permitted_attrs = [:music_style, :music_level, :group_id]
 
   decorates :event
 
@@ -15,54 +16,19 @@ class Events::GroupParticipationsController < CrudController
     Event::GroupParticipation
   end
 
-=begin
-  skip_authorization_check # FIXME: implement this
+  before_action :participating_group, only: [:new]
 
-  decorates :event, :group
+  # def update
+  #   @participation = Event::GroupParticipation.find(params[:id])
+  #   @participation.assign_attributes(participation_params)
+  #   @participation.progress_in_application! if @participation.save
+  #   redirect_to group_event_path(group, event), notice: t('.success')
+  # end
 
-  before_action :event, :group, only: [:index, :new, :edit]
-
-  def index
-    @participations = Event::GroupParticipation.where(event: event)
-  end
-
-  def new
-    @participation = Event::GroupParticipation.new(group: group, event: event)
-  end
-
-  def create
-    @participation = Event::GroupParticipation.create!(group: group, event: event)
-
-    redirect_to group_event_path(group, event), notice: t('.success')
-  end
-
-  def edit
-    @participation = Event::GroupParticipation.find(params[:id])
-  end
-
-  def update
-    @participation = Event::GroupParticipation.find(params[:id])
-
-    @participation.assign_attributes(participation_params)
-
-    @participation.progress_in_application! if @participation.save
-
-    redirect_to group_event_path(group, event), notice: t('.success')
-  end
 
   private
 
-  def group
-    @group ||= Group.find(params[:group_id])
+  def participating_group
+    @participating_group ||= Group.find_by(id: params['participating_group'])
   end
-
-  def event
-    @event ||= Event.find(params[:event_id])
-  end
-
-  def participation_params
-    params.require(:event_group_participation)
-          .permit([:music_style, :music_level])
-  end
-=end
 end
