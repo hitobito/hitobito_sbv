@@ -50,6 +50,8 @@ class Event::GroupParticipation < ActiveRecord::Base
   validates_by_schema
   validates :group_id, uniqueness: { scope: :event_id }
 
+  ### STATE MACHINE
+
   aasm column: 'state' do
     state :initial, initial: true
     state :music_style_selected
