@@ -12,21 +12,26 @@ class Events::GroupParticipationsController < CrudController
   skip_authorize_resource
   skip_authorization_check
 
+  before_action :participating_group, only: [:new]
+  around_update :update_state_machine
+
+  def update
+    super(location: group_event_path(@group, @event))
+  end
+
+  private_class_method
+
   def self.model_class
     Event::GroupParticipation
   end
 
-  before_action :participating_group, only: [:new]
-
-  # def update
-  #   @participation = Event::GroupParticipation.find(params[:id])
-  #   @participation.assign_attributes(participation_params)
-  #   @participation.progress_in_application! if @participation.save
-  #   redirect_to group_event_path(group, event), notice: t('.success')
-  # end
-
-
   private
+
+  def update_state_machine
+    yield.tap do |result|
+      entry.progress_in_application! if result
+    end
+  end
 
   def participating_group
     @participating_group ||= Group.find_by(id: params['participating_group'])

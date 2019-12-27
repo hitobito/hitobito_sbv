@@ -1,15 +1,15 @@
-= crud_form([@group, @event, @participation],
-  cancel_url: group_event_path(@group, @event),
-  method: :patch, buttons_bottom: true, buttons_top: false) do |f|
+= crud_form(path_args(entry),
+  cancel_url: polymorphic_path(path_args(model_class), returning: true),
+  buttons_bottom: true, buttons_top: false) do |f|
 
-  - if @participation.initial?
+  - if entry.initial?
     = f.label :music_style
     = f.select :music_style, music_styles_selection, prompt: 'Select'
-  - if @participation.music_style_selected?
+  - if entry.music_style_selected?
     = f.label :music_type
-    = f.select :music_type, music_types_selection_for(@participation.music_style), prompt: 'Select'
+    = f.select :music_type, music_types_selection_for(entry.music_style), prompt: 'Select'
     = f.label :music_level
     = f.select :music_level, []
 
-= music_level_selections_for(@participation.music_style) if @participation.music_style_selected?
+= music_level_selections_for(entry.music_style) if entry.music_style_selected?
 
