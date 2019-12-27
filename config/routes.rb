@@ -18,6 +18,7 @@ Rails.application.routes.draw do
           post 'submit'
         end
       end
+      get 'our_festival_participations' => 'events/our_participations#index'
 
       resources :events, only: [] do
         resources :group_participations, controller: 'events/group_participations'

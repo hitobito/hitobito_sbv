@@ -24,7 +24,7 @@ module Sbv::Sheet::Group
                                  group.event_types.include?(::Event::Festival) &&
                                    view.can?(:'index_event/festivals', group)
                                end),
-                Sheet::Tab.new('group.festival_tab', :root_url, # :festival_participations_path,
+                Sheet::Tab.new('group.festival_tab', :group_our_festival_participations_path,
                                params: { returning: true },
                                if: lambda do |view, group|
                                  # Event::Festival.participatable(group).present? &&
