@@ -9,6 +9,8 @@ class Events::OurParticipationsController < ListController
   skip_authorize_resource
   skip_authorization_check
 
+  before_action :list_festivals
+
   private_class_method
 
   def self.model_class
@@ -19,6 +21,10 @@ class Events::OurParticipationsController < ListController
 
   def list_entries
     model_class.where(group_id: parent.id)
+  end
+
+  def list_festivals
+    @festivals ||= Event::Festival.participatable(parent)
   end
 
   # def authorize_class

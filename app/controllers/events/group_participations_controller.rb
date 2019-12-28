@@ -5,7 +5,12 @@
 
 class Events::GroupParticipationsController < CrudController
   self.nesting = [Group, Event]
-  self.permitted_attrs = [:music_style, :music_level, :group_id]
+  self.permitted_attrs = [
+    :music_style,
+    :music_type,
+    :music_level,
+    :group_id
+  ]
 
   decorates :event
 
