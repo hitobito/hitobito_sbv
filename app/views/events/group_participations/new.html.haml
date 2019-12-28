@@ -1,15 +1,19 @@
+- title ti(:title, :model => model_class_label(entry))
+
 %p
   Anmeldung bei
   = @event
   als
   %b
-    = @group
+    = @participating_group
   -# %li
   -#   Suche nach anderem Verein, wenn man Spielgemeinschaft bilden möchte
   -# %li
   -#   speichern und weiter zur Auswahl des Musiktyps
 
-= crud_form(@participation,
-  url: group_event_group_participations_path(@group, @event),
-  cancel_url: group_event_path(@group, @event),
-  method: :post)
+= crud_form(path_args(entry),
+  buttons_bottom: true,
+  buttons_top: false,
+  cancel_url: polymorphic_path(path_args(model_class), returning: true)) do |f|
+  = f.hidden_field :group_id, value: @participating_group.id
+

@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -65,6 +63,9 @@ class Group::Verein < ::Group
   has_many :concerts, dependent: :destroy
   has_many :song_counts, through: :concerts
 
+  has_many :group_participations, dependent: :destroy,
+                                  class_name: 'Event::GroupParticipation',
+                                  foreign_key: 'group_id'
 
   def self.hidden
     root = Group::Root.first

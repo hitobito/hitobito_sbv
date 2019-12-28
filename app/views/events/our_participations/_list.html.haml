@@ -1,0 +1,15 @@
+%h2
+  = t('.applicable_festivals')
+
+= table @festivals, class: 'table table-striped table-hover' do |t|
+  - t.attrs :name, :description, :application_opening_at, :application_closing_at
+  - t.col nil do |e|
+    = action_button(I18n.t('event_decorator.apply'), new_group_event_group_participation_url(event_id: e.id, participating_group: @group.id), :check)
+
+%h2
+  = t('.active_applications')
+
+= list_table do |t|
+  - t.attrs :id, :state, :event_id, :music_style, :music_type, :music_level
+  - t.col nil do |e|
+    = link_to t('.edit'), edit_group_event_group_participation_path(e.event.groups.first, e.event, e)

@@ -3,53 +3,42 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class Events::GroupParticipationsController < ApplicationController
-  skip_authorization_check # FIXME: implement this
+class Events::GroupParticipationsController < CrudController
+  self.nesting = [Group, Event]
+  self.permitted_attrs = [
+    :music_style,
+    :music_type,
+    :music_level,
+    :group_id
+  ]
 
-  decorates :event, :group
+  decorates :event
 
-  before_action :event, :group, only: [:index, :new, :edit]
+  skip_authorize_resource
+  skip_authorization_check
 
-  def index
-    @participations = Event::GroupParticipation.where(event: event)
-  end
-
-  def new
-    @participation = Event::GroupParticipation.new(group: group, event: event)
-  end
-
-  def create
-    @participation = Event::GroupParticipation.create!(group: group, event: event)
-
-    redirect_to group_event_path(group, event), notice: t('.success')
-  end
-
-  def edit
-    @participation = Event::GroupParticipation.find(params[:id])
-  end
+  before_action :participating_group, only: [:new]
+  around_update :update_state_machine
 
   def update
-    @participation = Event::GroupParticipation.find(params[:id])
+    super(location: group_event_path(@group, @event))
+  end
 
-    @participation.assign_attributes(participation_params)
+  private_class_method
 
-    @participation.progress_in_application! if @participation.save
-
-    redirect_to group_event_path(group, event), notice: t('.success')
+  def self.model_class
+    Event::GroupParticipation
   end
 
   private
 
-  def group
-    @group ||= Group.find(params[:group_id])
+  def update_state_machine
+    yield.tap do |result|
+      entry.progress_in_application! if result
+    end
   end
 
-  def event
-    @event ||= Event.find(params[:event_id])
-  end
-
-  def participation_params
-    params.require(:event_group_participation)
-          .permit([:music_style, :music_level])
+  def participating_group
+    @participating_group ||= Group.find_by(id: params['participating_group'])
   end
 end

@@ -3,13 +3,10 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-module Sbv::GroupAbility
-  extend ActiveSupport::Concern
-
-  included do
-    on(Group) do
-      permission(:any).may(:'index_event/festivals').all
-      permission(:festival_participation).may(:manage_festival_application).all # in_same_layer
+module Sheet
+  module Events
+    class OurParticipation < Base
+      self.parent_sheet = Sheet::Group
     end
   end
 end

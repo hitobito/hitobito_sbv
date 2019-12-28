@@ -3,8 +3,9 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
+require_dependency 'aasm'
+
 class Event::GroupParticipation < ActiveRecord::Base
-  require_dependency 'aasm'
   include ::AASM
   include I18nEnums
 
@@ -12,18 +13,18 @@ class Event::GroupParticipation < ActiveRecord::Base
     {
       style: 'concert_music',
       types: {
-        'harmony' => %w(highest first second third fourth),
-        'brass_band' => %w(highest first second third fourth),
-        'fanfare_benelux_harmony' => %w(first second third),
+        'harmony'                    => %w(highest first second third fourth),
+        'brass_band'                 => %w(highest first second third fourth),
+        'fanfare_benelux_harmony'    => %w(first second third),
         'fanfare_benelux_brass_band' => %w(first second third),
-        'fanfare_mixte_harmony' => %w(fourth),
-        'fanfare_mixte_brass_band' => %w(fourth)
+        'fanfare_mixte_harmony'      => %w(fourth),
+        'fanfare_mixte_brass_band'   => %w(fourth)
       }
     },
     {
       style: 'contemporary_music',
       types: {
-        'harmony' => %w(high medium low),
+        'harmony'    => %w(high medium low),
         'brass_band' => %w(high medium low)
       }
     },
@@ -31,7 +32,7 @@ class Event::GroupParticipation < ActiveRecord::Base
       style: 'parade_music',
       types: {
         'traditional_parade' => %w(),
-        'show_parade' => %w()
+        'show_parade'        => %w()
       }
     }
   ].freeze
@@ -42,13 +43,15 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   ### ASSOCIATIONS
 
-  belongs_to :event
+  belongs_to :event, class_name: 'Event::Festival'
   belongs_to :group
 
   ### VALIDATIONS
 
   validates_by_schema
   validates :group_id, uniqueness: { scope: :event_id }
+
+  ### STATE MACHINE
 
   aasm column: 'state' do
     state :initial, initial: true

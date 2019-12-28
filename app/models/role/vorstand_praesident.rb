@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -19,12 +17,6 @@
 #  deleted_at :datetime
 #
 
-
-#  Copyright (c) 2012-2013, Puzzle ITC GmbH. This file is part of
-#  hitobito_generic and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_generic.
-
 class Role::VorstandPraesident < Role
-  self.permissions = [:layer_full, :layer_and_below_read, :contact_data]
+  self.permissions = [:layer_full, :layer_and_below_read, :contact_data, :festival_participation]
 end
