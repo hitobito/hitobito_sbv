@@ -30,9 +30,6 @@ class Event::Festival < Event
   ### ASSOCIATIONS
 
   has_many :group_participations, foreign_key: 'event_id', dependent: :destroy
-  # has_many :participating_groups, through: :group_participations,
-  #                                 class_name: 'Group',
-  #                                 foreign_key: 'group_id'
 
   class << self
     def participatable(group)
