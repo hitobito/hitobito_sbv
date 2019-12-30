@@ -20,9 +20,10 @@ module GroupParticipationsHelper
   end
 
   def music_i18n_option(kind, value)
-    [
-      t("activerecord.attributes.#{Event::GroupParticipation.name.underscore}.#{kind.to_s.pluralize}.#{value}"),
-      value
-    ]
+    [ music_i18n(kind, value), value]
+  end
+
+  def music_i18n(kind, value)
+    t("activerecord.attributes.#{Event::GroupParticipation.name.underscore}.#{kind.to_s.pluralize}.#{value}")
   end
 end
