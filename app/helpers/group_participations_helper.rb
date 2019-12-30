@@ -1,6 +1,8 @@
 module GroupParticipationsHelper
   def music_styles_selection
-    Event::GroupParticipation::MUSIC_CLASSIFICATIONS.map { |h| music_i18n_option(:music_style, h[:style]) }
+    Event::GroupParticipation::MUSIC_CLASSIFICATIONS.map do |h|
+      music_i18n_option(:music_style, h[:style])
+    end
   end
 
   def music_types_selection_for(music_style)
@@ -20,10 +22,11 @@ module GroupParticipationsHelper
   end
 
   def music_i18n_option(kind, value)
-    [ music_i18n(kind, value), value]
+    [music_i18n(kind, value), value]
   end
 
   def music_i18n(kind, value)
-    t("activerecord.attributes.#{Event::GroupParticipation.name.underscore}.#{kind.to_s.pluralize}.#{value}")
+    model_key = Event::GroupParticipation.name.underscore
+    t("activerecord.attributes.#{model_key}.#{kind.to_s.pluralize}.#{value}")
   end
 end
