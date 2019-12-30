@@ -1,3 +1,7 @@
+- if entry.music_style_selected?
+  %ul
+    %li #{t(:music_style)}: #{music_i18n(:music_style, entry.music_style)}
+
 = crud_form(path_args(entry),
   cancel_url: polymorphic_path(path_args(model_class), returning: true),
   buttons_bottom: true, buttons_top: false) do |f|
