@@ -324,6 +324,10 @@ de:
         name: Aufführung
 
       event/group_participation:
+        group_id: Verein
+        music_style: Musikrichtung
+        music_type: Besetzung
+        music_level: Klasse
         music_styles:
           concert_music: Konzertmusik
           contemporary_music: Unterhaltungsmusik

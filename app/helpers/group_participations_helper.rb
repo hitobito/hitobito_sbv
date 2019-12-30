@@ -28,4 +28,16 @@ module GroupParticipationsHelper
       value
     ]
   end
+
+  def format_music_style(entry)
+    music_i18n_option(:music_style, entry.music_style).first
+  end
+
+  def format_music_type(entry)
+    music_i18n_option(:music_type, entry.music_type).first
+  end
+
+  def format_music_level(entry)
+    music_i18n_option(:music_level, entry.music_level).first
+  end
 end
