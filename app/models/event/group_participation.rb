@@ -7,7 +7,6 @@ require_dependency 'aasm'
 
 class Event::GroupParticipation < ActiveRecord::Base
   include ::AASM
-  include I18nEnums
 
   MUSIC_CLASSIFICATIONS = [
     {
@@ -36,8 +35,6 @@ class Event::GroupParticipation < ActiveRecord::Base
       }
     }
   ].freeze
-
-  # i18n_enum :music_styles, Event::GroupParticipation::MUSIC_CLASSIFICATIONS.map { |h| h[:style] }, key: :music_styles
 
   self.demodulized_route_keys = true
 

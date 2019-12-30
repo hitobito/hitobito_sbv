@@ -4,10 +4,10 @@
 
   - if entry.initial?
     = f.label :music_style
-    = f.select :music_style, music_styles_selection, prompt: 'Select'
+    = f.select :music_style, music_styles_selection, prompt: ''
   - if entry.music_style_selected?
     = f.label :music_type
-    = f.select :music_type, music_types_selection_for(entry.music_style), prompt: 'Select'
+    = f.select :music_type, music_types_selection_for(entry.music_style), prompt: ''
     = f.label :music_level
     = f.select :music_level, []
 
