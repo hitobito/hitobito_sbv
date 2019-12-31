@@ -1,9 +1,7 @@
-= render_present_attrs entry, :group_id
-= render_present_attrs entry, :music_style
-= render_present_attrs entry, :music_type, :music_level
+= render 'attrs'
 
 = crud_form(path_args(entry),
-  cancel_url: polymorphic_path(path_args(model_class), returning: true),
+  cancel_url: group_our_festival_participations_path(entry.group, returning: true),
   buttons_bottom: true, buttons_top: false) do |f|
 
   - if entry.initial?
