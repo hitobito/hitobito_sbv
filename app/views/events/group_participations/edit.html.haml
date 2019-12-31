@@ -15,5 +15,11 @@
     = f.label :music_level
     = f.select :music_level, []
 
+  - if entry.music_type_and_level_selected?
+    = f.label :preferred_play_day_1
+    = f.select :preferred_play_day_1, play_day_selection_for(entry), prompt: ''
+    = f.label :preferred_play_day_2
+    = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
+
 = music_level_selections_for(entry.music_style) if entry.music_style_selected?
 
