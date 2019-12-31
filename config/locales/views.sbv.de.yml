@@ -109,10 +109,16 @@ de:
 
   events:
     group_participations:
+      edit: "%{participation} bearbeiten"
       actions_new:
         title: "Vereinsanmeldung"
       create:
         success: "Anmeldung erfolgreich hinzugefügt"
+    our_participations:
+      list:
+        applicable_festivals: "zur Anmeldung freigegebenen Musikfeste"
+        active_applications: "Anmeldungen meiner Gruppe"
+        edit: bearbeiten
 
   contactable:
     additional_email_fields:

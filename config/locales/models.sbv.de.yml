@@ -243,6 +243,10 @@ de:
         one: Liste
         other: Listen
 
+      event/group_participation:
+        one: Gruppenanmeldung
+        other: Gruppenanmeldungen
+
     attributes:
       person:
         correspondence_language: Korrespondenzsprache
@@ -324,6 +328,7 @@ de:
         name: Aufführung
 
       event/group_participation:
+        name: "Gruppenanmeldung bei %{event} als %{group}"
         group_id: Verein
         music_style: Musikrichtung
         music_type: Besetzung

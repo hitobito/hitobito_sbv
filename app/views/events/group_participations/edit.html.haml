@@ -1,16 +1,16 @@
+= render_present_attrs entry, :group_id
+= render_present_attrs entry, :music_style
+= render_present_attrs entry, :music_type, :music_level
+
 = crud_form(path_args(entry),
   cancel_url: polymorphic_path(path_args(model_class), returning: true),
   buttons_bottom: true, buttons_top: false) do |f|
-
-  = render_attrs entry, :group_id
 
   - if entry.initial?
     = f.label :music_style
     = f.select :music_style, music_styles_selection, prompt: ''
 
   - if entry.music_style_selected?
-    = render_attrs entry, :music_style
-
     = f.label :music_type
     = f.select :music_type, music_types_selection_for(entry.music_style), prompt: ''
 

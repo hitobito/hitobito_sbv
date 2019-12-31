@@ -1,3 +1,8 @@
+#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
+#  hitobito_sbv and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_sbv.
+
 module GroupParticipationsHelper
   def music_styles_selection
     Event::GroupParticipation::MUSIC_CLASSIFICATIONS.map do |h|
@@ -14,7 +19,7 @@ module GroupParticipationsHelper
       values = levels.map { |level| music_i18n_option(:music_level, level) }
 
       content_tag(:div, hidden: true, class: type) { options_for_select(values || []) }
-    end.join.html_safe
+    end.join.html_safe # rubocop:disable Rails/OutputSafety contains no external input
   end
 
   def music_types_for(music_style)
@@ -39,5 +44,10 @@ module GroupParticipationsHelper
 
   def format_music_level(entry)
     music_i18n_option(:music_level, entry.music_level).first
+  end
+
+  def format_event_group_participation_title(entry)
+    t(:name, event: entry.event.to_s, group: entry.group.to_s,
+             scope: 'activerecord.attributes.event/group_participation')
   end
 end

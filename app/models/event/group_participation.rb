@@ -72,4 +72,10 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: :music_style_selected,          to: :music_type_and_level_selected
     end
   end
+
+  ### INSTANCE METHODS
+
+  def to_s
+    "#{group} -> #{event}"
+  end
 end
