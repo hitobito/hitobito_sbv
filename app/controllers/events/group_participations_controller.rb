@@ -21,7 +21,7 @@ class Events::GroupParticipationsController < CrudController
   around_update :update_state_machine
 
   def update
-    super(location: group_event_path(@group, @event))
+    super(location: edit_group_event_group_participation_path(@group, @event, entry))
   end
 
   private_class_method
