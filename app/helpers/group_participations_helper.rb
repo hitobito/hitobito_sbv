@@ -50,4 +50,18 @@ module GroupParticipationsHelper
     t(:name, event: entry.event.to_s, group: entry.group.to_s,
              scope: 'activerecord.attributes.event/group_participation')
   end
+
+  def play_day_selection_for(record)
+    result = Event::GroupParticipation::MUSIC_LEVEL_PLAY_DAYS
+
+    %i(music_style music_type music_level).each do |attr|
+      break unless result
+
+      result = result[record.public_send(attr)]
+    end
+
+    return [] unless result
+
+    t('date.day_names').values_at(*result)
+  end
 end
