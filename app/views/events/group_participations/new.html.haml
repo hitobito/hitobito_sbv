@@ -16,4 +16,3 @@
   buttons_top: false,
   cancel_url: polymorphic_path(path_args(model_class), returning: true)) do |f|
   = f.hidden_field :group_id, value: @participating_group.id
-

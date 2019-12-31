@@ -84,7 +84,6 @@ de:
         one: Verantwortlicher SUISA
         other: Verantworliche SUISA
 
-
       group/regionalverband:
         one: Regionalverband
         other: Regionalverbände
@@ -145,7 +144,6 @@ de:
       role/adressverwaltung:
         one: Adressverwaltung
         other: Adressverwaltung
-
 
       #### Geschaeftsstelle Roles
 
@@ -212,7 +210,6 @@ de:
       role/kontakt:
         one: Kontakt
         other: Kontakte
-
 
       #### Mitglieder Roles
 
