@@ -8,11 +8,6 @@ require_dependency 'aasm'
 class Event::GroupParticipation < ActiveRecord::Base
   include ::AASM
 
-  AVAILABLE_PLAY_DAYS = { thursday: 4, friday: 5, saturday: 6, sunday: 0 }.freeze
-
-  enum preferred_play_day_1: AVAILABLE_PLAY_DAYS, _prefix: :play_day_1
-  enum preferred_play_day_2: AVAILABLE_PLAY_DAYS, _prefix: :play_day_2
-
   MUSIC_CLASSIFICATIONS = [
     {
       style: 'concert_music',
@@ -40,6 +35,8 @@ class Event::GroupParticipation < ActiveRecord::Base
       }
     }
   ].freeze
+
+  AVAILABLE_PLAY_DAYS = { thursday: 4, friday: 5, saturday: 6, sunday: 0 }.freeze
 
   MUSIC_LEVEL_PLAY_DAYS = {
     'concert_music' => {
@@ -100,42 +97,7 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   validates_by_schema
   validates :group_id, uniqueness: { scope: :event_id }
-  validate :preferred_play_days_are_valid
-
-  def preferred_play_days_are_valid
-    errors.delete(:preferred_play_day_1)
-    errors.delete(:preferred_play_day_2)
-
-    return true unless music_style.present? && music_type.present? && music_level.present?
-
-    one_play_day_is_selected
-    preferred_play_days_are_possible
-    preferred_play_days_are_separate
-  end
-
-  def one_play_day_is_selected
-    if preferred_play_day_1.blank? && preferred_play_day_2.blank?
-      errors[:base] = :one_needs_to_be_selected
-    end
-  end
-
-  def preferred_play_days_are_separate
-    if preferred_play_day_1 == preferred_play_day_2
-      errors[:preferred_play_day_2] = :duplicate
-    end
-  end
-
-  def preferred_play_days_are_possible
-    days = MUSIC_LEVEL_PLAY_DAYS.fetch(music_style, {})
-                                .fetch(music_type, {})
-                                .fetch(music_level, {})
-
-    [:preferred_play_day_1, :preferred_play_day_2].each do |day|
-      if send(day) && (day_number = AVAILABLE_PLAY_DAYS[day]) && !days.include?(day_number)
-        errors[day] = :impossible
-      end
-    end
-  end
+  validates_with PreferredDateValidator
 
   ### STATE MACHINE
 
