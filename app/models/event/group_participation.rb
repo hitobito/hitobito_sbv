@@ -1,4 +1,4 @@
-#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -60,18 +60,18 @@ class Event::GroupParticipation < ActiveRecord::Base
       'fanfare_benelux_harmony' => {
         'first'  => AVAILABLE_PLAY_DAYS.values_at(:thursday),
         'second' => AVAILABLE_PLAY_DAYS.values_at(:thursday),
-        'third'  => AVAILABLE_PLAY_DAYS.values_at(:thursday, :friday),
+        'third'  => AVAILABLE_PLAY_DAYS.values_at(:thursday, :friday)
       },
       'fanfare_benelux_brass_band' => {
         'first'  => AVAILABLE_PLAY_DAYS.values_at(:thursday),
         'second' => AVAILABLE_PLAY_DAYS.values_at(:thursday),
-        'third'  => AVAILABLE_PLAY_DAYS.values_at(:thursday, :friday),
+        'third'  => AVAILABLE_PLAY_DAYS.values_at(:thursday, :friday)
       },
       'fanfare_mixte_harmony' => {
-        'fourth' => AVAILABLE_PLAY_DAYS.values_at(:thursday),
+        'fourth' => AVAILABLE_PLAY_DAYS.values_at(:thursday)
       },
       'fanfare_mixte_brass_band' => {
-        'fourth' => AVAILABLE_PLAY_DAYS.values_at(:thursday),
+        'fourth' => AVAILABLE_PLAY_DAYS.values_at(:thursday)
       }
     },
     'contemporary_music' => {
@@ -100,6 +100,42 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   validates_by_schema
   validates :group_id, uniqueness: { scope: :event_id }
+  validate :preferred_play_days_are_valid
+
+  def preferred_play_days_are_valid
+    errors.delete(:preferred_play_day_1)
+    errors.delete(:preferred_play_day_2)
+
+    return true unless music_style.present? && music_type.present? && music_level.present?
+
+    one_play_day_is_selected
+    preferred_play_days_are_possible
+    preferred_play_days_are_separate
+  end
+
+  def one_play_day_is_selected
+    if preferred_play_day_1.blank? && preferred_play_day_2.blank?
+      errors[:base] = :one_needs_to_be_selected
+    end
+  end
+
+  def preferred_play_days_are_separate
+    if preferred_play_day_1 == preferred_play_day_2
+      errors[:preferred_play_day_2] = :duplicate
+    end
+  end
+
+  def preferred_play_days_are_possible
+    days = MUSIC_LEVEL_PLAY_DAYS.fetch(music_style, {})
+                                .fetch(music_type, {})
+                                .fetch(music_level, {})
+
+    [:preferred_play_day_1, :preferred_play_day_2].each do |day|
+      if send(day) && (day_number = AVAILABLE_PLAY_DAYS[day]) && !days.include?(day_number)
+        errors[day] = :impossible
+      end
+    end
+  end
 
   ### STATE MACHINE
 
