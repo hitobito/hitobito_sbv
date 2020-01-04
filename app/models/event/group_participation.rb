@@ -1,4 +1,4 @@
-#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -36,6 +36,56 @@ class Event::GroupParticipation < ActiveRecord::Base
     }
   ].freeze
 
+  AVAILABLE_PLAY_DAYS = { thursday: 4, friday: 5, saturday: 6, sunday: 0 }.freeze
+
+  MUSIC_LEVEL_PLAY_DAYS = {
+    'concert_music' => {
+      'harmony' => {
+        'highest' => AVAILABLE_PLAY_DAYS.values_at(:friday, :saturday, :sunday),
+        'first'   => AVAILABLE_PLAY_DAYS.values,
+        'second'  => AVAILABLE_PLAY_DAYS.values,
+        'third'   => AVAILABLE_PLAY_DAYS.values,
+        'fourth'  => AVAILABLE_PLAY_DAYS.values_at(:sunday)
+      },
+      'brass_band' => {
+        'highest' => AVAILABLE_PLAY_DAYS.values_at(:thursday, :friday),
+        'first'   => AVAILABLE_PLAY_DAYS.values,
+        'second'  => AVAILABLE_PLAY_DAYS.values,
+        'third'   => AVAILABLE_PLAY_DAYS.values,
+        'fourth'  => AVAILABLE_PLAY_DAYS.values_at(:thursday)
+      },
+      'fanfare_benelux_harmony' => {
+        'first'  => AVAILABLE_PLAY_DAYS.values_at(:thursday),
+        'second' => AVAILABLE_PLAY_DAYS.values_at(:thursday),
+        'third'  => AVAILABLE_PLAY_DAYS.values_at(:thursday, :friday)
+      },
+      'fanfare_benelux_brass_band' => {
+        'first'  => AVAILABLE_PLAY_DAYS.values_at(:thursday),
+        'second' => AVAILABLE_PLAY_DAYS.values_at(:thursday),
+        'third'  => AVAILABLE_PLAY_DAYS.values_at(:thursday, :friday)
+      },
+      'fanfare_mixte_harmony' => {
+        'fourth' => AVAILABLE_PLAY_DAYS.values_at(:thursday)
+      },
+      'fanfare_mixte_brass_band' => {
+        'fourth' => AVAILABLE_PLAY_DAYS.values_at(:thursday)
+      }
+    },
+    'contemporary_music' => {
+      'harmony' => {
+        'high'   => AVAILABLE_PLAY_DAYS.values_at(:saturday),
+        'medium' => AVAILABLE_PLAY_DAYS.values_at(:saturday, :sunday),
+        'low'    => AVAILABLE_PLAY_DAYS.values_at(:thursday)
+      },
+      'brass_band' => {
+        'high'   => AVAILABLE_PLAY_DAYS.values_at(:sunday),
+        'medium' => AVAILABLE_PLAY_DAYS.values_at(:saturday),
+        'low'    => AVAILABLE_PLAY_DAYS.values_at(:friday)
+      }
+    },
+    'parade_music' => {}
+  }.freeze
+
   self.demodulized_route_keys = true
 
   ### ASSOCIATIONS
@@ -47,6 +97,7 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   validates_by_schema
   validates :group_id, uniqueness: { scope: :event_id }
+  validates_with PreferredDateValidator
 
   ### STATE MACHINE
 
@@ -54,13 +105,14 @@ class Event::GroupParticipation < ActiveRecord::Base
     state :initial, initial: true
     state :music_style_selected
     state :music_type_and_level_selected
+    state :preferred_play_day_selected
     state :completed
-
 
     event :progress_in_application do
       transitions from: :initial,                       to: :music_style_selected
       transitions from: :music_style_selected,          to: :music_type_and_level_selected
-      transitions from: :music_type_and_level_selected, to: :completed
+      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
+      transitions from: :preferred_play_day_selected,   to: :completed
     end
 
     event :select_music_style do
@@ -70,6 +122,10 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     event :select_music_type do
       transitions from: :music_style_selected,          to: :music_type_and_level_selected
+    end
+
+    event :select_preferred_play_day do
+      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
     end
   end
 
