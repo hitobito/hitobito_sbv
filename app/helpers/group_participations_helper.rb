@@ -1,4 +1,4 @@
-#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -51,10 +51,23 @@ module GroupParticipationsHelper
              scope: 'activerecord.attributes.event/group_participation')
   end
 
+  def format_preferred_play_day_1(entry)
+    day_name(entry.preferred_play_day_1)
+  end
+
+  def format_preferred_play_day_2(entry)
+    day_name(entry.preferred_play_day_2)
+  end
+
+  def day_name(value)
+    return '' unless value
+    t('date.day_names').fetch(value)
+  end
+
   def play_day_selection_for(record)
     result = Event::GroupParticipation::MUSIC_LEVEL_PLAY_DAYS
 
-    %i(music_style music_type music_level).each do |attr|
+    [:music_style, :music_type, :music_level].each do |attr|
       break unless result
 
       result = result[record.public_send(attr)]

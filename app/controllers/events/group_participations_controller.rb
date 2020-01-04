@@ -1,4 +1,4 @@
-#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -9,7 +9,9 @@ class Events::GroupParticipationsController < CrudController
     :music_style,
     :music_type,
     :music_level,
-    :group_id
+    :group_id,
+    :preferred_play_day_1,
+    :preferred_play_day_2
   ]
 
   decorates :event

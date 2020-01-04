@@ -45,7 +45,7 @@ class Event::GroupParticipation < ActiveRecord::Base
         'first'   => AVAILABLE_PLAY_DAYS.values,
         'second'  => AVAILABLE_PLAY_DAYS.values,
         'third'   => AVAILABLE_PLAY_DAYS.values,
-        'fourth'  => [AVAILABLE_PLAY_DAYS[:sunday]]
+        'fourth'  => AVAILABLE_PLAY_DAYS.values_at(:sunday)
       },
       'brass_band' => {
         'highest' => AVAILABLE_PLAY_DAYS.values_at(:thursday, :friday),
@@ -107,7 +107,6 @@ class Event::GroupParticipation < ActiveRecord::Base
     state :music_type_and_level_selected
     state :preferred_play_day_selected
     state :completed
-
 
     event :progress_in_application do
       transitions from: :initial,                       to: :music_style_selected
