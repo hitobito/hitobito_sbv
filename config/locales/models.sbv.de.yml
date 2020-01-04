@@ -327,7 +327,7 @@ de:
       event/group_participation:
         name: "Gruppenanmeldung bei %{event} als %{group}"
         group_id: Verein
-        music_style: Musikrichtung
+        music_style: Sparte
         music_type: Besetzung
         music_level: Klasse
         preferred_play_day_1: "1. Wunschspieltag"
