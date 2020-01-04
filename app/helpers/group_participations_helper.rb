@@ -27,11 +27,15 @@ module GroupParticipationsHelper
   end
 
   def music_i18n_option(kind, value)
-    model_key = Event::GroupParticipation.name.underscore
     [
-      t("activerecord.attributes.#{model_key}.#{kind.to_s.pluralize}.#{value}"),
+      t("#{kind.to_s.pluralize}.#{value}", group_participation_scope),
       value
     ]
+  end
+
+  def group_participation_scope
+    model_key = Event::GroupParticipation.name.underscore
+    { scope: "activerecord.attributes.#{model_key}" }
   end
 
   def format_music_style(entry)

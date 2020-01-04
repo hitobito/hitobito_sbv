@@ -11,7 +11,8 @@ class Events::GroupParticipationsController < CrudController
     :music_level,
     :group_id,
     :preferred_play_day_1,
-    :preferred_play_day_2
+    :preferred_play_day_2,
+    :terms_accepted
   ]
 
   decorates :event

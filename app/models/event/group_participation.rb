@@ -101,18 +101,20 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   ### STATE MACHINE
 
-  aasm column: 'state' do
+  aasm column: 'state' do # rubocop:disable Metrics/BlockLength This is config, not code
     state :initial, initial: true
     state :music_style_selected
     state :music_type_and_level_selected
     state :preferred_play_day_selected
+    state :terms_accepted
     state :completed
 
     event :progress_in_application do
       transitions from: :initial,                       to: :music_style_selected
       transitions from: :music_style_selected,          to: :music_type_and_level_selected
       transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
-      transitions from: :preferred_play_day_selected,   to: :completed
+      transitions from: :preferred_play_day_selected,   to: :terms_accepted
+      transitions from: :terms_accepted,                to: :completed
     end
 
     event :select_music_style do
@@ -126,6 +128,10 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     event :select_preferred_play_day do
       transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
+    end
+
+    event :accept_terms do
+      transitions from: :preferred_play_day_selected,   to: :terms_accepted
     end
   end
 
