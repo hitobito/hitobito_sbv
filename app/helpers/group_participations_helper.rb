@@ -59,22 +59,17 @@ module GroupParticipationsHelper
     day_name(entry.preferred_play_day_2)
   end
 
+  def play_day_selection_for(record)
+    day_numbers = record.possible_day_numbers
+    day_names   = t('date.day_names').values_at(*day_numbers)
+
+    day_names.zip(day_numbers)
+  end
+
+  private
+
   def day_name(value)
     return '' unless value
     t('date.day_names').fetch(value)
-  end
-
-  def play_day_selection_for(record)
-    result = Event::GroupParticipation::MUSIC_LEVEL_PLAY_DAYS
-
-    [:music_style, :music_type, :music_level].each do |attr|
-      break unless result
-
-      result = result[record.public_send(attr)]
-    end
-
-    return [] unless result
-
-    t('date.day_names').values_at(*result)
   end
 end

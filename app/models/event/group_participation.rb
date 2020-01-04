@@ -134,4 +134,11 @@ class Event::GroupParticipation < ActiveRecord::Base
   def to_s
     "#{group} -> #{event}"
   end
+
+  def possible_day_numbers
+    MUSIC_LEVEL_PLAY_DAYS
+      .fetch(music_style, {})
+      .fetch(music_type, {})
+      .fetch(music_level, {})
+  end
 end

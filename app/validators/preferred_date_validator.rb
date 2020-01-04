@@ -51,10 +51,7 @@ class PreferredDateValidator < ActiveModel::Validator
   end
 
   def preferred_play_days_are_possible
-    days = Event::GroupParticipation::MUSIC_LEVEL_PLAY_DAYS
-           .fetch(music_style, {})
-           .fetch(music_type, {})
-           .fetch(music_level, {})
+    days = record.possible_day_numbers
 
     [:preferred_play_day_1, :preferred_play_day_2].each do |day|
       day_number = record.send(day)
