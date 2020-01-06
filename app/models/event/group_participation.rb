@@ -36,8 +36,11 @@ class Event::GroupParticipation < ActiveRecord::Base
     }
   ].freeze
 
+  # these two constants should, if they ever need to change, be made
+  # configurable through additional attributes or a relation on Event::Date
+  # This duplication in structure with the MUSIC_CLASSIFICATIONS is actually a
+  # dependency.
   AVAILABLE_PLAY_DAYS = { thursday: 4, friday: 5, saturday: 6, sunday: 0 }.freeze
-
   MUSIC_LEVEL_PLAY_DAYS = {
     'concert_music' => {
       'harmony' => {
