@@ -27,10 +27,7 @@
       = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
 
   - if entry.preferred_play_day_selected?
-    = f.label :terms_accepted
-    = f.check_box :terms_accepted
-    %p
-      = link_to t(:terms, group_participation_scope), t(:terms_url, group_participation_scope), target: '_blank'
+    = f.labeled_boolean_field :terms_accepted, caption: link_to(t(:terms, group_participation_scope), t(:terms_url, group_participation_scope), target: '_blank')
 
 = music_level_selections_for(entry.music_style) if entry.music_style_selected?
 
