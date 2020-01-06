@@ -6,8 +6,9 @@
 module GroupParticipationsHelper
   def music_styles_selection
     Event::GroupParticipation::MUSIC_CLASSIFICATIONS.map do |h|
+      next if h[:style] == 'parade_music'
       music_i18n_option(:music_style, h[:style])
-    end
+    end.compact
   end
 
   def music_types_selection_for(music_style)
@@ -44,6 +45,10 @@ module GroupParticipationsHelper
 
   def format_music_type(entry)
     music_i18n_option(:music_type, entry.music_type).first
+  end
+
+  def format_parade_music(entry)
+    music_i18n_option(:music_type, entry.parade_music).first
   end
 
   def format_music_level(entry)

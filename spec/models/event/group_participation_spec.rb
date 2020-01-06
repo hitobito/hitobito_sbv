@@ -40,11 +40,6 @@ describe Event::GroupParticipation do
       end
 
       it 'to be one or two choices' do
-        subject.preferred_play_day_1 = nil
-        subject.preferred_play_day_2 = nil
-
-        is_expected.to_not be_valid
-
         subject.preferred_play_day_1 = friday
         subject.preferred_play_day_2 = nil
 

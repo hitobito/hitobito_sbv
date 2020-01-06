@@ -6,7 +6,7 @@
 class PreferredDateValidator < ActiveModel::Validator
   delegate :music_style, :music_type, :music_level,
            :preferred_play_day_1, :preferred_play_day_2,
-           :errors,
+           :errors, :changed,
            to: :record
 
   attr_reader :record
@@ -14,7 +14,7 @@ class PreferredDateValidator < ActiveModel::Validator
   def validate(record)
     @record = record
 
-    return true unless music_chosen?
+    return true unless music_chosen? && date_changed?
 
     errors.delete(:preferred_play_day_1)
     errors.delete(:preferred_play_day_2)
@@ -26,6 +26,10 @@ class PreferredDateValidator < ActiveModel::Validator
 
   def music_chosen?
     music_style.present? && music_type.present? && music_level.present?
+  end
+
+  def date_changed?
+    changed.include?('preferred_play_day_1') || changed.include?('preferred_play_day_2')
   end
 
   def error_translation(attr, key)

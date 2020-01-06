@@ -9,6 +9,7 @@ class Events::GroupParticipationsController < CrudController
     :music_style,
     :music_type,
     :music_level,
+    :parade_music,
     :group_id,
     :preferred_play_day_1,
     :preferred_play_day_2,

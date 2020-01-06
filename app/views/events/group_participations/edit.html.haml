@@ -5,21 +5,26 @@
   buttons_bottom: true, buttons_top: false) do |f|
 
   - if entry.initial?
-    = f.label :music_style
-    = f.select :music_style, music_styles_selection, prompt: ''
+    = f.labeled :music_style do
+      = f.select :music_style, music_styles_selection, prompt: ''
+    = f.labeled_boolean_field :parade_music, { checked_value: 'parade_music', unchecked_value: '' }
 
   - if entry.music_style_selected?
-    = f.label :music_type
-    = f.select :music_type, music_types_selection_for(entry.music_style), prompt: ''
+    = f.labeled :music_type do
+      = f.select :music_type, music_types_selection_for(entry.music_style), prompt: ''
 
-    = f.label :music_level
-    = f.select :music_level, []
+    = f.labeled :music_level do
+      = f.select :music_level, []
+
+    - if  entry.parade_music.present?
+      = f.labeled :parade_music do
+        = f.select :parade_music, music_types_selection_for(entry.parade_music), prompt: ''
 
   - if entry.music_type_and_level_selected?
-    = f.label :preferred_play_day_1
-    = f.select :preferred_play_day_1, play_day_selection_for(entry), prompt: ''
-    = f.label :preferred_play_day_2
-    = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
+    = f.labeled :preferred_play_day_1 do
+      = f.select :preferred_play_day_1, play_day_selection_for(entry), prompt: ''
+    = f.labeled :preferred_play_day_2 do
+      = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
 
   - if entry.preferred_play_day_selected?
     = f.label :terms_accepted
