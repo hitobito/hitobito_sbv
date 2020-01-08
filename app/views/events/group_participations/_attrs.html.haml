@@ -1,5 +1,7 @@
-= render_present_attrs entry, :group_id
+= render_present_attrs entry, :group_id, :secondary_group_id
 = render_present_attrs entry, :music_style, :parade_music
 = render_present_attrs entry, :music_type, :music_level
 = render_present_attrs entry, :preferred_play_day_1, :preferred_play_day_2
-= render_present_attrs entry, :terms_accepted
+
+- terms = entry.joint_participation? ? [:terms_accepted, :secondary_terms_accepted] : [:terms_accepted]
+= render_attrs entry, *terms

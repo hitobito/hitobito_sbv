@@ -4,30 +4,39 @@
   cancel_url: group_our_festival_participations_path(entry.group, returning: true),
   buttons_bottom: true, buttons_top: false) do |f|
 
-  - if entry.initial?
-    = f.labeled :music_style do
-      = f.select :music_style, music_styles_selection, prompt: ''
-    = f.labeled_boolean_field :parade_music, { checked_value: 'parade_music', unchecked_value: '' }
+  - if entry.primary_joint_participation_selected?
+    = f.labeled_group_field :secondary_group
+    = f.labeled_boolean_field :secondary_group_is_primary
 
-  - if entry.music_style_selected?
-    = f.labeled :music_type do
-      = f.select :music_type, music_types_selection_for(entry.music_style), prompt: ''
+  - if entry.primary_or_only?(@participating_group)
+    - if entry.primary_primary_group_selected?
+      = f.labeled :music_style do
+        = f.select :music_style, music_styles_selection, prompt: ''
+      = f.labeled_boolean_field :parade_music, { checked_value: 'parade_music', unchecked_value: '' }
 
-    = f.labeled :music_level do
-      = f.select :music_level, []
+    - if entry.primary_music_style_selected?
+      = f.labeled :music_type do
+        = f.select :music_type, music_types_selection_for(entry.music_style), prompt: ''
 
-    - if  entry.parade_music.present?
-      = f.labeled :parade_music do
-        = f.select :parade_music, music_types_selection_for(entry.parade_music), prompt: ''
+      = f.labeled :music_level do
+        = f.select :music_level, []
 
-  - if entry.music_type_and_level_selected?
-    = f.labeled :preferred_play_day_1 do
-      = f.select :preferred_play_day_1, play_day_selection_for(entry), prompt: ''
-    = f.labeled :preferred_play_day_2 do
-      = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
+      - if  entry.parade_music.present?
+        = f.labeled :parade_music do
+          = f.select :parade_music, music_types_selection_for(entry.parade_music), prompt: ''
 
-  - if entry.preferred_play_day_selected?
-    = f.labeled_boolean_field :terms_accepted, caption: link_to(t(:terms, group_participation_scope), t(:terms_url, group_participation_scope), target: '_blank')
+    - if entry.primary_music_type_and_level_selected?
+      = f.labeled :preferred_play_day_1 do
+        = f.select :preferred_play_day_1, play_day_selection_for(entry), prompt: ''
+      = f.labeled :preferred_play_day_2 do
+        = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
 
-= music_level_selections_for(entry.music_style) if entry.music_style_selected?
+    - if entry.primary_preferred_play_day_selected?
+      = f.labeled_boolean_field :terms_accepted, caption: link_to(t(:terms, group_participation_scope), t(:terms_url, group_participation_scope), target: '_blank')
+
+  - else # participating as secondary
+    - if entry.secondary_opened?
+      = f.labeled_boolean_field :secondary_terms_accepted, caption: link_to(t(:terms, group_participation_scope), t(:terms_url, group_participation_scope), target: '_blank')
+
+= music_level_selections_for(entry.music_style) if entry.primary_music_style_selected?
 

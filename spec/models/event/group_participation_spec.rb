@@ -7,8 +7,9 @@ require 'spec_helper'
 
 describe Event::GroupParticipation do
   context 'is a state-machine which' do
-    it { is_expected.to have_state(:initial) }
-    it { is_expected.to allow_event(:select_music_style) }
+    it { is_expected.to have_state(:opened).on(:primary) }
+    it { is_expected.to allow_event(:progress).on(:primary) }
+    it { is_expected.to allow_event(:progress).on(:secondary) }
     # more states?
     # it { is_expected.to allow_event(:select_music_type) }
     # it { is_expected.to have_state(:completed) }
@@ -20,7 +21,7 @@ describe Event::GroupParticipation do
         described_class.create(
           event: events(:festival),
           group: groups(:musikgesellschaft_aarberg),
-          state: 'music_type_and_level_selected',
+          primary_state: 'music_type_and_level_selected',
           music_style: 'concert_music',
           music_type: 'harmony',
           music_level: 'highest'

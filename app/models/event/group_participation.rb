@@ -91,10 +91,15 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   self.demodulized_route_keys = true
 
+  ### ATTRIBUTES
+
+  attr_accessor :secondary_group_is_primary
+
   ### ASSOCIATIONS
 
   belongs_to :event, class_name: 'Event::Festival'
   belongs_to :group
+  belongs_to :secondary_group, class_name: 'Group'
 
   ### VALIDATIONS
 
@@ -102,39 +107,43 @@ class Event::GroupParticipation < ActiveRecord::Base
   validates :group_id, uniqueness: { scope: :event_id }
   validates_with PreferredDateValidator
 
-  ### STATE MACHINE
+  ### STATE MACHINES
 
-  aasm column: 'state' do # rubocop:disable Metrics/BlockLength This is config, not code
-    state :initial, initial: true
+  aasm :primary, column: 'primary_state', namespace: :primary do
+    state :opened, initial: true
+    state :joint_participation_selected
+    state :primary_group_selected
     state :music_style_selected
     state :music_type_and_level_selected
     state :preferred_play_day_selected
     state :terms_accepted
     state :completed
 
-    event :progress_in_application do
-      transitions from: :initial,                       to: :music_style_selected
+    event :progress do
+      transitions from: :opened,                        to: :joint_participation_selected,
+                  guard: :joint_participation?
+      transitions from: :joint_participation_selected,  to: :primary_group_selected,
+                  after: :store_groups_correctly # after transition, before save
+      transitions from: :opened,                        to: :primary_group_selected
+
+      transitions from: :primary_group_selected,        to: :music_style_selected
       transitions from: :music_style_selected,          to: :music_type_and_level_selected
       transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
       transitions from: :preferred_play_day_selected,   to: :terms_accepted
       transitions from: :terms_accepted,                to: :completed
     end
+  end
 
-    event :select_music_style do
-      transitions from: :initial,                       to: :music_style_selected
-      transitions from: :music_type_and_level_selected, to: :music_style_selected
-    end
+  aasm :secondary, column: 'secondary_state', namespace: :secondary do
+    state :not_present, initial: true
+    state :opened
+    state :terms_accepted
+    state :completed
 
-    event :select_music_type do
-      transitions from: :music_style_selected,          to: :music_type_and_level_selected
-    end
-
-    event :select_preferred_play_day do
-      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
-    end
-
-    event :accept_terms do
-      transitions from: :preferred_play_day_selected,   to: :terms_accepted
+    event :progress do
+      transitions from: :not_present,    to: :opened
+      transitions from: :opened,         to: :terms_accepted
+      transitions from: :terms_accepted, to: :completed
     end
   end
 
@@ -149,5 +158,38 @@ class Event::GroupParticipation < ActiveRecord::Base
       .fetch(music_style, {})
       .fetch(music_type, {})
       .fetch(music_level, {})
+  end
+
+  def progress_for(participating_group)
+    send(:"progress_#{state_machine_for(participating_group)}!") # e.g. progress_primary!
+  end
+
+  def state_for(participating_group)
+    ActiveSupport::StringInquirer.new(
+      aasm(
+        state_machine_for(participating_group) # :primary or :secondary
+      ).current_state.to_s # e.g. terms_accepted
+    )
+  end
+
+  def primary_or_only?(participating_group)
+    !joint_participation || state_machine_for(participating_group) == :primary
+  end
+
+  private
+
+  def state_machine_for(participating_group = nil)
+    case participating_group
+    when group           then :primary
+    when secondary_group then :secondary
+    else
+      raise 'Group not related to this participation'
+    end
+  end
+
+  def store_groups_correctly
+    if secondary_group_is_primary == 'true'
+      self.group_id, self.secondary_group_id = secondary_group_id, group_id
+    end
   end
 end

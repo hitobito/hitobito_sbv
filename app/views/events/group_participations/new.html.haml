@@ -16,3 +16,6 @@
   buttons_top: false,
   cancel_url: polymorphic_path(path_args(model_class), returning: true)) do |f|
   = f.hidden_field :group_id, value: @participating_group.id
+  = f.labeled :joint_participation do
+    = f.inline_radio_button(:joint_participation, '1', t('global.yes'))
+    = f.inline_radio_button(:joint_participation, '0', t('global.no'))

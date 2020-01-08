@@ -327,6 +327,10 @@ de:
       event/group_participation:
         name: "Gruppenanmeldung bei %{event} als %{group}"
         group_id: Verein
+        joint_participation: Anmeldung als Spielgemeinschaft
+        secondary_group: Partnerverein
+        secondary_group_id: Spielgemeinschaft mit
+        secondary_group_is_primary: Partnerverein ist führender Verein
         music_style: Sparte
         music_type: Besetzung
         music_level: Klasse
@@ -336,6 +340,7 @@ de:
         terms: Reglement
         terms_url: https://www.windband.ch/media/471564/reglement-fuer-das-eidgenoessische-musikfest_sbv_20180414_d.pdf
         terms_accepted: Reglement akzeptiert
+        secondary_terms_accepted: Reglement von Partnerverein akzeptiert
         music_styles:
           concert_music: Konzertmusik
           contemporary_music: Unterhaltungsmusik
