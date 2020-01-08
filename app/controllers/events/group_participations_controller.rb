@@ -16,7 +16,8 @@ class Events::GroupParticipationsController < CrudController
     :secondary_group_is_primary,
     :preferred_play_day_1,
     :preferred_play_day_2,
-    :terms_accepted
+    :terms_accepted,
+    :secondary_group_terms_accepted
   ]
 
   decorates :event
