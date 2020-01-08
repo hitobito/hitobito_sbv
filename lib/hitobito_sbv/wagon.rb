@@ -46,6 +46,7 @@ module HitobitoSbv
       admin[:active_for] << 'songs'
       GroupsHelper.send :include, Sbv::GroupsHelper
       GroupDecorator.send :prepend, Sbv::GroupDecorator
+      StandardFormBuilder.send :include, Sbv::StandardFormBuilder
 
       ### sheets
       Sheet::Group.send :include, Sbv::Sheet::Group
