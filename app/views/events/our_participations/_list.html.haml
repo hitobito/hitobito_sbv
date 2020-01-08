@@ -10,6 +10,6 @@
   = t('.active_applications')
 
 = list_table do |t|
-  - t.attrs :event_id, :music_style, :music_type, :music_level, :preferred_play_day_1, :preferred_play_day_2
+  - t.attrs :event_id, :music_style, :music_type, :music_level, :parade_music, :preferred_play_day_1, :preferred_play_day_2
   - t.col nil do |e|
     = link_to t('.edit'), edit_group_event_group_participation_path(e.event.groups.first, e.event, e, participating_group: @group.id)
