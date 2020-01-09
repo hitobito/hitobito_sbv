@@ -28,10 +28,6 @@ class Events::GroupParticipationsController < CrudController
   before_action :participating_group, only: [:new, :edit]
   around_save :update_state_machine
 
-  # def update
-  #   super(location: edit_group_event_group_participation_path(@group, @event, entry))
-  # end
-
   private_class_method
 
   def self.model_class
