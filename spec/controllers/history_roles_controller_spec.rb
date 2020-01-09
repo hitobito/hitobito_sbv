@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -24,6 +24,25 @@ describe HistoryRolesController do
     end.not_to change { leader.roles.count }
     expect(leader.reload.active_years).to be_nil
     expect(flash.now[:alert]).to eq ['Eintritt ist kein gültiges Datum']
+  end
+
+  it 'POST#create is not allowed for normal members' do
+    member = people(:member)
+    group = groups(:mitglieder_mg_aarberg)
+
+    sign_in(member)
+
+    role_params = {
+      person_id: member.id,
+      group_id: group.id,
+      start_date: 2.years.ago.to_date
+    }
+    expect do
+      expect do
+        post :create, group_id: group.id, role: role_params, format: :js
+      end.to raise_error(CanCan::AccessDenied)
+    end.not_to change { member.roles.count }
+    expect(member.reload.active_years).to be_nil
   end
 
   it 'POST#create creates new role for existing VereinMitglieder group' do
