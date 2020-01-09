@@ -340,7 +340,7 @@ de:
         terms: Reglement
         terms_url: https://www.windband.ch/media/471564/reglement-fuer-das-eidgenoessische-musikfest_sbv_20180414_d.pdf
         terms_accepted: Reglement akzeptiert
-        secondary_terms_accepted: Reglement von Partnerverein akzeptiert
+        secondary_group_terms_accepted: Reglement von Partnerverein akzeptiert
         music_styles:
           concert_music: Konzertmusik
           contemporary_music: Unterhaltungsmusik

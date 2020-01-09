@@ -3,5 +3,5 @@
 = render_present_attrs entry, :music_type, :music_level
 = render_present_attrs entry, :preferred_play_day_1, :preferred_play_day_2
 
-- terms = entry.joint_participation? ? [:terms_accepted, :secondary_terms_accepted] : [:terms_accepted]
-= render_attrs entry, *terms
+- terms = entry.joint_participation? ? [:terms_accepted, :secondary_group_terms_accepted] : [:terms_accepted]
+= render_present_attrs entry, *terms
