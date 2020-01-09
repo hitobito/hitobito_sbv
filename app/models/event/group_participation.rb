@@ -138,6 +138,10 @@ class Event::GroupParticipation < ActiveRecord::Base
     state :terms_accepted
     state :completed
 
+    event :join do
+      transitions from: :not_present,    to: :opened
+    end
+
     event :progress do
       transitions from: :not_present,    to: :opened
       transitions from: :opened,         to: :terms_accepted
@@ -186,6 +190,8 @@ class Event::GroupParticipation < ActiveRecord::Base
   end
 
   def store_groups_correctly
+    join_secondary
+
     if secondary_group_is_primary == 'true'
       self.group_id, self.secondary_group_id = secondary_group_id, group_id
     end
