@@ -28,9 +28,9 @@ class Events::GroupParticipationsController < CrudController
   before_action :participating_group, only: [:new, :edit]
   around_save :update_state_machine
 
-  def update
-    super(location: edit_group_event_group_participation_path(@group, @event, entry))
-  end
+  # def update
+  #   super(location: edit_group_event_group_participation_path(@group, @event, entry))
+  # end
 
   private_class_method
 
@@ -40,6 +40,13 @@ class Events::GroupParticipationsController < CrudController
 
   private
 
+  def return_path
+    edit_group_event_group_participation_path(
+      @group, @event, entry,
+      participating_group: participating_group_id
+    )
+  end
+
   def update_state_machine
     yield.tap do |result|
       entry.progress_for(participating_group || entry.group) if result
@@ -47,6 +54,14 @@ class Events::GroupParticipationsController < CrudController
   end
 
   def participating_group
-    @participating_group ||= Group.find_by(id: params['participating_group'])
+    @participating_group ||= Group.find_by(id: participating_group_id)
+  end
+
+  def participating_group_id
+    if params['participating_group'].present?
+      params['participating_group']
+    elsif @group.id != @event.group_ids.first
+      @group.id
+    end
   end
 end

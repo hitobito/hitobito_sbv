@@ -3,6 +3,8 @@
 = crud_form(path_args(entry),
   cancel_url: group_our_festival_participations_path(entry.group, returning: true),
   buttons_bottom: true, buttons_top: false) do |f|
+  - if @participating_group.present?
+    = f.hidden_field :participating_group, value: @participating_group.id
 
   - if entry.primary_joint_participation_selected?
     = f.labeled_group_field :secondary_group
