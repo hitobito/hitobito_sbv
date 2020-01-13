@@ -202,7 +202,7 @@ musikgesellschaft_aarberg:
   address: Bielertstr. 91c
   zip_code: 6648
   town: Thiloscheid
-vorstand_20:
+vorstand_mg_aarberg:
   parent: musikgesellschaft_aarberg
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
   lft: 20
@@ -320,7 +320,7 @@ musikgesellschaft_alterswil:
   address: Am Junkernkamp 2
   zip_code: 7400
   town: Nord Boland
-vorstand_36:
+vorstand_mg_alterswil:
   parent: musikgesellschaft_alterswil
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>
   lft: 66

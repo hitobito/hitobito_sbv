@@ -70,11 +70,15 @@ module HitobitoSbv
       GroupAbility.send :include, Sbv::GroupAbility
 
       # festival_participation allows to manage your group's participation to a festival
+      Role::Permissions << :festival_participation
       # manage_participations allows to manage all participations to a festival
-      Role::Permissions << :festival_participation << :manage_participations
+      Role::Permissions << :manage_participations
 
       # load this class after all abilities have been defined
-      AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census
+      AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census << :festival_participation
+      AbilityDsl::UserContext::LAYER_PERMISSIONS                 << :festival_participation
+
+      # lastly, register the abilities (could happen earlier, it's just a nice conclusion here)
       Ability.store.register SongAbility
       Ability.store.register Event::GroupParticipationAbility
     end

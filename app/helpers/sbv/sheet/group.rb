@@ -1,7 +1,12 @@
+#  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
+#  hitobito and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito.
+
 module Sbv::Sheet::Group
   extend ActiveSupport::Concern
 
-  included do
+  included do # rubocop:disable Metrics/BlockLength
     tabs.insert(4,
                 Sheet::Tab.new('group.suisa_tab',
                                :group_song_censuses_path,
@@ -27,8 +32,9 @@ module Sbv::Sheet::Group
                 Sheet::Tab.new('group.festival_tab', :group_our_festival_participations_path,
                                params: { returning: true },
                                if: lambda do |view, group|
-                                 # Event::Festival.participatable(group).present? &&
-                                 view.can?(:manage_festival_application, group)
+                                 view.can?(:manage_festival_application, group) &&
+                                   (Event::Festival.participatable(group).any? ||
+                                    Event::Festival.participation_by(group).any?)
                                end))
   end
 end

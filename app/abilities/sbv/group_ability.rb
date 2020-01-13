@@ -10,7 +10,7 @@ module Sbv::GroupAbility
     on(Group) do
       permission(:any).may(:'index_event/festivals').all
       permission(:any).may(:query).all
-      permission(:festival_participation).may(:manage_festival_application).all # in_same_layer
+      permission(:festival_participation).may(:manage_festival_application).in_same_layer
     end
   end
 end
