@@ -11,6 +11,11 @@ module Sbv::GroupAbility
       permission(:any).may(:'index_event/festivals').all
       permission(:any).may(:query).all
       permission(:festival_participation).may(:manage_festival_application).in_same_layer
+
+      permission(:group_full).may(:create_history_member).in_same_group
+      permission(:group_and_below_full).may(:create_history_member).in_same_group_or_below
+      permission(:layer_full).may(:create_history_member).in_same_layer
+      permission(:layer_and_below_full). may(:create_history_member).in_same_layer_or_below
     end
   end
 end
