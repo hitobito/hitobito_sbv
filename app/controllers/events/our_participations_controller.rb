@@ -27,6 +27,10 @@ class Events::OurParticipationsController < ListController
     @festivals ||= Event::Festival.participatable(parent)
   end
 
+  def authorize_class
+    true
+  end
+
   # def authorize_class
   #   authorize! :manage_festival_participation, parent
   # end
