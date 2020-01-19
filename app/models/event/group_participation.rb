@@ -103,6 +103,8 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   validates_by_schema
   validates :group_id, uniqueness: { scope: :event_id }
+  # validates_with ParticipantValidator (every group may only apply once per
+  # event, but can be primary or secondary)
   validates_with PreferredDateValidator
 
   ### STATE MACHINES
