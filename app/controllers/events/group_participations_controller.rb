@@ -26,6 +26,7 @@ class Events::GroupParticipationsController < CrudController
   skip_authorization_check
 
   before_action :participating_group, only: [:new, :edit]
+  before_action :authorize_resource
   around_save :update_state_machine
 
   private_class_method
@@ -56,8 +57,18 @@ class Events::GroupParticipationsController < CrudController
   def participating_group_id
     if params['participating_group'].present?
       params['participating_group']
-    elsif @group.id != @event.group_ids.first
-      @group.id
+    elsif params[:group_id].to_i != entry.event.group_ids.first
+      @group.id # loaded by calling "entry"
+    end
+  end
+
+  def authorize_resource
+    if participating_group.present?
+      authorize! :manage_festival_application, participating_group
+    elsif entry.new_record?
+      authorize! action_name.to_sym, @group
+    else
+      authorize! action_name.to_sym, entry
     end
   end
 end
