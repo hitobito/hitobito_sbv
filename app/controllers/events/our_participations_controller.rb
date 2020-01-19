@@ -6,9 +6,6 @@
 class Events::OurParticipationsController < ListController
   self.nesting = Group
 
-  skip_authorize_resource
-  skip_authorization_check
-
   before_action :list_festivals
 
   private_class_method
