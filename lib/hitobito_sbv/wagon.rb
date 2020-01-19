@@ -71,8 +71,6 @@ module HitobitoSbv
 
       # festival_participation allows to manage your group's participation to a festival
       Role::Permissions << :festival_participation
-      # manage_participations allows to manage all participations to a festival
-      Role::Permissions << :manage_participations
 
       # load this class after all abilities have been defined
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census << :festival_participation
