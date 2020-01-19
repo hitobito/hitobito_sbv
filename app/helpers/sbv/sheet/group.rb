@@ -32,7 +32,8 @@ module Sbv::Sheet::Group
                 Sheet::Tab.new('group.festival_tab', :group_our_festival_participations_path,
                                params: { returning: true },
                                if: lambda do |view, group|
-                                 view.can?(:manage_festival_application, group) &&
+                                 group.layer_group.is_a?(Group::Verein) &&
+                                   view.can?(:manage_festival_application, group) &&
                                    (Event::Festival.participatable(group).any? ||
                                     Event::Festival.participation_by(group).any?)
                                end))
