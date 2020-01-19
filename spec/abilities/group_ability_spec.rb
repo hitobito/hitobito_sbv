@@ -22,7 +22,7 @@ describe GroupAbility do
       let(:group) { groups(:vorstand_mg_aarberg)}
       let(:checked_group) { groups(:musikgesellschaft_aarberg) }
 
-      it { is_expected.to be_able_to(:manage_festival_application, group)}
+      it { is_expected.to be_able_to(:manage_festival_application, checked_group)}
     end
 
     context 'as president of a group' do
