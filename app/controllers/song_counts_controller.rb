@@ -47,7 +47,7 @@ class SongCountsController < SimpleCrudController
   def export_filename(_format)
     str = SongCount.model_name.human
     if verein?
-      str << "-#{@group.name.tr(' ', '_').underscore}"
+      str << "-#{@group.name}"
     end
     str + "-#{year}"
   end
