@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -26,8 +26,7 @@ class SongCountsController < SimpleCrudController
 
   private
 
-  def redirection_target
-  end
+  def redirection_target; end
 
   def verein?
     @group.is_a?(Group::Verein)
@@ -35,9 +34,8 @@ class SongCountsController < SimpleCrudController
 
   def render_tabular_in_background(format)
     target = verein? ? group_concerts_path(@group) : group_song_censuses_path(@group)
-    with_async_download_cookie(format, export_filename(format), {
-      redirection_target: target
-    }) do |filename|
+    with_async_download_cookie(format, export_filename(format),
+                               redirection_target: target) do |filename|
       Export::SongCountsExportJob.new(format,
                                       current_person.id,
                                       parent.id,
@@ -46,7 +44,7 @@ class SongCountsController < SimpleCrudController
     end
   end
 
-  def export_filename(format)
+  def export_filename(_format)
     str = SongCount.model_name.human
     if verein?
       str << "-#{@group.name.tr(' ', '_').underscore}"
