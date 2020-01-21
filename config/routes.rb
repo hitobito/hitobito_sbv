@@ -21,7 +21,11 @@ Rails.application.routes.draw do
       get 'our_festival_participations' => 'events/our_participations#index'
 
       resources :events, only: [] do
-        resources :group_participations, controller: 'events/group_participations'
+        resources :group_participations, controller: 'events/group_participations' do
+          member do
+            get 'edit_stage'
+          end
+        end
         collection do
           get 'festival' => 'events#index', type: 'Event::Festival'
         end

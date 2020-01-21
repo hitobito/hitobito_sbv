@@ -75,6 +75,15 @@ module GroupParticipationsHelper
     day_names.zip(day_numbers)
   end
 
+  def group_participation_edit_link(stage, participating_group_id)
+    content_tag :p do
+      link_to t("event.group_participations.edit_stages.#{stage}"),
+              action: 'edit_stage',
+              participating_group: participating_group_id,
+              edit_stage: stage
+    end
+  end
+
   private
 
   def day_name(value)

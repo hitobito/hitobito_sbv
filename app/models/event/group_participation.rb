@@ -109,7 +109,7 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   ### STATE MACHINES
 
-  aasm :primary, column: 'primary_state', namespace: :primary do
+  aasm :primary, column: 'primary_state', namespace: :primary do # rubocop:disable Metrics/BlockLength
     state :opened, initial: true
     state :joint_participation_selected
     state :primary_group_selected
@@ -131,6 +131,52 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
       transitions from: :preferred_play_day_selected,   to: :terms_accepted
       transitions from: :terms_accepted,                to: :completed
+    end
+
+    event :edit_participation do
+      transitions from: [
+        :joint_participation_selected,
+        :primary_group_selected,
+        :music_style_selected,
+        :music_type_and_level_selected,
+        :preferred_play_day_selected,
+        :terms_accepted,
+        :completed
+      ], to: :opened, after: :clean_joining_groups
+    end
+
+    event :edit_joining_group do
+      transitions from: [
+        :music_style_selected,
+        :music_type_and_level_selected,
+        :preferred_play_day_selected,
+        :terms_accepted,
+        :completed
+      ], to: :joint_participation_selected, after: :clean_joining_groups
+    end
+
+    event :edit_music_style do
+      transitions from: [
+        :music_type_and_level_selected,
+        :preferred_play_day_selected,
+        :terms_accepted,
+        :completed
+      ], to: :primary_group_selected, after: :clean_music_style
+    end
+
+    event :edit_music_type_and_level do
+      transitions from: [
+        :preferred_play_day_selected,
+        :terms_accepted,
+        :completed
+      ], to: :music_style_selected, after: :clean_music_type_and_level
+    end
+
+    event :edit_date_preference do
+      transitions from: [
+        :terms_accepted,
+        :completed
+      ], to: :music_type_and_level_selected, after: :clean_date_preference
     end
   end
 
@@ -181,6 +227,35 @@ class Event::GroupParticipation < ActiveRecord::Base
   end
 
   private
+
+  def clean_date_preference
+    self.preferred_play_day_1 = nil
+    self.preferred_play_day_2 = nil
+
+    true
+  end
+
+  def clean_music_type_and_level
+    self.music_type = nil
+    self.music_level = nil
+
+    clean_date_preference
+  end
+
+  def clean_music_style
+    self.music_style = nil
+
+    clean_music_type_and_level
+  end
+
+  def clean_joining_groups
+    self.joint_participation = false
+    self.secondary_state = :not_present
+    self.secondary_group_id = nil
+    self.secondary_group_terms_accepted = false
+
+    clean_music_style
+  end
 
   def state_machine_for(participating_group = nil)
     case participating_group

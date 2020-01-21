@@ -35,6 +35,14 @@ class Events::GroupParticipationsController < CrudController
     Event::GroupParticipation
   end
 
+  def edit_stage
+    edit_event = :"edit_#{params[:edit_stage]}!"
+
+    entry.send(edit_event) if entry.respond_to?(edit_event)
+
+    redirect_to return_path
+  end
+
   private
 
   def return_path
@@ -54,10 +62,12 @@ class Events::GroupParticipationsController < CrudController
     @participating_group ||= Group.find_by(id: participating_group_id)
   end
 
-  def participating_group_id
+  def participating_group_id # rubocop:disable Metrics/AbcSize any refactoring inside the methods makes it harder to understand
     if params['participating_group'].present?
       params['participating_group']
-    elsif params[:group_id].to_i != entry.event.group_ids.first
+    elsif params.fetch('event_group_participation', {}).fetch('participating_group', nil).present?
+      params['event_group_participation']['participating_group']
+    elsif params['group_id'].to_i != entry.event.group_ids.first
       @group.id # loaded by calling "entry"
     end
   end

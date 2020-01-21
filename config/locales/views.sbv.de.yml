@@ -115,6 +115,12 @@ de:
       create:
         success: "Anmeldung erfolgreich hinzugefügt"
       list: Anmeldungen
+      edit_stages:
+        participation: Spielgemeinschaft bearbeiten
+        music_style: Sparte bearbeiten
+        music_type_and_level: Besetzung und Klasse bearbeiten
+        date_preference: Wunschspieltage bearbeiten
+
     our_participations:
       list:
         applicable_festivals: "zur Anmeldung freigegebenen Musikfeste"
