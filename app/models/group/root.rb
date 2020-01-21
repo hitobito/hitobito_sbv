@@ -2,7 +2,6 @@
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
-
 # == Schema Information
 #
 # Table name: groups
@@ -35,6 +34,12 @@
 #  klasse                      :string(255)
 #  unterhaltungsmusik          :string(255)
 #  subventionen                :string(255)
+#  swoffice_id                 :integer
+#  secondary_parent_id         :integer
+#  tertiary_parent_id          :integer
+#  description                 :text(65535)
+#  logo                        :string(255)
+#  hostname                    :string(255)
 #
 
 class Group::Root < ::Group

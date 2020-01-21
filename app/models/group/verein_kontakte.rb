@@ -36,6 +36,12 @@
 #  klasse                      :string(255)
 #  unterhaltungsmusik          :string(255)
 #  subventionen                :string(255)
+#  swoffice_id                 :integer
+#  secondary_parent_id         :integer
+#  tertiary_parent_id          :integer
+#  description                 :text(65535)
+#  logo                        :string(255)
+#  hostname                    :string(255)
 #
 
 class Group::VereinKontakte < Group

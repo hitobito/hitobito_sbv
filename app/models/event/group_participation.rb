@@ -3,6 +3,29 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
+# == Schema Information
+#
+# Table name: event_group_participations
+#
+#  id                             :integer          not null, primary key
+#  primary_state                  :string(255)      not null
+#  event_id                       :integer          not null
+#  group_id                       :integer          not null
+#  music_style                    :string(255)
+#  music_type                     :string(255)
+#  music_level                    :string(255)
+#  created_at                     :datetime         not null
+#  updated_at                     :datetime         not null
+#  preferred_play_day_1           :integer
+#  preferred_play_day_2           :integer
+#  terms_accepted                 :boolean          default(FALSE), not null
+#  parade_music                   :string(255)
+#  joint_participation            :boolean          default(FALSE), not null
+#  secondary_state                :string(255)      not null
+#  secondary_group_id             :integer
+#  secondary_group_terms_accepted :boolean          default(FALSE), not null
+#
+
 class Event::GroupParticipation < ActiveRecord::Base
   include ::AASM
 

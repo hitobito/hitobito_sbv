@@ -8,7 +8,7 @@
 # Table name: concerts
 #
 #  id                   :integer          not null, primary key
-#  name                 :string           not null
+#  name                 :string(255)      not null
 #  verein_id            :integer          not null
 #  mitgliederverband_id :integer
 #  regionalverband_id   :integer
@@ -16,6 +16,8 @@
 #  performed_at         :date
 #  year                 :integer          not null
 #  editable             :boolean          default(TRUE), not null
+#  created_at           :datetime         default(Wed, 30 Jan 2019 12:12:24 CET +01:00), not null
+#  updated_at           :datetime         default(Wed, 30 Jan 2019 12:12:24 CET +01:00), not null
 #
 
 class Concert < ActiveRecord::Base

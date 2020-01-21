@@ -11,7 +11,6 @@
 #  year       :integer          not null
 #  count      :integer          default(1), not null
 #  concert_id :integer
-#  editable   :boolean          default(TRUE), not null
 #
 
 class SongCount < ActiveRecord::Base
