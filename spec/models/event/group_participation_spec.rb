@@ -7,6 +7,13 @@ require 'spec_helper'
 
 describe Event::GroupParticipation do
   context 'is a state-machine which' do
+    subject do
+      described_class.create(
+        event: events(:festival),
+        group: groups(:musikgesellschaft_aarberg)
+      )
+    end
+
     it { is_expected.to have_state(:opened).on(:primary) }
     it { is_expected.to allow_event(:progress).on(:primary) }
     it { is_expected.to allow_event(:progress).on(:secondary) }
@@ -62,6 +69,13 @@ describe Event::GroupParticipation do
         is_expected.to be_valid
       end
     end
+  end
+
+  # if these are refactored away, please smile while deleting this spec
+  it 'has data some large constants' do
+    expect(described_class::MUSIC_CLASSIFICATIONS).to be_an Array
+    expect(described_class::AVAILABLE_PLAY_DAYS).to be_a Hash
+    expect(described_class::MUSIC_LEVEL_PLAY_DAYS).to be_a Hash
   end
 
   private
