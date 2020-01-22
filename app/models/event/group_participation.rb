@@ -142,11 +142,11 @@ class Event::GroupParticipation < ActiveRecord::Base
     state :terms_accepted
     state :completed
 
-    event :progress do
+    event :progress, guard: :application_possible? do
       transitions from: :opened,                        to: :joint_participation_selected,
                   guard: :joint_participation?
       transitions from: :joint_participation_selected,  to: :primary_group_selected,
-                  after: :store_groups_correctly # after transition, before save
+                  after: :store_groups_correctly
       transitions from: :opened,                        to: :primary_group_selected
 
       transitions from: :primary_group_selected,        to: :music_style_selected
@@ -156,7 +156,7 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: :terms_accepted,                to: :completed
     end
 
-    event :edit_participation do
+    event :edit_participation, guard: :application_possible? do
       transitions from: [
         :joint_participation_selected,
         :primary_group_selected,
@@ -168,7 +168,7 @@ class Event::GroupParticipation < ActiveRecord::Base
       ], to: :opened, after: :clean_joining_groups
     end
 
-    event :edit_joining_group do
+    event :edit_joining_group, guard: :application_possible? do
       transitions from: [
         :music_style_selected,
         :music_type_and_level_selected,
@@ -178,7 +178,7 @@ class Event::GroupParticipation < ActiveRecord::Base
       ], to: :joint_participation_selected, after: :clean_joining_groups
     end
 
-    event :edit_music_style do
+    event :edit_music_style, guard: :application_possible? do
       transitions from: [
         :music_type_and_level_selected,
         :preferred_play_day_selected,
@@ -187,7 +187,7 @@ class Event::GroupParticipation < ActiveRecord::Base
       ], to: :primary_group_selected, after: :clean_music_style
     end
 
-    event :edit_music_type_and_level do
+    event :edit_music_type_and_level, guard: :application_possible? do
       transitions from: [
         :preferred_play_day_selected,
         :terms_accepted,
@@ -195,7 +195,7 @@ class Event::GroupParticipation < ActiveRecord::Base
       ], to: :music_style_selected, after: :clean_music_type_and_level
     end
 
-    event :edit_date_preference do
+    event :edit_date_preference, guard: :application_possible? do
       transitions from: [
         :terms_accepted,
         :completed
@@ -209,11 +209,11 @@ class Event::GroupParticipation < ActiveRecord::Base
     state :terms_accepted
     state :completed
 
-    event :join do
+    event :join, guard: :application_possible? do
       transitions from: :not_present,    to: :opened
     end
 
-    event :progress do
+    event :progress, guard: :application_possible? do
       transitions from: :not_present,    to: :opened
       transitions from: :opened,         to: :terms_accepted
       transitions from: :terms_accepted, to: :completed
@@ -251,6 +251,25 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   private
 
+  def state_machine_for(participating_group = nil)
+    case participating_group
+    when group           then :primary
+    when secondary_group then :secondary
+    else
+      raise 'Group not related to this participation'
+    end
+  end
+
+  # after-transition HOOKS, happening after the transition, but before save
+
+  def store_groups_correctly
+    join_secondary
+
+    if secondary_group_is_primary == 'true'
+      self.group_id, self.secondary_group_id = secondary_group_id, group_id
+    end
+  end
+
   def clean_date_preference
     self.preferred_play_day_1 = nil
     self.preferred_play_day_2 = nil
@@ -280,20 +299,9 @@ class Event::GroupParticipation < ActiveRecord::Base
     clean_music_style
   end
 
-  def state_machine_for(participating_group = nil)
-    case participating_group
-    when group           then :primary
-    when secondary_group then :secondary
-    else
-      raise 'Group not related to this participation'
-    end
-  end
+  # GUARDS
 
-  def store_groups_correctly
-    join_secondary
-
-    if secondary_group_is_primary == 'true'
-      self.group_id, self.secondary_group_id = secondary_group_id, group_id
-    end
+  def application_possible?
+    event.application_possible?
   end
 end
