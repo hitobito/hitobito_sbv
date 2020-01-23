@@ -84,6 +84,12 @@ module GroupParticipationsHelper
     end
   end
 
+  def link_to_terms
+    link_to t(:terms, group_participation_scope),
+            t(:terms_url, group_participation_scope),
+            target: '_blank'
+  end
+
   private
 
   def day_name(value)

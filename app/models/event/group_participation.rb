@@ -70,8 +70,11 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: :opened,                        to: :primary_group_selected
 
       transitions from: :primary_group_selected,        to: :music_style_selected
+      transitions from: :music_style_selected,          to: :preferred_play_day_selected,
+                  guard: :single_play_day?, after: :infer_play_day_preference
       transitions from: :music_style_selected,          to: :music_type_and_level_selected
-      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
+      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected,
+                  after: :infer_play_day_preference
       transitions from: :preferred_play_day_selected,   to: :terms_accepted
       transitions from: :terms_accepted,                to: :completed
     end
@@ -169,6 +172,10 @@ class Event::GroupParticipation < ActiveRecord::Base
     !joint_participation || state_machine_for(participating_group) == :primary
   end
 
+  def may_prefer_two_days?
+    possible_day_numbers.size > 2
+  end
+
   private
 
   def state_machine_for(participating_group = nil)
@@ -187,6 +194,17 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     if secondary_group_is_primary == 'true'
       self.group_id, self.secondary_group_id = secondary_group_id, group_id
+    end
+  end
+
+  def infer_play_day_preference
+    case possible_day_numbers.size
+    when 2
+      self.preferred_play_day_2 = (possible_day_numbers - [preferred_play_day_1]).first
+    when 1
+      self.preferred_play_day_1 = possible_day_numbers.first
+    else
+      true
     end
   end
 
@@ -223,5 +241,9 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   def application_possible?
     event.application_possible?
+  end
+
+  def single_play_day?
+    possible_day_numbers.one?
   end
 end
