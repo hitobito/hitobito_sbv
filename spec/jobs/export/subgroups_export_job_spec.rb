@@ -1,3 +1,8 @@
+#  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
+#  hitobito_sbv and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_sbv.
+
 require 'spec_helper'
 require 'csv'
 
@@ -11,9 +16,19 @@ describe Export::SubgroupsExportJob do
 
   it ' exports address and special columns' do
     csv = CSV.parse(subject.data, col_sep: ';', headers: true)
-    expect(csv.headers).to eq ["Name", "Gruppentyp", "Mitgliederverband", "Kontaktperson",
-                               "Adresse", "PLZ", "Ort", "Land",
-                               "Besetzung", "Klasse", "Unterhaltungsmusik"]
+    expect(csv.headers).to eq [
+      "Name",
+      "Gruppentyp",
+      "Mitgliederverband",
+      "Kontaktperson",
+      "Adresse",
+      "PLZ",
+      "Ort",
+      "Land",
+      "Besetzung",
+      "Klasse",
+      "Unterhaltungsmusik",
+    ]
   end
 
 end
