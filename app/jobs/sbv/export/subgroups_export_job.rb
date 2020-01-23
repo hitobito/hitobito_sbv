@@ -1,12 +1,12 @@
-#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
 module Sbv::Export::SubgroupsExportJob
 
-  def initialize(user_id, group, options)
-    super(user_id, group.id, options)
+  def initialize(user_id, group_id, options)
+    super
     @exporter = Export::Tabular::Groups::AddressList
   end
 
