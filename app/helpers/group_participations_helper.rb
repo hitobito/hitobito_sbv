@@ -77,7 +77,7 @@ module GroupParticipationsHelper
 
   def group_participation_edit_link(stage, participating_group_id)
     content_tag :p do
-      link_to t("event.group_participations.edit_stages.#{stage}"),
+      link_to t("events.group_participations.edit_stages.#{stage}"),
               action: 'edit_stage',
               participating_group: participating_group_id,
               edit_stage: stage
