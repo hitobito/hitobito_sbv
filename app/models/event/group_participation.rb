@@ -169,6 +169,10 @@ class Event::GroupParticipation < ActiveRecord::Base
     !joint_participation || state_machine_for(participating_group) == :primary
   end
 
+  def may_prefer_two_days?
+    possible_day_numbers.size > 2
+  end
+
   private
 
   def state_machine_for(participating_group = nil)

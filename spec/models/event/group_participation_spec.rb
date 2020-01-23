@@ -71,11 +71,52 @@ describe Event::GroupParticipation do
     end
   end
 
-  # if these are refactored away, please smile while deleting this spec
+  # if these constants are refactored away, please smile while deleting this spec
   it 'has data some large constants' do
     expect(described_class::MUSIC_CLASSIFICATIONS).to be_an Array
     expect(described_class::AVAILABLE_PLAY_DAYS).to be_a Hash
     expect(described_class::MUSIC_LEVEL_PLAY_DAYS).to be_a Hash
+  end
+
+  context '#may_prefer_two_days?' do
+    subject do
+      described_class.create(
+        event: events(:festival),
+        group: groups(:musikgesellschaft_aarberg),
+        primary_state: 'music_type_and_level_selected',
+        music_style: 'concert_music',
+        music_type: 'harmony',
+        music_level: 'first'
+      )
+    end
+
+    it 'uses possible_day_numbers as metric' do
+      expect(subject.possible_day_numbers.size).to be 4
+    end
+
+    it 'is true for four days' do
+      expect(subject).to receive(:possible_day_numbers).and_return([1, 2, 3, 4])
+
+      expect(subject).to be_may_prefer_two_days
+    end
+
+    it 'is true for three days' do
+      expect(subject).to receive(:possible_day_numbers).and_return([1, 2, 3])
+
+      expect(subject).to be_may_prefer_two_days
+    end
+
+    it 'is false for two days' do
+      expect(subject).to receive(:possible_day_numbers).and_return([1, 2])
+
+      expect(subject).to_not be_may_prefer_two_days
+    end
+
+    it 'is false for one day' do
+      expect(subject).to receive(:possible_day_numbers).and_return([1])
+
+      expect(subject).to_not be_may_prefer_two_days
+    end
   end
 
   private
