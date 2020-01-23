@@ -37,8 +37,9 @@
         - if entry.primary_music_type_and_level_selected?
           = f.labeled :preferred_play_day_1 do
             = f.select :preferred_play_day_1, play_day_selection_for(entry), prompt: ''
-          = f.labeled :preferred_play_day_2 do
-            = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
+          - if entry.may_prefer_two_days?
+            = f.labeled :preferred_play_day_2 do
+              = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
 
         - if entry.primary_preferred_play_day_selected?
           = f.labeled_boolean_field :terms_accepted, caption: link_to_terms
