@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -46,6 +44,24 @@ describe Group do
     it 'might read hostname from hierarchy' do
       group.parent.update(hostname: 'example.com')
       expect(subject).to eq 'example.com'
+    end
+  end
+
+  context '#song_counts' do
+    subject { groups(:hauptgruppe_1) }
+
+    it 'is a scope' do
+      expect(subject.song_counts).to be_a ActiveRecord::Relation
+    end
+
+    it 'contains several song_counts' do
+      expect(subject.song_counts.count).to be 3
+    end
+
+    it 'does not include deleted groups' do
+      expect(song_counts(:mama_count).concert.verein).to be_deleted
+
+      expect(subject.song_counts).to_not include song_counts(:mama_count)
     end
   end
 

@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -68,7 +68,7 @@ module Sbv::Group
   end
 
   def song_counts
-    verein_ids = descendants.where(type: Group::Verein).pluck(:id)
+    verein_ids = descendants.where(type: Group::Verein).without_deleted.pluck(:id)
     SongCount.joins(:concert).where("concerts.verein_id IN (#{verein_ids.join(',')})")
   end
 

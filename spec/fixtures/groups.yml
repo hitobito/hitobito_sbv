@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -364,6 +364,7 @@ musikverband_hastdutoene:
   address: Friedrich-Engels-Str. 98c
   zip_code: 7892
   town: Neu Maddoxscheid
+  deleted_at: 2020-01-20
 vorstand_41:
   parent: musikverband_hastdutoene
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
@@ -371,6 +372,7 @@ vorstand_41:
   rgt: 38
   name: Vorstand
   type: Group::VereinVorstand
+  deleted_at: 2020-01-20
 kontakte_42:
   parent: musikverband_hastdutoene
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
@@ -378,6 +380,7 @@ kontakte_42:
   rgt: 32
   name: Kontakte
   type: Group::VereinKontakte
+  deleted_at: 2020-01-20
 mitglieder_43:
   parent: musikverband_hastdutoene
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
@@ -385,6 +388,7 @@ mitglieder_43:
   rgt: 34
   name: Mitglieder
   type: Group::VereinMitglieder
+  deleted_at: 2020-01-20
 musikkommission_44:
   parent: musikverband_hastdutoene
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
@@ -392,3 +396,4 @@ musikkommission_44:
   rgt: 36
   name: Musikkommission
   type: Group::VereinMusikkommission
+  deleted_at: 2020-01-20
