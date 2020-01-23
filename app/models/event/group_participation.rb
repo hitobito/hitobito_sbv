@@ -93,6 +93,7 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     event :edit_joining_group, guard: :application_possible? do
       transitions from: [
+        :primary_group_selected,
         :music_style_selected,
         :music_type_and_level_selected,
         :preferred_play_day_selected,
@@ -103,6 +104,7 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     event :edit_music_style, guard: :application_possible? do
       transitions from: [
+        :music_style_selected,
         :music_type_and_level_selected,
         :preferred_play_day_selected,
         :terms_accepted,
@@ -112,6 +114,7 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     event :edit_music_type_and_level, guard: :application_possible? do
       transitions from: [
+        :music_type_and_level_selected,
         :preferred_play_day_selected,
         :terms_accepted,
         :completed
@@ -120,6 +123,7 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     event :edit_date_preference, guard: :application_possible? do
       transitions from: [
+        :preferred_play_day_selected,
         :terms_accepted,
         :completed
       ], to: :music_type_and_level_selected, after: :clean_date_preference
