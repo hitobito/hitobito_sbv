@@ -17,11 +17,11 @@ class Events::OurParticipationsController < ListController
   private
 
   def list_entries
-    model_class.where(group_id: parent.id)
+    model_class.where(group_id: parent.layer_group_id)
   end
 
   def list_festivals
-    @festivals ||= Event::Festival.participatable(parent)
+    @festivals ||= Event::Festival.participatable(parent.layer_group)
   end
 
   def authorize_class
