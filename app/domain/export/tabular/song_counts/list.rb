@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -7,7 +7,7 @@ module Export::Tabular::SongCounts
   class List < Export::Tabular::Base
 
     INCLUDED_ATTRS = %w(count title composed_by arranged_by published_by suisa_id).freeze
-    GROUP_ATTRS = %w(verein verein_id).freeze
+    GROUP_ATTRS    = %w(verein verein_id).freeze
 
     self.model_class = SongCount
 
@@ -22,8 +22,8 @@ module Export::Tabular::SongCounts
     def multiple?
       @single_verein ||=
         Concert.where(id: list.collect(&:concert_id))
-        .having('count(distinct verein_id) = 1')
-        .empty?
+               .having('count(distinct verein_id) = 1')
+               .empty?
     end
   end
 end
