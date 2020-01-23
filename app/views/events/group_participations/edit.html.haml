@@ -41,11 +41,11 @@
             = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
 
         - if entry.primary_preferred_play_day_selected?
-          = f.labeled_boolean_field :terms_accepted, caption: link_to(t(:terms, group_participation_scope), t(:terms_url, group_participation_scope), target: '_blank')
+          = f.labeled_boolean_field :terms_accepted, caption: link_to_terms
 
       - else # participating as secondary
         - if entry.secondary_opened?
-          = f.labeled_boolean_field :secondary_terms_accepted, caption: link_to(t(:terms, group_participation_scope), t(:terms_url, group_participation_scope), target: '_blank')
+          = f.labeled_boolean_field :secondary_terms_accepted, caption: link_to_terms
 
   %aside.span5
     %section
