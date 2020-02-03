@@ -1,15 +1,13 @@
-#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-#  You can use YAML anchors to avoid duplication
-#  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
 fr:
   global:
     last_change: "Dernière modification: %{date}"
   group:
-    festival_tab: Festivals
+    festival_tab: ""
     suisa_tab: SUISA
     merge:
       select:
@@ -49,6 +47,10 @@ fr:
         start_date: Admission
         end_date: Démission
         save: Sauvegarder
+        create_deleted_verein: ""
+        select_existing_verein: ""
+        text_with_alternative_link_html: ""
+
     add_requests:
       creator:
         mailing_list:
@@ -62,6 +64,9 @@ fr:
     info:
       role_only_public: >
         Le rôle %{role} du groupe %{group} ne peut voir que des données publiques (groupes, manifestations et listes; aucune autre personne).
+  song_counts:
+    export_enqueued: ''
+
   subscriber:
       group:
         form:
@@ -92,6 +97,26 @@ fr:
       title: Saisie SUISA
       concerts: Interprétations
       summary: Résumé
+
+  events:
+    group_participations:
+      edit: ""
+      actions_new:
+        title: ""
+      create:
+        success: ""
+      list: ""
+      edit_stages:
+        participation: ""
+        music_style: ""
+        music_type_and_level: ""
+        date_preference: ""
+
+    our_participations:
+      list:
+        applicable_festivals: ""
+        active_applications: ""
+        edit: ""
 
   contactable:
     additional_email_fields:

@@ -1,10 +1,7 @@
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
-
-#  You can use YAML anchors to avoid duplication
-#  https://docs.transifex.com/formats/yaml#anchors(&)-and-aliases(*)
 
 it:
   activerecord:
@@ -12,40 +9,56 @@ it:
 
       ### GROUPS
 
+      group/generalverband:
+        one: ''
+        other: ''
+
+
       group/root:
         one: Associazione Mantello
         other: Associazioni mantello
-      group/root_geschaeftsstelle: &office
+
+      group/root_geschaeftsstelle:
         one: Segretariato
         other: Segretariati
+
       group/root_vorstand:
         one: Direzione
         other: Direzione
-      group/root_musikkommission: &musikkommission
+
+      group/root_musikkommission:
         one: Commisione di musica
         other: Commissioni di musica
-      group/root_arbeitsgruppe: &arbeitsgruppe
+
+      group/root_arbeitsgruppe:
         one: Gruppo di lavoro
         other: Gruppi di lavoro
-      group/root_ehrenmitglieder: &ehrenmitglieder
+
+      group/root_ehrenmitglieder:
         one: Membro d'onore
         other: Membri onorari
-      group/root_veteranen: &veteranen
+
+      group/root_veteranen:
         one: Veterani
         other: Veterani
+
       group/root_veteranen/veteran:
         one: Veterano federale
         other: Veterani federali
+
       group/root_veteranen/ehrenveteran:
         one: Veterano federale onorario
         other: Veterani federali onorari
+
       group/root_veteranen/cism_veteran:
         one: Veterano CISM
         other: Veterani CISM
-      group/root_kontakte: &kontakte
+
+      group/root_kontakte:
         one: Contatti
         other: Contatti
-      group/root/suisa_admin: &suisa_verantwortlicher
+
+      group/root/suisa_admin:
         one: Responsabile SUISA
         other: Responsabili SUISA
 
@@ -55,19 +68,29 @@ it:
         other: Membri delle associazioni
 
       group/mitgliederverband_geschaeftsstelle:
-        *office
-      group/mitgliederverband_vorstand: &vorstand
+        one: Segretariati
+        other: Segretariati
+
+      group/mitgliederverband_vorstand:
         one: Comitato
         other: Comitati
 
       group/mitgliederverband_musikkommission:
-        *musikkommission
+        one: Commissioni di musica
+        other: Commissioni di musica
+
       group/mitgliederverband_arbeitsgruppe:
-        *arbeitsgruppe
+        one: Gruppi di lavoro
+        other: Gruppi di lavoro
+
       group/mitgliederverband_ehrenmitglieder:
-        *ehrenmitglieder
+        one: Membri onorari
+        other: Membri onorari
+
       group/mitgliederverband_veteranen:
-        *veteranen
+        one: Veterani
+        other: Veterani
+
       group/mitgliederverband_veteranen/veteran:
         one: Veterano cantonale
         other: Veterani cantonali
@@ -77,9 +100,12 @@ it:
         other: Veterani onorari cantonali
 
       group/mitgliederverband_kontakte:
-        *kontakte
+        one: Contatti
+        other: Contatti
+
       group/mitgliederverband/suisa_admin:
-        *suisa_verantwortlicher
+        one: Responsabili SUISA
+        other: Responsabili SUISA
 
 
       group/regionalverband:
@@ -87,41 +113,65 @@ it:
         other: Associazioni regionali
 
       group/regionalverband_geschaeftsstelle:
-        *office
+        one: Segretariati
+        other: Segretariati
+
       group/regionalverband_vorstand:
-        *vorstand
+        one: Comitati
+        other: Comitati
+
       group/regionalverband_musikkommission:
-        *musikkommission
+        one: Commissioni di musica
+        other: Commissioni di musica
+
       group/regionalverband_arbeitsgruppe:
-        *arbeitsgruppe
+        one: Gruppi di lavoro
+        other: Gruppi di lavoro
+
       group/regionalverband_ehrenmitglieder:
-        *ehrenmitglieder
+        one: Membri onorari
+        other: Membri onorari
+
       group/regionalverband_kontakte:
-        *kontakte
+        one: Contatti
+        other: Contatti
+
       group/regionalverband/suisa_admin:
-        *suisa_verantwortlicher
+        one: Responsabili SUISA
+        other: Responsabili SUISA
+
 
       group/verein:
         one: Società bandistica
         other: Società bandistiche
 
       group/verein_vorstand:
-        *vorstand
+        one: Comitati
+        other: Comitati
+
       group/verein_musikkommission:
-        *musikkommission
+        one: Commissioni di musica
+        other: Commissioni di musica
+
       group/verein_arbeitsgruppe:
-        *arbeitsgruppe
+        one: Gruppi di lavoro
+        other: Gruppi di lavoro
+
       group/verein_mitglieder:
         one: Membro
         oter: Membri
       group/verein_kontakte:
-        *kontakte
+        one: Contatti
+        other: Contatti
+
       group/verein/conductor:
         one: Direttrice
         other: Direttrici
 
       group/verein/suisa_admin:
-        *suisa_verantwortlicher
+        one: Responsabili SUISA
+        other: Responsabili SUISA
+
 
       ### ROLES FOR ALL LAYERS
 
@@ -134,7 +184,6 @@ it:
       role/adressverwaltung:
         one: Gestione indirizzi
         other: Gestione indirizzi
-
 
 
       #### Geschaeftsstelle Roles
@@ -162,11 +211,11 @@ it:
         one: Responsabile Finanze
         other: Responsabili Finanze
 
-      role/vorstand_mitglied: &mitglied
+      role/vorstand_mitglied:
         one: Membro
         other: Membri
 
-      role/vorstand_praesident: &praesident
+      role/vorstand_praesident:
         one: Presidente
         other: Presidenti
 
@@ -186,9 +235,13 @@ it:
       #### Musikkommission Roles
 
       role/musikkommission_praesident:
-        *praesident
+        one: Presidenti
+        other: Presidenti
+
       role/musikkommission_mitglied:
-        *mitglied
+        one: Membri
+        other: Membri
+
 
       #### Arbeitsgruppen Roles
 
@@ -197,7 +250,9 @@ it:
         other: Direzione
 
       role/arbeitsgruppe_mitglied:
-        *mitglied
+        one: Membri
+        other: Membri
+
 
       #### Ehrenmitglieder
 
@@ -213,11 +268,12 @@ it:
         other: Contatti
 
 
-
       #### Mitglieder Roles
 
       role/mitglieder_mitglied:
-        *mitglied
+        one: Membri
+        other: Membri
+
       role/mitglieder_passivmitglied:
         one: Membro passivo
         other: Membri passivi
@@ -246,9 +302,14 @@ it:
         other: Elenchi
 
 
+      event/group_participation:
+        one: ''
+        other: ''
+
+
     attributes:
       person:
-        correspondence_language: &correspondence_language Lingua di corrispondenza
+        correspondence_language: Lingua di corrispondenza
         profession: Lavoro
         active_years: Anni attivi fino ad oggi
         prognostic_active_years: Stima anni attivi
@@ -256,13 +317,13 @@ it:
       group:
         vereinssitz: Sede società bandistica
         founding_year: Anno di fondazione
-        klasse: &klasse Classe
-        klasse_value: *klasse
-        besetzung: &besetzung Formazione
-        besetzung_value: *besetzung
-        unterhaltungsmusik: &unterhaltungsmusik Musica d'intrattenimento
-        unterhaltungsmusik_value: *unterhaltungsmusik
-        correspondence_language: *correspondence_language
+        klasse: Classe
+        klasse_value: Classe
+        besetzung: Formazione
+        besetzung_value: Formazione
+        unterhaltungsmusik: Musica d'intrattenimento
+        unterhaltungsmusik_value: Musica d'intrattenimento
+        correspondence_language: Lingua di corrispondenza
         subventionen: Sovvenzioni
         recognized_members: Membri recensiti
         besetzungen:
@@ -273,19 +334,22 @@ it:
           fanfare_mixte: Fanfara Mista
           tambour_percussion: Tamburi e Percussione
         unterhaltungsmusik_stufen:
-          _nil: &unbekannt sconosciuto
+          _nil: sconosciuto
           oberstufe: Categoria Superiore
           mittelstufe: Categoria Media
           unterstufe: Categoria Inferiore
         klassen:
-          _nil: *unbekannt
+          _nil: sconosciuto
           hoechste: Eccellenza
           erste: 1a Classe
           zweite: 2a Classe
           dritte: 3a Classe
           vierte: 4a Classe
-        mitgliederverband: Membro dell'associazione
-
+        mitgliederverband: Membri delle associazioni
+        secondary_parent_groups: ""
+        secondary_parent_id: ""
+        tertiary_parent_id: ""
+        hostname: ""
       role:
         dates: Dati
         created_at: Entrata
@@ -303,8 +367,8 @@ it:
         suisa_id: SUISA-ID
 
       song_count:
-        song: &song Composizione
-        song_id: *song
+        song: Composizione
+        song_id: Composizione
         count: Quantità
         title: Titolo
         composed_by: Compositore
@@ -315,13 +379,53 @@ it:
         verein_id: ID Società di musica
 
       song_counts:
-        song: *song
-        song_id: *song
+        song: Composizione
+        song_id: Composizione
 
       concert:
         song_counts: Registrazione brano
         performed_at: Data
         name: Esecuzione
+
+      event/group_participation:
+        name: ""
+        group_id: ""
+        joint_participation: ""
+        secondary_group: ""
+        secondary_group_id: ""
+        secondary_group_is_primary: ""
+        music_style: ""
+        music_type: ""
+        music_level: ""
+        parade_music: ""
+        preferred_play_day_1: ""
+        preferred_play_day_2: ""
+        terms: ""
+        terms_url: ""
+        terms_accepted: ""
+        secondary_group_terms_accepted: ""
+        music_styles:
+          concert_music: ""
+          contemporary_music: ""
+          parade_music: ""
+        music_types:
+          harmony: ""
+          brass_band: ""
+          fanfare_benelux_harmony: ""
+          fanfare_benelux_brass_band: ""
+          fanfare_mixte_harmony: ""
+          fanfare_mixte_brass_band: ""
+          traditional_parade: ""
+          show_parade: ""
+        music_levels:
+          high: ""
+          medium: ""
+          low: ""
+          highest: ""
+          first: ""
+          second: ""
+          third: ""
+          fourth: ""
 
     errors:
       models:
@@ -329,6 +433,15 @@ it:
           attributes:
             title:
               taken: esiste già con lo stesso compositore in questa casa editrice
+        event/group_participation:
+          attributes:
+            base:
+              date_preference_missing: ""
+            preferred_play_day_1:
+              impossible: ""
+            preferred_play_day_2:
+              impossible: ""
+              duplicate: ""
 
   errors:
     messages:
