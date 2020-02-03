@@ -27,6 +27,12 @@ describe Group do
 
       expect(group.reload.hostname).to eq 'example.com'
     end
+
+    it 'allows commonly used abbreviations' do
+      group.hostname = 'db.example.com'
+
+      expect(group).to be_valid
+    end
   end
 
   context '#hostname_from_hierarchy' do
