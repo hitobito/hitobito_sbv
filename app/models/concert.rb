@@ -16,8 +16,8 @@
 #  performed_at         :date
 #  year                 :integer          not null
 #  editable             :boolean          default(TRUE), not null
-#  created_at           :datetime         default(Wed, 30 Jan 2019 12:12:24 CET +01:00), not null
-#  updated_at           :datetime         default(Wed, 30 Jan 2019 12:12:24 CET +01:00), not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
 #
 
 class Concert < ActiveRecord::Base
