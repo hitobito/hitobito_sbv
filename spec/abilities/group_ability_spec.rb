@@ -17,17 +17,17 @@ describe GroupAbility do
   end
 
   describe 'manage application to festivals' do
-    context 'as president of a group' do
-      let(:group_role_class) { Group::VereinVorstand::Praesident }
-      let(:group) { groups(:vorstand_mg_aarberg)}
+    context 'as admin of a group' do
+      let(:group_role_class) { Group::Verein::Admin }
+      let(:group) { groups(:musikgesellschaft_aarberg) }
       let(:checked_group) { groups(:musikgesellschaft_aarberg) }
 
       it { is_expected.to be_able_to(:manage_festival_application, checked_group)}
     end
 
-    context 'as president of a group' do
-      let(:group_role_class) { Group::VereinVorstand::Praesident }
-      let(:group) { groups(:vorstand_mg_aarberg)}
+    context 'as admin of a group' do
+      let(:group_role_class) { Group::Verein::Admin }
+      let(:group) { groups(:musikgesellschaft_aarberg) }
       let(:checked_group) { groups(:musikgesellschaft_aarberg) }
 
       it { is_expected.to be_able_to(:manage_festival_application, checked_group)}
@@ -41,9 +41,17 @@ describe GroupAbility do
       it { is_expected.to_not be_able_to(:manage_festival_application, checked_group)}
     end
 
-    context 'as president of a different group' do
+    context 'as president of a group' do
       let(:group_role_class) { Group::VereinVorstand::Praesident }
-      let(:group) { groups(:vorstand_mg_alterswil)}
+      let(:group) { groups(:vorstand_mg_aarberg) }
+      let(:checked_group) { groups(:musikgesellschaft_aarberg) }
+
+      it { is_expected.to_not be_able_to(:manage_festival_application, checked_group)}
+    end
+
+    context 'as admin of a different group' do
+      let(:group_role_class) { Group::Verein::Admin }
+      let(:group) { groups(:musikgesellschaft_alterswil)}
       let(:checked_group) { groups(:musikgesellschaft_aarberg) }
 
       it { is_expected.to_not be_able_to(:manage_festival_application, checked_group)}
