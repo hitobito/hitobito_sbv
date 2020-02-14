@@ -45,6 +45,10 @@ class Events::GroupParticipationsController < CrudController
 
   private
 
+  def list_entries
+    model_scope.includes(:event, :group, :secondary_group).all
+  end
+
   def return_path
     edit_group_event_group_participation_path(
       @group, @event, entry,
