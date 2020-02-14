@@ -29,18 +29,18 @@ class Events::GroupParticipationsController < CrudController
   before_action :authorize_resource
   around_save :update_state_machine
 
-  private_class_method
-
-  def self.model_class
-    Event::GroupParticipation
-  end
-
   def edit_stage
     edit_event = :"edit_#{params[:edit_stage]}!"
 
     entry.send(edit_event) if entry.respond_to?(edit_event)
 
     redirect_to return_path
+  end
+
+  private_class_method
+
+  def self.model_class
+    Event::GroupParticipation
   end
 
   private
@@ -81,4 +81,5 @@ class Events::GroupParticipationsController < CrudController
       authorize! action_name.to_sym, entry
     end
   end
+
 end
