@@ -26,6 +26,7 @@ module Event::GroupParticipationData
     {
       style: 'parade_music',
       types: {
+        'no_parade'          => %w(),
         'traditional_parade' => %w(),
         'show_parade'        => %w()
       }

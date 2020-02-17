@@ -59,6 +59,7 @@ class Event::GroupParticipation < ActiveRecord::Base
     state :music_style_selected
     state :music_type_and_level_selected
     state :preferred_play_day_selected
+    state :parade_music_selected
     state :terms_accepted
     state :completed
 
@@ -75,7 +76,8 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: :music_style_selected,          to: :music_type_and_level_selected
       transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected,
                   after: :infer_play_day_preference
-      transitions from: :preferred_play_day_selected,   to: :terms_accepted
+      transitions from: :preferred_play_day_selected,   to: :parade_music_selected
+      transitions from: :parade_music_selected,         to: :terms_accepted
       transitions from: :terms_accepted,                to: :completed
     end
 
@@ -86,6 +88,7 @@ class Event::GroupParticipation < ActiveRecord::Base
         :music_style_selected,
         :music_type_and_level_selected,
         :preferred_play_day_selected,
+        :parade_music_selected,
         :terms_accepted,
         :completed
       ], to: :opened, after: :clean_joining_groups
@@ -97,6 +100,7 @@ class Event::GroupParticipation < ActiveRecord::Base
         :music_style_selected,
         :music_type_and_level_selected,
         :preferred_play_day_selected,
+        :parade_music_selected,
         :terms_accepted,
         :completed
       ], to: :joint_participation_selected, after: :clean_joining_groups
@@ -107,6 +111,7 @@ class Event::GroupParticipation < ActiveRecord::Base
         :music_style_selected,
         :music_type_and_level_selected,
         :preferred_play_day_selected,
+        :parade_music_selected,
         :terms_accepted,
         :completed
       ], to: :primary_group_selected, after: :clean_music_style
@@ -116,6 +121,7 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: [
         :music_type_and_level_selected,
         :preferred_play_day_selected,
+        :parade_music_selected,
         :terms_accepted,
         :completed
       ], to: :music_style_selected, after: :clean_music_type_and_level
@@ -124,9 +130,18 @@ class Event::GroupParticipation < ActiveRecord::Base
     event :edit_date_preference, guard: :application_possible? do
       transitions from: [
         :preferred_play_day_selected,
+        :parade_music_selected,
         :terms_accepted,
         :completed
       ], to: :music_type_and_level_selected, after: :clean_date_preference
+    end
+
+    event :edit_parade_music, guard: :application_possible? do
+      transitions from: [
+        :parade_music_selected,
+        :terms_accepted,
+        :completed
+      ], to: :preferred_play_day_selected, after: :clean_parade_music
     end
   end
 
@@ -210,6 +225,12 @@ class Event::GroupParticipation < ActiveRecord::Base
     else
       true
     end
+  end
+
+  def clean_parade_music
+    self.parade_music = nil
+
+    true
   end
 
   def clean_date_preference

@@ -21,7 +21,6 @@
         - if entry.primary_primary_group_selected?
           = f.labeled :music_style do
             = f.select :music_style, music_styles_selection, prompt: ''
-          = f.labeled_boolean_field :parade_music, { checked_value: 'parade_music', unchecked_value: '' }
 
         - if entry.primary_music_style_selected?
           = f.labeled :music_type do
@@ -30,9 +29,6 @@
           = f.labeled :music_level do
             = f.select :music_level, []
 
-          - if  entry.parade_music.present?
-            = f.labeled :parade_music do
-              = f.select :parade_music, music_types_selection_for(entry.parade_music), prompt: ''
 
         - if entry.primary_music_type_and_level_selected?
           = f.labeled :preferred_play_day_1 do
@@ -42,6 +38,10 @@
               = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
 
         - if entry.primary_preferred_play_day_selected?
+          = f.labeled :parade_music do
+            = f.select :parade_music, music_types_selection_for('parade_music'), prompt: ''
+
+        - if entry.primary_parade_music_selected?
           = f.labeled_boolean_field :terms_accepted, caption: link_to_terms
 
       - else # participating as secondary
@@ -60,6 +60,8 @@
           = group_participation_edit_link('music_type_and_level', @participating_group)
         - if entry.preferred_play_day_1.present? || entry.preferred_play_day_2.present?
           = group_participation_edit_link('date_preference', @participating_group)
+        - if entry.parade_music.present?
+          = group_participation_edit_link('parade_music', @participating_group)
       - else # participating as secondary
         - if entry.secondary_group_id.present?
           = group_participation_edit_link('participation', @participating_group)
