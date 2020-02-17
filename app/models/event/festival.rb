@@ -1,3 +1,8 @@
+#  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
+#  hitobito_sbv and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_sbv.
+
 # == Schema Information
 #
 # Table name: events
@@ -37,11 +42,6 @@
 #  display_booking_info        :boolean          default(TRUE), not null
 #
 
-#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
-#  hitobito_sbv and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_sbv.
-
 require 'set'
 
 class Event::Festival < Event
@@ -64,6 +64,14 @@ class Event::Festival < Event
 
   def supports_application_details?
     true
+  end
+
+  # OPTIMIZE: this could be persisted in the applicant_count-column upon
+  #           submitting the participation.
+  #           Open question: on which state-change should this happen?
+  #           Relevant API: Event::Participatable#refresh_participant_counts!
+  def applicant_count
+    group_participations.count
   end
 
   ### ASSOCIATIONS
