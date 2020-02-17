@@ -52,6 +52,7 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   ### STATE MACHINES
 
+  # rubocop:disable Layout/LineLength,Layout/ExtraSpacing
   aasm :primary, column: 'primary_state', namespace: :primary do # rubocop:disable Metrics/BlockLength
     state :opened, initial: true
     state :joint_participation_selected
@@ -64,18 +65,14 @@ class Event::GroupParticipation < ActiveRecord::Base
     state :completed
 
     event :progress, guard: :application_possible? do
-      transitions from: :opened,                        to: :joint_participation_selected,
-                  guard: :joint_participation?
-      transitions from: :joint_participation_selected,  to: :primary_group_selected,
-                  after: :store_groups_correctly
+      transitions from: :opened,                        to: :joint_participation_selected,  guard: :joint_participation?
+      transitions from: :joint_participation_selected,  to: :primary_group_selected,                                  after: :store_groups_correctly
       transitions from: :opened,                        to: :primary_group_selected
 
       transitions from: :primary_group_selected,        to: :music_style_selected
-      transitions from: :music_style_selected,          to: :preferred_play_day_selected,
-                  guard: :single_play_day?, after: :infer_play_day_preference
+      transitions from: :music_style_selected,          to: :preferred_play_day_selected,   guard: :single_play_day?, after: :infer_play_day_preference
       transitions from: :music_style_selected,          to: :music_type_and_level_selected
-      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected,
-                  after: :infer_play_day_preference
+      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected,                             after: :infer_play_day_preference
       transitions from: :preferred_play_day_selected,   to: :parade_music_selected
       transitions from: :parade_music_selected,         to: :terms_accepted
       transitions from: :terms_accepted,                to: :completed
@@ -161,6 +158,7 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: :terms_accepted, to: :completed
     end
   end
+  # rubocop:enable Layout/LineLength,Layout/ExtraSpacing
 
   ### INSTANCE METHODS
 
