@@ -116,10 +116,11 @@ de:
         success: "Anmeldung erfolgreich hinzugefügt"
       list: Anmeldungen
       edit_stages:
-        participation: Spielgemeinschaft bearbeiten
-        music_style: Sparte bearbeiten
-        music_type_and_level: Besetzung und Klasse bearbeiten
-        date_preference: Wunschspieltage bearbeiten
+        participation: Spielgemeinschaft zurücksetzen
+        music_style: Sparte zurücksetzen
+        music_type_and_level: Besetzung und Klasse zurücksetzen
+        date_preference: Wunschspieltage zurücksetzen
+        parade_music: Parademusik zurücksetzen
 
     our_participations:
       list:
