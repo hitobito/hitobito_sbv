@@ -17,7 +17,9 @@ class Events::OurParticipationsController < ListController
   private
 
   def list_entries
-    model_class.where(group_id: parent.layer_group_id)
+    our_id = parent.layer_group_id
+
+    model_class.where('group_id = ? OR secondary_group_id = ?', our_id, our_id)
   end
 
   def list_festivals

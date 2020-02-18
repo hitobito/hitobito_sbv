@@ -87,8 +87,12 @@ class Event::Festival < Event
     end
 
     def participation_by(group)
-      joins(:group_participations)
-        .where(['event_group_participations.group_id = ?', group.id])
+      group_fields = [
+        'event_group_participations.group_id = ?',
+        'event_group_participations.secondary_group_id = ?'
+      ].join(' OR ')
+
+      joins(:group_participations).where([group_fields, group.id, group.id])
     end
   end
 end
