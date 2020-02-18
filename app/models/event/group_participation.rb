@@ -209,7 +209,7 @@ class Event::GroupParticipation < ActiveRecord::Base
   def store_groups_correctly
     join_secondary
 
-    if secondary_group_is_primary == 'true'
+    if %w(true 1).include?(secondary_group_is_primary)
       self.group_id, self.secondary_group_id = secondary_group_id, group_id
     end
   end

@@ -46,14 +46,13 @@
 
       - else # participating as secondary
         - if entry.secondary_opened?
-          = f.labeled_boolean_field :secondary_terms_accepted, caption: link_to_terms
+          = f.labeled_boolean_field :secondary_group_terms_accepted, caption: link_to_terms
 
   %aside.span5
     %section
-      - if entry.group_id.present?
-        = group_participation_edit_link('participation', @participating_group)
-
       - if entry.primary_or_only?(@participating_group)
+        - if entry.group_id.present?
+          = group_participation_edit_link('participation', @participating_group)
         - if entry.music_style.present?
           = group_participation_edit_link('music_style', @participating_group)
         - if entry.music_level.present?
@@ -63,8 +62,7 @@
         - if entry.parade_music.present?
           = group_participation_edit_link('parade_music', @participating_group)
       - else # participating as secondary
-        - if entry.secondary_group_id.present?
-          = group_participation_edit_link('participation', @participating_group)
+        -# nothing so far
 
 = music_level_selections_for(entry.music_style) if entry.primary_music_style_selected?
 
