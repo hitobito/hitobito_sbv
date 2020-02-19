@@ -64,5 +64,9 @@
       - else # participating as secondary
         -# nothing so far
 
+    %section
+      - if entry.primary_or_only?(@participating_group)
+        = group_participation_destroy_link(entry, @participating_group)
+
 = music_level_selections_for(entry.music_style) if entry.primary_music_style_selected?
 

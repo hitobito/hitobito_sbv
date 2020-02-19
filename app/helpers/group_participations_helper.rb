@@ -84,6 +84,19 @@ module GroupParticipationsHelper
     end
   end
 
+  def group_participation_destroy_link(entry, participating_group_id)
+    scope = 'event.participations.cancel_application'
+    destroy_path = group_event_group_participation_path(
+      entry.event.groups.first, entry.event, entry,
+      participating_group: participating_group_id
+    )
+    options = { data: { confirm: t(:confirmation, scope: scope), method: :delete } }
+
+    content_tag :p do
+      action_button t(:caption, scope: scope), destroy_path, :trash, options
+    end
+  end
+
   def link_to_terms
     link_to t(:terms, group_participation_scope),
             t(:terms_url, group_participation_scope),
