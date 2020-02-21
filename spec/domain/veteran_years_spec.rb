@@ -1,4 +1,4 @@
-#  Copyright (c) 2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2018-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -6,6 +6,7 @@
 require 'spec_helper'
 
 describe VeteranYears do
+  include ActiveSupport::Testing::TimeHelpers
 
   it 'counts full duration if continuous' do
     expect(described_class.new(1978, 2013).years).to be == 35
@@ -39,6 +40,12 @@ describe VeteranYears do
     third = described_class.new(2012, 2013)
 
     expect((first + second + third).years).to be == 31
+  end
+
+  it 'does count the current year as full year' do
+    travel_to Date.new(2020, 02, 01) do
+      expect(described_class.new(2010, 2020).years).to be == 11
+    end
   end
 
   context 'has some helper methods to' do

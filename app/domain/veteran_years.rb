@@ -1,4 +1,4 @@
-#  Copyright (c) 2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2018-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -14,7 +14,7 @@ class VeteranYears
   end
 
   def years
-    @end_year - @start_year - passive_and_starting_years.size
+    past_years + current_year
   end
 
   def <=>(other)
@@ -39,6 +39,14 @@ class VeteranYears
 
   def passive_and_starting_years
     @passive_years.map { |y| [y, y.succ] }.flatten.uniq
+  end
+
+  def past_years
+    @end_year - @start_year - passive_and_starting_years.size
+  end
+
+  def current_year
+    Date.current.year == @end_year ? 1 : 0
   end
 
 end

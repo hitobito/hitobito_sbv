@@ -59,7 +59,7 @@ describe HistoryRolesController do
       post :create, group_id: group.id, role: role_params
       expect(response).to redirect_to(history_group_person_path(group.id, leader))
     end.to change { leader.roles.count }.by(1)
-    expect(leader.reload.active_years).to eq 2
+    expect(leader.reload.active_years).to eq 3
   end
 
   it 'POST#create creates new role and deleted mitglieder verein in hidden verein group' do
@@ -75,7 +75,7 @@ describe HistoryRolesController do
       post :create, group_id: leader.primary_group_id, role: role_params
       expect(response).to redirect_to(history_group_person_path(leader.primary_group, leader))
     end.to change { leader.roles.count }.by(1)
-    expect(leader.reload.active_years).to eq 2
+    expect(leader.reload.active_years).to eq 3
     expect(Group::Verein.hidden).to have(1).children
     group = Group::Verein.hidden.children.find_by(name: 'Dummy')
     expect(group).to be_deleted
