@@ -20,4 +20,5 @@ describe Group::Verein do
     expect(hidden.reload).to have(1).children
     expect(hidden.children.first).to be_deleted
   end
+
 end

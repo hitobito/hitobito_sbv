@@ -28,5 +28,5 @@
                 = f.labeled(:end_date, t('.end_date')) do
                   = f.date_field(:deleted_at, name: 'role[end_date]', autocomplete: 'off')
 
-              =f.indented do
+              = f.indented do
                 = submit_button(f, t('.save'))
