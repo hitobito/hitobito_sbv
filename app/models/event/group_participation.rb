@@ -193,6 +193,11 @@ class Event::GroupParticipation < ActiveRecord::Base
     possible_day_numbers.size > 2
   end
 
+  def could_change_date_preference?
+    (preferred_play_day_1.present? || preferred_play_day_2.present?) &&
+      possible_day_numbers.size > 1
+  end
+
   private
 
   def state_machine_for(participating_group = nil)

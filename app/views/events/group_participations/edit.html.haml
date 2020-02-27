@@ -57,7 +57,7 @@
           = group_participation_edit_link('music_style', @participating_group)
         - if entry.music_level.present?
           = group_participation_edit_link('music_type_and_level', @participating_group)
-        - if entry.preferred_play_day_1.present? || entry.preferred_play_day_2.present?
+        - if entry.could_change_date_preference?
           = group_participation_edit_link('date_preference', @participating_group)
         - if entry.parade_music.present?
           = group_participation_edit_link('parade_music', @participating_group)
