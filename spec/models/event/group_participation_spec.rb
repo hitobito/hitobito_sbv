@@ -68,6 +68,22 @@ describe Event::GroupParticipation do
 
         is_expected.to be_valid
       end
+
+      it 'can be reset without breaking validation' do
+        # cumbersome setup, sorry...
+        subject.preferred_play_day_1 = friday
+        subject.preferred_play_day_2 = saturday
+        is_expected.to be_valid
+        subject.progress_primary!
+        expect(subject).to have_state(:preferred_play_day_selected).on(:primary)
+        # cumbersome setup end
+
+        subject.edit_date_preference
+
+        expect(subject.preferred_play_day_1).to be_nil
+        expect(subject.preferred_play_day_2).to be_nil
+        is_expected.to be_valid
+      end
     end
   end
 

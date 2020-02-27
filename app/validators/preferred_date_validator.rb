@@ -14,6 +14,7 @@ class PreferredDateValidator < ActiveModel::Validator
   def validate(record)
     @record = record
 
+    return true if date_reset?
     return true unless music_chosen? && date_changed?
 
     errors.delete(:preferred_play_day_1)
@@ -30,6 +31,10 @@ class PreferredDateValidator < ActiveModel::Validator
 
   def date_changed?
     changed.include?('preferred_play_day_1') || changed.include?('preferred_play_day_2')
+  end
+
+  def date_reset?
+    date_changed? && preferred_play_day_1.nil? && preferred_play_day_2.nil?
   end
 
   def error_translation(attr, key)
