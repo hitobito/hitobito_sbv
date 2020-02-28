@@ -61,7 +61,7 @@ describe HistoryRolesController do
       expect(response).to redirect_to(history_group_person_path(group.id, leader))
     end.to change { leader.roles.count }.by(1)
     expect(leader.reload.active_years).to eq 3
-    expect(leader.roles.any? { |role| role.label.eq '1. Sax' }).to be_truthy
+    expect(leader.roles.any? { |role| role.label === '1. Sax' }).to be_truthy
   end
 
   it 'POST#create creates new role and deleted mitglieder verein in hidden verein group' do
