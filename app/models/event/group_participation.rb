@@ -201,7 +201,7 @@ class Event::GroupParticipation < ActiveRecord::Base
   private
 
   def state_machine_for(participating_group = nil)
-    case participating_group
+    case participating_group.layer_group
     when group           then :primary
     when secondary_group then :secondary
     else
