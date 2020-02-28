@@ -53,6 +53,7 @@ class HistoryRolesController < ApplicationController
     Group::VereinMitglieder::Mitglied.new(
       group: group,
       person_id: params[:role][:person_id],
+      label: params[:role][:label],
       created_at: params[:role][:start_date].presence || Time.zone.now.to_date,
       deleted_at: params[:role][:end_date]
     )
