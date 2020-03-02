@@ -69,7 +69,7 @@ class Events::GroupParticipationsController < CrudController
   end
 
   def participating_group
-    @participating_group ||= Group.find_by(id: participating_group_id).layer_group
+    @participating_group ||= Group.find_by(id: participating_group_id).try(:layer_group)
   end
 
   def participating_group_id # rubocop:disable Metrics/AbcSize any refactoring inside the methods makes it harder to understand
