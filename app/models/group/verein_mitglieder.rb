@@ -54,10 +54,8 @@ class Group::VereinMitglieder < Group
   class Mitglied < Role::MitgliederMitglied
   end
 
-
   class Passivmitglied < Role::MitgliederPassivmitglied
   end
-
 
   class Ehrenmitglied < Role::Ehrenmitglied
   end
