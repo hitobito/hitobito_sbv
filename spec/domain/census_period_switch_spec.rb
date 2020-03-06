@@ -15,7 +15,6 @@ describe CensusPeriodSwitch do
   let(:new) { SongCensus.new(year: 2019) }
 
   it 'has some assumptions' do
-    expect(Date.today.month).to be 12
     expect(old.finish_at).to eq Date.parse('2018-10-31')
   end
 
