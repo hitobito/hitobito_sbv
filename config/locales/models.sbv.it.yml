@@ -10,8 +10,8 @@ it:
       ### GROUPS
 
       group/generalverband:
-        one: ''
-        other: ''
+        one: Associazione o federazione generale
+        other: Associazione o federazione generale
 
 
       group/root:
@@ -303,8 +303,8 @@ it:
 
 
       event/group_participation:
-        one: ''
-        other: ''
+        one: Iscrizioni di gruppo
+        other: Iscrizioni di gruppo
 
 
     attributes:
@@ -346,10 +346,10 @@ it:
           dritte: 3a Classe
           vierte: 4a Classe
         mitgliederverband: Membri delle associazioni
-        secondary_parent_groups: ""
-        secondary_parent_id: ""
-        tertiary_parent_id: ""
-        hostname: ""
+        secondary_parent_groups: Appartenenze ad altri gruppi
+        secondary_parent_id: secondario
+        tertiary_parent_id: altri
+        hostname: Hostname
       role:
         dates: Dati
         created_at: Entrata
@@ -388,44 +388,46 @@ it:
         name: Esecuzione
 
       event/group_participation:
-        name: ""
-        group_id: ""
-        joint_participation: ""
-        secondary_group: ""
-        secondary_group_id: ""
-        secondary_group_is_primary: ""
-        music_style: ""
-        music_type: ""
-        music_level: ""
-        parade_music: ""
-        preferred_play_day_1: ""
-        preferred_play_day_2: ""
-        terms: ""
-        terms_url: ""
-        terms_accepted: ""
-        secondary_group_terms_accepted: ""
+        name: "Iscrizione di gruppo a %{evento} come %{gruppo}"
+        group_id: Società
+        joint_participation: Iscrizione come aggregazione tra società
+        secondary_group: Società partner
+        secondary_group_id: Aggregazione tra società con
+        secondary_group_is_primary: La società partner è quella di riferimento
+        music_style: Disciplina
+        music_type: Organico
+        music_level: Categoria
+        parade_music: anche musica da parata
+        preferred_play_day_1: "1° giorno di esecuzione desiderato"
+        preferred_play_day_2: "2° giorno di esecuzione desiderato"
+        terms: Regolamento
+        terms_url: "https://www.windband.ch/media/471563/règlement-pour-la-fête-fédérale-de-musique_asm_20180414_f.pdf "
+        terms_accepted: Regolamento accettato
+        secondary_group_terms_accepted: Regolamento accettato dalla società partner
         music_styles:
-          concert_music: ""
-          contemporary_music: ""
-          parade_music: ""
+          concert_music: Musica concertante
+          contemporary_music: Musica leggera
+          parade_music: Musica da parata
         music_types:
-          harmony: ""
-          brass_band: ""
-          fanfare_benelux_harmony: ""
-          fanfare_benelux_brass_band: ""
-          fanfare_mixte_harmony: ""
-          fanfare_mixte_brass_band: ""
-          traditional_parade: ""
-          show_parade: ""
+          harmony: Armonia
+          brass_band: Brass band
+          fanfare_benelux_harmony: Fanfara Benelux armonia
+          fanfare_benelux_brass_band: Fanfara Benelux brass band
+          fanfare_mixte_harmony: Fanfara mista armonia
+          fanfare_mixte_brass_band: Fanfara mista brass band
+          traditional_parade: Musica da parata tradizionale
+          show_parade: Musica da parata con evoluzioni e spettacolo
+          parade_music: sì
+          no_parade: no
         music_levels:
-          high: ""
-          medium: ""
-          low: ""
-          highest: ""
-          first: ""
-          second: ""
-          third: ""
-          fourth: ""
+          high: Categoria superiore
+          medium: Categoria media
+          low: Categoria inferiore
+          highest: Eccellenza
+          first: 1a categoria
+          second: 2a categoria
+          third: 3a categoria
+          fourth: 4a categoria
 
     errors:
       models:
@@ -436,12 +438,12 @@ it:
         event/group_participation:
           attributes:
             base:
-              date_preference_missing: ""
+              date_preference_missing: Deve essere indicato almeno un giorno
             preferred_play_day_1:
-              impossible: ""
+              impossible: non disponibile
             preferred_play_day_2:
-              impossible: ""
-              duplicate: ""
+              impossible: non disponibile
+              duplicate: deve essere diverso dal 1° giorno di esecuzione desiderato
 
   errors:
     messages:

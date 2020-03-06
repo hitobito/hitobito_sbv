@@ -7,7 +7,7 @@ fr:
   global:
     last_change: "Dernière modification: %{date}"
   group:
-    festival_tab: ""
+    festival_tab: Fêtes de musique
     suisa_tab: SUISA
     merge:
       select:
@@ -47,9 +47,9 @@ fr:
         start_date: Admission
         end_date: Démission
         save: Sauvegarder
-        create_deleted_verein: ""
-        select_existing_verein: ""
-        text_with_alternative_link_html: ""
+        create_deleted_verein: Saisir la société supprimée
+        select_existing_verein: Sélectionner la société
+        text_with_alternative_link_html: "%{text} ou %{link}"
 
     add_requests:
       creator:
@@ -65,7 +65,7 @@ fr:
       role_only_public: >
         Le rôle %{role} du groupe %{group} ne peut voir que des données publiques (groupes, manifestations et listes; aucune autre personne).
   song_counts:
-    export_enqueued: ''
+    export_enqueued: 'L’exportation est lancée en arrière-plan et téléchargée une fois terminée.'
 
   subscriber:
       group:
@@ -100,23 +100,24 @@ fr:
 
   events:
     group_participations:
-      edit: ""
+      edit: "traiter %{participation}"
       actions_new:
-        title: ""
+        title: "Inscription de société"
       create:
-        success: ""
-      list: ""
+        success: "L’inscription a bien été ajoutée"
+      list: Inscriptions
       edit_stages:
-        participation: ""
-        music_style: ""
-        music_type_and_level: ""
-        date_preference: ""
+        participation: Réinitialiser l’association d’ensembles
+        music_style: Réinitialiser le domaine
+        music_type_and_level: Réinitialiser l’instrumentation et la catégorie
+        date_preference: Réinitialiser les jours de prestation souhaités
+        parade_music: Réinitialiser la musique de parade
 
     our_participations:
       list:
-        applicable_festivals: ""
-        active_applications: ""
-        edit: ""
+        applicable_festivals: "Fêtes de musique ouvertes pour l’inscription"
+        active_applications: "Inscriptions de mon groupe"
+        edit: traiter
 
   contactable:
     additional_email_fields:

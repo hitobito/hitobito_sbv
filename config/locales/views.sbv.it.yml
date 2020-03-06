@@ -7,7 +7,7 @@ it:
   global:
     last_change: "Ultima modifica: %{date}"
   group:
-    festival_tab: ""
+    festival_tab: Feste di Musica
     suisa_tab: SUISA
     merge:
       select:
@@ -47,9 +47,9 @@ it:
         start_date: Entrata
         end_date: Uscita
         save: Memorizzare
-        create_deleted_verein: ""
-        select_existing_verein: ""
-        text_with_alternative_link_html: ""
+        create_deleted_verein: Inserire la società cancellata
+        select_existing_verein: Selezionare una società
+        text_with_alternative_link_html: "%{testo} oppure %{link}"
 
     add_requests:
       creator:
@@ -65,7 +65,7 @@ it:
       role_only_public: >
         Il ruolo %{role} nel gruppo %{group}può visionare solo dati pubblici (gruppi, eventi ed elenchi, nessuna altra persona).
   song_counts:
-    export_enqueued: ''
+    export_enqueued: 'L’esportazione avverrà in background e sarà scaricata al termine.'
 
   subscriber:
       group:
@@ -100,23 +100,24 @@ it:
 
   events:
     group_participations:
-      edit: ""
+      edit: "%{partecipazione} elaborare"
       actions_new:
-        title: ""
+        title: "Iscrizione della società"
       create:
-        success: ""
-      list: ""
+        success: "L’iscrizione della società è stata inserita con successo"
+      list: Iscrizioni
       edit_stages:
-        participation: ""
-        music_style: ""
-        music_type_and_level: ""
-        date_preference: ""
+        participation: Inizializzare di nuovo l’aggregazione tra società
+        music_style: Inizializzare di nuovo di nuovo la disciplina
+        music_type_and_level: Inizializzare di nuovo organico e categoria
+        date_preference: Inizializzare di nuovo il giorno di esecuzione desiderato
+        parade_music: Inizializzare di nuovo la musica da parata
 
     our_participations:
       list:
-        applicable_festivals: ""
-        active_applications: ""
-        edit: ""
+        applicable_festivals: "all’iscrizione di Feste di musica disponibili"
+        active_applications: "Iscrizione del mio gruppo"
+        edit: elaborare
 
   contactable:
     additional_email_fields:
