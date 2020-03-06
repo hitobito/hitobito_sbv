@@ -53,13 +53,15 @@ describe HistoryRolesController do
     role_params = {
       person_id: leader.id,
       group_id: group.id,
-      start_date: 2.years.ago.to_date
+      start_date: 2.years.ago.to_date,
+      label: '1. Sax'
     }
     expect do
       post :create, group_id: group.id, role: role_params
       expect(response).to redirect_to(history_group_person_path(group.id, leader))
     end.to change { leader.roles.count }.by(1)
     expect(leader.reload.active_years).to eq 3
+    expect(leader.roles.any? { |role| role.label === '1. Sax' }).to be_truthy
   end
 
   it 'POST#create creates new role and deleted mitglieder verein in hidden verein group' do

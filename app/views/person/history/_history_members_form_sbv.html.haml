@@ -16,6 +16,9 @@
               = swappable_group_add_fieldset(:create_deleted_verein, :select_existing_verein) do
                 = f.labeled(:verein, t('.verein')) do
                   = f.select(:group_id, mitglieder_group_as_select_options, {prompt: I18n.t('helpers.select.prompt') }, { class: 'chosen-select absolute'  })
+                = f.labeled_input_field(:label,
+                                        data: { provide: :typeahead, source: Role.available_labels },
+                                        help: t('roles.fields.help_optional_label'))
 
               = swappable_group_add_fieldset(:select_existing_verein, :create_deleted_verein) do
                 = f.fields_for(:group, Group.new) do |fields|
