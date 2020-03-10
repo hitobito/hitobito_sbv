@@ -16,14 +16,15 @@ describe HistoryRolesController do
     role_params = {
       person_id: leader.id,
       group_id: group.id,
-      start_date: 2019
+      start_date: 2019,
+      end_date: 2020
     }
     expect do
       post :create, group_id: group.id, role: role_params, format: :js
       expect(response).to render_template('shared/update_flash')
     end.not_to change { leader.roles.count }
     expect(leader.reload.active_years).to be_nil
-    expect(flash.now[:alert]).to eq ['Eintritt ist kein gültiges Datum']
+    expect(flash.now[:alert].sort).to eq ['Austritt ist kein gültiges Datum', 'Eintritt ist kein gültiges Datum']
   end
 
   it 'POST#create is not allowed for normal members' do
@@ -35,7 +36,8 @@ describe HistoryRolesController do
     role_params = {
       person_id: member.id,
       group_id: group.id,
-      start_date: 2.years.ago.to_date
+      start_date: 2.years.ago.to_date,
+      end_date: 1.year.ago.to_date
     }
     expect do
       expect do
@@ -54,14 +56,14 @@ describe HistoryRolesController do
       person_id: leader.id,
       group_id: group.id,
       start_date: 2.years.ago.to_date,
+      end_date: Date.yesterday,
       label: '1. Sax'
     }
     expect do
       post :create, group_id: group.id, role: role_params
-      expect(response).to redirect_to(history_group_person_path(group.id, leader))
-    end.to change { leader.roles.count }.by(1)
+    end.to change { leader.roles.with_deleted.count }.by(1)
     expect(leader.reload.active_years).to eq 3
-    expect(leader.roles.any? { |role| role.label === '1. Sax' }).to be_truthy
+    expect(leader.roles.with_deleted).to be_any { |role| role.label === '1. Sax' }
   end
 
   it 'POST#create creates new role and deleted mitglieder verein in hidden verein group' do
@@ -71,12 +73,13 @@ describe HistoryRolesController do
     role_params = {
       person_id: leader.id,
       group: { name: 'Dummy' },
-      start_date: 2.years.ago.to_date
+      start_date: 2.years.ago.to_date,
+      end_date: Date.today
     }
     expect do
       post :create, group_id: leader.primary_group_id, role: role_params
       expect(response).to redirect_to(history_group_person_path(leader.primary_group, leader))
-    end.to change { leader.roles.count }.by(1)
+    end.to change { leader.roles.count }.by(0)
     expect(leader.reload.active_years).to eq 3
     expect(Group::Verein.hidden).to have(1).children
     group = Group::Verein.hidden.children.find_by(name: 'Dummy')
