@@ -10,7 +10,7 @@
     = f.label :count do
       = f.object.song.decorate.full_label if f.object.song
   .col-1
-    = f.link_to_remove(icon(:close))
+    = f.link_to_remove(icon(:times))
 
     = f.hidden_field :year, value: year
     = f.hidden_field :song_id, class: 'song_id'
