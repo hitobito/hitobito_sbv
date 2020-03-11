@@ -74,5 +74,74 @@ describe SongCensusesHelper do
         expect(button_html).to_not match(disabled_class_regex)
       end
     end
+
+    context 'if the census has already been submitted, it' do
+      let(:concerts) do
+        group.concerts.map do |concert|
+          if concert.song_census.nil?
+            concert.update_attribute(:song_census, SongCensus.current)
+          end
+          concert
+        end
+      end
+
+      it 'has concerts that are linked to the current census' do
+        expect(concerts.any? { |concert| concert.song_census.current? }).to be_truthy
+      end
+
+      it 'has no concerts that are not linked to a census' do
+        expect(concerts.any? { |concert| concert.song_census.nil? }).to be_falsey
+      end
+
+      it 'renders an inactive button' do
+        label   = 'Meldeliste eingereicht'
+        tooltip = 'Die Meldeliste wurde bereits erfolgreich eingereicht.'
+
+        expect(button_html).to be_a String
+
+        expect(button_html).to include(label)
+        expect(button_html).to include(%(title="#{tooltip}"))
+
+        expect(button_html).to match(/div.*btn-group.*/)
+        expect(button_html).to_not match(/data-method="post"/)
+        expect(button_html).to_not match(button_class_regex)
+        expect(button_html).to_not include(submit_group_concerts_path(group.id))
+
+        expect(button_html).to match(disabled_class_regex)
+      end
+    end
+
+    context 'if there are no concerts for the census, it' do
+      let(:concerts) { Concert.none }
+
+      it 'has no concerts that are linked to the current census' do
+        expect(concerts.any? { |concert| concert.song_census.current? }).to be_falsey
+      end
+
+      it 'has no concerts that are not linked to a census' do
+        expect(concerts.any? { |concert| concert.song_census.nil? }).to be_falsey
+      end
+
+      it 'has no concerts' do
+        expect(concerts).to be_none
+      end
+
+      it 'renders an inactive button' do
+        label   = 'Meldeliste einreichen'
+        tooltip = 'Keine Meldelisten zum einreichen.'
+
+        expect(button_html).to be_a String
+
+        expect(button_html).to include(label)
+        expect(button_html).to include(%(title="#{tooltip}"))
+
+        expect(button_html).to match(/div.*btn-group.*/)
+        expect(button_html).to_not match(/data-method="post"/)
+        expect(button_html).to_not match(button_class_regex)
+        expect(button_html).to_not include(submit_group_concerts_path(group.id))
+
+        expect(button_html).to match(disabled_class_regex)
+      end
+    end
   end
 end
