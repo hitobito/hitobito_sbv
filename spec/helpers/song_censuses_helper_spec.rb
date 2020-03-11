@@ -43,10 +43,10 @@ describe SongCensusesHelper do
   end
 
   describe '#census_submit_button' do
-    let(:today) { Date.parse('2018-12-01') } # might be needed, but useless to change per context
+    let(:today) { Date.parse('2018-12-01') } # determines the current census, but useless to change per context
     let(:group) { groups(:musikverband_hastdutoene) }
 
-    let(:disabled_class_regex) { /class="[^"]*disabled[^"]"/ }
+    let(:disabled_class_regex) { /class="[^"]*disabled[^"]*"/ }
     let(:button_class_regex) { /class="[^"]*btn[^"]*"/ }
     let(:button_html) { census_submit_button(concerts, group) }
 
@@ -67,8 +67,8 @@ describe SongCensusesHelper do
         expect(button_html).to include(%(title="#{tooltip}"))
 
         expect(button_html).to match(/div.*btn-group.*/)
-        expect(button_html).to match(/data-method="post"/)
         expect(button_html).to match(button_class_regex)
+        expect(button_html).to match(/data-method="post"/)
         expect(button_html).to include(submit_group_concerts_path(group.id))
 
         expect(button_html).to_not match(disabled_class_regex)
@@ -103,8 +103,8 @@ describe SongCensusesHelper do
         expect(button_html).to include(%(title="#{tooltip}"))
 
         expect(button_html).to match(/div.*btn-group.*/)
+        expect(button_html).to match(button_class_regex)
         expect(button_html).to_not match(/data-method="post"/)
-        expect(button_html).to_not match(button_class_regex)
         expect(button_html).to_not include(submit_group_concerts_path(group.id))
 
         expect(button_html).to match(disabled_class_regex)
@@ -136,8 +136,8 @@ describe SongCensusesHelper do
         expect(button_html).to include(%(title="#{tooltip}"))
 
         expect(button_html).to match(/div.*btn-group.*/)
+        expect(button_html).to match(button_class_regex)
         expect(button_html).to_not match(/data-method="post"/)
-        expect(button_html).to_not match(button_class_regex)
         expect(button_html).to_not include(submit_group_concerts_path(group.id))
 
         expect(button_html).to match(disabled_class_regex)

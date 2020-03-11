@@ -34,6 +34,16 @@ de:
     verein:
       search: Werk suchen…
     submit: Meldeliste einreichen
+    submit_button:
+      label:
+        submit: Meldeliste einreichen
+        submitted: Meldeliste eingereicht
+        none: Meldeliste einreichen
+      tooltip:
+        submit: Die Meldeliste kann eingereicht werden.
+        submitted: Die Meldeliste wurde bereits erfolgreich eingereicht.
+        none: Keine Meldelisten zum einreichen.
+
     remind:
       success: "Erinnerung wurde erfolgreich an %{verein_count} Vereine versendet."
       send: Erinnerung senden
