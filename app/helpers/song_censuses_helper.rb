@@ -16,4 +16,15 @@ module SongCensusesHelper
       )
     end
   end
+
+  def census_submit_button(concerts, group)
+    unless concerts.all?(&:song_census)
+      action_button(
+        t('song_censuses.submit'),
+        submit_group_concerts_path(group),
+        nil,
+        method: :post, title: 'Die Meldeliste kann eingereicht werden.'
+      )
+    end
+  end
 end

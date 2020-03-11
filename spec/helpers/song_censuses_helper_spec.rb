@@ -15,28 +15,64 @@ describe SongCensusesHelper do
   include LayoutHelper # action_button
   include UtilityHelper # add_css_class
 
-  let(:group) { groups(:hauptgruppe_1) }
-  let(:button_html) { census_finish_button(census, group.id) }
+  describe '#census_finish_button' do
+    context 'for a current, finished census, it' do
+      let(:census) { song_censuses(:two_o_18) }
+      let(:group) { groups(:hauptgruppe_1) }
 
-  context 'for a current, finished census, it' do
-    let(:census) { song_censuses(:two_o_18) }
-    let(:today) { Date.parse('2018-12-01') }
+      let(:today) { Date.parse('2018-12-01') }
 
-    it 'deals with a current census' do
-      expect(census).to be_current
+      it 'deals with a current census' do
+        expect(census).to be_current
+      end
+
+      it 'deals with a finished census' do
+        expect(census).to be_finished
+      end
+
+      it 'allows to finish the census' do
+        button_html = census_finish_button(census, group.id)
+        message = I18n.t('song_censuses.finish.start_new_census')
+
+        expect(button_html).to match(/div.*btn-group.*/)
+        expect(button_html).to match(/a.*data-confirm="#{message}"/)
+        expect(button_html).to match(new_group_song_census_path(group.id))
+        expect(button_html).to match(/Meldeliste abschliessen/)
+      end
     end
+  end
 
-    it 'deals with a finished census' do
-      expect(census).to be_finished
-    end
+  describe '#census_submit_button' do
+    let(:today) { Date.parse('2018-12-01') } # might be needed, but useless to change per context
+    let(:group) { groups(:musikverband_hastdutoene) }
 
-    it 'allows to finish the census' do
-      message = I18n.t('song_censuses.finish.start_new_census')
+    let(:disabled_class_regex) { /class="[^"]*disabled[^"]"/ }
+    let(:button_class_regex) { /class="[^"]*btn[^"]*"/ }
+    let(:button_html) { census_submit_button(concerts, group) }
 
-      expect(button_html).to match(/div.*btn-group.*/)
-      expect(button_html).to match(/a.*data-confirm="#{message}"/)
-      expect(button_html).to match(new_group_song_census_path(group.id))
-      expect(button_html).to match(/Meldeliste abschliessen/)
+    context 'if the census is not yet submitted, it' do
+      let(:concerts) { group.concerts }
+
+      it 'has concerts that are not linked to a census' do
+        expect(concerts.any? { |concert| concert.song_census.nil? }).to be_truthy
+      end
+
+      it 'renders a button to submit' do
+        label   = 'Meldeliste einreichen'
+        tooltip = 'Die Meldeliste kann eingereicht werden.'
+
+        expect(button_html).to be_a String
+
+        expect(button_html).to include(label)
+        expect(button_html).to include(%(title="#{tooltip}"))
+
+        expect(button_html).to match(/div.*btn-group.*/)
+        expect(button_html).to match(/data-method="post"/)
+        expect(button_html).to match(button_class_regex)
+        expect(button_html).to include(submit_group_concerts_path(group.id))
+
+        expect(button_html).to_not match(disabled_class_regex)
+      end
     end
   end
 end
