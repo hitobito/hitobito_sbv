@@ -1,4 +1,3 @@
-- if can?(:manage_song_census, @group) && @census.try(:current?) && @census.finished?
-  = action_button(t('.submit'), new_group_song_census_path(@group.id), :ok,
-    { data: { confirm: "#{t('.start_new_census')}" } })
+- if can?(:manage_song_census, @group)
+  = census_finish_button(@census, @group.id)
 
