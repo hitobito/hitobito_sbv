@@ -52,7 +52,7 @@
     min-width: 7rem;
     margin-right: -3rem;
     flex-grow: 0;
-  } 
+  }
 }
 
 .typeahead {
@@ -62,4 +62,8 @@
   .active .muted {
     color: $white;
   }
+}
+
+.tooltip-wrapper {
+  display: inline-block;
 }

@@ -46,7 +46,7 @@ describe SongCensusesHelper do
     let(:today) { Date.parse('2018-12-01') } # determines the current census, but useless to change per context
     let(:group) { groups(:musikverband_hastdutoene) }
 
-    let(:disabled_class_regex) { /class="[^"]*disabled[^"]*"/ }
+    let(:disabled_class_regex) { /div class="tooltip-wrapper".*a class="[^"]*disabled[^"]*"/ }
     let(:button_class_regex) { /class="[^"]*btn[^"]*"/ }
     let(:button_html) { census_submit_button(concerts, group) }
 

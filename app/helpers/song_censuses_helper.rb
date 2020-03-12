@@ -45,9 +45,8 @@ module SongCensusesHelper
   end
 
   def inactive_census_submit(key)
-    action_button(
-      census_submit_label(key), '#', nil,
-      class: 'disabled', title: census_submit_tooltip(key)
-    )
+    content_tag(:div, class: 'tooltip-wrapper', title: census_submit_tooltip(key)) do
+      action_button(census_submit_label(key), '#', nil, class: 'disabled')
+    end
   end
 end
