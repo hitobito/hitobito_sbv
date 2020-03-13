@@ -349,12 +349,10 @@ de:
         music_types:
           harmony: Harmonie
           brass_band: Brass Band
-          fanfare_benelux_harmony: Fanfare Benelux Harmonie
-          fanfare_benelux_brass_band: Fanfare Benelux Brass Band
-          fanfare_mixte_harmony: Fanfare mixte Harmonie
-          fanfare_mixte_brass_band: Fanfare mixte Brass Band
+          fanfare_benelux: Fanfare Benelux
+          fanfare_mixte: Fanfare mixte
           traditional_parade: traditionelle Parademusik
-          show_parade: Parademusik mit Evolution und Showparade
+          show_parade: Parademusik mit Evolution und/oder Show
           parade_music: ja
           no_parade: nein
         music_levels:

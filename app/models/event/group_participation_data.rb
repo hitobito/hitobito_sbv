@@ -8,12 +8,10 @@ module Event::GroupParticipationData
     {
       style: 'concert_music',
       types: {
-        'harmony'                    => %w(highest first second third fourth),
-        'brass_band'                 => %w(highest first second third fourth),
-        'fanfare_benelux_harmony'    => %w(first second third),
-        'fanfare_benelux_brass_band' => %w(first second third),
-        'fanfare_mixte_harmony'      => %w(fourth),
-        'fanfare_mixte_brass_band'   => %w(fourth)
+        'harmony'         => %w(highest first second third fourth),
+        'brass_band'      => %w(highest first second third fourth),
+        'fanfare_benelux' => %w(first second third),
+        'fanfare_mixte'   => %w(fourth)
       }
     },
     {
@@ -54,20 +52,12 @@ module Event::GroupParticipationData
         'third'   => AVAILABLE_PLAY_DAYS.values,
         'fourth'  => AVAILABLE_PLAY_DAYS.values_at(:thursday)
       },
-      'fanfare_benelux_harmony' => {
+      'fanfare_benelux' => {
         'first'  => AVAILABLE_PLAY_DAYS.values_at(:thursday),
         'second' => AVAILABLE_PLAY_DAYS.values_at(:thursday),
         'third'  => AVAILABLE_PLAY_DAYS.values_at(:thursday, :friday)
       },
-      'fanfare_benelux_brass_band' => {
-        'first'  => AVAILABLE_PLAY_DAYS.values_at(:thursday),
-        'second' => AVAILABLE_PLAY_DAYS.values_at(:thursday),
-        'third'  => AVAILABLE_PLAY_DAYS.values_at(:thursday, :friday)
-      },
-      'fanfare_mixte_harmony' => {
-        'fourth' => AVAILABLE_PLAY_DAYS.values_at(:thursday)
-      },
-      'fanfare_mixte_brass_band' => {
+      'fanfare_mixte' => {
         'fourth' => AVAILABLE_PLAY_DAYS.values_at(:thursday)
       }
     },
