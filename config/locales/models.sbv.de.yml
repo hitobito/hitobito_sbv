@@ -297,6 +297,7 @@ de:
               song_census: Darf SUISA-Meldungen verwalten.
               layer_full: Alles Lesen und Schreiben auf dieser Ebene. Erstellen von Anlässen und Listen auf dieser Ebene.
               group_full: Lesen und Schreiben auf der Gruppe. Erstellen von Anlässen und Listen auf der Gruppe.
+              festival_participation: Darf den Verein zu Musikfesten anmelden und die Anmeldung bearbeiten.
       song:
         title: Titel
         composed_by: Komponist
