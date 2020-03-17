@@ -40,6 +40,8 @@ Rails.application.routes.draw do
       resources :history_roles, only: [:create, :destroy]
     end
     get '/groups/query' => 'groups/query#index', as: :query_groups
+
+    get 'help' => 'help#index'
   end
 
 end

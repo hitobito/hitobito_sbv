@@ -6,6 +6,8 @@
 de:
   global:
     last_change: "Letzte Änderung: %{date}"
+  navigation:
+    help: Hilfe
   group:
     festival_tab: Musikfeste
     suisa_tab: SUISA

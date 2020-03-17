@@ -44,6 +44,15 @@ module HitobitoSbv
       ### helpers
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
       admin[:active_for] << 'songs'
+
+      index_admin = NavigationHelper::MAIN.index { |opts| opts[:label] == :admin }
+      NavigationHelper::MAIN.insert(
+        index_admin,
+        label: :help,
+        icon_name: :'info-circle',
+        url: :help_path
+      )
+
       GroupsHelper.send :include, Sbv::GroupsHelper
       GroupDecorator.send :prepend, Sbv::GroupDecorator
       StandardFormBuilder.send :include, Sbv::StandardFormBuilder
