@@ -2,6 +2,8 @@
 
 # vim:foldlevel=0
 
+require_relative '../../app/domain/data_extraction'
+
 # rubocop:disable Metrics/BlockLength
 namespace :migration do
   task :clean do
@@ -66,7 +68,7 @@ directory 'db/seeds/production'
 
 file('db/seeds/production/verbaende.csv').clear
 file 'db/seeds/production/verbaende.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name, 'swoffice_sbvnew')
+  migrator = DataExtraction.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
     name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type
   TEXT
@@ -93,7 +95,7 @@ end
 
 file('db/seeds/production/vereine.csv').clear
 file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name, 'swoffice_sbvnew')
+  migrator = DataExtraction.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
     name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,kreis,swoffice_id
   TEXT
@@ -131,7 +133,7 @@ end
 
 file('db/seeds/production/vereine_musicgest.csv').clear
 file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name, 'musicgest10')
+  migrator = DataExtraction.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
     name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,kreis,swoffice_id
   TEXT
@@ -180,7 +182,7 @@ end
 
 file('db/seeds/production/mitglieder.csv').clear
 file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name, 'swoffice_sbvnew')
+  migrator = DataExtraction.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
     anrede,first_name,last_name,email,birthday,address,zip_code,town,country,verein_name,verein_ort,eintrittsdatum,bemerkung,zusatz
   TEXT
@@ -209,7 +211,7 @@ end
 
 file('db/seeds/production/mitglieder_musicgest.csv').clear
 file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name, 'musicgest10')
+  migrator = DataExtraction.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
     anrede,first_name,last_name,email,birthday,address,zip_code,town,country,verein_name,verein_ort,eintrittsdatum,bemerkung,zusatz
   TEXT
@@ -259,7 +261,7 @@ end
 #
 file('db/seeds/production/suisa_werke.csv').clear
 file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name, 'suisa')
+  migrator = DataExtraction.new(task.name, 'suisa')
   migrator.headers = 'suisa_id,title,composed_by,arranged_by,published_by'
   migrator.query(<<-TABLE.strip_heredoc, <<-FIELDS.strip_heredoc)
     (SELECT
@@ -290,7 +292,7 @@ end
 
 file('db/seeds/production/rollen_musicgest.csv').clear
 file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name, 'musicgest10')
+  migrator = DataExtraction.new(task.name, 'musicgest10')
   migrator.headers = <<-TEXT.strip_heredoc
     first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
   TEXT
@@ -348,7 +350,7 @@ file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task
     'Adjoint'      => 'Group::Verein::Admin'
   }
 
-  migrator = Migration.new(task.name, 'swoffice_sbvnew')
+  migrator = DataExtraction.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
     first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
   TEXT
@@ -375,7 +377,7 @@ end
 
 file('db/seeds/production/rollen_swoffice_admin.csv').clear
 file 'db/seeds/production/rollen_swoffice_admin.csv' => 'db/seeds/production' do |task|
-  migrator = Migration.new(task.name, 'swoffice_sbvnew')
+  migrator = DataExtraction.new(task.name, 'swoffice_sbvnew')
   migrator.headers = <<-TEXT.strip_heredoc
     first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
   TEXT
@@ -404,73 +406,3 @@ file 'db/seeds/production/rollen_swoffice_admin.csv' => 'db/seeds/production' do
 end
 
 # rubocop:enable Metrics/BlockLength
-
-class Migration
-  include FileUtils
-
-  attr_reader :filename
-  attr_writer :headers
-
-  def initialize(filename, database)
-    @filename = filename
-    @headers  = ''
-    @database = database
-  end
-
-  def headers
-    @headers.chomp
-  end
-
-  def tmp_out
-    @tmp_out ||= "/var/lib/mysql-files/#{@filename.split('/').last}"
-  end
-
-  def query(table = nil, field_sql = '*', condition_sql = '')
-    raise ArgumentError, 'Table needs to be passed' if @query.nil? && table.nil?
-
-    @query = <<-SQL.strip_heredoc.split("\n").map(&:strip).join(' ').gsub(/\s+/, ' ')
-      SELECT #{field_sql}
-      INTO OUTFILE '#{tmp_out}'
-        CHARACTER SET utf8
-        FIELDS TERMINATED BY ','
-        OPTIONALLY ENCLOSED BY '\\"'
-        LINES TERMINATED BY '\\n'
-      FROM #{table}
-      #{condition_sql}
-    SQL
-  end
-
-  def show_query
-    puts @query.gsub(/INTO OUTFILE.*FROM/, 'FROM')
-  end
-
-  def dump
-    start_csv
-    append(@database)
-  end
-
-  def append(database = @database)
-    fetch(database)
-    append_data
-  end
-
-  private
-
-  def fetch(database = @database)
-    raise 'No Query set, please use Migration#query(table, fields, joins) to set one' unless @query
-
-    sh "sudo rm -f #{tmp_out}"
-    sh <<-CMD.strip_heredoc
-      mysql -u#{ENV['RAILS_DB_USERNAME']} -p#{ENV['RAILS_DB_PASSWORD']} -e \"#{@query}\" #{database}
-    CMD
-  end
-
-  def start_csv
-    sh "echo '#{headers}' > #{filename}"
-  end
-
-  def append_data
-    sh "sudo cat #{tmp_out} >> #{filename}"
-    sh "sudo rm -f #{tmp_out}"
-  end
-end
