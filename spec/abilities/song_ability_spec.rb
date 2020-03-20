@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2018-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -14,7 +14,7 @@ describe SongAbility do
   let(:ability) { Ability.new(role.person.reload) }
   let(:concert) { concerts(:third_concert) }
   let(:verein)  { groups(:musikgesellschaft_alterswil) }
-  let(:group)   { groups(:bernischer_kantonal_musikverband_8) }
+  let(:group)   { groups(:bernischer_kantonal_musikverband) }
 
   [
     %w(Group::Verein::Admin musikgesellschaft_alterswil),
