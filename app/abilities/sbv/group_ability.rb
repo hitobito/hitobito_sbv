@@ -16,6 +16,22 @@ module Sbv::GroupAbility
       permission(:group_and_below_full).may(:create_history_member).in_same_group_or_below
       permission(:layer_full).may(:create_history_member).in_same_layer
       permission(:layer_and_below_full). may(:create_history_member).in_same_layer_or_below
+
+      permission(:uv_lohnsumme).may(:show_uv_lohnsummen).everywhere_if_admin
+      permission(:uv_lohnsumme).may(:edit_uv_lohnsummen).everywhere_if_admin_or_in_same_layer
+    end
+
+    def everywhere_if_admin
+      [
+        Group::Generalverband::Admin,
+        Group::Root::Admin,
+        Group::Mitgliederverband::Admin,
+        # Group::Regionalverband::Admin # is not allowed, according to hitobito/hitobito_sbv#30
+      ].any? { |admin_role| role_type?(admin_role) }
+    end
+
+    def everywhere_if_admin_or_in_same_layer
+      everywhere_if_admin || in_same_layer
     end
   end
 end

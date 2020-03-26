@@ -104,7 +104,7 @@ class Group::Verein < ::Group
   ### ROLES
 
   class Admin < Role::Admin
-    self.permissions = [:layer_and_below_full, :festival_participation]
+    self.permissions = [:layer_and_below_full, :festival_participation, :uv_lohnsumme]
   end
 
   class Conductor < Role
