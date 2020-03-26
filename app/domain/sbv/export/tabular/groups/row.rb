@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -27,6 +27,16 @@ module Sbv
           def correspondence_language
             Settings.application.languages.to_h.stringify_keys[entry.correspondence_language]
           end
+
+          # rubocop:disable Style/FormatString
+          def buv_lohnsumme
+            '%#.2f' % entry.buv_lohnsumme
+          end
+
+          def nbuv_lohnsumme
+            '%#.2f' % entry.nbuv_lohnsumme
+          end
+          # rubocop:enable Style/FormatString
 
           private
 

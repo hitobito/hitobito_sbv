@@ -208,6 +208,8 @@ musikgesellschaft_aarberg:
   address: Bielertstr. 91c
   zip_code: 6648
   town: Thiloscheid
+  buv_lohnsumme: 133700
+  nbuv_lohnsumme: 4223
 vorstand_mg_aarberg:
   parent: musikgesellschaft_aarberg
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>

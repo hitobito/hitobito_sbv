@@ -101,6 +101,22 @@ class Group::Verein < ::Group
           .where("roles.type = 'Group::Verein::SuisaAdmin' AND roles.group_id = #{id}")
   end
 
+  def buv_lohnsumme
+    self[:buv_lohnsumme].try(:/, 100.0)
+  end
+
+  def buv_lohnsumme=(value)
+    self[:buv_lohnsumme] = value * 100
+  end
+
+  def nbuv_lohnsumme
+    self[:nbuv_lohnsumme].try(:/, 100.0)
+  end
+
+  def nbuv_lohnsumme=(value)
+    self[:nbuv_lohnsumme] = value * 100
+  end
+
   ### ROLES
 
   class Admin < Role::Admin
