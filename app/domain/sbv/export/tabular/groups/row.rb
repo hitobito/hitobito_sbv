@@ -30,11 +30,15 @@ module Sbv
 
           # rubocop:disable Style/FormatString
           def buv_lohnsumme
-            '%#.2f' % entry.buv_lohnsumme
+            if entry.buv_lohnsumme
+              '%#.2f' % entry.buv_lohnsumme
+            end
           end
 
           def nbuv_lohnsumme
-            '%#.2f' % entry.nbuv_lohnsumme
+            if entry.nbuv_lohnsumme
+              '%#.2f' % entry.nbuv_lohnsumme
+            end
           end
           # rubocop:enable Style/FormatString
 

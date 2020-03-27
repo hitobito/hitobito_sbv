@@ -106,7 +106,7 @@ class Group::Verein < ::Group
   end
 
   def buv_lohnsumme=(value)
-    self[:buv_lohnsumme] = value * 100
+    self[:buv_lohnsumme] = value.to_i * 100
   end
 
   def nbuv_lohnsumme
@@ -114,7 +114,7 @@ class Group::Verein < ::Group
   end
 
   def nbuv_lohnsumme=(value)
-    self[:nbuv_lohnsumme] = value * 100
+    self[:nbuv_lohnsumme] = value.to_i * 100
   end
 
   ### ROLES
