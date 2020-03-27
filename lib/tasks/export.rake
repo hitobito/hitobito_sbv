@@ -11,13 +11,20 @@ namespace :export do
     dachverband = Group.find(1)
 
     extractor = DataExtraction.new('tmp/all-members.csv', ENV['RAILS_DB_NAME'])
-    extractor.headers = 'vorname,nachname,hauptgruppe,email'
+    extractor.headers = 'vorname,nachname,hauptgruppe,email,korrespondenzsprache'
+
+    language_sql = Settings.application.languages.map do |code, long_name|
+      "WHEN '#{code}' THEN '#{long_name}'"
+    end.join(' ')
 
     extractor.query('people', <<-FIELD_SQL, <<-CONDITION_SQL)
       people.first_name,
       people.last_name,
       layer_groups.name AS primary_group,
-      people.email
+      people.email,
+      CASE people.correspondence_language
+        #{language_sql}
+      END AS correspondence_language
     FIELD_SQL
       INNER JOIN groups ON groups.id = people.primary_group_id
       INNER JOIN groups AS layer_groups ON layer_groups.id = groups.layer_group_id
