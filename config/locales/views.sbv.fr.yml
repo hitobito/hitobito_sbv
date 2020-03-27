@@ -6,6 +6,8 @@
 fr:
   global:
     last_change: "Dernière modification: %{date}"
+  navigation:
+    help: ""
   group:
     festival_tab: Fêtes de musique
     suisa_tab: SUISA
@@ -31,6 +33,16 @@ fr:
     verein:
       search: Rechercher une oeuvre...
     submit: Soumettre la liste d'annonce
+    submit_button:
+      label:
+        submit: ""
+        submitted: ""
+        none: ""
+      tooltip:
+        submit: ""
+        submitted: ""
+        none: ""
+
     remind:
       success: "Le rappel a été envoyé avec succès à la société %{verein_count}."
       send: Envoyer un rappel.
@@ -59,6 +71,10 @@ fr:
   people:
     fields_sbv:
       allow_personal_data_usage: J'accepte l'utilisation de mes données d'adresse
+
+  groups:
+    actions_show_sbv:
+      export_lohnsummen: ""
 
   roles:
     info:

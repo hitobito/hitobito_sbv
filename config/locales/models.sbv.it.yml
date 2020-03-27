@@ -350,15 +350,20 @@ it:
         secondary_parent_id: secondario
         tertiary_parent_id: altri
         hostname: Hostname
+        buv_lohnsumme: ""
+        nbuv_lohnsumme: ""
       role:
         dates: Dati
         created_at: Entrata
+        deleted_at: Uscita
         class:
           permission:
             description:
               song_census: Può gestire annunci SUISA
               layer_full: "A questo livello può leggere tutto e scrivere. \nA questo livello può creare eventi e liste."
               group_full: "Leggere e scrivere nel gruppo.\nCreare eventi e liste nel gruppo."
+              festival_participation: ""
+              uv_lohnsumme: ""
       song:
         title: Titolo
         composed_by: Compositore
@@ -411,12 +416,10 @@ it:
         music_types:
           harmony: Armonia
           brass_band: Brass band
-          fanfare_benelux_harmony: Fanfara Benelux armonia
-          fanfare_benelux_brass_band: Fanfara Benelux brass band
-          fanfare_mixte_harmony: Fanfara mista armonia
-          fanfare_mixte_brass_band: Fanfara mista brass band
+          fanfare_benelux: Fanfara Benelux
+          fanfare_mixte: Fanfara Mista
           traditional_parade: Musica da parata tradizionale
-          show_parade: Musica da parata con evoluzioni e spettacolo
+          show_parade: Musica da parata con evoluzioni e/o spettacolo
           parade_music: sì
           no_parade: no
         music_levels:

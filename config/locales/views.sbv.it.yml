@@ -6,6 +6,8 @@
 it:
   global:
     last_change: "Ultima modifica: %{date}"
+  navigation:
+    help: ""
   group:
     festival_tab: Feste di Musica
     suisa_tab: SUISA
@@ -31,6 +33,16 @@ it:
     verein:
       search: ricercare composizione
     submit: inoltrare modello elenco
+    submit_button:
+      label:
+        submit: ""
+        submitted: ""
+        none: ""
+      tooltip:
+        submit: ""
+        submitted: ""
+        none: ""
+
     remind:
       success: "Promemoria inoltrato con succeso a %{verein_count}delle società bandistiche"
       send: spedire promemoria
@@ -59,6 +71,10 @@ it:
   people:
     fields_sbv:
       allow_personal_data_usage: Accetto l'uso dei dettagli del mio indirizzo
+
+  groups:
+    actions_show_sbv:
+      export_lohnsummen: ""
 
   roles:
     info:
