@@ -287,6 +287,8 @@ de:
         secondary_parent_id: sekundär
         tertiary_parent_id: weitere
         hostname: Hostname
+        buv_lohnsumme: BUV-Lohnsumme
+        nbuv_lohnsumme: NBUV-Lohnsumme
       role:
         dates: Daten
         created_at: Eintritt
@@ -298,6 +300,7 @@ de:
               layer_full: Alles Lesen und Schreiben auf dieser Ebene. Erstellen von Anlässen und Listen auf dieser Ebene.
               group_full: Lesen und Schreiben auf der Gruppe. Erstellen von Anlässen und Listen auf der Gruppe.
               festival_participation: Darf den Verein zu Musikfesten anmelden und die Anmeldung bearbeiten.
+              uv_lohnsumme: Darf die UV-Lohnsummen verwalten.
       song:
         title: Titel
         composed_by: Komponist

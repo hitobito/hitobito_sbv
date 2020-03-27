@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -18,11 +18,11 @@ describe Concert do
     end
 
     it 'sets mitgliederverband for verein nested under mitgliederverband' do
-      verein = Group::Verein.create!(name: 'group', parent: groups(:bernischer_kantonal_musikverband_8))
+      verein = Group::Verein.create!(name: 'group', parent: groups(:bernischer_kantonal_musikverband))
       concert = Concert.create!(verein: verein, year: 2018)
 
       expect(concert.regionalverband).to be_nil
-      expect(concert.mitgliederverband).to eq groups(:bernischer_kantonal_musikverband_8)
+      expect(concert.mitgliederverband).to eq groups(:bernischer_kantonal_musikverband)
     end
 
     it 'does not set verband ids for verein nested under root' do

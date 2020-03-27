@@ -98,16 +98,16 @@ veteranen_7:
   rgt: 88
   name: Veteranen
   type: Group::RootVeteranen
-bernischer_kantonal_musikverband_8:
+bernischer_kantonal_musikverband:
   parent: hauptgruppe_1
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband) %>
   lft: 3
   rgt: 44
   name: Bernischer Kantonal-Musikverband
   type: Group::Mitgliederverband
 geschaeftsstelle_9:
-  parent: bernischer_kantonal_musikverband_8
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
+  parent: bernischer_kantonal_musikverband
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband) %>
   lft: 4
   rgt: 5
   name: Geschäftsstelle
@@ -117,8 +117,8 @@ geschaeftsstelle_9:
   zip_code: 9976
   town: Stahldorf
 vorstand_10:
-  parent: bernischer_kantonal_musikverband_8
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
+  parent: bernischer_kantonal_musikverband
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband) %>
   lft: 42
   rgt: 43
   name: Vorstand
@@ -128,8 +128,8 @@ vorstand_10:
   zip_code: 1090
   town: Emelieburg
 kontakte_11:
-  parent: bernischer_kantonal_musikverband_8
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
+  parent: bernischer_kantonal_musikverband
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband) %>
   lft: 6
   rgt: 7
   name: Kontakte
@@ -139,8 +139,8 @@ kontakte_11:
   zip_code: 1094
   town: Felicitasstadt
 musikkommission_12:
-  parent: bernischer_kantonal_musikverband_8
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
+  parent: bernischer_kantonal_musikverband
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband) %>
   lft: 28
   rgt: 29
   name: Musikkommission
@@ -150,8 +150,8 @@ musikkommission_12:
   zip_code: 3143
   town: Feuerbachscheid
 veteranen_13:
-  parent: bernischer_kantonal_musikverband_8
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband_8) %>
+  parent: bernischer_kantonal_musikverband
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bernischer_kantonal_musikverband) %>
   lft: 40
   rgt: 41
   name: Veteranen
@@ -160,9 +160,9 @@ veteranen_13:
   address: An der Fettehenne 85b
   zip_code: 3990
   town: Nord Michaelaland
-mittleres_seeland_14:
-  parent: bernischer_kantonal_musikverband_8
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:mittleres_seeland_14) %>
+regionalverband_mittleres_seeland:
+  parent: bernischer_kantonal_musikverband
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:regionalverband_mittleres_seeland) %>
   lft: 8
   rgt: 27
   name: Mittleres Seeland
@@ -171,35 +171,35 @@ mittleres_seeland_14:
   zip_code: 5692
   town: Damianburg
 geschaeftsstelle_15:
-  parent: mittleres_seeland_14
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:mittleres_seeland_14) %>
+  parent: regionalverband_mittleres_seeland
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:regionalverband_mittleres_seeland) %>
   lft: 9
   rgt: 10
   name: Geschäftsstelle
   type: Group::RegionalverbandGeschaeftsstelle
 vorstand_16:
-  parent: mittleres_seeland_14
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:mittleres_seeland_14) %>
+  parent: regionalverband_mittleres_seeland
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:regionalverband_mittleres_seeland) %>
   lft: 25
   rgt: 26
   name: Vorstand
   type: Group::RegionalverbandVorstand
 kontakte_17:
-  parent: mittleres_seeland_14
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:mittleres_seeland_14) %>
+  parent: regionalverband_mittleres_seeland
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:regionalverband_mittleres_seeland) %>
   lft: 11
   rgt: 12
   name: Kontakte
   type: Group::RegionalverbandKontakte
 musikkommission_18:
-  parent: mittleres_seeland_14
-  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:mittleres_seeland_14) %>
+  parent: regionalverband_mittleres_seeland
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:regionalverband_mittleres_seeland) %>
   lft: 23
   rgt: 24
   name: Musikkommission
   type: Group::RegionalverbandMusikkommission
 musikgesellschaft_aarberg:
-  parent: mittleres_seeland_14
+  parent: regionalverband_mittleres_seeland
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
   lft: 13
   rgt: 22
@@ -208,6 +208,8 @@ musikgesellschaft_aarberg:
   address: Bielertstr. 91c
   zip_code: 6648
   town: Thiloscheid
+  buv_lohnsumme: 133700
+  nbuv_lohnsumme: 4223
 vorstand_mg_aarberg:
   parent: musikgesellschaft_aarberg
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_aarberg) %>
@@ -355,7 +357,7 @@ musikkommission_39:
   name: Musikkommission
   type: Group::VereinMusikkommission
 musikverband_hastdutoene:
-  parent: bernischer_kantonal_musikverband_8
+  parent: bernischer_kantonal_musikverband
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
   lft: 30
   rgt: 39

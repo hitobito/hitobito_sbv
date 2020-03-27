@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
     resources :songs
     resources :groups, only: [] do
+      get 'export_lohnsummen' => 'lohnsummen#show'
+
       resources :song_counts
       resources :concerts do
         collection do
