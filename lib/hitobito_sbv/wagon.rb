@@ -33,7 +33,8 @@ module HitobitoSbv
                                            :correspondence_language, :besetzung,
                                            :klasse, :unterhaltungsmusik,
                                            :secondary_parent_id, :tertiary_parent_id,
-                                           :subventionen, :hostname, :buv_lohnsumme, :nbuv_lohnsumme]
+                                           :subventionen, :hostname,
+                                           :buv_lohnsumme, :nbuv_lohnsumme]
 
       PeopleController.permitted_attrs += [:profession, :correspondence_language,
                                            :personal_data_usage]
@@ -83,8 +84,11 @@ module HitobitoSbv
       Role::Permissions << :festival_participation << :uv_lohnsumme
 
       # load this class after all abilities have been defined
-      AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census << :festival_participation << :uv_lohnsumme
-      AbilityDsl::UserContext::LAYER_PERMISSIONS                 << :festival_participation << :uv_lohnsumme
+      AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census << :festival_participation
+      AbilityDsl::UserContext::LAYER_PERMISSIONS                 << :festival_participation
+
+      AbilityDsl::UserContext::GROUP_PERMISSIONS << :uv_lohnsumme
+      AbilityDsl::UserContext::LAYER_PERMISSIONS << :uv_lohnsumme
 
       # lastly, register the abilities (could happen earlier, it's just a nice conclusion here)
       Ability.store.register SongAbility
