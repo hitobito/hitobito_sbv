@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -59,11 +59,11 @@ describe Export::Tabular::SongCounts::List do
     let(:list) { groups(:hauptgruppe_1).song_counts }
 
     its(:headers) do
-      should == ['Anzahl', 'Titel', 'Komponist', 'Arrangeur', 'Verlag', 'SUISA-ID']
+      should == ['Anzahl', 'Titel', 'Komponist', 'Arrangeur', 'Verlag', 'SUISA-ID', 'Verein und Ort']
     end
 
-    it 'has 3 items' do
-      expect(subject.size).to eq(3)
+    it 'has 4 items' do
+      expect(subject.size).to eq(4)
     end
 
     context 'first row' do
@@ -75,6 +75,8 @@ describe Export::Tabular::SongCounts::List do
       its(['Komponist']) { should == 'John Fogerty' }
       its(['Arrangeur']) { should == 'Creedence Clearwater Revival' }
       its(['Verlag']) { should == 'Fantasy' }
+      its(['SUISA-ID']) { should == '12345' }
+      its(['Verein und Ort']) { should == 'Musikgesellschaft Aarberg, Thiloscheid' }
     end
 
     context 'second row' do
@@ -87,17 +89,33 @@ describe Export::Tabular::SongCounts::List do
       its(['Arrangeur']) { should == 'The Temptations' }
       its(['Verlag']) { should == 'Motown' }
       its(['SUISA-ID']) { should == '23456' }
+      its(['Verein und Ort']) { should == 'Musikgesellschaft Aarberg, Thiloscheid' }
     end
 
     context 'third row' do
 
       subject { csv[2] }
 
+      its(['Anzahl']) { should == '4' }
+      its(['Titel']) { should == "Papa Was a Rollin' Stone" }
+      its(['Komponist']) { should == 'Barrett Strong / Norman Whitfield' }
+      its(['Arrangeur']) { should == 'The Temptations' }
+      its(['Verlag']) { should == 'Motown' }
+      its(['SUISA-ID']) { should == '23456' }
+      its(['Verein und Ort']) { should == 'Musikgesellschaft Alterswil, Nord Boland' }
+    end
+
+    context 'fourth row' do
+
+      subject { csv[3] }
+
       its(['Anzahl']) { should == '2' }
       its(['Titel']) { should == 'Material Girl' }
       its(['Komponist']) { should == 'Peter Brown / Robert Rans' }
       its(['Arrangeur']) { should == 'Madonna' }
+      its(['Verlag']) { should == 'Sire' }
       its(['SUISA-ID']) { should == '34567' }
+      its(['Verein und Ort']) { should == 'Musikgesellschaft Alterswil, Nord Boland' }
     end
   end
 end

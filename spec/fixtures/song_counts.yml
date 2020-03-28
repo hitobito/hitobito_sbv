@@ -36,3 +36,9 @@ mama_count:
   year: 2018
   count: 7
   concert: fourth_concert
+
+other_papa_count:
+  song: papa
+  year: 2018
+  count: 4
+  concert: third_concert

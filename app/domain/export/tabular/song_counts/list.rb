@@ -8,12 +8,14 @@ module Export::Tabular::SongCounts
 
     INCLUDED_ATTRS = %w(count title composed_by arranged_by published_by suisa_id).freeze
     GROUP_ATTRS    = %w(verein verein_id).freeze
+    GROUP_INFO     = %w(verein_with_town).freeze
 
     self.model_class = SongCount
+    self.row_class = Export::Tabular::SongCounts::Row
 
     def attributes
       if multiple?
-        INCLUDED_ATTRS
+        INCLUDED_ATTRS + GROUP_INFO
       else
         INCLUDED_ATTRS + GROUP_ATTRS
       end.collect(&:to_sym)

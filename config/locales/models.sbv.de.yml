@@ -319,6 +319,7 @@ de:
         suisa_id: SUISA-ID
         verein: Verein
         verein_id: Vereins ID
+        verein_with_town: Verein und Ort
 
       song_counts:
         song: Werk
