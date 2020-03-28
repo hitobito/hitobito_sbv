@@ -61,7 +61,7 @@ describe Group do
     end
 
     it 'contains several song_counts' do
-      expect(subject.song_counts.count).to be 3
+      expect(subject.song_counts.count).to be 4
     end
 
     it 'does not include deleted groups' do
