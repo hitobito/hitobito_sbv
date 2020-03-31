@@ -10,7 +10,7 @@ class LohnsummenController < ApplicationController
   def show
     groups = group.descendants.where(type: 'Group::Verein')
     csv = Export::Tabular::Groups::LohnsummenList.csv(groups)
-    send_data csv, type: :csv, disposition: 'inline'
+    send_data csv, type: :csv, disposition: 'attachment'
   end
 
   private
