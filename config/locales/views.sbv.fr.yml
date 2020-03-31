@@ -7,7 +7,7 @@ fr:
   global:
     last_change: "Dernière modification: %{date}"
   navigation:
-    help: ""
+    help: Aide
   group:
     festival_tab: Fêtes de musique
     suisa_tab: SUISA

@@ -382,6 +382,7 @@ fr:
         suisa_id: ID-SUISA
         verein: Société
         verein_id: ID société
+        verein_with_town: Société et Lieu
 
       song_counts:
         song: Oeuvre

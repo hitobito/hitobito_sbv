@@ -7,7 +7,7 @@ it:
   global:
     last_change: "Ultima modifica: %{date}"
   navigation:
-    help: ""
+    help: Auito
   group:
     festival_tab: Feste di Musica
     suisa_tab: SUISA
@@ -61,7 +61,7 @@ it:
         save: Memorizzare
         create_deleted_verein: Inserire la società cancellata
         select_existing_verein: Selezionare una società
-        text_with_alternative_link_html: "%{testo} oppure %{link}"
+        text_with_alternative_link_html: "%{text} <small>oppure %{link}</small>"
 
     add_requests:
       creator:

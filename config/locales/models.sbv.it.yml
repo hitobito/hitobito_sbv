@@ -382,6 +382,7 @@ it:
         suisa_id: SUISA-ID
         verein: Società bandistica
         verein_id: ID Società di musica
+        verein_with_town: Società e Luogo
 
       song_counts:
         song: Composizione
