@@ -60,6 +60,7 @@ module HitobitoSbv
 
       ### sheets
       Sheet::Group.send :include, Sbv::Sheet::Group
+      Sheet::Event.send :include, Sbv::Sheet::Event
 
       ### jobs
       Export::SubgroupsExportJob.send :prepend, Sbv::Export::SubgroupsExportJob
