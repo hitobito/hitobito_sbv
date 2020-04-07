@@ -20,6 +20,10 @@ class Events::GroupParticipationsController < CrudController
     :secondary_group_terms_accepted
   ]
 
+  self.sort_mappings = {
+    group_id: 'groups.name',
+  }
+
   decorates :event
 
   skip_authorize_resource
@@ -45,8 +49,8 @@ class Events::GroupParticipationsController < CrudController
 
   private
 
-  def list_entries
-    model_scope.includes(:event, :group, :secondary_group).all
+  def list_entries_without_sort
+    model_scope.includes(:group, :secondary_group)
   end
 
   def return_path
