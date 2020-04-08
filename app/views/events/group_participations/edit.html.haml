@@ -10,8 +10,8 @@
 
       - if entry.primary_opened?
         = f.labeled :joint_participation do
-          = f.inline_radio_button(:joint_participation, '1', t('global.yes'))
-          = f.inline_radio_button(:joint_participation, '0', t('global.no'))
+          = f.inline_radio_button(:joint_participation, true, t('global.yes'))
+          = f.inline_radio_button(:joint_participation, false, t('global.no'))
 
       - if entry.primary_joint_participation_selected?
         = f.labeled_group_field :secondary_group
