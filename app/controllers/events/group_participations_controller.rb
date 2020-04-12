@@ -115,5 +115,4 @@ class Events::GroupParticipationsController < CrudController
     secondary_entry.destroy!
     model_ivar_set(primary_entry)
   end
-
 end
