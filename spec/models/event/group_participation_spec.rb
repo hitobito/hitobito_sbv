@@ -47,11 +47,47 @@ describe Event::GroupParticipation do
         is_expected.to be_valid
       end
 
-      it 'to be one or two choices' do
+      it 'to be one if one is available' do
+        subject.music_type = 'brass_band'
+        subject.music_level = 'fourth'
+
+        expect(subject.possible_day_numbers.size).to be 1
+        expect(subject.possible_day_numbers).to include thursday
+
+        subject.preferred_play_day_1 = nil
+        subject.preferred_play_day_2 = nil
+
+        is_expected.to_not be_valid
+
+        subject.preferred_play_day_1 = thursday
+
+        is_expected.to be_valid
+      end
+
+      it 'to be two choices if two can be chosen' do
+        subject.music_type = 'brass_band'
+        subject.music_level = 'highest'
+
+        expect(subject.possible_day_numbers.size).to be 2
+        expect(subject.possible_day_numbers).to include thursday
+        expect(subject.possible_day_numbers).to include friday
+
         subject.preferred_play_day_1 = friday
         subject.preferred_play_day_2 = nil
 
+        is_expected.to_not be_valid
+
+        subject.preferred_play_day_1 = friday
+        subject.preferred_play_day_2 = thursday
+
         is_expected.to be_valid
+      end
+
+      it 'to be two choices if two or more can be chosen' do
+        subject.preferred_play_day_1 = friday
+        subject.preferred_play_day_2 = nil
+
+        is_expected.to_not be_valid
 
         subject.preferred_play_day_1 = friday
         subject.preferred_play_day_2 = saturday
@@ -61,10 +97,12 @@ describe Event::GroupParticipation do
 
       it 'should be possible in schedule' do
         subject.preferred_play_day_1 = thursday
+        subject.preferred_play_day_2 = saturday
 
         is_expected.to_not be_valid
 
         subject.preferred_play_day_1 = friday
+        subject.preferred_play_day_2 = saturday
 
         is_expected.to be_valid
       end
@@ -189,10 +227,10 @@ describe Event::GroupParticipation do
       expect(subject).to be_may_prefer_two_days
     end
 
-    it 'is false for two days' do
+    it 'is true for two days' do
       expect(subject).to receive(:possible_day_numbers).and_return([1, 2])
 
-      expect(subject).to_not be_may_prefer_two_days
+      expect(subject).to be_may_prefer_two_days
     end
 
     it 'is false for one day' do

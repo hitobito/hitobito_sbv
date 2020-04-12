@@ -15,12 +15,13 @@ class PreferredDateValidator < ActiveModel::Validator
     @record = record
 
     return true if date_reset?
-    return true unless music_chosen? && date_changed?
+    return true unless music_chosen? && (date_empty? || date_changed?)
 
     errors.delete(:preferred_play_day_1)
     errors.delete(:preferred_play_day_2)
 
     one_play_day_is_selected
+    two_play_days_are_selected_if_possible
     preferred_play_days_are_possible
     preferred_play_days_are_separate
   end
@@ -29,12 +30,16 @@ class PreferredDateValidator < ActiveModel::Validator
     music_style.present? && music_type.present? && music_level.present?
   end
 
+  def date_empty?
+    preferred_play_day_1.nil? && preferred_play_day_2.nil?
+  end
+
   def date_changed?
     changed.include?('preferred_play_day_1') || changed.include?('preferred_play_day_2')
   end
 
   def date_reset?
-    date_changed? && preferred_play_day_1.nil? && preferred_play_day_2.nil?
+    date_changed? && date_empty?
   end
 
   def error_translation(attr, key)
@@ -50,6 +55,14 @@ class PreferredDateValidator < ActiveModel::Validator
   def one_play_day_is_selected
     if preferred_play_day_1.blank? && preferred_play_day_2.blank?
       add_translated_error(:base, :date_preference_missing)
+    end
+  end
+
+  def two_play_days_are_selected_if_possible
+    if record.may_prefer_two_days?
+      if preferred_play_day_1.blank? || preferred_play_day_2.blank?
+        add_translated_error(:base, :date_preference_incomplete)
+      end
     end
   end
 

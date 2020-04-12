@@ -193,7 +193,7 @@ class Event::GroupParticipation < ActiveRecord::Base
   end
 
   def may_prefer_two_days?
-    possible_day_numbers.size > 2
+    possible_day_numbers.size >= 2
   end
 
   def could_change_date_preference?

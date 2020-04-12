@@ -380,6 +380,7 @@ de:
           attributes:
             base:
               date_preference_missing: Es muss mindestens ein Tag ausgewählt werden
+              date_preference_incomplete: Es müssen zwei Tage gewählt werden
             preferred_play_day_1:
               impossible: ist nicht verfügbar
             preferred_play_day_2:
