@@ -97,64 +97,46 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     event :edit_participation, guard: :application_possible? do
       transitions from: [
-        :joint_participation_selected,
-        :primary_group_selected,
-        :music_style_selected,
-        :music_type_and_level_selected,
-        :preferred_play_day_selected,
-        :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :joint_participation_selected, :primary_group_selected,
+        :music_style_selected, :music_type_and_level_selected,
+        :preferred_play_day_selected, :parade_music_selected,
+        :terms_accepted, :completed
       ], to: :opened, after: :clean_joining_groups
     end
 
     event :edit_joining_group, guard: :application_possible? do
       transitions from: [
-        :primary_group_selected,
-        :music_style_selected,
-        :music_type_and_level_selected,
-        :preferred_play_day_selected,
-        :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :primary_group_selected, :music_style_selected,
+        :music_type_and_level_selected, :preferred_play_day_selected,
+        :parade_music_selected, :terms_accepted, :completed
       ], to: :joint_participation_selected, after: :clean_joining_groups
     end
 
     event :edit_music_style, guard: :application_possible? do
       transitions from: [
-        :music_style_selected,
-        :music_type_and_level_selected,
-        :preferred_play_day_selected,
-        :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :music_style_selected, :music_type_and_level_selected,
+        :preferred_play_day_selected, :parade_music_selected,
+        :terms_accepted, :completed
       ], to: :primary_group_selected, after: :clean_music_style
     end
 
     event :edit_music_type_and_level, guard: :application_possible? do
       transitions from: [
-        :music_type_and_level_selected,
-        :preferred_play_day_selected,
-        :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :music_type_and_level_selected, :preferred_play_day_selected,
+        :parade_music_selected, :terms_accepted, :completed
       ], to: :music_style_selected, after: :clean_music_type_and_level
     end
 
     event :edit_date_preference, guard: :application_possible? do
       transitions from: [
-        :preferred_play_day_selected,
-        :parade_music_selected,
-        :terms_accepted,
+        :preferred_play_day_selected, :parade_music_selected, :terms_accepted,
         :completed
       ], to: :music_type_and_level_selected, after: :clean_date_preference
     end
 
     event :edit_parade_music, guard: :application_possible? do
       transitions from: [
-        :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :parade_music_selected, :terms_accepted, :completed
       ], to: :preferred_play_day_selected, after: :clean_parade_music
     end
   end

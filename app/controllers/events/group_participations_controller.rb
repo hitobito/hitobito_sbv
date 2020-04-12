@@ -61,12 +61,7 @@ class Events::GroupParticipationsController < CrudController
   end
 
   def update_state_machine
-    if entry.primary_joint_participation_selected?
-      if entry.secondary_group_is_primary == '1'
-        join_participations!(primary_entry: model_class.find_by(group_id: entry.secondary_group_id),
-                             secondary_entry: entry)
-      end
-    end
+    maybe_join_participations
 
     entry.progress_for(participating_group || entry.group) if entry.valid?
     yield.tap do |result|
@@ -96,6 +91,14 @@ class Events::GroupParticipationsController < CrudController
     else
       authorize! action_name.to_sym, entry
     end
+  end
+
+  def maybe_join_participations
+    return unless entry.primary_joint_participation_selected?
+    return unless entry.secondary_group_is_primary == '1'
+
+    join_participations!(primary_entry: model_class.find_by(group_id: entry.secondary_group_id),
+                         secondary_entry: entry)
   end
 
   def join_participations!(primary_entry:, secondary_entry:)
