@@ -85,6 +85,73 @@ describe Event::GroupParticipation do
         is_expected.to be_valid
       end
     end
+
+    context 'secondary_group_id' do
+      subject do
+        described_class.new(
+          event: events(:festival),
+          group: groups(:musikgesellschaft_aarberg),
+          primary_state: 'primary_group_selected',
+          secondary_state: 'opened',
+          joint_participation: true,
+        )
+      end
+      it 'to be present if it is a joint participation' do
+        expect(subject.secondary_group).to be_nil
+
+        is_expected.to_not be_valid
+
+        subject.secondary_group = groups(:musikgesellschaft_alterswil)
+
+        is_expected.to be_valid
+      end
+
+      it 'to be unique in the event'
+      it 'to not be participating as primary group in the event'
+    end
+
+    context 'music_style' do
+      subject do
+        described_class.new(
+          event: events(:festival),
+          group: groups(:musikgesellschaft_aarberg),
+          primary_state: 'music_style_selected',
+        )
+      end
+
+      it 'to be present' do
+        expect(subject.music_style).to be_blank
+
+        is_expected.to have_state(:music_style_selected).on(:primary)
+        is_expected.to_not be_valid
+
+        expect do
+          subject.music_style = 'concert_music'
+        end.to change(subject, :valid?).to(true)
+      end
+    end
+
+    context 'music_type and music_level' do
+      subject do
+        described_class.new(
+          event: events(:festival),
+          group: groups(:musikgesellschaft_aarberg),
+          primary_state: 'music_type_and_level_selected',
+        )
+      end
+
+      it 'to be present' do
+        expect(subject.music_type).to be_blank
+        expect(subject.music_level).to be_blank
+
+        is_expected.to_not be_valid
+
+        expect do
+          subject.music_type = 'harmony'
+          subject.music_level = 'second'
+        end.to change(subject, :valid?).to(true)
+      end
+    end
   end
 
   # if these constants are refactored away, please smile while deleting this spec

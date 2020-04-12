@@ -45,10 +45,27 @@ class Event::GroupParticipation < ActiveRecord::Base
   ### VALIDATIONS
 
   validates_by_schema
+
   validates :group_id, uniqueness: { scope: :event_id }
   # validates_with ParticipantValidator (every group may only apply once per
   # event, but can be primary or secondary)
+
   validates_with PreferredDateValidator
+
+  # validates_with JointParticipationValidator (decide wether you are in a
+  # joint participation and select another group if you are)
+  validates :secondary_group_id, presence: { if: proc do |gp|
+    (gp.primary_primary_group_selected? && gp.joint_participation) || gp.secondary_group_id_change
+  end }
+
+  validates :music_style,  presence: { if: :primary_music_style_selected? }
+  validates :music_type,   presence: { if: :primary_music_type_and_level_selected? }
+  validates :music_level,  presence: { if: :primary_music_type_and_level_selected? }
+  validates :parade_music, presence: { if: :primary_parade_music_selected? }
+
+  # validates_with AcceptanceValidator # enforce acceptance
+  validates :terms_accepted, presence: { if: :primary_terms_accepted? }
+  validates :secondary_group_terms_accepted, presence: { if: :secondary_terms_accepted? }
 
   ### STATE MACHINES
 
@@ -173,8 +190,12 @@ class Event::GroupParticipation < ActiveRecord::Base
       .fetch(music_level, {})
   end
 
-  def progress_for(participating_group)
+  def progress_for!(participating_group)
     send(:"progress_#{state_machine_for(participating_group)}!") # e.g. progress_primary!
+  end
+
+  def progress_for(participating_group)
+    send(:"progress_#{state_machine_for(participating_group)}") # e.g. progress_primary
   end
 
   def state_for(participating_group)
