@@ -34,9 +34,12 @@ class Events::GroupParticipationsController < CrudController
   around_save :update_state_machine
 
   def edit_stage
-    edit_event = :"edit_#{params[:edit_stage]}!"
+    edit_event = :"edit_#{params[:edit_stage]}"
 
-    entry.send(edit_event) if entry.respond_to?(edit_event)
+    if entry.respond_to?(edit_event)
+      entry.send(edit_event)
+      entry.save!(validate: false)
+    end
 
     redirect_to return_path
   end

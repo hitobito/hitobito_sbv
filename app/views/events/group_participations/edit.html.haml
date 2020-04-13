@@ -51,15 +51,16 @@
   %aside.span5
     %section
       - if entry.primary_or_only?(@participating_group)
-        - if entry.group_id.present?
+        - if entry.group_id.present? && entry.may_edit_participation?
           = group_participation_edit_link('participation', @participating_group)
-        - if entry.music_style.present?
+        - if entry.music_style.present? && entry.may_edit_music_style?
           = group_participation_edit_link('music_style', @participating_group)
-        - if entry.music_level.present?
+        - if entry.music_level.present? && entry.may_edit_music_type_and_level?
           = group_participation_edit_link('music_type_and_level', @participating_group)
-        - if entry.could_change_date_preference?
+          -# the date preference could be predetermined by the selected music-style/level
+        - if entry.could_change_date_preference? && entry.may_edit_date_preference?
           = group_participation_edit_link('date_preference', @participating_group)
-        - if entry.parade_music.present?
+        - if entry.parade_music.present? && entry.may_edit_parade_music?
           = group_participation_edit_link('parade_music', @participating_group)
       - else # participating as secondary
         -# nothing so far
