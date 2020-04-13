@@ -165,6 +165,15 @@ class Event::GroupParticipation < ActiveRecord::Base
     "#{group} -> #{event}"
   end
 
+  def required_attributes
+    %w(
+      joint_participation secondary_group
+      music_style music_type music_level parade_music
+      preferred_play_day_1 preferred_play_day_2
+      terms_accepted secondary_group_terms_accepted
+    )
+  end
+
   def possible_day_numbers
     MUSIC_LEVEL_PLAY_DAYS
       .fetch(music_style, {})
