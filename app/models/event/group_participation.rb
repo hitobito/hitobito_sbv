@@ -181,10 +181,6 @@ class Event::GroupParticipation < ActiveRecord::Base
       .fetch(music_level, {})
   end
 
-  def progress_for!(participating_group)
-    send(:"progress_#{state_machine_for(participating_group)}!") # e.g. progress_primary!
-  end
-
   def progress_for(participating_group)
     send(:"progress_#{state_machine_for(participating_group)}") # e.g. progress_primary
   end
