@@ -47,9 +47,11 @@ describe Event::GroupParticipation do
         is_expected.to be_valid
       end
 
-      it 'to be one if one is available' do
-        subject.music_type = 'brass_band'
-        subject.music_level = 'fourth'
+      it 'to be inferred if one is available but none is chosen' do
+        subject.update(
+          music_type: 'brass_band',
+          music_level: 'fourth'
+        )
 
         expect(subject.possible_day_numbers.size).to be 1
         expect(subject.possible_day_numbers).to include thursday
@@ -57,16 +59,35 @@ describe Event::GroupParticipation do
         subject.preferred_play_day_1 = nil
         subject.preferred_play_day_2 = nil
 
-        is_expected.to_not be_valid
-
-        subject.preferred_play_day_1 = thursday
-
         is_expected.to be_valid
+
+        expect(subject.preferred_play_day_1).to be thursday
+        expect(subject.preferred_play_day_2).to be_nil
       end
 
-      it 'to be two choices if two can be chosen' do
-        subject.music_type = 'brass_band'
-        subject.music_level = 'highest'
+      it 'to be one if one is available' do
+        subject.update(
+          music_type: 'brass_band',
+          music_level: 'fourth'
+        )
+
+        expect(subject.possible_day_numbers.size).to be 1
+        expect(subject.possible_day_numbers).to include thursday
+
+        subject.preferred_play_day_1 = thursday
+        subject.preferred_play_day_2 = nil
+
+        is_expected.to be_valid
+
+        expect(subject.preferred_play_day_1).to be thursday
+        expect(subject.preferred_play_day_2).to be_nil
+      end
+
+      it 'infers second choice if two can be chosen and one is' do
+        subject.update(
+          music_type: 'brass_band',
+          music_level: 'highest'
+        )
 
         expect(subject.possible_day_numbers.size).to be 2
         expect(subject.possible_day_numbers).to include thursday
@@ -75,12 +96,10 @@ describe Event::GroupParticipation do
         subject.preferred_play_day_1 = friday
         subject.preferred_play_day_2 = nil
 
-        is_expected.to_not be_valid
+        is_expected.to be_valid # validation with side-effects, sorry
 
-        subject.preferred_play_day_1 = friday
-        subject.preferred_play_day_2 = thursday
-
-        is_expected.to be_valid
+        expect(subject.preferred_play_day_1).to be friday
+        expect(subject.preferred_play_day_2).to be thursday
       end
 
       it 'to be two choices if two or more can be chosen' do

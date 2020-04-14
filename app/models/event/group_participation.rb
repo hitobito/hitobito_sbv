@@ -50,7 +50,7 @@ class Event::GroupParticipation < ActiveRecord::Base
   # validates_with ParticipantValidator (every group may only apply once per
   # event, but can be primary or secondary)
 
-  validates_with PreferredDateValidator
+  validates_with PreferredDateValidator # !!! calls also infer_play_day_preference if it makes sense
 
   # validates_with JointParticipationValidator (decide wether you are in a
   # joint participation and select another group if you are)
@@ -210,6 +210,16 @@ class Event::GroupParticipation < ActiveRecord::Base
     restore_attributes(%w(primary_state secondary_state)) unless saved
   end
 
+  def infer_play_day_preference
+    if preferred_play_day_1.present? && possible_day_numbers.size == 2
+      self.preferred_play_day_2 = (possible_day_numbers - [preferred_play_day_1]).first
+    elsif possible_day_numbers.size == 1
+      self.preferred_play_day_1 = possible_day_numbers.first
+    else
+      true
+    end
+  end
+
   private
 
   def state_machine_for(participating_group = nil)
@@ -228,17 +238,6 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     if %w(true 1).include?(secondary_group_is_primary)
       self.group_id, self.secondary_group_id = secondary_group_id, group_id
-    end
-  end
-
-  def infer_play_day_preference
-    case possible_day_numbers.size
-    when 2
-      self.preferred_play_day_2 = (possible_day_numbers - [preferred_play_day_1]).first
-    when 1
-      self.preferred_play_day_1 = possible_day_numbers.first
-    else
-      true
     end
   end
 
