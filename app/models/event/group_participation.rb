@@ -207,7 +207,7 @@ class Event::GroupParticipation < ActiveRecord::Base
   end
 
   def rollback_state_if_invalid(saved)
-    restore_attributes(%w(primary_state secondary_state)) unless valid? && saved
+    restore_attributes(%w(primary_state secondary_state)) unless saved
   end
 
   private

@@ -66,7 +66,7 @@ class Events::GroupParticipationsController < CrudController
   def update_state_machine
     maybe_join_participations
 
-    entry.progress_for(participating_group || entry.group) if entry.valid?
+    entry.progress_for(participating_group || entry.group)
     yield.tap do |result|
       entry.rollback_state_if_invalid(result)
     end
