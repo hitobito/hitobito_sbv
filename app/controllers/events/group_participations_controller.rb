@@ -68,7 +68,7 @@ class Events::GroupParticipationsController < CrudController
 
     entry.progress_for(participating_group || entry.group) if entry.valid?
     yield.tap do |result|
-      entry.restore_attributes(%w(primary_state secondary_state)) unless result
+      entry.rollback_state_if_invalid(result)
     end
   end
 

@@ -210,6 +210,10 @@ class Event::GroupParticipation < ActiveRecord::Base
       possible_day_numbers.size > 1
   end
 
+  def rollback_state_if_invalid(saved)
+    restore_attributes(%w(primary_state secondary_state)) unless valid? && saved
+  end
+
   private
 
   def state_machine_for(participating_group = nil)
