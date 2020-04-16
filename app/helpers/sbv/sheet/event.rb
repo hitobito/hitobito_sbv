@@ -9,11 +9,6 @@ module Sbv::Sheet::Event
   extend ActiveSupport::Concern
 
   included do
-    tab 'global.tabs.info',
-        :group_event_path,
-        if: :show,
-        no_alt: true
-
     tab 'events.group_participations.list',
         :group_event_group_participations_path
   end
