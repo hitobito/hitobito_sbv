@@ -42,6 +42,10 @@ class Event::GroupParticipation < ActiveRecord::Base
   belongs_to :group
   belongs_to :secondary_group, class_name: 'Group'
 
+  ### CALLBACKS
+
+  before_validation :infer_play_day_preference
+
   ### VALIDATIONS
 
   validates_by_schema
@@ -50,7 +54,7 @@ class Event::GroupParticipation < ActiveRecord::Base
   # validates_with ParticipantValidator (every group may only
   # apply once per event, but can be primary or secondary)
 
-  validates_with PreferredDateValidator # !!! calls also infer_play_day_preference if it makes sense
+  validates_with PreferredDateValidator
 
   validates :secondary_group_id, presence: { if: proc do |gp|
     (gp.primary_primary_group_selected? && gp.joint_participation) ||
@@ -85,9 +89,9 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: :opened,                        to: :primary_group_selected
 
       transitions from: :primary_group_selected,        to: :music_style_selected
-      transitions from: :music_style_selected,          to: :preferred_play_day_selected,   guard: :single_play_day?, after: :infer_play_day_preference
+      transitions from: :music_style_selected,          to: :preferred_play_day_selected,   guard: :single_play_day?
       transitions from: :music_style_selected,          to: :music_type_and_level_selected
-      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected,                             after: :infer_play_day_preference
+      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
       transitions from: :preferred_play_day_selected,   to: :parade_music_selected
       transitions from: :parade_music_selected,         to: :terms_accepted
       transitions from: :terms_accepted,                to: :completed
