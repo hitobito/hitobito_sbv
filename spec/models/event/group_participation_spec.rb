@@ -48,10 +48,8 @@ describe Event::GroupParticipation do
       end
 
       it 'to be inferred if one is available but none is chosen' do
-        subject.update(
-          music_type: 'brass_band',
-          music_level: 'fourth'
-        )
+        subject.music_type = 'brass_band'
+        subject.music_level = 'fourth'
 
         expect(subject.possible_day_numbers.size).to be 1
         expect(subject.possible_day_numbers).to include thursday
@@ -66,10 +64,8 @@ describe Event::GroupParticipation do
       end
 
       it 'to be one if one is available' do
-        subject.update(
-          music_type: 'brass_band',
-          music_level: 'fourth'
-        )
+        subject.music_type = 'brass_band'
+        subject.music_level = 'fourth'
 
         expect(subject.possible_day_numbers.size).to be 1
         expect(subject.possible_day_numbers).to include thursday
@@ -84,10 +80,8 @@ describe Event::GroupParticipation do
       end
 
       it 'infers second choice if two can be chosen and one is' do
-        subject.update(
-          music_type: 'brass_band',
-          music_level: 'highest'
-        )
+        subject.music_type = 'brass_band'
+        subject.music_level = 'highest'
 
         expect(subject.possible_day_numbers.size).to be 2
         expect(subject.possible_day_numbers).to include thursday
@@ -140,6 +134,25 @@ describe Event::GroupParticipation do
         expect(subject.preferred_play_day_1).to be_nil
         expect(subject.preferred_play_day_2).to be_nil
         is_expected.to be_valid
+      end
+
+      it 'is not checked if the music has just been chosen' do
+        sut = described_class.create(
+          event: events(:festival),
+          group: groups(:musikverband_hastdutoene),
+          primary_state: 'music_style_selected',
+          music_style: 'concert_music',
+        )
+
+        expect(sut).to be_valid
+
+        sut.music_type = 'harmony'
+        sut.music_level = 'highest'
+        sut.progress_primary
+
+        expect(sut).to have_state('music_type_and_level_selected')
+                              .on(:primary)
+        expect(sut).to be_valid
       end
     end
 
