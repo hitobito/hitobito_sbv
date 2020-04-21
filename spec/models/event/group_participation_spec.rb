@@ -47,11 +47,60 @@ describe Event::GroupParticipation do
         is_expected.to be_valid
       end
 
-      it 'to be one or two choices' do
-        subject.preferred_play_day_1 = friday
+      it 'to be inferred if one is available but none is chosen' do
+        subject.music_type = 'brass_band'
+        subject.music_level = 'fourth'
+
+        expect(subject.possible_day_numbers.size).to be 1
+        expect(subject.possible_day_numbers).to include thursday
+
+        subject.preferred_play_day_1 = nil
         subject.preferred_play_day_2 = nil
 
         is_expected.to be_valid
+
+        expect(subject.preferred_play_day_1).to be thursday
+        expect(subject.preferred_play_day_2).to be_nil
+      end
+
+      it 'to be one if one is available' do
+        subject.music_type = 'brass_band'
+        subject.music_level = 'fourth'
+
+        expect(subject.possible_day_numbers.size).to be 1
+        expect(subject.possible_day_numbers).to include thursday
+
+        subject.preferred_play_day_1 = thursday
+        subject.preferred_play_day_2 = nil
+
+        is_expected.to be_valid
+
+        expect(subject.preferred_play_day_1).to be thursday
+        expect(subject.preferred_play_day_2).to be_nil
+      end
+
+      it 'infers second choice if two can be chosen and one is' do
+        subject.music_type = 'brass_band'
+        subject.music_level = 'highest'
+
+        expect(subject.possible_day_numbers.size).to be 2
+        expect(subject.possible_day_numbers).to include thursday
+        expect(subject.possible_day_numbers).to include friday
+
+        subject.preferred_play_day_1 = friday
+        subject.preferred_play_day_2 = nil
+
+        is_expected.to be_valid # validation with side-effects, sorry
+
+        expect(subject.preferred_play_day_1).to be friday
+        expect(subject.preferred_play_day_2).to be thursday
+      end
+
+      it 'to be two choices if two or more can be chosen' do
+        subject.preferred_play_day_1 = friday
+        subject.preferred_play_day_2 = nil
+
+        is_expected.to_not be_valid
 
         subject.preferred_play_day_1 = friday
         subject.preferred_play_day_2 = saturday
@@ -61,10 +110,12 @@ describe Event::GroupParticipation do
 
       it 'should be possible in schedule' do
         subject.preferred_play_day_1 = thursday
+        subject.preferred_play_day_2 = saturday
 
         is_expected.to_not be_valid
 
         subject.preferred_play_day_1 = friday
+        subject.preferred_play_day_2 = saturday
 
         is_expected.to be_valid
       end
@@ -83,6 +134,92 @@ describe Event::GroupParticipation do
         expect(subject.preferred_play_day_1).to be_nil
         expect(subject.preferred_play_day_2).to be_nil
         is_expected.to be_valid
+      end
+
+      it 'is not checked if the music has just been chosen' do
+        sut = described_class.create(
+          event: events(:festival),
+          group: groups(:musikverband_hastdutoene),
+          primary_state: 'music_style_selected',
+          music_style: 'concert_music',
+        )
+
+        expect(sut).to be_valid
+
+        sut.music_type = 'harmony'
+        sut.music_level = 'highest'
+        sut.progress_primary
+
+        expect(sut).to have_state('music_type_and_level_selected')
+                              .on(:primary)
+        expect(sut).to be_valid
+      end
+    end
+
+    context 'secondary_group_id' do
+      subject do
+        described_class.new(
+          event: events(:festival),
+          group: groups(:musikgesellschaft_aarberg),
+          primary_state: 'primary_group_selected',
+          secondary_state: 'opened',
+          joint_participation: true,
+        )
+      end
+      it 'to be present if it is a joint participation' do
+        expect(subject.secondary_group).to be_nil
+
+        is_expected.to_not be_valid
+
+        subject.secondary_group = groups(:musikgesellschaft_alterswil)
+
+        is_expected.to be_valid
+      end
+
+      it 'to be unique in the event'
+      it 'to not be participating as primary group in the event'
+    end
+
+    context 'music_style' do
+      subject do
+        described_class.new(
+          event: events(:festival),
+          group: groups(:musikgesellschaft_aarberg),
+          primary_state: 'music_style_selected',
+        )
+      end
+
+      it 'to be present' do
+        expect(subject.music_style).to be_blank
+
+        is_expected.to have_state(:music_style_selected).on(:primary)
+        is_expected.to_not be_valid
+
+        expect do
+          subject.music_style = 'concert_music'
+        end.to change(subject, :valid?).to(true)
+      end
+    end
+
+    context 'music_type and music_level' do
+      subject do
+        described_class.new(
+          event: events(:festival),
+          group: groups(:musikgesellschaft_aarberg),
+          primary_state: 'music_type_and_level_selected',
+        )
+      end
+
+      it 'to be present' do
+        expect(subject.music_type).to be_blank
+        expect(subject.music_level).to be_blank
+
+        is_expected.to_not be_valid
+
+        expect do
+          subject.music_type = 'harmony'
+          subject.music_level = 'second'
+        end.to change(subject, :valid?).to(true)
       end
     end
   end
@@ -122,10 +259,10 @@ describe Event::GroupParticipation do
       expect(subject).to be_may_prefer_two_days
     end
 
-    it 'is false for two days' do
+    it 'is true for two days' do
       expect(subject).to receive(:possible_day_numbers).and_return([1, 2])
 
-      expect(subject).to_not be_may_prefer_two_days
+      expect(subject).to be_may_prefer_two_days
     end
 
     it 'is false for one day' do

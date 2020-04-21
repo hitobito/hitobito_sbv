@@ -42,13 +42,32 @@ class Event::GroupParticipation < ActiveRecord::Base
   belongs_to :group
   belongs_to :secondary_group, class_name: 'Group'
 
+  ### CALLBACKS
+
+  before_validation :infer_play_day_preference
+
   ### VALIDATIONS
 
   validates_by_schema
+
   validates :group_id, uniqueness: { scope: :event_id }
-  # validates_with ParticipantValidator (every group may only apply once per
-  # event, but can be primary or secondary)
+  # validates_with ParticipantValidator (every group may only
+  # apply once per event, but can be primary or secondary)
+
   validates_with PreferredDateValidator
+
+  validates :secondary_group_id, presence: { if: proc do |gp|
+    (gp.primary_primary_group_selected? && gp.joint_participation) ||
+      gp.secondary_group_id_change
+  end }
+
+  validates :music_style,  presence: { if: :primary_music_style_selected? }
+  validates :music_type,   presence: { if: :primary_music_type_and_level_selected? }
+  validates :music_level,  presence: { if: :primary_music_type_and_level_selected? }
+  validates :parade_music, presence: { if: :primary_parade_music_selected? }
+
+  validates :terms_accepted, presence: { if: :primary_terms_accepted? }
+  validates :secondary_group_terms_accepted, presence: { if: :secondary_terms_accepted? }
 
   ### STATE MACHINES
 
@@ -70,9 +89,9 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: :opened,                        to: :primary_group_selected
 
       transitions from: :primary_group_selected,        to: :music_style_selected
-      transitions from: :music_style_selected,          to: :preferred_play_day_selected,   guard: :single_play_day?, after: :infer_play_day_preference
+      transitions from: :music_style_selected,          to: :preferred_play_day_selected,   guard: :single_play_day?
       transitions from: :music_style_selected,          to: :music_type_and_level_selected
-      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected,                             after: :infer_play_day_preference
+      transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
       transitions from: :preferred_play_day_selected,   to: :parade_music_selected
       transitions from: :parade_music_selected,         to: :terms_accepted
       transitions from: :terms_accepted,                to: :completed
@@ -80,64 +99,46 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     event :edit_participation, guard: :application_possible? do
       transitions from: [
-        :joint_participation_selected,
-        :primary_group_selected,
-        :music_style_selected,
-        :music_type_and_level_selected,
-        :preferred_play_day_selected,
-        :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :joint_participation_selected, :primary_group_selected,
+        :music_style_selected, :music_type_and_level_selected,
+        :preferred_play_day_selected, :parade_music_selected,
+        :terms_accepted, :completed
       ], to: :opened, after: :clean_joining_groups
     end
 
     event :edit_joining_group, guard: :application_possible? do
       transitions from: [
-        :primary_group_selected,
-        :music_style_selected,
-        :music_type_and_level_selected,
-        :preferred_play_day_selected,
-        :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :primary_group_selected, :music_style_selected,
+        :music_type_and_level_selected, :preferred_play_day_selected,
+        :parade_music_selected, :terms_accepted, :completed
       ], to: :joint_participation_selected, after: :clean_joining_groups
     end
 
     event :edit_music_style, guard: :application_possible? do
       transitions from: [
-        :music_style_selected,
-        :music_type_and_level_selected,
-        :preferred_play_day_selected,
-        :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :music_style_selected, :music_type_and_level_selected,
+        :preferred_play_day_selected, :parade_music_selected,
+        :terms_accepted, :completed
       ], to: :primary_group_selected, after: :clean_music_style
     end
 
     event :edit_music_type_and_level, guard: :application_possible? do
       transitions from: [
-        :music_type_and_level_selected,
-        :preferred_play_day_selected,
-        :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :music_type_and_level_selected, :preferred_play_day_selected,
+        :parade_music_selected, :terms_accepted, :completed
       ], to: :music_style_selected, after: :clean_music_type_and_level
     end
 
     event :edit_date_preference, guard: :application_possible? do
       transitions from: [
-        :preferred_play_day_selected,
-        :parade_music_selected,
-        :terms_accepted,
+        :preferred_play_day_selected, :parade_music_selected, :terms_accepted,
         :completed
       ], to: :music_type_and_level_selected, after: :clean_date_preference
     end
 
     event :edit_parade_music, guard: :application_possible? do
       transitions from: [
-        :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :parade_music_selected, :terms_accepted, :completed
       ], to: :preferred_play_day_selected, after: :clean_parade_music
     end
   end
@@ -166,6 +167,15 @@ class Event::GroupParticipation < ActiveRecord::Base
     "#{group} -> #{event}"
   end
 
+  def required_attributes
+    %w(
+      joint_participation secondary_group
+      music_style music_type music_level parade_music
+      preferred_play_day_1 preferred_play_day_2
+      terms_accepted secondary_group_terms_accepted
+    )
+  end
+
   def possible_day_numbers
     MUSIC_LEVEL_PLAY_DAYS
       .fetch(music_style, {})
@@ -174,7 +184,7 @@ class Event::GroupParticipation < ActiveRecord::Base
   end
 
   def progress_for(participating_group)
-    send(:"progress_#{state_machine_for(participating_group)}!") # e.g. progress_primary!
+    send(:"progress_#{state_machine_for(participating_group)}") # e.g. progress_primary
   end
 
   def state_for(participating_group)
@@ -190,12 +200,26 @@ class Event::GroupParticipation < ActiveRecord::Base
   end
 
   def may_prefer_two_days?
-    possible_day_numbers.size > 2
+    possible_day_numbers.size >= 2
   end
 
   def could_change_date_preference?
     (preferred_play_day_1.present? || preferred_play_day_2.present?) &&
       possible_day_numbers.size > 1
+  end
+
+  def rollback_state_if_invalid(saved)
+    restore_attributes(%w(primary_state secondary_state)) unless saved
+  end
+
+  def infer_play_day_preference
+    if preferred_play_day_1.present? && possible_day_numbers.size == 2
+      self.preferred_play_day_2 = (possible_day_numbers - [preferred_play_day_1]).first
+    elsif possible_day_numbers.size == 1
+      self.preferred_play_day_1 = possible_day_numbers.first
+    else
+      true
+    end
   end
 
   private
@@ -216,17 +240,6 @@ class Event::GroupParticipation < ActiveRecord::Base
 
     if %w(true 1).include?(secondary_group_is_primary)
       self.group_id, self.secondary_group_id = secondary_group_id, group_id
-    end
-  end
-
-  def infer_play_day_preference
-    case possible_day_numbers.size
-    when 2
-      self.preferred_play_day_2 = (possible_day_numbers - [preferred_play_day_1]).first
-    when 1
-      self.preferred_play_day_1 = possible_day_numbers.first
-    else
-      true
     end
   end
 

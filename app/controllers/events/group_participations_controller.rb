@@ -21,7 +21,7 @@ class Events::GroupParticipationsController < CrudController
   ]
 
   self.sort_mappings = {
-    group_id: 'groups.name',
+    group_id: 'groups.name'
   }
 
   decorates :event
@@ -34,9 +34,12 @@ class Events::GroupParticipationsController < CrudController
   around_save :update_state_machine
 
   def edit_stage
-    edit_event = :"edit_#{params[:edit_stage]}!"
+    edit_event = :"edit_#{params[:edit_stage]}"
 
-    entry.send(edit_event) if entry.respond_to?(edit_event)
+    if entry.respond_to?(edit_event)
+      entry.send(edit_event)
+      entry.save!(validate: false)
+    end
 
     redirect_to return_path
   end
@@ -61,14 +64,11 @@ class Events::GroupParticipationsController < CrudController
   end
 
   def update_state_machine
-    if entry.primary_joint_participation_selected?
-      if entry.secondary_group_is_primary == '1'
-        join_participations!(primary_entry: model_class.find_by(group_id: entry.secondary_group_id),
-                             secondary_entry: entry)
-      end
-    end
+    maybe_join_participations
+
+    entry.progress_for(participating_group || entry.group)
     yield.tap do |result|
-      entry.progress_for(participating_group || entry.group) if result
+      entry.rollback_state_if_invalid(result)
     end
   end
 
@@ -96,6 +96,14 @@ class Events::GroupParticipationsController < CrudController
     end
   end
 
+  def maybe_join_participations
+    return unless entry.primary_joint_participation_selected?
+    return unless entry.secondary_group_is_primary == '1'
+
+    join_participations!(primary_entry: model_class.find_by(group_id: entry.secondary_group_id),
+                         secondary_entry: entry)
+  end
+
   def join_participations!(primary_entry:, secondary_entry:)
     return if primary_entry.blank?
 
@@ -110,5 +118,4 @@ class Events::GroupParticipationsController < CrudController
     secondary_entry.destroy!
     model_ivar_set(primary_entry)
   end
-
 end
