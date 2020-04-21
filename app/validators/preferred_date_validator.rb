@@ -14,8 +14,9 @@ class PreferredDateValidator < ActiveModel::Validator
   def validate(record)
     @record = record
 
+    return true if music_not_chosen?
     return true if date_reset?
-    return true unless music_chosen? && (date_empty? || date_changed?)
+    return true unless (date_empty? || date_changed?)
 
     errors.delete(:preferred_play_day_1)
     errors.delete(:preferred_play_day_2)
@@ -26,9 +27,15 @@ class PreferredDateValidator < ActiveModel::Validator
     preferred_play_days_are_separate
   end
 
-  def music_chosen?
-    music_style.present? && music_type.present? && music_level.present? &&
-      !music_just_changed?
+  def music_not_chosen?
+    music_chosen = begin
+                     music_style.present? &&
+                       music_type.present? &&
+                       music_level.present? &&
+                       !music_just_changed?
+                   end
+
+    !music_chosen
   end
 
   def music_just_changed?
