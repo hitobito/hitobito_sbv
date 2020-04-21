@@ -21,7 +21,7 @@ class Events::GroupParticipationsController < CrudController
   ]
 
   self.sort_mappings = {
-    group_id: 'groups.name',
+    group_id: 'groups.name'
   }
 
   decorates :event
