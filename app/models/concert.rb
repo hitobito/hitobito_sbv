@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -30,8 +30,8 @@ class Concert < ActiveRecord::Base
 
   after_initialize :set_readonly
 
-  before_validation :set_name, unless: 'name.present?'
-  before_validation :set_verband_ids, on: :create, if: :verein
+  before_validation :set_name
+  before_validation :set_verband_ids, on: :create
   before_validation :remove_empty_song_count
 
   validates_by_schema
@@ -48,6 +48,7 @@ class Concert < ActiveRecord::Base
   private
 
   def set_name
+    return if name.present?
     self.name = I18n.t('activerecord.models.concert.without_date')
   end
 
@@ -60,6 +61,8 @@ class Concert < ActiveRecord::Base
   end
 
   def set_verband_ids
+    return if verein.blank?
+
     case verein.parent
     when Group::Regionalverband
       self.regionalverband_id = verein.parent.id
