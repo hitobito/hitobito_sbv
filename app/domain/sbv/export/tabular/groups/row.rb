@@ -28,6 +28,12 @@ module Sbv
             Settings.application.languages.to_h.stringify_keys[entry.correspondence_language]
           end
 
+          def contact_email
+            if entry.contact
+              entry.contact.email
+            end
+          end
+
           # rubocop:disable Style/FormatString
           def buv_lohnsumme
             if entry.buv_lohnsumme
