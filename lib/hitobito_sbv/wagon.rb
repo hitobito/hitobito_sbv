@@ -73,7 +73,7 @@ module HitobitoSbv
 
       ### domain
       Export::Tabular::Groups::Row.send :include, Sbv::Export::Tabular::Groups::Row
-      Export::Tabular::Groups::List.send :include, Sbv::Export::Tabular::Groups::List
+      Export::Tabular::Groups::List.send :prepend, Sbv::Export::Tabular::Groups::List
       Export::Tabular::People::PeopleFull.send :include, Sbv::Export::Tabular::People::PeopleFull
 
       MailRelay::Lists.send :prepend, Sbv::MailRelay::Lists
