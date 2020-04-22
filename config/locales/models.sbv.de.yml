@@ -289,6 +289,7 @@ de:
         hostname: Hostname
         buv_lohnsumme: BUV-Lohnsumme
         nbuv_lohnsumme: NBUV-Lohnsumme
+        contact_email: E-Mailadresse Kontaktperson
       role:
         dates: Daten
         created_at: Eintritt

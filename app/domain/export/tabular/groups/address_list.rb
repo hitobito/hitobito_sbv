@@ -6,9 +6,9 @@
 module Export::Tabular::Groups
   class AddressList < List
     def attributes
-      %w(name type mitgliederverband contact address zip_code town country
-         besetzung klasse unterhaltungsmusik correspondence_language
-         subventionen founding_year recognized_members)
+      %w(name type mitgliederverband email contact contact_email address
+         zip_code town country besetzung klasse unterhaltungsmusik
+         correspondence_language subventionen founding_year recognized_members)
     end
   end
 end
