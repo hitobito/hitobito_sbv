@@ -350,8 +350,8 @@ fr:
         secondary_parent_id: secondaire
         tertiary_parent_id: autres
         hostname: Hostname
-        buv_lohnsumme: ""
-        nbuv_lohnsumme: ""
+        buv_lohnsumme: Salaire AAP
+        nbuv_lohnsumme: Salaire AANP
       role:
         dates: Données
         created_at: Entrée
@@ -362,8 +362,8 @@ fr:
               song_census: Peut gérer les annonces SUISA.
               layer_full: Tout lire et écrire à ce niveau. Créer des manifestations et des listes à ce niveau.
               group_full: Lire et écrire sur le groupe. Créer des manifestations et des listes sur le groupe.
-              festival_participation: ""
-              uv_lohnsumme: ""
+              festival_participation: Peut inscrire la société à des fêtes de musique et traiter l’inscription.
+              uv_lohnsumme: Peut gérer le salaire AA.
       song:
         title: Titre
         composed_by: Compositeur

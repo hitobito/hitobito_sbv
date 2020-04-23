@@ -35,13 +35,13 @@ fr:
     submit: Soumettre la liste d'annonce
     submit_button:
       label:
-        submit: ""
-        submitted: ""
-        none: ""
+        submit: Envoyer liste
+        submitted: Liste envoyée
+        none: Envoyer liste
       tooltip:
-        submit: ""
-        submitted: ""
-        none: ""
+        submit: La liste peut être envoyée.
+        submitted: La liste a déjà été envoyée
+        none: Aucune liste à envoyer.
 
     remind:
       success: "Le rappel a été envoyé avec succès à la société %{verein_count}."
@@ -74,7 +74,7 @@ fr:
 
   groups:
     actions_show_sbv:
-      export_lohnsummen: ""
+      export_lohnsummen: Export des salaires AA
 
   roles:
     info:
