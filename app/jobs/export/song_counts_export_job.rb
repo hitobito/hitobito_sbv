@@ -1,4 +1,4 @@
-#  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -19,7 +19,7 @@ class Export::SongCountsExportJob < Export::ExportBaseJob
     song_counts
       .joins(:concert, :song)
       .preload(:song)
-      .group(:song_id)
+      .group('`concerts`.`verein_id`', :song_id)
       .select('song_counts.id, song_id, song_counts.year, SUM(count) AS count, concert_id')
       .in(@year)
       .merge(Song.list)
