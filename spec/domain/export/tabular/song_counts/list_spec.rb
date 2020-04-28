@@ -15,7 +15,7 @@ describe Export::Tabular::SongCounts::List do
 
   context 'verein' do
 
-    let(:list) { groups(:musikgesellschaft_aarberg).song_counts }
+    let(:list) { groups(:musikgesellschaft_aarberg).song_counts.order(:concert_id) }
 
     its(:headers) do
       should == ['Anzahl', 'Titel', 'Komponist', 'Arrangeur', 'Verlag', 'SUISA-ID', 'Verein', 'Vereins ID']
@@ -56,7 +56,7 @@ describe Export::Tabular::SongCounts::List do
 
   context 'group' do
 
-    let(:list) { groups(:hauptgruppe_1).song_counts }
+    let(:list) { groups(:hauptgruppe_1).song_counts.order(:concert_id) }
 
     its(:headers) do
       should == ['Anzahl', 'Titel', 'Komponist', 'Arrangeur', 'Verlag', 'SUISA-ID', 'Verein und Ort']
