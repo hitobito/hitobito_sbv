@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2019, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -30,13 +30,20 @@ def limited(collection, selection: nil, limit: nil)
 end
 
 def build_verein_attrs(parent_id, name, besetzung, lang)
-  { name: name, parent_id: parent_id,
+  attrs = { name: name, parent_id: parent_id,
     address: Faker::Address.street_address,
     zip_code: Faker::Address.zip[0..3],
     town: Faker::Address.city,
-    besetzung: BESETZUNGEN_MEMO.fetch(besetzung, nil),
     correspondence_language: lang,
   }
+
+  if besetzung
+    attrs.merge({
+      besetzung: BESETZUNGEN_MEMO.fetch(besetzung, nil),
+    })
+  end
+
+  attrs
 end
 
 def build_regionalverband_attrs(parent_id, name = nil)
