@@ -20,8 +20,6 @@ class CreateConcerts < ActiveRecord::Migration[4.2]
 
     remove_column :song_counts, :editable
 
-    remove_index :song_counts, column: [:song_id, :verein_id, :year]
-
     add_reference :song_counts, :concert, foreign_key: true
   end
 end
