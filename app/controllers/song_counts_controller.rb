@@ -5,7 +5,7 @@
 
 class SongCountsController < SimpleCrudController
   include YearBasedPaging
-  include Concerns::AsyncDownload
+  include AsyncDownload
 
   self.nesting = Group
   self.permitted_attrs = [:song_id, :year, :count]
