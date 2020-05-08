@@ -1,4 +1,4 @@
-class CreateGroupParticipations < ActiveRecord::Migration
+class CreateGroupParticipations < ActiveRecord::Migration[4.2]
   def change
     create_table :event_group_participations do |t|
       t.string :state, null: false

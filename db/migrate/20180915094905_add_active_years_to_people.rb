@@ -1,4 +1,4 @@
-class AddActiveYearsToPeople < ActiveRecord::Migration
+class AddActiveYearsToPeople < ActiveRecord::Migration[4.2]
   def change
     add_column :people, :active_years, :integer
     add_column :people, :active_role, :boolean, default: false, null: false

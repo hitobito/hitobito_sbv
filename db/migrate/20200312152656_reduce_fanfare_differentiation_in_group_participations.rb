@@ -1,4 +1,4 @@
-class ReduceFanfareDifferentiationInGroupParticipations < ActiveRecord::Migration
+class ReduceFanfareDifferentiationInGroupParticipations < ActiveRecord::Migration[4.2]
   def up
     say_with_time 'Mapping Fanfare Benelux' do
       execute <<-SQL.strip_heredoc.split.join(' ')

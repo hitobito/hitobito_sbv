@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class AddBsvAttributes < ActiveRecord::Migration
+class AddBsvAttributes < ActiveRecord::Migration[4.2]
   def change
     add_column :groups, :vereinssitz, :string
     add_column :groups, :founding_year, :integer

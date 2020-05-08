@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class AddTimestampsToConcert < ActiveRecord::Migration
+class AddTimestampsToConcert < ActiveRecord::Migration[4.2]
   def up
     add_timestamps :concerts, null: false, default: Time.zone.now
   end

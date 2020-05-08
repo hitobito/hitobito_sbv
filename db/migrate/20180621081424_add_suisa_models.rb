@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class AddSuisaModels < ActiveRecord::Migration
+class AddSuisaModels < ActiveRecord::Migration[4.2]
 
   def change
     create_table :songs do |t|

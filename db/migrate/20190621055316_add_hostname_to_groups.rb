@@ -1,4 +1,4 @@
-class AddHostnameToGroups < ActiveRecord::Migration
+class AddHostnameToGroups < ActiveRecord::Migration[4.2]
   def change
     add_column :groups, :hostname, :string
 

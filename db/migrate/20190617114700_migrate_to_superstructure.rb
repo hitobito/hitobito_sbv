@@ -1,4 +1,4 @@
-class MigrateToSuperstructure < ActiveRecord::Migration
+class MigrateToSuperstructure < ActiveRecord::Migration[4.2]
   def up
     admin_layer = nil
 

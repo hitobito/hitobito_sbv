@@ -1,4 +1,4 @@
-class AddPlaceholdersToSelectedCustomContents < ActiveRecord::Migration
+class AddPlaceholdersToSelectedCustomContents < ActiveRecord::Migration[4.2]
   def up
     each_applicable_custom_content do |content|
       placeholders = content.placeholders_optional + ", dachverband"
