@@ -38,7 +38,7 @@ if Wagons.find('sbv').root.join('db/seeds/production/verbaende.csv').exist?
     next unless mv
 
     mv.default_children.each do |child_class|
-      child_class.first.update_attributes(seeder.group_attributes)
+      child_class.first.update(seeder.group_attributes)
     end
 
     mitglieder_verbaende[mv.name] = mv.id # store for verein-import

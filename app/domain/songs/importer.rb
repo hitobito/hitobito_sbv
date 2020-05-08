@@ -39,9 +39,9 @@ class Songs::Importer
 
   def values(rows)
     rows.collect do |title, composed_by, arranged_by|
-      "(#{ActiveRecord::Base.sanitize(title)},"\
-        " #{ActiveRecord::Base.sanitize(composed_by)},"\
-        " #{ActiveRecord::Base.sanitize(arranged_by)})"
+      "(#{ActiveRecord::Base.connection.quote(title)},"\
+        " #{ActiveRecord::Base.connection.quote(composed_by)},"\
+        " #{ActiveRecord::Base.connection.quote(arranged_by)})"
     end
   end
 end

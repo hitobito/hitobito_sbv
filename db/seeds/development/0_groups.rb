@@ -76,6 +76,6 @@ limited(csv.by_col['Verband'].uniq, selection: [
   end
 
   mv.default_children.each do |child_class|
-    child_class.first.update_attributes(seeder.group_attributes)
+    child_class.first.update(seeder.group_attributes)
   end
 end

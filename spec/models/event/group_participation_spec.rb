@@ -296,7 +296,7 @@ describe Event::GroupParticipation do
     it 'assumes the only day if only one is possible' do
       # the only possible value id thursday/4
       # simulate earlier step, because progress! needs to skip the day-selection
-      subject.update_attributes(primary_state: 'music_style_selected')
+      subject.update(primary_state: 'music_style_selected')
 
       expect do
         expect do
