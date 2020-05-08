@@ -29,7 +29,7 @@ class SongCensusesController < CrudController
     vereins_total = CensusCalculator.new(census, group).vereins_total
     count = deliver_reminders(vereins_total)
 
-    redirect_to :back, notice: t('.success', verein_count: count)
+    redirect_back fallback_location: group_song_censuses_path(group), notice: t('.success', verein_count: count)
   end
 
   private
