@@ -24,7 +24,8 @@ class Song < ActiveRecord::Base
   scope :list, -> { order(:title) }
 
   validates_by_schema
-  validates :title, uniqueness: { scope: [:composed_by, :arranged_by, :published_by] }
+  validates :title,
+    uniqueness: { scope: [:composed_by, :arranged_by, :published_by], case_sensitive: true }
 
   def to_s
     title
