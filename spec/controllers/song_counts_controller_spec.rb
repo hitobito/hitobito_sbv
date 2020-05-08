@@ -19,13 +19,13 @@ describe SongCountsController do
     end
 
     it 'exports csv' do
-      get :index, group_id: verein, format: :csv
+      get :index, params: { group_id: verein }, format: :csv
       expect(flash[:notice]).to eq 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
       expect(response).to redirect_to group_concerts_path(verein)
     end
 
     it 'exports xlsx' do
-      get :index, group_id: group, format: :xlsx
+      get :index, params: { group_id: group }, format: :xlsx
       expect(flash[:notice]).to eq 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
       expect(response).to redirect_to group_song_censuses_path(group)
     end

@@ -20,7 +20,7 @@ describe ConcertsController do
     it 'sets recently played songs as preselection' do
       allow_any_instance_of(Group::Verein).to receive(:last_played_song_ids).and_return([1, 3])
 
-      get :new, group_id: admin.primary_group
+      get :new, params: { group_id: admin.primary_group }
 
       entry = assigns(:concert)
       expect(entry.song_counts.length).to be 2
@@ -37,12 +37,12 @@ describe ConcertsController do
 
     it 'connects open song-counts to the current song-census' do
       expect do
-        post :submit, group_id: admin.primary_group
+        post :submit, params: { group_id: admin.primary_group }
       end.to change { Concert.where(song_census: nil).count }.by(-2)
     end
 
     it 'displays a message about song-count submission' do
-      post :submit, group_id: admin.primary_group
+      post :submit, params: { group_id: admin.primary_group }
       expect(flash[:notice]).to match(/Meldeliste eingereicht/)
     end
   end

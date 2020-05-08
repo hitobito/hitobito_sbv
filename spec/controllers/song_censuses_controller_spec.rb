@@ -17,7 +17,7 @@ describe SongCensusesController do
     end
 
     it 'shows which groups have submitted a census' do
-      get :index, group_id: group.id
+      get :index, params: { group_id: group.id }
 
       expect(response).to have_http_status(:ok)
     end
@@ -40,7 +40,7 @@ describe SongCensusesController do
       ref = @request.env['HTTP_REFERER'] = group_song_censuses_path(group, song_census)
 
       expect do
-        post :remind, group_id: group, song_census_id: song_census
+        post :remind, params: { group_id: group, song_census_id: song_census }
       end.to change { ActionMailer::Base.deliveries.size }.by 3
 
       is_expected.to redirect_to(ref)

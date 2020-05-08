@@ -20,7 +20,7 @@ describe HistoryRolesController do
       end_date: 2020
     }
     expect do
-      post :create, group_id: group.id, role: role_params, format: :js
+      post :create, params: { group_id: group.id, role: role_params }, format: :js
       expect(response).to render_template('shared/update_flash')
     end.not_to change { leader.roles.count }
     expect(leader.reload.active_years).to be_nil
@@ -41,7 +41,7 @@ describe HistoryRolesController do
     }
     expect do
       expect do
-        post :create, group_id: group.id, role: role_params, format: :js
+        post :create, params: { group_id: group.id, role: role_params }, format: :js
       end.to raise_error(CanCan::AccessDenied)
     end.not_to change { member.roles.count }
     expect(member.reload.active_years).to be_nil
@@ -60,7 +60,7 @@ describe HistoryRolesController do
       label: '1. Sax'
     }
     expect do
-      post :create, group_id: group.id, role: role_params
+      post :create, params: { group_id: group.id, role: role_params }
     end.to change { leader.roles.with_deleted.count }.by(1)
     expect(leader.reload.active_years).to eq 3
     expect(leader.roles.with_deleted).to be_any { |role| role.label === '1. Sax' }
@@ -77,7 +77,7 @@ describe HistoryRolesController do
       end_date: Date.today
     }
     expect do
-      post :create, group_id: leader.primary_group_id, role: role_params
+      post :create, params: { group_id: leader.primary_group_id, role: role_params }
       expect(response).to redirect_to(history_group_person_path(leader.primary_group, leader))
     end.to change { leader.roles.count }.by(0)
     expect(leader.reload.active_years).to eq 3
@@ -95,7 +95,7 @@ describe HistoryRolesController do
 
     sign_in(people(:leader))
     expect do
-      delete :destroy, group_id: role.group_id, id: role.id
+      delete :destroy, params: { group_id: role.group_id, id: role.id }
     end.to change { role.person.roles.with_deleted.count }.by(-1)
 
     expect(role.person.active_years).to eq 0
@@ -113,7 +113,7 @@ describe HistoryRolesController do
 
     sign_in(people(:leader))
     expect do
-      delete :destroy, group_id: role.group_id, id: role.id
+      delete :destroy, params: { group_id: role.group_id, id: role.id }
     end.to change { role.person.roles.with_deleted.count }.by(-1)
 
     expect(role.person.active_years).to eq 0
