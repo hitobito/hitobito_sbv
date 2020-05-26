@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -7,6 +9,7 @@ module GroupParticipationsHelper
   def music_styles_selection
     Event::GroupParticipation::MUSIC_CLASSIFICATIONS.map do |h|
       next if h[:style] == 'parade_music'
+
       music_i18n_option(:music_style, h[:style])
     end.compact
   end
@@ -100,13 +103,14 @@ module GroupParticipationsHelper
   def link_to_terms
     link_to t(:terms, group_participation_scope),
             t(:terms_url, group_participation_scope),
-            target: '_blank'
+            target: '_blank', rel: 'noopener'
   end
 
   private
 
   def day_name(value)
     return '' unless value
+
     t('date.day_names').fetch(value)
   end
 end
