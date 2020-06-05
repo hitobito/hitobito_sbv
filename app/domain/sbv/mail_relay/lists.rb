@@ -7,7 +7,7 @@ module Sbv::MailRelay::Lists
   extend ActiveSupport::Concern
 
   def envelope_sender
-    super(envelope_receiver_name, sender_mail, mail_domain)
+    super(envelope_receiver_name, sender_email, mail_domain)
   end
 
   def mail_domain
