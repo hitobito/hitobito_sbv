@@ -29,13 +29,31 @@ describe MailRelay::Lists do
     end
 
     it '#mail_domain might read hostname from group' do
-      group.update(hostname: 'example.com')
-      expect(subject).to eq 'example.com'
+      group.update!(hostname: 'group.example.com')
+      expect(subject).to eq 'group.example.com'
     end
 
     it '#mail_domain might read hostname from hierarchy' do
-      group.parent.update(hostname: 'example.com')
-      expect(subject).to eq 'example.com'
+      group.parent.update!(hostname: 'parent.example.com')
+      expect(subject).to eq 'parent.example.com'
+    end
+  end
+
+  context '#envelope_sender' do
+    subject { relay.send(:envelope_sender) }
+
+    it 'reads hostname from Settings' do
+      expect(subject).to eq 'dummy-bounces+admin=hitobito.example.com@localhost'
+    end
+
+    it 'reads hostname from group' do
+      group.update!(hostname: 'group.example.com')
+      expect(subject).to eq 'dummy-bounces+admin=hitobito.example.com@group.example.com'
+    end
+
+    it 'reads hostname from hierarchy' do
+      group.parent.update!(hostname: 'parent.example.com')
+      expect(subject).to eq 'dummy-bounces+admin=hitobito.example.com@parent.example.com'
     end
   end
 
