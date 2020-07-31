@@ -52,7 +52,7 @@ class Events::GroupParticipationsController < CrudController
 
   private
 
-  def list_entries_without_sort
+  def list_entries
     model_scope.includes(:group, :secondary_group)
   end
 
