@@ -6,5 +6,5 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 module HitobitoSbv
-  VERSION = '0.0.1'.freeze
+  VERSION = '1.22'.freeze
 end
