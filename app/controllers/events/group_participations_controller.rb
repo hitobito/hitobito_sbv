@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -44,7 +46,7 @@ class Events::GroupParticipationsController < CrudController
     redirect_to return_path
   end
 
-  private_class_method
+  private_class_method :model_class
 
   def self.model_class
     Event::GroupParticipation
