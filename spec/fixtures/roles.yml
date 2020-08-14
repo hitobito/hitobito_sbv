@@ -41,3 +41,8 @@ suisa_admin:
   person: suisa_admin
   group: musikgesellschaft_alterswil
   type: Group::Verein::SuisaAdmin
+
+conductor:
+  person: conductor
+  group: musikverband_hastdutoene
+  type: Group::Verein::Conductor

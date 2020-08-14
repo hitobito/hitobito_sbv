@@ -328,6 +328,7 @@ musikgesellschaft_alterswil:
   address: Am Junkernkamp 2
   zip_code: 7400
   town: Nord Boland
+  email: alterswil@hitobito.example.com
 vorstand_mg_alterswil:
   parent: musikgesellschaft_alterswil
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikgesellschaft_alterswil) %>

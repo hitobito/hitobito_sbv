@@ -33,3 +33,10 @@ suisa_admin:
   email: suisa@hitobito.example.com
   primary_group: musikgesellschaft_alterswil
   birthday: 10.01.1980
+
+conductor:
+  first_name: Dieter
+  last_name: Irigent
+  email: dirigent@hitobito.example.com
+  primary_group: musikverband_hastdutoene
+  birthday: 14.08.1970
