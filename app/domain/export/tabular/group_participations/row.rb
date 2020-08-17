@@ -9,7 +9,6 @@ module Export::Tabular::GroupParticipations
   class Row < Export::Tabular::Row
     include GroupParticipationsFormatHelper
 
-    # /^group_contact/ => :group_contact_attribute,
     self.dynamic_attributes = {
       /^group/ => :group_attribute,
       /^music/ => :participation_format_attribute,
