@@ -12,7 +12,7 @@ env:
     - RAILS_DB_ADAPTER=mysql2
     - RAILS_DB_NAME=hitobito_test
     - RAILS_ENV=development
-    - RAILS_HOST_NAME=test.host
+    - RAILS_HOST_NAME=localhost
 rvm:
   - 2.5.5
 install:
