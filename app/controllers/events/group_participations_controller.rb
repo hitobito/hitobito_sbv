@@ -51,6 +51,7 @@ class Events::GroupParticipationsController < CrudController
   def index
     super do |format|
       format.csv { render_tabular_in_background(:csv) }
+      format.xlsx { render_tabular_in_background(:xlsx) }
     end
   end
 
