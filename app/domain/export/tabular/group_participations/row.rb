@@ -30,11 +30,18 @@ module Export::Tabular::GroupParticipations
     end
 
     def group_dirigent
-      entry.group.roles.where(type: 'Group::Verein::Conductor').first.try(:person)&.to_s
+      entry.group.roles.where(type: 'Group::Verein::Conductor')
+           .first.try(:person)&.to_s
     end
 
     def group_contact
       entry.group.contact
+    end
+
+    def secondary_group_terms_accepted
+      if entry.joint_participation? && entry.secondary_group.present?
+        normalize(entry.secondary_group_terms_accepted)
+      end
     end
 
     private

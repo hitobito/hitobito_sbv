@@ -162,7 +162,7 @@ describe Export::Tabular::GroupParticipations::List do
         "2. Wunschspieltag" => "Freitag",
 
         "Reglement akzeptiert" => "ja",
-        "Reglement von Partnerverein akzeptiert" => "nein",
+        "Reglement von Partnerverein akzeptiert" => nil,
 
         "Dirigent" => "Dieter Irigent",
 

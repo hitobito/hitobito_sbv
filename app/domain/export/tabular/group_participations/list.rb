@@ -39,7 +39,9 @@ module Export::Tabular::GroupParticipations
 
       list.each do |entry|
         yield values(entry, format)
-        yield values(secondary_group(entry), format) if entry.joint_participation?
+        if entry.joint_participation? && entry.secondary_group.present?
+          yield values(secondary_group(entry), format)
+        end
       end
     end
 
