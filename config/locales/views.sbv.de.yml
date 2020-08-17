@@ -109,13 +109,13 @@ de:
 
 
   dropdown/song_counts:
-      button: Export
-      csv: CSV
-      xlsx: Excel
+    button: Export
+    csv: CSV
+    xlsx: Excel
   dropdown/group_participations:
-      button: Anmeldungen Export
-      csv: CSV
-      xlsx: Excel
+    button: Anmeldungen Export
+    csv: CSV
+    xlsx: Excel
   concerts:
     submit:
       flash:
