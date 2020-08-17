@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class Export::GroupParticipationsExportJob < Export::ExportBaseJob
-
   self.parameters = PARAMETERS + [:festival_id]
 
   def initialize(format, user_id, festival_id, options)
