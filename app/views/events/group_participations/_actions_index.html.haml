@@ -1,0 +1,2 @@
+- if can?(:edit, entry.event)
+  = Dropdown::GroupParticipations.new(self, params.merge({id: params[:event_id]}), :download).export
