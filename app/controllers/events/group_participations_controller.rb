@@ -6,6 +6,8 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class Events::GroupParticipationsController < CrudController
+  include AsyncDownload
+
   self.nesting = [Group, Event]
   self.permitted_attrs = [
     :music_style,
@@ -48,13 +50,7 @@ class Events::GroupParticipationsController < CrudController
 
   def index
     super do |format|
-      format.csv do
-        send_data(
-          render_tabular(:csv),
-          filename: "anmeldungen-#{@event.name.parameterize}.csv",
-          type: 'text/csv'
-        )
-      end
+      format.csv { render_tabular_in_background(:csv) }
     end
   end
 
@@ -77,10 +73,15 @@ class Events::GroupParticipationsController < CrudController
     )
   end
 
-  def render_tabular(format)
-    Export::Tabular::GroupParticipations::List.export(
-      format, list_entries.includes(group: [:contact])
-    )
+  def render_tabular_in_background(format)
+    with_async_download_cookie(
+      format, "anmeldungen-#{@event.name.parameterize}"
+    ) do |filename|
+      Export::GroupParticipationsExportJob.new(
+        format, current_person.id, entry.event.id,
+        filename: filename
+      ).enqueue!
+    end
   end
 
   def update_state_machine

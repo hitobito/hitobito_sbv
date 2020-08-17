@@ -20,9 +20,9 @@ describe Events::GroupParticipationsController do
 
     it 'exports csv' do
       get :index, params: { group_id: group.id, event_id: festival.id }, format: :csv
-      expect(response).to have_http_status(:success)
-      # expect(flash[:notice]).to eq 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
-      # expect(response).to redirect_to group_event_group_participations_path(group, festival)
+      expect(flash[:notice]).to eq 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to group_event_group_participations_path(group, festival, returning: true)
     end
   end
 end

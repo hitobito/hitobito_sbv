@@ -127,6 +127,9 @@ de:
       concerts: Aufführungen
       summary: Zusammenfassung
 
+  events/group_participations:
+    export_enqueued: 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
+
   events:
     group_participations:
       edit: "%{participation} bearbeiten"
