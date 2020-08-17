@@ -112,6 +112,10 @@ de:
       button: Export
       csv: CSV
       xlsx: Excel
+  dropdown/group_participations:
+      button: Anmeldungen Export
+      csv: CSV
+      xlsx: Excel
   concerts:
     submit:
       flash:

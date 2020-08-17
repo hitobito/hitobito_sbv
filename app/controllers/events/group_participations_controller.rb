@@ -46,6 +46,18 @@ class Events::GroupParticipationsController < CrudController
     redirect_to return_path
   end
 
+  def index
+    super do |format|
+      format.csv do
+        send_data(
+          render_tabular(:csv),
+          filename: "anmeldungen-#{@event.name.parameterize}.csv",
+          type: 'text/csv'
+        )
+      end
+    end
+  end
+
   private_class_method :model_class
 
   def self.model_class
@@ -62,6 +74,12 @@ class Events::GroupParticipationsController < CrudController
     edit_group_event_group_participation_path(
       @group, @event, entry,
       participating_group: participating_group_id
+    )
+  end
+
+  def render_tabular(format)
+    Export::Tabular::GroupParticipations::List.export(
+      format, list_entries.includes(group: [:contact])
     )
   end
 
