@@ -46,16 +46,16 @@ module Export::Tabular::GroupParticipations
     private
 
     def participation_format_attribute(attr)
-      return nil if entry.read_attribute(attr).blank?
+      return nil if entry.read_attribute(attr).blank? # :music_style
 
-      format_participation_attr = :"format_#{attr}"
+      format_participation_attr = :"format_#{attr}" # :format_music_style
       send(format_participation_attr, entry) # format_music_style(entry)
     end
 
     def group_attribute(attr)
-      return send(attr) if respond_to?(attr)
+      return send(attr) if respond_to?(attr) # :group_email
 
-      group_attr = attr.to_s.delete_prefix('group_').to_sym
+      group_attr = attr.to_s.delete_prefix('group_').to_sym # :email
       entry.group.send(group_attr) # entry.group.email
     end
   end
