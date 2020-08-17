@@ -10,3 +10,7 @@ AllCops:
     - tmp/**/*
     - spec/**/*
     - test/**/*
+
+# we inherit mostly from CrudController et al, rendering this useless
+Rails/LexicallyScopedActionFilter:
+  Enabled: false

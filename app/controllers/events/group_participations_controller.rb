@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 #  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
 class Events::GroupParticipationsController < CrudController
+  include AsyncDownload
+
   self.nesting = [Group, Event]
   self.permitted_attrs = [
     :music_style,
@@ -44,7 +48,14 @@ class Events::GroupParticipationsController < CrudController
     redirect_to return_path
   end
 
-  private_class_method
+  def index
+    super do |format|
+      format.csv { render_tabular_in_background(:csv) }
+      format.xlsx { render_tabular_in_background(:xlsx) }
+    end
+  end
+
+  private_class_method :model_class
 
   def self.model_class
     Event::GroupParticipation
@@ -61,6 +72,17 @@ class Events::GroupParticipationsController < CrudController
       @group, @event, entry,
       participating_group: participating_group_id
     )
+  end
+
+  def render_tabular_in_background(format)
+    with_async_download_cookie(
+      format, "anmeldungen-#{@event.name.parameterize}"
+    ) do |filename|
+      Export::GroupParticipationsExportJob.new(
+        format, current_person.id, entry.event.id,
+        filename: filename
+      ).enqueue!
+    end
   end
 
   def update_state_machine

@@ -109,9 +109,13 @@ de:
 
 
   dropdown/song_counts:
-      button: Export
-      csv: CSV
-      xlsx: Excel
+    button: Export
+    csv: CSV
+    xlsx: Excel
+  dropdown/group_participations:
+    button: Anmeldungen Export
+    csv: CSV
+    xlsx: Excel
   concerts:
     submit:
       flash:
@@ -122,6 +126,9 @@ de:
       title: SUISA Erfassung
       concerts: Aufführungen
       summary: Zusammenfassung
+
+  events/group_participations:
+    export_enqueued: 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
 
   events:
     group_participations:
