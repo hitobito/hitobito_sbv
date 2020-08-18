@@ -131,6 +131,9 @@ de:
     export_enqueued: 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
 
   events:
+    global:
+      link:
+        add_event/festival: Musikfest erstellen
     group_participations:
       edit: "%{participation} bearbeiten"
       actions_new:
