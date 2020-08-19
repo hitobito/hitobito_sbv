@@ -83,7 +83,6 @@ class Event::GroupParticipation < ActiveRecord::Base
     state :preferred_play_day_selected
     state :parade_music_selected
     state :terms_accepted
-    state :completed
 
     event :progress, guard: :application_possible? do
       transitions from: :opened,                        to: :joint_participation_selected,  guard: :joint_participation?
@@ -96,7 +95,6 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: :music_type_and_level_selected, to: :preferred_play_day_selected
       transitions from: :preferred_play_day_selected,   to: :parade_music_selected
       transitions from: :parade_music_selected,         to: :terms_accepted
-      transitions from: :terms_accepted,                to: :completed
     end
 
     event :edit_participation, guard: :application_possible? do
@@ -104,7 +102,7 @@ class Event::GroupParticipation < ActiveRecord::Base
         :joint_participation_selected, :primary_group_selected,
         :music_style_selected, :music_type_and_level_selected,
         :preferred_play_day_selected, :parade_music_selected,
-        :terms_accepted, :completed
+        :terms_accepted
       ], to: :opened, after: :clean_joining_groups
     end
 
@@ -112,7 +110,7 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: [
         :primary_group_selected, :music_style_selected,
         :music_type_and_level_selected, :preferred_play_day_selected,
-        :parade_music_selected, :terms_accepted, :completed
+        :parade_music_selected, :terms_accepted
       ], to: :joint_participation_selected, after: :clean_joining_groups
     end
 
@@ -120,27 +118,26 @@ class Event::GroupParticipation < ActiveRecord::Base
       transitions from: [
         :music_style_selected, :music_type_and_level_selected,
         :preferred_play_day_selected, :parade_music_selected,
-        :terms_accepted, :completed
+        :terms_accepted
       ], to: :primary_group_selected, after: :clean_music_style
     end
 
     event :edit_music_type_and_level, guard: :application_possible? do
       transitions from: [
         :music_type_and_level_selected, :preferred_play_day_selected,
-        :parade_music_selected, :terms_accepted, :completed
+        :parade_music_selected, :terms_accepted
       ], to: :music_style_selected, after: :clean_music_type_and_level
     end
 
     event :edit_date_preference, guard: :application_possible? do
       transitions from: [
-        :preferred_play_day_selected, :parade_music_selected, :terms_accepted,
-        :completed
+        :preferred_play_day_selected, :parade_music_selected, :terms_accepted
       ], to: :music_type_and_level_selected, after: :clean_date_preference
     end
 
     event :edit_parade_music, guard: :application_possible? do
       transitions from: [
-        :parade_music_selected, :terms_accepted, :completed
+        :parade_music_selected, :terms_accepted
       ], to: :preferred_play_day_selected, after: :clean_parade_music
     end
   end
@@ -149,7 +146,6 @@ class Event::GroupParticipation < ActiveRecord::Base
     state :not_present, initial: true
     state :opened
     state :terms_accepted
-    state :completed
 
     event :join, guard: :application_possible? do
       transitions from: :not_present,    to: :opened
@@ -158,7 +154,6 @@ class Event::GroupParticipation < ActiveRecord::Base
     event :progress, guard: :application_possible? do
       transitions from: :not_present,    to: :opened
       transitions from: :opened,         to: :terms_accepted
-      transitions from: :terms_accepted, to: :completed
     end
   end
   # rubocop:enable Layout/LineLength,Layout/ExtraSpacing

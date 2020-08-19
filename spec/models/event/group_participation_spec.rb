@@ -28,8 +28,7 @@ describe Event::GroupParticipation do
         :music_type_and_level_selected,
         :preferred_play_day_selected,
         :parade_music_selected,
-        :terms_accepted,
-        :completed
+        :terms_accepted
       ]
 
       expect(actual_states).to match_array(expected_states) # match items
@@ -41,8 +40,7 @@ describe Event::GroupParticipation do
       expected_states = [
         :not_present,
         :opened,
-        :terms_accepted,
-        :completed
+        :terms_accepted
       ]
 
       expect(actual_states).to match_array(expected_states) # match items
