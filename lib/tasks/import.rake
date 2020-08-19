@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # rubocop:disable Metrics/BlockLength
 namespace :import do
   desc 'Import more historic roles'
