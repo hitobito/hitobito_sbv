@@ -14,10 +14,41 @@ describe Event::GroupParticipation do
       )
     end
 
+    let(:secondary_states) { subject.aasm(:secondary).states.map(&:name) }
+    let(:primary_states) { subject.aasm(:primary).states.map(&:name) }
+
     it { is_expected.to have_state(:opened).on(:primary) }
     it { is_expected.to allow_event(:progress).on(:primary) }
     it { is_expected.to allow_event(:progress).on(:secondary) }
-    # more states?
+
+    [
+      :opened,
+      :joint_participation_selected,
+      :primary_group_selected,
+      :music_style_selected,
+      :music_type_and_level_selected,
+      :preferred_play_day_selected,
+      :parade_music_selected,
+      :terms_accepted,
+      :completed
+    ].each do |state|
+      it "has a #{state} state on primary" do
+        expect(primary_states).to include(state)
+      end
+    end
+
+    [
+      :not_present,
+      :opened,
+      :terms_accepted,
+      :completed
+    ].each do |state|
+      it "has a #{state} state on seconday" do
+        expect(secondary_states).to include(state)
+      end
+    end
+
+    # more state-specs?
     # it { is_expected.to allow_event(:select_music_type) }
     # it { is_expected.to have_state(:completed) }
   end
