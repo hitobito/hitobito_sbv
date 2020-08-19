@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ConcertsHelper
 
   def concerts_view_tabs(group)

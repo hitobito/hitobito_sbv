@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 #  Copyright (c) 2019, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
