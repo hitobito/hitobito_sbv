@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SongCountsHelper
 
   def song_counts_update_button(action)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :reactivate do
   task deleted: [:environment] do
     restore_list = Wagons.find('sbv').root.join('db/seeds/production/deleted.csv')

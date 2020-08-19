@@ -23,12 +23,12 @@ module HitobitoSbv
     config.to_prepare do # rubocop:disable Metrics/BlockLength
       # extend application classes here
       # models
-      Group.send        :include, Sbv::Group
-      Group.send        :include, Sbv::Group::NestedSet
-      Person.send       :include, Sbv::Person
-      Role.send         :include, Sbv::Role
-      Subscription.send :prepend, Sbv::Subscription
-      MailingList.send  :prepend, Sbv::MailingList
+      Group.include Sbv::Group
+      Group.include Sbv::Group::NestedSet
+      Person.include Sbv::Person
+      Role.include Sbv::Role
+      Subscription.prepend Sbv::Subscription
+      MailingList.prepend Sbv::MailingList
 
       ### controllers
       GroupsController.permitted_attrs += [:vereinssitz, :founding_year,
@@ -41,8 +41,8 @@ module HitobitoSbv
       PeopleController.permitted_attrs += [:profession, :correspondence_language,
                                            :personal_data_usage]
 
-      Person::HistoryController.send :prepend, Sbv::Person::HistoryController
-      DeviseController.send :include, HostnamedGroups
+      Person::HistoryController.prepend Sbv::Person::HistoryController
+      DeviseController.include HostnamedGroups
 
       ### helpers
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
@@ -56,31 +56,31 @@ module HitobitoSbv
         url: :help_path
       )
 
-      GroupsHelper.send :include, Sbv::GroupsHelper
-      GroupDecorator.send :prepend, Sbv::GroupDecorator
-      StandardFormBuilder.send :include, Sbv::StandardFormBuilder
+      GroupsHelper.include Sbv::GroupsHelper
+      GroupDecorator.prepend Sbv::GroupDecorator
+      StandardFormBuilder.include Sbv::StandardFormBuilder
 
       ### sheets
-      Sheet::Group.send :include, Sbv::Sheet::Group
-      Sheet::Event.send :include, Sbv::Sheet::Event
+      Sheet::Group.include Sbv::Sheet::Group
+      Sheet::Event.include Sbv::Sheet::Event
 
       ### jobs
-      Export::SubgroupsExportJob.send :prepend, Sbv::Export::SubgroupsExportJob
+      Export::SubgroupsExportJob.prepend Sbv::Export::SubgroupsExportJob
 
       ### mailers
-      Person::LoginMailer.send :prepend, Sbv::Person::LoginMailer
-      ApplicationMailer.send   :prepend, Sbv::ApplicationMailer
+      Person::LoginMailer.prepend Sbv::Person::LoginMailer
+      ApplicationMailer.prepend Sbv::ApplicationMailer
 
       ### domain
-      Export::Tabular::Groups::Row.send :include, Sbv::Export::Tabular::Groups::Row
-      Export::Tabular::Groups::List.send :prepend, Sbv::Export::Tabular::Groups::List
-      Export::Tabular::People::PeopleFull.send :include, Sbv::Export::Tabular::People::PeopleFull
+      Export::Tabular::Groups::Row.include Sbv::Export::Tabular::Groups::Row
+      Export::Tabular::Groups::List.prepend Sbv::Export::Tabular::Groups::List
+      Export::Tabular::People::PeopleFull.include Sbv::Export::Tabular::People::PeopleFull
 
-      MailRelay::Lists.send :prepend, Sbv::MailRelay::Lists
+      MailRelay::Lists.prepend Sbv::MailRelay::Lists
 
       ### abilities
-      RoleAbility.send :include, Sbv::RoleAbility
-      GroupAbility.send :include, Sbv::GroupAbility
+      RoleAbility.include Sbv::RoleAbility
+      GroupAbility.include Sbv::GroupAbility
 
       # festival_participation allows to manage your group's participation to a festival
       # uv_lohnsumme allows to manage the salary amount for the accident insurance

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -15,9 +17,9 @@ class CensusCalculator
     return unless census
 
     {
-      verein:            vereins_total,
+      verein: vereins_total,
       mitgliederverband: verbands_total(:mitgliederverband),
-      regionalverband:   verbands_total(:regionalverband)
+      regionalverband: verbands_total(:regionalverband)
     }
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Metrics/BlockLength
 namespace :import do
   desc 'Import more historic roles'
@@ -10,10 +12,10 @@ namespace :import do
 
     CSV.parse(role_csv.read, headers: true).each do |row|
       person_data = {
-        'email'      => row['Adresse e-mail principale'],
+        'email' => row['Adresse e-mail principale'],
         'first_name' => row['Prénom'],
-        'last_name'  => row['Nom'],
-        'birthday'   => row['Anniversaire']
+        'last_name' => row['Nom'],
+        'birthday' => row['Anniversaire']
       }
       person = migrator.load_person(person_data)
       if person.nil?
@@ -44,11 +46,11 @@ namespace :import do
       end
 
       Role.new(
-        person_id:  person.id,
-        group_id:   vereins_id,
+        person_id: person.id,
+        group_id: vereins_id,
         created_at: entry_date,
         deleted_at: exit_date,
-        type:       rolle
+        type: rolle
       ).save(validate: false)
     end
   end
@@ -87,27 +89,27 @@ namespace :import do
         parent = Group::Regionalverband.find_by(name: kreis_name)
 
         vereins_attrs = {
-          parent_id:         parent.id,
-          name:              choir['Verein'],
-          description:       choir['Status'],
-          email:             choir['E-Mail'],
-          address:           choir['Adresse'],
-          town:              choir['Ort'],
-          zip_code:          choir['PLZ'],
-          country:           choir['Land'],
-          vereinssitz:       choir['Ort']
+          parent_id: parent.id,
+          name: choir['Verein'],
+          description: choir['Status'],
+          email: choir['E-Mail'],
+          address: choir['Adresse'],
+          town: choir['Ort'],
+          zip_code: choir['PLZ'],
+          country: choir['Land'],
+          vereinssitz: choir['Ort']
         }
 
         person_attrs = {
-          first_name:               choir['Vorname'],
-          last_name:                choir['Nachname'],
-          birthday:                 '1900-01-01',
-          email:                    choir['E-Mail'],
-          address:                  choir['Adresse'],
-          town:                     choir['Ort'],
-          zip_code:                 choir['PLZ'],
-          country:                  choir['Land'],
-          correspondence_language:  sprachen.key(choir['Sprache der Person'].titlecase)
+          first_name: choir['Vorname'],
+          last_name: choir['Nachname'],
+          birthday: '1900-01-01',
+          email: choir['E-Mail'],
+          address: choir['Adresse'],
+          town: choir['Ort'],
+          zip_code: choir['PLZ'],
+          country: choir['Land'],
+          correspondence_language: sprachen.key(choir['Sprache der Person'].titlecase)
         }
 
         Group::Verein.seed_once(:name, :parent_id, vereins_attrs)
@@ -132,10 +134,10 @@ namespace :import do
 
           PhoneNumber.seed(
             :contactable_id, :contactable_type, :label,
-            contactable_id:    person.id,
-            contactable_type:  person.class.name,
-            label:             label,
-            number:            number
+            contactable_id: person.id,
+            contactable_type: person.class.name,
+            label: label,
+            number: number
           )
         end
 
