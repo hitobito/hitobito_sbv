@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 #  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
+
 # == Schema Information
 #
 # Table name: groups
@@ -44,7 +47,7 @@
 
 class Group::Verein < ::Group
 
-  HIDDEN_ROOT_VEREIN_NAME = 'Ehemalige aus Verlauf'.freeze
+  HIDDEN_ROOT_VEREIN_NAME = 'Ehemalige aus Verlauf'
 
   self.layer = true
   self.default_children = [Group::VereinVorstand,
@@ -69,7 +72,7 @@ class Group::Verein < ::Group
   has_many :concerts, dependent: :destroy
   has_many :song_counts, through: :concerts
 
-  has_many :group_participations, dependent: :destroy,
+  has_many :group_participations, dependent: :destroy, # rubocop:disable Rails/InverseOf there are two inverses
                                   class_name: 'Event::GroupParticipation',
                                   foreign_key: 'group_id'
 
