@@ -52,4 +52,27 @@ describe Concert do
       expect(concert.song_counts.first.song).to eq(songs(:girl))
     end
   end
+
+  context 'soft-deletion' do
+    subject(:concert) { concerts(:third_concert) }
+    let(:verein) { concert.verein }
+
+    it 'is supported' do
+      expect(concert.class.ancestors).to include(Paranoia)
+
+      expect do
+        concert.destroy!
+      end.to change { Concert.without_deleted.count }.by(-1)
+
+      expect(concert.reload.deleted_at).to_not be_nil
+    end
+
+    it 'by association' do
+      verein.children.each(&:destroy!) # ensure group can be deleted
+
+      expect do
+        verein.destroy!
+      end.to change { Concert.without_deleted.count }.by(-1)
+    end
+  end
 end

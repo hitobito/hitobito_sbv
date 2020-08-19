@@ -23,6 +23,10 @@
 #
 
 class Concert < ActiveRecord::Base
+
+  acts_as_paranoid
+  extend Paranoia::RegularScope
+
   belongs_to :song_census
   belongs_to :verein, class_name: 'Group::Verein'
   belongs_to :regionalverband, class_name: 'Group::Regionalverband'
@@ -31,6 +35,7 @@ class Concert < ActiveRecord::Base
   has_many :song_counts, dependent: :destroy
 
   after_initialize :set_readonly
+  before_destroy :allow_soft_deletion
 
   before_validation :set_name
   before_validation :set_verband_ids, on: :create
@@ -72,6 +77,12 @@ class Concert < ActiveRecord::Base
       self.mitgliederverband_id = verein.parent.parent.id
     when Group::Mitgliederverband
       self.mitgliederverband_id = verein.parent.id
+    end
+  end
+
+  def allow_soft_deletion
+    if changes.empty?
+      @readonly = false
     end
   end
 
