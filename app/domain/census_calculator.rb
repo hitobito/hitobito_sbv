@@ -17,9 +17,9 @@ class CensusCalculator
     return unless census
 
     {
-      verein:            vereins_total,
+      verein: vereins_total,
       mitgliederverband: verbands_total(:mitgliederverband),
-      regionalverband:   verbands_total(:regionalverband)
+      regionalverband: verbands_total(:regionalverband)
     }
   end
 
