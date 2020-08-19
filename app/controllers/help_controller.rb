@@ -7,7 +7,7 @@
 
 class HelpController < ApplicationController
 
-  HELP_TEXT = 'controller/help_text'.freeze
+  HELP_TEXT = 'controller/help_text'
 
   skip_authorization_check only: [:index]
 

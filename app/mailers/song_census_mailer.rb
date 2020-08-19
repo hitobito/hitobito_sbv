@@ -6,7 +6,7 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class SongCensusMailer < ApplicationMailer
-  SONG_CENSUS_REMINDER = 'cong_census_reminder'.freeze
+  SONG_CENSUS_REMINDER = 'cong_census_reminder'
 
   def reminder(recipient, verein)
     @recipient = recipient
