@@ -135,7 +135,9 @@ de:
       link:
         add_event/festival: Musikfest erstellen
     group_participations:
-      edit: "%{participation} bearbeiten"
+      edit:
+        title: "%{participation} bearbeiten"
+        thank_you: "Herzlichen Dank für die Anmeldung."
       actions_new:
         title: "Vereinsanmeldung"
       create:

@@ -1,52 +1,57 @@
 #main.row-fluid
   %article.span7
-    = render 'attrs'
+    - if entry.completed?(@participating_group)
+      %p
+        = t('.thank_you')
+      = render 'attrs'
 
-    = crud_form(path_args(entry),
-      cancel_url: group_our_festival_participations_path(entry.group, returning: true),
-      buttons_bottom: true, buttons_top: false) do |f|
-      - if @participating_group.present?
-        = f.hidden_field :participating_group, value: @participating_group.id
+    - else # not completed
+      = render 'attrs'
+      = crud_form(path_args(entry),
+        cancel_url: group_our_festival_participations_path(entry.group, returning: true),
+        buttons_bottom: true, buttons_top: false) do |f|
+        - if @participating_group.present?
+          = f.hidden_field :participating_group, value: @participating_group.id
 
-      - if entry.primary_opened?
-        = f.labeled :joint_participation do
-          = f.inline_radio_button(:joint_participation, true, t('global.yes'))
-          = f.inline_radio_button(:joint_participation, false, t('global.no'))
+        - if entry.primary_opened?
+          = f.labeled :joint_participation do
+            = f.inline_radio_button(:joint_participation, true, t('global.yes'))
+            = f.inline_radio_button(:joint_participation, false, t('global.no'))
 
-      - if entry.primary_joint_participation_selected?
-        = f.labeled_group_field :secondary_group
-        = f.labeled_boolean_field :secondary_group_is_primary
+        - if entry.primary_joint_participation_selected?
+          = f.labeled_group_field :secondary_group
+          = f.labeled_boolean_field :secondary_group_is_primary
 
-      - if entry.primary_or_only?(@participating_group)
-        - if entry.primary_primary_group_selected?
-          = f.labeled :music_style do
-            = f.select :music_style, music_styles_selection, prompt: ''
+        - if entry.primary_or_only?(@participating_group)
+          - if entry.primary_primary_group_selected?
+            = f.labeled :music_style do
+              = f.select :music_style, music_styles_selection, prompt: ''
 
-        - if entry.primary_music_style_selected?
-          = f.labeled :music_type do
-            = f.select :music_type, music_types_selection_for(entry.music_style), prompt: ''
+          - if entry.primary_music_style_selected?
+            = f.labeled :music_type do
+              = f.select :music_type, music_types_selection_for(entry.music_style), prompt: ''
 
-          = f.labeled :music_level do
-            = f.select :music_level, []
+            = f.labeled :music_level do
+              = f.select :music_level, []
 
 
-        - if entry.primary_music_type_and_level_selected?
-          = f.labeled :preferred_play_day_1 do
-            = f.select :preferred_play_day_1, play_day_selection_for(entry), prompt: ''
-          - if entry.may_prefer_two_days?
-            = f.labeled :preferred_play_day_2 do
-              = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
+          - if entry.primary_music_type_and_level_selected?
+            = f.labeled :preferred_play_day_1 do
+              = f.select :preferred_play_day_1, play_day_selection_for(entry), prompt: ''
+            - if entry.may_prefer_two_days?
+              = f.labeled :preferred_play_day_2 do
+                = f.select :preferred_play_day_2, play_day_selection_for(entry), prompt: ''
 
-        - if entry.primary_preferred_play_day_selected?
-          = f.labeled :parade_music do
-            = f.select :parade_music, music_types_selection_for('parade_music'), prompt: ''
+          - if entry.primary_preferred_play_day_selected?
+            = f.labeled :parade_music do
+              = f.select :parade_music, music_types_selection_for('parade_music'), prompt: ''
 
-        - if entry.primary_parade_music_selected?
-          = f.labeled_boolean_field :terms_accepted, caption: link_to_terms
+          - if entry.primary_parade_music_selected?
+            = f.labeled_boolean_field :terms_accepted, caption: link_to_terms
 
-      - else # participating as secondary
-        - if entry.secondary_opened?
-          = f.labeled_boolean_field :secondary_group_terms_accepted, caption: link_to_terms
+        - else # participating as secondary
+          - if entry.secondary_opened?
+            = f.labeled_boolean_field :secondary_group_terms_accepted, caption: link_to_terms
 
   %aside.span5
     %section
