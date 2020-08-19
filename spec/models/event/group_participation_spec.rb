@@ -52,6 +52,25 @@ describe Event::GroupParticipation do
     # it { is_expected.to have_state(:completed) }
   end
 
+  context 'has some state-machine helpers, which allow to' do
+    subject do
+      described_class.create(
+        event: events(:festival),
+        group: groups(:musikgesellschaft_aarberg),
+        primary_state: 'terms_accepted',
+        terms_accepted: true,
+      )
+    end
+
+    it 'check for completeness' do
+      is_expected.to have_state(:terms_accepted).on(:primary)
+      is_expected.to be_completed(subject.group)
+    end
+
+    it 'progress a statemachine'
+    it 'get the current state of a statemachine'
+  end
+
   context 'validates' do
     context 'preferred_play_days' do
       subject do

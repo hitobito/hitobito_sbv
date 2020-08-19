@@ -196,6 +196,15 @@ class Event::GroupParticipation < ActiveRecord::Base
     !joint_participation || state_machine_for(participating_group) == :primary
   end
 
+  def completed?(participating_group)
+    state_machine = aasm(state_machine_for(participating_group))
+
+    states  = state_machine.states.map(&:name)
+    current = state_machine.current_state
+
+    (states.last == current)
+  end
+
   def may_prefer_two_days?
     possible_day_numbers.size >= 2
   end
