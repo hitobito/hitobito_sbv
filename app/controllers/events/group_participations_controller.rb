@@ -30,11 +30,7 @@ class Events::GroupParticipationsController < CrudController
 
   decorates :event
 
-  skip_authorize_resource
-  skip_authorization_check
-
   before_action :participating_group, only: [:new, :edit]
-  before_action :authorize_resource
   around_save :update_state_machine
 
   def edit_stage
@@ -105,14 +101,6 @@ class Events::GroupParticipationsController < CrudController
       params['event_group_participation']['participating_group']
     elsif params['group_id'].to_i != entry.event.group_ids.first
       @group.id # loaded by calling "entry"
-    end
-  end
-
-  def authorize_resource
-    if entry.new_record? || action_name.to_sym == :index
-      authorize! action_name.to_sym, model_class
-    else
-      authorize! action_name.to_sym, entry
     end
   end
 
