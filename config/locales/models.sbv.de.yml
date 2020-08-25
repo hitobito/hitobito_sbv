@@ -249,6 +249,7 @@ de:
         correspondence_language: Korrespondenzsprache
         profession: Beruf
         active_years: Aktivjahre aktuell
+        active_role: aktive Mitgliedschaft
         prognostic_active_years: Aktivjahre Prognose
         personal_data_usage: Verwendung der Adressdaten
       group:
