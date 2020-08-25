@@ -109,10 +109,8 @@ class Events::GroupParticipationsController < CrudController
   end
 
   def authorize_resource
-    if participating_group.present?
-      authorize! :manage_festival_application, participating_group
-    elsif entry.new_record?
-      authorize! action_name.to_sym, @group
+    if entry.new_record? || action_name.to_sym == :index
+      authorize! action_name.to_sym, model_class
     else
       authorize! action_name.to_sym, entry
     end
