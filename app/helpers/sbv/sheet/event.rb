@@ -10,6 +10,10 @@ module Sbv::Sheet::Event
 
   included do
     tab 'events.group_participations.list',
-        :group_event_group_participations_path
+        :group_event_group_participations_path,
+        { if: lambda do |view, *args|
+          _group, event = args
+          view.can?(:edit, event)
+        end }
   end
 end
