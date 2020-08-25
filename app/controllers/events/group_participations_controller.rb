@@ -101,6 +101,8 @@ class Events::GroupParticipationsController < CrudController
       params['event_group_participation']['participating_group']
     elsif params['group_id'].to_i != entry.event.group_ids.first
       @group.id # loaded by calling "entry"
+    else
+      entry.group_id
     end
   end
 
