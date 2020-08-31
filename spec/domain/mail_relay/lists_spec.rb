@@ -11,8 +11,7 @@ describe MailRelay::Lists do
 
   let(:message) do
     mail = Mail.new(File.read(Rails.root.join('spec', 'fixtures', 'email', 'regular.eml')))
-    mail.header['X-Envelope-To'] = nil
-    mail.header['X-Envelope-To'] = 'dummy'
+    mail.header['X-Original-To'] = 'dummy'
     mail.from = people(:admin).email
     mail
   end
