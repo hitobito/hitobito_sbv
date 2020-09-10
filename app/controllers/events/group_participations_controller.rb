@@ -31,6 +31,8 @@ class Events::GroupParticipationsController < CrudController
   decorates :event
 
   before_action :participating_group, only: [:new, :edit]
+  prepend_before_action :correct_nesting_in_new_entry, only: [:new, :create]
+  prepend_before_action :entry, only: ACTIONS + [:edit_stage]
   around_save :update_state_machine
 
   def edit_stage
@@ -92,6 +94,13 @@ class Events::GroupParticipationsController < CrudController
 
   def participating_group
     @participating_group ||= Group.find_by(id: participating_group_id).try(:layer_group)
+  end
+
+  def correct_nesting_in_new_entry
+    if entry.new_record?
+      entry.group_id ||= params['participating_group'] ||
+                         params['event_group_participation']['group_id']
+    end
   end
 
   def participating_group_id # rubocop:disable Metrics/AbcSize any refactoring inside the methods makes it harder to understand

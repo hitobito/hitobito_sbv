@@ -39,6 +39,7 @@ describe Event::GroupParticipationAbility do
 
       it { is_expected.to     be_able_to(:show,    group_participation) }
       it { is_expected.to     be_able_to(:index,   group_participation.class) }
+      it { is_expected.to_not be_able_to(:new,     new_group_participation) }
       it { is_expected.to_not be_able_to(:create,  new_group_participation) }
       it { is_expected.to     be_able_to(:edit,    group_participation) }
       it { is_expected.to     be_able_to(:edit_stage, group_participation) }
@@ -51,6 +52,7 @@ describe Event::GroupParticipationAbility do
       let(:group_role_class) { Group::Verein::Admin }
 
       it { is_expected.to     be_able_to(:show,    group_participation) }
+      it { is_expected.to     be_able_to(:new,     new_group_participation) }
       it { is_expected.to     be_able_to(:create,  new_group_participation) }
       it { is_expected.to     be_able_to(:edit,    group_participation) }
       it { is_expected.to     be_able_to(:edit_stage, group_participation) }
@@ -63,6 +65,7 @@ describe Event::GroupParticipationAbility do
       let(:group_role_class) { Group::Verein::Admin }
 
       it { is_expected.to_not be_able_to(:show,    group_participation) }
+      it { is_expected.to_not be_able_to(:new,     new_group_participation) }
       it { is_expected.to_not be_able_to(:create,  new_group_participation) }
       it { is_expected.to_not be_able_to(:edit,    group_participation) }
       it { is_expected.to_not be_able_to(:edit_stage, group_participation) }
@@ -81,6 +84,7 @@ describe Event::GroupParticipationAbility do
 
       it { is_expected.to     be_able_to(:show,    group_participation) }
       it { is_expected.to     be_able_to(:index,   group_participation.class) }
+      it { is_expected.to_not be_able_to(:new,     new_group_participation) }
       it { is_expected.to_not be_able_to(:create,  new_group_participation) }
       it { is_expected.to     be_able_to(:edit,    group_participation) }
       it { is_expected.to     be_able_to(:edit_stage, group_participation) }
@@ -93,6 +97,7 @@ describe Event::GroupParticipationAbility do
       let(:group_role_class) { Group::Verein::Admin }
 
       it { is_expected.to     be_able_to(:show,    group_participation) }
+      it { is_expected.to_not be_able_to(:new,     new_group_participation) }
       it { is_expected.to_not be_able_to(:create,  new_group_participation) }
       it { is_expected.to_not be_able_to(:edit,    group_participation) }
       it { is_expected.to_not be_able_to(:edit_stage, group_participation) }
@@ -105,6 +110,7 @@ describe Event::GroupParticipationAbility do
       let(:group_role_class) { Group::Verein::Admin }
 
       it { is_expected.to_not be_able_to(:show,    group_participation) }
+      it { is_expected.to_not be_able_to(:new,     new_group_participation) }
       it { is_expected.to_not be_able_to(:create,  new_group_participation) }
       it { is_expected.to_not be_able_to(:edit,    group_participation) }
       it { is_expected.to_not be_able_to(:edit_stage, group_participation) }
