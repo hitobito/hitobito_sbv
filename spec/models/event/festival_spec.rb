@@ -11,6 +11,12 @@ describe Event::Festival do
   let(:festival) { events(:festival) }
   let(:group) { groups(:musikgesellschaft_aarberg) }
 
+  it 'has prerequisites' do
+    do_not_participate(group, festival)
+
+    expect(described_class.upcoming).to be_one
+  end
+
   it 'knows which events are participatable' do
     do_not_participate(group, festival)
 
