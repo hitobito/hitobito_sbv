@@ -312,6 +312,7 @@ it:
         correspondence_language: Lingua di corrispondenza
         profession: Lavoro
         active_years: Anni attivi fino ad oggi
+        active_role: ""
         prognostic_active_years: Stima anni attivi
         personal_data_usage: Utilizzo dettagli indirizzi
       group:
@@ -350,8 +351,9 @@ it:
         secondary_parent_id: secondario
         tertiary_parent_id: altri
         hostname: Hostname
-        buv_lohnsumme: ""
-        nbuv_lohnsumme: ""
+        buv_lohnsumme: Salario AIP
+        nbuv_lohnsumme: Salario AINP
+        contact_email: ""
       role:
         dates: Dati
         created_at: Entrata
@@ -362,8 +364,8 @@ it:
               song_census: Può gestire annunci SUISA
               layer_full: "A questo livello può leggere tutto e scrivere. \nA questo livello può creare eventi e liste."
               group_full: "Leggere e scrivere nel gruppo.\nCreare eventi e liste nel gruppo."
-              festival_participation: ""
-              uv_lohnsumme: ""
+              festival_participation: Può iscrivere la società a Feste di musica ed elaborare l’iscrizione.
+              uv_lohnsumme: Può gestire il salario AINF.
       song:
         title: Titolo
         composed_by: Compositore
@@ -443,6 +445,7 @@ it:
           attributes:
             base:
               date_preference_missing: Deve essere indicato almeno un giorno
+              date_preference_incomplete: ""
             preferred_play_day_1:
               impossible: non disponibile
             preferred_play_day_2:

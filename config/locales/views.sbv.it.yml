@@ -35,13 +35,13 @@ it:
     submit: inoltrare modello elenco
     submit_button:
       label:
-        submit: ""
-        submitted: ""
-        none: ""
+        submit: Inviare la lista
+        submitted: Lista inviata
+        none: Inviare la lista
       tooltip:
-        submit: ""
-        submitted: ""
-        none: ""
+        submit: La lista può essere inviata.
+        submitted: La lista è già stata inviata.
+        none: Non ci sono liste da inviare.
 
     remind:
       success: "Promemoria inoltrato con succeso a %{verein_count}delle società bandistiche"
@@ -74,7 +74,7 @@ it:
 
   groups:
     actions_show_sbv:
-      export_lohnsummen: ""
+      export_lohnsummen: Esportare i salari AINF
 
   roles:
     info:
@@ -100,9 +100,13 @@ it:
 
 
   dropdown/song_counts:
-      button: Esportazione
-      csv: CSV
-      xlsx: Excel
+    button: Esportazione
+    csv: CSV
+    xlsx: Excel
+  dropdown/group_participations:
+    button: ""
+    csv: ""
+    xlsx: ""
   concerts:
     submit:
       flash:
@@ -114,9 +118,17 @@ it:
       concerts: Esecuzioni
       summary: Riassunto
 
+  events/group_participations:
+    export_enqueued: ''
+
   events:
+    global:
+      link:
+        add_event/festival: ""
     group_participations:
-      edit: "%{partecipazione} elaborare"
+      edit:
+        title: ""
+        thank_you: ""
       actions_new:
         title: "Iscrizione della società"
       create:
