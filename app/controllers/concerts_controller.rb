@@ -9,8 +9,7 @@ class ConcertsController < SimpleCrudController
   include YearBasedPaging
 
   self.nesting = Group
-  self.permitted_attrs = [:name, :performed_at, :year, :verein_id, :song_census_id,
-                          :reason,
+  self.permitted_attrs = [:name, :performed_at, :year, :verein_id, :song_census_id, :reason,
                           song_counts_attributes: [
                             :id,
                             :count,
@@ -53,13 +52,7 @@ class ConcertsController < SimpleCrudController
   end
 
   def list_entries
-    list = super.includes(song_counts: :song).includes(:song_census).in(year)
-
-    if list.present? && list.any?(&:played?)
-      list.where(reason: nil)
-    else
-      list
-    end
+    super.includes(song_counts: :song).includes(:song_census).in(year)
   end
 
   def census
