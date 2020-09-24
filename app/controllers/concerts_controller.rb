@@ -30,7 +30,9 @@ class ConcertsController < SimpleCrudController
   end
 
   def submit
-    submitted = CensusSubmission.new(parent, census).submit
+    submitted = with_callbacks(:save) do
+      CensusSubmission.new(parent, census).submit
+    end
     respond_with(parent, success: submitted, location: group_concerts_path(parent))
   end
 
