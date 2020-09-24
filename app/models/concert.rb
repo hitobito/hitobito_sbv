@@ -51,6 +51,9 @@ class Concert < ActiveRecord::Base
   i18n_enum :reason, REASONS, scopes: true, queries: true
 
   scope :in, ->(year) { where(year: year) }
+  scope :not_played, -> { where.not(reason: nil) }
+  scope :played, -> { where(reason: nil) }
+
   default_scope { order(performed_at: :desc) }
 
   def to_s

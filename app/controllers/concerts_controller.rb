@@ -21,6 +21,8 @@ class ConcertsController < SimpleCrudController
 
   helper_method :census
 
+  after_create :remove_existing_unplayed_concerts
+
   def new
     entry.song_counts = parent.last_played_song_ids.map do |id|
       SongCount.new(song_id: id, count: 0)
@@ -35,6 +37,10 @@ class ConcertsController < SimpleCrudController
   end
 
   private
+
+  def remove_existing_unplayed_concerts
+    (entry.verein.concerts.not_played - [entry]).each(&:really_destroy)
+  end
 
   def assign_attributes
     super

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -25,22 +25,27 @@ class CensusCalculator
 
   def vereins_total
     census
-      .song_counts
-      .joins(:concert)
+      .concerts
       .where(concerts: { verein_id: group.descendants.where(type: Group::Verein) })
-      .group('concerts.verein_id').count
+      .distinct
+      .pluck(:verein_id, :reason)
+      .each_with_object({}) do |(verein, reason), memo|
+        next if memo[verein].present? # any reason
+
+        memo[verein] = reason || 'played'
+      end
   end
 
   private
 
   def verbands_total(type)
     census
-      .song_counts
+      .concerts
       .where(concerts: { verein_id: vereins_total.keys })
       .distinct
       .pluck(:verein_id, :"#{type}_id")
       .each_with_object(Hash.new([])) do |(verein, verband), memo|
-      memo[verband] += [verein]
-    end
+        memo[verband] += [verein]
+      end
   end
 end

@@ -133,6 +133,18 @@ describe Concert do
       expect(new_concert.reason_label).to eq reason('_nil')
     end
 
+    context 'comes with scopes' do # whose concrete results depend on fixtures. sorry.
+      it 'to select played/normale concerts' do
+        expect(described_class).to respond_to(:played)
+        expect(described_class.played.count).to be 6
+      end
+
+      it 'to select not played/placeholder concerts' do
+        expect(described_class).to respond_to(:not_played)
+        expect(described_class.not_played.count).to be 1
+      end
+    end
+
     def reason(key)
       I18n.t(key, scope: "activerecord.attributes.concert.reasons")
     end
