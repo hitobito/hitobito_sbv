@@ -32,7 +32,7 @@ class CensusCalculator
       .each_with_object({}) do |(verein, reason), memo|
         next if memo[verein].present? # any reason
 
-        memo[verein] = reason || 'played'
+        memo[verein] = reason || 'submitted' # coupling with view/i18n
       end
   end
 

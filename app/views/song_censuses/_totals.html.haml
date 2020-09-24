@@ -31,4 +31,4 @@
     - t.col do |verein|
       = link_to(verein.name, group_song_censuses_path(verein, year: year))
     - t.col do |verein|
-      = t(@total[:verein][verein.id] ? '.submitted': '.not_submitted')
+      = t(".#{@total[:verein][verein.id].presence || 'not_submitted'}")
