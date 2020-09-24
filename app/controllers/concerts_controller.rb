@@ -51,7 +51,7 @@ class ConcertsController < SimpleCrudController
   end
 
   def list_entries
-    list = super.includes(song_counts: :song).includes(:song_census).in(year).without_deleted
+    list = super.includes(song_counts: :song).includes(:song_census).in(year)
 
     if list.present? && list.any?(&:played?)
       list.where(reason: nil)

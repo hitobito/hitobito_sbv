@@ -25,7 +25,6 @@
 class Concert < ActiveRecord::Base
 
   acts_as_paranoid
-  extend Paranoia::RegularScope
 
   belongs_to :song_census
   belongs_to :verein, class_name: 'Group::Verein'
