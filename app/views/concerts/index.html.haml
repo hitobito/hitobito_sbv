@@ -4,5 +4,22 @@
 = render 'shared/page_per_year'
 
 #main.row-fluid.song-counts
-  .list
-    = render 'list', list: @list
+  - if entries.blank?
+    = form_for([@group, Concert.new], method: :post, class: 'no-concerts') do |f|
+      %p
+        = t('.no_concerts_yet')
+      - Concert.reason_labels.each do |reason, desc|
+        %p
+          = f.label(:"reason_#{reason}", class: 'radio') do
+            = f.radio_button(:reason, reason)
+            = desc
+
+      = f.hidden_field :verein_id, value: @group.id
+      = f.hidden_field :year, value: year
+      = f.hidden_field :performed_at, value: Date.current
+      %p
+        = button_tag(ti('button.save'), class: 'btn btn-primary', data: { disable_with: ti('button.save') })
+
+  - else
+    .list
+      = render 'list'

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -10,6 +10,7 @@ class ConcertsController < SimpleCrudController
 
   self.nesting = Group
   self.permitted_attrs = [:name, :performed_at, :year, :verein_id, :song_census_id,
+                          :reason,
                           song_counts_attributes: [
                             :id,
                             :count,
@@ -35,12 +36,24 @@ class ConcertsController < SimpleCrudController
 
   private
 
+  def assign_attributes
+    super
+    entry.name ||= entry.reason_label
+    nil
+  end
+
   def find_entry
     model_scope.includes(song_counts: :song).find(params[:id])
   end
 
   def list_entries
-    super.includes(song_counts: :song).includes(:song_census).in(year)
+    list = super.includes(song_counts: :song).includes(:song_census).in(year).without_deleted
+
+    if list.present? && list.any?(&:played?)
+      list.where(reason: nil)
+    else
+      list
+    end
   end
 
   def census
