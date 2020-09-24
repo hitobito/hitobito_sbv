@@ -30,16 +30,14 @@ class ConcertsController < SimpleCrudController
   end
 
   def submit
-    submitted = with_callbacks(:create, :save) do
-      CensusSubmission.new(parent, census).submit
-    end
+    submitted = CensusSubmission.new(parent, census).submit
     respond_with(parent, success: submitted, location: group_concerts_path(parent))
   end
 
   private
 
   def remove_existing_unplayed_concerts
-    (entry.verein.concerts.not_played - [entry]).each(&:really_destroy)
+    (entry.verein.concerts.not_played - [entry]).each(&:really_destroy!)
   end
 
   def assign_attributes
