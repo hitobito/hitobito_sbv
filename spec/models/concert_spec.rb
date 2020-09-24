@@ -85,4 +85,56 @@ describe Concert do
       end.to change { Concert.without_deleted.count }.by(-1)
     end
   end
+
+  context 'reason' do
+    subject(:concert) { concerts(:six_concert) }
+
+    it 'can be joint_play' do
+      concert.reason = 'joint_play'
+
+      is_expected.to be_joint_play
+      expect(concert.reason).to eq 'joint_play'
+      expect(concert.reason_label).to eq reason('joint_play')
+
+      is_expected.to be_valid
+    end
+
+    it 'can be not_playable' do
+      concert.reason = 'not_playable'
+
+      is_expected.to be_not_playable
+      expect(concert.reason).to eq 'not_playable'
+      expect(concert.reason_label).to eq reason('not_playable')
+
+      is_expected.to be_valid
+    end
+
+    it 'can be otherwise_billed' do
+      concert.reason = 'otherwise_billed'
+
+      is_expected.to be_otherwise_billed
+      expect(concert.reason).to eq 'otherwise_billed'
+      expect(concert.reason_label).to eq reason('otherwise_billed')
+
+      is_expected.to be_valid
+    end
+
+    it 'cannot be something else' do
+      expect do
+        concert.reason = 'something else'
+      end.to change(concert, :valid?).from(true).to(false)
+    end
+
+    it 'is played by default' do
+      new_concert = described_class.new
+
+      expect(new_concert).to be_played
+      expect(new_concert.reason).to be_nil
+      expect(new_concert.reason_label).to eq reason('_nil')
+    end
+
+    def reason(key)
+      I18n.t(key, scope: "activerecord.attributes.concert.reasons")
+    end
+  end
 end

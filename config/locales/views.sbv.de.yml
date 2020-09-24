@@ -117,6 +117,8 @@ de:
     csv: CSV
     xlsx: Excel
   concerts:
+    index:
+      no_concerts_yet: "Um die SUISA-Meldeliste einzureichen müssen Sie mindestens eine Aufführung hinzufügen oder eine alternative Erledigung wählen:"
     submit:
       flash:
         success: Meldeliste eingereicht.

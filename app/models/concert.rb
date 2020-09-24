@@ -46,11 +46,19 @@ class Concert < ActiveRecord::Base
 
   accepts_nested_attributes_for :song_counts, allow_destroy: true
 
+  include I18nEnums
+  REASONS = %w(joint_play not_playable otherwise_billed).freeze
+  i18n_enum :reason, REASONS, scopes: true, queries: true
+
   scope :in, ->(year) { where(year: year) }
   default_scope { order(performed_at: :desc) }
 
   def to_s
     name
+  end
+
+  def played?
+    self[:reason].nil?
   end
 
   private
