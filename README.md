@@ -8,26 +8,26 @@ of the Schweizer Blasmusikverband.
 
 * Generalverband
   * Generalverband
-    * Administrator: [:layer_and_below_full, :admin, :impersonation, :finance]
+    * Administrator: [:layer_and_below_full, :admin, :impersonation, :finance, :uv_lohnsumme]
 * Dachverband
   * Dachverband
-    * Administrator: [:group_and_below_full, :admin, :impersonation, :finance, :song_census]
+    * Administrator: [:layer_and_below_full, :admin, :impersonation, :finance, :song_census, :uv_lohnsumme]
     * Verantwortlicher SUISA: [:group_read, :song_census]
   * Geschäftsstelle
-    * Geschäftsführung: [:layer_and_below_full, :contact_data, :impersonation]
-    * Mitarbeiter: [:layer_and_below_full, :contact_data, :approve_applications, :finance]
-    * Hilfe: [:layer_and_below_read, :contact_data]
+    * Geschäftsführung: [:layer_and_below_full, :impersonation]
+    * Mitarbeiter: [:layer_and_below_full, :approve_applications, :finance]
+    * Hilfe: [:layer_and_below_read]
   * Verbandsleitung
-    * Präsident: [:layer_full, :layer_and_below_read, :contact_data]
-    * Vizepräsident: [:layer_and_below_read, :contact_data]
-    * Finanzchef: [:layer_and_below_read, :contact_data, :finance]
-    * Veteranenchef: [:layer_and_below_read, :contact_data]
-    * Mitglied: [:layer_and_below_read, :contact_data]
+    * Präsident: [:layer_full, :layer_and_below_read]
+    * Vizepräsident: [:layer_and_below_read]
+    * Finanzchef: [:layer_and_below_read, :finance]
+    * Veteranenchef: [:layer_and_below_read]
+    * Mitglied: [:layer_and_below_read]
   * Musikkommission
     * Präsident: [:layer_read, :group_and_below_full]
     * Mitglied: [:layer_read]
   * Arbeitsgruppe
-    * Leitung: [:layer_read, :contact_data]
+    * Leitung: [:layer_read]
     * Mitglied: [:group_and_below_read]
   * Kontakte
     * Adressverwaltung: [:group_and_below_full]
@@ -41,23 +41,23 @@ of the Schweizer Blasmusikverband.
     * CISM Veteran: []
 * Mitgliederverband
   * Mitgliederverband
-    * Administrator: [:layer_and_below_full]
+    * Administrator: [:layer_and_below_full, :uv_lohnsumme]
     * Verantwortlicher SUISA: [:group_read, :song_census]
   * Geschäftsstelle
-    * Geschäftsführung: [:layer_and_below_full, :contact_data, :finance]
-    * Mitarbeiter: [:layer_and_below_full, :contact_data, :approve_applications, :finance]
-    * Hilfe: [:layer_and_below_read, :contact_data]
+    * Geschäftsführung: [:layer_and_below_full, :finance]
+    * Mitarbeiter: [:layer_and_below_full, :approve_applications, :finance]
+    * Hilfe: [:layer_and_below_read]
   * Vorstand
-    * Präsident: [:layer_full, :layer_and_below_read, :contact_data]
-    * Vizepräsident: [:layer_and_below_read, :contact_data]
-    * Kassier: [:layer_and_below_read, :contact_data, :finance]
-    * Veteranenchef: [:layer_and_below_read, :contact_data]
-    * Mitglied: [:layer_and_below_read, :contact_data]
+    * Präsident: [:layer_full, :layer_and_below_read]
+    * Vizepräsident: [:layer_and_below_read]
+    * Kassier: [:layer_and_below_read, :finance]
+    * Veteranenchef: [:layer_and_below_read]
+    * Mitglied: [:layer_and_below_read]
   * Musikkommission
     * Präsident: [:layer_read, :group_and_below_full]
     * Mitglied: [:layer_read]
   * Arbeitsgruppe
-    * Leitung: [:layer_read, :contact_data]
+    * Leitung: [:layer_read]
     * Mitglied: [:group_and_below_read]
   * Kontakte
     * Adressverwaltung: [:group_and_below_full]
@@ -70,36 +70,36 @@ of the Schweizer Blasmusikverband.
     * Administrator: [:layer_and_below_full]
     * Verantwortlicher SUISA: [:group_read, :song_census]
   * Geschäftsstelle
-    * Geschäftsführung: [:layer_and_below_full, :contact_data, :finance]
-    * Mitarbeiter: [:layer_and_below_full, :contact_data, :approve_applications, :finance]
-    * Hilfe: [:layer_and_below_read, :contact_data]
+    * Geschäftsführung: [:layer_and_below_full, :finance]
+    * Mitarbeiter: [:layer_and_below_full, :approve_applications, :finance]
+    * Hilfe: [:layer_and_below_read]
   * Vorstand
-    * Präsident: [:layer_full, :layer_and_below_read, :contact_data]
-    * Vizepräsident: [:layer_and_below_read, :contact_data]
-    * Kassier: [:layer_and_below_read, :contact_data, :finance]
-    * Veteranenchef: [:layer_and_below_read, :contact_data]
-    * Mitglied: [:layer_and_below_read, :contact_data]
+    * Präsident: [:layer_full, :layer_and_below_read]
+    * Vizepräsident: [:layer_and_below_read]
+    * Kassier: [:layer_and_below_read, :finance]
+    * Veteranenchef: [:layer_and_below_read]
+    * Mitglied: [:layer_and_below_read]
   * Musikkommission
     * Präsident: [:layer_read, :group_and_below_full]
     * Mitglied: [:layer_read]
   * Arbeitsgruppe
-    * Leitung: [:layer_read, :contact_data]
+    * Leitung: [:layer_read]
     * Mitglied: [:group_and_below_read]
   * Kontakte
     * Adressverwaltung: [:group_and_below_full]
     * Kontakt: []
 * Verein
   * Verein
-    * Administrator: [:layer_and_below_full]
-    * DirigentIn: [:contact_data]
+    * Administrator: [:layer_and_below_full, :festival_participation, :uv_lohnsumme]
+    * DirigentIn: []
     * Verantwortlicher SUISA: [:group_read, :song_census]
   * Vorstand
-    * Präsident: [:layer_full, :layer_and_below_read, :contact_data]
-    * Vizepräsident: [:layer_and_below_read, :contact_data]
-    * Kassier: [:layer_and_below_read, :contact_data, :finance]
-    * Veteranenchef: [:layer_and_below_read, :contact_data]
-    * Materialverwaltung: [:layer_and_below_read, :contact_data]
-    * Mitglied: [:layer_and_below_read, :contact_data]
+    * Präsident: [:layer_full, :layer_and_below_read]
+    * Vizepräsident: [:layer_and_below_read]
+    * Kassier: [:layer_and_below_read, :finance]
+    * Veteranenchef: [:layer_and_below_read]
+    * Materialverwaltung: [:layer_and_below_read]
+    * Mitglied: [:layer_and_below_read]
   * Musikkommission
     * Präsident: [:layer_read, :group_and_below_full]
     * Mitglied: [:layer_read]
@@ -109,12 +109,11 @@ of the Schweizer Blasmusikverband.
     * Passivmitglied: []
     * Ehrenmitglied: []
   * Arbeitsgruppe
-    * Leitung: [:layer_read, :contact_data]
+    * Leitung: [:layer_read]
     * Mitglied: [:group_and_below_read]
   * Kontakte
     * Adressverwaltung: [:group_and_below_full]
     * Kontakt: []
-
 
 (Output of rake app:hitobito:roles)
 
