@@ -81,6 +81,7 @@ module HitobitoSbv
       ### abilities
       RoleAbility.include Sbv::RoleAbility
       GroupAbility.include Sbv::GroupAbility
+      PersonAbility.include Sbv::PersonAbility
 
       # festival_participation allows to manage your group's participation to a festival
       # uv_lohnsumme allows to manage the salary amount for the accident insurance
