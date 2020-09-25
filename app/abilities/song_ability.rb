@@ -1,7 +1,6 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -14,7 +13,7 @@ class SongAbility < AbilityDsl::Base
   end
 
   on(SongCount) do
-    permission(:song_census).may(:manage).in_verein
+    permission(:song_census).may(:manage).in_verein_or_mitgliederverband
     permission(:layer_and_below_read).may(:read).in_verein
   end
 
@@ -28,15 +27,31 @@ class SongAbility < AbilityDsl::Base
   on(Group) do
     permission(:song_census).may(:index_concerts).in_layer
     permission(:song_census).may(:index_song_counts).in_layer
-    permission(:song_census).may(:manage_song_census).in_layer
+    permission(:song_census).may(:manage_song_census).in_layer_or_below_if_mitgliederverband
   end
 
-  def in_same_group
-    permission_in_group?(subject.id)
+  def in_verein_or_mitgliederverband
+    if role_type?(Group::Mitgliederverband::SuisaAdmin)
+      in_verein || in_mitgliederverband
+    else
+      in_verein
+    end
+  end
+
+  def in_layer_or_below_if_mitgliederverband
+    if role_type?(Group::Mitgliederverband::SuisaAdmin)
+      in_layer_or_below
+    else
+      in_layer
+    end
   end
 
   def in_verein
     permission_in_group?(subject.verein_id)
+  end
+
+  def in_mitgliederverband
+    permission_in_group?(subject.concert.mitgliederverband_id)
   end
 
   def in_layer
@@ -45,8 +60,14 @@ class SongAbility < AbilityDsl::Base
     end
   end
 
+  def in_layer_or_below
+    in_layer ||
+      permission_in_layers?(subject.layer_hierarchy.collect(&:id)) ||
+      permission_in_groups?(subject.local_hierarchy.collect(&:id))
+  end
+
   def in_dachverband
-    user.groups_with_permission(:song_census).include?(Group::Root.first)
+    user.groups_with_permission(:song_census).include?(Group::Root.all)
   end
 
 end
