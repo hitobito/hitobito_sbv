@@ -30,6 +30,12 @@ module HitobitoSbv
       Subscription.prepend Sbv::Subscription
       MailingList.prepend Sbv::MailingList
 
+      unused_event_fields = [
+        :motto, :signature, :signature_confirmation, :signature_confirmation_text
+      ]
+      Event.used_attributes         -= unused_event_fields
+      Event::Course.used_attributes -= (unused_event_fields + [:requires_approval])
+
       ### controllers
       GroupsController.permitted_attrs += [:vereinssitz, :founding_year,
                                            :correspondence_language, :besetzung,
