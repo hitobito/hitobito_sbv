@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
 #  hitobito and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -177,14 +179,32 @@ describe GroupAbility do
       let(:checked_group)    { groups(:musikgesellschaft_alterswil) }
 
       it { is_expected.not_to be_able_to(:destroy, checked_person) }
+    end
 
-      context 'as member of a group' do
-        let(:group_role_class) { Group::VereinMitglieder::Mitglied }
-        let(:group)            { groups(:mitglieder_mg_aarberg)}
-        let(:checked_group)    { group.layer_group }
+    context 'as member of a group' do
+      let(:group_role_class) { Group::VereinMitglieder::Mitglied }
+      let(:group)            { groups(:mitglieder_mg_aarberg)}
+      let(:checked_group)    { group.layer_group }
 
-        it { is_expected.not_to be_able_to(:destroy, checked_person) }
-      end
+      it { is_expected.not_to be_able_to(:destroy, checked_person) }
+    end
+  end
+
+  describe 'show deleted_subgroups' do
+    context 'as admin of group' do
+      let(:group_role_class) { Group::Verein::Admin }
+      let(:group)            { groups(:musikgesellschaft_aarberg) }
+      let(:checked_group)    { group }
+
+      it { is_expected.to be_able_to(:deleted_subgroups, checked_group) }
+    end
+
+    context 'as admin of different group' do
+      let(:group_role_class) { Group::Verein::Admin }
+      let(:group)            { groups(:musikgesellschaft_alterswil) }
+      let(:checked_group)    { groups(:musikgesellschaft_aarberg) }
+
+      it { is_expected.not_to be_able_to(:deleted_subgroups, checked_group) }
     end
   end
 end

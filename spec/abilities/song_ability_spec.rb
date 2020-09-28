@@ -12,13 +12,17 @@ describe SongAbility do
   subject { ability }
 
   let(:ability) { Ability.new(role.person.reload) }
-  let(:concert) { concerts(:third_concert) }
-  let(:verein)  { groups(:musikgesellschaft_alterswil) }
+  let(:concert) do
+    concerts(:second_concert).tap do |concert|
+      concert.send :set_verband_ids
+    end
+  end
+  let(:verein)  { groups(:musikgesellschaft_aarberg) }
   let(:group)   { groups(:bernischer_kantonal_musikverband) }
 
   [
-    %w(Group::Verein::Admin musikgesellschaft_alterswil),
-    %w(Group::VereinMitglieder::Mitglied mitglieder_43)
+    %w(Group::Verein::Admin musikgesellschaft_aarberg),
+    %w(Group::VereinMitglieder::Mitglied mitglieder_mg_aarberg)
   ].each do |role, group|
     context role do
     let(:role) { Fabricate(role.to_sym, group: groups(group)) }
@@ -47,10 +51,9 @@ describe SongAbility do
     end
   end
 
-  context 'suisa_admin' do
-    let(:role) { Fabricate(Group::Verein::SuisaAdmin.name.to_sym, group: verein) }
-
+  describe 'suisa_admin' do
     context Song do
+      let(:role) { Fabricate(Group::Verein::SuisaAdmin.name.to_sym, group: verein) }
       %w(create show).each do |action|
         it "may #{action} Song" do
           is_expected.to be_able_to(action.to_sym, Song.first)
@@ -70,7 +73,6 @@ describe SongAbility do
     end
 
     context SongCount do
-
       context 'layer above' do
         let(:role) { Fabricate("#{verein.parent.class}::SuisaAdmin".to_sym,
                                group: verein.parent) }
@@ -81,6 +83,23 @@ describe SongAbility do
       end
 
       context 'in same verein' do
+        let(:role) { Fabricate(Group::Verein::SuisaAdmin.name.to_sym, group: verein) }
+
+        it 'may index_song_counts in verein' do
+          is_expected.to be_able_to(:index_song_counts, verein)
+        end
+
+        it 'may manage SongCounts owned by verein' do
+          is_expected.to be_able_to(:manage, concert.song_counts.new)
+        end
+
+        it 'may submit SongCounts owned by verein' do
+          is_expected.to be_able_to(:submit, concert.song_counts.new)
+        end
+      end
+
+      context 'in groups below' do
+        let(:role) { Fabricate(Group::Mitgliederverband::SuisaAdmin.name.to_sym, group: group) }
 
         it 'may index_song_counts in verein' do
           is_expected.to be_able_to(:index_song_counts, verein)
@@ -110,7 +129,10 @@ describe SongAbility do
       it 'may not manage_song_census in layer above' do
         is_expected.not_to be_able_to(:manage_song_census, groups(:hauptgruppe_1))
       end
-    end
 
+      it 'may manage_song_census in groups below' do
+        is_expected.to be_able_to(:manage_song_census, verein)
+      end
+    end
   end
 end

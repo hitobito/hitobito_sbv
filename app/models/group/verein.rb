@@ -127,7 +127,7 @@ class Group::Verein < ::Group
   end
 
   class Conductor < Role
-    self.permissions = [:contact_data]
+    self.permissions = []
   end
 
   class SuisaAdmin < Sbv::Role::SuisaAdmin
