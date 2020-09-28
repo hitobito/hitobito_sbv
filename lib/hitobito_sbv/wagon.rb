@@ -78,6 +78,8 @@ module HitobitoSbv
       ApplicationMailer.prepend Sbv::ApplicationMailer
 
       ### domain
+      Export::Pdf::List::People.prepend Sbv::Export::Pdf::List::People
+
       Export::Tabular::Groups::Row.include Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.prepend Sbv::Export::Tabular::Groups::List
       Export::Tabular::People::PeopleFull.include Sbv::Export::Tabular::People::PeopleFull

@@ -26,6 +26,7 @@ member:
   email: member0@hitobito.example.com
   primary_group: musikverband_hastdutoene
   birthday: 01.02.1990
+  nickname: mynick
 
 suisa_admin:
   first_name: Suisa
