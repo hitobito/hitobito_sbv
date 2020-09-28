@@ -12,6 +12,7 @@ module Sbv::GroupAbility
     on(Group) do
       permission(:any).may(:'index_event/festivals').all
       permission(:any).may(:query).all
+      permission(:any).may(:deleted_subgroups).if_writable
       permission(:festival_participation).may(:manage_festival_application).in_same_layer
 
       permission(:group_full).may(:create_history_member).in_same_group
@@ -22,18 +23,29 @@ module Sbv::GroupAbility
       permission(:uv_lohnsumme).may(:show_uv_lohnsummen).everywhere_if_admin
       permission(:uv_lohnsumme).may(:edit_uv_lohnsummen).everywhere_if_admin_or_in_same_layer
     end
+  end
 
-    def everywhere_if_admin
-      [
-        Group::Generalverband::Admin,
-        Group::Root::Admin,
-        Group::Mitgliederverband::Admin,
-        # Group::Regionalverband::Admin # is not allowed, according to hitobito/hitobito_sbv#30
-      ].any? { |admin_role| role_type?(admin_role) }
+  def if_writable
+    [
+      :layer_and_below_full,
+      :layer_full,
+      :group_and_below_full,
+      :group_full
+    ].any? do |permission|
+      user_context.permission_group_ids(permission).include?(group.id)
     end
+  end
 
-    def everywhere_if_admin_or_in_same_layer
-      everywhere_if_admin || in_same_layer
-    end
+  def everywhere_if_admin
+    [
+      Group::Generalverband::Admin,
+      Group::Root::Admin,
+      Group::Mitgliederverband::Admin
+      # Group::Regionalverband::Admin # is not allowed, according to hitobito/hitobito_sbv#30
+    ].any? { |admin_role| role_type?(admin_role) }
+  end
+
+  def everywhere_if_admin_or_in_same_layer
+    everywhere_if_admin || in_same_layer
   end
 end
