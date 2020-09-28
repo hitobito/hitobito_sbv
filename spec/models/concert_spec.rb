@@ -53,6 +53,16 @@ describe Concert do
     end
   end
 
+  context 'validations' do
+    it 'name has a maximum length' do
+      subject.name = ('La' * 130) + 'TrumpetMan'
+      expect(subject.name.length).to be > 255
+
+      expect(subject).to_not be_valid
+      expect(subject.errors).to have_key(:name)
+    end
+  end
+
   context 'soft-deletion' do
     subject(:concert) { concerts(:third_concert) }
     let(:verein) { concert.verein }

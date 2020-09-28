@@ -41,7 +41,8 @@ class Concert < ActiveRecord::Base
   before_validation :set_verband_ids, on: :create
   before_validation :remove_empty_song_count
 
-  validates_by_schema
+  validates_by_schema except: [:name]
+  validates :name, length: { maximum: 255 }
 
   accepts_nested_attributes_for :song_counts, allow_destroy: true
 
