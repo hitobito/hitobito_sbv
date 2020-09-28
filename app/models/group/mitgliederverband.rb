@@ -55,6 +55,8 @@ class Group::Mitgliederverband < ::Group
                            Group::MitgliederverbandMusikkommission,
                            Group::MitgliederverbandVeteranen]
 
+  self.event_types += [Event::Course]
+
   children Group::MitgliederverbandGeschaeftsstelle,
            Group::MitgliederverbandVorstand,
            Group::MitgliederverbandMusikkommission,
