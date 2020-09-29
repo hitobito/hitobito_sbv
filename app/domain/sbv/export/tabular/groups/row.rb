@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 #  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
@@ -30,12 +29,10 @@ module Sbv
           end
 
           def contact_email
-            if entry.contact
-              entry.contact.email
-            end
+            entry.contact&.email
           end
 
-          # rubocop:disable Style/FormatString
+          # rubocop:disable Style/FormatString,Style/FormatStringToken
           def buv_lohnsumme
             if entry.buv_lohnsumme
               '%#.2f' % entry.buv_lohnsumme
@@ -47,7 +44,7 @@ module Sbv
               '%#.2f' % entry.nbuv_lohnsumme
             end
           end
-          # rubocop:enable Style/FormatString
+          # rubocop:enable Style/FormatString,Style/FormatStringToken
 
           private
 
