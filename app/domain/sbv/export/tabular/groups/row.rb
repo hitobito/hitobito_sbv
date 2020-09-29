@@ -25,7 +25,8 @@ module Sbv
           end
 
           def correspondence_language
-            Settings.application.languages.to_h.stringify_keys[entry.correspondence_language]
+            Settings.application.correspondence_languages
+                    .to_h.stringify_keys[entry.correspondence_language.to_s]
           end
 
           def contact_email

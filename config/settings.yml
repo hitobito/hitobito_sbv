@@ -16,6 +16,12 @@ application:
     de: Deutsch
     fr: Français
     it: Italiano
+  correspondence_languages:
+    de: Deutsch
+    fr: Français
+    it: Italiano
+    # en: English
+    rm: Rumantsch
 
 # The person with this email has root access to everything
 # This person should only be used by the operators of the application,

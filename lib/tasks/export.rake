@@ -14,7 +14,7 @@ namespace :export do
     extractor = DataExtraction.new('tmp/all-members.csv', ENV['RAILS_DB_NAME'])
     extractor.headers = 'vorname,nachname,hauptgruppe,email,korrespondenzsprache'
 
-    language_sql = Settings.application.languages.map do |code, long_name|
+    language_sql = Settings.application.correspondence_languages.map do |code, long_name|
       "WHEN '#{code}' THEN '#{long_name}'"
     end.join(' ')
 
