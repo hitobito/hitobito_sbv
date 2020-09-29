@@ -7,7 +7,7 @@ require 'spec_helper'
 require 'csv'
 
 describe Export::SubgroupsExportJob do
-  let(:subject) { described_class.new(people(:admin), groups(:hauptgruppe_1).id, {}) }
+  subject { described_class.new(people(:admin), groups(:hauptgruppe_1).id, {}) }
 
   it 'only exports Verband and Verein group types' do
     names = subject.send(:entries).collect { |e| e.class.sti_name }.uniq
@@ -16,10 +16,13 @@ describe Export::SubgroupsExportJob do
 
   it ' exports address and special columns' do
     csv = CSV.parse(subject.data, col_sep: ';', headers: true)
-    expect(csv.headers).to eq [
+    expected_headers = [
       "Name",
       "Gruppentyp",
       "Mitgliederverband",
+      "Regionalverband",
+      "sekundär",
+      "weitere",
       "Haupt-E-Mail",
       "Kontaktperson",
       "E-Mailadresse Kontaktperson",
@@ -35,6 +38,8 @@ describe Export::SubgroupsExportJob do
       "Gründungsjahr",
       "Erfasste Mitglieder",
     ]
+    expect(csv.headers).to match_array expected_headers
+    expect(csv.headers).to eq expected_headers
   end
 
 end

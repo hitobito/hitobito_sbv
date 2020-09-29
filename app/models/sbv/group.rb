@@ -61,6 +61,10 @@ module Sbv::Group
     ancestors.find_by(type: Group::Mitgliederverband)
   end
 
+  def regionalverband
+    ancestors.find_by(type: Group::Regionalverband)
+  end
+
   # actual other parents, secondary and tertiary
   def secondary_parents
     [
