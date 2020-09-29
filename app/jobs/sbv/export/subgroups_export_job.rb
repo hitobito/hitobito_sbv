@@ -15,7 +15,15 @@ module Sbv::Export::SubgroupsExportJob
   private
 
   def entries
-    super.where(type: types.collect(&:sti_name))
+    primary_entries = super.where(type: types.map(&:sti_name))
+
+    potential_parents = primary_entries.where(type: (types - [Group::Verein]).map(&:sti_name))
+    secondary_entries = Group::Verein.where(secondary_parent_id: potential_parents.pluck(:id))
+                                     .without_deleted.order(:lft).includes(:contact) # like in core
+
+    deduplicated_secondary_entries = secondary_entries - primary_entries
+
+    primary_entries + deduplicated_secondary_entries
   end
 
   def types
