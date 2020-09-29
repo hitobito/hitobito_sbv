@@ -25,7 +25,6 @@
 class Concert < ActiveRecord::Base
 
   acts_as_paranoid
-  extend Paranoia::RegularScope
 
   belongs_to :song_census
   belongs_to :verein, class_name: 'Group::Verein'
@@ -46,11 +45,22 @@ class Concert < ActiveRecord::Base
 
   accepts_nested_attributes_for :song_counts, allow_destroy: true
 
+  include I18nEnums
+  REASONS = %w(joint_play not_playable otherwise_billed).freeze
+  i18n_enum :reason, REASONS, scopes: true, queries: true
+
   scope :in, ->(year) { where(year: year) }
+  scope :not_played, -> { where.not(reason: nil) }
+  scope :played, -> { where(reason: nil) }
+
   default_scope { order(performed_at: :desc) }
 
   def to_s
     name
+  end
+
+  def played?
+    self[:reason].nil?
   end
 
   private

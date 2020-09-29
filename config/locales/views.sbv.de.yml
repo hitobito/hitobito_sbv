@@ -33,6 +33,9 @@ de:
       submitted: eingereicht
       not_submitted: nicht eingereicht
       censuses_submitted: "%{submitted} von %{total} eingereicht"
+      joint_play: Spielgemeinschaft
+      not_playable: nicht spielfähig in diesem Jahr
+      otherwise_billed: SUISA über Dritte abgerechnet
     verein:
       search: Werk suchen…
     submit: Meldeliste einreichen
@@ -117,6 +120,8 @@ de:
     csv: CSV
     xlsx: Excel
   concerts:
+    index:
+      no_concerts_yet: "Um die SUISA-Meldeliste einzureichen müssen Sie mindestens eine Aufführung hinzufügen oder eine alternative Erledigung wählen:"
     submit:
       flash:
         success: Meldeliste eingereicht.

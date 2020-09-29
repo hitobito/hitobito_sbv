@@ -54,3 +54,10 @@ six_concert:
   verein: musikverband_hastdutoene
   year: 2018
   song_census:
+
+unplayed_concert:
+  name: not playable this year
+  verein: musikverband_alterswil
+  year: 2019
+  song_census: two_o_19
+  reason: not_playable

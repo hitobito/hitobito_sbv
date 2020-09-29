@@ -14,7 +14,7 @@ class CensusSubmission
 
   def submit
     changed_rows = attach_concerts_to_census
-    changed_rows > 0
+    changed_rows.positive?
   end
 
   private

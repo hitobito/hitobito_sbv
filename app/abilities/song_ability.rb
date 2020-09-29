@@ -21,6 +21,7 @@ class SongAbility < AbilityDsl::Base
     permission(:song_census).may(:manage).in_dachverband
     permission(:song_census).may(:manage).in_verein
     permission(:song_census).may(:submit).in_verein
+    permission(:song_census).may(:create).in_verein
     permission(:layer_and_below_read).may(:read).in_verein
   end
 

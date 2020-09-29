@@ -331,6 +331,11 @@ de:
         song_counts: Werkeintrag
         performed_at: Datum
         name: Aufführung
+        reasons:
+          _nil: gespielt
+          joint_play: Spielgemeinschaft
+          not_playable: nicht spielfähig in diesem Jahr
+          otherwise_billed: SUISA über Dritte abgerechnet
 
       event/group_participation:
         name: "Gruppenanmeldung bei %{event} als %{group}"
