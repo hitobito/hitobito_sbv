@@ -384,7 +384,7 @@ kontakte_42:
   name: Kontakte
   type: Group::VereinKontakte
   deleted_at: 2020-01-20
-mitglieder_43:
+mitglieder_hastdutoene:
   parent: musikverband_hastdutoene
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:musikverband_hastdutoene) %>
   lft: 33

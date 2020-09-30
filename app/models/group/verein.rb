@@ -130,7 +130,7 @@ class Group::Verein < ::Group
     self.permissions = []
   end
 
-  class SuisaAdmin < Sbv::Role::SuisaAdmin
+  class SuisaAdmin < Role::SuisaAdmin
   end
 
   roles Admin, Conductor, SuisaAdmin

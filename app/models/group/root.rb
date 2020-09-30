@@ -79,7 +79,7 @@ class Group::Root < ::Group
     ]
   end
 
-  class SuisaAdmin < Sbv::Role::SuisaAdmin
+  class SuisaAdmin < Role::SuisaAdmin
   end
 
   roles Admin, SuisaAdmin
