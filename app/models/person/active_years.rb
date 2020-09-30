@@ -33,12 +33,20 @@ module Person::ActiveYears
 
   private
 
+  def veteran_role_condition
+    {
+      type: [
+        Group::VereinMitglieder::Mitglied
+      ]
+    }
+  end
+
   def active_member_role?
-    roles.where("type LIKE '%Mitglied'").any?
+    roles.where(veteran_role_condition).any?
   end
 
   def calculate_active_years(end_date = Time.zone.now)
-    roles.with_deleted.where("type LIKE '%Mitglied'").map do |role|
+    roles.with_deleted.where(veteran_role_condition).map do |role|
       VeteranYears.new(role.created_at.year, (role.deleted_at || end_date).year)
     end.sort.sum.years.to_i
   end
