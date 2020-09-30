@@ -286,7 +286,9 @@ de:
         mitgliederverband: Mitgliederverband
         secondary_parent_groups: weitere Gruppenzugehörigkeiten
         secondary_parent_id: sekundär
+        secondary_parent: sekundäre Zugehörigkeit
         tertiary_parent_id: weitere
+        tertiary_parent: weitere Zugehörigkeit
         hostname: Hostname
         buv_lohnsumme: BUV-Lohnsumme
         nbuv_lohnsumme: NBUV-Lohnsumme

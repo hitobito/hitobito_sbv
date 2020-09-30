@@ -12,20 +12,22 @@ describe Export::SubgroupsExportJob do
   subject(:root_export) { described_class.new(people(:admin), groups(:hauptgruppe_1).id, {}) }
   subject(:bern_export) { described_class.new(people(:admin), groups(:bernischer_kantonal_musikverband).id, {}) }
 
+  let(:export) { root_export }
+  let(:csv) { CSV.parse(export.data, col_sep: ';', headers: true) }
+
   it 'only exports Verband and Verein group types' do
     names = root_export.send(:entries).collect { |e| e.class.sti_name }.uniq
     expect(names).to eq ["Group::Mitgliederverband", "Group::Regionalverband", "Group::Verein"]
   end
 
   it ' exports address and special columns' do
-    csv = CSV.parse(root_export.data, col_sep: ';', headers: true)
     expected_headers = [
       "Name",
       "Gruppentyp",
       "Mitgliederverband",
       "Regionalverband",
-      "sekundär",
-      "weitere",
+      "sekundäre Zugehörigkeit",
+      "weitere Zugehörigkeit",
       "Haupt-E-Mail",
       "Kontaktperson",
       "E-Mailadresse Kontaktperson",
@@ -41,15 +43,14 @@ describe Export::SubgroupsExportJob do
       "Gründungsjahr",
       "Erfasste Mitglieder",
     ]
+
     expect(csv.headers).to match_array expected_headers
     expect(csv.headers).to eq expected_headers
   end
 
   context 'secondary_children' do
-    let(:exported_group_names) do
-      csv = CSV.parse(bern_export.data, col_sep: ';', headers: true)
-      csv.map { |row| row['Name'] }
-    end
+    let(:export) { bern_export }
+    let(:exported_group_names) { csv.map { |row| row['Name'] } }
 
     it 'exports secondary children as well' do
       groups(:musikgesellschaft_alterswil).update(
@@ -75,6 +76,40 @@ describe Export::SubgroupsExportJob do
         groups(:musikgesellschaft_aarberg).name
       ]
     end
+  end
+
+  context 'data' do
+    let(:export) { bern_export }
+
+    before do
+      groups(:musikgesellschaft_alterswil).update(
+        secondary_parent_id: groups(:regionalverband_mittleres_seeland).id,
+        tertiary_parent_id: groups(:bernischer_kantonal_musikverband).id
+      )
+    end
+
+    it 'secondary parent is present by name' do
+      parents = csv.map { |row| row['sekundäre Zugehörigkeit'] }
+
+      expect(parents).to match_array [
+        nil,
+        nil,
+        nil,
+        groups(:regionalverband_mittleres_seeland).name
+      ]
+    end
+
+    it 'tertiary parent is present by name' do
+      parents = csv.map { |row| row['weitere Zugehörigkeit'] }
+
+      expect(parents).to match_array [
+        nil,
+        nil,
+        nil,
+        groups(:bernischer_kantonal_musikverband).name
+      ]
+    end
+
   end
 
 end
