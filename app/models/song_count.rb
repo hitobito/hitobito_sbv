@@ -17,9 +17,6 @@
 
 class SongCount < ActiveRecord::Base
 
-  acts_as_paranoid
-  extend Paranoia::RegularScope
-
   belongs_to :song
   belongs_to :concert, touch: true
 
