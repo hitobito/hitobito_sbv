@@ -4,8 +4,9 @@
       %h2.h5
         = concert.name
         %span.muted= I18n.l(concert.performed_at) if concert.performed_at
-        = link_action_edit(edit_group_concert_path(parent, concert))
-        = link_action_destroy(group_concert_path(parent, concert))
+        - if concert.editable?
+          = link_action_edit(edit_group_concert_path(parent, concert))
+          = link_action_destroy(group_concert_path(parent, concert))
       = content_tag(:small, t('global.last_change',
         date: I18n.localize(concert.updated_at, format: :date_time)))
     .concert-song-list
