@@ -69,6 +69,8 @@ describe HistoryRolesController do
   it 'POST#create creates new role and deleted mitglieder verein in hidden verein group' do
     sign_in(people(:admin))
     leader = people(:leader)
+    leader.update_active_years
+    expect(leader.active_years).to be_zero
 
     role_params = {
       person_id: leader.id,
@@ -80,7 +82,9 @@ describe HistoryRolesController do
       post :create, params: { group_id: leader.primary_group_id, role: role_params }
       expect(response).to redirect_to(history_group_person_path(leader.primary_group, leader))
     end.to change { leader.roles.count }.by(0)
+
     expect(leader.reload.active_years).to eq 3
+
     expect(Group::Verein.hidden).to have(1).children
     group = Group::Verein.hidden.children.find_by(name: 'Dummy')
     expect(group).to be_deleted
