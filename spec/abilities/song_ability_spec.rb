@@ -14,7 +14,7 @@ describe SongAbility do
   let(:ability) { Ability.new(role.person.reload) }
   let(:concert) do
     concerts(:second_concert).tap do |concert|
-      concert.send :set_verband_ids
+      concert.infer_verband_ids
     end
   end
   let(:verein)  { groups(:musikgesellschaft_aarberg) }

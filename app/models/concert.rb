@@ -37,7 +37,7 @@ class Concert < ActiveRecord::Base
   before_destroy :allow_soft_deletion
 
   before_validation :set_name
-  before_validation :set_verband_ids, on: :create
+  before_validation :infer_verband_ids, on: :create
   before_validation :remove_empty_song_count
 
   validates_by_schema except: [:name]
@@ -63,6 +63,20 @@ class Concert < ActiveRecord::Base
     self[:reason].nil?
   end
 
+  def infer_verband_ids
+    return if verein.blank?
+
+    case verein.parent
+    when Group::Regionalverband
+      self.regionalverband_id = verein.parent.id
+      self.mitgliederverband_id = verein.parent.parent.id
+    when Group::Mitgliederverband
+      self.mitgliederverband_id = verein.parent.id
+    end
+
+    [regionalverband_id, mitgliederverband_id]
+  end
+
   private
 
   def set_name
@@ -77,18 +91,6 @@ class Concert < ActiveRecord::Base
 
   def set_readonly
     readonly! unless editable?
-  end
-
-  def set_verband_ids
-    return if verein.blank?
-
-    case verein.parent
-    when Group::Regionalverband
-      self.regionalverband_id = verein.parent.id
-      self.mitgliederverband_id = verein.parent.parent.id
-    when Group::Mitgliederverband
-      self.mitgliederverband_id = verein.parent.id
-    end
   end
 
   def allow_soft_deletion

@@ -64,7 +64,7 @@ class MigrateToSuperstructure < ActiveRecord::Migration[4.2]
     unless Rails.env.test? # this breaks with the addition of paranoia to the concerts
       say_with_time 'Relink concerts to verbandsebenen' do
         Concert.find_each do |concert|
-          concert.send(:set_verband_ids)
+          concert.infer_verband_ids
           concert.save if concert.changes.any?
         end
       end
@@ -136,7 +136,7 @@ class MigrateToSuperstructure < ActiveRecord::Migration[4.2]
     unless Rails.env.test? # this breaks with the addition of paranoia to the concerts
       say_with_time 'Relink concerts to verbandsebenen' do
         Concert.find_each do |concert|
-          concert.send(:set_verband_ids)
+          concert.infer_verband_ids
           concert.save if concert.changes.any?
         end
       end

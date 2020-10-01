@@ -9,6 +9,16 @@ require 'spec_helper'
 
 describe Concert do
 
+  it 'can infer verband-relations' do
+    concert = Concert.new(verein: groups(:musikgesellschaft_alterswil), year: 2018)
+
+    expect(concert).to be_respond_to(:infer_verband_ids)
+    expect do
+      concert.infer_verband_ids
+    end.to change(concert, :regionalverband).from(nil).to(groups(:alt_thiesdorf_30))
+      .and change(concert, :mitgliederverband).from(nil).to(groups(:societe_cantonale_des_musiques_fribourgeoises_freiburger_kantonal_musikverband_24))
+  end
+
   context 'before validation' do
     it 'sets verband ids for verein nested under regionalverband ' do
       concert = Concert.create!(verein: groups(:musikgesellschaft_alterswil), year: 2018)
