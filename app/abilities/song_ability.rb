@@ -19,9 +19,9 @@ class SongAbility < AbilityDsl::Base
 
   on(Concert) do
     permission(:song_census).may(:manage).in_dachverband
-    permission(:song_census).may(:manage).in_verein
-    permission(:song_census).may(:submit).in_verein
-    permission(:song_census).may(:create).in_verein
+    permission(:song_census).may(:manage).in_verein_or_mitgliederverband
+    permission(:song_census).may(:submit).in_verein_or_mitgliederverband
+    permission(:song_census).may(:create).in_verein_or_mitgliederverband
     permission(:layer_and_below_read).may(:read).in_verein
   end
 
@@ -52,6 +52,9 @@ class SongAbility < AbilityDsl::Base
   end
 
   def in_mitgliederverband
+    if subject.mitgliederverband_id.nil? && subject.respond_to?(:infer_verband_ids)
+      subject.infer_verband_ids
+    end
     permission_in_group?(subject.mitgliederverband_id)
   end
 
