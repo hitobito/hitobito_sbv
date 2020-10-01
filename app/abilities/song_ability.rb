@@ -52,7 +52,7 @@ class SongAbility < AbilityDsl::Base
   end
 
   def in_mitgliederverband
-    permission_in_group?(subject.concert.mitgliederverband_id)
+    permission_in_group?(subject.mitgliederverband_id)
   end
 
   def in_layer
