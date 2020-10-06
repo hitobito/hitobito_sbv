@@ -349,7 +349,9 @@ fr:
         mitgliederverband: Associations membres
         secondary_parent_groups: autres appartenances à un groupe
         secondary_parent_id: secondaire
+        secondary_parent: ""
         tertiary_parent_id: autres
+        tertiary_parent: ""
         hostname: Hostname
         buv_lohnsumme: Salaire AAP
         nbuv_lohnsumme: Salaire AANP
@@ -394,6 +396,11 @@ fr:
         song_counts: Saisie de l'oeuvre
         performed_at: Date
         name: Interprétation
+        reasons:
+          _nil: ""
+          joint_play: ""
+          not_playable: ""
+          otherwise_billed: ""
 
       event/group_participation:
         name: "Inscription %{group} à %{event}"

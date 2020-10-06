@@ -30,6 +30,9 @@ it:
       submitted: inoltrato
       not_submitted: non inoltrato
       censuses_submitted: "%{submitted} di %{total}inoltrato"
+      joint_play: ""
+      not_playable: ""
+      otherwise_billed: ""
     verein:
       search: ricercare composizione
     submit: inoltrare modello elenco
@@ -108,6 +111,8 @@ it:
     csv: ""
     xlsx: ""
   concerts:
+    index:
+      no_concerts_yet: ""
     submit:
       flash:
         success: Elenco inoltrato

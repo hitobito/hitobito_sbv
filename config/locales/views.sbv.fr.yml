@@ -30,6 +30,9 @@ fr:
       submitted: soumis
       not_submitted: pas soumis
       censuses_submitted: "%{submitted} de %{total} soumis"
+      joint_play: ""
+      not_playable: ""
+      otherwise_billed: ""
     verein:
       search: Rechercher une oeuvre...
     submit: Soumettre la liste d'annonce
@@ -108,6 +111,8 @@ fr:
     csv: ""
     xlsx: ""
   concerts:
+    index:
+      no_concerts_yet: ""
     submit:
       flash:
         success: Liste d'annonces soumise.

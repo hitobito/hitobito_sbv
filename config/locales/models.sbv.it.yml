@@ -349,7 +349,9 @@ it:
         mitgliederverband: Membri delle associazioni
         secondary_parent_groups: Appartenenze ad altri gruppi
         secondary_parent_id: secondario
+        secondary_parent: ""
         tertiary_parent_id: altri
+        tertiary_parent: ""
         hostname: Hostname
         buv_lohnsumme: Salario AIP
         nbuv_lohnsumme: Salario AINP
@@ -394,6 +396,11 @@ it:
         song_counts: Registrazione brano
         performed_at: Data
         name: Esecuzione
+        reasons:
+          _nil: ""
+          joint_play: ""
+          not_playable: ""
+          otherwise_billed: ""
 
       event/group_participation:
         name: "Iscrizione di gruppo a %{evento} come %{gruppo}"
