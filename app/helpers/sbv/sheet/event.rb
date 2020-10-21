@@ -13,7 +13,7 @@ module Sbv::Sheet::Event
         :group_event_group_participations_path,
         { if: lambda do |view, *args|
           _group, event = args
-          view.can?(:edit, event)
+          event.type == 'Event::Festival' && view.can?(:edit, event)
         end }
   end
 end
