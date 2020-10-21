@@ -14,6 +14,8 @@ module Person::ActiveYears
   end
 
   def prognostic_active_years
+    update_active_years if active_years.nil?
+
     if active_role?
       active_years.succ
     else

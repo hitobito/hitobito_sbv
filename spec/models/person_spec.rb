@@ -8,6 +8,8 @@
 require 'spec_helper'
 
 describe Person do
+  include ActiveSupport::Testing::TimeHelpers
+
   subject { people(:member) }
 
   %w(first_name last_name birthday).each do |attr|
@@ -79,6 +81,34 @@ describe Person do
       subject.update_active_years
 
       expect(subject.active_years).to be 0
+    end
+
+    it 'handles active_years not being cached' do
+      travel_to('2020-03-16') do
+        expect(subject.roles.with_deleted.where(type: 'Group::VereinMitglieder::Mitglied').count).to eq 0
+        expect(subject.active_years).to be_nil
+
+        expect(subject.prognostic_active_years).to eq 0
+
+        Fabricate(
+          Group::VereinMitglieder::Mitglied.name.to_sym,
+          person: subject,
+          group: groups(:mitglieder_hastdutoene),
+          created_at: Date.current.change(year: 2010),
+          deleted_at: nil # active Role
+        )
+
+
+        expect(subject.roles.without_deleted.where(type: 'Group::VereinMitglieder::Mitglied').count).to eq 1
+        expect(subject.active_years).to eq 11
+
+        # simulate data not being present
+        subject.active_years = nil
+        subject.active_role = nil
+        expect(subject.active_years).to be_nil
+
+        expect(subject.prognostic_active_years).to eq 12
+      end
     end
   end
 
