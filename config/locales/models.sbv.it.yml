@@ -13,165 +13,126 @@ it:
         one: Associazione o federazione generale
         other: Associazione o federazione generale
 
-
       group/root:
         one: Associazione Mantello
         other: Associazioni mantello
-
       group/root_geschaeftsstelle:
         one: Segretariato
         other: Segretariati
-
       group/root_vorstand:
         one: Direzione
         other: Direzione
-
       group/root_musikkommission:
         one: Commisione di musica
         other: Commissioni di musica
-
       group/root_arbeitsgruppe:
         one: Gruppo di lavoro
         other: Gruppi di lavoro
-
       group/root_ehrenmitglieder:
         one: Membro d'onore
         other: Membri onorari
-
       group/root_veteranen:
         one: Veterani
         other: Veterani
-
       group/root_veteranen/veteran:
         one: Veterano federale
         other: Veterani federali
-
       group/root_veteranen/ehrenveteran:
         one: Veterano federale onorario
         other: Veterani federali onorari
-
       group/root_veteranen/cism_veteran:
         one: Veterano CISM
         other: Veterani CISM
-
       group/root_kontakte:
         one: Contatti
         other: Contatti
-
       group/root/suisa_admin:
         one: Responsabile SUISA
         other: Responsabili SUISA
 
-
       group/mitgliederverband:
         one: Membro dell'associazione
         other: Membri delle associazioni
-
       group/mitgliederverband_geschaeftsstelle:
         one: Segretariati
         other: Segretariati
-
       group/mitgliederverband_vorstand:
         one: Comitato
         other: Comitati
-
       group/mitgliederverband_musikkommission:
         one: Commissioni di musica
         other: Commissioni di musica
-
       group/mitgliederverband_arbeitsgruppe:
         one: Gruppi di lavoro
         other: Gruppi di lavoro
-
       group/mitgliederverband_ehrenmitglieder:
         one: Membri onorari
         other: Membri onorari
-
       group/mitgliederverband_veteranen:
         one: Veterani
         other: Veterani
-
       group/mitgliederverband_veteranen/veteran:
         one: Veterano cantonale
         other: Veterani cantonali
-
       group/mitgliederverband_veteranen/ehrenveteran:
         one: Veterano onorario cantonale
         other: Veterani onorari cantonali
-
       group/mitgliederverband_kontakte:
         one: Contatti
         other: Contatti
-
       group/mitgliederverband/suisa_admin:
         one: Responsabili SUISA
         other: Responsabili SUISA
 
-
       group/regionalverband:
         one: Associazione regionale
         other: Associazioni regionali
-
       group/regionalverband_geschaeftsstelle:
         one: Segretariati
         other: Segretariati
-
       group/regionalverband_vorstand:
         one: Comitati
         other: Comitati
-
       group/regionalverband_musikkommission:
         one: Commissioni di musica
         other: Commissioni di musica
-
       group/regionalverband_arbeitsgruppe:
         one: Gruppi di lavoro
         other: Gruppi di lavoro
-
       group/regionalverband_ehrenmitglieder:
         one: Membri onorari
         other: Membri onorari
-
       group/regionalverband_kontakte:
         one: Contatti
         other: Contatti
-
       group/regionalverband/suisa_admin:
         one: Responsabili SUISA
         other: Responsabili SUISA
 
-
       group/verein:
         one: Società bandistica
         other: Società bandistiche
-
       group/verein_vorstand:
         one: Comitati
         other: Comitati
-
       group/verein_musikkommission:
         one: Commissioni di musica
         other: Commissioni di musica
-
       group/verein_arbeitsgruppe:
         one: Gruppi di lavoro
         other: Gruppi di lavoro
-
       group/verein_mitglieder:
         one: Membro
         oter: Membri
       group/verein_kontakte:
         one: Contatti
         other: Contatti
-
       group/verein/conductor:
         one: Direttrice
         other: Direttrici
-
       group/verein/suisa_admin:
         one: Responsabili SUISA
         other: Responsabili SUISA
-
 
       ### ROLES FOR ALL LAYERS
 
@@ -180,79 +141,63 @@ it:
       role/admin:
         one: Amministratore
         other: Amministratori
-
       role/adressverwaltung:
         one: Gestione indirizzi
         other: Gestione indirizzi
-
 
       #### Geschaeftsstelle Roles
 
       role/geschaeftsstelle_manager:
         one: Direzione Amministrazione
         other: Direzione Amministrazione
-
       role/geschaeftsstelle_staff:
         one: Collaboratore
         other: Collaboratori
-
       role/geschaeftsstelle_help:
         one: Aiuto
         other: Aiuti
-
 
       #### Vorstand Roles
 
       role/vorstand_kassier:
         one: Cassiere
         other: Cassieri
-
       role/vorstand_finanzchef:
         one: Responsabile Finanze
         other: Responsabili Finanze
-
       role/vorstand_mitglied:
         one: Membro
         other: Membri
-
       role/vorstand_praesident:
         one: Presidente
         other: Presidenti
-
       role/vorstand_vize_praesident:
         one: Vice Presidente
         other: Vice Presidenti
-
       role/vorstand_veteranenchef:
         one: Responsabile Veterani
         other: Responsabili Veterani
-
       role/vorstand_materialverwaltung:
         one: Gestione materiale
         other: Gestione materiale
-
 
       #### Musikkommission Roles
 
       role/musikkommission_praesident:
         one: Presidenti
         other: Presidenti
-
       role/musikkommission_mitglied:
         one: Membri
         other: Membri
-
 
       #### Arbeitsgruppen Roles
 
       role/arbeitsgruppe_leitung:
         one: Direzione
         other: Direzione
-
       role/arbeitsgruppe_mitglied:
         one: Membri
         other: Membri
-
 
       #### Ehrenmitglieder
 
@@ -260,29 +205,24 @@ it:
         one: Membro onorario
         other: Membri onorari
 
-
       #### Kontakte Roles
 
       role/kontakt:
         one: Contatto
         other: Contatti
 
-
       #### Mitglieder Roles
 
       role/mitglieder_mitglied:
         one: Membri
         other: Membri
-
       role/mitglieder_passivmitglied:
         one: Membro passivo
         other: Membri passivi
 
-
       song:
         one: Brano
         other: Brani
-
 
       song_census:
         one: Elenchi iscritti
@@ -290,7 +230,6 @@ it:
       song_count:
         one: Annuncio brani
         other: Annunci brani
-
 
       concert:
         one: Esecuzione
@@ -301,18 +240,16 @@ it:
         one: Elenco
         other: Elenchi
 
-
       event/group_participation:
         one: Iscrizioni di gruppo
         other: Iscrizioni di gruppo
-
 
     attributes:
       person:
         correspondence_language: Lingua di corrispondenza
         profession: Lavoro
         active_years: Anni attivi fino ad oggi
-        active_role: ""
+        active_role: appartenenza attiva
         prognostic_active_years: Stima anni attivi
         personal_data_usage: Utilizzo dettagli indirizzi
       group:
@@ -349,13 +286,13 @@ it:
         mitgliederverband: Membri delle associazioni
         secondary_parent_groups: Appartenenze ad altri gruppi
         secondary_parent_id: secondario
-        secondary_parent: ""
+        secondary_parent: seconda affiliazione
         tertiary_parent_id: altri
-        tertiary_parent: ""
+        tertiary_parent: affiliazione supplemenare
         hostname: Hostname
         buv_lohnsumme: Salario AIP
         nbuv_lohnsumme: Salario AINP
-        contact_email: ""
+        contact_email: indirizzo e-mail della persona di contatto
       role:
         dates: Dati
         created_at: Entrata
@@ -397,10 +334,10 @@ it:
         performed_at: Data
         name: Esecuzione
         reasons:
-          _nil: ""
-          joint_play: ""
-          not_playable: ""
-          otherwise_billed: ""
+          _nil: suonato
+          joint_play: società di musica
+          not_playable: nessuna esecuzione musicale durante quest’anno
+          otherwise_billed: SUISA pagata da terzi
 
       event/group_participation:
         name: "Iscrizione di gruppo a %{evento} come %{gruppo}"
@@ -452,7 +389,7 @@ it:
           attributes:
             base:
               date_preference_missing: Deve essere indicato almeno un giorno
-              date_preference_incomplete: ""
+              date_preference_incomplete: Due giorni devono essere scelti
             preferred_play_day_1:
               impossible: non disponibile
             preferred_play_day_2:

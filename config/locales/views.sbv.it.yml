@@ -30,9 +30,9 @@ it:
       submitted: inoltrato
       not_submitted: non inoltrato
       censuses_submitted: "%{submitted} di %{total}inoltrato"
-      joint_play: ""
-      not_playable: ""
-      otherwise_billed: ""
+      joint_play: unione tra società
+      not_playable: nessuna esecuzione musicale quest’anno
+      otherwise_billed: SUISA calcolata attraverso terzi
     verein:
       search: ricercare composizione
     submit: inoltrare modello elenco
@@ -107,12 +107,12 @@ it:
     csv: CSV
     xlsx: Excel
   dropdown/group_participations:
-    button: ""
-    csv: ""
-    xlsx: ""
+    button: Esportazione registrazioni
+    csv: CSV
+    xlsx: Excel
   concerts:
     index:
-      no_concerts_yet: ""
+      no_concerts_yet: "Per inoltrare la lista SUISA è necessario aggiungere almeno un'esecuzione o scegliere un'alternativa:"
     submit:
       flash:
         success: Elenco inoltrato
@@ -124,16 +124,16 @@ it:
       summary: Riassunto
 
   events/group_participations:
-    export_enqueued: ''
+    export_enqueued: 'L’esportazione avverrà in background e sarà scaricata al termine.'
 
   events:
     global:
       link:
-        add_event/festival: ""
+        add_event/festival: Creare feste della musica
     group_participations:
       edit:
-        title: ""
-        thank_you: ""
+        title: "%{partecipazione} elaborare"
+        thank_you: "Grazie mille per la registrazione"
       actions_new:
         title: "Iscrizione della società"
       create:

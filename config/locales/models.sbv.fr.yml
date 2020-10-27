@@ -13,165 +13,126 @@ fr:
         one: Associations générale
         other: Associations générales
 
-
       group/root:
         one: Organisation faîtière
         other: Organisations faîtières
-
       group/root_geschaeftsstelle:
         one: Secrétariat
         other: Secrétariats
-
       group/root_vorstand:
         one: Direction de l'association
         other: Direction de l'association
-
       group/root_musikkommission:
         one: Commission de musique
         other: Commissions de musique
-
       group/root_arbeitsgruppe:
         one: Groupe de travail
         other: Groupes de travail
-
       group/root_ehrenmitglieder:
         one: Membre d'honneur
         other: Membres d'honneur
-
       group/root_veteranen:
         one: Vétéran
         other: Vétérans
-
       group/root_veteranen/veteran:
         one: Vétéran fédéral
         other: Vétérans fédéraux
-
       group/root_veteranen/ehrenveteran:
         one: 'Vétéran d’honneur fédéral '
         other: Vétérans d’honneur fédéraux
-
       group/root_veteranen/cism_veteran:
         one: Vétérans CISM
         other: Vétérans CISM
-
       group/root_kontakte:
         one: Contacts
         other: Contacts
-
       group/root/suisa_admin:
         one: Responsable SUISA
         other: Responsables SUISA
 
-
       group/mitgliederverband:
         one: Association membre
         other: Associations membres
-
       group/mitgliederverband_geschaeftsstelle:
         one: Secrétariats
         other: Secrétariats
-
       group/mitgliederverband_vorstand:
         one: Comité
         other: Comités
-
       group/mitgliederverband_musikkommission:
         one: Commissions de musique
         other: Commissions de musique
-
       group/mitgliederverband_arbeitsgruppe:
         one: Groupes de travail
         other: Groupes de travail
-
       group/mitgliederverband_ehrenmitglieder:
         one: Membres d'honneur
         other: Membres d'honneur
-
       group/mitgliederverband_veteranen:
         one: Vétérans
         other: Vétérans
-
       group/mitgliederverband_veteranen/veteran:
         one: Vétéran cantonal
         other: Vétérans cantonaux
-
       group/mitgliederverband_veteranen/ehrenveteran:
         one: Vétéran d'honneur cantonal
         other: Vétérans d'honneur cantonaux
-
       group/mitgliederverband_kontakte:
         one: Contacts
         other: Contacts
-
       group/mitgliederverband/suisa_admin:
         one: Responsables SUISA
         other: Responsables SUISA
 
-
       group/regionalverband:
         one: Association régionale
         other: Associations régionales
-
       group/regionalverband_geschaeftsstelle:
         one: Secrétariats
         other: Secrétariats
-
       group/regionalverband_vorstand:
         one: Comités
         other: Comités
-
       group/regionalverband_musikkommission:
         one: Commissions de musique
         other: Commissions de musique
-
       group/regionalverband_arbeitsgruppe:
         one: Groupes de travail
         other: Groupes de travail
-
       group/regionalverband_ehrenmitglieder:
         one: Membres d'honneur
         other: Membres d'honneur
-
       group/regionalverband_kontakte:
         one: Contacts
         other: Contacts
-
       group/regionalverband/suisa_admin:
         one: Responsables SUISA
         other: Responsables SUISA
 
-
       group/verein:
         one: Société
         other: Sociétés
-
       group/verein_vorstand:
         one: Comités
         other: Comités
-
       group/verein_musikkommission:
         one: Commissions de musique
         other: Commissions de musique
-
       group/verein_arbeitsgruppe:
         one: Groupes de travail
         other: Groupes de travail
-
       group/verein_mitglieder:
         one: Membres
         oter: Membres
       group/verein_kontakte:
         one: Contacts
         other: Contacts
-
       group/verein/conductor:
         one: Directeur-trice
         other: Directeur-trice-s
-
       group/verein/suisa_admin:
         one: Responsables SUISA
         other: Responsables SUISA
-
 
       ### ROLES FOR ALL LAYERS
 
@@ -180,79 +141,63 @@ fr:
       role/admin:
         one: Administrateur
         other: Administrateurs
-
       role/adressverwaltung:
         one: Gestion des adresses
         other: Gestion des adresses
-
 
       #### Geschaeftsstelle Roles
 
       role/geschaeftsstelle_manager:
         one: Direction du secrétariat
         other: Direction du secrétariat
-
       role/geschaeftsstelle_staff:
         one: Collaborateur
         other: Collaborateurs
-
       role/geschaeftsstelle_help:
         one: Aide
         other: Aides
-
 
       #### Vorstand Roles
 
       role/vorstand_kassier:
         one: Caissier
         other: Caissiers
-
       role/vorstand_finanzchef:
         one: Chef des finances
         other: ' Chefs des finances'
-
       role/vorstand_mitglied:
         one: Membre
         other: Membres
-
       role/vorstand_praesident:
         one: Président
         other: Présidents
-
       role/vorstand_vize_praesident:
         one: Vice-président
         other: Vice-Présidents
-
       role/vorstand_veteranenchef:
         one: Chef des vétérans
         other: Chefs des vétérans
-
       role/vorstand_materialverwaltung:
         one: Responsable matériel
         other: Responsable matériel
-
 
       #### Musikkommission Roles
 
       role/musikkommission_praesident:
         one: Présidents
         other: Présidents
-
       role/musikkommission_mitglied:
         one: Membres
         other: Membres
-
 
       #### Arbeitsgruppen Roles
 
       role/arbeitsgruppe_leitung:
         one: Direction
         other: Direction
-
       role/arbeitsgruppe_mitglied:
         one: Membres
         other: Membres
-
 
       #### Ehrenmitglieder
 
@@ -260,29 +205,24 @@ fr:
         one: Membre d'honneur
         other: Membres d'honneur
 
-
       #### Kontakte Roles
 
       role/kontakt:
         one: Contact
         other: Contacts
 
-
       #### Mitglieder Roles
 
       role/mitglieder_mitglied:
         one: Membres
         other: Membres
-
       role/mitglieder_passivmitglied:
         one: Membre passif
         other: Membres passifs
 
-
       song:
         one: Oeuvre
         other: Oeuvres
-
 
       song_census:
         one: Liste d'annonce
@@ -290,7 +230,6 @@ fr:
       song_count:
         one: Annonce d'oeuvre
         other: Annonces d'oeuvres
-
 
       concert:
         one: Interprétation
@@ -301,18 +240,16 @@ fr:
         one: Liste
         other: Listes
 
-
       event/group_participation:
         one: Inscriptions de groupe
         other: Inscriptions de groupe
-
 
     attributes:
       person:
         correspondence_language: Langue de correspondance
         profession: Profession
         active_years: Années d'activité actuelles
-        active_role: ""
+        active_role: adhésion active
         prognostic_active_years: Années d'activité - projection
         personal_data_usage: Utilisation des données d'adresse
       group:
@@ -349,13 +286,13 @@ fr:
         mitgliederverband: Associations membres
         secondary_parent_groups: autres appartenances à un groupe
         secondary_parent_id: secondaire
-        secondary_parent: ""
+        secondary_parent: appartenance secondaire
         tertiary_parent_id: autres
-        tertiary_parent: ""
+        tertiary_parent: appartenance supplémentaire
         hostname: Hostname
         buv_lohnsumme: Salaire AAP
         nbuv_lohnsumme: Salaire AANP
-        contact_email: ""
+        contact_email: adresse email de la personne de contact
       role:
         dates: Données
         created_at: Entrée
@@ -397,10 +334,10 @@ fr:
         performed_at: Date
         name: Interprétation
         reasons:
-          _nil: ""
-          joint_play: ""
-          not_playable: ""
-          otherwise_billed: ""
+          _nil: joué(e)
+          joint_play: société de musique
+          not_playable: sans exécution musicale cette année
+          otherwise_billed: SUISA payé par un tiers
 
       event/group_participation:
         name: "Inscription %{group} à %{event}"
@@ -452,7 +389,7 @@ fr:
           attributes:
             base:
               date_preference_missing: Prière de sélectionner au moins un jour
-              date_preference_incomplete: ""
+              date_preference_incomplete: Deux jours doivent être choisis
             preferred_play_day_1:
               impossible: n’est pas disponible
             preferred_play_day_2:

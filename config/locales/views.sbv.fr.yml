@@ -30,9 +30,9 @@ fr:
       submitted: soumis
       not_submitted: pas soumis
       censuses_submitted: "%{submitted} de %{total} soumis"
-      joint_play: ""
-      not_playable: ""
-      otherwise_billed: ""
+      joint_play: Association musicale
+      not_playable: Pas d'exécution musicale cette année
+      otherwise_billed: SUISA facturé à un tiers
     verein:
       search: Rechercher une oeuvre...
     submit: Soumettre la liste d'annonce
@@ -107,12 +107,12 @@ fr:
     csv: CSV
     xlsx: Excel
   dropdown/group_participations:
-    button: ""
-    csv: ""
-    xlsx: ""
+    button: Exportation des enregistrements
+    csv: CSV
+    xlsx: Excel
   concerts:
     index:
-      no_concerts_yet: ""
+      no_concerts_yet: "Pour soumettre la liste SUISA, vous devez ajouter au moins une exécution musicale ou choisir une alternative:"
     submit:
       flash:
         success: Liste d'annonces soumise.
@@ -124,16 +124,16 @@ fr:
       summary: Résumé
 
   events/group_participations:
-    export_enqueued: ''
+    export_enqueued: 'L’exportation est lancée en arrière-plan et téléchargée une fois terminée.'
 
   events:
     global:
       link:
-        add_event/festival: ""
+        add_event/festival: Créer une fête de musique
     group_participations:
       edit:
-        title: ""
-        thank_you: ""
+        title: "traiter %{participation}"
+        thank_you: "Merci pour ton inscription."
       actions_new:
         title: "Inscription de société"
       create:
