@@ -140,3 +140,23 @@ können:
   * `/(.+)@hitobito\.domain\.tld/ mailaccount+$1@maildomain.tld`
   * Verantwortlichkeit: Sys-Team Hitobito
 
+## Glossar
+
+interner Name             | Domänenbegriff
+--------------            | ---------------
+Concert                   | Aufführung
+Song                      | Werk
+SongCensus                | Meldeliste
+SongCount                 | Werkmeldung
+Event::GroupParticipation | Gruppenanmeldung
+Event::Festival           | Musikfest
+
+### Ablauf SUISA-Meldung
+
+- die Vereine erfassen über den Meldezeitraum hinweg ihre Aufführungen.
+- jeder Aufführung werden die gespielten Werke in entsprechender Anzahl zugeordnet.
+- mit dem Button "Meldeliste einreichen" werden die Aufführungen der aktuellen Meldeliste zugeordnet und gelten damit als eingereicht.
+- Sonderfälle
+	- wenn man keine Aufführungen während der Meldeperiode hatte, kann eine alternative Erledigungsart gewählt werden. Diese legt eine spezielle Aufführung an, die dann wie sonst auch als Meldeliste eingereicht werden kann.
+	- wenn eine neue Aufführung erfasst wird, werden diese speziellen Aufführungen für das aktuelle Jahr wieder gelöscht.
+	- wenn eine neue Aufführung nach dem Einreichen der Meldeliste erfasst wird, kann man erneut die Meldeliste einreichen. Das Kriterium ist "gibt es noch Aufführungen, die nicht der aktuellen Meldeliste zugeordnet sind".
