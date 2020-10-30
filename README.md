@@ -142,14 +142,14 @@ können:
 
 ## Glossar
 
-interner Name             | Domänenbegriff
---------------            | ---------------
-Concert                   | Aufführung
-Song                      | Werk
-SongCensus                | Meldeliste
-SongCount                 | Werkmeldung
-Event::GroupParticipation | Gruppenanmeldung
-Event::Festival           | Musikfest
+| interner Name             | Domänenbegriff   |
+| --------------            | --------------   |
+| Concert                   | Aufführung       |
+| Song                      | Werk             |
+| SongCensus                | Meldeliste       |
+| SongCount                 | Werkmeldung      |
+| Event::GroupParticipation | Gruppenanmeldung |
+| Event::Festival           | Musikfest        |
 
 ### Ablauf SUISA-Meldung
 
