@@ -44,6 +44,7 @@ class ConcertsController < SimpleCrudController
   def assign_attributes
     super
     entry.name ||= entry.reason_label
+    entry.reason = nil if entry.reason == '_nil'
     nil
   end
 
