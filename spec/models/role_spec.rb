@@ -12,8 +12,10 @@ describe Role do
   let(:role) { roles(:member) }
 
   it "validates presence of created_at if deleted_at is present" do
-    role.update(deleted_at: Time.zone.now)
-    role.update(created_at: nil)
+    role.update(
+      created_at: nil,
+      deleted_at: Time.zone.now
+    )
 
     expect(role).not_to be_valid
     expect(role.errors.full_messages).

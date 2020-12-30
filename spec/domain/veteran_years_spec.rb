@@ -8,43 +8,81 @@ require 'spec_helper'
 describe VeteranYears do
   include ActiveSupport::Testing::TimeHelpers
 
-  it 'counts full duration if continuous' do
-    expect(described_class.new(1978, 2013).years).to be == 35
-  end
+  context 'with the new algorithm that has been ratified on 2020-11-14 (VL-Sitzung), it' do
+    before do
+      travel_to Date.new(2020, 7, 31)
+    end
 
-  it 'counts full duration if break was not a full year' do
-    first = described_class.new(1978, 2011)
-    second = described_class.new(2012, 2013)
+    it 'has an abstract example' do
+      first = described_class.new(1979, 1986)
+      second = described_class.new(1994, 2005)
+      third = described_class.new(2017, 2020)
 
-    expect((first + second).years).to be == 35
-  end
+      expect(first.years).to be == 8
+      expect(second.years).to be == 12
+      expect(third.years).to be == 3
 
-  it 'counts full duration if breaks were not full years' do
-    first = described_class.new(1978, 1981)
-    second = described_class.new(1982, 2011)
-    third = described_class.new(2012, 2013)
+      expect((first + second + third).years).to be == 23
+    end
 
-    expect((first + second + third).years).to be == 35
-  end
+    it 'has a concrete bug-report' do
+      expect([
+        described_class.new(1951, 1956),
+        described_class.new(1956, 1959),
+        described_class.new(1959, 1964),
+        described_class.new(1964, 1970),
+        described_class.new(1970, 1981),
+        described_class.new(1981, 2020),
+      ].sum.years).to be == 69
+    end
 
-  it 'does not count a break of over a year' do
-    first = described_class.new(1978, 2010)
-    second = described_class.new(2012, 2013)
+    it 'counts completed years in the past' do
+      subject = [
+        described_class.new(2018, 2020)
+      ].sum
 
-    expect((first + second).years).to be == 33
-  end
+      expect(subject.send :year_list).to match_array [2018, 2019, 2020]
+      expect(subject.years).to be == 2
+    end
 
-  it 'does not count several breaks of over a year' do
-    first = described_class.new(1978, 1981)
-    second = described_class.new(1983, 2010)
-    third = described_class.new(2012, 2013)
+    it 'counts only years with membership' do
+      subject = [
+        described_class.new(2018, 2018),
+        described_class.new(2018, 2019)
+      ].sum
 
-    expect((first + second + third).years).to be == 31
-  end
+      expect(subject.send :year_list).to match_array [2018, 2019]
+      expect(subject.years).to be == 2
+    end
 
-  it 'does count the current year as full year' do
-    travel_to Date.new(2020, 02, 01) do
-      expect(described_class.new(2010, 2020).years).to be == 11
+    it 'counts multiple durations in one year only once' do
+      subject = [
+        described_class.new(2018, 2018),
+        described_class.new(2018, 2020)
+      ].sum
+
+      expect(subject.send :year_list).to match_array [2018, 2019, 2020]
+      expect(subject.years).to be == 2
+    end
+
+    it 'counts years which have an short interruption fully' do
+      subject = [
+        described_class.new(2018, 2018),
+        described_class.new(2018, 2020)
+      ].sum
+
+      expect(subject.send :year_list).to match_array [2018, 2019, 2020]
+      expect(subject.years).to be == 2
+    end
+
+    it 'does not count completely omitted years' do
+      subject = [
+        described_class.new(2018, 2018),
+        described_class.new(2020, 2020)
+      ].sum
+
+      expect(subject.send :year_list).to match_array [2018, 2020]
+      expect(subject.years).to be == 1
     end
   end
 
@@ -60,22 +98,23 @@ describe VeteranYears do
     describe 'add, which' do
       let(:first) { described_class.new(1978, 1981) }
       let(:second) { described_class.new(1983, 2010) }
-      let(:result) { first + second }
+
+      subject { first + second }
 
       it 'returns a new VeteranYears-Object' do
-        expect(result).to be_a described_class
+        is_expected.to be_a described_class
       end
 
       it 'uses the earliest start year' do
-        expect(result.start_year).to be == 1978
+        expect(subject.start_year).to be == 1978
       end
 
       it 'uses the latest end_year' do
-        expect(result.end_year).to be == 2010
+        expect(subject.end_year).to be == 2010
       end
 
       it 'calculates gaps' do
-        expect(result.passive_years).to be == [1982]
+        expect(subject.passive_years).to be == [1982]
       end
 
       it 'combines gaps' do

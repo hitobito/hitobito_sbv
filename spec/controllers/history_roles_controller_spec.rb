@@ -62,7 +62,7 @@ describe HistoryRolesController do
     expect do
       post :create, params: { group_id: group.id, role: role_params }
     end.to change { leader.roles.with_deleted.count }.by(1)
-    expect(leader.reload.active_years).to eq 3
+    expect(leader.reload.active_years).to eq 2
     expect(leader.roles.with_deleted).to be_any { |role| role.label === '1. Sax' }
   end
 
@@ -83,7 +83,7 @@ describe HistoryRolesController do
       expect(response).to redirect_to(history_group_person_path(leader.primary_group, leader))
     end.to change { leader.roles.count }.by(0)
 
-    expect(leader.reload.active_years).to eq 3
+    expect(leader.reload.active_years).to eq 2
 
     expect(Group::Verein.hidden).to have(1).children
     group = Group::Verein.hidden.children.find_by(name: 'Dummy')
