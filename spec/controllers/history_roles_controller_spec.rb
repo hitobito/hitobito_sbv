@@ -1,4 +1,6 @@
-#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
+# frozen_string_literal: true
+
+#  Copyright (c) 2012-2021, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -20,11 +22,10 @@ describe HistoryRolesController do
       end_date: 2020
     }
     expect do
-      post :create, params: { group_id: group.id, role: role_params }, format: :js
-      expect(response).to render_template('shared/update_flash')
+      post :create, params: { group_id: group.id, role: role_params }
     end.not_to change { leader.roles.count }
     expect(leader.reload.active_years).to be_nil
-    expect(flash.now[:alert].sort).to eq ['Austritt ist kein gültiges Datum', 'Eintritt ist kein gültiges Datum']
+    expect(flash[:alert].sort).to eq ['Austritt ist kein gültiges Datum', 'Eintritt ist kein gültiges Datum']
   end
 
   it 'POST#create is not allowed for normal members' do
@@ -41,7 +42,7 @@ describe HistoryRolesController do
     }
     expect do
       expect do
-        post :create, params: { group_id: group.id, role: role_params }, format: :js
+        post :create, params: { group_id: group.id, role: role_params }
       end.to raise_error(CanCan::AccessDenied)
     end.not_to change { member.roles.count }
     expect(member.reload.active_years).to be_nil

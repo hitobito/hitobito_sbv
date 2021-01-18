@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2021, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -8,7 +8,7 @@
 class HistoryRolesController < ApplicationController
   skip_load_and_authorize_resource
 
-  def create # rubocop:disable Metrics/AbcSize,MethodLength
+  def create # rubocop:disable Metrics/AbcSize
     role = build_role(find_or_create_group)
     person = role.person
 
@@ -17,11 +17,11 @@ class HistoryRolesController < ApplicationController
     if (role_group_id || role_group_name) && role.save
       person.update_active_years
       flash[:notice] = I18n.t('crud.create.flash.success', model: role.to_s)
-      redirect_to return_path(role.person)
     else
-      flash.now[:alert] = [role, role.group].flat_map { |m| m.errors.full_messages }.compact
-      render 'shared/update_flash'
+      flash[:alert] = [role, role.group].flat_map { |m| m.errors.full_messages }.compact
     end
+
+    redirect_to return_path(role.person)
   end
 
   def destroy
