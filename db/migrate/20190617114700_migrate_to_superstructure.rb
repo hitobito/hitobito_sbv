@@ -61,7 +61,7 @@ class MigrateToSuperstructure < ActiveRecord::Migration[4.2]
       Group.rebuild!(false)
     end
 
-    unless Rails.env.test? # this breaks with the addition of paranoia to the concerts
+    unless Time.zone.today.year > 2020 || Rails.env.test? # this breaks with the addition of paranoia to the concerts
       say_with_time 'Relink concerts to verbandsebenen' do
         Concert.find_each do |concert|
           concert.infer_verband_ids
