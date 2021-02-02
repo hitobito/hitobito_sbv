@@ -335,7 +335,7 @@ fr:
         name: Interprétation
         reasons:
           _nil: joué(e)
-          joint_play: société de musique
+          joint_play: SUISA déclarée par l'autre société de l'association musicale
           not_playable: sans exécution musicale cette année
           otherwise_billed: SUISA payé par un tiers
 
