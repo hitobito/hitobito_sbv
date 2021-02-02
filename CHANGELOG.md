@@ -11,6 +11,7 @@
 * Rätoromanisch als Korrespondenzsprache
 * Exporte und Berechtigungen angepasst
 * Mitgliederverbände können eigene Kurse anlegen und verwalten
+* Anpassung der Berechnung der Aktivjahre an die Verbandsregeln von 2021
 
 ## Version 1.20
 
