@@ -68,11 +68,25 @@ describe Person do
       expect(subject.active_years).to be 11 # even partial years count, so 10 years later cover 11 years
     end
 
+    it 'considers historic Mitglied roles' do
+      create_role(Role::MitgliederMitglied, years: 7)
+      subject.update_active_years
+
+      expect(subject.active_years).to be 7
+    end
+
     it 'does not consider PassivMitglied' do
       create_role(Group::VereinMitglieder::Passivmitglied, years: 10)
       subject.update_active_years
 
       expect(subject.active_years).to be 0
+    end
+
+    it 'does not consider historic PassivMitglied roles' do
+      create_role(Role::MitgliederPassivmitglied, years: 10)
+      subject.update_active_years
+
+      expect(subject.active_years).to be 7
     end
 
     it 'does not consider Adressverwaltung' do

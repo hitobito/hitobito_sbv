@@ -38,7 +38,8 @@ module Person::ActiveYears
   def veteran_role_condition
     {
       type: [
-        Group::VereinMitglieder::Mitglied
+        Group::VereinMitglieder::Mitglied,
+        Role::MitgliederMitglied
       ]
     }
   end
