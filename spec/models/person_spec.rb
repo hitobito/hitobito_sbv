@@ -68,8 +68,40 @@ describe Person do
       expect(subject.active_years).to be 11 # even partial years count, so 10 years later cover 11 years
     end
 
+    it 'considers historic Mitglied roles' do
+      # Create the role without validation because it's technically not allowed,
+      # but we create such roles anyway in import.rake
+      Fabricate.build(
+          :'Role::MitgliederMitglied',
+          person: subject,
+          group: groups(:mitglieder_hastdutoene),
+          created_at: Date.current.change(year: 2005),
+          deleted_at: Date.current.change(year: 2012)
+      ).save(validate: false)
+
+      subject.update_active_years
+
+      expect(subject.active_years).to be 8 # even partial years count, so 7 years later cover 8 years
+    end
+
     it 'does not consider PassivMitglied' do
       create_role(Group::VereinMitglieder::Passivmitglied, years: 10)
+      subject.update_active_years
+
+      expect(subject.active_years).to be 0
+    end
+
+    it 'does not consider historic PassivMitglied roles' do
+      # Create the role without validation because it's technically not allowed,
+      # but we create such roles anyway in import.rake
+      Fabricate.build(
+          :'Role::MitgliederPassivmitglied',
+          person: subject,
+          group: groups(:mitglieder_hastdutoene),
+          created_at: Date.current.change(year: 2005),
+          deleted_at: Date.current.change(year: 2015)
+      ).save(validate: false)
+
       subject.update_active_years
 
       expect(subject.active_years).to be 0
