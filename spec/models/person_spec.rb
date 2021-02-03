@@ -81,7 +81,7 @@ describe Person do
 
       subject.update_active_years
 
-      expect(subject.active_years).to be 7
+      expect(subject.active_years).to be 8 # even partial years count, so 7 years later cover 8 years
     end
 
     it 'does not consider PassivMitglied' do
