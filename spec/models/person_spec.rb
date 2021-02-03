@@ -69,7 +69,16 @@ describe Person do
     end
 
     it 'considers historic Mitglied roles' do
-      create_role(Role::MitgliederMitglied, years: 7)
+      # Create the role without validation because it's technically not allowed,
+      # but we create such roles anyway in import.rake
+      Fabricate.build(
+          :'Role::MitgliederMitglied',
+          person: subject,
+          group: groups(:mitglieder_hastdutoene),
+          created_at: Date.current.change(year: 2005),
+          deleted_at: Date.current.change(year: 2012)
+      ).save(validate: false)
+
       subject.update_active_years
 
       expect(subject.active_years).to be 7
@@ -83,10 +92,19 @@ describe Person do
     end
 
     it 'does not consider historic PassivMitglied roles' do
-      create_role(Role::MitgliederPassivmitglied, years: 10)
+      # Create the role without validation because it's technically not allowed,
+      # but we create such roles anyway in import.rake
+      Fabricate.build(
+          :'Role::MitgliederPassivmitglied',
+          person: subject,
+          group: groups(:mitglieder_hastdutoene),
+          created_at: Date.current.change(year: 2005),
+          deleted_at: Date.current.change(year: 2015)
+      ).save(validate: false)
+
       subject.update_active_years
 
-      expect(subject.active_years).to be 7
+      expect(subject.active_years).to be 0
     end
 
     it 'does not consider Adressverwaltung' do
