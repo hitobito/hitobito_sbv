@@ -133,7 +133,8 @@ können:
 * DNS-Eintrag machen, um Domain auf SBV-Hitobito zeigen zu lassen
   * Verantwortlichkeit: Domaininhaber
 * OpenShift-Route anlegen, um Domain von SBV-Hitobito verarbeiten zu lassen
-  * Route ins kustomize-git aufnehmen
+  * Route aufnehmen (kustomize - additional ingress)
+  * Domain in RAILS_HOST_REGEX aufnehmen (kustomize - environment variables)
   * Verantwortlichkeit: Ops-Team Hitobito
 * Eintrag in Mailkonfiguration machen, um mail an neue Domain in das richtige Postfach zu schieben
   * analog dem bestehenden catch-call regexp für SBV:
