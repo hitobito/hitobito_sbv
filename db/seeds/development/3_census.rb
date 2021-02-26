@@ -43,7 +43,7 @@ SongCensus.all.each do |census|
           count.concert_id = concert.id
           count.song_id = song.id
           count.year = census.year
-          count.count = Faker::Number.between(0, 30)
+          count.count = Faker::Number.between(from: 0, to: 30)
         end
       end
     end
