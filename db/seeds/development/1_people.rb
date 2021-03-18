@@ -68,3 +68,5 @@ end
 devs.each do |name, email|
   seeder.seed_developer(name, email, superstructure, Group::Generalverband::Admin)
 end
+
+seeder.assign_role_to_root(root, Group::Root::Admin)
