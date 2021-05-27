@@ -1,5 +1,7 @@
 # Hitobito SBV Changelog
 
+## unreleased
+
 ## Version 1.22
 
 * Verbesserungen am Anmeldeformular für Musikfeste
