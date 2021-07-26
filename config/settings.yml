@@ -7,7 +7,7 @@
 # Overrides settings from the main application
 application:
   logo:
-    image: logo-sbv.png
+    image: logo-sbv.svg
     width: 200
     height: 60
     background_color: white

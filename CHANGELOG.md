@@ -2,6 +2,8 @@
 
 ## unreleased
 
+* Dachverband-Logo aktualisiert und durch Vektorgrafik ersetzt
+
 ## Version 1.22
 
 * Verbesserungen am Anmeldeformular für Musikfeste
