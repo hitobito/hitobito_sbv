@@ -14,4 +14,10 @@ module Sbv::RolesHelper
     end
   end
 
+  def default_language_for_person(group)
+    return Settings.application.correspondence_languages.to_hash.invert.first if group.correspondence_language.nil?
+
+    group.correspondence_language
+  end
+
 end

@@ -13,13 +13,11 @@ module Sbv::Person
 
     Person::PUBLIC_ATTRS << :correspondence_language << :personal_data_usage
 
-    validates :first_name, :last_name, :birthday, presence: true
+    validates :first_name, :last_name, :birthday, :correspondence_language, presence: true
 
-    # validates :correspondence_language,
-    #           inclusion: { in: lambda do |_|
-    #                              Settings.application.correspondence_languages.to_h.stringify_keys
-    #                            end,
-    #                        allow_blank: true }
+    validates :correspondence_language, inclusion: {
+      in: Settings.application.correspondence_languages.to_h.keys.map(&:to_s)
+    }
 
   end
 end

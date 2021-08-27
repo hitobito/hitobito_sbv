@@ -297,6 +297,7 @@ de:
         dates: Daten
         created_at: Eintritt
         deleted_at: Austritt
+        correspondence_language: Korrespondenz Sprache
         class:
           permission:
             description:
