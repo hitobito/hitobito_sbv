@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class AddCorrespondenceLanguageByLayer < ActiveRecord::Migration[6.0]
+class AddCorrespondenceLanguageToPersonByLayer < ActiveRecord::Migration[6.0]
   def change
     people_without_language.find_each do |person|
       person.correspondence_language = person.primary_group.correspondence_language
@@ -16,7 +16,8 @@ class AddCorrespondenceLanguageByLayer < ActiveRecord::Migration[6.0]
   private
 
   def people_without_language
-    Person.where("people.correspondence_language IS NULL OR correspondence_language NOT IN ?")
+    supported_languages = Settings.application.correspondence_languages.to_h.keys.map(&:to_s)
+    Person.where("people.correspondence_language NOT IN (?)", supported_languages)
   end
 
 end
