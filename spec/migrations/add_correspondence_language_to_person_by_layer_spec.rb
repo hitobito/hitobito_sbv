@@ -12,24 +12,27 @@ require migration_file_name
 describe AddCorrespondenceLanguageToPersonByLayer do
 
   let(:migration) { described_class.new.tap { |m| m.verbose = false } }
-  let!(:group_without_language) { Fabricate(:group, { correspondence_language: nil, type: "Group::Verein" }) }
-  let!(:group_with_language) { Fabricate(:group, { correspondence_language: "fr", type: "Group::Verein" }) }
+  let(:person) { people(:leader) }
+  let(:group) { people(:leader).primary_group }
 
-  context 'change' do
+  context 'up' do
     before do
       migration.migrate(:down)
     end
 
     it 'does not set default language of person if layer has no language' do
-      person = fabricate_person(true, false)
-      group = person.primary_group
+      adjust_person(true)
+      adjust_group(false)
 
       # Expect correspondence values to be unchanged
       expect(person.correspondence_language).to eq('it')
       expect(group.correspondence_language).to eq(nil)
 
       # Execute migration
-      migration.change
+      migration.up
+
+      # Update person
+      person.reload
 
       # Expect person languages to be unchanged after migration
       expect(person.correspondence_language).to eq('it')
@@ -37,15 +40,18 @@ describe AddCorrespondenceLanguageToPersonByLayer do
     end
 
     it 'does not set default language if person already has correspondence language' do
-      person = fabricate_person(true, true)
-      group = person.primary_group
+      adjust_person(true)
+      adjust_group(true)
 
       # Expect person to have language already
       expect(person.correspondence_language).to eq("it")
       expect(group.correspondence_language).to eq("fr")
 
       # Execute migration
-      migration.change
+      migration.up
+
+      # Update person
+      person.reload
 
       # Expect person with language to be unchanged
       expect(person.correspondence_language).to eq("it")
@@ -53,45 +59,107 @@ describe AddCorrespondenceLanguageToPersonByLayer do
     end
 
     it 'does set default language from layer if person has no language' do
-      person = fabricate_person(false, true)
-      group = person.primary_group
+      adjust_person(false)
+      adjust_group(true)
 
       # Expect Person to have no language
       expect(person.correspondence_language).to eq(nil)
       expect(group.correspondence_language).to eq('fr')
 
-      binding.pry
       # Execute migration
-      migration.change
+      migration.up
+
+      # Update person
+      person.reload
 
       # Expect person to have default language set
-      expect(person.correspondence_language).to eq('fr')
       expect(group.correspondence_language).to eq('fr')
+      expect(person.correspondence_language).to eq('fr')
     end
 
     it 'does not update language if layer and person languages are nil' do
-      person = fabricate_person(false, false)
-      group = person.primary_group
+      adjust_person(false)
+      adjust_group(false)
 
       # Expect Person to have no language
       expect(person.correspondence_language).to eq(nil)
       expect(group.correspondence_language).to eq(nil)
 
       # Execute migration
-      migration.change
+      migration.up
+
+      # Update person
+      person.reload
 
       # Expect person and group to not have language
       expect(person.correspondence_language).to eq(nil)
       expect(group.correspondence_language).to eq(nil)
     end
+
+    it 'covers each case in one test' do
+      # Fabricate groups with and without language
+      group_with_language = Fabricate(:group, { correspondence_language: "de", type: "Group::Verein" })
+      group_without_language = Fabricate(:group, { correspondence_language: nil, type: "Group::Verein" })
+
+      # Fabricate people with or without self or layer language
+      person_with_layer_and_own_language = fabricate_person(true, group_with_language)
+      person_without_own_but_layer_language = fabricate_person(false , group_with_language)
+      person_with_but_layer_without_language = fabricate_person(true, group_without_language)
+      person_and_layer_without_language = fabricate_person(false , group_without_language)
+
+      # Expect people and groups to be fabricated as planned
+      expect(person_with_layer_and_own_language.correspondence_language).to eq("it")
+      expect(person_with_layer_and_own_language.primary_group.correspondence_language).to eq("de")
+      expect(person_without_own_but_layer_language.correspondence_language).to eq(nil)
+      expect(person_without_own_but_layer_language.primary_group.correspondence_language).to eq("de")
+      expect(person_with_but_layer_without_language.correspondence_language).to eq("it")
+      expect(person_with_but_layer_without_language.primary_group.correspondence_language).to eq(nil)
+      expect(person_and_layer_without_language.correspondence_language).to eq(nil)
+      expect(person_and_layer_without_language.primary_group.correspondence_language).to eq(nil)
+
+      # Run migration
+      migration.up
+
+      # Update people
+      person_with_layer_and_own_language.reload
+      person_without_own_but_layer_language.reload
+      person_with_but_layer_without_language.reload
+      person_and_layer_without_language.reload
+
+      # Expect no change here as person and group already have a language
+      expect(person_with_layer_and_own_language.correspondence_language).to eq("it")
+      expect(person_with_layer_and_own_language.primary_group.correspondence_language).to eq("de")
+
+      # Expect this case to update the person language according the layers one
+      expect(person_without_own_but_layer_language.correspondence_language).to eq("de")
+      expect(person_without_own_but_layer_language.primary_group.correspondence_language).to eq("de")
+
+      # Expect language from person not to be overwritten by nil from the layer language
+      expect(person_with_but_layer_without_language.correspondence_language).to eq("it")
+      expect(person_with_but_layer_without_language.primary_group.correspondence_language).to eq(nil)
+
+      # Expect nothing to change when neither layer nor person have languages
+      expect(person_and_layer_without_language.correspondence_language).to eq(nil)
+      expect(person_and_layer_without_language.primary_group.correspondence_language).to eq(nil)
+    end
   end
 
   private
 
-  def fabricate_person(with_language, layer_has_language)
+  def adjust_person(with_language)
+    person.update_attribute(:correspondence_language, with_language ? 'it' : nil)
+    person.save!(validate: false)
+  end
+
+  def adjust_group(with_language)
+    group.update_attribute(:correspondence_language, with_language ? "fr" : nil)
+    group.save!(validate: false)
+  end
+
+  def fabricate_person(with_language, group)
     person = Fabricate(:person, {
       correspondence_language: "it",
-      primary_group: layer_has_language ? group_with_language : group_without_language
+      primary_group: group
     })
 
     unless with_language
