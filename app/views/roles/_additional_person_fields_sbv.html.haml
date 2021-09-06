@@ -3,4 +3,4 @@
                               class: 'span2')
 
 = fields.labeled(:correspondence_language) do
-  = fields.select(:correspondence_language, Settings.application.correspondence_languages.to_hash.invert, selected: fields.object.correspondence_language || default_language_for_person(@group))
+  = fields.select(:correspondence_language, supported_languages, selected: fields.object.correspondence_language || default_language_for_person(@group))
