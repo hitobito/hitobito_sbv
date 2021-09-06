@@ -1,3 +1,6 @@
 = fields.labeled_string_field(:birthday,
                               help_inline: t('people.fields.format_birthday'),
                               class: 'span2')
+
+= fields.labeled(:correspondence_language) do
+  = fields.select(:correspondence_language, supported_languages, selected: fields.object.correspondence_language || default_language_for_person(@group))
