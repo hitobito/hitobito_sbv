@@ -297,6 +297,7 @@ fr:
         dates: Données
         created_at: Entrée
         deleted_at: Démission
+        correspondence_language: ""
         class:
           permission:
             description:
