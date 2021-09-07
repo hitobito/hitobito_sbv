@@ -1,6 +1,6 @@
 # Hitobito SBV Changelog
 
-## unreleased
+## Version 1.26
 
 * Dachverband-Logo aktualisiert und durch Vektorgrafik ersetzt
 * Korrespondenzsprache aufgrund der Vereinssprache gesetzt (sbv#99)
