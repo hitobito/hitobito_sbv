@@ -10,6 +10,8 @@ class AddCorrespondenceLanguageToPersonByLayer < ActiveRecord::Migration[6.0]
     people = people_without_language
     say_with_time('updating people to have default language set') do
       people.find_each do |person_without_language|
+        next unless person_without_language.primary_group&.correspondence_language
+
         person_without_language.correspondence_language = person_without_language.primary_group.correspondence_language
         person_without_language.save
       end
