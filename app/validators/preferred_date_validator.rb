@@ -69,7 +69,7 @@ class PreferredDateValidator < ActiveModel::Validator
   end
 
   def add_translated_error(attr, key)
-    errors[attr] << error_translation(attr, key)
+    errors.add(attr, key, message: error_translation(attr, key))
   end
 
   def one_play_day_is_selected
