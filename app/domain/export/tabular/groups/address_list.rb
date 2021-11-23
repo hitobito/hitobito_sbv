@@ -16,7 +16,29 @@ module Export::Tabular::Groups
         email contact contact_email address zip_code town country
         besetzung klasse unterhaltungsmusik
         correspondence_language subventionen founding_year recognized_members
+        suisa_status
       )
     end
+
+    private
+
+    def row_for(entry, format = nil)
+      row_class.new(entry, suisa_verein_statuses, format)
+    end
+
+    def suisa_verein_statuses
+      @suisa_verein_statuses ||= fetch_suisa_verein_statuses
+    end
+
+    def fetch_suisa_verein_statuses
+      calculator = CensusCalculator.new(SongCensus.current, nil)
+      calculator.verein_suisa_statuses(verein_ids)
+    end
+
+    def verein_ids
+      vereine = list.select { |g| g.type == Group::Verein.sti_name }
+      vereine.pluck(:id)
+    end
+
   end
 end

@@ -9,6 +9,7 @@ require 'spec_helper'
 require 'csv'
 
 describe Export::SubgroupsExportJob do
+
   subject(:root_export) { described_class.new(people(:admin), groups(:hauptgruppe_1).id, {}) }
   subject(:bern_export) { described_class.new(people(:admin), groups(:bernischer_kantonal_musikverband).id, {}) }
 
@@ -17,31 +18,32 @@ describe Export::SubgroupsExportJob do
 
   it 'only exports Verband and Verein group types' do
     names = root_export.send(:entries).collect { |e| e.class.sti_name }.uniq
-    expect(names).to eq ["Group::Mitgliederverband", "Group::Regionalverband", "Group::Verein"]
+    expect(names).to eq ['Group::Mitgliederverband', 'Group::Regionalverband', 'Group::Verein']
   end
 
-  it ' exports address and special columns' do
+  it 'exports address and special columns' do
     expected_headers = [
-      "Name",
-      "Gruppentyp",
-      "Mitgliederverband",
-      "Regionalverband",
-      "sekundäre Zugehörigkeit",
-      "weitere Zugehörigkeit",
-      "Haupt-E-Mail",
-      "Kontaktperson",
-      "E-Mailadresse Kontaktperson",
-      "Adresse",
-      "PLZ",
-      "Ort",
-      "Land",
-      "Besetzung",
-      "Klasse",
-      "Unterhaltungsmusik",
-      "Korrespondenzsprache",
-      "Subventionen",
-      "Gründungsjahr",
-      "Erfasste Mitglieder",
+      'Name',
+      'Gruppentyp',
+      'Mitgliederverband',
+      'Regionalverband',
+      'sekundäre Zugehörigkeit',
+      'weitere Zugehörigkeit',
+      'Haupt-E-Mail',
+      'Kontaktperson',
+      'E-Mailadresse Kontaktperson',
+      'Adresse',
+      'PLZ',
+      'Ort',
+      'Land',
+      'Besetzung',
+      'Klasse',
+      'Unterhaltungsmusik',
+      'Korrespondenzsprache',
+      'Subventionen',
+      'Gründungsjahr',
+      'Erfasste Mitglieder',
+      'SUISA Status'
     ]
 
     expect(csv.headers).to match_array expected_headers
@@ -110,6 +112,55 @@ describe Export::SubgroupsExportJob do
       ]
     end
 
+  end
+
+  context 'suisa status' do
+    let(:export) { root_export }
+    let(:verein1) { groups(:musikgesellschaft_alterswil) }
+    let!(:verein2) { create_verein }
+    let!(:verein3) { create_verein }
+    let!(:verein4) { create_verein }
+    let!(:verein5) { create_verein }
+    let(:current_year) { Time.zone.today.year }
+    let(:song_census) { SongCensus.create!(year: current_year) }
+
+    before do
+      verein1.concerts.first.update!(reason: :not_playable, song_census: song_census)
+      create_concert(nil, verein2)
+      verein2.concerts.first.update!(song_census: nil)
+      create_concert(:otherwise_billed, verein3)
+      create_concert(nil, verein4)
+      create_concert(nil, verein4)
+      create_concert(:joint_play, verein5)
+    end
+
+    it 'exports suisa status for Vereine and current year' do
+      suisas = csv.each_with_object({}) { |row, h| h[row['Name']] = row['SUISA Status'] }
+
+      expect(suisas[verein1.name]).to eq('nicht spielfähig in diesem Jahr')
+      expect(suisas[verein2.name]).to eq('nicht eingereicht')
+      expect(suisas[verein3.name]).to eq('SUISA über Dritte abgerechnet')
+      expect(suisas[verein4.name]).to eq('eingereicht')
+      expect(suisas[verein5.name]).to eq('Spielgemeinschaft')
+
+      # not a Verein
+      expect(suisas[verein1.parent.name]).to eq(nil)
+    end
+
+  end
+
+  private
+
+  def create_concert(reason, verein)
+    Concert.create!(reason: reason,
+                    verein_id: verein.id,
+                    song_census: song_census,
+                    year: current_year)
+  end
+
+  def create_verein
+    Group::Verein.create!(name: "#{Faker::Space.nebula} #{Faker::Number.number}",
+                          parent: groups(:regionalverband_mittleres_seeland))
   end
 
 end
