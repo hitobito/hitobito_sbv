@@ -3,10 +3,11 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_sbv.
 
+
 - if entry.is_a?(Group::Verein)
   = field_set_tag do
-    = f.labeled_input_fields :vereinssitz
-    = f.labeled_input_fields :founding_year
+    = f.labeled_input_fields :reported_members if entry.manually_counted_members?
+    = f.labeled_input_fields :vereinssitz, :founding_year
     = f.labeled_collection_select :correspondence_language, Settings.application.correspondence_languages.to_hash, :first, :last
     = f.labeled_collection_select :besetzung, Group.besetzung_labels.to_a, :first, :last, include_blank: true
     = f.labeled_collection_select :klasse, Group.klasse_labels.to_a, :first, :last, include_blank: true
