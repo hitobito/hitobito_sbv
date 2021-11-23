@@ -57,6 +57,10 @@ module Sbv::Group
     end
   end
 
+  def recognized_members
+    manually_counted_members? ? self.reported_members : calculated_recognized_members
+  end
+
   def mitgliederverband
     ancestors.find_by(type: Group::Mitgliederverband)
   end
@@ -78,7 +82,7 @@ module Sbv::Group
     SongCount.joins(:concert).where("concerts.verein_id IN (#{verein_sql})")
   end
 
-  def recognized_members
+  def calculated_recognized_members
     return unless is_a?(Group::Verein)
 
     Group::VereinMitglieder::Mitglied.joins(:group).where(groups: { layer_group_id: id }).count

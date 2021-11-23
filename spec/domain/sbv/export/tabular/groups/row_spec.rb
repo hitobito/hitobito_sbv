@@ -55,5 +55,32 @@ describe Export::Tabular::Groups::Row do
     it 'returns Deutsch for correspondence_language' do
       expect(row.fetch(:correspondence_language)).to eq 'Deutsch'
     end
+
+    describe 'recognized_members' do
+      before do
+        mitglieder = Group::VereinMitglieder.create!(name: 'dummy', parent: group, deleted_at: Time.zone.now)
+
+        10.times.each do |i|
+          p = Fabricate(:person)
+          Group::VereinMitglieder::Mitglied.create!(person: p, group: mitglieder)
+        end
+      end
+
+      it 'returns calculated if manually_counted_members is false' do
+        expect(group.manually_counted_members).to eq(false)
+
+        expect(row.fetch(:recognized_members)).to eq 10
+      end
+
+      it 'returns manually reported count if manually_counted_members is true' do
+        group.update(manually_counted_members: true, reported_members: 20)
+
+        expect(group.manually_counted_members).to eq(true)
+
+        expect(row.fetch(:recognized_members)).to eq 20
+      end
+
+    end
+
   end
 end
