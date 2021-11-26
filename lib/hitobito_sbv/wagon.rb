@@ -43,7 +43,7 @@ module HitobitoSbv
                                            :klasse, :unterhaltungsmusik,
                                            :secondary_parent_id, :tertiary_parent_id,
                                            :subventionen, :hostname,
-                                           :buv_lohnsumme, :nbuv_lohnsumme, :reported_members]
+                                           :buv_lohnsumme, :nbuv_lohnsumme, :manual_member_count]
 
       PeopleController.permitted_attrs += [:profession, :correspondence_language,
                                            :personal_data_usage]

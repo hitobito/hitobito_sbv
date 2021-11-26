@@ -38,7 +38,7 @@ describe Group::Verein do
     end
 
     it 'returns manually reported count if manually_counted_members is true' do
-      verein.update(manually_counted_members: true, reported_members: 20)
+      verein.update(manually_counted_members: true, manual_member_count: 20)
 
       expect(verein.manually_counted_members).to eq(true)
       expect(verein.recognized_members).to eq(20)
