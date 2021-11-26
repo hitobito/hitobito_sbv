@@ -265,6 +265,7 @@ de:
         subventionen: Subventionen
         recognized_members: Erfasste Mitglieder
         manual_count: Erfasste Mitglieder
+        manually_counted_members: Mitglieder manuell erfasst
         besetzungen:
           _nil: unbekannt
           brass_band: Brass Band
