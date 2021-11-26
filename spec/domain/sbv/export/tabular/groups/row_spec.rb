@@ -73,7 +73,7 @@ describe Export::Tabular::Groups::Row do
       end
 
       it 'returns manually reported count if manually_counted_members is true' do
-        group.update(manually_counted_members: true, reported_members: 20)
+        group.update(manually_counted_members: true, manual_member_count: 20)
 
         expect(group.manually_counted_members).to eq(true)
 

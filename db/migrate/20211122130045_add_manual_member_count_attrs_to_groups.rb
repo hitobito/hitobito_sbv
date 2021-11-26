@@ -5,9 +5,9 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class AddReportedMembersAttrsToGroups < ActiveRecord::Migration[6.0]
+class AddManualMemberCountAttrsToGroups < ActiveRecord::Migration[6.0]
   def up
-    add_column :groups, :reported_members, :integer, default: 0
+    add_column :groups, :manual_member_count, :integer, default: 0
     add_column :groups, :manually_counted_members, :boolean, default: false, null: false
   end
 end

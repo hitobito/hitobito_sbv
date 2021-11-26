@@ -58,7 +58,7 @@ module Sbv::Group
   end
 
   def recognized_members
-    manually_counted_members? ? self.reported_members : calculated_recognized_members
+    manually_counted_members? ? manual_member_count : member_count
   end
 
   def mitgliederverband
@@ -82,7 +82,7 @@ module Sbv::Group
     SongCount.joins(:concert).where("concerts.verein_id IN (#{verein_sql})")
   end
 
-  def calculated_recognized_members
+  def member_count
     return unless is_a?(Group::Verein)
 
     Group::VereinMitglieder::Mitglied.joins(:group).where(groups: { layer_group_id: id }).count

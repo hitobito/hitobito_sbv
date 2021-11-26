@@ -6,7 +6,7 @@
 
 - if entry.is_a?(Group::Verein)
   = field_set_tag do
-    = f.labeled_input_fields :reported_members if entry.manually_counted_members?
+    = f.labeled_input_fields :manual_member_count if entry.manually_counted_members?
     = f.labeled_input_fields :vereinssitz, :founding_year
     = f.labeled_collection_select :correspondence_language, Settings.application.correspondence_languages.to_hash, :first, :last
     = f.labeled_collection_select :besetzung, Group.besetzung_labels.to_a, :first, :last, include_blank: true
