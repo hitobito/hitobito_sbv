@@ -8,12 +8,12 @@ require 'spec_helper'
 describe Group::Verein do
   let(:hidden) { described_class.hidden }
 
-  it '.hidden creates hidden verein in root group without children' do
+  it 'hidden verein creates hidden verein in root group without children' do
     expect(hidden).to be_deleted
     expect(hidden.reload).to have(0).children
   end
 
-  it '.hidden may have additional deleted children' do
+  it 'hidden verein may have additional deleted children' do
     Group::VereinMitglieder.create!(name: 'dummy', parent: hidden, deleted_at: Time.zone.now)
     expect(hidden).to be_deleted
     expect(hidden.reload).to have(1).children
