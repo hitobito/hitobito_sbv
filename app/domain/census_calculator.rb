@@ -24,9 +24,14 @@ class CensusCalculator
   end
 
   def vereins_total
+    verein_ids = group.descendants.where(type: Group::Verein).pluck(:id)
+    verein_suisa_statuses(verein_ids)
+  end
+
+  def verein_suisa_statuses(verein_ids)
     census
       .concerts
-      .where(concerts: { verein_id: group.descendants.where(type: Group::Verein) })
+      .where(concerts: { verein_id: verein_ids })
       .distinct
       .pluck(:verein_id, :reason)
       .each_with_object({}) do |(verein, reason), memo|

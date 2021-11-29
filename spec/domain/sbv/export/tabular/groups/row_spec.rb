@@ -8,7 +8,7 @@
 require 'spec_helper'
 describe Export::Tabular::Groups::Row do
 
-  let(:row) { Export::Tabular::Groups::Row.new(group) }
+  let(:row) { Export::Tabular::Groups::Row.new(group, []) }
 
   subject { row }
 

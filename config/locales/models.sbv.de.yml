@@ -295,6 +295,7 @@ de:
         buv_lohnsumme: BUV-Lohnsumme
         nbuv_lohnsumme: NBUV-Lohnsumme
         contact_email: E-Mailadresse Kontaktperson
+        suisa_status: SUISA Status
       role:
         dates: Daten
         created_at: Eintritt
