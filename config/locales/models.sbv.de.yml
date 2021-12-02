@@ -264,7 +264,7 @@ de:
         correspondence_language: Korrespondenzsprache
         subventionen: Subventionen
         recognized_members: Erfasste Mitglieder
-        manual_count: Erfasste Mitglieder
+        manual_member_count: Erfasste Mitglieder (manuell)
         manually_counted_members: Mitglieder manuell erfasst
         besetzungen:
           _nil: unbekannt

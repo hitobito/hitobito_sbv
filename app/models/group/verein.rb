@@ -68,6 +68,7 @@ class Group::Verein < ::Group
                            :unterhaltungsmusik,
                            :subventionen,
                            :manually_counted_members,
+                           :manual_member_count,
                            :recognized_members]
 
   has_many :concerts, dependent: :destroy

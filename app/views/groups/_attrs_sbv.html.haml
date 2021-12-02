@@ -6,9 +6,11 @@
 = render_attrs(entry, *entry.used_attributes(:correspondence_language, :vereinssitz, :founding_year, :besetzung, :klasse, :unterhaltungsmusik))
 = render_attrs(entry, *entry.used_attributes(:subventionen)) if can?(:show_details, @group)
 = render_attrs(entry, *entry.used_attributes(:buv_lohnsumme, :nbuv_lohnsumme)) if can?(:show_uv_lohnsummen, @group)
-= render_attrs(entry, *entry.used_attributes(:manually_counted_members))
-= render_attrs(entry, *entry.used_attributes(:recognized_members)) do |attr|
-  - entry.send(attr).present?
+- if entry.manually_counted_members?
+  = render_attrs(entry, *entry.used_attributes(:manually_counted_members))
+  = render_attrs(entry, *entry.used_attributes(:manual_member_count))
+- else
+  = render_attrs(entry, *entry.used_attributes(:recognized_members))
 
 - if entry.is_a?(Group::Root)
   = render_attrs(entry, :hostname)
