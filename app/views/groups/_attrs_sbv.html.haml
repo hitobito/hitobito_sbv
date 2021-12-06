@@ -7,7 +7,6 @@
 = render_attrs(entry, *entry.used_attributes(:subventionen)) if can?(:show_details, @group)
 = render_attrs(entry, *entry.used_attributes(:buv_lohnsumme, :nbuv_lohnsumme)) if can?(:show_uv_lohnsummen, @group)
 - if entry.manually_counted_members?
-  = render_attrs(entry, *entry.used_attributes(:manually_counted_members))
   = render_attrs(entry, *entry.used_attributes(:manual_member_count))
 - else
   = render_attrs(entry, *entry.used_attributes(:recognized_members))
