@@ -36,3 +36,9 @@ census:
 
 pdf:
   font_size: 8
+
+messages:
+  enable_writing: true
+
+assignments:
+  enabled: true

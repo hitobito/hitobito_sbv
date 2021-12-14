@@ -23,6 +23,7 @@ module HitobitoSbv
     config.to_prepare do # rubocop:disable Metrics/BlockLength
       # extend application classes here
       # models
+      Event.include Sbv::Event
       Group.include Sbv::Group
       Group.include Sbv::Group::NestedSet
       Person.include Sbv::Person
