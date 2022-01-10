@@ -11,7 +11,7 @@
       = link_to(verband.name, group_song_censuses_path(verband, year: year))
 
     - t.col do |verband|
-      = t('.censuses_submitted', submitted: @total[:mitgliederverband][verband.id].to_a.size, total: verband.descendants.where(type: Group::Verein).size)
+      = census_submitted_ratio(verband, @total[:mitgliederverband])
 
 - if regionalverbaende.any?
   %h2
@@ -21,7 +21,7 @@
     - t.col do |verband|
       = link_to(verband.name, group_song_censuses_path(verband, year: year))
     - t.col do |verband|
-      = t('.censuses_submitted', submitted: @total[:regionalverband][verband.id].to_a.size, total: verband.descendants.where(type: Group::Verein).size)
+      = census_submitted_ratio(verband, @total[:regionalverband])
 
 - if vereine.any?
   %h2
