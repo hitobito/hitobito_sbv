@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2020-2022, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
 module SongCensusesHelper
+  def census_submitted_ratio(verband, total)
+    census_submitted = total[verband.id].to_a.size
+    census_total     = verband.descendants.without_deleted.where(type: Group::Verein).size
+
+    t('.censuses_submitted', submitted: census_submitted, total: census_total)
+  end
+
   def census_finish_button(census, group_id)
     if census.try(:current?) && census.finished?
       action_button(
