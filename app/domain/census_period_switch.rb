@@ -20,6 +20,17 @@ class CensusPeriodSwitch
     correct_concert_year_to_match_period
   end
 
+  # def revert
+  #   # unlock submitted concerts
+  #   @old.concerts.update_all('editable = true')
+  #   # move all concerts from new census to old
+  #   @new.concerts.update_all("song_census_id = #{@old.id}")
+  #   # adjust period of unsubmitted concerts and concerts in old period
+  #   Concert.where(song_census: [nil, @old]).update_all("year = '#{@old.year.to_i}'")
+  #   # delete new song_census
+  #   @new.destroy
+  # end
+
   private
 
   def finish_previous_song_census
