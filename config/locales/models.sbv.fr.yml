@@ -264,6 +264,8 @@ fr:
         correspondence_language: Langue de correspondance
         subventionen: Subventions
         recognized_members: Membres saisis
+        manual_member_count: ""
+        manually_counted_members: ""
         besetzungen:
           _nil: Inconnu
           brass_band: Brass Band
@@ -293,6 +295,7 @@ fr:
         buv_lohnsumme: Salaire AAP
         nbuv_lohnsumme: Salaire AANP
         contact_email: adresse email de la personne de contact
+        suisa_status: ""
       role:
         dates: Données
         created_at: Entrée

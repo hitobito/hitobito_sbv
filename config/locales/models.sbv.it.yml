@@ -264,6 +264,8 @@ it:
         correspondence_language: Lingua di corrispondenza
         subventionen: Sovvenzioni
         recognized_members: Membri recensiti
+        manual_member_count: ""
+        manually_counted_members: ""
         besetzungen:
           _nil: sconosciuto
           brass_band: Brass Band
@@ -293,6 +295,7 @@ it:
         buv_lohnsumme: Salario AIP
         nbuv_lohnsumme: Salario AINP
         contact_email: indirizzo e-mail della persona di contatto
+        suisa_status: ""
       role:
         dates: Dati
         created_at: Entrata
