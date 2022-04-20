@@ -130,6 +130,9 @@ de:
       group/verein/conductor:
         one: DirigentIn
         other: DirigentInnen
+      group/verein/jugendverantwortlicher:
+        one: Jugendverantwortlicher
+        other: Jugendverantwortlicher
       group/verein/suisa_admin:
         one: Verantwortlicher SUISA
         other: Verantworliche SUISA

@@ -1,5 +1,9 @@
 # Hitobito SBV Changelog
 
+## Version 1.27
+
+* Neue Rolle Jugendverantwortlicher auf Verein (hitobito_sbv#115)
+
 ## Version 1.26
 
 * Dachverband-Logo aktualisiert und durch Vektorgrafik ersetzt
