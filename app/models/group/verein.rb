@@ -132,8 +132,12 @@ class Group::Verein < ::Group
     self.permissions = []
   end
 
+  class Jugendverantwortlicher < Role
+    self.permissions = [:group_and_below_full]
+  end
+
   class SuisaAdmin < Role::SuisaAdmin
   end
 
-  roles Admin, Conductor, SuisaAdmin
+  roles Admin, Conductor, SuisaAdmin, Jugendverantwortlicher
 end
