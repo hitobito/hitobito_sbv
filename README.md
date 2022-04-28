@@ -159,15 +159,15 @@ können:
 - jeder Aufführung werden die gespielten Werke in entsprechender Anzahl zugeordnet.
 - mit dem Button "Meldeliste einreichen" werden die Aufführungen der aktuellen Meldeliste zugeordnet und gelten damit als eingereicht.
 - Sonderfälle
-	- wenn man keine Aufführungen während der Meldeperiode hatte, kann eine alternative Erledigungsart gewählt werden. Diese legt eine spezielle Aufführung an, die dann wie sonst auch als Meldeliste eingereicht werden kann.
-	- wenn eine neue Aufführung erfasst wird, werden diese speziellen Aufführungen für das aktuelle Jahr wieder gelöscht.
-	- wenn eine neue Aufführung nach dem Einreichen der Meldeliste erfasst wird, kann man erneut die Meldeliste einreichen. Das Kriterium ist "gibt es noch Aufführungen, die nicht der aktuellen Meldeliste zugeordnet sind".
-	
+  - wenn man keine Aufführungen während der Meldeperiode hatte, kann eine alternative Erledigungsart gewählt werden. Diese legt eine spezielle Aufführung an, die dann wie sonst auch als Meldeliste eingereicht werden kann.
+  - wenn eine neue Aufführung erfasst wird, werden diese speziellen Aufführungen für das aktuelle Jahr wieder gelöscht.
+  - wenn eine neue Aufführung nach dem Einreichen der Meldeliste erfasst wird, kann man erneut die Meldeliste einreichen. Das Kriterium ist "gibt es noch Aufführungen, die nicht der aktuellen Meldeliste zugeordnet sind".
+
 ## Manuelles Erfassen der Mitgliederanzahl
 
 | Rake Task                                             | Erklärung                                                                                       |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| ---------                                             | ---------                                                                                       |
 | `group:manually_counted_members:activate[group_id]`   | Setzt auf self und allen Subgruppen manually_counted_members auf `true`. Betrifft nur Vereine.  |
 | `group:manually_counted_members:deactivate[group_id]` | Setzt auf self und allen Subgruppen manually_counted_members auf `false`. Betrifft nur Vereine. |
 
-Sobald manually_counted_members auf true gesetzt ist, kann die Mitgliederanzahl im groups#edit werden.
+Sobald manually_counted_members auf true gesetzt ist, kann die Mitgliederanzahl im groups#edit bearbeitet werden.
