@@ -93,6 +93,7 @@ of the Schweizer Blasmusikverband.
     * Administrator: [:layer_and_below_full, :festival_participation, :uv_lohnsumme]
     * DirigentIn: []
     * Verantwortlicher SUISA: [:group_read, :song_census]
+    * Jugendverantwortlicher: [:group_and_below_full]
   * Vorstand
     * Präsident: [:layer_full, :layer_and_below_read]
     * Vizepräsident: [:layer_and_below_read]
