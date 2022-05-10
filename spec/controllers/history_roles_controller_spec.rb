@@ -25,7 +25,7 @@ describe HistoryRolesController do
       post :create, params: { group_id: group.id, role: role_params }
     end.not_to change { leader.roles.count }
     expect(leader.reload.active_years).to be_nil
-    expect(flash[:alert].sort).to eq ['Austritt ist kein gültiges Datum', 'Eintritt ist kein gültiges Datum']
+    expect(flash[:alert].sort).to eq ['Austritt ist kein gültiges Datum']
   end
 
   it 'POST#create is not allowed for normal members' do
