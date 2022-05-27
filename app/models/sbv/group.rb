@@ -33,6 +33,11 @@ module Sbv::Group
               format: { with: Regexp.new(FQDN_REGEX, Regexp::IGNORECASE) },
               allow_blank: true
 
+    validates :manual_member_count,
+              numericality: { greater_than_or_equal_to: 0 },
+              if: :manually_counted_members?
+
+
     belongs_to :secondary_parent, class_name: 'Group'
     belongs_to :tertiary_parent, class_name: 'Group'
 
@@ -57,8 +62,12 @@ module Sbv::Group
     end
   end
 
+  def uses_manually_counted_members?
+    manually_counted_members? && manual_member_count.nonzero?
+  end
+
   def recognized_members
-    manually_counted_members? ? manual_member_count : member_count
+    uses_manually_counted_members? ? manual_member_count : member_count
   end
 
   def mitgliederverband

@@ -32,16 +32,27 @@ describe Group::Verein do
       end
     end
 
-    it 'returns automatically calulated if manually_counted_members is false' do
-      expect(verein.manually_counted_members).to eq(false)
-      expect(verein.recognized_members).to eq(10)
+    context 'when manually_counted_members is false' do
+      it 'returns automatically calulated' do
+        expect(verein.manually_counted_members).to eq(false)
+        expect(verein.recognized_members).to eq(10)
+      end
     end
 
-    it 'returns manually reported count if manually_counted_members is true' do
-      verein.update(manually_counted_members: true, manual_member_count: 20)
+    context 'when manually_counted_members is true' do
+      it 'returns manually reported count if manual count is nonzero' do
+        verein.update(manually_counted_members: true, manual_member_count: 20)
 
-      expect(verein.manually_counted_members).to eq(true)
-      expect(verein.recognized_members).to eq(20)
+        expect(verein.manually_counted_members).to eq(true)
+        expect(verein.recognized_members).to eq(20)
+      end
+
+      it 'returns automatically calulated if manual count is zero' do
+        verein.update(manually_counted_members: true, manual_member_count: 0)
+
+        expect(verein.manually_counted_members).to eq(true)
+        expect(verein.recognized_members).to eq(10)
+      end
     end
   end
 
