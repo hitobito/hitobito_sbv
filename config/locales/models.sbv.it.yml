@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2022, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -11,127 +11,170 @@ it:
 
       group/generalverband:
         one: Associazione o federazione generale
+        many: Associazione o federazione generale
         other: Associazione o federazione generale
 
       group/root:
         one: Associazione Mantello
+        many: Associazioni mantello
         other: Associazioni mantello
       group/root_geschaeftsstelle:
         one: Segretariato
+        many: Segretariati
         other: Segretariati
       group/root_vorstand:
         one: Direzione
+        many: Direzione
         other: Direzione
       group/root_musikkommission:
         one: Commisione di musica
+        many: Commissioni di musica
         other: Commissioni di musica
       group/root_arbeitsgruppe:
         one: Gruppo di lavoro
+        many: Gruppi di lavoro
         other: Gruppi di lavoro
       group/root_ehrenmitglieder:
         one: Membro d'onore
+        many: Membri onorari
         other: Membri onorari
       group/root_veteranen:
         one: Veterani
+        many: Veterani
         other: Veterani
       group/root_veteranen/veteran:
         one: Veterano federale
+        many: Veterani federali
         other: Veterani federali
       group/root_veteranen/ehrenveteran:
         one: Veterano federale onorario
+        many: Veterani federali onorari
         other: Veterani federali onorari
       group/root_veteranen/cism_veteran:
         one: Veterano CISM
+        many: Veterani CISM
         other: Veterani CISM
       group/root_kontakte:
         one: Contatti
+        many: Contatti
         other: Contatti
       group/root/suisa_admin:
         one: Responsabile SUISA
+        many: Responsabili SUISA
         other: Responsabili SUISA
 
       group/mitgliederverband:
         one: Membro dell'associazione
+        many: Membri delle associazioni
         other: Membri delle associazioni
       group/mitgliederverband_geschaeftsstelle:
         one: Segretariati
+        many: Segretariati
         other: Segretariati
       group/mitgliederverband_vorstand:
         one: Comitato
+        many: Comitati
         other: Comitati
       group/mitgliederverband_musikkommission:
         one: Commissioni di musica
+        many: Commissioni di musica
         other: Commissioni di musica
       group/mitgliederverband_arbeitsgruppe:
         one: Gruppi di lavoro
+        many: Gruppi di lavoro
         other: Gruppi di lavoro
       group/mitgliederverband_ehrenmitglieder:
         one: Membri onorari
+        many: Membri onorari
         other: Membri onorari
       group/mitgliederverband_veteranen:
         one: Veterani
+        many: Veterani
         other: Veterani
       group/mitgliederverband_veteranen/veteran:
         one: Veterano cantonale
+        many: Veterani cantonali
         other: Veterani cantonali
       group/mitgliederverband_veteranen/ehrenveteran:
         one: Veterano onorario cantonale
+        many: Veterani onorari cantonali
         other: Veterani onorari cantonali
       group/mitgliederverband_kontakte:
         one: Contatti
+        many: Contatti
         other: Contatti
       group/mitgliederverband/suisa_admin:
         one: Responsabili SUISA
+        many: Responsabili SUISA
         other: Responsabili SUISA
 
       group/regionalverband:
         one: Associazione regionale
+        many: Associazioni regionali
         other: Associazioni regionali
       group/regionalverband_geschaeftsstelle:
         one: Segretariati
+        many: Segretariati
         other: Segretariati
       group/regionalverband_vorstand:
         one: Comitati
+        many: Comitati
         other: Comitati
       group/regionalverband_musikkommission:
         one: Commissioni di musica
+        many: Commissioni di musica
         other: Commissioni di musica
       group/regionalverband_arbeitsgruppe:
         one: Gruppi di lavoro
+        many: Gruppi di lavoro
         other: Gruppi di lavoro
       group/regionalverband_ehrenmitglieder:
         one: Membri onorari
+        many: Membri onorari
         other: Membri onorari
       group/regionalverband_kontakte:
         one: Contatti
+        many: Contatti
         other: Contatti
       group/regionalverband/suisa_admin:
         one: Responsabili SUISA
+        many: Responsabili SUISA
         other: Responsabili SUISA
 
       group/verein:
         one: Società bandistica
+        many: Società bandistiche
         other: Società bandistiche
       group/verein_vorstand:
         one: Comitati
+        many: Comitati
         other: Comitati
       group/verein_musikkommission:
         one: Commissioni di musica
+        many: Commissioni di musica
         other: Commissioni di musica
       group/verein_arbeitsgruppe:
         one: Gruppi di lavoro
+        many: Gruppi di lavoro
         other: Gruppi di lavoro
       group/verein_mitglieder:
         one: Membro
         oter: Membri
       group/verein_kontakte:
         one: Contatti
+        many: Contatti
         other: Contatti
       group/verein/conductor:
         one: Direttrice
+        many: Direttrici
         other: Direttrici
+      group/verein/jugendverantwortlicher:
+        one: ''
+        many: ''
+        other: ''
       group/verein/suisa_admin:
         one: Responsabili SUISA
+        many: Responsabili SUISA
         other: Responsabili SUISA
 
       ### ROLES FOR ALL LAYERS
@@ -140,88 +183,109 @@ it:
 
       role/admin:
         one: Amministratore
+        many: Amministratori
         other: Amministratori
       role/adressverwaltung:
         one: Gestione indirizzi
+        many: Gestione indirizzi
         other: Gestione indirizzi
 
       #### Geschaeftsstelle Roles
 
       role/geschaeftsstelle_manager:
         one: Direzione Amministrazione
+        many: Direzione Amministrazione
         other: Direzione Amministrazione
       role/geschaeftsstelle_staff:
         one: Collaboratore
+        many: Collaboratori
         other: Collaboratori
       role/geschaeftsstelle_help:
         one: Aiuto
+        many: Aiuti
         other: Aiuti
 
       #### Vorstand Roles
 
       role/vorstand_kassier:
         one: Cassiere
+        many: Cassieri
         other: Cassieri
       role/vorstand_finanzchef:
         one: Responsabile Finanze
+        many: Responsabili Finanze
         other: Responsabili Finanze
       role/vorstand_mitglied:
         one: Membro
+        many: Membri
         other: Membri
       role/vorstand_praesident:
         one: Presidente
+        many: Presidenti
         other: Presidenti
       role/vorstand_vize_praesident:
         one: Vice Presidente
+        many: Vice Presidenti
         other: Vice Presidenti
       role/vorstand_veteranenchef:
         one: Responsabile Veterani
+        many: Responsabili Veterani
         other: Responsabili Veterani
       role/vorstand_materialverwaltung:
         one: Gestione materiale
+        many: Gestione materiale
         other: Gestione materiale
 
       #### Musikkommission Roles
 
       role/musikkommission_praesident:
         one: Presidenti
+        many: Presidenti
         other: Presidenti
       role/musikkommission_mitglied:
         one: Membri
+        many: Membri
         other: Membri
 
       #### Arbeitsgruppen Roles
 
       role/arbeitsgruppe_leitung:
         one: Direzione
+        many: Direzione
         other: Direzione
       role/arbeitsgruppe_mitglied:
         one: Membri
+        many: Membri
         other: Membri
 
       #### Ehrenmitglieder
 
       role/ehrenmitglied:
         one: Membro onorario
+        many: Membri onorari
         other: Membri onorari
 
       #### Kontakte Roles
 
       role/kontakt:
         one: Contatto
+        many: Contatti
         other: Contatti
 
       #### Mitglieder Roles
 
       role/mitglieder_mitglied:
         one: Membri
+        many: Membri
         other: Membri
       role/mitglieder_passivmitglied:
         one: Membro passivo
+        many: Membri passivi
         other: Membri passivi
 
       song:
         one: Brano
+        many: Brani
         other: Brani
 
       song_census:
@@ -229,6 +293,7 @@ it:
 
       song_count:
         one: Annuncio brani
+        many: Annunci brani
         other: Annunci brani
 
       concert:
@@ -238,10 +303,12 @@ it:
 
       mailing_list:
         one: Elenco
+        many: Elenchi
         other: Elenchi
 
       event/group_participation:
         one: Iscrizioni di gruppo
+        many: Iscrizioni di gruppo
         other: Iscrizioni di gruppo
 
     attributes:

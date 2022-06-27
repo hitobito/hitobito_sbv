@@ -27,15 +27,15 @@ fr:
       no_data_for_this_year: Aucune donnée disponible pour cette année.
     total: Total
     totals:
-      submitted: soumis
-      not_submitted: pas soumis
-      censuses_submitted: "%{submitted} de %{total} soumis"
-      joint_play: Association musicale
+      submitted: envoyé
+      not_submitted: pas envoyé
+      censuses_submitted: "%{submitted} sur %{total} envoyé"
+      joint_play: Association d’ensembles
       not_playable: Pas d'exécution musicale cette année
       otherwise_billed: SUISA facturé à un tiers
     verein:
-      search: Rechercher une oeuvre...
-    submit: Soumettre la liste d'annonce
+      search: Rechercher une œuvre...
+    submit: Envoyer la liste d'annonce
     submit_button:
       label:
         submit: Envoyer liste
@@ -47,12 +47,12 @@ fr:
         none: Aucune liste à envoyer.
 
     remind:
-      success: "Le rappel a été envoyé avec succès à la société %{verein_count}."
-      send: Envoyer un rappel.
-      send_confirm: "Envoie un rappel à tous les responsables SUISA, qui n'ont pas encore établi de liste. Chacun reçoit un courriel dans sa langue de correspondance. Le texte du courriel peut être modifié sous Paramètres par un administrateur."
+      success: "Le rappel a été envoyé à la société %{verein_count}."
+      send: Envoyer un rappel
+      send_confirm: Envoie un rappel à tous les responsables SUISA qui n'ont pas encore envoyé de liste. Chacun reçoit un courriel dans sa langue de correspondance. Le texte du courriel peut être modifié par un administrateur sous Paramètres.
     finish:
       submit: Clôturer la liste d'annonces
-      start_new_census: "En clôturant la liste d'annonces, toutes les annonces effectuées jusqu'ici seront sauvegardées. Une nouvelle liste de messages sera créée, les nouvelles annonces seront ajoutées à cette liste."
+      start_new_census: "En clôturant la liste d'annonces, toutes les annonces effectuées jusqu'ici seront verrouillées. Une nouvelle liste de messages sera créée et les nouvelles annonces seront ajoutées à cette liste."
 
   person:
     history:
@@ -84,7 +84,7 @@ fr:
       role_only_public: >
         Le rôle %{role} du groupe %{group} ne peut voir que des données publiques (groupes, manifestations et listes; aucune autre personne).
   song_counts:
-    export_enqueued: 'L’exportation est lancée en arrière-plan et téléchargée une fois terminée.'
+    export_enqueued: 'L’exportation est lancée en arrière-plan et sera téléchargée une fois terminée.'
 
   subscriber:
       group:
@@ -93,30 +93,30 @@ fr:
           subgroups_and_siblings_selectable: "Seuls les groupes situés au niveau inférieur du groupe des listes ou en dessous des groupes voisins du type %{type} peuvent être sélectionnés"
 
   subscriber/user:
-    success: Vous avez été ajouté avec succès à la liste.
+    success: Vous avez été ajouté à la liste.
     failure: 'Vous ne pouvez pas être ajouté à la liste: %{errors}'
-    unsubscribed: Vous avez été supprimé de la liste avec succès.
+    unsubscribed: Vous avez été supprimé de la liste.
 
   subscriptions:
     list:
-      export_not_allowed: "Vous n'êtes pas autorisé à exporter les abonnés de cette liste, car ils contiennent également des rôles et / ou des manifestations extérieurs qui dépassent vos droits."
+      export_not_allowed: "Vous n'êtes pas autorisé à exporter les abonnés de cette liste, car ils contiennent en dehors des rôles et / ou des manifestations qui dépassent vos droits."
 
 
   dropdown/song_counts:
-    button: Exportation
+    button: Exporter
     csv: CSV
     xlsx: Excel
   dropdown/group_participations:
-    button: Exportation des enregistrements
+    button: Exporter des annonces
     csv: CSV
     xlsx: Excel
   concerts:
     index:
-      no_concerts_yet: "Pour soumettre la liste SUISA, vous devez ajouter au moins une exécution musicale ou choisir une alternative:"
+      no_concerts_yet: "Pour envoyer la liste SUISA, vous devez ajouter au moins une exécution musicale ou choisir une alternative:"
     submit:
       flash:
-        success: Liste d'annonces soumise.
-        failure: Une erreur s'est produite lors de l'enregistrement de la liste des oeuvres.
+        success: Liste d'annonces envoyée.
+        failure: Une erreur s'est produite lors de l'enregistrement de la liste des œuvres.
     actions_index:
       add_concert: Ajouter une interprétation
       title: Saisie SUISA
@@ -124,7 +124,7 @@ fr:
       summary: Résumé
 
   events/group_participations:
-    export_enqueued: 'L’exportation est lancée en arrière-plan et téléchargée une fois terminée.'
+    export_enqueued: 'L’exportation est lancée en arrière-plan et sera téléchargée une fois terminée.'
 
   events:
     global:
@@ -133,7 +133,7 @@ fr:
     group_participations:
       edit:
         title: "traiter %{participation}"
-        thank_you: "Merci pour ton inscription."
+        thank_you: "Merci pour votre inscription."
       actions_new:
         title: "Inscription de société"
       create:
