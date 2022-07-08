@@ -71,4 +71,13 @@ describe Group do
     end
   end
 
+  context 'manually counted members' do
+    it 'does not crash when manual_member_count is nil' do
+      group = groups(:hauptgruppe_1)
+      group.manual_member_count = nil
+
+      expect { group.uses_manually_counted_members? }.not_to raise_error
+    end
+  end
+
 end

@@ -63,7 +63,7 @@ module Sbv::Group
   end
 
   def uses_manually_counted_members?
-    manually_counted_members? && manual_member_count.nonzero?
+    manually_counted_members? && manual_member_count.present? && manual_member_count.nonzero?
   end
 
   def recognized_members
