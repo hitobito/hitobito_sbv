@@ -75,6 +75,8 @@ class SongCensusesController < CrudController
       next if vereins_total[verein.id]
 
       verein.suisa_admins.each do |suisa_admin|
+        next unless Person.mailing_emails_for(suisa_admin).present?
+
         SongCensusMailer.reminder(suisa_admin, verein).deliver_now
       end
     end.compact.count
