@@ -84,6 +84,31 @@ de:
         one: Verantwortlicher SUISA
         other: Verantworliche SUISA
 
+      group/kreis:
+        one: Kreis
+        other: Kreise
+      group/kreis_geschaeftsstelle:
+        one: Geschäftsstelle
+        other: Geschäftsstellen
+      group/kreis_vorstand:
+        one: Vorstand
+        other: Vorstände
+      group/kreis_musikkommission:
+        one: Musikkommission
+        other: Musikkommissionen
+      group/kreis_arbeitsgruppe:
+        one: Arbeitsgruppe
+        other: Arbeitsgruppen
+      group/kreis_ehrenmitglieder:
+        one: Ehrenmitglieder
+        other: Ehrenmitglieder
+      group/kreis_kontakte:
+        one: Kontakte
+        other: Kontakte
+      group/kreis/suisa_admin:
+        one: Verantwortlicher SUISA
+        other: Verantworliche SUISA
+
       group/regionalverband:
         one: Regionalverband
         other: Regionalverbände

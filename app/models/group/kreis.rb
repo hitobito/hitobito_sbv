@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2022, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2022, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -44,23 +44,19 @@
 #  hostname                    :string(255)
 #
 
-class Group::Regionalverband < ::Group
+class Group::Kreis < ::Group
 
   self.layer = true
-  self.default_children = [Group::RegionalverbandGeschaeftsstelle,
-                           Group::RegionalverbandVorstand,
-                           Group::RegionalverbandKontakte,
-                           Group::RegionalverbandMusikkommission]
+  self.default_children = [Group::KreisGeschaeftsstelle,
+                           Group::KreisVorstand,
+                           Group::KreisKontakte,
+                           Group::KreisMusikkommission]
 
-  children Group::RegionalverbandGeschaeftsstelle,
-           Group::RegionalverbandVorstand,
-           Group::RegionalverbandMusikkommission,
-           Group::RegionalverbandArbeitsgruppe,
-           Group::RegionalverbandKontakte,
-           Group::Kreis,
+  children Group::KreisGeschaeftsstelle,
+           Group::KreisVorstand,
+           Group::KreisMusikkommission,
+           Group::KreisKontakte,
            Group::Verein
-
-  include SecondaryChildren
 
   ### ROLES
 

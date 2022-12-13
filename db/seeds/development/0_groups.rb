@@ -46,6 +46,20 @@ def build_verein_attrs(parent_id, name, besetzung, lang)
   attrs
 end
 
+def build_kreis_attrs(parent_id, name = nil)
+  attrs = []
+  (1..4).to_a.sample.times.each do |i|
+    attrs << { 
+      name: "Kreis " + ['A', 'B', 'C', 'D'][i],
+      address: Faker::Address.street_address,
+      zip_code: Faker::Address.zip[0..3],
+      town: Faker::Address.city,
+      parent_id: parent_id
+    }
+  end
+  attrs
+end
+
 def build_regionalverband_attrs(parent_id, name = nil)
   build_verein_attrs(parent_id, (name || "Region #{%w[Nord Ost Süd West].sample}"), nil, nil)
 end
@@ -73,6 +87,7 @@ limited(csv.by_col['Verband'].uniq, selection: [
     end
 
     Group::Verein.seed_once(:name, :parent_id, limited(verein_attrs, limit: 4))
+    Group::Kreis.seed_once(:name, :parent_id, build_kreis_attrs(rv.id))
   end
 
   mv.default_children.each do |child_class|
