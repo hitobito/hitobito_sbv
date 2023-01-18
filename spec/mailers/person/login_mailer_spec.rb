@@ -8,7 +8,7 @@ require 'spec_helper'
 describe Person::LoginMailer do
 
   before do
-
+    CustomContent.where(key: Person::LoginMailer::CONTENT_LOGIN).destroy_all
     content = CustomContent.new(key: Person::LoginMailer::CONTENT_LOGIN,
                                 placeholders_required: 'login-url',
                                 placeholders_optional: 'recipient-name, sender-name, dachverband')
