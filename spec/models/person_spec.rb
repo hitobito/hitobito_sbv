@@ -12,7 +12,12 @@ describe Person do
 
   subject { people(:member) }
 
-  %w(first_name last_name birthday).each do |attr|
+  # original validations, commented for https://github.com/hitobito/hitobito_sbv/issues/125
+  # revert commit later to restore original behaviour
+  # 
+  # %w(first_name last_name birthday).each do |attr|
+
+  %w(first_name last_name).each do |attr|
     it "validates presence of #{attr}" do
       subject.update_attribute(attr, '')
       translated_attr = Person.human_attribute_name(attr)
