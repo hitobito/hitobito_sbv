@@ -108,6 +108,39 @@ it:
         many: Responsabili SUISA
         other: Responsabili SUISA
 
+      group/kreis:
+        one: ''
+        many: ''
+        other: ''
+      group/kreis_geschaeftsstelle:
+        one: ''
+        many: ''
+        other: ''
+      group/kreis_vorstand:
+        one: ''
+        many: ''
+        other: ''
+      group/kreis_musikkommission:
+        one: ''
+        many: ''
+        other: ''
+      group/kreis_arbeitsgruppe:
+        one: ''
+        many: ''
+        other: ''
+      group/kreis_ehrenmitglieder:
+        one: ''
+        many: ''
+        other: ''
+      group/kreis_kontakte:
+        one: ''
+        many: ''
+        other: ''
+      group/kreis/suisa_admin:
+        one: ''
+        many: ''
+        other: ''
+
       group/regionalverband:
         one: Associazione regionale
         many: Associazioni regionali
