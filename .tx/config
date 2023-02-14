@@ -1,13 +1,13 @@
 [main]
 host = https://www.transifex.com
-type = YML
 
-[hitobito_sbv.views-sbv]
+[o:hitobito:p:hitobito_sbv:r:models-sbv]
+file_filter = config/locales/models.sbv.<lang>.yml
+source_file = config/locales/models.sbv.de.yml
+source_lang = de
+
+[o:hitobito:p:hitobito_sbv:r:views-sbv]
 file_filter = config/locales/views.sbv.<lang>.yml
 source_file = config/locales/views.sbv.de.yml
 source_lang = de
 
-[hitobito_sbv.models-sbv]
-file_filter = config/locales/models.sbv.<lang>.yml
-source_file = config/locales/models.sbv.de.yml
-source_lang = de
