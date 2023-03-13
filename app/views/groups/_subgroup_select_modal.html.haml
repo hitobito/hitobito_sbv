@@ -1,0 +1,26 @@
+#subgroup-select.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h5.bold.modal-title
+          -# %b= title
+
+      = standard_form(path_args(entry),
+        url: 'bla', method: :get) do |f|
+        .modal-body
+          .row-fluid
+            -#TODO: necessary to yield?
+            -# = yield
+
+            .checkboxes
+              - groups = entry.self_and_descendants
+              - if groups.present?
+                -# = subgroups_checkboxes(groups)
+                = groups.map(&:name)
+              - else
+                = t('.no_entries')
+        .modal-footer
+          = submit_button(f, 'l')
+          = link_to(ti('button.cancel'), '#',
+            class: 'link cancel',
+            onclick: "event.preventDefault(); $('#subgroup-select').modal('hide')")
