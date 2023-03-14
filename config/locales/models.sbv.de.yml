@@ -337,6 +337,12 @@ de:
               group_full: Lesen und Schreiben auf der Gruppe. Erstellen von Anlässen und Listen auf der Gruppe.
               festival_participation: Darf den Verein zu Musikfesten anmelden und die Anmeldung bearbeiten.
               uv_lohnsumme: Darf die UV-Lohnsummen verwalten.
+
+      invoice_item/membership_fee:
+        amount: Betrag
+        cutoff_date: Stichdatum
+
+
       song:
         title: Titel
         composed_by: Komponist

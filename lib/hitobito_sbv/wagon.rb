@@ -28,6 +28,7 @@ module HitobitoSbv
       Group.include Sbv::Group::NestedSet
       Person.include Sbv::Person
       Role.include Sbv::Role
+      InvoiceItem.add_type_mapping(:membership_fee, InvoiceItem::MembershipFee)
       Subscription.prepend Sbv::Subscription
       MailingList.prepend Sbv::MailingList
 
