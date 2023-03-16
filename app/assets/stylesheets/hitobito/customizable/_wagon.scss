@@ -3,12 +3,13 @@
 //  or later. See the COPYING file at the top-level directory or at
 //  https://github.com/hitobito/hitobito_sbv.
 
-.nav-left a.is-active, .nav-left li.is-active > a {
-  background-color: lighten(desaturate($linkColor,60%), 55%);
+.nav-left a.is-active,
+.nav-left li.is-active > a {
+  background-color: lighten(desaturate($linkColor, 60%), 55%);
 }
 
 .song-counts {
-  input[name=q] {
+  input[name="q"] {
     width: 100%;
   }
 
@@ -30,16 +31,17 @@
 }
 
 #concert-form {
-  border-top: 1px solid #E8EBF0;
+  border-top: 1px solid #e8ebf0;
 }
-
 
 #song-counts-form {
   position: relative;
   .add_nested_fields {
     display: none;
   }
-  .dec_song_count, .inc_song_count, .remove_nested_fields {
+  .dec_song_count,
+  .inc_song_count,
+  .remove_nested_fields {
     padding: 0.5rem;
     margin: -0.5rem;
   }
@@ -66,4 +68,13 @@
 
 .tooltip-wrapper {
   display: inline-block;
+}
+
+#invoice_items_fields .controls-row [class*="span"] {
+  float: none;
+}
+
+#invoice_items_fields
+  input[name="invoice_list[invoice][invoice_items_attributes][0][dynamic_cost_parameters][amount]"] {
+  width: 56px;
 }
