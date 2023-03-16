@@ -13,8 +13,9 @@ class InvoiceItem::MembershipFee < InvoiceItem
 
     amount = dynamic_cost_parameters[:amount]
     cutoff_date = Date.parse(dynamic_cost_parameters[:cutoff_date])
+    recipient_id = dynamic_cost_parameters[:recipient_id]
 
-    layer = Group::VereinVorstand::Kassier.find_by(person_id: dynamic_cost_parameters[:recipient_id]).group.layer_group
+    layer = InvoiceLists::VereinMembershipFeeRecipientFinder.find_verein(recipient_id)
 
     member_count = if layer.manually_counted_members?
                      layer.manual_member_count
