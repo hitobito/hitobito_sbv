@@ -6,21 +6,20 @@
           -# %b= title
 
       = standard_form(path_args(entry),
-        url: 'bla', method: :get) do |f|
+        url: new_group_invoice_list_path(group_id: entry) , method: :get) do |f|
         .modal-body
           .row-fluid
             -#TODO: necessary to yield?
             -# = yield
-
+            = hidden_field_tag('invoice_items[]', [:membership_fee])
             .checkboxes
-              - groups = entry.self_and_descendants
+              - groups = Group::Verein.where(id: entry.self_and_descendants.pluck(:id))
               - if groups.present?
-                -# = subgroups_checkboxes(groups)
-                = groups.map(&:name)
+                = subgroups_checkboxes(groups)
               - else
                 = t('.no_entries')
         .modal-footer
-          = submit_button(f, 'l')
+          = submit_button(f, 'l', data: { checkable: true })
           = link_to(ti('button.cancel'), '#',
             class: 'link cancel',
             onclick: "event.preventDefault(); $('#subgroup-select').modal('hide')")

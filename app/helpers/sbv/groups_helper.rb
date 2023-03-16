@@ -44,4 +44,22 @@ module Sbv::GroupsHelper
     verein.besetzung_label
   end
 
+  def subgroups_checkboxes(groups)
+    safe_join(groups.map do |group|
+      content_tag(:div, class: 'control-group') do
+        recipient_id = InvoiceLists::VereinMembershipFeeRecipientFinder.find_recipient(group.id)
+        id = "invoice_list_ids_#{recipient_id}"
+        label_tag(nil, class: 'checkbox') do
+          out = check_box_tag('ids[]',
+                              recipient_id,
+                              true,
+                              id: 'invoice_list_ids_',
+                              data: { multiselect: true })
+          out << group.name
+          out.html_safe
+        end
+      end
+    end, '')
+  end
+
 end
