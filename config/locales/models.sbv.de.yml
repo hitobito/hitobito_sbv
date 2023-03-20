@@ -338,7 +338,7 @@ de:
               festival_participation: Darf den Verein zu Musikfesten anmelden und die Anmeldung bearbeiten.
               uv_lohnsumme: Darf die UV-Lohnsummen verwalten.
 
-      invoice_item/membership_fee:
+      invoice_item:
         amount: Betrag
         cutoff_date: Stichdatum
 

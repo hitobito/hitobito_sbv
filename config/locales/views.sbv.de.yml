@@ -86,6 +86,8 @@ de:
     actions_show_sbv:
       export_lohnsummen: Export UV Lohnsummen
       create_verein_invoice_list: Vereinsrechnungen erstellen
+    subgroup_select_modal:
+      submit: Zum Rechnungsformular
 
   roles:
     info:
@@ -120,6 +122,9 @@ de:
     button: Anmeldungen Export
     csv: CSV
     xlsx: Excel
+  dropdown/invoice_new:
+    membership_fee: Mitgliederbeitrag
+
   concerts:
     index:
       no_concerts_yet: "Um die SUISA-Meldeliste einzureichen müssen Sie mindestens eine Aufführung hinzufügen oder eine alternative Erledigung wählen:"
