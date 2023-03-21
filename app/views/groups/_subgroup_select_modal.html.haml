@@ -9,13 +9,11 @@
         url: new_group_invoice_list_path(group_id: entry) , method: :get) do |f|
         .modal-body
           .row-fluid
-            -#TODO: necessary to yield?
-            -# = yield
             = hidden_field_tag('invoice_items[]', [:membership_fee])
             .checkboxes
-              - groups = Group::Verein.where(id: entry.self_and_descendants.pluck(:id))
+              - groups = Group::Verein.where(id: entry.descendants.pluck(:id))
               - if groups.present?
-                = subgroups_checkboxes(groups)
+                = subgroups_checkboxes(groups, entry)
               - else
                 = t('.no_entries')
         .modal-footer

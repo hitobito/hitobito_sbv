@@ -44,22 +44,61 @@ module Sbv::GroupsHelper
     verein.besetzung_label
   end
 
-  def subgroups_checkboxes(groups)
-    safe_join(groups.map do |group|
-      content_tag(:div, class: 'control-group') do
-        recipient_id = InvoiceLists::VereinMembershipFeeRecipientFinder.find_recipient(group.id)
-        id = "invoice_list_ids_#{recipient_id}"
-        label_tag(nil, class: 'checkbox') do
-          out = check_box_tag('ids[]',
-                              recipient_id,
-                              true,
-                              id: 'invoice_list_ids_',
-                              data: { multiselect: true })
-          out << group.name
-          out.html_safe
+  def subgroups_checkboxes(groups, root)
+    hash = {}
+    groups.group_by(&:parent_id).values.each do |grouping|
+      if grouping.first.parent_id == root.id
+        hash[root] = grouping
+      else
+        hash.merge!(create_nesting(grouping, root) { grouping })
+      end
+    end
+
+    nested_verein_checkbox(hash, root)
+  end
+
+  def nested_verein_checkbox(hash, root)
+    safe_join(hash.map do |parent, value|
+      content_tag(:ul) do
+        content = content_tag(:li) do
+          parent.name
+        end
+        content << content_tag(:li) do
+          if value.is_a?(Hash)
+            nested_verein_checkbox(value, root)
+          else
+            safe_join(value.map do |verein|
+              content_tag(:div, class: 'control-group') do
+                recipient_id = InvoiceLists::VereinMembershipFeeRecipientFinder.find_recipient(verein.id)
+                next unless recipient_id
+                label_tag(nil, class: 'checkbox') do
+                  out = check_box_tag('ids[]',
+                                      recipient_id,
+                                      true,
+                                      id: 'invoice_list_ids_',
+                                      data: { multiselect: true })
+                  out << verein.name
+                  out.html_safe
+                end
+              end
+            end, '')
+          end
         end
       end
-    end, '')
+    end,'')
+  end
+
+  def create_nesting(group, root)
+    parent = Array.wrap(group).first.parent
+    if parent.id == root.id
+      return yield
+    end
+
+    create_nesting(parent, root) do
+      hash = Hash.new
+      hash[parent] = yield
+      hash
+    end
   end
 
 end
