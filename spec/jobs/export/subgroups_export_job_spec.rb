@@ -14,7 +14,8 @@ describe Export::SubgroupsExportJob do
   subject(:bern_export) { described_class.new(people(:admin), groups(:bernischer_kantonal_musikverband).id, {}) }
 
   let(:export) { root_export }
-  let(:csv) { CSV.parse(export.data, col_sep: ';', headers: true) }
+  let(:data_without_bom) { export.data.gsub(Regexp.new("^#{Export::Csv::UTF8_BOM}"), '') }
+  let(:csv)  { CSV.parse(data_without_bom, col_sep: ';', headers: true) }
 
   it 'only exports Verband and Verein group types' do
     names = root_export.send(:entries).collect { |e| e.class.sti_name }.uniq
