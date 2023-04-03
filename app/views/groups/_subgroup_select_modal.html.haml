@@ -5,7 +5,7 @@
         %h5.bold.modal-title
           %b= t('groups.actions_show_sbv.create_verein_invoice_list')
 
-      = standard_form(path_args(entry),
+      = standard_form(entry,
         url: new_group_invoice_list_path(group_id: entry) , method: :get) do |f|
         .modal-body
           .row-fluid

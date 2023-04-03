@@ -57,17 +57,30 @@ module Sbv::GroupsHelper
     nested_verein_checkbox(hash, root)
   end
 
+  def create_nesting(group, root)
+    parent = Array.wrap(group).first.parent
+    if parent.id == root.id
+      return yield
+    end
+
+    create_nesting(parent, root) do
+      hash = Hash.new
+      hash[parent] = yield
+      hash
+    end
+  end
+
   def nested_verein_checkbox(hash, root)
-    safe_join(hash.map do |parent, value|
-      content_tag(:ul) do
-        content = content_tag(:li) do
+    safe_join(hash.map do |parent, vereine_or_nested_structure|
+      content_tag(:div, class: 'verein_fee_nesting') do
+        content = content_tag(:h3) do
           parent.name
         end
-        content << content_tag(:li) do
-          if value.is_a?(Hash)
-            nested_verein_checkbox(value, root)
-          else
-            safe_join(value.map do |verein|
+        content << content_tag(:div, class: 'verein_fee_nesting') do
+          if vereine_or_nested_structure.is_a?(Hash)
+            nested_verein_checkbox(vereine_or_nested_structure, root)
+          elsif vereine_or_nested_structure.is_a?(Array)
+            safe_join(vereine_or_nested_structure.map do |verein|
               content_tag(:div, class: 'control-group') do
                 recipient_id = InvoiceLists::VereinMembershipFeeRecipientFinder.find_recipient(verein.id)
                 next unless recipient_id
@@ -87,18 +100,4 @@ module Sbv::GroupsHelper
       end
     end,'')
   end
-
-  def create_nesting(group, root)
-    parent = Array.wrap(group).first.parent
-    if parent.id == root.id
-      return yield
-    end
-
-    create_nesting(parent, root) do
-      hash = Hash.new
-      hash[parent] = yield
-      hash
-    end
-  end
-
 end
