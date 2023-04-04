@@ -1,7 +1,7 @@
 
 class InvoiceLists::VereinMembershipFeeRecipientFinder
   def self.find_recipient(verein_id)
-    vorstand_id = Group::VereinVorstand.where(parent_id: verein_id)&.first&.id
+    vorstand_id = Group::VereinVorstand.find_by(parent_id: verein_id)&.id
     admin_role = Group::Verein::Admin.find_by(group_id: verein_id)
 
     if vorstand_id.present?

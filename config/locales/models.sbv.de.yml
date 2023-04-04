@@ -272,6 +272,10 @@ de:
         one: Gruppenanmeldung
         other: Gruppenanmeldungen
 
+      invoice_item/membership_fee:
+        one: Mitgliederbeitrag
+        other: Mitgliederbeiträge
+
     attributes:
       person:
         correspondence_language: Korrespondenzsprache

@@ -95,7 +95,7 @@ module Sbv::GroupsHelper
                   out = check_box_tag('ids[]',
                                       recipient_id,
                                       true,
-                                      id: 'invoice_list_ids_',
+                                      id: 'ids_',
                                       data: { multiselect: true })
                   out << verein.name
                   out.html_safe

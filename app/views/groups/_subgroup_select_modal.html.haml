@@ -13,6 +13,10 @@
             .checkboxes
               - groups = Group::Verein.where(id: entry.descendants.pluck(:id))
               - if groups.present?
+                = label_tag(nil, class: 'checkbox') do
+                  = check_box_tag(:all, 0, true, data: :multiselect)
+                  = t('.select_all')
+
                 = subgroups_checkboxes(groups, entry)
               - else
                 = t('.no_entries')

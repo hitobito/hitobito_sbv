@@ -87,6 +87,7 @@ de:
       export_lohnsummen: Export UV Lohnsummen
       create_verein_invoice_list: Vereinsrechnungen erstellen
     subgroup_select_modal:
+      select_all: Alle Vereine an-/abwählen
       submit: Zum Rechnungsformular
 
   roles:
