@@ -46,11 +46,16 @@ module Sbv::GroupsHelper
 
   def subgroups_checkboxes(groups, root)
     hash = {}
-    groups.group_by(&:parent_id).values.each do |grouping|
+    groups.without_deleted.includes([:parent]).group_by(&:parent_id).values.each do |grouping|
       if grouping.first.parent_id == root.id
-        hash[root] = grouping
+        hash[root] = {}
+        hash[root][root] = grouping
       else
-        hash.merge!(create_nesting(grouping, root) { grouping })
+        hash.deep_merge!(create_nesting(grouping, root) do
+          b = Hash.new
+          b[grouping.first.parent] = grouping
+          b
+        end)
       end
     end
 
@@ -60,11 +65,13 @@ module Sbv::GroupsHelper
   def create_nesting(group, root)
     parent = Array.wrap(group).first.parent
     if parent.id == root.id
-      return yield
+      hash = {}
+      hash[parent] = yield
+      return hash
     end
 
     create_nesting(parent, root) do
-      hash = Hash.new
+      hash = {}
       hash[parent] = yield
       hash
     end
@@ -74,7 +81,7 @@ module Sbv::GroupsHelper
     safe_join(hash.map do |parent, vereine_or_nested_structure|
       content_tag(:div, class: 'verein_fee_nesting') do
         content = content_tag(:h3) do
-          parent.name
+          parent.name if vereine_or_nested_structure.is_a?(Hash)
         end
         content << content_tag(:div, class: 'verein_fee_nesting') do
           if vereine_or_nested_structure.is_a?(Hash)
