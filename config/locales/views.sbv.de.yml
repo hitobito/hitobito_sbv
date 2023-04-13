@@ -89,6 +89,11 @@ de:
     subgroup_select_modal:
       select_all: Alle Vereine an-/abwählen
       submit: Zum Rechnungsformular
+      info: 
+        group-vereinvorstand-kassier: Rechnung wird an den/die Kassier*in des Vorstandes gesendet
+        group-vereinvorstand-praesident: Rechnung wird an den/die Präsident*in des Vorstandes gesendet
+        group-verein-admin: Rechnung wird an den/die Administrator*in des Vorstandes gesendet
+        no_recipient: Rechnung kann nicht gestellt werden, da kein Empfänger gefunden wurde
 
   roles:
     info:

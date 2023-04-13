@@ -45,24 +45,31 @@ module Sbv::GroupsHelper
   end
 
   def subgroups_checkboxes(groups, root)
-    hash = {}
-    groups.without_deleted.includes([:parent]).group_by(&:parent_id).values.each do |grouping|
-      if grouping.first.parent_id == root.id
-        hash[root] = {}
-        hash[root][root] = grouping
-      else
-        hash.deep_merge!(create_nesting(grouping, root) do
-          b = Hash.new
-          b[grouping.first.parent] = grouping
-          b
-        end)
-      end
-    end
-
-    nested_verein_checkbox(hash, root)
+    nested_verein_checkboxes(vereine_nesting(groups, root), root)
   end
 
-  def create_nesting(group, root)
+  def vereine_nesting(groups, root)
+    groups.without_deleted.includes([:parent])
+                          .group_by(&:parent_id)
+                          .values.each_with_object({}) do |vereine_by_parent, global_nesting|
+      parent = vereine_by_parent.first.parent
+
+      if parent.id == root.id
+        global_nesting[root] = {}
+        global_nesting[root][root] = vereine_by_parent
+      else
+        nesting = create_vereine_nesting(vereine_by_parent, root) do
+          verein_nesting = {}
+          verein_nesting[parent] = vereine_by_parent
+          verein_nesting
+        end
+
+        global_nesting.deep_merge!(nesting)
+      end
+    end
+  end
+
+  def create_vereine_nesting(group, root)
     parent = Array.wrap(group).first.parent
     if parent.id == root.id
       hash = {}
@@ -70,41 +77,49 @@ module Sbv::GroupsHelper
       return hash
     end
 
-    create_nesting(parent, root) do
+    create_vereine_nesting(parent, root) do
       hash = {}
       hash[parent] = yield
       hash
     end
   end
 
-  def nested_verein_checkbox(hash, root)
+  def nested_verein_checkboxes(hash, root)
     safe_join(hash.map do |parent, vereine_or_nested_structure|
       content_tag(:div, class: 'verein_fee_nesting') do
-        content = content_tag(:h3) do
-          parent.name if vereine_or_nested_structure.is_a?(Hash)
+        content = ActiveSupport::SafeBuffer.new
+        if vereine_or_nested_structure.is_a?(Hash)
+          content << content_tag(:h3) do
+            parent.name
+          end
         end
         content << content_tag(:div, class: 'verein_fee_nesting') do
           if vereine_or_nested_structure.is_a?(Hash)
-            nested_verein_checkbox(vereine_or_nested_structure, root)
+            nested_verein_checkboxes(vereine_or_nested_structure, root)
           elsif vereine_or_nested_structure.is_a?(Array)
-            safe_join(vereine_or_nested_structure.map do |verein|
-              content_tag(:div, class: 'control-group') do
-                recipient_id = InvoiceLists::VereinMembershipFeeRecipientFinder.find_recipient(verein.id)
-                next unless recipient_id
-                label_tag(nil, class: 'checkbox') do
-                  out = check_box_tag('ids[]',
-                                      recipient_id,
-                                      true,
-                                      id: 'ids_',
-                                      data: { multiselect: true })
-                  out << verein.name
-                  out.html_safe
-                end
-              end
-            end, '')
+            safe_join(vereine_or_nested_structure.map { |verein| verein_checkbox(verein) }, '')
           end
         end
       end
     end,'')
+  end
+
+  def verein_checkbox(verein)
+    content_tag(:div, class: 'control-group') do
+      recipient = InvoiceLists::VereinMembershipFeeRecipientFinder.find_recipient(verein.id)
+      info_text = t(".info.#{recipient&.class&.sti_name&.parameterize || 'no_recipient'}")
+      label_tag(nil, class: 'checkbox', title: info_text) do
+        out = check_box_tag('ids[]',
+                            recipient&.id,
+                            recipient&.id.present?,
+                            id: 'ids_',
+                            disabled: recipient&.id.nil?,
+                            data: { multiselect: true })
+        out << verein.name
+        out << ' '
+        out << icon(:info)
+        out.html_safe
+      end
+    end
   end
 end
