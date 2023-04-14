@@ -22,7 +22,7 @@ class InvoiceItem::MembershipFee < InvoiceItem
 
     layer = InvoiceLists::VereinMembershipFeeRecipientFinder.find_verein(recipient_id)
 
-    member_count = if layer.manually_counted_members?
+    member_count = if layer.uses_manually_counted_members?
                      layer.manual_member_count
                    else
                      Role.with_deleted
@@ -33,6 +33,6 @@ class InvoiceItem::MembershipFee < InvoiceItem
                                 group: { layer_group_id: layer.id }).count
                    end
 
-    amount * member_count
+    amount.to_i * member_count
   end
 end

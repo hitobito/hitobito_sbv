@@ -110,10 +110,10 @@ module Sbv::GroupsHelper
       info_text = t(".info.#{recipient&.class&.sti_name&.parameterize || 'no_recipient'}")
       label_tag(nil, class: 'checkbox', title: info_text) do
         out = check_box_tag('ids[]',
-                            recipient&.id,
-                            recipient&.id.present?,
+                            recipient&.person_id,
+                            recipient.present?,
                             id: 'ids_',
-                            disabled: recipient&.id.nil?,
+                            disabled: recipient.nil?,
                             data: { multiselect: true })
         out << verein.name
         out << ' '

@@ -7,9 +7,9 @@
   = action_button(t('.export_lohnsummen'), group_export_lohnsummen_path(group_id: entry.id, format: :csv), :download)
 - if can?(:show_uv_lohnsummen, entry)
   = action_button(t('.export_lohnsummen'), group_export_lohnsummen_path(group_id: entry.id, format: :csv), :download)
-- if can?(:create_invoices_from_list, entry)
+- if entry.layer? && can?(:create_invoices_from_list, entry)
   = action_button(translate('.create_verein_invoice_list'),
-    subgroup_select_group_path(entry),
+    subverein_select_group_path(entry),
     :plus,
     data: { checkable: true, method: :get },
     remote: true)
