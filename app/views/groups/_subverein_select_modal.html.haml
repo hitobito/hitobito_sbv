@@ -26,7 +26,8 @@
               - else
                 = t('.no_entries')
         .modal-footer
-          = submit_button(f, t('.submit'), data: { checkable: true })
+          - if groups.present?
+            = submit_button(f, t('.submit'), data: { checkable: true })
           = link_to(ti('button.cancel'), nil,
             class: 'link cancel',
             onclick: "event.preventDefault(); $('#subgroup-select').modal('hide')")
