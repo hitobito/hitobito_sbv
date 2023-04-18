@@ -27,7 +27,8 @@
                 = t('.no_entries')
         .modal-footer
           - if groups.present?
-            = submit_button(f, t('.submit'), data: { checkable: true })
+            - disabled_text = entry.invoice_config.invalid? ? t('.invoice_config_invalid') : nil
+            = submit_button(f, t('.submit'), data: { checkable: true }, disabled: disabled_text.present?, title: disabled_text)
           = link_to(ti('button.cancel'), nil,
             class: 'link cancel',
             onclick: "event.preventDefault(); $('#subgroup-select').modal('hide')")

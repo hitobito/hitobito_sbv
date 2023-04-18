@@ -90,6 +90,7 @@ de:
       select_all: Alle Vereine an-/abwählen
       submit: Zum Rechnungsformular
       no_entries: Keine Subvereine vorhanden
+      invoice_config_invalid: Rechnungen können nicht erstellt werden, da Ihre Rechnungseinstellungen invalide sind.
       info: 
         group-vereinvorstand-kassier: Rechnung wird an den/die Kassier*in des Vorstandes gesendet
         group-vereinvorstand-praesident: Rechnung wird an den/die Präsident*in des Vorstandes gesendet
