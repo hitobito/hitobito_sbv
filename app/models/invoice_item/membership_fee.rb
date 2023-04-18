@@ -17,22 +17,34 @@ class InvoiceItem::MembershipFee < InvoiceItem
     return if dynamic_cost_parameters[:recipient_id].blank?
 
     amount = dynamic_cost_parameters[:amount]
-    cutoff_date = Date.parse(dynamic_cost_parameters[:cutoff_date])
+    cutoff_date = begin
+                    Date.parse(dynamic_cost_parameters[:cutoff_date])
+                  rescue
+                    nil
+                  end
+
     recipient_id = dynamic_cost_parameters[:recipient_id]
 
-    layer = InvoiceLists::VereinMembershipFeeRecipientFinder.find_verein(recipient_id)
-
-    member_count = if layer.uses_manually_counted_members?
-                     layer.manual_member_count
-                   else
-                     Role.with_deleted
-                         .joins(:group)
-                         .where('roles.deleted_at IS NULL OR roles.deleted_at > ?', cutoff_date)
-                         .where(created_at: ...cutoff_date,
-                                type: Group::VereinMitglieder::Mitglied.sti_name,
-                                group: { layer_group_id: layer.id }).count
-                   end
+    member_count = member_count_for_dynamic_cost(recipient_id, cutoff_date)
 
     amount.to_i * member_count
+  end
+
+  def member_count_for_dynamic_cost(recipient_id, cutoff_date)
+    layer = InvoiceLists::VereinMembershipFeeRecipientFinder.find_verein(recipient_id)
+
+    if layer.uses_manually_counted_members?
+      layer.manual_member_count
+    else
+      roles_scope = Role.with_deleted.joins(:group)
+        .where(type: Group::VereinMitglieder::Mitglied.sti_name,
+               group: { layer_group_id: layer.id })
+      if cutoff_date.present?
+        roles_scope.where('roles.deleted_at IS NULL OR roles.deleted_at > ?', cutoff_date)
+          .where(created_at: ...cutoff_date)
+      else
+        roles_scope
+      end.count
+    end
   end
 end
