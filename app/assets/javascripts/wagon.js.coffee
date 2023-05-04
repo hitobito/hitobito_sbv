@@ -5,3 +5,4 @@
 
 import './modules/group_paticipations.js.coffee'
 import './modules/song_counts.js.coffee'
+import './modules/subverein_select.js.coffee'

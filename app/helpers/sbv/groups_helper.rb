@@ -44,4 +44,7 @@ module Sbv::GroupsHelper
     verein.besetzung_label
   end
 
+  def subverein_checkboxes(root)
+    SubvereinCheckboxesBuilder.checkboxes(root, self)
+  end
 end

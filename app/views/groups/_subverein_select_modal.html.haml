@@ -1,0 +1,27 @@
+- #  Copyright (c) 2023, Schweizer Blasmusikverband. This file is part of
+- #  hitobito_sbv and licensed under the Affero General Public License version 3
+- #  or later. See the COPYING file at the top-level directory or at
+- #  https://github.com/hitobito/hitobito_sbv.
+
+#subgroup-select.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h5.bold.modal-title
+          %b= t('groups.actions_show_sbv.create_verein_invoice_list')
+
+      = standard_form(entry,
+        url: new_group_invoice_list_path(group_id: entry) , method: :get) do |f|
+        .modal-body
+          .row-fluid
+            = hidden_field_tag('invoice_items[]', [:membership_fee])
+            .checkboxes
+              = subverein_checkboxes(entry)
+        .modal-footer
+          - groups = Group::Verein.where(id: entry.descendants.pluck(:id))
+          - if groups.present?
+            - disabled_text = entry.invoice_config.invalid? ? t('.invoice_config_invalid') : nil
+            = submit_button(f, t('.submit'), data: { checkable: true }, disabled: disabled_text.present?, title: disabled_text)
+          = link_to(ti('button.cancel'), nil,
+            class: 'link cancel',
+            onclick: "event.preventDefault(); $('#subgroup-select').modal('hide')")

@@ -85,6 +85,17 @@ de:
   groups:
     actions_show_sbv:
       export_lohnsummen: Export UV Lohnsummen
+      create_verein_invoice_list: Vereinsrechnungen erstellen
+    subverein_select_modal:
+      select_all: Alle Vereine an-/abwählen
+      submit: Zum Rechnungsformular
+      no_entries: Keine Subvereine vorhanden
+      invoice_config_invalid: Rechnungen können nicht erstellt werden, da Ihre Rechnungseinstellungen invalide sind.
+      info: 
+        group-vereinvorstand-kassier: Rechnung wird an den/die Kassier*in des Vorstandes gesendet
+        group-vereinvorstand-praesident: Rechnung wird an den/die Präsident*in des Vorstandes gesendet
+        group-verein-admin: Rechnung wird an den/die Administrator*in des Vorstandes gesendet
+        no_recipient: Rechnung kann nicht gestellt werden, da kein Empfänger gefunden wurde
 
   roles:
     info:
@@ -119,6 +130,9 @@ de:
     button: Anmeldungen Export
     csv: CSV
     xlsx: Excel
+  dropdown/invoice_new:
+    membership_fee: Mitgliederbeitrag
+
   concerts:
     index:
       no_concerts_yet: "Um die SUISA-Meldeliste einzureichen müssen Sie mindestens eine Aufführung hinzufügen oder eine alternative Erledigung wählen:"
