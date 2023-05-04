@@ -16,16 +16,9 @@
           .row-fluid
             = hidden_field_tag('invoice_items[]', [:membership_fee])
             .checkboxes
-              - groups = Group::Verein.where(id: entry.descendants.pluck(:id))
-              - if groups.present?
-                = label_tag(nil, class: 'checkbox') do
-                  = check_box_tag(:all, 0, true, data: :multiselect)
-                  = t('.select_all')
-
-                = subgroups_checkboxes(groups, entry)
-              - else
-                = t('.no_entries')
+              = subverein_checkboxes(entry)
         .modal-footer
+          - groups = Group::Verein.where(id: entry.descendants.pluck(:id))
           - if groups.present?
             - disabled_text = entry.invoice_config.invalid? ? t('.invoice_config_invalid') : nil
             = submit_button(f, t('.submit'), data: { checkable: true }, disabled: disabled_text.present?, title: disabled_text)
