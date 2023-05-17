@@ -207,4 +207,24 @@ describe GroupAbility do
       it { is_expected.not_to be_able_to(:deleted_subgroups, checked_group) }
     end
   end
+
+  context 'finance' do
+    let(:role) { Fabricate(Group::RegionalverbandVorstand::Kassier.name.to_sym, group: groups(:vorstand_16)) }
+
+    it 'may not show subverein_select on random group' do
+      is_expected.not_to be_able_to(:subverein_select, Group.new)
+    end
+
+    it 'may not show subverein_select in own group' do
+      is_expected.not_to be_able_to(:subverein_select, groups(:vorstand_16))
+    end
+
+    it 'may not show subverein_select in layer below' do
+      is_expected.not_to be_able_to(:subverein_select, groups(:musikgesellschaft_aarberg))
+    end
+
+    it 'may show subverein_select in layer' do
+      is_expected.to be_able_to(:subverein_select, groups(:regionalverband_mittleres_seeland))
+    end
+  end
 end

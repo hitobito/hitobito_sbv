@@ -22,6 +22,8 @@ module Sbv::GroupAbility
 
       permission(:uv_lohnsumme).may(:show_uv_lohnsummen).everywhere_if_admin
       permission(:uv_lohnsumme).may(:edit_uv_lohnsummen).everywhere_if_admin_or_in_same_layer
+
+      permission(:finance).may(:subverein_select).in_layer_group
     end
   end
 
