@@ -13,7 +13,8 @@ module Sbv::MailRelay::Lists
   end
 
   def mail_domain
-    mailing_list.mail_domain
+    # fallback to list_domain for reject_not_existing
+    mailing_list&.mail_domain || Settings.email.list_domain
   end
 
 end

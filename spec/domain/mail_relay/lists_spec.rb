@@ -18,12 +18,14 @@ describe MailRelay::Lists do
 
   let(:relay) { MailRelay::Lists.new(message) }
   let(:group) { groups(:kontakte_5) }
-  before { group.mailing_lists.create!(name: 'dummy', mail_name: 'dummy') }
+  let!(:mailing_list) { group.mailing_lists.create!(name: 'dummy', mail_name: 'dummy') }
 
   context '#prepare_not_allowed_message' do
     subject { relay.send(:prepare_not_allowed_message).from.first.split('@').last }
 
     it '#mail_domain falls back to settings' do
+      mailing_list.destroy!
+
       expect(subject).to eq Settings.email.list_domain
     end
 
