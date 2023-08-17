@@ -68,6 +68,7 @@ module HitobitoSbv
       GroupsHelper.include Sbv::GroupsHelper
       GroupDecorator.prepend Sbv::GroupDecorator
       StandardFormBuilder.include Sbv::StandardFormBuilder
+      Dropdown::InvoiceNew.prepend Sbv::Dropdown::InvoiceNew
 
       ### sheets
       Sheet::Group.include Sbv::Sheet::Group
