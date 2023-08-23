@@ -89,6 +89,14 @@ module HitobitoSbv
 
       MailRelay::Lists.prepend Sbv::MailRelay::Lists
 
+      additional_person_attrs = [
+        :active_years,
+      ]
+
+      TableDisplay.register_column(Person,
+        TableDisplays::ShowDetailsColumn,
+        additional_person_attrs)
+      
       ### abilities
       RoleAbility.include Sbv::RoleAbility
       GroupAbility.include Sbv::GroupAbility
