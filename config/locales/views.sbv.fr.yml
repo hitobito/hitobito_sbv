@@ -78,6 +78,17 @@ fr:
   groups:
     actions_show_sbv:
       export_lohnsummen: Export des salaires AA
+      create_verein_invoice_list: ""
+    subverein_select_modal:
+      select_all: ""
+      submit: ""
+      no_entries: ""
+      invoice_config_invalid: ""
+      info: 
+        group-vereinvorstand-kassier: ""
+        group-vereinvorstand-praesident: ""
+        group-verein-admin: ""
+        no_recipient: ""
 
   roles:
     info:
@@ -110,6 +121,9 @@ fr:
     button: Exporter des annonces
     csv: CSV
     xlsx: Excel
+  dropdown/invoice_new:
+    membership_fee: ""
+
   concerts:
     index:
       no_concerts_yet: "Pour envoyer la liste SUISA, vous devez ajouter au moins une exécution musicale ou choisir une alternative:"

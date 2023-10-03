@@ -78,6 +78,17 @@ it:
   groups:
     actions_show_sbv:
       export_lohnsummen: Esportare i salari AINF
+      create_verein_invoice_list: ""
+    subverein_select_modal:
+      select_all: ""
+      submit: ""
+      no_entries: ""
+      invoice_config_invalid: ""
+      info: 
+        group-vereinvorstand-kassier: ""
+        group-vereinvorstand-praesident: ""
+        group-verein-admin: ""
+        no_recipient: ""
 
   roles:
     info:
@@ -110,6 +121,9 @@ it:
     button: Esportazione registrazioni
     csv: CSV
     xlsx: Excel
+  dropdown/invoice_new:
+    membership_fee: ""
+
   concerts:
     index:
       no_concerts_yet: "Per inoltrare la lista SUISA è necessario aggiungere almeno un'esecuzione o scegliere un'alternativa:"

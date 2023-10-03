@@ -344,6 +344,11 @@ fr:
         many: Inscriptions de groupe
         other: Inscriptions de groupe
 
+      invoice_item/membership_fee:
+        one: ''
+        many: ''
+        other: ''
+
     attributes:
       person:
         correspondence_language: Langue de correspondance
@@ -409,6 +414,11 @@ fr:
               group_full: Lire et écrire sur le groupe. Créer des manifestations et des listes sur le groupe.
               festival_participation: Peut inscrire la société à des fêtes de musique et traiter l’inscription.
               uv_lohnsumme: Peut gérer le salaire AA.
+
+      invoice_item:
+        amount: ""
+        cutoff_date: ""
+
       song:
         title: Titre
         composed_by: Compositeur
