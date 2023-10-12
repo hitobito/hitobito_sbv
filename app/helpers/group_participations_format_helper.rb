@@ -40,7 +40,7 @@ module GroupParticipationsFormatHelper
 
   def music_i18n_option(kind, value)
     [
-      I18n.t("#{kind.to_s.pluralize}.#{value}", group_participation_scope),
+      I18n.t("#{kind.to_s.pluralize}.#{value}", **group_participation_scope),
       value
     ]
   end
