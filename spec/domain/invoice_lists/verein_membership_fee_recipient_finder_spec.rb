@@ -7,7 +7,7 @@ require 'spec_helper'
 
 describe InvoiceLists::VereinMembershipFeeRecipientFinder do
   let(:verein) { Fabricate(Group::Verein.sti_name.to_sym, parent: groups(:alt_thiesdorf_30)) }
-  let(:vorstand) { Fabricate(Group::VereinVorstand.sti_name.to_sym, parent: verein) }
+  let(:vorstand) { Group::VereinVorstand.find_by(parent: verein) }
 
   describe '#find_recipient' do
     subject { InvoiceLists::VereinMembershipFeeRecipientFinder.find_recipient(verein.id) }
