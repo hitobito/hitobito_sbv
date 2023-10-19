@@ -24,11 +24,11 @@ module Dropdown
     private
 
     def csv_links
-      add_item(translate(:csv), export_path(:csv, controller: :song_counts), item_options)
+      add_item(translate(:csv), export_path(:csv, controller: :song_counts), **item_options)
     end
 
     def xlsx_links
-      add_item(translate(:xlsx), export_path(:xlsx, controller: :song_counts), item_options)
+      add_item(translate(:xlsx), export_path(:xlsx, controller: :song_counts), **item_options)
     end
 
     def item_options
