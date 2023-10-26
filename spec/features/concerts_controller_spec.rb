@@ -46,7 +46,8 @@ describe ConcertsController, js: true do
     concert.song_counts.create!(song: songs(:papa), year: 2018, count: 3)
     visit edit_group_concert_path(group_id: verein.id, id: concert.id)
     within('#song_counts_fields') do
-      click_link 'Entfernen'
+      # click the former "Entfernen" link which now only has an icon without text
+      find('a.remove_nested_fields').click
     end
     expect(page).to have_css('#song_counts_fields .fields', count: 0)
   end
