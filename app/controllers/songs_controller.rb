@@ -45,7 +45,7 @@ class SongsController < SimpleCrudController
   def for_typeahead(entries)
     entries.collect do |entry|
       attributes = entry.attributes.map { |key, value| [key, h(value)] }.to_h
-      attributes.merge(label: entry.decorate.full_label)
+      attributes.merge(label: ActionView::Base.full_sanitizer.sanitize(entry.decorate.full_label))
     end
   end
 
