@@ -8,10 +8,10 @@
   = field_set_tag do
     = f.labeled_input_fields :manual_member_count if entry.manually_counted_members?
     = f.labeled_input_fields :vereinssitz, :founding_year
-    = f.labeled_collection_select :correspondence_language, Settings.application.correspondence_languages.to_hash, :first, :last
-    = f.labeled_collection_select :besetzung, Group.besetzung_labels.to_a, :first, :last, include_blank: true
-    = f.labeled_collection_select :klasse, Group.klasse_labels.to_a, :first, :last, include_blank: true
-    = f.labeled_collection_select :unterhaltungsmusik, Group.unterhaltungsmusik_labels.to_a, :first, :last, include_blank: true
+    = f.labeled_collection_select(:correspondence_language, Settings.application.correspondence_languages.to_hash, :first, :last, {}, class: 'form-select form-select-sm')
+    = f.labeled_collection_select(:besetzung, Group.besetzung_labels.to_a, :first, :last, { include_blank: "" }, class:'form-select form-select-sm')
+    = f.labeled_collection_select(:klasse, Group.klasse_labels.to_a, :first, :last, { include_blank: "" }, class:'form-select form-select-sm')
+    = f.labeled_collection_select(:unterhaltungsmusik, Group.unterhaltungsmusik_labels.to_a, :first, :last, { include_blank: "" }, class:'form-select form-select-sm')
 
   = field_set_tag do
     = f.labeled_input_fields :subventionen
@@ -21,8 +21,8 @@
       = f.labeled_input_fields :buv_lohnsumme, :nbuv_lohnsumme
 
   = field_set_tag Group.human_attribute_name(:secondary_parent_groups) do
-    = f.labeled_collection_select :secondary_parent_id, Group.secondary_parents, :id, :name, include_blank: true
-    = f.labeled_collection_select :tertiary_parent_id, Group.secondary_parents, :id, :name, include_blank: true
+    = f.labeled_collection_select :secondary_parent_id, Group.secondary_parents, :id, :name, { include_blank: "" }, class:'form-select form-select-sm'
+    = f.labeled_collection_select :tertiary_parent_id, Group.secondary_parents, :id, :name, { include_blank: "" }, class:'form-select form-select-sm'
 
 - if entry.is_a?(Group::Root)
   = field_set_tag do

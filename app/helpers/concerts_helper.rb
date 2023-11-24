@@ -3,11 +3,13 @@
 module ConcertsHelper
 
   def concerts_view_tabs(group)
-    content_tag(:ul, class: 'nav nav-pills group-pills') do
-      safe_join(tabs(group)) do |title, path|
-        content_tag(:li,
-                    link_to(title, path),
-                    class: active(path) ? 'active' : nil)
+    content_tag(:div, class: 'toolbar-pills mb-2') do
+      content_tag(:ul, class: 'nav nav-pills group-pills border border-primary rounded') do
+        safe_join(tabs(group)) do |title, path|
+          content_tag(:li,
+                      link_to(title, path, class: "nav-link rounded-0 py-1 px-3 mr-0 #{'active' if active(path)}"),
+                      class: "nav-item border-start border-primary")
+        end
       end
     end
   end
