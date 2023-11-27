@@ -5,7 +5,7 @@
 
 .nav-left a.is-active,
 .nav-left li.is-active > a {
-  background-color: lighten(desaturate($linkColor, 60%), 55%);
+  background-color: lighten(desaturate($link-color, 60%), 55%);
 }
 
 .song-counts {
@@ -46,7 +46,7 @@
     margin: -0.5rem;
   }
   .row {
-    border-top: 1px solid $grayLight;
+    border-top: 1px solid $gray-light;
     align-items: center;
     padding-top: 0.2rem;
   }

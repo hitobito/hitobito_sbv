@@ -4,14 +4,14 @@
 //  https://github.com/hitobito/hitobito_sbv.
 
 
-$bsv_color_a:           #C00000;
-$bsv_color_b:           #FF424B;
-$bsv_color_c:           #a00000;
-$bsv_color_d:           #2a6496;
-$bsv_color_e:           #EDEDED;
-$bsv_color_f:           #333333;
-$bsv_color_g:           #F8F9FA;
-$bsv_color_h:           #626262;
+$sbv_color_a:           #C00000;
+$sbv_color_b:           #FF424B;
+$sbv_color_c:           #a00000;
+$sbv_color_d:           #2a6496;
+$sbv_color_e:           #EDEDED;
+$sbv_color_f:           #333333;
+$sbv_color_g:           #F8F9FA;
+$sbv_color_h:           #626262;
 
 /* Bootstrap variable definition here */
 
@@ -30,19 +30,19 @@ $white:                 #fff !default;
 
 // Colors
 // ----------------------------
-$blue:                  $bsv-color-a !default;
+$blue:                  $sbv_color_a !default;
 $blue-dark:              darken($blue, 10%) !default;
 $green:                 #8DB850 !default;
 $green-dark:             darken($green, 10%) !default;
 
-$orange:                lighten($bsv-color-b, 10%) !default;
-$orange-dark:            $bsv-color-b;
-$purple:                $bsv-color-c;
-$purple-dark:            darken($bsv-color-c, 10%) !default;
+$orange:                lighten($sbv_color_b, 10%) !default;
+$orange-dark:            $sbv_color_b;
+$purple:                $sbv_color_c;
+$purple-dark:            darken($sbv_color_c, 10%) !default;
 
 $red:                   $orange !default;
 
-$text-color:             $bsv-color-f !default;
+$text-color:             $sbv_color_f !default;
 $border-color:           $gray-light !default;
 
 $page-background:        #B6B6B6;
@@ -50,10 +50,10 @@ $content-background:     $gray-light;
 $footer-background:      darken(#B6B6B6, 30%);
 $body-background:        $footer-background !default;
 
-$focus-color:            $bsv-color-c;
+$focus-color:            $sbv_color_c;
 $shadow-color:           darken($page-background, 10%);
-$link-color:             $bsv-color-a !default;
-$link-color-hover:        $bsv-color-d !default;
+$link-color:             $sbv_color_a !default;
+$link-color-hover:        $sbv_color_d !default;
 
 $footer-color:           $white;
 $footer-color-hover:      $white;
