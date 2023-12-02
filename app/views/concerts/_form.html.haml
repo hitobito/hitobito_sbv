@@ -2,6 +2,7 @@
   = field_set_tag nil, id: 'song_counts_typeahead' do
     = text_field_tag('q', nil,
       placeholder: I18n.t('song_censuses.verein.search'),
+      class: 'form-control form-control-sm',
       data: { provide: 'entity', max_items: 30, updater: 'SongCounts.add', url: songs_path(format: :json) })
 
     = standard_form(Song.new, remote: true) do |f|
