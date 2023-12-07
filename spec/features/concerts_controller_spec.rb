@@ -24,7 +24,7 @@ describe ConcertsController, js: true do
     within('#song_counts_typeahead') do
       fill_in :q, with: 'Fortu'
       expect(page).to have_content 'Fortunate Son'
-      click_link 'Fortunate Son'
+      find('ul[role="listbox"] li[role="option"]', text: "Fortunate Son").click
     end
 
     expect(page).to have_css('#song_counts_fields .fields', count: 1)
@@ -58,7 +58,7 @@ describe ConcertsController, js: true do
     within('#song_counts_typeahead') do
       fill_in :q, with: 'unknown'
       expect(page).to have_content 'Werk erstellen'
-      click_link 'Werk erstellen'
+      find('ul[role="listbox"] li[role="option"]', text: "Werk erstellen").click
 
       fill_in 'Titel', with: 'Mamamia'
       fill_in 'Komponist', with: 'Abba'
@@ -74,7 +74,7 @@ describe ConcertsController, js: true do
 
     within('#song_counts_typeahead') do
       fill_in :q, with: 'unknown'
-      click_link 'Werk erstellen'
+      find('ul[role="listbox"] li[role="option"]', text: "Werk erstellen").click
       expect(page).to have_button 'Werk erstellen'
       click_link 'Abbrechen'
       expect(page).not_to have_button 'Werk erstellen'

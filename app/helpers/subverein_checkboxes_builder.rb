@@ -30,7 +30,7 @@ class SubvereinCheckboxesBuilder
 
   def to_html
     if subvereine.present?
-      content = label_tag(nil, class: 'checkbox') do |content|
+      content = label_tag(nil, class: 'checkbox mb-2') do |content|
         content = check_box_tag(:all, 0, true, data: :multiselect)
         content << I18n.t("#{I18N_PREFIX}.select_all")
       end
@@ -81,7 +81,7 @@ class SubvereinCheckboxesBuilder
 
   def nested_verein_checkboxes(hash)
     safe_join(hash.map do |parent, vereine_or_nested_structure|
-      content_tag(:div, class: 'verein_fee_nesting') do
+      content_tag(:div, class: 'verein_fee_nesting mb-3') do
         content = ActiveSupport::SafeBuffer.new
         if vereine_or_nested_structure.is_a?(Hash)
           content << content_tag(:h3) do
@@ -100,7 +100,7 @@ class SubvereinCheckboxesBuilder
   end
 
   def verein_checkbox(verein)
-    content_tag(:div, class: 'control-group') do
+    content_tag(:div, class: 'control-group mb-1') do
       recipient = InvoiceLists::VereinMembershipFeeRecipientFinder.find_recipient(verein.id)
       info_key = recipient&.class&.sti_name&.parameterize || 'no_recipient'
       info_text = I18n.t("#{I18N_PREFIX}.info.#{info_key}")
