@@ -164,8 +164,8 @@ class Event::GroupParticipation < ActiveRecord::Base
     "#{group} -> #{event}"
   end
 
-  def required_attributes
-    %w(
+  def required_attrs
+    %i(
       joint_participation secondary_group
       music_style music_type music_level parade_music
       preferred_play_day_1 preferred_play_day_2
