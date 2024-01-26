@@ -21,6 +21,8 @@ module HitobitoSbv
     ]
 
     config.to_prepare do # rubocop:disable Metrics/BlockLength
+      JobManager.wagon_jobs += [RefreshActiveYearsJob]
+
       # extend application classes here
       # models
       Event.include Sbv::Event
