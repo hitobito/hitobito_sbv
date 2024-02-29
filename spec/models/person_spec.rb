@@ -14,7 +14,7 @@ describe Person do
 
   # original validations, commented for https://github.com/hitobito/hitobito_sbv/issues/125
   # revert commit later to restore original behaviour
-  # 
+  #
   # %w(first_name last_name birthday).each do |attr|
 
   %w(first_name last_name).each do |attr|
