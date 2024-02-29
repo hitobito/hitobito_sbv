@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2024, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -33,10 +33,18 @@ describe Person do
 
     def create_role(role_class, years: 10, start_date: false, end_date: false)
       start_year = 2005
-      created_at = start_date.presence || Date.current.change(year: start_year)
+      created_at = begin
+        start_date.presence || Date.current.change(year: start_year)
+      rescue Date::Error
+        Date.current.change(day: 25, year: start_year)
+      end
 
       deleted_at = if end_date == false
-                     Date.current.change(year: start_year + years)
+                     begin
+                       Date.current.change(year: start_year + years)
+                     rescue Date::Error
+                       Date.current.change(day: 25, year: start_year + years)
+                     end
                    else # could be a date-string or nil to leave it active
                      end_date
                    end
@@ -80,7 +88,7 @@ describe Person do
           :'Role::MitgliederMitglied',
           person: subject,
           group: groups(:mitglieder_hastdutoene),
-          created_at: Date.current.change(year: 2005),
+          created_at: Date.current.change(year: 2005, day: 25),
           deleted_at: Date.current.change(year: 2012)
       ).save(validate: false)
 
@@ -103,8 +111,8 @@ describe Person do
           :'Role::MitgliederPassivmitglied',
           person: subject,
           group: groups(:mitglieder_hastdutoene),
-          created_at: Date.current.change(year: 2005),
-          deleted_at: Date.current.change(year: 2015)
+          created_at: Date.current.change(year: 2005, day: 25),
+          deleted_at: Date.current.change(year: 2015, day: 25)
       ).save(validate: false)
 
       subject.update_active_years
