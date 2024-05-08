@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2019-2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2019-2024, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -60,13 +60,12 @@ module GroupParticipationsHelper
   end
 
   def link_to_terms
-    link_to t(:terms, group_participation_scope),
-            t(:terms_url, group_participation_scope),
+    link_to t(:terms, **group_participation_scope),
+            t(:terms_url, **group_participation_scope),
             target: '_blank', rel: 'noopener'
   end
 
   def format_event_group_participation_title(entry)
-    t(:name, event: entry.event.to_s, group: entry.group.to_s,
-             scope: 'activerecord.attributes.event/group_participation')
+    t(:name, event: entry.event.to_s, group: entry.group.to_s, **group_participation_scope)
   end
 end
