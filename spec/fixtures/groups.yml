@@ -113,7 +113,8 @@ geschaeftsstelle_9:
   name: Geschäftsstelle
   type: Group::MitgliederverbandGeschaeftsstelle
   email: hosea@example.org
-  address: Auf der Weide 209
+  street: Auf der Weide
+  housenumber: 209
   zip_code: 9976
   town: Stahldorf
 vorstand_10:
@@ -124,7 +125,8 @@ vorstand_10:
   name: Vorstand
   type: Group::MitgliederverbandVorstand
   email: eulalia@example.com
-  address: Stephanusstr. 13b
+  street: Stephanusstr.
+  housenumber: 13b
   zip_code: 1090
   town: Emelieburg
 kontakte_11:
@@ -135,7 +137,8 @@ kontakte_11:
   name: Kontakte
   type: Group::MitgliederverbandKontakte
   email: annamarie@example.org
-  address: Müritzstr. 98
+  street: Müritzstr.
+  housenumber: 98
   zip_code: 1094
   town: Felicitasstadt
 musikkommission_12:
@@ -146,7 +149,8 @@ musikkommission_12:
   name: Musikkommission
   type: Group::MitgliederverbandMusikkommission
   email: lambert@example.com
-  address: An der Dingbank 74
+  street: An der Dingbank
+  housenumber: 74
   zip_code: 3143
   town: Feuerbachscheid
 veteranen_13:
@@ -157,7 +161,8 @@ veteranen_13:
   name: Veteranen
   type: Group::MitgliederverbandVeteranen
   email: duncan_lang@example.org
-  address: An der Fettehenne 85b
+  street: An der Fettehenne
+  housenumber: 85b
   zip_code: 3990
   town: Nord Michaelaland
 regionalverband_mittleres_seeland:
@@ -167,7 +172,8 @@ regionalverband_mittleres_seeland:
   rgt: 27
   name: Mittleres Seeland
   type: Group::Regionalverband
-  address: Schellingstr. 8
+  street: Schellingstr.
+  housenumber: 8
   zip_code: 5692
   town: Damianburg
 geschaeftsstelle_15:
@@ -205,7 +211,8 @@ musikgesellschaft_aarberg:
   rgt: 22
   name: Musikgesellschaft Aarberg
   type: Group::Verein
-  address: Bielertstr. 91c
+  street: Bielertstr.
+  housenumber: 91c
   zip_code: 6648
   town: Thiloscheid
   buv_lohnsumme: 133700
@@ -287,7 +294,8 @@ alt_thiesdorf_30:
   rgt: 73
   name: Alt Thiesdorf
   type: Group::Regionalverband
-  address: Karl-Ulitzka-Str. 23
+  street: Karl-Ulitzka-Str.
+  housenumber: 23
   zip_code: 1092
   town: Björnstadt
 geschaeftsstelle_31:
@@ -325,7 +333,8 @@ musikgesellschaft_alterswil:
   rgt: 68
   name: Musikgesellschaft Alterswil
   type: Group::Verein
-  address: Am Junkernkamp 2
+  street: Am Junkernkamp
+  housenumber: 2
   zip_code: 7400
   town: Nord Boland
   email: alterswil@hitobito.example.com
@@ -364,7 +373,8 @@ musikverband_hastdutoene:
   rgt: 39
   name: Musikverband HastDuTöne
   type: Group::Verein
-  address: Friedrich-Engels-Str. 98c
+  street: Friedrich-Engels-Str.
+  housenumber: 98c
   zip_code: 7892
   town: Neu Maddoxscheid
   deleted_at: 2020-01-20
