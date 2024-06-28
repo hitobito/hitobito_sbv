@@ -49,7 +49,7 @@ module Sbv::Group
         order_by_type_stmt_without_name(parent_group).gsub(/ lft$/, " name")
       end
 
-      alias_method_chain :order_by_type_stmt, :name
+      alias_method_chain :order_by_type, :name
     end
 
     # potential other parents, dropdown data
