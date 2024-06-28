@@ -44,14 +44,6 @@ module Sbv::Group
 
     used_attributes << :secondary_parent_id << :tertiary_parent_id
 
-    class << self
-      def order_by_type_stmt_with_name(parent_group = nil)
-        order_by_type_stmt_without_name(parent_group).gsub(/ lft$/, " name")
-      end
-
-      alias_method_chain :order_by_type, :name
-    end
-
     # potential other parents, dropdown data
     def self.secondary_parents
       where(type: %w[Group::Mitgliederverband Group::Regionalverband])
