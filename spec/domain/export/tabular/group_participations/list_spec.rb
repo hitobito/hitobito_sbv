@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2020-2024, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -25,11 +25,11 @@ describe Export::Tabular::GroupParticipations::List do
       secondary_state: "terms_accepted",
       music_style: "concert_music",
       music_type: "harmony",
-      music_level: "highest",
-      preferred_play_day_1: 0, # sunday
-      preferred_play_day_2: 6, # saturday
-      terms_accepted: false,
-      secondary_group_terms_accepted: true
+      music_level: "highest"
+      # preferred_play_day_1: 0, # sunday
+      # preferred_play_day_2: 6, # saturday
+      # terms_accepted: false,
+      # secondary_group_terms_accepted: true
     )
 
     groups(:musikgesellschaft_aarberg).roles.create(
@@ -44,10 +44,10 @@ describe Export::Tabular::GroupParticipations::List do
       music_style: "concert_music",
       music_type: "harmony",
       music_level: "first",
-      parade_music: "traditional_parade",
-      preferred_play_day_1: 4, # thursday
-      preferred_play_day_2: 5, # friday
-      terms_accepted: true
+      parade_music: "traditional_parade"
+      # preferred_play_day_1: 4, # thursday
+      # preferred_play_day_2: 5, # friday
+      # terms_accepted: true
     )
   end
 
@@ -60,10 +60,10 @@ describe Export::Tabular::GroupParticipations::List do
         "zusätzlich Parademusik",
         "Besetzung",
         "Klasse",
-        "1. Wunschspieltag",
-        "2. Wunschspieltag",
-        "Reglement akzeptiert",
-        "Reglement von Partnerverein akzeptiert",
+        # "1. Wunschspieltag",
+        # "2. Wunschspieltag",
+        # "Reglement akzeptiert",
+        # "Reglement von Partnerverein akzeptiert",
         "Dirigent",
         "Kontaktperson",
         "Haupt-E-Mail",
@@ -101,11 +101,11 @@ describe Export::Tabular::GroupParticipations::List do
         "Besetzung" => "Harmonie",
         "Klasse" => "Höchstklasse",
 
-        "1. Wunschspieltag" => "Sonntag",
-        "2. Wunschspieltag" => "Samstag",
+        # "1. Wunschspieltag" => "Sonntag",
+        # "2. Wunschspieltag" => "Samstag",
 
-        "Reglement akzeptiert" => "nein",
-        "Reglement von Partnerverein akzeptiert" => "ja",
+        # "Reglement akzeptiert" => "nein",
+        # "Reglement von Partnerverein akzeptiert" => "ja",
 
         "Dirigent" => "Dieter Irigent",
 
@@ -130,11 +130,11 @@ describe Export::Tabular::GroupParticipations::List do
         "Besetzung" => "Harmonie",
         "Klasse" => "Höchstklasse",
 
-        "1. Wunschspieltag" => "Sonntag",
-        "2. Wunschspieltag" => "Samstag",
+        # "1. Wunschspieltag" => "Sonntag",
+        # "2. Wunschspieltag" => "Samstag",
 
-        "Reglement akzeptiert" => "ja",
-        "Reglement von Partnerverein akzeptiert" => "nein",
+        # "Reglement akzeptiert" => "ja",
+        # "Reglement von Partnerverein akzeptiert" => "nein",
 
         "Dirigent" => nil,
 
@@ -159,11 +159,11 @@ describe Export::Tabular::GroupParticipations::List do
         "Besetzung" => "Harmonie",
         "Klasse" => "1. Klasse",
 
-        "1. Wunschspieltag" => "Donnerstag",
-        "2. Wunschspieltag" => "Freitag",
+        # "1. Wunschspieltag" => "Donnerstag",
+        # "2. Wunschspieltag" => "Freitag",
 
-        "Reglement akzeptiert" => "ja",
-        "Reglement von Partnerverein akzeptiert" => nil,
+        # "Reglement akzeptiert" => "ja",
+        # "Reglement von Partnerverein akzeptiert" => nil,
 
         "Dirigent" => "Dieter Irigent",
 
