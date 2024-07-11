@@ -5,14 +5,14 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-require 'spec_helper'
-require 'csv'
+require "spec_helper"
+require "csv"
 
 describe Export::Tabular::GroupParticipations::List do
   let(:list) { events(:festival).group_participations.includes(:group, :secondary_group) }
   let(:data) { described_class.csv(list) }
-  let(:data_without_bom) { data.gsub(Regexp.new("^#{Export::Csv::UTF8_BOM}"), '') }
-  let(:csv)  { CSV.parse(data_without_bom, headers: true, col_sep: Settings.csv.separator) }
+  let(:data_without_bom) { data.gsub(Regexp.new("^#{Export::Csv::UTF8_BOM}"), "") }
+  let(:csv) { CSV.parse(data_without_bom, headers: true, col_sep: Settings.csv.separator) }
 
   subject { csv }
 
@@ -21,11 +21,11 @@ describe Export::Tabular::GroupParticipations::List do
       group: groups(:musikgesellschaft_aarberg),
       secondary_group: groups(:musikgesellschaft_alterswil),
       joint_participation: true,
-      primary_state: 'music_type_and_level_selected',
-      secondary_state: 'terms_accepted',
-      music_style: 'concert_music',
-      music_type: 'harmony',
-      music_level: 'highest',
+      primary_state: "music_type_and_level_selected",
+      secondary_state: "terms_accepted",
+      music_style: "concert_music",
+      music_type: "harmony",
+      music_level: "highest",
       preferred_play_day_1: 0, # sunday
       preferred_play_day_2: 6, # saturday
       terms_accepted: false,
@@ -40,57 +40,57 @@ describe Export::Tabular::GroupParticipations::List do
     events(:festival).group_participations.create(
       group: groups(:musikverband_hastdutoene),
       joint_participation: false,
-      primary_state: 'music_type_and_level_selected',
-      music_style: 'concert_music',
-      music_type: 'harmony',
-      music_level: 'first',
-      parade_music: 'traditional_parade',
+      primary_state: "music_type_and_level_selected",
+      music_style: "concert_music",
+      music_type: "harmony",
+      music_level: "first",
+      parade_music: "traditional_parade",
       preferred_play_day_1: 4, # thursday
       preferred_play_day_2: 5, # friday
-      terms_accepted: true,
+      terms_accepted: true
     )
   end
 
-  context 'has headers' do
+  context "has headers" do
     let(:headers) do
       [
-        'Verein',
-        'Spielgemeinschaft mit',
-        'Sparte',
-        'zusätzlich Parademusik',
-        'Besetzung',
-        'Klasse',
-        '1. Wunschspieltag',
-        '2. Wunschspieltag',
-        'Reglement akzeptiert',
-        'Reglement von Partnerverein akzeptiert',
-        'Dirigent',
-        'Kontaktperson',
-        'Haupt-E-Mail',
-        'Adresse',
-        'PLZ',
-        'Ort',
-        'Land',
-        'Erfasste Mitglieder',
+        "Verein",
+        "Spielgemeinschaft mit",
+        "Sparte",
+        "zusätzlich Parademusik",
+        "Besetzung",
+        "Klasse",
+        "1. Wunschspieltag",
+        "2. Wunschspieltag",
+        "Reglement akzeptiert",
+        "Reglement von Partnerverein akzeptiert",
+        "Dirigent",
+        "Kontaktperson",
+        "Haupt-E-Mail",
+        "Adresse",
+        "PLZ",
+        "Ort",
+        "Land",
+        "Erfasste Mitglieder"
       ]
     end
 
-    it 'translated' do
+    it "translated" do
       expect(subject.headers).to match_array(headers)
     end
 
-    it 'in the right order' do
+    it "in the right order" do
       expect(subject.headers).to eq headers
     end
   end
 
-  context 'has rows, ' do
-    it 'three rows with the above setup' do
+  context "has rows, " do
+    it "three rows with the above setup" do
       expect(subject.size).to_not be_zero
       expect(subject.size).to be 3
     end
 
-    it 'first the participation application of the leading group' do
+    it "first the participation application of the leading group" do
       expect(csv[0]).to_not be_nil
       expect(csv[0].to_h).to include({
         "Verein" => "Musikgesellschaft Aarberg",
@@ -115,11 +115,11 @@ describe Export::Tabular::GroupParticipations::List do
         "Ort" => "Thiloscheid",
         "PLZ" => "6648",
         "Land" => nil,
-        "Erfasste Mitglieder" => "0",
+        "Erfasste Mitglieder" => "0"
       })
     end
 
-    it 'second the participation application of the supporting group' do
+    it "second the participation application of the supporting group" do
       expect(csv[1]).to_not be_nil
       expect(csv[1].to_h).to include({
         "Verein" => "Musikgesellschaft Alterswil",
@@ -140,15 +140,15 @@ describe Export::Tabular::GroupParticipations::List do
 
         "Adresse" => "Am Junkernkamp 2",
         "Kontaktperson" => nil,
-        "Haupt-E-Mail" => 'alterswil@hitobito.example.com',
+        "Haupt-E-Mail" => "alterswil@hitobito.example.com",
         "Ort" => "Nord Boland",
         "PLZ" => "7400",
         "Land" => nil,
-        "Erfasste Mitglieder" => "0",
+        "Erfasste Mitglieder" => "0"
       })
     end
 
-    it 'thirdly the application of another solitary group' do
+    it "thirdly the application of another solitary group" do
       expect(csv[2]).to_not be_nil
       expect(csv[2].to_h).to include({
         "Verein" => "Musikverband HastDuTöne",
@@ -173,9 +173,8 @@ describe Export::Tabular::GroupParticipations::List do
         "Ort" => "Neu Maddoxscheid",
         "PLZ" => "7892",
         "Land" => nil,
-        "Erfasste Mitglieder" => "1",
+        "Erfasste Mitglieder" => "1"
       })
     end
   end
-
 end

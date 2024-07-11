@@ -5,20 +5,20 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-require 'spec_helper'
+require "spec_helper"
 
 describe Sbv::RolesHelper do
-  describe '#default_language_for_person' do
-    let(:group)   { groups(:hauptgruppe_1)}
+  describe "#default_language_for_person" do
+    let(:group) { groups(:hauptgruppe_1) }
 
-    it 'returns predefined language for group if preset' do
+    it "returns predefined language for group if preset" do
       group.correspondence_language = "de"
       language = default_language_for_person(group)
 
       expect(language).to eq("de")
     end
 
-    it 'returns predefined languages if language not set' do
+    it "returns predefined languages if language not set" do
       group.correspondence_language = nil
       language = default_language_for_person(group)
 

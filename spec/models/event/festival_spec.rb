@@ -5,19 +5,19 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-require 'spec_helper'
+require "spec_helper"
 
 describe Event::Festival do
   let(:festival) { events(:festival) }
   let(:group) { groups(:musikgesellschaft_aarberg) }
 
-  it 'has prerequisites' do
+  it "has prerequisites" do
     do_not_participate(group, festival)
 
     expect(described_class.upcoming).to be_one
   end
 
-  it 'knows which events are participatable' do
+  it "knows which events are participatable" do
     do_not_participate(group, festival)
 
     list = described_class.participatable(group)
@@ -25,7 +25,7 @@ describe Event::Festival do
     expect(list).to be_one
   end
 
-  it 'does not count events as participatable if already applied' do
+  it "does not count events as participatable if already applied" do
     participate(group, festival)
 
     list = described_class.participatable(group)
@@ -33,7 +33,7 @@ describe Event::Festival do
     expect(list).to be_empty
   end
 
-  it 'knows events a group has already applied to' do
+  it "knows events a group has already applied to" do
     participate(group, festival)
 
     relation = described_class.participation_by(group)

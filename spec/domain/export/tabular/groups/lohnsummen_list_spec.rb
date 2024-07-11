@@ -5,35 +5,35 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-require 'spec_helper'
-require 'csv'
+require "spec_helper"
+require "csv"
 
 describe Export::Tabular::Groups::LohnsummenList do
   let(:data) { described_class.csv(list) }
-  let(:data_without_bom) { data.gsub(Regexp.new("^#{Export::Csv::UTF8_BOM}"), '') }
-  let(:csv)  { CSV.parse(data_without_bom, headers: true, col_sep: Settings.csv.separator) }
+  let(:data_without_bom) { data.gsub(Regexp.new("^#{Export::Csv::UTF8_BOM}"), "") }
+  let(:csv) { CSV.parse(data_without_bom, headers: true, col_sep: Settings.csv.separator) }
 
   subject { csv }
 
   let(:list) do
     groups(:regionalverband_mittleres_seeland)
       .descendants
-      .where(type: 'Group::Verein')
+      .where(type: "Group::Verein")
   end
 
   its(:headers) do
-    should == ['Name', 'BUV-Lohnsumme', 'NBUV-Lohnsumme']
+    is_expected.to == ["Name", "BUV-Lohnsumme", "NBUV-Lohnsumme"]
   end
 
-  it 'has 1 item' do
+  it "has 1 item" do
     expect(subject.size).to eq(1)
   end
 
-  context 'first row' do
+  context "first row" do
     subject { csv[0] }
 
-    its(['Name']) { should == 'Musikgesellschaft Aarberg' }
-    its(['BUV-Lohnsumme']) { should == '1337.00' }
-    its(['NBUV-Lohnsumme']) { should == '42.23' }
+    its(["Name"]) { is_expected.to == "Musikgesellschaft Aarberg" }
+    its(["BUV-Lohnsumme"]) { is_expected.to == "1337.00" }
+    its(["NBUV-Lohnsumme"]) { is_expected.to == "42.23" }
   end
 end
