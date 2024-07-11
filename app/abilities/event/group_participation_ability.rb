@@ -26,7 +26,7 @@ class Event::GroupParticipationAbility < AbilityDsl::Base
   end
 
   def if_festival_organizer
-    event_contact    = (subject.event.contact == user)
+    event_contact = (subject.event.contact == user)
     group_permission = permission_in_groups?(subject.event.group_ids)
 
     event_contact || group_permission

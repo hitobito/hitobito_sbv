@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 #  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
@@ -6,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-require 'csv'
+require "csv"
 
 class Songs::Importer
   attr_accessor :filepath
@@ -16,7 +15,7 @@ class Songs::Importer
   end
 
   def compose
-    return 'File not found' unless File.exist?(filepath)
+    return "File not found" unless File.exist?(filepath)
 
     csv_rows = CSV.read(filepath).drop(1)
     ActiveRecord::Base.connection.execute(insert_songs_statement(csv_rows))
@@ -34,14 +33,14 @@ class Songs::Importer
   def insert_songs_statement(rows)
     <<-SQL
       INSERT INTO songs(title, composed_by, arranged_by)
-      VALUES #{values(rows).join(',')}
+      VALUES #{values(rows).join(",")}
     SQL
   end
 
   def values(rows)
     rows.collect do |title, composed_by, arranged_by|
-      "(#{ActiveRecord::Base.connection.quote(title)},"\
-        " #{ActiveRecord::Base.connection.quote(composed_by)},"\
+      "(#{ActiveRecord::Base.connection.quote(title)}," \
+        " #{ActiveRecord::Base.connection.quote(composed_by)}," \
         " #{ActiveRecord::Base.connection.quote(arranged_by)})"
     end
   end

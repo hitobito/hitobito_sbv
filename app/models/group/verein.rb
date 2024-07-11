@@ -46,37 +46,36 @@
 #
 
 class Group::Verein < ::Group
-
-  HIDDEN_ROOT_VEREIN_NAME = 'Ehemalige aus Verlauf'
+  HIDDEN_ROOT_VEREIN_NAME = "Ehemalige aus Verlauf"
 
   self.layer = true
   self.default_children = [Group::VereinVorstand,
-                           Group::VereinKontakte,
-                           Group::VereinMitglieder,
-                           Group::VereinMusikkommission]
+    Group::VereinKontakte,
+    Group::VereinMitglieder,
+    Group::VereinMusikkommission]
 
   children Group::VereinVorstand,
-           Group::VereinMusikkommission,
-           Group::VereinMitglieder,
-           Group::VereinArbeitsgruppe,
-           Group::VereinKontakte
+    Group::VereinMusikkommission,
+    Group::VereinMitglieder,
+    Group::VereinArbeitsgruppe,
+    Group::VereinKontakte
 
   self.used_attributes += [:founding_year,
-                           :correspondence_language,
-                           :besetzung,
-                           :klasse,
-                           :unterhaltungsmusik,
-                           :subventionen,
-                           :manually_counted_members,
-                           :manual_member_count,
-                           :recognized_members]
+    :correspondence_language,
+    :besetzung,
+    :klasse,
+    :unterhaltungsmusik,
+    :subventionen,
+    :manually_counted_members,
+    :manual_member_count,
+    :recognized_members]
 
   has_many :concerts, dependent: :destroy
   has_many :song_counts, through: :concerts
 
   has_many :group_participations, dependent: :destroy, # rubocop:disable Rails/InverseOf there are two inverses
-                                  class_name: 'Event::GroupParticipation',
-                                  foreign_key: 'group_id'
+    class_name: "Event::GroupParticipation",
+    foreign_key: "group_id"
 
   def self.hidden
     root = Group::Root.first
@@ -85,11 +84,10 @@ class Group::Verein < ::Group
 
     # NOTE: we piggy-back on created_at to avoid default children to be created
     Group::Verein.create!(name: HIDDEN_ROOT_VEREIN_NAME,
-                          parent: root,
-                          created_at: 1.minute.ago,
-                          deleted_at: Time.zone.now)
+      parent: root,
+      created_at: 1.minute.ago,
+      deleted_at: Time.zone.now)
   end
-
 
   # TODO: Validierungen der verschiedenen Values, refactoring, exports
 
@@ -97,13 +95,13 @@ class Group::Verein < ::Group
     year = Time.zone.now.year
 
     SongCount.where(concert: concerts.in([year, year - 1]))
-             .pluck(:song_id)
-             .uniq
+      .pluck(:song_id)
+      .uniq
   end
 
   def suisa_admins
     Person.joins(:roles)
-          .where("roles.type = 'Group::Verein::SuisaAdmin' AND roles.group_id = #{id}")
+      .where("roles.type = 'Group::Verein::SuisaAdmin' AND roles.group_id = #{id}")
   end
 
   def buv_lohnsumme

@@ -15,5 +15,4 @@ module Sbv::MailRelay::Lists
   def mail_domain
     mailing_list.mail_domain
   end
-
 end

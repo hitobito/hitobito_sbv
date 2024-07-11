@@ -10,7 +10,7 @@ class CensusCalculator
 
   def initialize(census, group)
     @census = census
-    @group  = group
+    @group = group
   end
 
   def total
@@ -35,13 +35,13 @@ class CensusCalculator
   def verein_suisa_statuses(verein_ids)
     census
       .concerts
-      .where(concerts: { verein_id: verein_ids })
+      .where(concerts: {verein_id: verein_ids})
       .distinct
       .pluck(:verein_id, :reason)
       .each_with_object({}) do |(verein, reason), memo|
         next if memo[verein].present? # any reason
 
-        memo[verein] = reason || 'submitted' # coupling with view/i18n
+        memo[verein] = reason || "submitted" # coupling with view/i18n
       end
   end
 
@@ -50,7 +50,7 @@ class CensusCalculator
   def verbands_total(type)
     census
       .concerts
-      .where(concerts: { verein_id: vereins_total.keys })
+      .where(concerts: {verein_id: vereins_total.keys})
       .distinct
       .pluck(:verein_id, :"#{type}_id")
       .each_with_object(Hash.new([])) do |(verein, verband), memo|

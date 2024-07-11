@@ -13,7 +13,7 @@ module Sheet
       delegate :t, to: :I18n
 
       def title
-        t('events.group_participations.actions_new.title')
+        t("events.group_participations.actions_new.title")
       end
     end
   end

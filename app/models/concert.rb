@@ -24,30 +24,28 @@
 #
 
 class Concert < ActiveRecord::Base
-
   acts_as_paranoid
 
   belongs_to :song_census
-  belongs_to :verein, class_name: 'Group::Verein'
-  belongs_to :regionalverband, class_name: 'Group::Regionalverband'
-  belongs_to :mitgliederverband, class_name: 'Group::Mitgliederverband'
+  belongs_to :verein, class_name: "Group::Verein"
+  belongs_to :regionalverband, class_name: "Group::Regionalverband"
+  belongs_to :mitgliederverband, class_name: "Group::Mitgliederverband"
 
   has_many :song_counts, dependent: :destroy
 
   after_initialize :set_readonly
-  before_destroy :allow_soft_deletion
-
   before_validation :set_name
   before_validation :infer_verband_ids, on: :create
   before_validation :remove_empty_song_count
+  before_destroy :allow_soft_deletion
 
   validates_by_schema except: [:name]
-  validates :name, length: { maximum: 255 }
+  validates :name, length: {maximum: 255}
 
   accepts_nested_attributes_for :song_counts, allow_destroy: true
 
   include I18nEnums
-  REASONS = %w(joint_play not_playable otherwise_billed).freeze
+  REASONS = %w[joint_play not_playable otherwise_billed].freeze
   i18n_enum :reason, REASONS, scopes: true, queries: true
 
   scope :in, ->(year) { where(year: year) }
@@ -83,7 +81,7 @@ class Concert < ActiveRecord::Base
   def set_name
     return if name.present?
 
-    self.name = I18n.t('activerecord.models.concert.without_date')
+    self.name = I18n.t("activerecord.models.concert.without_date")
   end
 
   def remove_empty_song_count
@@ -99,5 +97,4 @@ class Concert < ActiveRecord::Base
       @readonly = false
     end
   end
-
 end

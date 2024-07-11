@@ -24,14 +24,14 @@ class Role::MitgliederMitglied < Role
 
   attr_accessor :historic_membership
 
-  after_save :update_active_years_on_person
   after_destroy :update_active_years_on_person
+  after_save :update_active_years_on_person
 
   validates_date :deleted_at,
-                 if: :historic_membership,
-                 allow_nil: false,
-                 on_or_before: -> { Time.zone.today },
-                 on_or_before_message: :cannot_be_later_than_today
+    if: :historic_membership,
+    allow_nil: false,
+    on_or_before: -> { Time.zone.today },
+    on_or_before_message: :cannot_be_later_than_today
 
   private
 
@@ -39,5 +39,4 @@ class Role::MitgliederMitglied < Role
     person.cache_active_years
     person.save(validate: false)
   end
-
 end

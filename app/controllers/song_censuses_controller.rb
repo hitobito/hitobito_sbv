@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class SongCensusesController < CrudController
-
   include YearBasedPaging
 
   self.permitted_attrs = [:year, :start_at, :finish_at]
@@ -33,7 +32,7 @@ class SongCensusesController < CrudController
 
     redirect_back(
       fallback_location: group_song_censuses_path(group),
-      notice: t('.success', verein_count: count)
+      notice: t(".success", verein_count: count)
     )
   end
 
@@ -75,11 +74,10 @@ class SongCensusesController < CrudController
       next if vereins_total[verein.id]
 
       verein.suisa_admins.each do |suisa_admin|
-        next unless Person.mailing_emails_for(suisa_admin).present?
+        next if Person.mailing_emails_for(suisa_admin).blank?
 
         SongCensusMailer.reminder(suisa_admin, verein).deliver_now
       end
     end.compact.count
   end
-
 end

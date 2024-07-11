@@ -8,7 +8,7 @@
 module GroupParticipationsHelper
   def music_styles_selection
     Event::GroupParticipation::MUSIC_CLASSIFICATIONS.map do |h|
-      next if h[:style] == 'parade_music'
+      next if h[:style] == "parade_music"
 
       music_i18n_option(:music_style, h[:style])
     end.compact
@@ -32,7 +32,7 @@ module GroupParticipationsHelper
 
   def play_day_selection_for(record)
     day_numbers = record.possible_day_numbers
-    day_names   = t('date.day_names').values_at(*day_numbers)
+    day_names = t("date.day_names").values_at(*day_numbers)
 
     day_names.zip(day_numbers)
   end
@@ -40,19 +40,19 @@ module GroupParticipationsHelper
   def group_participation_edit_link(stage, participating_group_id)
     content_tag :p do
       link_to t("events.group_participations.edit_stages.#{stage}"),
-              action: 'edit_stage',
-              participating_group: participating_group_id,
-              edit_stage: stage
+        action: "edit_stage",
+        participating_group: participating_group_id,
+        edit_stage: stage
     end
   end
 
   def group_participation_destroy_link(entry, participating_group_id)
-    scope = 'event.participations.cancel_application'
+    scope = "event.participations.cancel_application"
     destroy_path = group_event_group_participation_path(
       entry.event.groups.first, entry.event, entry,
       participating_group: participating_group_id
     )
-    options = { data: { confirm: t(:confirmation, scope: scope), method: :delete } }
+    options = {data: {confirm: t(:confirmation, scope: scope), method: :delete}}
 
     content_tag :p do
       action_button t(:caption, scope: scope), destroy_path, :trash, options
@@ -61,8 +61,8 @@ module GroupParticipationsHelper
 
   def link_to_terms
     link_to t(:terms, **group_participation_scope),
-            t(:terms_url, **group_participation_scope),
-            target: '_blank', rel: 'noopener'
+      t(:terms_url, **group_participation_scope),
+      target: "_blank", rel: "noopener"
   end
 
   def format_event_group_participation_title(entry)

@@ -10,7 +10,7 @@ module Sbv::ApplicationMailer
 
   def return_path(sender)
     MailRelay::Lists.personal_return_path(MailRelay::Lists.app_sender_name,
-                                          sender.email,
-                                          sender.primary_group.try(:hostname_from_hierarchy))
+      sender.email,
+      sender.primary_group.try(:hostname_from_hierarchy))
   end
 end

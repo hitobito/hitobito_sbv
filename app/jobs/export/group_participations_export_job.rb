@@ -10,7 +10,7 @@ class Export::GroupParticipationsExportJob < Export::ExportBaseJob
 
   def initialize(format, user_id, festival_id, options)
     super(format, user_id, options)
-    @exporter    = Export::Tabular::GroupParticipations::List
+    @exporter = Export::Tabular::GroupParticipations::List
     @festival_id = festival_id
   end
 

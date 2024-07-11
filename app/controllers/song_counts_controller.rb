@@ -11,9 +11,9 @@ class SongCountsController < SimpleCrudController
 
   self.nesting = Group
   self.permitted_attrs = [:song_id, :year, :count]
-  self.sort_mappings = { title: 'songs.title',
-                         composed_by: 'songs.composed_by',
-                         arranged_by: 'songs.arranged_by' }
+  self.sort_mappings = {title: "songs.title",
+                         composed_by: "songs.composed_by",
+                         arranged_by: "songs.arranged_by"}
 
   respond_to :js
   helper_method :census
@@ -21,14 +21,15 @@ class SongCountsController < SimpleCrudController
   def index
     respond_to do |format|
       format.html { super }
-      format.csv  { render_tabular_in_background(:csv) }
+      format.csv { render_tabular_in_background(:csv) }
       format.xlsx { render_tabular_in_background(:xlsx) }
     end
   end
 
   private
 
-  def redirection_target; end
+  def redirection_target
+  end
 
   def verein?
     @group.is_a?(Group::Verein)
@@ -37,12 +38,12 @@ class SongCountsController < SimpleCrudController
   def render_tabular_in_background(format)
     target = verein? ? group_concerts_path(@group) : group_song_censuses_path(@group)
     with_async_download_cookie(format, export_filename(format),
-                               redirection_target: target) do |filename|
+      redirection_target: target) do |filename|
       Export::SongCountsExportJob.new(format,
-                                      current_person.id,
-                                      parent.id,
-                                      year,
-                                      filename: filename).enqueue!
+        current_person.id,
+        parent.id,
+        year,
+        filename: filename).enqueue!
     end
   end
 
@@ -50,17 +51,17 @@ class SongCountsController < SimpleCrudController
     verein_name = @group.name if verein?
 
     [SongCount.model_name.human,
-     verein_name,
-     year].compact.join('-')
+      verein_name,
+      year].compact.join("-")
   end
 
   def list_entries
     super.joins(:concert, :song)
-         .preload(:song)
-         .group(:song_id)
-         .select('song_counts.id, song_id, song_counts.year, SUM(count) AS count, concert_id')
-         .in(year)
-         .merge(Song.list)
+      .preload(:song)
+      .group(:song_id)
+      .select("song_counts.id, song_id, song_counts.year, SUM(count) AS count, concert_id")
+      .in(year)
+      .merge(Song.list)
   end
 
   def census
@@ -82,5 +83,4 @@ class SongCountsController < SimpleCrudController
   def authorize_class
     authorize!(:index_song_counts, parent)
   end
-
 end

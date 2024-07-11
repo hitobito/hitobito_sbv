@@ -8,7 +8,7 @@
 module Export::Tabular::Groups
   class LohnsummenList < List
     def attributes
-      %w(name buv_lohnsumme nbuv_lohnsumme)
+      %w[name buv_lohnsumme nbuv_lohnsumme]
     end
   end
 end

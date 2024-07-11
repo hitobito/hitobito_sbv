@@ -25,7 +25,7 @@ class Events::GroupParticipationsController < CrudController
   ]
 
   self.sort_mappings = {
-    group_id: 'groups.name'
+    group_id: "groups.name"
   }
 
   decorates :event
@@ -98,17 +98,17 @@ class Events::GroupParticipationsController < CrudController
 
   def correct_nesting_in_new_entry
     if entry.new_record?
-      entry.group_id ||= params['participating_group'] ||
-                         params['event_group_participation']['group_id']
+      entry.group_id ||= params["participating_group"] ||
+        params["event_group_participation"]["group_id"]
     end
   end
 
   def participating_group_id # rubocop:disable Metrics/AbcSize any refactoring inside the methods makes it harder to understand
-    if params['participating_group'].present?
-      params['participating_group']
-    elsif params.fetch('event_group_participation', {}).fetch('participating_group', nil).present?
-      params['event_group_participation']['participating_group']
-    elsif params['group_id'].to_i != entry.event.group_ids.first
+    if params["participating_group"].present?
+      params["participating_group"]
+    elsif params.fetch("event_group_participation", {}).fetch("participating_group", nil).present?
+      params["event_group_participation"]["participating_group"]
+    elsif params["group_id"].to_i != entry.event.group_ids.first
       @group.id # loaded by calling "entry"
     else
       entry.group_id
@@ -117,10 +117,10 @@ class Events::GroupParticipationsController < CrudController
 
   def maybe_join_participations
     return unless entry.primary_joint_participation_selected?
-    return unless entry.secondary_group_is_primary == '1'
+    return unless entry.secondary_group_is_primary == "1"
 
     join_participations!(primary_entry: model_class.find_by(group_id: entry.secondary_group_id),
-                         secondary_entry: entry)
+      secondary_entry: entry)
   end
 
   def join_participations!(primary_entry:, secondary_entry:)

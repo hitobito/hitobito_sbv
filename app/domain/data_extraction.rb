@@ -13,7 +13,7 @@ class DataExtraction
 
   def initialize(filename, database)
     @filename = filename
-    @headers  = ''
+    @headers = ""
     @database = database
   end
 
@@ -22,13 +22,13 @@ class DataExtraction
   end
 
   def tmp_out
-    @tmp_out ||= "/var/lib/mysql-files/#{@filename.split('/').last}"
+    @tmp_out ||= "/var/lib/mysql-files/#{@filename.split("/").last}"
   end
 
-  def query(table = nil, field_sql = '*', condition_sql = '')
-    raise ArgumentError, 'Table needs to be passed' if @query.nil? && table.nil?
+  def query(table = nil, field_sql = "*", condition_sql = "")
+    raise ArgumentError, "Table needs to be passed" if @query.nil? && table.nil?
 
-    @query = <<-SQL.strip_heredoc.split("\n").map(&:strip).join(' ').gsub(/\s+/, ' ')
+    @query = <<~SQL.split("\n").map(&:strip).join(" ").gsub(/\s+/, " ")
       SELECT #{field_sql}
       INTO OUTFILE '#{tmp_out}'
         CHARACTER SET utf8
@@ -41,7 +41,7 @@ class DataExtraction
   end
 
   def show_query
-    puts @query.gsub(/INTO OUTFILE.*FROM/, 'FROM') # rubocop:disable Rails/Output
+    puts @query.gsub(/INTO OUTFILE.*FROM/, "FROM") # rubocop:disable Rails/Output
   end
 
   def dump
@@ -62,9 +62,11 @@ class DataExtraction
     end
 
     sh "sudo rm -f #{tmp_out}"
-    sh <<-CMD.strip_heredoc
-      mysql -u#{ENV['RAILS_DB_USERNAME']} -p#{ENV['RAILS_DB_PASSWORD']} -e \"#{@query}\" #{database}
+    # rubocop:disable Rails/EnvironmentVariableAccess
+    sh <<~CMD
+      mysql -u#{ENV["RAILS_DB_USERNAME"]} -p#{ENV["RAILS_DB_PASSWORD"]} -e "#{@query}" #{database}
     CMD
+    # rubocop:enable Rails/EnvironmentVariableAccess
   end
 
   def start_csv

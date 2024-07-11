@@ -6,12 +6,11 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class VeteranYears
-
   attr_reader :start_year, :end_year, :passive_years
 
   def initialize(start_year, end_year, passive_years = [])
-    @start_year    = start_year
-    @end_year      = end_year
+    @start_year = start_year
+    @end_year = end_year
     @passive_years = passive_years
   end
 
@@ -24,8 +23,8 @@ class VeteranYears
   end
 
   def +(other)
-    new_start   = [@start_year, other.start_year].min
-    new_end     = [@end_year, other.end_year].max
+    new_start = [@start_year, other.start_year].min
+    new_end = [@end_year, other.end_year].max
     new_passive = (new_start..new_end).to_a - (year_list + other.year_list)
 
     self.class.new(new_start, new_end, new_passive)
@@ -36,5 +35,4 @@ class VeteranYears
   def year_list
     (@start_year..@end_year).to_a - @passive_years
   end
-
 end

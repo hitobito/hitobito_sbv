@@ -18,10 +18,10 @@ class InvoiceItem::MembershipFee < InvoiceItem
 
     amount = dynamic_cost_parameters[:amount]
     cutoff_date = begin
-                    Date.parse(dynamic_cost_parameters[:cutoff_date])
-                  rescue
-                    nil
-                  end
+      Date.parse(dynamic_cost_parameters[:cutoff_date])
+    rescue
+      nil
+    end
 
     recipient_id = dynamic_cost_parameters[:recipient_id]
 
@@ -38,9 +38,9 @@ class InvoiceItem::MembershipFee < InvoiceItem
     else
       roles_scope = Role.with_deleted.joins(:group)
         .where(type: Group::VereinMitglieder::Mitglied.sti_name,
-               group: { layer_group_id: layer.id })
+          group: {layer_group_id: layer.id})
       if cutoff_date.present?
-        roles_scope.where('roles.deleted_at IS NULL OR roles.deleted_at > ?', cutoff_date)
+        roles_scope.where("roles.deleted_at IS NULL OR roles.deleted_at > ?", cutoff_date)
           .where(created_at: ...cutoff_date)
       else
         roles_scope

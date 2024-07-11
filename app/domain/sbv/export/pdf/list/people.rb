@@ -13,8 +13,8 @@ module Sbv
           person.full_name, # person_name without nickname
           address(person),
           person.email,
-          phone_numbers(person, %w(Privat)),
-          phone_numbers(person, %w(Mobil))
+          phone_numbers(person, %w[Privat]),
+          phone_numbers(person, %w[Mobil])
         ]
       end
     end

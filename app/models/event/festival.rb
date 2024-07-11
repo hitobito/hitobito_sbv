@@ -44,10 +44,10 @@
 #  display_booking_info        :boolean          default(TRUE), not null
 #
 
-require 'set'
-
+# A festival ("Musikfest") is an event which whole groups apply to. The
+# application is more complicated because the groups can play together
+# and compete in different levels and disciplines.
 class Event::Festival < Event
-
   self.used_attributes -= [
     :application_conditions,
     :applications_cancelable,
@@ -78,9 +78,9 @@ class Event::Festival < Event
 
   ### ASSOCIATIONS
 
-  has_many :group_participations, foreign_key: 'event_id',
-                                  dependent: :destroy,
-                                  inverse_of: :event
+  has_many :group_participations, foreign_key: "event_id",
+    dependent: :destroy,
+    inverse_of: :event
 
   class << self
     def participatable(group)
@@ -92,9 +92,9 @@ class Event::Festival < Event
 
     def participation_by(group)
       group_fields = [
-        'event_group_participations.group_id = ?',
-        'event_group_participations.secondary_group_id = ?'
-      ].join(' OR ')
+        "event_group_participations.group_id = ?",
+        "event_group_participations.secondary_group_id = ?"
+      ].join(" OR ")
 
       joins(:group_participations).where([group_fields, group.id, group.id])
     end

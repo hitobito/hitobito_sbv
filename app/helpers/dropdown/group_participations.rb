@@ -7,12 +7,11 @@
 
 module Dropdown
   class GroupParticipations < Base
-
     attr_reader :params
 
     def initialize(template, params, type)
       super(template, translate(:button), type)
-      @params = params
+      @params = params # rubocop:disable Rails/HelperInstanceVariable
     end
 
     def export
@@ -32,12 +31,11 @@ module Dropdown
     end
 
     def item_options
-      { data: { checkable: true } }
+      {data: {checkable: true}}
     end
 
     def export_path(format)
       template.group_event_group_participations_path(event_id: params[:id], format: format)
     end
-
   end
 end

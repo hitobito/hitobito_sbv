@@ -29,8 +29,8 @@ module Export::Tabular::GroupParticipations
     end
 
     def group_dirigent
-      entry.group.roles.where(type: 'Group::Verein::Conductor')
-           .first.try(:person)&.to_s
+      entry.group.roles.where(type: "Group::Verein::Conductor")
+        .first.try(:person)&.to_s
     end
 
     def group_contact
@@ -55,7 +55,7 @@ module Export::Tabular::GroupParticipations
     def group_attribute(attr)
       return send(attr) if respond_to?(attr) # :group_email
 
-      group_attr = attr.to_s.delete_prefix('group_').to_sym # :email
+      group_attr = attr.to_s.delete_prefix("group_").to_sym # :email
       entry.group.send(group_attr) # entry.group.email
     end
   end

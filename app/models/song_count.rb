@@ -16,21 +16,20 @@
 #
 
 class SongCount < ActiveRecord::Base
-
   belongs_to :song
   belongs_to :concert, touch: true
 
   validates :count,
-            numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 30 }, if: :count
-  validates :song_id, uniqueness: { scope: :concert }
+    numericality: {greater_than_or_equal_to: 1, less_than_or_equal_to: 30}, if: :count
+  validates :song_id, uniqueness: {scope: :concert}
 
   delegate :title, :composed_by, :arranged_by, :published_by, :suisa_id,
-           to: :song
+    to: :song
   delegate :verein, :verein_id, :mitgliederverband, :mitgliederverband_id, :song_census,
-           to: :concert
+    to: :concert
 
   scope :in, ->(year) { where(year: year) }
-  scope :ordered, -> { joins(:song).order('songs.title') }
+  scope :ordered, -> { joins(:song).order("songs.title") }
 
   def to_s
     song.to_s
@@ -39,5 +38,4 @@ class SongCount < ActiveRecord::Base
   def empty?
     count.to_i.zero?
   end
-
 end

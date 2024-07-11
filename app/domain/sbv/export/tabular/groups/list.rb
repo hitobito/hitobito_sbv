@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 #  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
@@ -16,7 +15,6 @@ module Sbv
           def attributes
             super + [:recognized_members]
           end
-
         end
       end
     end

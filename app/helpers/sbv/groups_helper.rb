@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 module Sbv::GroupsHelper
-
   def mitglieder_group_as_select_options
     Group::Verein::VereinMitglieder
       .with_deleted.includes(:parent)
@@ -19,17 +18,17 @@ module Sbv::GroupsHelper
   end
 
   def swappable_group_add_fieldset(*keys)
-    title = t('person.history.history_members_form_sbv.text_with_alternative_link_html',
-              text: t(".#{keys.last}"),
-              link: link_to(t(".#{keys.first}"), '#', data: { swap: 'group-fields' }))
+    title = t("person.history.history_members_form_sbv.text_with_alternative_link_html",
+      text: t(".#{keys.last}"),
+      link: link_to(t(".#{keys.first}"), "#", data: {swap: "group-fields"}))
 
     visible = keys.last == :select_existing_verein
-    field_set_tag(title, class: 'group-fields', style: element_visible(visible)) { yield }
+    field_set_tag(title, class: "group-fields", style: element_visible(visible)) { yield }
   end
 
   def format_correspondence_language(verein)
     Settings.application.correspondence_languages
-            .to_h.stringify_keys[verein.correspondence_language.to_s]
+      .to_h.stringify_keys[verein.correspondence_language.to_s]
   end
 
   def format_unterhaltungsmusik(verein)

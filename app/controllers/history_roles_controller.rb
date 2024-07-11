@@ -16,7 +16,7 @@ class HistoryRolesController < ApplicationController
 
     if (role_group_id || role_group_name) && role.save
       person.update_active_years
-      flash[:notice] = I18n.t('crud.create.flash.success', model: role.to_s)
+      flash[:notice] = I18n.t("crud.create.flash.success", model: role.to_s)
     else
       flash[:alert] = [role, role.group].flat_map { |m| m.errors.full_messages }.compact
     end
@@ -31,7 +31,7 @@ class HistoryRolesController < ApplicationController
 
     if role.really_destroy!
       person.update_active_years
-      flash[:notice] = I18n.t('crud.destroy.flash.success', model: role.to_s)
+      flash[:notice] = I18n.t("crud.destroy.flash.success", model: role.to_s)
 
       redirect_to return_path(person)
     end
@@ -66,8 +66,8 @@ class HistoryRolesController < ApplicationController
     scope.find_by(id: role_group_id) ||
       scope.deleted.find_by(name: params[:role][:group][:name]) ||
       scope.create(parent: Group::Verein.hidden,
-                   name: role_group_name,
-                   deleted_at: Time.zone.now)
+        name: role_group_name,
+        deleted_at: Time.zone.now)
   end
 
   def role_group_id
@@ -77,5 +77,4 @@ class HistoryRolesController < ApplicationController
   def role_group_name
     params[:role][:group][:name].presence
   end
-
 end

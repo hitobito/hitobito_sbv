@@ -45,18 +45,17 @@
 #
 
 class Group::Kreis < ::Group
-
   self.layer = true
   self.default_children = [Group::KreisGeschaeftsstelle,
-                           Group::KreisVorstand,
-                           Group::KreisKontakte,
-                           Group::KreisMusikkommission]
+    Group::KreisVorstand,
+    Group::KreisKontakte,
+    Group::KreisMusikkommission]
 
   children Group::KreisGeschaeftsstelle,
-           Group::KreisVorstand,
-           Group::KreisMusikkommission,
-           Group::KreisKontakte,
-           Group::Verein
+    Group::KreisVorstand,
+    Group::KreisMusikkommission,
+    Group::KreisKontakte,
+    Group::Verein
 
   ### ROLES
 

@@ -10,9 +10,9 @@ class LohnsummenController < ApplicationController
   before_action :authorize_class
 
   def show
-    groups = group.descendants.where(type: 'Group::Verein')
+    groups = group.descendants.where(type: "Group::Verein")
     csv = Export::Tabular::Groups::LohnsummenList.csv(groups)
-    send_data csv, type: :csv, disposition: 'attachment'
+    send_data csv, type: :csv, disposition: "attachment"
   end
 
   private
@@ -24,5 +24,4 @@ class LohnsummenController < ApplicationController
   def group
     @group ||= Group.find(params[:group_id])
   end
-
 end

@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 #  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
@@ -47,24 +46,23 @@
 #
 
 class Group::Mitgliederverband < ::Group
-
   self.layer = true
   self.default_children = [Group::MitgliederverbandGeschaeftsstelle,
-                           Group::MitgliederverbandVorstand,
-                           Group::MitgliederverbandKontakte,
-                           Group::MitgliederverbandMusikkommission,
-                           Group::MitgliederverbandVeteranen]
+    Group::MitgliederverbandVorstand,
+    Group::MitgliederverbandKontakte,
+    Group::MitgliederverbandMusikkommission,
+    Group::MitgliederverbandVeteranen]
 
   self.event_types += [Event::Course]
 
   children Group::MitgliederverbandGeschaeftsstelle,
-           Group::MitgliederverbandVorstand,
-           Group::MitgliederverbandMusikkommission,
-           Group::MitgliederverbandArbeitsgruppe,
-           Group::MitgliederverbandKontakte,
-           Group::MitgliederverbandVeteranen,
-           Group::Regionalverband,
-           Group::Verein
+    Group::MitgliederverbandVorstand,
+    Group::MitgliederverbandMusikkommission,
+    Group::MitgliederverbandArbeitsgruppe,
+    Group::MitgliederverbandKontakte,
+    Group::MitgliederverbandVeteranen,
+    Group::Regionalverband,
+    Group::Verein
 
   include SecondaryChildren
 

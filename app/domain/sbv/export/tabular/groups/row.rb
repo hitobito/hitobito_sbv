@@ -12,7 +12,6 @@ module Sbv
         module Row
           extend ActiveSupport::Concern
 
-
           def initialize(entry, suisa_verein_statuses, format = nil)
             @suisa_verein_statuses = suisa_verein_statuses
             super(entry, format)
@@ -32,7 +31,7 @@ module Sbv
 
           def correspondence_language
             Settings.application.correspondence_languages
-                    .to_h.stringify_keys[entry.correspondence_language.to_s]
+              .to_h.stringify_keys[entry.correspondence_language.to_s]
           end
 
           def contact_email
@@ -42,13 +41,13 @@ module Sbv
           # rubocop:disable Style/FormatString,Style/FormatStringToken
           def buv_lohnsumme
             if entry.buv_lohnsumme
-              '%#.2f' % entry.buv_lohnsumme
+              "%#.2f" % entry.buv_lohnsumme
             end
           end
 
           def nbuv_lohnsumme
             if entry.nbuv_lohnsumme
-              '%#.2f' % entry.nbuv_lohnsumme
+              "%#.2f" % entry.nbuv_lohnsumme
             end
           end
           # rubocop:enable Style/FormatString,Style/FormatStringToken
@@ -68,10 +67,9 @@ module Sbv
 
           def translated_suisa_status(verein)
             reason = @suisa_verein_statuses[verein.id]
-            reason ||= 'not_submitted'
+            reason ||= "not_submitted"
             I18n.t("song_censuses.totals.#{reason}")
           end
-
         end
       end
     end

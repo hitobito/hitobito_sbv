@@ -6,9 +6,7 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 module Sbv::GroupDecorator
-
   def link_with_layer
-    model.parent_id == Group::Verein.hidden.id ? model.name : super
+    (model.parent_id == Group::Verein.hidden.id) ? model.name : super
   end
-
 end

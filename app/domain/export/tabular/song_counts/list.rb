@@ -7,10 +7,9 @@
 
 module Export::Tabular::SongCounts
   class List < Export::Tabular::Base
-
-    INCLUDED_ATTRS = %w(count title composed_by arranged_by published_by suisa_id).freeze
-    GROUP_ATTRS    = %w(verein verein_id).freeze
-    GROUP_INFO     = %w(verein_with_town).freeze
+    INCLUDED_ATTRS = %w[count title composed_by arranged_by published_by suisa_id].freeze
+    GROUP_ATTRS = %w[verein verein_id].freeze
+    GROUP_INFO = %w[verein_with_town].freeze
 
     self.model_class = SongCount
     self.row_class = Export::Tabular::SongCounts::Row
@@ -26,8 +25,8 @@ module Export::Tabular::SongCounts
     def multiple?
       @single_verein ||=
         Concert.where(id: list.collect(&:concert_id))
-               .having('count(distinct verein_id) = 1')
-               .empty?
+          .having("count(distinct verein_id) = 1")
+          .empty?
     end
   end
 end

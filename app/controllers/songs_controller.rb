@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class SongsController < SimpleCrudController
-
   self.search_columns = [:title]
   self.permitted_attrs = [:title, :composed_by, :arranged_by, :published_by]
 
@@ -39,7 +38,7 @@ class SongsController < SimpleCrudController
   def with_create(list)
     return list if list.size > 3
 
-    list + [{ label: I18n.t('crud.new.title', model: model_class.model_name.human) }]
+    list + [{label: I18n.t("crud.new.title", model: model_class.model_name.human)}]
   end
 
   def for_typeahead(entries)
@@ -60,5 +59,4 @@ class SongsController < SimpleCrudController
       flash.now[:alert] = failure_notice
     end
   end
-
 end

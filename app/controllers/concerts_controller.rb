@@ -10,13 +10,13 @@ class ConcertsController < SimpleCrudController
 
   self.nesting = Group
   self.permitted_attrs = [:name, :performed_at, :year, :verein_id, :song_census_id, :reason,
-                          song_counts_attributes: [
-                            :id,
-                            :count,
-                            :song_id,
-                            :year,
-                            :_destroy
-                          ]]
+    song_counts_attributes: [
+      :id,
+      :count,
+      :song_id,
+      :year,
+      :_destroy
+    ]]
 
   helper_method :census
 
@@ -44,7 +44,7 @@ class ConcertsController < SimpleCrudController
   def assign_attributes
     super
     entry.name ||= entry.reason_label
-    entry.reason = nil if entry.reason == '_nil'
+    entry.reason = nil if entry.reason == "_nil"
     nil
   end
 
@@ -75,5 +75,4 @@ class ConcertsController < SimpleCrudController
   def authorize_class
     authorize!(:index_concerts, parent)
   end
-
 end

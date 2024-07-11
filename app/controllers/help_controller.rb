@@ -6,13 +6,11 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class HelpController < ApplicationController
-
-  HELP_TEXT = 'controller/help_text'
+  HELP_TEXT = "controller/help_text"
 
   skip_authorization_check only: [:index]
 
   def index
     @content = CustomContent.get(HELP_TEXT)
   end
-
 end

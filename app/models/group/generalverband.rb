@@ -46,7 +46,6 @@
 #
 
 class Group::Generalverband < ::Group
-
   self.layer = true
   self.event_types = [] # only managing structure, does not have events (as of 2019-06-17)
 
@@ -57,5 +56,4 @@ class Group::Generalverband < ::Group
   end
 
   roles Admin
-
 end

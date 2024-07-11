@@ -8,7 +8,7 @@
 module Export::Tabular::SongCounts
   class Row < Export::Tabular::Row
     def verein_with_town
-      [entry.verein, entry.verein.town].compact.join(', ')
+      [entry.verein, entry.verein.town].compact.join(", ")
     end
   end
 end

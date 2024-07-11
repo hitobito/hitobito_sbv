@@ -11,5 +11,4 @@ module Sbv::MailingList
   def mail_domain
     group.hostname_from_hierarchy || super
   end
-
 end

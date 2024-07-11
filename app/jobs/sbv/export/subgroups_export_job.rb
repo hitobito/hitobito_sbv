@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 module Sbv::Export::SubgroupsExportJob
-
   def initialize(user_id, group_id, options)
     super
     @exporter = Export::Tabular::Groups::AddressList
@@ -19,7 +18,7 @@ module Sbv::Export::SubgroupsExportJob
 
     potential_parents = primary_entries.where(type: (types - [Group::Verein]).map(&:sti_name))
     secondary_entries = Group::Verein.where(secondary_parent_id: potential_parents.pluck(:id))
-                                     .without_deleted.order(:lft).includes(:contact) # like in core
+      .without_deleted.order(:lft).includes(:contact) # like in core
 
     deduplicated_secondary_entries = secondary_entries - primary_entries
 
@@ -33,5 +32,4 @@ module Sbv::Export::SubgroupsExportJob
       Group::Verein
     ]
   end
-
 end

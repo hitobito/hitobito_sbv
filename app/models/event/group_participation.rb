@@ -40,9 +40,9 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   ### ASSOCIATIONS
 
-  belongs_to :event, class_name: 'Event::Festival'
+  belongs_to :event, class_name: "Event::Festival"
   belongs_to :group
-  belongs_to :secondary_group, class_name: 'Group'
+  belongs_to :secondary_group, class_name: "Group"
 
   ### CALLBACKS
 
@@ -52,29 +52,29 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   validates_by_schema
 
-  validates :group_id, uniqueness: { scope: :event_id }
+  validates :group_id, uniqueness: {scope: :event_id}
   # validates_with ParticipantValidator (every group may only
   # apply once per event, but can be primary or secondary)
 
   validates_with PreferredDateValidator
 
-  validates :secondary_group_id, presence: { if: proc do |gp|
+  validates :secondary_group_id, presence: {if: proc do |gp|
     (gp.primary_primary_group_selected? && gp.joint_participation) ||
       gp.secondary_group_id_change
-  end }
+  end}
 
-  validates :music_style,  presence: { if: :primary_music_style_selected? }
-  validates :music_type,   presence: { if: :primary_music_type_and_level_selected? }
-  validates :music_level,  presence: { if: :primary_music_type_and_level_selected? }
-  validates :parade_music, presence: { if: :primary_parade_music_selected? }
+  validates :music_style, presence: {if: :primary_music_style_selected?}
+  validates :music_type, presence: {if: :primary_music_type_and_level_selected?}
+  validates :music_level, presence: {if: :primary_music_type_and_level_selected?}
+  validates :parade_music, presence: {if: :primary_parade_music_selected?}
 
-  validates :terms_accepted, presence: { if: :primary_terms_accepted? }
-  validates :secondary_group_terms_accepted, presence: { if: :secondary_terms_accepted? }
+  validates :terms_accepted, presence: {if: :primary_terms_accepted?}
+  validates :secondary_group_terms_accepted, presence: {if: :secondary_terms_accepted?}
 
   ### STATE MACHINES
 
   # rubocop:disable Layout/LineLength,Layout/ExtraSpacing
-  aasm :primary, column: 'primary_state', namespace: :primary do # rubocop:disable Metrics/BlockLength
+  aasm :primary, column: "primary_state", namespace: :primary do # rubocop:disable Metrics/BlockLength
     state :opened, initial: true
     state :joint_participation_selected
     state :primary_group_selected
@@ -142,7 +142,7 @@ class Event::GroupParticipation < ActiveRecord::Base
     end
   end
 
-  aasm :secondary, column: 'secondary_state', namespace: :secondary do
+  aasm :secondary, column: "secondary_state", namespace: :secondary do
     state :not_present, initial: true
     state :opened
     state :terms_accepted
@@ -165,12 +165,12 @@ class Event::GroupParticipation < ActiveRecord::Base
   end
 
   def required_attrs
-    %i(
+    %i[
       joint_participation secondary_group
       music_style music_type music_level parade_music
       preferred_play_day_1 preferred_play_day_2
       terms_accepted secondary_group_terms_accepted
-    )
+    ]
   end
 
   def possible_day_numbers
@@ -199,7 +199,7 @@ class Event::GroupParticipation < ActiveRecord::Base
   def completed?(participating_group)
     state_machine = aasm(state_machine_for(participating_group))
 
-    states  = state_machine.states.map(&:name)
+    states = state_machine.states.map(&:name)
     current = state_machine.current_state
 
     (states.last == current)
@@ -215,7 +215,7 @@ class Event::GroupParticipation < ActiveRecord::Base
   end
 
   def rollback_state_if_invalid(saved)
-    restore_attributes(%w(primary_state secondary_state)) unless saved
+    restore_attributes(%w[primary_state secondary_state]) unless saved
   end
 
   def infer_play_day_preference
@@ -232,10 +232,10 @@ class Event::GroupParticipation < ActiveRecord::Base
 
   def state_machine_for(participating_group = nil)
     case participating_group.layer_group
-    when group           then :primary
+    when group then :primary
     when secondary_group then :secondary
     else
-      raise 'Group not related to this participation'
+      raise "Group not related to this participation"
     end
   end
 
@@ -244,7 +244,7 @@ class Event::GroupParticipation < ActiveRecord::Base
   def store_groups_correctly
     join_secondary
 
-    if %w(true 1).include?(secondary_group_is_primary)
+    if %w[true 1].include?(secondary_group_is_primary)
       self.group_id, self.secondary_group_id = secondary_group_id, group_id
     end
   end

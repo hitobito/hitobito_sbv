@@ -45,7 +45,6 @@
 #
 
 class Group::KreisMusikkommission < Group
-
   class Praesident < Role::MusikkommissionPraesident
   end
 

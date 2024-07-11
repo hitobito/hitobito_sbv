@@ -18,7 +18,7 @@ module Export::Tabular::Groups
     private
 
     def other_parent_name(id)
-      Group.where(id: id).pluck(:name).first if id.present?
+      Group.where(id: id).pick(:name) if id.present?
     end
   end
 end

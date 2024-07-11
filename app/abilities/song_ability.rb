@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class SongAbility < AbilityDsl::Base
-
   on(Song) do
     permission(:song_census).may(:create, :index, :show).all
     permission(:song_census).may(:manage).in_dachverband
@@ -73,5 +72,4 @@ class SongAbility < AbilityDsl::Base
   def in_dachverband
     user.groups_with_permission(:song_census).include?(Group::Root.all)
   end
-
 end

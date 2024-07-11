@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 #  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
@@ -46,7 +45,6 @@
 #
 
 class Group::RegionalverbandGeschaeftsstelle < Group
-
   class Manager < Role::GeschaeftsstelleManager
   end
 
@@ -58,5 +56,4 @@ class Group::RegionalverbandGeschaeftsstelle < Group
 
   self.default_role = Staff
   roles Manager, Staff, Help
-
 end

@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 #  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
@@ -46,9 +45,7 @@
 #
 
 class Group::MitgliederverbandArbeitsgruppe < Group
-
   children Group::MitgliederverbandArbeitsgruppe
-
 
   class Leitung < Role::ArbeitsgruppeLeitung
   end

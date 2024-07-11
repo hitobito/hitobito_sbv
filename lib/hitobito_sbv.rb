@@ -5,9 +5,9 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-require 'wagons'
+require "wagons"
 # require 'your_wagon_dependencies'
-require 'hitobito_sbv/wagon'
+require "hitobito_sbv/wagon"
 
 module HitobitoSbv
 end

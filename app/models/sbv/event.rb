@@ -9,8 +9,6 @@ module Sbv::Event
   extend ActiveSupport::Concern
 
   included do # rubocop:disable Metrics/BlockLength
-
     self.used_attributes += [:waiting_list]
-
   end
 end

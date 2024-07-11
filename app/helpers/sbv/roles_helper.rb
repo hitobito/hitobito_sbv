@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 #  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
@@ -7,9 +6,8 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 module Sbv::RolesHelper
-
   def group_options
-    @group_selection.map do |group|
+    @group_selection.map do |group| # rubocop:disable Rails/HelperInstanceVariable
       [group.to_s, group.id]
     end
   end
@@ -25,5 +23,4 @@ module Sbv::RolesHelper
   def supported_languages
     Settings.application.correspondence_languages.to_hash.invert
   end
-
 end

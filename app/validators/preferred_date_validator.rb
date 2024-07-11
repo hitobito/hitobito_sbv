@@ -7,9 +7,9 @@
 
 class PreferredDateValidator < ActiveModel::Validator
   delegate :music_style, :music_type, :music_level,
-           :preferred_play_day_1, :preferred_play_day_2,
-           :errors, :changed,
-           to: :record
+    :preferred_play_day_1, :preferred_play_day_2,
+    :errors, :changed,
+    to: :record
 
   attr_reader :record
 
@@ -30,20 +30,18 @@ class PreferredDateValidator < ActiveModel::Validator
   end
 
   def music_not_chosen?
-    music_chosen = begin
-                     music_style.present? &&
-                       music_type.present? &&
-                       music_level.present? &&
-                       !music_just_changed?
-                   end
+    music_chosen = music_style.present? &&
+      music_type.present? &&
+      music_level.present? &&
+      !music_just_changed?
 
     !music_chosen
   end
 
   def music_just_changed?
-    changed.include?('music_style') ||
-      changed.include?('music_type') ||
-      changed.include?('music_level')
+    changed.include?("music_style") ||
+      changed.include?("music_type") ||
+      changed.include?("music_level")
   end
 
   def date_reset?
@@ -59,12 +57,12 @@ class PreferredDateValidator < ActiveModel::Validator
   end
 
   def date_changed?
-    changed.include?('preferred_play_day_1') || changed.include?('preferred_play_day_2')
+    changed.include?("preferred_play_day_1") || changed.include?("preferred_play_day_2")
   end
 
   def error_translation(attr, key)
-    I18n.t(key, scope: 'activerecord.errors.models.' \
-           'event/group_participation' \
+    I18n.t(key, scope: "activerecord.errors.models." \
+           "event/group_participation" \
            ".attributes.#{attr}")
   end
 

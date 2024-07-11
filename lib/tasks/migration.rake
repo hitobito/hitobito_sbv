@@ -2,60 +2,60 @@
 
 # vim:foldlevel=0
 
-require_relative '../../app/domain/data_extraction'
+require_relative "../../app/domain/data_extraction"
 
 # rubocop:disable Metrics/BlockLength
 namespace :migration do
   task :clean do
-    rm_f 'db/seeds/production/verbaende.csv'
-    rm_f 'db/seeds/production/vereine.csv'
-    rm_f 'db/seeds/production/vereine_musicgest.csv'
-    rm_f 'db/seeds/production/mitglieder.csv'
-    rm_f 'db/seeds/production/mitglieder_musicgest.csv'
-    rm_f 'db/seeds/production/suisa_werke.csv'
-    rm_f 'db/seeds/production/rollen_swoffice.csv'
-    rm_f 'db/seeds/production/rollen_swoffice_admin.csv'
-    rm_f 'db/seeds/production/rollen_musicgest.csv'
+    rm_f "db/seeds/production/verbaende.csv"
+    rm_f "db/seeds/production/vereine.csv"
+    rm_f "db/seeds/production/vereine_musicgest.csv"
+    rm_f "db/seeds/production/mitglieder.csv"
+    rm_f "db/seeds/production/mitglieder_musicgest.csv"
+    rm_f "db/seeds/production/suisa_werke.csv"
+    rm_f "db/seeds/production/rollen_swoffice.csv"
+    rm_f "db/seeds/production/rollen_swoffice_admin.csv"
+    rm_f "db/seeds/production/rollen_musicgest.csv"
   end
 
   task extract: [
-    'db/seeds/production/verbaende.csv',
-    'db/seeds/production/vereine.csv',
-    'db/seeds/production/vereine_musicgest.csv',
-    'db/seeds/production/mitglieder.csv',
-    'db/seeds/production/mitglieder_musicgest.csv',
-    'db/seeds/production/suisa_werke.csv',
-    'db/seeds/production/rollen_swoffice.csv',
-    'db/seeds/production/rollen_swoffice_admin.csv',
-    'db/seeds/production/rollen_musicgest.csv'
+    "db/seeds/production/verbaende.csv",
+    "db/seeds/production/vereine.csv",
+    "db/seeds/production/vereine_musicgest.csv",
+    "db/seeds/production/mitglieder.csv",
+    "db/seeds/production/mitglieder_musicgest.csv",
+    "db/seeds/production/suisa_werke.csv",
+    "db/seeds/production/rollen_swoffice.csv",
+    "db/seeds/production/rollen_swoffice_admin.csv",
+    "db/seeds/production/rollen_musicgest.csv"
   ]
 
   task prepare_seed: [:extract] do
-    rm_f 'db/seeds/groups.rb'
-    rm_rf 'db/seeds/development'
+    rm_f "db/seeds/groups.rb"
+    rm_rf "db/seeds/development"
 
-    cp 'db/seeds/production/0_groups.rb', 'db/seeds/0_groups.rb'
-    cp 'db/seeds/production/1_people.rb', 'db/seeds/1_people.rb'
-    cp 'db/seeds/production/2_songs.rb', 'db/seeds/2_songs.rb'
-    cp 'db/seeds/production/4_roles.rb', 'db/seeds/4_roles.rb'
+    cp "db/seeds/production/0_groups.rb", "db/seeds/0_groups.rb"
+    cp "db/seeds/production/1_people.rb", "db/seeds/1_people.rb"
+    cp "db/seeds/production/2_songs.rb", "db/seeds/2_songs.rb"
+    cp "db/seeds/production/4_roles.rb", "db/seeds/4_roles.rb"
   end
 
   task :repair_after_seed do
-    sh 'git checkout db/seeds/development'
-    sh 'git checkout db/seeds/groups.rb'
-    sh 'git clean -f'
+    sh "git checkout db/seeds/development"
+    sh "git checkout db/seeds/groups.rb"
+    sh "git clean -f"
   end
 
   task map_primary_contact: [:environment] do
-    potential_primary_contacts = %w(
+    potential_primary_contacts = %w[
       Group::Mitgliederverband::Admin
       Group::Regionalverband::Admin
       Group::Verein::Admin
-    )
+    ]
 
     Group.transaction do
       roles = Role.where(type: potential_primary_contacts)
-                  .joins(:group).where('groups.contact_id IS NULL')
+        .joins(:group).where(groups: {contact_id: nil})
 
       roles.each do |role|
         role.group.update_attribute(:contact_id, role.person_id) # rubocop:disable Rails/SkipsModelValidations
@@ -64,15 +64,15 @@ namespace :migration do
   end
 end
 
-directory 'db/seeds/production'
+directory "db/seeds/production"
 
-file('db/seeds/production/verbaende.csv').clear
-file 'db/seeds/production/verbaende.csv' => 'db/seeds/production' do |task|
-  migrator = DataExtraction.new(task.name, 'swoffice_sbvnew')
-  migrator.headers = <<-TEXT.strip_heredoc
+file("db/seeds/production/verbaende.csv").clear
+file "db/seeds/production/verbaende.csv" => "db/seeds/production" do |task|
+  migrator = DataExtraction.new(task.name, "swoffice_sbvnew")
+  migrator.headers = <<~TEXT
     name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type
   TEXT
-  migrator.query('tbl_person', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+  migrator.query("tbl_person", <<~SQL, <<~CONDITIONS)
     name,
     email,
     laendercode AS country,
@@ -93,13 +93,13 @@ file 'db/seeds/production/verbaende.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
-file('db/seeds/production/vereine.csv').clear
-file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
-  migrator = DataExtraction.new(task.name, 'swoffice_sbvnew')
-  migrator.headers = <<-TEXT.strip_heredoc
+file("db/seeds/production/vereine.csv").clear
+file "db/seeds/production/vereine.csv" => "db/seeds/production" do |task|
+  migrator = DataExtraction.new(task.name, "swoffice_sbvnew")
+  migrator.headers = <<~TEXT
     name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,kreis,swoffice_id
   TEXT
-  migrator.query('tbl_person', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+  migrator.query("tbl_person", <<~SQL, <<~CONDITIONS)
     CONCAT_WS(' ', tbl_person.name, tbl_person.domizil) AS name,
     tbl_person.email,
     tbl_person.laendercode AS country,
@@ -131,13 +131,13 @@ file 'db/seeds/production/vereine.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
-file('db/seeds/production/vereine_musicgest.csv').clear
-file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |task|
-  migrator = DataExtraction.new(task.name, 'musicgest10')
-  migrator.headers = <<-TEXT.strip_heredoc
+file("db/seeds/production/vereine_musicgest.csv").clear
+file "db/seeds/production/vereine_musicgest.csv" => "db/seeds/production" do |task|
+  migrator = DataExtraction.new(task.name, "musicgest10")
+  migrator.headers = <<~TEXT
     name,email,country,town,zip_code,address,vereinssitz,founding_year,subventionen,type,verband,besetzung,correspondence_language,kreis,swoffice_id
   TEXT
-  migrator.query('societes', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+  migrator.query("societes", <<~SQL, <<~CONDITIONS)
     CONCAT_WS(' ', nomSociete, nomVilleSoc) AS name,
     NULL AS email,
     NULL AS country,
@@ -176,17 +176,17 @@ file 'db/seeds/production/vereine_musicgest.csv' => 'db/seeds/production' do |ta
     LEFT JOIN federations USING (mandant, autoFederation)
   CONDITIONS
   migrator.dump # musicgest10')
-  migrator.append('music_1_db')
-  migrator.append('music_2_db')
+  migrator.append("music_1_db")
+  migrator.append("music_2_db")
 end
 
-file('db/seeds/production/mitglieder.csv').clear
-file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
-  migrator = DataExtraction.new(task.name, 'swoffice_sbvnew')
-  migrator.headers = <<-TEXT.strip_heredoc
+file("db/seeds/production/mitglieder.csv").clear
+file "db/seeds/production/mitglieder.csv" => "db/seeds/production" do |task|
+  migrator = DataExtraction.new(task.name, "swoffice_sbvnew")
+  migrator.headers = <<~TEXT
     anrede,first_name,last_name,email,birthday,address,zip_code,town,country,verein_name,verein_ort,eintrittsdatum,bemerkung,zusatz
   TEXT
-  migrator.query('tbl_person', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+  migrator.query("tbl_person", <<~SQL, <<~CONDITIONS)
     NULLIF(tbl_person.anrede, ''),
     tbl_person.vorname,
     tbl_person.name,
@@ -209,13 +209,13 @@ file 'db/seeds/production/mitglieder.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
-file('db/seeds/production/mitglieder_musicgest.csv').clear
-file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do |task|
-  migrator = DataExtraction.new(task.name, 'musicgest10')
-  migrator.headers = <<-TEXT.strip_heredoc
+file("db/seeds/production/mitglieder_musicgest.csv").clear
+file "db/seeds/production/mitglieder_musicgest.csv" => "db/seeds/production" do |task|
+  migrator = DataExtraction.new(task.name, "musicgest10")
+  migrator.headers = <<~TEXT
     anrede,first_name,last_name,email,birthday,address,zip_code,town,country,verein_name,verein_ort,eintrittsdatum,bemerkung,zusatz
   TEXT
-  migrator.query('musiciens', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+  migrator.query("musiciens", <<~SQL, <<~CONDITIONS)
     CASE autoTitre
       WHEN 1 THEN 'Herr'
       WHEN 2 THEN 'Frau'
@@ -247,8 +247,8 @@ file 'db/seeds/production/mitglieder_musicgest.csv' => 'db/seeds/production' do 
       ON (lienmusicienssocietes.mandant = societes.mandant AND lienmusicienssocietes.autoSociete = societes.autoSociete)
   CONDITIONS
   migrator.dump # musicgest10')
-  migrator.append('music_1_db')
-  migrator.append('music_2_db')
+  migrator.append("music_1_db")
+  migrator.append("music_2_db")
 end
 
 # imported manually into swoffice_sbvnew with
@@ -259,11 +259,11 @@ end
 #   FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
 #   (suisaid, title, compositionyear, typ, name);
 #
-file('db/seeds/production/suisa_werke.csv').clear
-file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
-  migrator = DataExtraction.new(task.name, 'suisa')
-  migrator.headers = 'suisa_id,title,composed_by,arranged_by,published_by'
-  migrator.query(<<-TABLE.strip_heredoc, <<-FIELDS.strip_heredoc)
+file("db/seeds/production/suisa_werke.csv").clear
+file "db/seeds/production/suisa_werke.csv" => "db/seeds/production" do |task|
+  migrator = DataExtraction.new(task.name, "suisa")
+  migrator.headers = "suisa_id,title,composed_by,arranged_by,published_by"
+  migrator.query(<<~TABLE, <<~FIELDS)
     (SELECT
       suisaid                                             AS suisa_id,
       max(title)                                          AS title,
@@ -290,13 +290,13 @@ file 'db/seeds/production/suisa_werke.csv' => 'db/seeds/production' do |task|
   migrator.dump
 end
 
-file('db/seeds/production/rollen_musicgest.csv').clear
-file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |task|
-  migrator = DataExtraction.new(task.name, 'musicgest10')
-  migrator.headers = <<-TEXT.strip_heredoc
+file("db/seeds/production/rollen_musicgest.csv").clear
+file "db/seeds/production/rollen_musicgest.csv" => "db/seeds/production" do |task|
+  migrator = DataExtraction.new(task.name, "musicgest10")
+  migrator.headers = <<~TEXT
     first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
   TEXT
-  migrator.query('lienmusicienssocietes', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+  migrator.query("lienmusicienssocietes", <<~SQL, <<~CONDITIONS)
     prenomMusicien,
     nomMusicien,
     emailMusicien,
@@ -313,10 +313,10 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
           AND lienmusicienssocietes.cotisation = 1
   CONDITIONS
   migrator.dump # musicgest10
-  migrator.append('music_1_db')
-  migrator.append('music_2_db')
+  migrator.append("music_1_db")
+  migrator.append("music_2_db")
 
-  migrator.query('lienmusicienssocietes', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+  migrator.query("lienmusicienssocietes", <<~SQL, <<~CONDITIONS)
     prenomMusicien,
     nomMusicien,
     emailMusicien,
@@ -332,29 +332,29 @@ file 'db/seeds/production/rollen_musicgest.csv' => 'db/seeds/production' do |tas
     INNER JOIN lienfonctionsmusiciens USING (mandant, autoMusicien)
     WHERE fonctionMusicien = 1 AND until IS NULL
   CONDITIONS
-  migrator.append('musicgest10')
-  migrator.append('music_1_db')
-  migrator.append('music_2_db')
+  migrator.append("musicgest10")
+  migrator.append("music_1_db")
+  migrator.append("music_2_db")
 end
 
-file('db/seeds/production/rollen_swoffice.csv').clear
-file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task|
+file("db/seeds/production/rollen_swoffice.csv").clear
+file "db/seeds/production/rollen_swoffice.csv" => "db/seeds/production" do |task|
   role_map = {
-    'Suisa' => 'Group::Verein::SuisaAdmin',
-    'Präsident/in' => 'Group::VereinVorstand::Praesident',
-    'Presidente' => 'Group::VereinVorstand::Praesident',
-    'Präsident/e' => 'Group::VereinVorstand::Praesident',
-    'Sekretär/in' => 'Group::Verein::Admin',
-    'Segretario/a' => 'Group::Verein::Admin',
-    'Secrétaire' => 'Group::Verein::Admin',
-    'Adjoint' => 'Group::Verein::Admin'
+    "Suisa" => "Group::Verein::SuisaAdmin",
+    "Präsident/in" => "Group::VereinVorstand::Praesident",
+    "Presidente" => "Group::VereinVorstand::Praesident",
+    "Präsident/e" => "Group::VereinVorstand::Praesident",
+    "Sekretär/in" => "Group::Verein::Admin",
+    "Segretario/a" => "Group::Verein::Admin",
+    "Secrétaire" => "Group::Verein::Admin",
+    "Adjoint" => "Group::Verein::Admin"
   }
 
-  migrator = DataExtraction.new(task.name, 'swoffice_sbvnew')
-  migrator.headers = <<-TEXT.strip_heredoc
+  migrator = DataExtraction.new(task.name, "swoffice_sbvnew")
+  migrator.headers = <<~TEXT
     first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
   TEXT
-  migrator.query('tbl_person_chargen pc', <<-SQL.strip_heredoc, <<-CONDITIONS.strip_heredoc)
+  migrator.query("tbl_person_chargen pc", <<~SQL, <<~CONDITIONS)
     p.vorname,
     p.name,
     p.email,
@@ -364,7 +364,7 @@ file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task
     pc.von AS entrittsdatum,
     NULL AS austrittsdatum,
     CASE a.bezeichnung
-      #{role_map.map { |name, role| "WHEN '#{name}' THEN '#{role}'" }.join(' ')}
+      #{role_map.map { |name, role| "WHEN '#{name}' THEN '#{role}'" }.join(" ")}
     END AS rolle
   SQL
     INNER JOIN tbl_person p ON (pc.person_id = p.id)
@@ -375,14 +375,14 @@ file 'db/seeds/production/rollen_swoffice.csv' => 'db/seeds/production' do |task
   migrator.dump
 end
 
-file('db/seeds/production/rollen_swoffice_admin.csv').clear
-file 'db/seeds/production/rollen_swoffice_admin.csv' => 'db/seeds/production' do |task|
-  migrator = DataExtraction.new(task.name, 'swoffice_sbvnew')
-  migrator.headers = <<-TEXT.strip_heredoc
+file("db/seeds/production/rollen_swoffice_admin.csv").clear
+file "db/seeds/production/rollen_swoffice_admin.csv" => "db/seeds/production" do |task|
+  migrator = DataExtraction.new(task.name, "swoffice_sbvnew")
+  migrator.headers = <<~TEXT
     first_name,last_name,email,birthday,verein_name,verein_ort,eintrittsdatum,austrittsdatum,rolle
   TEXT
-  table = 'tbl_settings s'
-  fields = <<-SQL.strip_heredoc
+  table = "tbl_settings s"
+  fields = <<~SQL
     p.vorname,
     p.name,
     p.email,
@@ -393,15 +393,15 @@ file 'db/seeds/production/rollen_swoffice_admin.csv' => 'db/seeds/production' do
     NULL AS austrittsdatum,
     '__ROLLENNAME__' AS rolle
   SQL
-  joins = <<-SQL.strip_heredoc
+  joins = <<~SQL
     INNER JOIN tbl_person p ON (s.person_id = p.id)
     INNER JOIN tbl_person v ON (p.parentId = v.id)
   SQL
 
-  migrator.query(table, fields.gsub('__ROLLENNAME__', 'Group::Verein::SuisaAdmin'), joins)
+  migrator.query(table, fields.gsub("__ROLLENNAME__", "Group::Verein::SuisaAdmin"), joins)
   migrator.dump
 
-  migrator.query(table, fields.gsub('__ROLLENNAME__', 'Group::Verein::Admin'), joins)
+  migrator.query(table, fields.gsub("__ROLLENNAME__", "Group::Verein::Admin"), joins)
   migrator.append
 end
 

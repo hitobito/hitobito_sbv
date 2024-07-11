@@ -45,7 +45,6 @@
 #
 
 class Group::KreisGeschaeftsstelle < Group
-
   class Manager < Role::GeschaeftsstelleManager
   end
 
@@ -57,5 +56,4 @@ class Group::KreisGeschaeftsstelle < Group
 
   self.default_role = Staff
   roles Manager, Staff, Help
-
 end

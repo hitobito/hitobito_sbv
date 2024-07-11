@@ -28,6 +28,5 @@ module Sbv::Person
       in: Settings.application.correspondence_languages.to_h.keys.map(&:to_s),
       allow_blank: true
     }
-
   end
 end

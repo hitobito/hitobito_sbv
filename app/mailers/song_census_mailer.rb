@@ -6,11 +6,11 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class SongCensusMailer < ApplicationMailer
-  SONG_CENSUS_REMINDER = 'cong_census_reminder'
+  SONG_CENSUS_REMINDER = "cong_census_reminder"
 
   def reminder(recipient, verein)
     @recipient = recipient
-    @verein    = verein
+    @verein = verein
     compose(recipient, SONG_CENSUS_REMINDER)
   end
 

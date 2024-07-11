@@ -9,11 +9,11 @@ module Sbv::Sheet::Event
   extend ActiveSupport::Concern
 
   included do
-    tab 'events.group_participations.list',
-        :group_event_group_participations_path,
-        { if: lambda do |view, *args|
-          _group, event = args
-          event.type == 'Event::Festival' && view.can?(:edit, event)
-        end }
+    tab "events.group_participations.list",
+      :group_event_group_participations_path,
+      {if: lambda do |view, *args|
+        _group, event = args
+        event.type == "Event::Festival" && view.can?(:edit, event)
+      end}
   end
 end

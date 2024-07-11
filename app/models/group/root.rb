@@ -45,26 +45,25 @@
 #
 
 class Group::Root < ::Group
-
   self.layer = true
   self.default_children = [Group::RootGeschaeftsstelle,
-                           Group::RootVorstand,
-                           Group::RootMusikkommission,
-                           Group::RootKontakte,
-                           Group::RootEhrenmitglieder,
-                           Group::RootVeteranen]
+    Group::RootVorstand,
+    Group::RootMusikkommission,
+    Group::RootKontakte,
+    Group::RootEhrenmitglieder,
+    Group::RootVeteranen]
 
   self.event_types = [Event, Event::Course, Event::Festival]
 
   children Group::RootGeschaeftsstelle,
-           Group::RootVorstand,
-           Group::RootMusikkommission,
-           Group::RootArbeitsgruppe,
-           Group::RootKontakte,
-           Group::RootEhrenmitglieder,
-           Group::RootVeteranen,
-           Group::Mitgliederverband,
-           Group::Verein
+    Group::RootVorstand,
+    Group::RootMusikkommission,
+    Group::RootArbeitsgruppe,
+    Group::RootKontakte,
+    Group::RootEhrenmitglieder,
+    Group::RootVeteranen,
+    Group::Mitgliederverband,
+    Group::Verein
 
   ### ROLES
 
@@ -83,5 +82,4 @@ class Group::Root < ::Group
   end
 
   roles Admin, SuisaAdmin
-
 end

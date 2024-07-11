@@ -45,7 +45,6 @@
 #
 
 class Group::RootGeschaeftsstelle < Group
-
   class Manager < Role::GeschaeftsstelleManager
     self.permissions = [:layer_and_below_full, :impersonation]
   end

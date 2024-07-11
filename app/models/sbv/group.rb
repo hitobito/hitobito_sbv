@@ -8,15 +8,16 @@
 module Sbv::Group
   extend ActiveSupport::Concern
 
+  BESETZUNGEN = %w[brass_band harmonie fanfare_benelux fanfare_mixte tambour_percussion].freeze
+  KLASSEN = %w[hoechste erste zweite dritte vierte].freeze
+  UNTERHALTUNGSMUSIK = %w[oberstufe mittelstufe unterstufe].freeze
+  FQDN_REGEX = '(?=\A.{1,254}\z)(\A(([a-z0-9][a-z0-9\-]{0,61}[a-z0-9])\.)+([a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))\z' # rubocop:disable Metrics/LineLength
+
   included do # rubocop:disable Metrics/BlockLength
     root_types Group::Generalverband
 
     include I18nSettable
     include I18nEnums
-
-    BESETZUNGEN = %w(brass_band harmonie fanfare_benelux fanfare_mixte tambour_percussion).freeze
-    KLASSEN = %w(hoechste erste zweite dritte vierte).freeze
-    UNTERHALTUNGSMUSIK = %w(oberstufe mittelstufe unterstufe).freeze
 
     i18n_enum :besetzung, BESETZUNGEN, key: :besetzungen
     i18n_enum :klasse, KLASSEN, key: :klassen
@@ -26,20 +27,17 @@ module Sbv::Group
     i18n_setter :klasse, (KLASSEN + [nil])
     i18n_setter :unterhaltungsmusik, (UNTERHALTUNGSMUSIK + [nil])
 
-    FQDN_REGEX = '(?=\A.{1,254}\z)(\A(([a-z0-9][a-z0-9\-]{0,61}[a-z0-9])\.)+([a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))\z' # rubocop:disable Metrics/LineLength
-
     validates :hostname,
-              uniqueness: { case_sensitive: false },
-              format: { with: Regexp.new(FQDN_REGEX, Regexp::IGNORECASE) },
-              allow_blank: true
+      uniqueness: {case_sensitive: false},
+      format: {with: Regexp.new(FQDN_REGEX, Regexp::IGNORECASE)},
+      allow_blank: true
 
     validates :manual_member_count,
-              numericality: { greater_than_or_equal_to: 0 },
-              if: :manually_counted_members?
+      numericality: {greater_than_or_equal_to: 0},
+      if: :manually_counted_members?
 
-
-    belongs_to :secondary_parent, class_name: 'Group'
-    belongs_to :tertiary_parent, class_name: 'Group'
+    belongs_to :secondary_parent, class_name: "Group"
+    belongs_to :tertiary_parent, class_name: "Group"
 
     before_validation :nullify_blank_hostname
     before_validation :downcase_hostname
@@ -48,7 +46,7 @@ module Sbv::Group
 
     class << self
       def order_by_type_stmt_with_name(parent_group = nil)
-        order_by_type_stmt_without_name(parent_group).gsub(/ lft$/, ' name')
+        order_by_type_stmt_without_name(parent_group).gsub(/ lft$/, " name")
       end
 
       alias_method_chain :order_by_type_stmt, :name
@@ -56,7 +54,7 @@ module Sbv::Group
 
     # potential other parents, dropdown data
     def self.secondary_parents
-      where(type: %w(Group::Mitgliederverband Group::Regionalverband))
+      where(type: %w[Group::Mitgliederverband Group::Regionalverband])
         .order(:type, :name)
         .select(:id, :name)
     end
@@ -94,7 +92,7 @@ module Sbv::Group
   def member_count
     return unless is_a?(Group::Verein)
 
-    Group::VereinMitglieder::Mitglied.joins(:group).where(groups: { layer_group_id: id }).count
+    Group::VereinMitglieder::Mitglied.joins(:group).where(groups: {layer_group_id: id}).count
   end
 
   def hostname_from_hierarchy
@@ -108,5 +106,4 @@ module Sbv::Group
   def downcase_hostname
     self.hostname = hostname.downcase if hostname.present?
   end
-
 end

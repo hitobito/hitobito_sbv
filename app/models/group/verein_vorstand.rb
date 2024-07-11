@@ -45,7 +45,6 @@
 #
 
 class Group::VereinVorstand < Group
-
   class Praesident < Role::VorstandPraesident
   end
 

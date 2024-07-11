@@ -45,7 +45,6 @@
 #
 
 class Group::KreisKontakte < Group
-
   children Group::RegionalverbandKontakte
 
   class Adressverwaltung < Role::Adressverwaltung

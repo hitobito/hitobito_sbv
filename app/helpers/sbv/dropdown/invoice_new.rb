@@ -1,4 +1,3 @@
-
 module Sbv
   module Dropdown
     module InvoiceNew

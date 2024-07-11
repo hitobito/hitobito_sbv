@@ -45,7 +45,6 @@
 #
 
 class Group::KreisVorstand < Group
-
   class Praesident < Role::VorstandPraesident
   end
 

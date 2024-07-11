@@ -10,7 +10,7 @@ class InvoiceLists::VereinMembershipFeeRecipientFinder
     vorstand_id = Group::VereinVorstand.find_by(parent_id: verein_id)&.id
     admin_role = Group::Verein::Admin.find_by(group_id: verein_id)
 
-    return admin_role unless vorstand_id.present?
+    return admin_role if vorstand_id.blank?
 
     Group::VereinVorstand::Kassier.find_by(group_id: vorstand_id) ||
       Group::VereinVorstand::Praesident.find_by(group_id: vorstand_id) ||

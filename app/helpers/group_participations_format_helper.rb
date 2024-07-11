@@ -35,7 +35,7 @@ module GroupParticipationsFormatHelper
 
   def group_participation_scope
     model_key = Event::GroupParticipation.name.underscore
-    { scope: "activerecord.attributes.#{model_key}" }
+    {scope: "activerecord.attributes.#{model_key}"}
   end
 
   def music_i18n_option(kind, value)
@@ -46,8 +46,8 @@ module GroupParticipationsFormatHelper
   end
 
   def day_name(value)
-    return '' unless value
+    return "" unless value
 
-    I18n.t('date.day_names').fetch(value)
+    I18n.t("date.day_names").fetch(value)
   end
 end

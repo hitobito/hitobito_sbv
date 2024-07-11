@@ -11,12 +11,12 @@ module Sbv
     def group_field(attr, html_options = {})
       _attr, attr_id = assoc_and_id_attr(attr)
       hidden_field(attr_id) +
-      string_field(attr, # "#{attr}_search",
-                   placeholder: I18n.t('global.search.placeholder_group'),
-                   name: 'group_name_search_result',
-                   data: { provide: 'entity',
-                           id_field: "#{object_name}_#{attr_id}",
-                           url: @template.query_groups_path(html_options[:search_params]) })
+        string_field(attr, # "#{attr}_search",
+          placeholder: I18n.t("global.search.placeholder_group"),
+          name: "group_name_search_result",
+          data: {provide: "entity",
+                 id_field: "#{object_name}_#{attr_id}",
+                 url: @template.query_groups_path(html_options[:search_params])})
     end
   end
 end

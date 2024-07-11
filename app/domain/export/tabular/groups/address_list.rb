@@ -10,14 +10,14 @@ module Export::Tabular::Groups
     self.row_class = Export::Tabular::Groups::AddressRow
 
     def attributes
-      %w(
+      %w[
         name type mitgliederverband regionalverband
         secondary_parent tertiary_parent
         email contact contact_email address zip_code town country
         besetzung klasse unterhaltungsmusik
         correspondence_language subventionen founding_year recognized_members
         suisa_status
-      )
+      ]
     end
 
     private
@@ -39,6 +39,5 @@ module Export::Tabular::Groups
       vereine = list.select { |g| g.type == Group::Verein.sti_name }
       vereine.pluck(:id)
     end
-
   end
 end

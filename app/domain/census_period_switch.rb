@@ -7,7 +7,6 @@
 
 # rubocop:disable Rails/SkipsModelValidations if this makes a census or count invalid, it reflects an invalid reality...
 class CensusPeriodSwitch
-
   def initialize(old, new)
     @old = old
     @new = new
@@ -42,11 +41,10 @@ class CensusPeriodSwitch
   end
 
   def lock_submitted_concerts
-    @old.concerts.update_all('editable = false')
+    @old.concerts.update_all("editable = false")
   end
 
   def correct_concert_year_to_match_period
     @old.concerts.update_all("year = #{@old.year.to_i}")
   end
-
 end

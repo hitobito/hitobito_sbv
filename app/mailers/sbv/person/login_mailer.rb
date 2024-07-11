@@ -5,9 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-
 module Sbv::Person::LoginMailer
-
   private
 
   def placeholder_dachverband
@@ -15,5 +13,4 @@ module Sbv::Person::LoginMailer
       @recipient.primary_group.self_and_ancestors.find_by(type: Group::Root.sti_name).to_s
     end
   end
-
 end

@@ -48,10 +48,10 @@ module Export::Tabular::GroupParticipations
     private
 
     def human_attribute(attr)
-      return super unless attr.to_s.starts_with?('group_')
+      return super unless attr.to_s.starts_with?("group_")
       return super if attr == :group_id
 
-      Group.human_attribute_name(attr.to_s.delete_prefix('group_'))
+      Group.human_attribute_name(attr.to_s.delete_prefix("group_"))
     end
 
     def secondary_group(leader)

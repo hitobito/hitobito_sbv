@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 class Groups::QueryController < ApplicationController
-
   before_action :authorize_action
 
   delegate :model_class, to: :class
@@ -16,10 +15,10 @@ class Groups::QueryController < ApplicationController
     groups = []
     if params.key?(:q) && params[:q].size >= 3
       groups = if params.fetch(:historic, false)
-                 list_entries_for_member_history
-               else
-                 list_entries
-               end
+        list_entries_for_member_history
+      else
+        list_entries
+      end
       groups = decorate(groups.limit(10))
     end
 
@@ -48,11 +47,8 @@ class Groups::QueryController < ApplicationController
   self.search_columns = [:name, :short_name, :town, :vereinssitz]
 
   class << self
-
     def model_class
       Group
     end
-
   end
-
 end
