@@ -18,10 +18,10 @@ Gemfile.lock
 
 # reports
 spec/coverage
+coverage/
 spec/reports
 brakeman-output.tabs
 rubocop-results.xml
 .pry_history
-.tool-versions
 db/seeds/production/*.csv
 NOTES
