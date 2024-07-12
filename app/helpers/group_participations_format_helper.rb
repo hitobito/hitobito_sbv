@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2020-2024, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -23,14 +23,6 @@ module GroupParticipationsFormatHelper
     music_i18n_option(:music_level, entry.music_level).first
   end
 
-  def format_preferred_play_day_1(entry)
-    day_name(entry.preferred_play_day_1)
-  end
-
-  def format_preferred_play_day_2(entry)
-    day_name(entry.preferred_play_day_2)
-  end
-
   private
 
   def group_participation_scope
@@ -43,11 +35,5 @@ module GroupParticipationsFormatHelper
       I18n.t("#{kind.to_s.pluralize}.#{value}", **group_participation_scope),
       value
     ]
-  end
-
-  def day_name(value)
-    return "" unless value
-
-    I18n.t("date.day_names").fetch(value)
   end
 end

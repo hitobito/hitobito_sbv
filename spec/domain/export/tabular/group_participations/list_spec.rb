@@ -26,10 +26,6 @@ describe Export::Tabular::GroupParticipations::List do
       music_style: "concert_music",
       music_type: "harmony",
       music_level: "highest"
-      # preferred_play_day_1: 0, # sunday
-      # preferred_play_day_2: 6, # saturday
-      # terms_accepted: false,
-      # secondary_group_terms_accepted: true
     )
 
     groups(:musikgesellschaft_aarberg).roles.create(
@@ -45,9 +41,6 @@ describe Export::Tabular::GroupParticipations::List do
       music_type: "harmony",
       music_level: "first",
       parade_music: "traditional_parade"
-      # preferred_play_day_1: 4, # thursday
-      # preferred_play_day_2: 5, # friday
-      # terms_accepted: true
     )
   end
 

@@ -30,13 +30,6 @@ module GroupParticipationsHelper
     Event::GroupParticipation::MUSIC_CLASSIFICATIONS.find { |h| h[:style] == music_style }[:types]
   end
 
-  def play_day_selection_for(record)
-    day_numbers = record.possible_day_numbers
-    day_names = t("date.day_names").values_at(*day_numbers)
-
-    day_names.zip(day_numbers)
-  end
-
   def group_participation_edit_link(stage, participating_group_id)
     content_tag :p do
       link_to t("events.group_participations.edit_stages.#{stage}"),
@@ -57,12 +50,6 @@ module GroupParticipationsHelper
     content_tag :p do
       action_button t(:caption, scope: scope), destroy_path, :trash, options
     end
-  end
-
-  def link_to_terms
-    link_to t(:terms, **group_participation_scope),
-      t(:terms_url, **group_participation_scope),
-      target: "_blank", rel: "noopener"
   end
 
   def format_event_group_participation_title(entry)
