@@ -18,7 +18,7 @@ describe SongCensus do
     subject { described_class.current }
 
     it "should eq 2017 census" do
-      travel_to Time.new(2018, 0o1, 0o1) do
+      travel_to Time.zone.local(2018, 1, 1) do
         is_expected.to eq(song_censuses(:two_o_17))
       end
     end
@@ -63,25 +63,25 @@ describe SongCensus do
       end
 
       it "uses the current year to name the period" do
-        travel_to Time.new(2018, 12, 20) do
+        travel_to Time.zone.local(2018, 12, 20) do
           is_expected.to have_attributes(year: 2018)
         end
       end
 
       it "uses the current year for the finish-date if possible" do
-        travel_to Time.new(2018, 12, 20) do
+        travel_to Time.zone.local(2018, 12, 20) do
           is_expected.to have_attributes(finish_at: Date.new(2018, 12, 24))
         end
       end
 
       it "uses the next year to name the period" do
-        travel_to Time.new(2018, 12, 25) do
+        travel_to Time.zone.local(2018, 12, 25) do
           is_expected.to have_attributes(finish_at: Date.new(2019, 12, 24))
         end
       end
 
       it "uses the next year for the finish-date if needed" do
-        travel_to Time.new(2018, 12, 25) do
+        travel_to Time.zone.local(2018, 12, 25) do
           is_expected.to have_attributes(year: 2019)
         end
       end

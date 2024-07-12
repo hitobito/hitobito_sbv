@@ -76,7 +76,7 @@ describe HistoryRolesController do
       person_id: leader.id,
       group: {name: "Dummy"},
       start_date: 2.years.ago.to_date,
-      end_date: Date.today
+      end_date: Time.zone.today
     }
     expect do
       post :create, params: {group_id: leader.primary_group_id, role: role_params}

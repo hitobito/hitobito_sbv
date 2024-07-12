@@ -322,41 +322,41 @@ describe Event::GroupParticipation do
     end
   end
 
-  context "deduces logical choices when there are few, it" do
-    subject do
-      described_class.create(
-        event: events(:festival),
-        group: groups(:musikgesellschaft_aarberg),
-        primary_state: "music_type_and_level_selected",
-        music_style: "concert_music",
-        music_type: "brass_band",
-        music_level: "highest"
-      )
-    end
+  # context "deduces logical choices when there are few, it" do
+  #   subject do
+  #     described_class.create(
+  #       event: events(:festival),
+  #       group: groups(:musikgesellschaft_aarberg),
+  #       primary_state: "music_type_and_level_selected",
+  #       music_style: "concert_music",
+  #       music_type: "brass_band",
+  #       music_level: "highest"
+  #     )
+  #   end
 
-    # it "assumes the second possible day when one is selected" do
-    #   # possible values are thursday/4 and friday/5
-    #   expect do
-    #     subject.preferred_play_day_1 = thursday
-    #     subject.progress_primary!
-    #   end.to change { subject.preferred_play_day_2 }.from(nil).to(friday)
-    #   # expect(subject.send :infer_play_day_preference).to change { :preferred_play_day_2 }.to friday
-    # end
+  #   it "assumes the second possible day when one is selected" do
+  #     # possible values are thursday/4 and friday/5
+  #     expect do
+  #       subject.preferred_play_day_1 = thursday
+  #       subject.progress_primary!
+  #     end.to change { subject.preferred_play_day_2 }.from(nil).to(friday)
+  #     # expect(subject.send :infer_play_day_preference).to change { :preferred_play_day_2 }.to friday
+  #   end
 
-    # it "assumes the only day if only one is possible" do
-    #   # the only possible value id thursday/4
-    #   # simulate earlier step, because progress! needs to skip the day-selection
-    #   subject.update(primary_state: "music_style_selected")
-    #   expect do
-    #     expect do
-    #       subject.music_type = "brass_band"
-    #       subject.music_level = "fourth"
-    #       subject.progress_primary!
-    #     end.to change { subject.preferred_play_day_1 }.from(nil).to(thursday)
-    #   end.to change { subject.primary_state }
-    #     .from("music_style_selected").to("preferred_play_day_selected")
-    # end
-  end
+  #   it "assumes the only day if only one is possible" do
+  #     # the only possible value id thursday/4
+  #     # simulate earlier step, because progress! needs to skip the day-selection
+  #     subject.update(primary_state: "music_style_selected")
+  #     expect do
+  #       expect do
+  #         subject.music_type = "brass_band"
+  #         subject.music_level = "fourth"
+  #         subject.progress_primary!
+  #       end.to change { subject.preferred_play_day_1 }.from(nil).to(thursday)
+  #     end.to change { subject.primary_state }
+  #       .from("music_style_selected").to("preferred_play_day_selected")
+  #   end
+  # end
 
   private
 

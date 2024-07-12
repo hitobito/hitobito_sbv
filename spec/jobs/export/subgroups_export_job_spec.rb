@@ -53,7 +53,7 @@ describe Export::SubgroupsExportJob do
 
   context "secondary_children" do
     let(:export) { bern_export }
-    let(:exported_group_names) { csv.map { |row| row["Name"] } }
+    let(:exported_group_names) { csv.pluck("Name") }
 
     it "exports secondary children as well" do
       groups(:musikgesellschaft_alterswil).update(
@@ -92,7 +92,7 @@ describe Export::SubgroupsExportJob do
     end
 
     it "secondary parent is present by name" do
-      parents = csv.map { |row| row["sekundäre Zugehörigkeit"] }
+      parents = csv.pluck("sekundäre Zugehörigkeit")
 
       expect(parents).to match_array [
         nil,
@@ -103,7 +103,7 @@ describe Export::SubgroupsExportJob do
     end
 
     it "tertiary parent is present by name" do
-      parents = csv.map { |row| row["weitere Zugehörigkeit"] }
+      parents = csv.pluck("weitere Zugehörigkeit")
 
       expect(parents).to match_array [
         nil,
