@@ -22,7 +22,7 @@ describe Export::Tabular::GroupParticipations::List do
       secondary_group: groups(:musikgesellschaft_alterswil),
       joint_participation: true,
       primary_state: "music_type_and_level_selected",
-      secondary_state: "terms_accepted",
+      secondary_state: "opened",
       music_style: "concert_music",
       music_type: "harmony",
       music_level: "highest"
@@ -49,6 +49,12 @@ describe Export::Tabular::GroupParticipations::List do
       # preferred_play_day_2: 5, # friday
       # terms_accepted: true
     )
+  end
+
+  context "has assumptions" do
+    it "the list has entries" do
+      expect(list).to have(2).items
+    end
   end
 
   context "has headers" do
@@ -84,7 +90,7 @@ describe Export::Tabular::GroupParticipations::List do
     end
   end
 
-  context "has rows, " do
+  context "has rows," do
     it "three rows with the above setup" do
       expect(subject.size).to_not be_zero
       expect(subject.size).to be 3

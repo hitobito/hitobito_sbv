@@ -20,12 +20,12 @@ describe SongCensusMailer do
     context "includes content" do
       let(:mail) { SongCensusMailer.reminder(person, group) }
 
-      its(:subject) { is_expected.to == "Meldeliste ausfüllen!" }
-      its(:from) { is_expected.to == ["noreply@localhost"] }
-      its(:to) { is_expected.to == [person.email] }
-      its(:body) { is_expected.to =~ /Hallo Suisa Boy/ }
-      its(:body) { is_expected.to =~ /die Meldeliste für den Verein 'Musikgesellschaft Alterswil'/ }
-      its(:body) { is_expected.to =~ /Dein Hauptgruppe/ }
+      its(:subject) { is_expected.to eql "Meldeliste ausfüllen!" }
+      its(:from) { is_expected.to eql ["noreply@localhost"] }
+      its(:to) { is_expected.to eql [person.email] }
+      its(:body) { is_expected.to match(/Hallo Suisa Boy/) }
+      its(:body) { is_expected.to match(/die Meldeliste für den Verein 'Musikgesellschaft Alterswil'/) }
+      its(:body) { is_expected.to match(/Dein Hauptgruppe/) }
     end
   end
 end
