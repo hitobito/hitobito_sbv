@@ -22,7 +22,7 @@ describe Export::Tabular::Groups::LohnsummenList do
   end
 
   its(:headers) do
-    is_expected.to == ["Name", "BUV-Lohnsumme", "NBUV-Lohnsumme"]
+    is_expected.to eql ["Name", "BUV-Lohnsumme", "NBUV-Lohnsumme"]
   end
 
   it "has 1 item" do
@@ -32,8 +32,8 @@ describe Export::Tabular::Groups::LohnsummenList do
   context "first row" do
     subject { csv[0] }
 
-    its(["Name"]) { is_expected.to == "Musikgesellschaft Aarberg" }
-    its(["BUV-Lohnsumme"]) { is_expected.to == "1337.00" }
-    its(["NBUV-Lohnsumme"]) { is_expected.to == "42.23" }
+    its(["Name"]) { is_expected.to eql "Musikgesellschaft Aarberg" }
+    its(["BUV-Lohnsumme"]) { is_expected.to eql "1337.00" }
+    its(["NBUV-Lohnsumme"]) { is_expected.to eql "42.23" }
   end
 end

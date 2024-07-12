@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2020-2024, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -18,10 +18,6 @@ module Export::Tabular::GroupParticipations
         :parade_music,
         :music_type,
         :music_level,
-        :preferred_play_day_1,
-        :preferred_play_day_2,
-        :terms_accepted,
-        :secondary_group_terms_accepted,
 
         :group_dirigent,
         :group_contact,
@@ -59,7 +55,6 @@ module Export::Tabular::GroupParticipations
       partner.id = nil
 
       switch(leader, partner, :group_id, :secondary_group_id)
-      switch(leader, partner, :terms_accepted, :secondary_group_terms_accepted)
 
       partner
     end

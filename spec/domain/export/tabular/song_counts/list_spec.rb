@@ -20,7 +20,7 @@ describe Export::Tabular::SongCounts::List do
     let(:list) { groups(:musikgesellschaft_aarberg).song_counts.order(:concert_id) }
 
     its(:headers) do
-      is_expected.to == ["Anzahl", "Titel", "Komponist", "Arrangeur", "Verlag", "SUISA-ID", "Verein", "Vereins ID"]
+      is_expected.to eql ["Anzahl", "Titel", "Komponist", "Arrangeur", "Verlag", "SUISA-ID", "Verein", "Vereins ID"]
     end
 
     it "has 2 items" do
@@ -30,27 +30,27 @@ describe Export::Tabular::SongCounts::List do
     context "first row" do
       subject { sorted_csv[0] }
 
-      its(["Anzahl"]) { is_expected.to == "12" }
-      its(["Titel"]) { is_expected.to == "Fortunate Son" }
-      its(["Komponist"]) { is_expected.to == "John Fogerty" }
-      its(["Arrangeur"]) { is_expected.to == "Creedence Clearwater Revival" }
-      its(["Verlag"]) { is_expected.to == "Fantasy" }
-      its(["SUISA-ID"]) { is_expected.to == "12345" }
-      its(["Verein"]) { is_expected.to == "Musikgesellschaft Aarberg" }
-      its(["Vereins ID"]) { is_expected.to == groups(:musikgesellschaft_aarberg).id.to_s }
+      its(["Anzahl"]) { is_expected.to eql "12" }
+      its(["Titel"]) { is_expected.to eql "Fortunate Son" }
+      its(["Komponist"]) { is_expected.to eql "John Fogerty" }
+      its(["Arrangeur"]) { is_expected.to eql "Creedence Clearwater Revival" }
+      its(["Verlag"]) { is_expected.to eql "Fantasy" }
+      its(["SUISA-ID"]) { is_expected.to eql "12345" }
+      its(["Verein"]) { is_expected.to eql "Musikgesellschaft Aarberg" }
+      its(["Vereins ID"]) { is_expected.to eql groups(:musikgesellschaft_aarberg).id.to_s }
     end
 
     context "second row" do
       subject { sorted_csv[1] }
 
-      its(["Anzahl"]) { is_expected.to == "8" }
-      its(["Titel"]) { is_expected.to == "Papa Was a Rollin' Stone" }
-      its(["Komponist"]) { is_expected.to == "Barrett Strong / Norman Whitfield" }
-      its(["Arrangeur"]) { is_expected.to == "The Temptations" }
-      its(["Verlag"]) { is_expected.to == "Motown" }
-      its(["SUISA-ID"]) { is_expected.to == "23456" }
-      its(["Verein"]) { is_expected.to == "Musikgesellschaft Aarberg" }
-      its(["Vereins ID"]) { is_expected.to == groups(:musikgesellschaft_aarberg).id.to_s }
+      its(["Anzahl"]) { is_expected.to eql "8" }
+      its(["Titel"]) { is_expected.to eql "Papa Was a Rollin' Stone" }
+      its(["Komponist"]) { is_expected.to eql "Barrett Strong / Norman Whitfield" }
+      its(["Arrangeur"]) { is_expected.to eql "The Temptations" }
+      its(["Verlag"]) { is_expected.to eql "Motown" }
+      its(["SUISA-ID"]) { is_expected.to eql "23456" }
+      its(["Verein"]) { is_expected.to eql "Musikgesellschaft Aarberg" }
+      its(["Vereins ID"]) { is_expected.to eql groups(:musikgesellschaft_aarberg).id.to_s }
     end
   end
 
@@ -58,7 +58,7 @@ describe Export::Tabular::SongCounts::List do
     let(:list) { groups(:hauptgruppe_1).song_counts.order(:concert_id) }
 
     its(:headers) do
-      is_expected.to == ["Anzahl", "Titel", "Komponist", "Arrangeur", "Verlag", "SUISA-ID", "Verein und Ort"]
+      is_expected.to eql ["Anzahl", "Titel", "Komponist", "Arrangeur", "Verlag", "SUISA-ID", "Verein und Ort"]
     end
 
     it "has 4 items" do
@@ -68,49 +68,49 @@ describe Export::Tabular::SongCounts::List do
     context "first row" do
       subject { sorted_csv[0] }
 
-      its(["Anzahl"]) { is_expected.to == "12" }
-      its(["Titel"]) { is_expected.to == "Fortunate Son" }
-      its(["Komponist"]) { is_expected.to == "John Fogerty" }
-      its(["Arrangeur"]) { is_expected.to == "Creedence Clearwater Revival" }
-      its(["Verlag"]) { is_expected.to == "Fantasy" }
-      its(["SUISA-ID"]) { is_expected.to == "12345" }
-      its(["Verein und Ort"]) { is_expected.to == "Musikgesellschaft Aarberg, Thiloscheid" }
+      its(["Anzahl"]) { is_expected.to eql "12" }
+      its(["Titel"]) { is_expected.to eql "Fortunate Son" }
+      its(["Komponist"]) { is_expected.to eql "John Fogerty" }
+      its(["Arrangeur"]) { is_expected.to eql "Creedence Clearwater Revival" }
+      its(["Verlag"]) { is_expected.to eql "Fantasy" }
+      its(["SUISA-ID"]) { is_expected.to eql "12345" }
+      its(["Verein und Ort"]) { is_expected.to eql "Musikgesellschaft Aarberg, Thiloscheid" }
     end
 
     context "second row" do
       subject { sorted_csv[1] }
 
-      its(["Anzahl"]) { is_expected.to == "8" }
-      its(["Titel"]) { is_expected.to == "Papa Was a Rollin' Stone" }
-      its(["Komponist"]) { is_expected.to == "Barrett Strong / Norman Whitfield" }
-      its(["Arrangeur"]) { is_expected.to == "The Temptations" }
-      its(["Verlag"]) { is_expected.to == "Motown" }
-      its(["SUISA-ID"]) { is_expected.to == "23456" }
-      its(["Verein und Ort"]) { is_expected.to == "Musikgesellschaft Aarberg, Thiloscheid" }
+      its(["Anzahl"]) { is_expected.to eql "8" }
+      its(["Titel"]) { is_expected.to eql "Papa Was a Rollin' Stone" }
+      its(["Komponist"]) { is_expected.to eql "Barrett Strong / Norman Whitfield" }
+      its(["Arrangeur"]) { is_expected.to eql "The Temptations" }
+      its(["Verlag"]) { is_expected.to eql "Motown" }
+      its(["SUISA-ID"]) { is_expected.to eql "23456" }
+      its(["Verein und Ort"]) { is_expected.to eql "Musikgesellschaft Aarberg, Thiloscheid" }
     end
 
     context "third row" do
       subject { sorted_csv[2] }
 
-      its(["Anzahl"]) { is_expected.to == "4" }
-      its(["Titel"]) { is_expected.to == "Papa Was a Rollin' Stone" }
-      its(["Komponist"]) { is_expected.to == "Barrett Strong / Norman Whitfield" }
-      its(["Arrangeur"]) { is_expected.to == "The Temptations" }
-      its(["Verlag"]) { is_expected.to == "Motown" }
-      its(["SUISA-ID"]) { is_expected.to == "23456" }
-      its(["Verein und Ort"]) { is_expected.to == "Musikgesellschaft Alterswil, Nord Boland" }
+      its(["Anzahl"]) { is_expected.to eql "4" }
+      its(["Titel"]) { is_expected.to eql "Papa Was a Rollin' Stone" }
+      its(["Komponist"]) { is_expected.to eql "Barrett Strong / Norman Whitfield" }
+      its(["Arrangeur"]) { is_expected.to eql "The Temptations" }
+      its(["Verlag"]) { is_expected.to eql "Motown" }
+      its(["SUISA-ID"]) { is_expected.to eql "23456" }
+      its(["Verein und Ort"]) { is_expected.to eql "Musikgesellschaft Alterswil, Nord Boland" }
     end
 
     context "fourth row" do
       subject { sorted_csv[3] }
 
-      its(["Anzahl"]) { is_expected.to == "2" }
-      its(["Titel"]) { is_expected.to == "Material Girl" }
-      its(["Komponist"]) { is_expected.to == "Peter Brown / Robert Rans" }
-      its(["Arrangeur"]) { is_expected.to == "Madonna" }
-      its(["Verlag"]) { is_expected.to == "Sire" }
-      its(["SUISA-ID"]) { is_expected.to == "34567" }
-      its(["Verein und Ort"]) { is_expected.to == "Musikgesellschaft Alterswil, Nord Boland" }
+      its(["Anzahl"]) { is_expected.to eql "2" }
+      its(["Titel"]) { is_expected.to eql "Material Girl" }
+      its(["Komponist"]) { is_expected.to eql "Peter Brown / Robert Rans" }
+      its(["Arrangeur"]) { is_expected.to eql "Madonna" }
+      its(["Verlag"]) { is_expected.to eql "Sire" }
+      its(["SUISA-ID"]) { is_expected.to eql "34567" }
+      its(["Verein und Ort"]) { is_expected.to eql "Musikgesellschaft Alterswil, Nord Boland" }
     end
   end
 end

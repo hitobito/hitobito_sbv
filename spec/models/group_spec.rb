@@ -6,8 +6,9 @@
 require "spec_helper"
 
 describe Group do
-  include_examples "group types"
   let(:group) { groups(:kontakte_5) }
+
+  include_examples "group types"
 
   context "hostname" do
     it "is nullfied when blank" do

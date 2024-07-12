@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2020-2024, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -12,7 +12,6 @@ module Export::Tabular::GroupParticipations
     self.dynamic_attributes = {
       /^group/ => :group_attribute,
       /^music/ => :participation_format_attribute,
-      /^preferred_play_day/ => :participation_format_attribute,
       /^parade_music$/ => :participation_format_attribute
     }
 
@@ -35,12 +34,6 @@ module Export::Tabular::GroupParticipations
 
     def group_contact
       entry.group.contact
-    end
-
-    def secondary_group_terms_accepted
-      if entry.joint_participation? && entry.secondary_group.present?
-        normalize(entry.secondary_group_terms_accepted)
-      end
     end
 
     private
