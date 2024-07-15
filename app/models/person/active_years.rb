@@ -40,7 +40,7 @@ module Person::ActiveYears
       type: [
         Group::VereinMitglieder::Mitglied,
         Role::MitgliederMitglied
-      ]
+      ].map(&:sti_name)
     }
   end
 

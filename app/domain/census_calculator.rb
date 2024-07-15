@@ -24,7 +24,7 @@ class CensusCalculator
   end
 
   def vereins_total
-    verein_ids = group.descendants.without_deleted.where(type: Group::Verein).pluck(:id)
+    verein_ids = group.descendants.without_deleted.where(type: Group::Verein.sti_name).pluck(:id)
     verein_suisa_statuses(verein_ids)
   end
 
@@ -35,14 +35,11 @@ class CensusCalculator
   def verein_suisa_statuses(verein_ids)
     census
       .concerts
-      .where(concerts: {verein_id: verein_ids})
-      .distinct
-      .pluck(:verein_id, :reason)
-      .each_with_object({}) do |(verein, reason), memo|
-        next if memo[verein].present? # any reason
-
-        memo[verein] = reason || "submitted" # coupling with view/i18n
-      end
+      .where(concerts: { verein_id: verein_ids })
+      .pluck(:verein_id, :reason).uniq.each_with_object({}) do |(verein, reason), memo|
+      next if memo[verein].present? # any reason
+      memo[verein] = reason || "submitted" # coupling with view/i18n
+    end
   end
 
   private
@@ -54,9 +51,9 @@ class CensusCalculator
       .distinct
       .pluck(:verein_id, :"#{type}_id")
       .each_with_object(Hash.new([])) do |(verein, verband), memo|
-        next if deleted_vereins_ids.include?(verein)
+      next if deleted_vereins_ids.include?(verein)
 
-        memo[verband] += [verein]
-      end
+      memo[verband] += [verein]
+    end
   end
 end
