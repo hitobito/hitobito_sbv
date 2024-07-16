@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2022, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2024, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -464,12 +464,6 @@ it:
         music_type: Organico
         music_level: Categoria
         parade_music: anche musica da parata
-        preferred_play_day_1: "1° giorno di esecuzione desiderato"
-        preferred_play_day_2: "2° giorno di esecuzione desiderato"
-        terms: Regolamento
-        terms_url: "https://www.windband.ch/media/471563/règlement-pour-la-fête-fédérale-de-musique_asm_20180414_f.pdf "
-        terms_accepted: Regolamento accettato
-        secondary_group_terms_accepted: Regolamento accettato dalla società partner
         music_styles:
           concert_music: Musica concertante
           contemporary_music: Musica leggera
@@ -499,16 +493,6 @@ it:
           attributes:
             title:
               taken: esiste già con lo stesso compositore in questa casa editrice
-        event/group_participation:
-          attributes:
-            base:
-              date_preference_missing: Deve essere indicato almeno un giorno
-              date_preference_incomplete: Due giorni devono essere scelti
-            preferred_play_day_1:
-              impossible: non disponibile
-            preferred_play_day_2:
-              impossible: non disponibile
-              duplicate: deve essere diverso dal 1° giorno di esecuzione desiderato
 
   errors:
     messages:
