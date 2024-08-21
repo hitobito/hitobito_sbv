@@ -130,8 +130,8 @@ describe GroupAbility do
     let(:checked_person) { Fabricate(:person, primary_group: checked_group) }
     let!(:checked_person_role) do
       Fabricate(Group::VereinMitglieder::Mitglied.name.to_sym,
-                group: checked_group.children.where(type: Group::VereinMitglieder.sti_name).first,
-                person: checked_person)
+        group: checked_group.children.where(type: Group::VereinMitglieder.sti_name).first,
+        person: checked_person)
     end
 
     context "as admin of generalverband" do

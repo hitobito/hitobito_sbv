@@ -35,7 +35,7 @@ class CensusCalculator
   def verein_suisa_statuses(verein_ids)
     census
       .concerts
-      .where(concerts: { verein_id: verein_ids })
+      .where(concerts: {verein_id: verein_ids})
       .pluck(:verein_id, :reason).uniq.each_with_object({}) do |(verein, reason), memo|
       next if memo[verein].present? # any reason
       memo[verein] = reason || "submitted" # coupling with view/i18n
