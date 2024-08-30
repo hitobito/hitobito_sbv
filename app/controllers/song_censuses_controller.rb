@@ -70,7 +70,7 @@ class SongCensusesController < CrudController
   # extracted methods
 
   def deliver_reminders(vereins_total)
-    group.descendants.where(type: Group::Verein).collect do |verein|
+    group.descendants.where(type: Group::Verein.sti_name).collect do |verein|
       next if vereins_total[verein.id]
 
       verein.suisa_admins.each do |suisa_admin|
