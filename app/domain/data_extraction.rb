@@ -64,7 +64,8 @@ class DataExtraction
     sh "sudo rm -f #{tmp_out}"
     # rubocop:disable Rails/EnvironmentVariableAccess
     sh <<~CMD
-      mysql -u#{ENV["RAILS_DB_USERNAME"]} -p#{ENV["RAILS_DB_PASSWORD"]} -e "#{@query}" #{database}
+      export PGPASSWORD=#{ENV["RAILS_DB_PASSWORD"]} && 
+      psql -U#{ENV["RAILS_DB_USERNAME"]} -d #{database} -c "#{@query}"
     CMD
     # rubocop:enable Rails/EnvironmentVariableAccess
   end
