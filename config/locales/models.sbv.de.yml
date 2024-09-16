@@ -330,8 +330,8 @@ de:
         suisa_status: SUISA Status
       role:
         dates: Daten
-        created_at: Eintritt
-        deleted_at: Austritt
+        start_on: Eintritt
+        end_on: Austritt
         correspondence_language: Korrespondenz Sprache
         class:
           permission:

@@ -65,10 +65,12 @@ class Reactivator
   end
 
   def restore_roles(group)
-    group.roles.with_deleted.where(
-      deleted_at: (@start_date.prev_day..@end_date.next_day)
+    group.roles.with_inactive.where(
+      end_on: (@start_date.prev_day..@end_date.next_day)
     ).find_each do |role|
-      role.restore!
+      if (end_on_change = role.versions.last.changeset["end_on"])
+        role.update(end_on: end_on_change.first)
+      end
     end
   end
 end
