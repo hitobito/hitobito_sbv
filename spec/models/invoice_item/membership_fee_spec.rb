@@ -45,8 +45,8 @@ describe InvoiceItem::MembershipFee do
           expect(invoice_item.dynamic_cost).to eq(600) # 3 * 20 * 10
         end
 
-        it "excludes members with roles deleted_at before cutoff_date" do
-          member_roles.sample(5).each { |r| r.update(deleted_at: 5.days.from_now.to_s.to_date) }
+        it "excludes members with roles end_on before cutoff_date" do
+          member_roles.sample(5).each { |r| r.update(end_on: 5.days.from_now.to_s.to_date) }
           expect(invoice_item.dynamic_cost).to eq(550) # (3 * 20 - 5) * 10
         end
       end
@@ -71,8 +71,8 @@ describe InvoiceItem::MembershipFee do
           expect(invoice_item.dynamic_cost).to eq(600) # 3 * 20 * 10
         end
 
-        it "excludes members with roles deleted_at before cutoff_date" do
-          member_roles.sample(5).each { |r| r.update(deleted_at: 5.days.from_now.to_s.to_date) }
+        it "excludes members with roles end_on before cutoff_date" do
+          member_roles.sample(5).each { |r| r.update(end_on: 5.days.from_now.to_s.to_date) }
           expect(invoice_item.dynamic_cost).to eq(550) # (3 * 20 - 5) * 10
         end
       end
@@ -97,8 +97,8 @@ describe InvoiceItem::MembershipFee do
           expect(invoice_item.dynamic_cost).to eq(600) # 3 * 20 * 10
         end
 
-        it "excludes members with roles deleted_at before cutoff_date" do
-          member_roles.sample(5).each { |r| r.update(deleted_at: 5.days.from_now.to_s.to_date) }
+        it "excludes members with roles end_on before cutoff_date" do
+          member_roles.sample(5).each { |r| r.update(end_on: 5.days.from_now.to_s.to_date) }
           expect(invoice_item.dynamic_cost).to eq(550) # (3 * 20 - 5) * 10
         end
       end

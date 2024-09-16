@@ -33,13 +33,13 @@ describe Person do
 
     def create_role(role_class, years: 10, start_date: false, end_date: false)
       start_year = 2005
-      created_at = begin
+      start_on = begin
         start_date.presence || Date.current.change(year: start_year)
       rescue Date::Error
         Date.current.change(day: 25, year: start_year)
       end
 
-      deleted_at = if end_date == false
+      end_on = if end_date == false
         begin
           Date.current.change(year: start_year + years)
         rescue Date::Error
@@ -53,8 +53,8 @@ describe Person do
         role_class.name.to_sym,
         person: subject,
         group: groups(:mitglieder_hastdutoene),
-        created_at: created_at,
-        deleted_at: deleted_at
+        start_on: start_on,
+        end_on: end_on
       )
     end
 
@@ -88,8 +88,8 @@ describe Person do
         :"Role::MitgliederMitglied",
         person: subject,
         group: groups(:mitglieder_hastdutoene),
-        created_at: Date.current.change(year: 2005, day: 25),
-        deleted_at: Date.current.change(year: 2012)
+        start_on: Date.current.change(year: 2005, day: 25),
+        end_on: Date.current.change(year: 2012)
       ).save(validate: false)
 
       subject.update_active_years
@@ -111,8 +111,8 @@ describe Person do
         :"Role::MitgliederPassivmitglied",
         person: subject,
         group: groups(:mitglieder_hastdutoene),
-        created_at: Date.current.change(year: 2005, day: 25),
-        deleted_at: Date.current.change(year: 2015, day: 25)
+        start_on: Date.current.change(year: 2005, day: 25),
+        end_on: Date.current.change(year: 2015, day: 25)
       ).save(validate: false)
 
       subject.update_active_years
@@ -181,7 +181,7 @@ describe Person do
 
     it "handles active_years not being cached" do
       travel_to("2020-03-16") do
-        expect(subject.roles.with_deleted.where(type: "Group::VereinMitglieder::Mitglied").count).to eq 0
+        expect(subject.roles.with_inactive.where(type: "Group::VereinMitglieder::Mitglied").count).to eq 0
         expect(subject.active_years).to be_nil
 
         expect(subject.prognostic_active_years).to eq 0
@@ -190,11 +190,11 @@ describe Person do
           Group::VereinMitglieder::Mitglied.name.to_sym,
           person: subject,
           group: groups(:mitglieder_hastdutoene),
-          created_at: Date.current.change(year: 2010),
-          deleted_at: nil # active Role
+          start_on: Date.current.change(year: 2010),
+          end_on: nil # active Role
         )
 
-        expect(subject.roles.without_deleted.where(type: "Group::VereinMitglieder::Mitglied").count).to eq 1
+        expect(subject.roles.where(type: "Group::VereinMitglieder::Mitglied").count).to eq 1
         expect(subject.active_years).to eq 10
 
         # simulate data not being present

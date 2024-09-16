@@ -17,8 +17,8 @@ describe Role::MitgliederMitglied do
         type: "Group::VereinMitglieder::Mitglied",
         group: groups(:mitglieder_mg_aarberg),
         person: people(:member),
-        created_at: 1.year.ago,
-        deleted_at: nil,
+        start_on: 1.year.ago,
+        end_on: nil,
         historic_membership: true
       )
     end
@@ -27,24 +27,24 @@ describe Role::MitgliederMitglied do
       expect(subject.historic_membership).to be true
     end
 
-    it "is invalid without deleted_at" do
-      expect(subject.deleted_at).to be_nil
+    it "is invalid without end_on" do
+      expect(subject.end_on).to be_nil
 
       expect(subject).to_not be_valid
       expect(subject.errors.full_messages)
         .to include("Austritt ist kein gültiges Datum")
     end
 
-    it "is invalid with future deleted_at" do
-      subject.deleted_at = 1.week.from_now
+    it "is invalid with future end_on" do
+      subject.end_on = 1.week.from_now
 
       expect(subject).to_not be_valid
       expect(subject.errors.full_messages)
         .to include("Austritt kann nicht später als heute sein")
     end
 
-    it "is valid with deleted_at in the past" do
-      subject.deleted_at = 1.week.ago
+    it "is valid with end_on in the past" do
+      subject.end_on = 1.week.ago
 
       expect(subject).to be_valid
     end

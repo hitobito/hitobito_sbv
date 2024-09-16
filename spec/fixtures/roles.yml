@@ -36,7 +36,7 @@ member:
   person: member
   group: musikverband_hastdutoene
   type: Group::VereinMitglieder::Mitglied
-  created_at: <%= 1.year.ago %>
+  start_on: <%= 1.year.ago %>
 
 suisa_admin:
   person: suisa_admin
