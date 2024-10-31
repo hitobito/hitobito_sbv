@@ -12,17 +12,17 @@ class SongCountsController < SimpleCrudController
   self.nesting = Group
   self.permitted_attrs = [:song_id, :year, :count]
   self.sort_mappings = {title: {
-                                joins: [:song],
-                                order: ["MAX(songs.title)"]
-                              },
-                         composed_by: {
                           joins: [:song],
-                          order: ["MAX(songs.composed_by)"]
+                          order: ["MAX(songs.title)"]
                         },
+                         composed_by: {
+                           joins: [:song],
+                           order: ["MAX(songs.composed_by)"]
+                         },
                          arranged_by: {
-                          joins: [:song],
-                          order: ["MAX(songs.arranged_by)"]
-                        }}
+                           joins: [:song],
+                           order: ["MAX(songs.arranged_by)"]
+                         }}
 
   respond_to :js
   helper_method :census
@@ -73,7 +73,7 @@ class SongCountsController < SimpleCrudController
       .in(year)
       .order("MAX(songs.title)")
 
-    entries = sort_by_sort_expression(entries)
+    sort_by_sort_expression(entries)
   end
 
   def census
