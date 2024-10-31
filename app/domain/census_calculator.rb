@@ -49,6 +49,7 @@ class CensusCalculator
       .concerts
       .where(concerts: {verein_id: vereins_total.keys})
       .distinct
+      .unscope(:order)
       .pluck(:verein_id, :"#{type}_id")
       .each_with_object(Hash.new([])) do |(verein, verband), memo|
       next if deleted_vereins_ids.include?(verein)

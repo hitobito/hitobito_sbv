@@ -1,6 +1,6 @@
-- mitgliederverbaende = @group.descendants.without_deleted.where(type: Group::Mitgliederverband).order(:name)
-- regionalverbaende   = @group.descendants.without_deleted.where(type: Group::Regionalverband).order(:name)
-- vereine             = @group.children.without_deleted.where(type: Group::Verein).order(:name)
+- mitgliederverbaende = @group.descendants.without_deleted.where(type: Group::Mitgliederverband.sti_name).order(:name)
+- regionalverbaende   = @group.descendants.without_deleted.where(type: Group::Regionalverband.sti_name).order(:name)
+- vereine             = @group.children.without_deleted.where(type: Group::Verein.sti_name).order(:name)
 
 - if mitgliederverbaende.any?
   %h2

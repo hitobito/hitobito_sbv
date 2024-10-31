@@ -19,10 +19,10 @@ class Export::SongCountsExportJob < Export::ExportBaseJob
     song_counts
       .joins(:concert, :song)
       .preload(:song)
-      .group("`concerts`.`verein_id`", :song_id)
-      .select("song_counts.id, song_id, song_counts.year, SUM(count) AS count, concert_id")
+      .group("concerts.verein_id", :song_id)
+      .select("MAX(song_counts.id) AS id, song_id, MAX(song_counts.year) AS year, SUM(count) AS count, MAX(concert_id) AS concert_id")
       .in(@year)
-      .merge(Song.list)
+      .order("MAX(songs.title)")
   end
 
   def song_counts
