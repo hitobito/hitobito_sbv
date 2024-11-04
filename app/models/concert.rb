@@ -52,8 +52,6 @@ class Concert < ActiveRecord::Base
   scope :not_played, -> { where.not(reason: nil) }
   scope :played, -> { where(reason: nil) }
 
-  default_scope { order(performed_at: :desc) }
-
   def to_s
     name
   end
