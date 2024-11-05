@@ -8,7 +8,7 @@
 module SongCensusesHelper
   def census_submitted_ratio(verband, total)
     census_submitted = total[verband.id].to_a.size
-    census_total = verband.descendants.without_deleted.where(type: Group::Verein).size
+    census_total = verband.descendants.without_deleted.where(type: Group::Verein.sti_name).size
 
     # return t('.census_complete') if census_submitted == census_total
     t(".censuses_submitted", submitted: census_submitted, total: census_total)

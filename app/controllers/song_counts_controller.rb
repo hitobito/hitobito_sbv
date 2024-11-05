@@ -11,9 +11,18 @@ class SongCountsController < SimpleCrudController
 
   self.nesting = Group
   self.permitted_attrs = [:song_id, :year, :count]
-  self.sort_mappings = {title: "songs.title",
-                         composed_by: "songs.composed_by",
-                         arranged_by: "songs.arranged_by"}
+  self.sort_mappings = {title: {
+                          joins: [:song],
+                          order: ["MAX(songs.title)"]
+                        },
+                         composed_by: {
+                           joins: [:song],
+                           order: ["MAX(songs.composed_by)"]
+                         },
+                         arranged_by: {
+                           joins: [:song],
+                           order: ["MAX(songs.arranged_by)"]
+                         }}
 
   respond_to :js
   helper_method :census
@@ -56,12 +65,15 @@ class SongCountsController < SimpleCrudController
   end
 
   def list_entries
-    super.joins(:concert, :song)
+    entries = Group.find(params[:group_id]).song_counts
+      .joins(:concert, :song)
       .preload(:song)
       .group(:song_id)
-      .select("song_counts.id, song_id, song_counts.year, SUM(count) AS count, concert_id")
+      .select("MAX(song_counts.id), song_id, MAX(song_counts.year), SUM(count) AS count, MAX(concert_id)")
       .in(year)
-      .merge(Song.list)
+      .order("MAX(songs.title)")
+
+    sort_by_sort_expression(entries)
   end
 
   def census

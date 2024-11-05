@@ -53,7 +53,7 @@ class ConcertsController < SimpleCrudController
   end
 
   def list_entries
-    super.includes(song_counts: :song).includes(:song_census).in(year)
+    super.includes(song_counts: :song).includes(:song_census).in(year).order(performed_at: :desc)
   end
 
   def census
