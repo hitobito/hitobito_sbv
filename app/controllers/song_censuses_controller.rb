@@ -31,7 +31,7 @@ class SongCensusesController < CrudController
     count = deliver_reminders(vereins_total)
 
     redirect_back(
-      fallback_location: group_song_censuses_path(group),
+      fallback_location: group_song_censuses_path(group, census),
       notice: t(".success", verein_count: count)
     )
   end
