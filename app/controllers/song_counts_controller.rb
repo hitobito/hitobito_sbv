@@ -13,15 +13,15 @@ class SongCountsController < SimpleCrudController
   self.permitted_attrs = [:song_id, :year, :count]
   self.sort_mappings = {title: {
                           joins: [:song],
-                          order: ["MAX(songs.title)"]
+                          order: ["songs.title"]
                         },
                          composed_by: {
                            joins: [:song],
-                           order: ["MAX(songs.composed_by)"]
+                           order: ["songs.composed_by"]
                          },
                          arranged_by: {
                            joins: [:song],
-                           order: ["MAX(songs.arranged_by)"]
+                           order: ["songs.arranged_by"]
                          }}
 
   respond_to :js
