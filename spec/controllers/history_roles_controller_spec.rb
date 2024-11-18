@@ -61,9 +61,9 @@ describe HistoryRolesController do
     }
     expect do
       post :create, params: {group_id: group.id, role: role_params}
-    end.to change { leader.roles.with_deleted.count }.by(1)
+    end.to change { leader.roles.with_inactive.count }.by(1)
     expect(leader.reload.active_years).to eq 2
-    expect(leader.roles.with_deleted).to be_any { |role| role.label === "1. Sax" }
+    expect(leader.roles.with_inactive).to be_any { |role| role.label === "1. Sax" }
   end
 
   it "POST#create creates new role and deleted mitglieder verein in hidden verein group" do
@@ -81,7 +81,11 @@ describe HistoryRolesController do
     expect do
       post :create, params: {group_id: leader.primary_group_id, role: role_params}
       expect(response).to redirect_to(history_group_person_path(leader.primary_group, leader))
-    end.to change { leader.roles.count }.by(0)
+    end.to change { leader.roles.count }.by(1)
+
+    new_role = leader.roles.last
+    expect(new_role.group.name).to eq "Dummy"
+    expect(new_role.end_on).to eq Time.zone.today
 
     expect(leader.reload.active_years).to eq 2
 
@@ -92,7 +96,7 @@ describe HistoryRolesController do
 
   it "DELETE#destroy hard destroys role and updates active_years" do
     role = roles(:suisa_admin)
-    role.update(created_at: 3.years.ago)
+    role.update(start_on: 3.years.ago)
 
     person = role.person
     person.update_active_years
@@ -100,7 +104,7 @@ describe HistoryRolesController do
     sign_in(people(:leader))
     expect do
       delete :destroy, params: {group_id: role.group_id, id: role.id}
-    end.to change { role.person.roles.with_deleted.count }.by(-1)
+    end.to change { role.person.roles.with_inactive.count }.by(-1)
 
     expect(role.person.active_years).to eq 0
 
@@ -110,7 +114,7 @@ describe HistoryRolesController do
 
   it "DELETE#destroy hard destroys deleted role and updates active_years" do
     role = roles(:suisa_admin)
-    role.update(created_at: 3.years.ago, deleted_at: 10.days.ago)
+    role.update(start_on: 3.years.ago, end_on: 10.days.ago)
 
     person = role.person
     person.update_active_years
@@ -118,11 +122,11 @@ describe HistoryRolesController do
     sign_in(people(:leader))
     expect do
       delete :destroy, params: {group_id: role.group_id, id: role.id}
-    end.to change { role.person.roles.with_deleted.count }.by(-1)
+    end.to change { role.person.roles.with_inactive.count }.by(-1)
 
     expect(role.person.active_years).to eq 0
 
-    expect(flash[:notice]).to eq "Verantwortlicher SUISA wurde erfolgreich gelöscht."
+    expect(flash[:notice]).to match(/Verantwortlicher SUISA \(bis \d{2}\.\d{2}\.\d{4}\) wurde erfolgreich gelöscht./)
     expect(response).to redirect_to(group_path(role.group))
   end
 end

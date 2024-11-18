@@ -27,7 +27,10 @@ class Role::MitgliederMitglied < Role
   after_destroy :update_active_years_on_person
   after_save :update_active_years_on_person
 
-  validates_date :deleted_at,
+  validates_date :start_on,
+    allow_nil: true
+
+  validates_date :end_on,
     if: :historic_membership,
     allow_nil: false,
     on_or_before: -> { Time.zone.today },

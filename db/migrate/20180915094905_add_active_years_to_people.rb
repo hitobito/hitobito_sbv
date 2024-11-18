@@ -9,8 +9,8 @@ class AddActiveYearsToPeople < ActiveRecord::Migration[4.2]
           end_date = Time.zone.now
 
           Person.find_each do |person|
-            active_years = person.roles.with_deleted.where("type LIKE '%Mitglied'").map do |role|
-              VeteranYears.new(role.created_at.year, (role.deleted_at || end_date).year)
+            active_years = person.roles.with_inactive.where("type LIKE '%Mitglied'").map do |role|
+              VeteranYears.new((role.start_on || role.created_at).year, (role.end_on || end_date).year)
             end.sort.sum.years.to_i
             active_roles = person.roles.where("type LIKE '%Mitglied'").any?
 

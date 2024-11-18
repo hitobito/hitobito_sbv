@@ -36,12 +36,11 @@ class InvoiceItem::MembershipFee < InvoiceItem
     if layer.uses_manually_counted_members?
       layer.manual_member_count
     else
-      roles_scope = Role.with_deleted.joins(:group)
+      roles_scope = Role.with_inactive.joins(:group)
         .where(type: Group::VereinMitglieder::Mitglied.sti_name,
           group: {layer_group_id: layer.id})
       if cutoff_date.present?
-        roles_scope.where("roles.deleted_at IS NULL OR roles.deleted_at > ?", cutoff_date)
-          .where(created_at: ...cutoff_date)
+        roles_scope.active(cutoff_date)
       else
         roles_scope
       end.count

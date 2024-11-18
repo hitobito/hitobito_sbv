@@ -25,7 +25,7 @@ class HistoryRolesController < ApplicationController
   end
 
   def destroy
-    role = Role.with_deleted.find(params[:id])
+    role = Role.with_inactive.find(params[:id])
     person = role.person
     authorize!(:destroy, role)
 
@@ -56,8 +56,8 @@ class HistoryRolesController < ApplicationController
       group: group,
       person_id: params[:role][:person_id],
       label: params[:role][:label],
-      created_at: params[:role][:start_date],
-      deleted_at: params[:role][:end_date],
+      start_on: params[:role][:start_date],
+      end_on: params[:role][:end_date],
       historic_membership: true
     )
   end
