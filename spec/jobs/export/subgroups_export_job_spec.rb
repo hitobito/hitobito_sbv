@@ -9,9 +9,9 @@ require "spec_helper"
 require "csv"
 
 describe Export::SubgroupsExportJob do
-  subject(:root_export) { described_class.new(people(:admin), groups(:hauptgruppe_1).id, {}) }
+  subject(:root_export) { described_class.new(people(:admin).id, groups(:hauptgruppe_1).id, {}) }
 
-  subject(:bern_export) { described_class.new(people(:admin), groups(:bernischer_kantonal_musikverband).id, {}) }
+  subject(:bern_export) { described_class.new(people(:admin).id, groups(:bernischer_kantonal_musikverband).id, {}) }
 
   let(:export) { root_export }
   let(:data_without_bom) { export.data.gsub(Regexp.new("^#{Export::Csv::UTF8_BOM}"), "") }
