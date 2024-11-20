@@ -9,9 +9,9 @@ require "spec_helper"
 require "csv"
 
 describe Export::SongCountsExportJob do
-  subject(:root_export) { described_class.new(:csv, people(:admin), groups(:hauptgruppe_1).id, "2018", {}) }
+  subject(:root_export) { described_class.new(:csv, people(:admin).id, groups(:hauptgruppe_1).id, "2018", {}) }
 
-  subject(:bern_export) { described_class.new(:csv, people(:admin), groups(:bernischer_kantonal_musikverband).id, "2018", {}) }
+  subject(:bern_export) { described_class.new(:csv, people(:admin).id, groups(:bernischer_kantonal_musikverband).id, "2018", {}) }
 
   let(:data_without_bom) { export.data.gsub(Regexp.new("^#{Export::Csv::UTF8_BOM}"), "") }
   let(:csv) { CSV.parse(data_without_bom, col_sep: ";", headers: true) }
