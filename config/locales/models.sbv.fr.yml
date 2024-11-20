@@ -403,8 +403,8 @@ fr:
         suisa_status: Statut SUISA
       role:
         dates: Données
-        created_at: Entrée
-        deleted_at: Démission
+        start_on: ""
+        end_on: ""
         correspondence_language: Langue de correspondance
         class:
           permission:
