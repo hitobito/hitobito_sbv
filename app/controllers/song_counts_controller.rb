@@ -13,8 +13,7 @@ class SongCountsController < SimpleCrudController
   self.permitted_attrs = [:song_id, :year, :count]
   self.sort_mappings = {title: "songs.title",
                         composed_by: "songs.composed_by",
-                        arranged_by: "songs.arranged_by"
-                      }
+                        arranged_by: "songs.arranged_by"}
 
   respond_to :js
   helper_method :census
