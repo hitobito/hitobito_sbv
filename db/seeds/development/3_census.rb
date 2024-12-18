@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2018, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2012-2024, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -22,7 +22,6 @@ end
 end
 
 current_census = SongCensus.current
-songs          = Song.all.shuffle.take(10)
 
 SongCensus.all.each do |census|
   Group::Verein.all.shuffle.take(10).each do |verein|
@@ -34,11 +33,11 @@ SongCensus.all.each do |census|
         concert.regionalverband_id = verein.parent.id if verein.parent.is_a?(Group::Regionalverband)
         concert.mitgliederverband_id = verein.parent.parent.id if verein.parent.try(:parent).is_a?(Group::Mitgliederverband)
         concert.year = census.year
-        concert.editable = (census == current_census)
       end
     end
-    Concert.all.each do |concert|
-      songs.shuffle.take(10).each do |song|
+
+    Concert.where(song_census_id: census.id, verein_id: verein.id).all.each do |concert|
+      Song.all.shuffle.take(10).each do |song|
         SongCount.seed_once(:concert_id, :song_id) do |count|
           count.concert_id = concert.id
           count.song_id = song.id
@@ -49,3 +48,5 @@ SongCensus.all.each do |census|
     end
   end
 end
+
+Concert.where.not(year: current_census).update_all(editable: false)
