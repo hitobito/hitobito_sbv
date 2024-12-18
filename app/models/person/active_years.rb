@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2018-2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2018-2024, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -51,6 +51,6 @@ module Person::ActiveYears
   def calculate_active_years(end_date = Time.zone.now)
     roles.with_inactive.where(veteran_role_condition).map do |role|
       VeteranYears.new((role.start_on || role.created_at).year, (role.end_on || end_date).year)
-    end.sort.sum.years.to_i
+    end.sort.sum(VeteranYears::NULL).years.to_i
   end
 end
