@@ -202,9 +202,9 @@ it:
         many: Direttrici
         other: Direttrici
       group/verein/jugendverantwortlicher:
-        one: Responsabile dei giovani
-        many: Responsabile dei giovani
-        other: Responsabile dei giovani
+        one: Agente giovanile
+        many: Agente giovanile
+        other: Agente giovanile
       group/verein/suisa_admin:
         one: Responsabili SUISA
         many: Responsabili SUISA

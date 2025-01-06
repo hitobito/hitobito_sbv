@@ -4,6 +4,12 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 fr:
+  activemodel:
+    models:
+      household:
+        one: Ménage
+        many: Ménages
+        other: Ménages
   activerecord:
     models:
 
@@ -400,6 +406,7 @@ fr:
         buv_lohnsumme: Salaire AAP
         nbuv_lohnsumme: Salaire AANP
         contact_email: Adresse email de la personne de contact
+        self_registration_require_adult_consent: Consentement des tuteurs légaux
         suisa_status: Statut SUISA
       role:
         dates: Données
