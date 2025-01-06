@@ -137,9 +137,9 @@ fr:
         many: ''
         other: ''
       group/kreis/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
+        one: Responsables SUISA
+        many: Responsables SUISA
+        other: Responsables SUISA
 
       group/regionalverband:
         one: Association régionale
@@ -202,9 +202,9 @@ fr:
         many: Directeur-trice-s
         other: Directeur-trice-s
       group/verein/jugendverantwortlicher:
-        one: ''
-        many: ''
-        other: ''
+        one: responsable jeunesse
+        many: responsables jeunesse
+        other: responsable jeunesse
       group/verein/suisa_admin:
         one: Responsables SUISA
         many: Responsables SUISA
