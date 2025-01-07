@@ -6,11 +6,6 @@
 fr:
   global:
     last_change: "Dernière modification: %{date}"
-  households:
-    edit:
-      title: Haushalt verwalten
-      shared_address_info: Alle Personen teilen sich dieselbe Adresse.
-      placeholder_search_person: Person suchen und hinzufügen ...
   navigation:
     help: Aide
   group:
