@@ -17,8 +17,8 @@ describe HistoryRolesController do
     role_params = {
       person_id: leader.id,
       group_id: group.id,
-      start_date: 2019,
-      end_date: 2020
+      start_on: 2019,
+      end_onf: 2020
     }
     expect do
       post :create, params: {group_id: group.id, role: role_params}
@@ -36,8 +36,8 @@ describe HistoryRolesController do
     role_params = {
       person_id: member.id,
       group_id: group.id,
-      start_date: 2.years.ago.to_date,
-      end_date: 1.year.ago.to_date
+      start_on: 2.years.ago.to_date,
+      end_on: 1.year.ago.to_date
     }
     expect do
       expect do
@@ -55,8 +55,8 @@ describe HistoryRolesController do
     role_params = {
       person_id: leader.id,
       group_id: group.id,
-      start_date: 2.years.ago.to_date,
-      end_date: Date.yesterday,
+      start_on: 2.years.ago.to_date,
+      end_on: Date.yesterday,
       label: "1. Sax"
     }
     expect do
@@ -75,8 +75,8 @@ describe HistoryRolesController do
     role_params = {
       person_id: leader.id,
       group: {name: "Dummy"},
-      start_date: 2.years.ago.to_date,
-      end_date: Time.zone.today
+      start_on: 2.years.ago.to_date,
+      end_on: Time.zone.today
     }
     expect do
       post :create, params: {group_id: leader.primary_group_id, role: role_params}
