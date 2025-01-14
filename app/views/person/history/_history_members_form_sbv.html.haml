@@ -1,3 +1,8 @@
+- #  Copyright (c) 2012-2025, Schweizer Blasmusikverband. This file is part of
+- #  hitobito_sbv and licensed under the Affero General Public License version 3
+- #  or later. See the COPYING file at the top-level directory or at
+- #  https://github.com/hitobito/hitobito_sbv.
+
 - if can?(:create_history_member, @group)
   %br
   .accordion
@@ -17,8 +22,7 @@
                 = f.labeled(:verein, t('.verein')) do
                   = f.group_field :group, search_params: { historic: true }
                 = f.labeled_input_field(:label,
-                                        data: { provide: :typeahead, source: Role.available_labels },
-                                        help: t('roles.fields.help_optional_label'))
+                                        data: { provide: :typeahead, source: Role.available_labels })
 
               = swappable_group_add_fieldset(:select_existing_verein, :create_deleted_verein) do
                 = f.fields_for(:group, Group.new) do |fields|
@@ -29,7 +33,7 @@
                   = f.date_field(:created_at, name: 'role[start_date]', autocomplete: 'off')
 
                 = f.labeled(:end_date, t('.end_date')) do
-                  = f.date_field(:deleted_at, name: 'role[end_date]', autocomplete: 'off')
+                  = f.date_field(:end_on, name: 'role[end_on]', autocomplete: 'off')
 
               = f.indented do
                 = submit_button(f, t('.save'))

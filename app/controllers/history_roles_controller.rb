@@ -56,8 +56,8 @@ class HistoryRolesController < ApplicationController
       group: group,
       person_id: params[:role][:person_id],
       label: params[:role][:label],
-      start_on: params[:role][:start_date],
-      end_on: params[:role][:end_date],
+      start_on: params[:role][:start_on],
+      end_on: params[:role][:end_on],
       historic_membership: true
     )
   end
