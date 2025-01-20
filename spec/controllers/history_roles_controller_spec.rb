@@ -18,7 +18,7 @@ describe HistoryRolesController do
       person_id: leader.id,
       group_id: group.id,
       start_on: 2019,
-      end_onf: 2020
+      end_on: 2020
     }
     expect do
       post :create, params: {group_id: group.id, role: role_params}
