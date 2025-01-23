@@ -30,7 +30,7 @@
 
               = field_set_tag  do
                 = f.labeled(:start_date, t('.start_date')) do
-                  = f.date_field(:created_at, name: 'role[start_date]', autocomplete: 'off')
+                  = f.date_field(:start_on, name: 'role[start_on]', autocomplete: 'off')
 
                 = f.labeled(:end_date, t('.end_date')) do
                   = f.date_field(:end_on, name: 'role[end_on]', autocomplete: 'off')

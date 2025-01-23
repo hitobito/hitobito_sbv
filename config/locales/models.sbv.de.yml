@@ -424,4 +424,4 @@ de:
   errors:
     messages:
       cannot_be_later_than_today: kann nicht später als heute sein
-      cannot_be_later_than_deleted_at: muss vor oder am selben Tag wie der Austritt sein
+      cannot_be_later_than_end_on: muss vor oder am selben Tag wie der Austritt sein
