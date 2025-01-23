@@ -497,4 +497,4 @@ it:
   errors:
     messages:
       cannot_be_later_than_today: non può essere più tardi di oggi
-      cannot_be_later_than_end_on: deve essere prima o allo stesso giorno del ritiro
+      cannot_be_later_than_deleted_at: deve essere prima o allo stesso giorno del ritiro
