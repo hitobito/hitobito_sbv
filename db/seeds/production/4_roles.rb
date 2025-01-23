@@ -64,8 +64,8 @@ CSV::Converters[:all] = [:numeric, :nil]
       Role.seed_once( :person_id, :group_id, :type, {
         person_id:  db_person.id,
         group_id:   group_id,
-        created_at: entry_date,
-        deleted_at: exit_date,
+        start_on: entry_date,
+        end_on: exit_date,
         type:       person['rolle']
       })
     end

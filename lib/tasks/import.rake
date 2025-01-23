@@ -48,8 +48,8 @@ namespace :import do
       Role.new(
         person_id: person.id,
         group_id: vereins_id,
-        created_at: entry_date,
-        deleted_at: exit_date,
+        start_on: entry_date,
+        end_on: exit_date,
         type: rolle
       ).save(validate: false)
     end
