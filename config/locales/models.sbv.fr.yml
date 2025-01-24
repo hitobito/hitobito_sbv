@@ -497,4 +497,4 @@ fr:
   errors:
     messages:
       cannot_be_later_than_today: ne peut pas être postérieur à aujourd'hui
-      cannot_be_later_than_end_on: doit être antérieur à ou le jour même de la démission
+      cannot_be_later_than_end_on: ""
