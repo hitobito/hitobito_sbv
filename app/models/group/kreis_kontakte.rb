@@ -53,6 +53,6 @@ class Group::KreisKontakte < Group
   class Kontakt < Role::Kontakt
   end
 
-  self.default_role = Kontakt
+  self.standard_role = Kontakt
   roles Adressverwaltung, Kontakt
 end

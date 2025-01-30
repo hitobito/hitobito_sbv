@@ -51,6 +51,6 @@ class Group::VereinMusikkommission < Group
   class Mitglied < Role::MusikkommissionMitglied
   end
 
-  self.default_role = Mitglied
+  self.standard_role = Mitglied
   roles Praesident, Mitglied
 end
