@@ -59,6 +59,6 @@ class Group::VereinMitglieder < Group
   class Ehrenmitglied < Role::Ehrenmitglied
   end
 
-  self.default_role = Mitglied
+  self.standard_role = Mitglied
   roles Adressverwaltung, Mitglied, Passivmitglied, Ehrenmitglied
 end
