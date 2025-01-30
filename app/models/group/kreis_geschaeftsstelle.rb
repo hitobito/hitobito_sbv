@@ -54,6 +54,6 @@ class Group::KreisGeschaeftsstelle < Group
   class Help < Role::GeschaeftsstelleHelp
   end
 
-  self.standard_role = Staff
+  self.default_role = Staff
   roles Manager, Staff, Help
 end

@@ -53,6 +53,6 @@ class Group::RootEhrenmitglieder < Group
   class Ehrenmitglied < Role::Ehrenmitglied
   end
 
-  self.standard_role = Ehrenmitglied
+  self.default_role = Ehrenmitglied
   roles Adressverwaltung, Ehrenmitglied
 end

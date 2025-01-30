@@ -53,6 +53,6 @@ class Group::RegionalverbandKontakte < Group
   class Kontakt < Role::Kontakt
   end
 
-  self.standard_role = Kontakt
+  self.default_role = Kontakt
   roles Adressverwaltung, Kontakt
 end

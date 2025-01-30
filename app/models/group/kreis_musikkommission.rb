@@ -51,6 +51,6 @@ class Group::KreisMusikkommission < Group
   class Mitglied < Role::MusikkommissionMitglied
   end
 
-  self.standard_role = Mitglied
+  self.default_role = Mitglied
   roles Praesident, Mitglied
 end

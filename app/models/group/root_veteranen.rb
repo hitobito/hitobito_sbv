@@ -58,6 +58,6 @@ class Group::RootVeteranen < ::Group
   class CismVeteran < Role
   end
 
-  self.standard_role = Veteran
+  self.default_role = Veteran
   roles Veteran, Ehrenveteran, CismVeteran
 end
