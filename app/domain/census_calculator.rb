@@ -51,7 +51,7 @@ class CensusCalculator
       .distinct
       .unscope(:order)
       .pluck(:verein_id, :"#{type}_id")
-      .each_with_object(Hash.new([])) do |(verein, verband), memo|
+      .each_with_object(Hash.new { |h, k| h[k] = [] }) do |(verein, verband), memo|
       next if deleted_vereins_ids.include?(verein)
 
       memo[verband] += [verein]

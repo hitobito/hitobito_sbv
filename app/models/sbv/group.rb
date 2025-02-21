@@ -11,7 +11,7 @@ module Sbv::Group
   BESETZUNGEN = %w[brass_band harmonie fanfare_benelux fanfare_mixte tambour_percussion].freeze
   KLASSEN = %w[hoechste erste zweite dritte vierte].freeze
   UNTERHALTUNGSMUSIK = %w[oberstufe mittelstufe unterstufe].freeze
-  FQDN_REGEX = '(?=\A.{1,254}\z)(\A(([a-z0-9][a-z0-9\-]{0,61}[a-z0-9])\.)+([a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))\z' # rubocop:disable Metrics/LineLength
+  FQDN_REGEX = '(?=\A.{1,254}\z)(\A(([a-z0-9][a-z0-9\-]{0,61}[a-z0-9])\.)+([a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))\z' # rubocop:disable Layout/LineLength
 
   included do # rubocop:disable Metrics/BlockLength
     root_types Group::Generalverband
