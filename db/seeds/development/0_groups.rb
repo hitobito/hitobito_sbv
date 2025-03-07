@@ -31,7 +31,8 @@ end
 
 def build_verein_attrs(parent_id, name, besetzung, lang)
   attrs = { name: name, parent_id: parent_id,
-    address: Faker::Address.street_address,
+    street: Faker::Address.street_name,
+    housenumber: Faker::Address.building_number,
     zip_code: Faker::Address.zip[0..3],
     town: Faker::Address.city,
     correspondence_language: lang,
