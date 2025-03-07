@@ -52,7 +52,8 @@ def build_kreis_attrs(parent_id, name = nil)
   (1..4).to_a.sample.times.each do |i|
     attrs << { 
       name: "Kreis " + ['A', 'B', 'C', 'D'][i],
-      address: Faker::Address.street_address,
+      street: Faker::Address.street_name,
+    housenumber: Faker::Address.building_number,
       zip_code: Faker::Address.zip[0..3],
       town: Faker::Address.city,
       parent_id: parent_id
