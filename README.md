@@ -90,7 +90,7 @@ of the Schweizer Blasmusikverband.
     * Kontakt: []
 * Verein
   * Verein
-    * Administrator: [:layer_and_below_full, :festival_participation, :uv_lohnsumme]
+    * Administrator: [:layer_and_below_full, :uv_lohnsumme]
     * DirigentIn: []
     * Verantwortlicher SUISA: [:group_read, :song_census]
     * Jugendverantwortlicher: [:group_and_below_full]
@@ -150,8 +150,6 @@ können:
 | Song                      | Werk             |
 | SongCensus                | Meldeliste       |
 | SongCount                 | Werkmeldung      |
-| Event::GroupParticipation | Gruppenanmeldung |
-| Event::Festival           | Musikfest        |
 
 ### Ablauf SUISA-Meldung
 

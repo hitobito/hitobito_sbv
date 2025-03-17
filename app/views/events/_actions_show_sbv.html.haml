@@ -1,3 +1,0 @@
-- if entry.type == 'Event::Festival' && can?(:edit, entry)
-  = action_button(I18n.t('events.group_participations.list'), group_event_group_participations_url(event_id: entry.id), :list)
-  = Dropdown::GroupParticipations.new(self, params, :download).export

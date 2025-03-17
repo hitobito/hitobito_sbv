@@ -18,9 +18,3 @@ second:
   label: Event
   event: top_event
   start_at: 2018-09-01 00:00:00 +0200
-
-festival:
-  label: Musikfest
-  event: festival
-  start_at: <%= 60.days.from_now.midnight %>
-  finish_at: <%= 62.days.from_now.midnight %>
