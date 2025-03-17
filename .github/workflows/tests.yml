@@ -5,10 +5,6 @@ on:
   # break the wagon.
   schedule:
   - cron:  '38 3 * * *'
-  push:
-    paths-ignore:
-      - 'doc/**'
-      - '**.md'
   pull_request:
     paths-ignore:
       - 'doc/**'
