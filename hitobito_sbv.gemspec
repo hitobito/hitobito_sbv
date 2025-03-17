@@ -16,6 +16,4 @@ Gem::Specification.new do |s|
   s.description = "Structure and additonal features for hitobito of Schweizer Blasmusikverband"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile"]
-
-  s.add_dependency "aasm", "~> 5.0"
 end

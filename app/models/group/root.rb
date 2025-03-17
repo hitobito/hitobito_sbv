@@ -53,7 +53,7 @@ class Group::Root < ::Group
     Group::RootEhrenmitglieder,
     Group::RootVeteranen]
 
-  self.event_types = [Event, Event::Course, Event::Festival]
+  self.event_types = [Event, Event::Course]
 
   children Group::RootGeschaeftsstelle,
     Group::RootVorstand,
