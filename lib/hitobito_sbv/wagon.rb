@@ -74,7 +74,6 @@ module HitobitoSbv
 
       ### sheets
       Sheet::Group.include Sbv::Sheet::Group
-      Sheet::Event.include Sbv::Sheet::Event
 
       ### jobs
       Export::SubgroupsExportJob.prepend Sbv::Export::SubgroupsExportJob
@@ -105,20 +104,17 @@ module HitobitoSbv
       GroupAbility.include Sbv::GroupAbility
       PersonAbility.include Sbv::PersonAbility
 
-      # festival_participation allows to manage your group's participation to a festival
       # uv_lohnsumme allows to manage the salary amount for the accident insurance
-      Role::Permissions << :festival_participation << :uv_lohnsumme
+      Role::Permissions << :uv_lohnsumme
 
       # load this class after all abilities have been defined
-      AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census << :festival_participation
-      AbilityDsl::UserContext::LAYER_PERMISSIONS << :festival_participation
+      AbilityDsl::UserContext::GROUP_PERMISSIONS << :song_census
 
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :uv_lohnsumme
       AbilityDsl::UserContext::LAYER_PERMISSIONS << :uv_lohnsumme
 
       # lastly, register the abilities (could happen earlier, it's just a nice conclusion here)
       Ability.store.register SongAbility
-      Ability.store.register Event::GroupParticipationAbility
     end
 
     initializer "sbv.add_settings" do |_app|

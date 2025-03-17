@@ -268,10 +268,6 @@ de:
         one: Liste
         other: Listen
 
-      event/group_participation:
-        one: Gruppenanmeldung
-        other: Gruppenanmeldungen
-
       invoice_item/membership_fee:
         one: Mitgliederbeitrag
         other: Mitgliederbeiträge
@@ -339,7 +335,6 @@ de:
               song_census: Darf SUISA-Meldungen verwalten.
               layer_full: Alles Lesen und Schreiben auf dieser Ebene. Erstellen von Anlässen und Listen auf dieser Ebene.
               group_full: Lesen und Schreiben auf der Gruppe. Erstellen von Anlässen und Listen auf der Gruppe.
-              festival_participation: Darf den Verein zu Musikfesten anmelden und die Anmeldung bearbeiten.
               uv_lohnsumme: Darf die UV-Lohnsummen verwalten.
 
       invoice_item:
@@ -379,40 +374,6 @@ de:
           joint_play: Spielgemeinschaft
           not_playable: nicht spielfähig in diesem Jahr
           otherwise_billed: SUISA über Dritte abgerechnet
-
-      event/group_participation:
-        name: "Gruppenanmeldung bei %{event} als %{group}"
-        group_id: Verein
-        joint_participation: Anmeldung als Spielgemeinschaft
-        secondary_group: Partnerverein
-        secondary_group_id: Spielgemeinschaft mit
-        secondary_group_is_primary: Partnerverein ist führender Verein
-        music_style: Sparte
-        music_type: Besetzung
-        music_level: Klasse
-        parade_music: zusätzlich Parademusik
-        music_styles:
-          concert_music: Konzertmusik
-          contemporary_music: Unterhaltungsmusik
-          parade_music: Parademusik
-        music_types:
-          harmony: Harmonie
-          brass_band: Brass Band
-          fanfare_benelux: Fanfare Benelux
-          fanfare_mixte: Fanfare mixte
-          traditional_parade: traditionelle Parademusik
-          show_parade: Parademusik mit Evolution und/oder Show
-          parade_music: ja
-          no_parade: nein
-        music_levels:
-          high: Oberstufe
-          medium: Mittelstufe
-          low: Unterstufe
-          highest: Höchstklasse
-          first: 1. Klasse
-          second: 2. Klasse
-          third: 3. Klasse
-          fourth: 4. Klasse
 
     errors:
       models:

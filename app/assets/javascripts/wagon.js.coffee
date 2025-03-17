@@ -3,6 +3,5 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-import './modules/group_paticipations.js.coffee'
 import './modules/song_counts.js.coffee'
 import './modules/subverein_select.js.coffee'

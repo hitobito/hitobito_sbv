@@ -10,10 +10,8 @@ module Sbv::GroupAbility
 
   included do
     on(Group) do
-      permission(:any).may(:"index_event/festivals").all
       permission(:any).may(:query).all
       permission(:any).may(:deleted_subgroups).if_writable
-      permission(:festival_participation).may(:manage_festival_application).in_same_layer
 
       permission(:group_full).may(:create_history_member).in_same_group
       permission(:group_and_below_full).may(:create_history_member).in_same_group_or_below

@@ -52,7 +52,3 @@ top_course:
   priorization: true
   requires_approval: true
   external_applications: true
-
-festival:
-  groups: hauptgruppe_1
-  type: Event::Festival
