@@ -48,7 +48,7 @@ de:
         other: Kontakte
       group/root/suisa_admin:
         one: Verantwortlicher SUISA
-        other: Verantworliche SUISA
+        other: Verantwortliche SUISA
 
       group/mitgliederverband:
         one: Mitgliederverband
@@ -82,7 +82,7 @@ de:
         other: Kontakte
       group/mitgliederverband/suisa_admin:
         one: Verantwortlicher SUISA
-        other: Verantworliche SUISA
+        other: Verantwortliche SUISA
 
       group/kreis:
         one: Kreis
@@ -107,7 +107,7 @@ de:
         other: Kontakte
       group/kreis/suisa_admin:
         one: Verantwortlicher SUISA
-        other: Verantworliche SUISA
+        other: Verantwortliche SUISA
 
       group/regionalverband:
         one: Regionalverband
@@ -132,7 +132,7 @@ de:
         other: Kontakte
       group/regionalverband/suisa_admin:
         one: Verantwortlicher SUISA
-        other: Verantworliche SUISA
+        other: Verantwortliche SUISA
 
       group/verein:
         one: Verein
@@ -160,7 +160,7 @@ de:
         other: Jugendverantwortliche
       group/verein/suisa_admin:
         one: Verantwortlicher SUISA
-        other: Verantworliche SUISA
+        other: Verantwortliche SUISA
 
       ### ROLES FOR ALL LAYERS
 
