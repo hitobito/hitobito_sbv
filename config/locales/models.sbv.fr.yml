@@ -137,7 +137,7 @@ fr:
         many: ''
         other: ''
       group/kreis/suisa_admin:
-        one: Responsables SUISA
+        one: Responsable SUISA
         many: Responsables SUISA
         other: Responsables SUISA
 
@@ -170,7 +170,7 @@ fr:
         many: Contacts
         other: Contacts
       group/regionalverband/suisa_admin:
-        one: Responsables SUISA
+        one: Responsable SUISA
         many: Responsables SUISA
         other: Responsables SUISA
 
@@ -206,7 +206,7 @@ fr:
         many: responsables jeunesse
         other: responsable jeunesse
       group/verein/suisa_admin:
-        one: Responsables SUISA
+        one: Responsable SUISA
         many: Responsables SUISA
         other: Responsables SUISA
 
