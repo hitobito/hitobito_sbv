@@ -59,9 +59,9 @@ it:
         many: Contatti
         other: Contatti
       group/root/suisa_admin:
-        one: Responsabile SUISA
-        many: Responsabili SUISA
-        other: Responsabili SUISA
+        one: ''
+        many: ''
+        other: ''
 
       group/mitgliederverband:
         one: Membro dell'associazione
@@ -104,9 +104,9 @@ it:
         many: Contatti
         other: Contatti
       group/mitgliederverband/suisa_admin:
-        one: Responsabili SUISA
-        many: Responsabili SUISA
-        other: Responsabili SUISA
+        one: ''
+        many: ''
+        other: ''
 
       group/kreis:
         one: ''
@@ -170,9 +170,9 @@ it:
         many: Contatti
         other: Contatti
       group/regionalverband/suisa_admin:
-        one: Responsabili SUISA
-        many: Responsabili SUISA
-        other: Responsabili SUISA
+        one: ''
+        many: ''
+        other: ''
 
       group/verein:
         one: Società bandistica
@@ -206,9 +206,9 @@ it:
         many: Agente giovanile
         other: Agente giovanile
       group/verein/suisa_admin:
-        one: Responsabili SUISA
-        many: Responsabili SUISA
-        other: Responsabili SUISA
+        one: ''
+        many: ''
+        other: ''
 
       ### ROLES FOR ALL LAYERS
 

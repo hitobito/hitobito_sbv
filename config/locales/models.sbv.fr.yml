@@ -59,9 +59,9 @@ fr:
         many: Contacts
         other: Contacts
       group/root/suisa_admin:
-        one: Responsable SUISA
-        many: Responsables SUISA
-        other: Responsables SUISA
+        one: ''
+        many: ''
+        other: ''
 
       group/mitgliederverband:
         one: Association membre
@@ -104,9 +104,9 @@ fr:
         many: Contacts
         other: Contacts
       group/mitgliederverband/suisa_admin:
-        one: Responsables SUISA
-        many: Responsables SUISA
-        other: Responsables SUISA
+        one: ''
+        many: ''
+        other: ''
 
       group/kreis:
         one: ''
@@ -137,9 +137,9 @@ fr:
         many: ''
         other: ''
       group/kreis/suisa_admin:
-        one: Responsable SUISA
-        many: Responsables SUISA
-        other: Responsables SUISA
+        one: ''
+        many: ''
+        other: ''
 
       group/regionalverband:
         one: Association régionale
@@ -170,9 +170,9 @@ fr:
         many: Contacts
         other: Contacts
       group/regionalverband/suisa_admin:
-        one: Responsable SUISA
-        many: Responsables SUISA
-        other: Responsables SUISA
+        one: ''
+        many: ''
+        other: ''
 
       group/verein:
         one: Société
@@ -206,9 +206,9 @@ fr:
         many: responsables jeunesse
         other: responsable jeunesse
       group/verein/suisa_admin:
-        one: Responsable SUISA
-        many: Responsables SUISA
-        other: Responsables SUISA
+        one: ''
+        many: ''
+        other: ''
 
       ### ROLES FOR ALL LAYERS
 
