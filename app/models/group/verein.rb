@@ -73,10 +73,6 @@ class Group::Verein < ::Group
   has_many :concerts, dependent: :destroy
   has_many :song_counts, through: :concerts
 
-  has_many :group_participations, dependent: :destroy, # rubocop:disable Rails/InverseOf there are two inverses
-    class_name: "Event::GroupParticipation",
-    foreign_key: "group_id"
-
   def self.hidden
     root = Group::Root.first
     verein = Group::Verein.deleted.find_by(name: HIDDEN_ROOT_VEREIN_NAME, parent: root)
@@ -123,7 +119,7 @@ class Group::Verein < ::Group
   ### ROLES
 
   class Admin < Role::Admin
-    self.permissions = [:layer_and_below_full, :festival_participation, :uv_lohnsumme]
+    self.permissions = [:layer_and_below_full, :uv_lohnsumme]
   end
 
   class Conductor < Role

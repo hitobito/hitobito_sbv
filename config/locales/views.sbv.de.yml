@@ -9,7 +9,6 @@ de:
   navigation:
     help: Hilfe
   group:
-    festival_tab: Musikfeste
     suisa_tab: SUISA
     merge:
       select:
@@ -126,10 +125,6 @@ de:
     button: Export
     csv: CSV
     xlsx: Excel
-  dropdown/group_participations:
-    button: Anmeldungen Export
-    csv: CSV
-    xlsx: Excel
   dropdown/invoice_new:
     membership_fee: Mitgliederbeitrag
 
@@ -145,35 +140,6 @@ de:
       title: SUISA Erfassung
       concerts: Aufführungen
       summary: Zusammenfassung
-
-  events/group_participations:
-    export_enqueued: 'Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen.'
-
-  events:
-    global:
-      link:
-        add_event/festival: Musikfest erstellen
-    group_participations:
-      edit:
-        title: "%{participation} bearbeiten"
-        thank_you: "Herzlichen Dank für die Anmeldung."
-      actions_new:
-        title: "Vereinsanmeldung"
-      create:
-        success: "Anmeldung erfolgreich hinzugefügt"
-      list: Anmeldungen
-      edit_stages:
-        participation: Spielgemeinschaft zurücksetzen
-        music_style: Sparte zurücksetzen
-        music_type_and_level: Besetzung und Klasse zurücksetzen
-        date_preference: Wunschspieltage zurücksetzen
-        parade_music: Parademusik zurücksetzen
-
-    our_participations:
-      list:
-        applicable_festivals: "zur Anmeldung freigegebenen Musikfeste"
-        active_applications: "Anmeldungen meiner Gruppe"
-        edit: bearbeiten
 
   contactable:
     additional_email_fields:
