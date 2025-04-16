@@ -9,6 +9,7 @@ fr:
   navigation:
     help: Aide
   group:
+    festival_tab: Fêtes de musique
     suisa_tab: SUISA
     merge:
       select:
@@ -116,6 +117,10 @@ fr:
     button: Exporter
     csv: CSV
     xlsx: Excel
+  dropdown/group_participations:
+    button: Exporter des annonces
+    csv: CSV
+    xlsx: Excel
   dropdown/invoice_new:
     membership_fee: ""
 
@@ -131,6 +136,35 @@ fr:
       title: Saisie SUISA
       concerts: Interprétations
       summary: Résumé
+
+  events/group_participations:
+    export_enqueued: 'L’exportation est lancée en arrière-plan et sera téléchargée une fois terminée.'
+
+  events:
+    global:
+      link:
+        add_event/festival: Créer une fête de musique
+    group_participations:
+      edit:
+        title: "traiter %{participation}"
+        thank_you: "Merci pour votre inscription."
+      actions_new:
+        title: "Inscription de société"
+      create:
+        success: "L’inscription a bien été ajoutée"
+      list: Inscriptions
+      edit_stages:
+        participation: Réinitialiser l’association d’ensembles
+        music_style: Réinitialiser le domaine
+        music_type_and_level: Réinitialiser l’instrumentation et la catégorie
+        date_preference: Réinitialiser les jours de prestation souhaités
+        parade_music: Réinitialiser la musique de parade
+
+    our_participations:
+      list:
+        applicable_festivals: "Fêtes de musique ouvertes pour l’inscription"
+        active_applications: "Inscriptions de mon groupe"
+        edit: traiter
 
   contactable:
     additional_email_fields:

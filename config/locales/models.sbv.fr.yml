@@ -339,6 +339,11 @@ fr:
         many: Listes
         other: Listes
 
+      event/group_participation:
+        one: Inscriptions de groupe
+        many: Inscriptions de groupe
+        other: Inscriptions de groupe
+
       invoice_item/membership_fee:
         one: ''
         many: ''
@@ -407,6 +412,7 @@ fr:
               song_census: Peut gérer les annonces SUISA.
               layer_full: Tout lire et écrire à ce niveau. Créer des manifestations et des listes à ce niveau.
               group_full: Lire et écrire sur le groupe. Créer des manifestations et des listes sur le groupe.
+              festival_participation: Peut inscrire la société à des fêtes de musique et traiter l’inscription.
               uv_lohnsumme: Peut gérer le salaire AA.
 
       invoice_item:
@@ -446,6 +452,40 @@ fr:
           joint_play: SUISA déclarée par l'association d'ensembles
           not_playable: sans exécution musicale cette année
           otherwise_billed: SUISA payé par un tiers
+
+      event/group_participation:
+        name: "Inscription %{group} à %{event}"
+        group_id: Société
+        joint_participation: Inscription comme association d’ensembles
+        secondary_group: Société partenaire
+        secondary_group_id: Association d’ensembles avec
+        secondary_group_is_primary: La société partenaire est leader
+        music_style: Domaine
+        music_type: Instrumentation
+        music_level: Catégorie
+        parade_music: Musique de parade en plus
+        music_styles:
+          concert_music: Musique de concert
+          contemporary_music: Musique de divertissement
+          parade_music: Musique de parade
+        music_types:
+          harmony: Harmonie
+          brass_band: Brass Band
+          fanfare_benelux: Fanfare Benelux
+          fanfare_mixte: Fanfare Mixte
+          traditional_parade: Musique de parade traditionnelle
+          show_parade: Musique de parade avec évolutions et/ou show
+          parade_music: oui
+          no_parade: non
+        music_levels:
+          high: Catégorie supérieure
+          medium: Catégorie moyenne
+          low: Catégorie inférieure
+          highest: Classe d'excellence
+          first: 1re catégorie
+          second: 2e catégorie
+          third: 3e catégorie
+          fourth: 4e catégorie
 
     errors:
       models:
