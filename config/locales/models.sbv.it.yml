@@ -339,11 +339,6 @@ it:
         many: Elenchi
         other: Elenchi
 
-      event/group_participation:
-        one: Iscrizioni di gruppo
-        many: Iscrizioni di gruppo
-        other: Iscrizioni di gruppo
-
       invoice_item/membership_fee:
         one: ''
         many: ''
@@ -412,7 +407,6 @@ it:
               song_census: Può gestire annunci SUISA
               layer_full: "A questo livello può leggere tutto e scrivere. \nA questo livello può creare eventi e liste."
               group_full: "Leggere e scrivere nel gruppo.\nCreare eventi e liste nel gruppo."
-              festival_participation: Può iscrivere la società a Feste di musica ed elaborare l’iscrizione.
               uv_lohnsumme: Può gestire il salario AINF.
 
       invoice_item:
@@ -452,40 +446,6 @@ it:
           joint_play: società di musica
           not_playable: nessuna esecuzione musicale durante quest’anno
           otherwise_billed: SUISA pagata da terzi
-
-      event/group_participation:
-        name: "Iscrizione di gruppo a %{evento} come %{gruppo}"
-        group_id: Società
-        joint_participation: Iscrizione come aggregazione tra società
-        secondary_group: Società partner
-        secondary_group_id: Aggregazione tra società con
-        secondary_group_is_primary: La società partner è quella di riferimento
-        music_style: Disciplina
-        music_type: Organico
-        music_level: Categoria
-        parade_music: anche musica da parata
-        music_styles:
-          concert_music: Musica concertante
-          contemporary_music: Musica leggera
-          parade_music: Musica da parata
-        music_types:
-          harmony: Armonia
-          brass_band: Brass band
-          fanfare_benelux: Fanfara Benelux
-          fanfare_mixte: Fanfara Mista
-          traditional_parade: Musica da parata tradizionale
-          show_parade: Musica da parata con evoluzioni e/o spettacolo
-          parade_music: sì
-          no_parade: no
-        music_levels:
-          high: Categoria superiore
-          medium: Categoria media
-          low: Categoria inferiore
-          highest: Eccellenza
-          first: 1a categoria
-          second: 2a categoria
-          third: 3a categoria
-          fourth: 4a categoria
 
     errors:
       models:
