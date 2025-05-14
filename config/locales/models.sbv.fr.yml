@@ -1,19 +1,10 @@
-#  Copyright (c) 2012-2024, Schweizer Blasmusikverband. This file is part of
-#  hitobito_sbv and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_sbv.
-
 fr:
   activerecord:
     models:
-
-      ### GROUPS
-
       group/generalverband:
         one: Associations générale
         many: Associations générales
         other: Associations générales
-
       group/root:
         one: Organisation faîtière
         many: Organisations faîtières
@@ -58,11 +49,6 @@ fr:
         one: Contacts
         many: Contacts
         other: Contacts
-      group/root/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
-
       group/mitgliederverband:
         one: Association membre
         many: Associations membres
@@ -103,44 +89,6 @@ fr:
         one: Contacts
         many: Contacts
         other: Contacts
-      group/mitgliederverband/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
-
-      group/kreis:
-        one: ''
-        many: ''
-        other: ''
-      group/kreis_geschaeftsstelle:
-        one: ''
-        many: ''
-        other: ''
-      group/kreis_vorstand:
-        one: ''
-        many: ''
-        other: ''
-      group/kreis_musikkommission:
-        one: ''
-        many: ''
-        other: ''
-      group/kreis_arbeitsgruppe:
-        one: ''
-        many: ''
-        other: ''
-      group/kreis_ehrenmitglieder:
-        one: ''
-        many: ''
-        other: ''
-      group/kreis_kontakte:
-        one: ''
-        many: ''
-        other: ''
-      group/kreis/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
-
       group/regionalverband:
         one: Association régionale
         many: Associations régionales
@@ -169,11 +117,6 @@ fr:
         one: Contacts
         many: Contacts
         other: Contacts
-      group/regionalverband/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
-
       group/verein:
         one: Société
         many: Sociétés
@@ -205,26 +148,10 @@ fr:
         one: responsable jeunesse
         many: responsables jeunesse
         other: responsable jeunesse
-      group/verein/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
-
-      ### ROLES FOR ALL LAYERS
-
-      #### General
-
-      role/admin:
-        one: Administrateur
-        many: Administrateurs
-        other: Administrateurs
       role/adressverwaltung:
         one: Gestion des adresses
         many: Gestion des adresses
         other: Gestion des adresses
-
-      #### Geschaeftsstelle Roles
-
       role/geschaeftsstelle_manager:
         one: Direction du secrétariat
         many: Direction du secrétariat
@@ -237,9 +164,6 @@ fr:
         one: Aide
         many: Aides
         other: Aides
-
-      #### Vorstand Roles
-
       role/vorstand_kassier:
         one: Caissier
         many: Caissiers
@@ -264,13 +188,6 @@ fr:
         one: Chef des vétérans
         many: Chefs des vétérans
         other: Chefs des vétérans
-      role/vorstand_materialverwaltung:
-        one: Responsable matériel
-        many: Responsable matériel
-        other: Responsable matériel
-
-      #### Musikkommission Roles
-
       role/musikkommission_praesident:
         one: Présidents
         many: Présidents
@@ -279,9 +196,6 @@ fr:
         one: Membres
         many: Membres
         other: Membres
-
-      #### Arbeitsgruppen Roles
-
       role/arbeitsgruppe_leitung:
         one: Direction
         many: Direction
@@ -290,23 +204,14 @@ fr:
         one: Membres
         many: Membres
         other: Membres
-
-      #### Ehrenmitglieder
-
       role/ehrenmitglied:
         one: Membre d'honneur
         many: Membres d'honneur
         other: Membres d'honneur
-
-      #### Kontakte Roles
-
       role/kontakt:
         one: Contact
         many: Contacts
         other: Contacts
-
-      #### Mitglieder Roles
-
       role/mitglieder_mitglied:
         one: Membres
         many: Membres
@@ -315,35 +220,24 @@ fr:
         one: Membre passif
         many: Membres passifs
         other: Membres passifs
-
       song:
         one: Oeuvre
         many: Œuvres
         other: Œuvres
-
       song_census:
         one: Liste d'annonce
-
       song_count:
         one: Annonce d'oeuvre
         many: Annonces d'œuvres
         other: Annonces d'œuvres
-
       concert:
         one: Interprétation
         other: Interprétations
         without_date: Interprétation sans date
-
       mailing_list:
         one: Liste
         many: Listes
         other: Listes
-
-      invoice_item/membership_fee:
-        one: ''
-        many: ''
-        other: ''
-
     attributes:
       person:
         correspondence_language: Langue de correspondance
@@ -364,7 +258,6 @@ fr:
         correspondence_language: Langue de correspondance
         subventionen: Subventions
         recognized_members: Membres saisis
-        manual_member_count: ""
         manually_counted_members: Membres saisis manuellement
         besetzungen:
           _nil: Inconnu
@@ -398,8 +291,6 @@ fr:
         suisa_status: Statut SUISA
       role:
         dates: Données
-        start_on: ""
-        end_on: ""
         correspondence_language: Langue de correspondance
         class:
           permission:
@@ -408,18 +299,12 @@ fr:
               layer_full: Tout lire et écrire à ce niveau. Créer des manifestations et des listes à ce niveau.
               group_full: Lire et écrire sur le groupe. Créer des manifestations et des listes sur le groupe.
               uv_lohnsumme: Peut gérer le salaire AA.
-
-      invoice_item:
-        amount: ""
-        cutoff_date: ""
-
       song:
         title: Titre
         composed_by: Compositeur
         arranged_by: Arrangeur
         published_by: Éditeur
         suisa_id: ID-SUISA
-
       song_count:
         song: Œuvre
         song_id: Œuvre
@@ -432,11 +317,9 @@ fr:
         verein: Société
         verein_id: ID société
         verein_with_town: Société et lieu
-
       song_counts:
         song: Œuvre
         song_id: Œuvre
-
       concert:
         song_counts: Saisie de l'oeuvre
         performed_at: Date
@@ -446,15 +329,12 @@ fr:
           joint_play: SUISA déclarée par l'association d'ensembles
           not_playable: sans exécution musicale cette année
           otherwise_billed: SUISA payé par un tiers
-
     errors:
       models:
         song:
           attributes:
             title:
               taken: existe déjà avec le même compositeur chez cet éditeur
-
   errors:
     messages:
       cannot_be_later_than_today: ne peut pas être postérieur à aujourd'hui
-      cannot_be_later_than_end_on: ""

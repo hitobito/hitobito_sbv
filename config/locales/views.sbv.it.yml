@@ -1,8 +1,3 @@
-#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
-#  hitobito_sbv and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_sbv.
-
 it:
   global:
     last_change: "Ultima modifica: %{date}"
@@ -12,7 +7,7 @@ it:
     suisa_tab: SUISA
     merge:
       select:
-        explanation: "Quando due gruppi vengono fusionati, tutti i sottogruppi, gli eventi e le persone, compresi i ruoli di entrambi i gruppi, vengono uniti. Gli elenchi non vengono ripresi. I gruppi precedenti continueranno a essere visibili nel campo \"Eliminato\"."
+        explanation: Quando due gruppi vengono fusionati, tutti i sottogruppi, gli eventi e le persone, compresi i ruoli di entrambi i gruppi, vengono uniti. Gli elenchi non vengono ripresi. I gruppi precedenti continueranno a essere visibili nel campo "Eliminato".
     person_add_requests:
       index:
         explanation: >
@@ -44,15 +39,13 @@ it:
         submit: La lista può essere inviata.
         submitted: La lista è già stata inviata.
         none: Non ci sono liste da inviare.
-
     remind:
       success: "Promemoria inoltrato con succeso a %{verein_count}delle società bandistiche"
       send: spedire promemoria
       send_confirm: Invia un promemoria a ogni responsabile SUISA che non abbia ancora inoltrato l'elenco. Ognuno riceve una e-mail nella loro lingua di corrispondenza. Il testo dell'e-mail può essere modificato da un amministratore nel campo "Impostazioni".
     finish:
       submit: completare elenco
-      start_new_census: "Con il completamento dell'elenco, tutte le notifiche inviate fino ad oggi verranno bloccate. Verrà creato un nuovo elenco. Tutte le notiifiche ancora aperte verranno aggiunte a questo elenco."
-
+      start_new_census: Con il completamento dell'elenco, tutte le notifiche inviate fino ad oggi verranno bloccate. Verrà creato un nuovo elenco. Tutte le notiifiche ancora aperte verranno aggiunte a questo elenco.
   person:
     history:
       history_members_form_sbv:
@@ -64,61 +57,38 @@ it:
         create_deleted_verein: Inserire la società cancellata
         select_existing_verein: Selezionare una società
         text_with_alternative_link_html: "%{text} <small>oppure %{link}</small>"
-
     add_requests:
       creator:
         mailing_list:
-          success: "Abbiamo inviato una richiesta di accesso per %{person}. La persona verrà aggiunta alla lista non appena viene accettata la richiesta."
-
+          success: Abbiamo inviato una richiesta di accesso per %{person}. La persona verrà aggiunta alla lista non appena viene accettata la richiesta.
   people:
     fields_sbv:
       allow_personal_data_usage: Accetto l'uso dei dettagli del mio indirizzo
-
   groups:
     actions_show_sbv:
       export_lohnsummen: Esportare i salari AINF
-      create_verein_invoice_list: ""
-    subverein_select_modal:
-      select_all: ""
-      submit: ""
-      no_entries: ""
-      invoice_config_invalid: ""
-      info: 
-        group-vereinvorstand-kassier: ""
-        group-vereinvorstand-praesident: ""
-        group-verein-admin: ""
-        no_recipient: ""
-
   roles:
     info:
       role_only_public: >
         Il ruolo %{role} nel gruppo %{group}può visionare solo dati pubblici (gruppi, eventi ed elenchi, nessuna altra persona).
   song_counts:
     export_enqueued: 'L’esportazione avverrà in background e sarà scaricata al termine.'
-
   subscriber:
-      group:
-        form:
-          subgroups_selectable: Si possono scegliere gruppi nell'elenco gruppi.
-          subgroups_and_siblings_selectable: "Possono essere selezionati unicamente gruppi di questo elenco o nei gruppi contigui del tipo%{type}."
-
+    group:
+      form:
+        subgroups_selectable: Si possono scegliere gruppi nell'elenco gruppi.
+        subgroups_and_siblings_selectable: Possono essere selezionati unicamente gruppi di questo elenco o nei gruppi contigui del tipo%{type}.
   subscriber/user:
     success: Sei stato aggiunto con successo alla lista.
     failure: 'Non sei stato aggiunto alla lista%{errors}'
     unsubscribed: Sei stato eliminato con successo dalla lista
-
   subscriptions:
     list:
-      export_not_allowed: "Non è consentito esportare abbonati da questo elenco, perché rappresentano ruoli e/o eventi al di fuori del campo autorizzato."
-
-
+      export_not_allowed: Non è consentito esportare abbonati da questo elenco, perché rappresentano ruoli e/o eventi al di fuori del campo autorizzato.
   dropdown/song_counts:
     button: Esportazione
     csv: CSV
     xlsx: Excel
-  dropdown/invoice_new:
-    membership_fee: ""
-
   concerts:
     index:
       no_concerts_yet: "Per inoltrare la lista SUISA è necessario aggiungere almeno un'esecuzione o scegliere un'alternativa:"
@@ -131,7 +101,6 @@ it:
       title: Registrazione SUISA
       concerts: Esecuzioni
       summary: Riassunto
-
   contactable:
     additional_email_fields:
-      tooltip_mailings: "L'invio degli elechi, le conferme via e-mail ecc. vengono pure inviati a tutti gli indirizzi qui indicati."
+      tooltip_mailings: L'invio degli elechi, le conferme via e-mail ecc. vengono pure inviati a tutti gli indirizzi qui indicati.
