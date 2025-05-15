@@ -1,3 +1,8 @@
+#  Copyright (c) 2012-2020, Schweizer Blasmusikverband. This file is part of
+#  hitobito_sbv and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_sbv.
+
 fr:
   global:
     last_change: "Dernière modification: %{date}"
@@ -7,7 +12,7 @@ fr:
     suisa_tab: SUISA
     merge:
       select:
-        explanation: Lorsque deux groupes sont fusionnés, tous les sous-groupes, manifestations et personnes, y compris les rôles des deux groupes, sont réunis. Les listes ne sont pas reprises. Les groupes précédents resteront alors visibles sous "Supprimé".
+        explanation: "Lorsque deux groupes sont fusionnés, tous les sous-groupes, manifestations et personnes, y compris les rôles des deux groupes, sont réunis. Les listes ne sont pas reprises. Les groupes précédents resteront alors visibles sous \"Supprimé\"."
     person_add_requests:
       index:
         explanation: >
@@ -39,13 +44,15 @@ fr:
         submit: La liste peut être envoyée.
         submitted: La liste a déjà été envoyée
         none: Aucune liste à envoyer.
+
     remind:
       success: "Le rappel a été envoyé à la société %{verein_count}."
       send: Envoyer un rappel
       send_confirm: Envoie un rappel à tous les responsables SUISA qui n'ont pas encore envoyé de liste. Chacun reçoit un courriel dans sa langue de correspondance. Le texte du courriel peut être modifié par un administrateur sous Paramètres.
     finish:
       submit: Clôturer la liste d'annonces
-      start_new_census: En clôturant la liste d'annonces, toutes les annonces effectuées jusqu'ici seront verrouillées. Une nouvelle liste de messages sera créée et les nouvelles annonces seront ajoutées à cette liste.
+      start_new_census: "En clôturant la liste d'annonces, toutes les annonces effectuées jusqu'ici seront verrouillées. Une nouvelle liste de messages sera créée et les nouvelles annonces seront ajoutées à cette liste."
+
   person:
     history:
       history_members_form_sbv:
@@ -57,38 +64,61 @@ fr:
         create_deleted_verein: Saisir la société supprimée
         select_existing_verein: Sélectionner la société
         text_with_alternative_link_html: "%{text} ou %{link}"
+
     add_requests:
       creator:
         mailing_list:
-          success: Nous avons envoyé une demande d'accès pour %{person}. La personne sera ajoutée à la liste dès que la demande aura été approuvée.
+          success: "Nous avons envoyé une demande d'accès pour %{person}. La personne sera ajoutée à la liste dès que la demande aura été approuvée."
+
   people:
     fields_sbv:
       allow_personal_data_usage: J'accepte l'utilisation de mes données d'adresse
+
   groups:
     actions_show_sbv:
       export_lohnsummen: Export des salaires AA
+      create_verein_invoice_list: ""
+    subverein_select_modal:
+      select_all: ""
+      submit: ""
+      no_entries: ""
+      invoice_config_invalid: ""
+      info: 
+        group-vereinvorstand-kassier: ""
+        group-vereinvorstand-praesident: ""
+        group-verein-admin: ""
+        no_recipient: ""
+
   roles:
     info:
       role_only_public: >
         Le rôle %{role} du groupe %{group} ne peut voir que des données publiques (groupes, manifestations et listes; aucune autre personne).
   song_counts:
     export_enqueued: 'L’exportation est lancée en arrière-plan et sera téléchargée une fois terminée.'
+
   subscriber:
-    group:
-      form:
-        subgroups_selectable: Seuls les groupes situés au niveau inférieur du groupe de listes peuvent être sélectionnés
-        subgroups_and_siblings_selectable: Seuls les groupes situés au niveau inférieur du groupe des listes ou en dessous des groupes voisins du type %{type} peuvent être sélectionnés
+      group:
+        form:
+          subgroups_selectable: Seuls les groupes situés au niveau inférieur du groupe de listes peuvent être sélectionnés
+          subgroups_and_siblings_selectable: "Seuls les groupes situés au niveau inférieur du groupe des listes ou en dessous des groupes voisins du type %{type} peuvent être sélectionnés"
+
   subscriber/user:
     success: Vous avez été ajouté à la liste.
     failure: 'Vous ne pouvez pas être ajouté à la liste: %{errors}'
     unsubscribed: Vous avez été supprimé de la liste.
+
   subscriptions:
     list:
-      export_not_allowed: Vous n'êtes pas autorisé à exporter les abonnés de cette liste, car ils contiennent en dehors des rôles et / ou des manifestations qui dépassent vos droits.
+      export_not_allowed: "Vous n'êtes pas autorisé à exporter les abonnés de cette liste, car ils contiennent en dehors des rôles et / ou des manifestations qui dépassent vos droits."
+
+
   dropdown/song_counts:
     button: Exporter
     csv: CSV
     xlsx: Excel
+  dropdown/invoice_new:
+    membership_fee: ""
+
   concerts:
     index:
       no_concerts_yet: "Pour envoyer la liste SUISA, vous devez ajouter au moins une exécution musicale ou choisir une alternative:"
@@ -101,6 +131,7 @@ fr:
       title: Saisie SUISA
       concerts: Interprétations
       summary: Résumé
+
   contactable:
     additional_email_fields:
-      tooltip_mailings: Les envois de listes, de confirmations par e-mail, etc. sont également envoyés à toutes les adresses marquées ici.
+      tooltip_mailings: "Les envois de listes, de confirmations par e-mail, etc. sont également envoyés à toutes les adresses marquées ici."
