@@ -77,17 +77,17 @@ it:
   groups:
     actions_show_sbv:
       export_lohnsummen: Esportare i salari AINF
-      create_verein_invoice_list: ""
+      create_verein_invoice_list: Vereinsrechnungen erstellen
     subverein_select_modal:
-      select_all: ""
-      submit: ""
-      no_entries: ""
-      invoice_config_invalid: ""
+      select_all: Alle Vereine an-/abwählen
+      submit: Zum Rechnungsformular
+      no_entries: Keine Subvereine vorhanden
+      invoice_config_invalid: "Rechnungen können nicht erstellt werden, da Ihre Rechnungseinstellungen invalide sind."
       info: 
-        group-vereinvorstand-kassier: ""
-        group-vereinvorstand-praesident: ""
-        group-verein-admin: ""
-        no_recipient: ""
+        group-vereinvorstand-kassier: Rechnung wird an den/die Kassier*in des Vorstandes gesendet
+        group-vereinvorstand-praesident: Rechnung wird an den/die Präsident*in des Vorstandes gesendet
+        group-verein-admin: Rechnung wird an den/die Administrator*in des Vorstandes gesendet
+        no_recipient: "Rechnung kann nicht gestellt werden, da kein Empfänger gefunden wurde"
 
   roles:
     info:
@@ -117,7 +117,7 @@ it:
     csv: CSV
     xlsx: Excel
   dropdown/invoice_new:
-    membership_fee: ""
+    membership_fee: Mitgliederbeitrag
 
   concerts:
     index:

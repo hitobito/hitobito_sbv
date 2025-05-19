@@ -59,9 +59,8 @@ fr:
         many: Contacts
         other: Contacts
       group/root/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
+        one: Verantwortlicher SUISA
+        other: Verantwortliche SUISA
 
       group/mitgliederverband:
         one: Association membre
@@ -104,42 +103,33 @@ fr:
         many: Contacts
         other: Contacts
       group/mitgliederverband/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
+        one: Verantwortlicher SUISA
+        other: Verantwortliche SUISA
 
       group/kreis:
-        one: ''
-        many: ''
-        other: ''
+        one: Kreis
+        other: Kreise
       group/kreis_geschaeftsstelle:
-        one: ''
-        many: ''
-        other: ''
+        one: Geschäftsstelle
+        other: Geschäftsstellen
       group/kreis_vorstand:
-        one: ''
-        many: ''
-        other: ''
+        one: Vorstand
+        other: Vorstände
       group/kreis_musikkommission:
-        one: ''
-        many: ''
-        other: ''
+        one: Musikkommission
+        other: Musikkommissionen
       group/kreis_arbeitsgruppe:
-        one: ''
-        many: ''
-        other: ''
+        one: Arbeitsgruppe
+        other: Arbeitsgruppen
       group/kreis_ehrenmitglieder:
-        one: ''
-        many: ''
-        other: ''
+        one: Ehrenmitglieder
+        other: Ehrenmitglieder
       group/kreis_kontakte:
-        one: ''
-        many: ''
-        other: ''
+        one: Kontakte
+        other: Kontakte
       group/kreis/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
+        one: Verantwortlicher SUISA
+        other: Verantwortliche SUISA
 
       group/regionalverband:
         one: Association régionale
@@ -170,9 +160,8 @@ fr:
         many: Contacts
         other: Contacts
       group/regionalverband/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
+        one: Verantwortlicher SUISA
+        other: Verantwortliche SUISA
 
       group/verein:
         one: Société
@@ -206,9 +195,8 @@ fr:
         many: responsables jeunesse
         other: responsable jeunesse
       group/verein/suisa_admin:
-        one: ''
-        many: ''
-        other: ''
+        one: Verantwortlicher SUISA
+        other: Verantwortliche SUISA
 
       ### ROLES FOR ALL LAYERS
 
@@ -340,9 +328,8 @@ fr:
         other: Listes
 
       invoice_item/membership_fee:
-        one: ''
-        many: ''
-        other: ''
+        one: Mitgliederbeitrag
+        other: Mitgliederbeiträge
 
     attributes:
       person:
@@ -364,7 +351,7 @@ fr:
         correspondence_language: Langue de correspondance
         subventionen: Subventions
         recognized_members: Membres saisis
-        manual_member_count: ""
+        manual_member_count: Mitglieder (manuell)
         manually_counted_members: Membres saisis manuellement
         besetzungen:
           _nil: Inconnu
@@ -398,8 +385,8 @@ fr:
         suisa_status: Statut SUISA
       role:
         dates: Données
-        start_on: ""
-        end_on: ""
+        start_on: Eintritt
+        end_on: Austritt
         correspondence_language: Langue de correspondance
         class:
           permission:
@@ -410,8 +397,8 @@ fr:
               uv_lohnsumme: Peut gérer le salaire AA.
 
       invoice_item:
-        amount: ""
-        cutoff_date: ""
+        amount: Betrag
+        cutoff_date: Stichdatum
 
       song:
         title: Titre
@@ -457,4 +444,4 @@ fr:
   errors:
     messages:
       cannot_be_later_than_today: ne peut pas être postérieur à aujourd'hui
-      cannot_be_later_than_end_on: ""
+      cannot_be_later_than_end_on: muss vor oder am selben Tag wie der Austritt sein
