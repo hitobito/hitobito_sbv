@@ -78,11 +78,15 @@ class Group::Verein < ::Group
     verein = Group::Verein.deleted.find_by(name: HIDDEN_ROOT_VEREIN_NAME, parent: root)
     return verein if verein
 
-    # NOTE: we piggy-back on created_at to avoid default children to be created
-    Group::Verein.create!(name: HIDDEN_ROOT_VEREIN_NAME,
+    Group::Verein.new(
+      name: HIDDEN_ROOT_VEREIN_NAME,
       parent: root,
       created_at: 1.minute.ago,
-      deleted_at: Time.zone.now)
+      deleted_at: Time.zone.now
+    ).tap do |verein|
+      verein._skip_default_children = true
+      verein.save!
+    end
   end
 
   # TODO: Validierungen der verschiedenen Values, refactoring, exports
