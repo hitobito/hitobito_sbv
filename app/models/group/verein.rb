@@ -81,7 +81,6 @@ class Group::Verein < ::Group
     Group::Verein.new(
       name: HIDDEN_ROOT_VEREIN_NAME,
       parent: root,
-      created_at: 1.minute.ago,
       deleted_at: Time.zone.now
     ).tap do |verein|
       verein._skip_default_children = true
