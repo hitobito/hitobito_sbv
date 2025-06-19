@@ -10,7 +10,7 @@ fr:
       ### GROUPS
 
       group/generalverband:
-        one: Associations générale
+        one: Association générale
         many: Associations générales
         other: Associations générales
 
@@ -47,20 +47,21 @@ fr:
         many: Vétérans fédéraux
         other: Vétérans fédéraux
       group/root_veteranen/ehrenveteran:
-        one: 'Vétéran d’honneur fédéral '
+        one: Vétéran d’honneur fédéral
         many: Vétérans d’honneur fédéraux
         other: Vétérans d’honneur fédéraux
       group/root_veteranen/cism_veteran:
-        one: Vétérans CISM
+        one: Vétéran CISM
         many: Vétérans CISM
         other: Vétérans CISM
       group/root_kontakte:
-        one: Contacts
+        one: Contact
         many: Contacts
         other: Contacts
       group/root/suisa_admin:
-        one: Verantwortlicher SUISA
-        other: Verantwortliche SUISA
+        one: Responsable SUISA
+        many: Responsables SUISA
+        other: Responsables SUISA
 
       group/mitgliederverband:
         one: Association membre
@@ -83,7 +84,7 @@ fr:
         many: Groupes de travail
         other: Groupes de travail
       group/mitgliederverband_ehrenmitglieder:
-        one: Membres d'honneur
+        one: Membre d'honneur
         many: Membres d'honneur
         other: Membres d'honneur
       group/mitgliederverband_veteranen:
@@ -99,37 +100,46 @@ fr:
         many: Vétérans d'honneur cantonaux
         other: Vétérans d'honneur cantonaux
       group/mitgliederverband_kontakte:
-        one: Contacts
+        one: Contact
         many: Contacts
         other: Contacts
       group/mitgliederverband/suisa_admin:
-        one: Verantwortlicher SUISA
-        other: Verantwortliche SUISA
+        one: Responsable SUISA
+        many: Responsables SUISA
+        other: Responsable SUISA
 
       group/kreis:
-        one: Kreis
-        other: Kreise
+        one: Cercle
+        many: Cercles
+        other: Cercles
       group/kreis_geschaeftsstelle:
-        one: Geschäftsstelle
-        other: Geschäftsstellen
+        one: Secrétariat
+        many: Secrétariats
+        other: Secrétariats
       group/kreis_vorstand:
-        one: Vorstand
-        other: Vorstände
+        one: Comité
+        many: Comités
+        other: Comités
       group/kreis_musikkommission:
-        one: Musikkommission
-        other: Musikkommissionen
+        one: Commission de musique
+        many: Commissions de musique
+        other: Commissions de musique
       group/kreis_arbeitsgruppe:
-        one: Arbeitsgruppe
-        other: Arbeitsgruppen
+        one: Groupe de travail
+        many: Groupes de travail
+        other: Groupes de travail
       group/kreis_ehrenmitglieder:
-        one: Ehrenmitglieder
-        other: Ehrenmitglieder
+        one: Membre d'honneur
+        many: Membres d'honneur
+        other: Membres d'honneur
       group/kreis_kontakte:
-        one: Kontakte
-        other: Kontakte
+        one: Contact
+        many: Contacts
+        other: Contacts
       group/kreis/suisa_admin:
-        one: Verantwortlicher SUISA
-        other: Verantwortliche SUISA
+        one: Responsable SUISA
+        many: Responsables SUISA
+        other: Responsables SUISA
 
       group/regionalverband:
         one: Association régionale
@@ -160,8 +170,9 @@ fr:
         many: Contacts
         other: Contacts
       group/regionalverband/suisa_admin:
-        one: Verantwortlicher SUISA
-        other: Verantwortliche SUISA
+        one: Responsable SUISA
+        many: Responsables SUISA
+        other: Responsables SUISA
 
       group/verein:
         one: Société
@@ -183,7 +194,7 @@ fr:
         one: Membres
         oter: Membres
       group/verein_kontakte:
-        one: Contacts
+        one: Contact
         many: Contacts
         other: Contacts
       group/verein/conductor:
@@ -195,8 +206,9 @@ fr:
         many: responsables jeunesse
         other: responsable jeunesse
       group/verein/suisa_admin:
-        one: Verantwortlicher SUISA
-        other: Verantwortliche SUISA
+        one: Responsable SUISA
+        many: Responsables SUISA
+        other: Responsables SUISA
 
       ### ROLES FOR ALL LAYERS
 
@@ -260,11 +272,11 @@ fr:
       #### Musikkommission Roles
 
       role/musikkommission_praesident:
-        one: Présidents
+        one: Président
         many: Présidents
         other: Présidents
       role/musikkommission_mitglied:
-        one: Membres
+        one: Membre
         many: Membres
         other: Membres
 
@@ -275,7 +287,7 @@ fr:
         many: Direction
         other: Direction
       role/arbeitsgruppe_mitglied:
-        one: Membres
+        one: Membre
         many: Membres
         other: Membres
 
@@ -296,7 +308,7 @@ fr:
       #### Mitglieder Roles
 
       role/mitglieder_mitglied:
-        one: Membres
+        one: Membre
         many: Membres
         other: Membres
       role/mitglieder_passivmitglied:
@@ -328,8 +340,9 @@ fr:
         other: Listes
 
       invoice_item/membership_fee:
-        one: Mitgliederbeitrag
-        other: Mitgliederbeiträge
+        one: Frais de membre
+        many: Frais des membres
+        other: Frais des membres
 
     attributes:
       person:
@@ -351,7 +364,7 @@ fr:
         correspondence_language: Langue de correspondance
         subventionen: Subventions
         recognized_members: Membres saisis
-        manual_member_count: Mitglieder (manuell)
+        manual_member_count: Membres (manuel)
         manually_counted_members: Membres saisis manuellement
         besetzungen:
           _nil: Inconnu
@@ -385,8 +398,8 @@ fr:
         suisa_status: Statut SUISA
       role:
         dates: Données
-        start_on: Eintritt
-        end_on: Austritt
+        start_on: Entrée
+        end_on: Sortie
         correspondence_language: Langue de correspondance
         class:
           permission:
@@ -397,8 +410,8 @@ fr:
               uv_lohnsumme: Peut gérer le salaire AA.
 
       invoice_item:
-        amount: Betrag
-        cutoff_date: Stichdatum
+        amount: Montant
+        cutoff_date: Date d'échéance
 
       song:
         title: Titre
@@ -430,7 +443,7 @@ fr:
         name: Interprétation
         reasons:
           _nil: joué(e)
-          joint_play: SUISA déclarée par l'association d'ensembles
+          joint_play: SUISA déclarée par l'autre société de l'association d'ensembles
           not_playable: sans exécution musicale cette année
           otherwise_billed: SUISA payé par un tiers
 
@@ -444,4 +457,4 @@ fr:
   errors:
     messages:
       cannot_be_later_than_today: ne peut pas être postérieur à aujourd'hui
-      cannot_be_later_than_end_on: muss vor oder am selben Tag wie der Austritt sein
+      cannot_be_later_than_end_on: doit être avant ou au même jour que la sortie
