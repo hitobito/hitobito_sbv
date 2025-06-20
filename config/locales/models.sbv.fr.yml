@@ -68,7 +68,7 @@ fr:
         many: Associations membres
         other: Associations membres
       group/mitgliederverband_geschaeftsstelle:
-        one: Secrétariats
+        one: Secrétariat
         many: Secrétariats
         other: Secrétariats
       group/mitgliederverband_vorstand:
@@ -76,11 +76,11 @@ fr:
         many: Comités
         other: Comités
       group/mitgliederverband_musikkommission:
-        one: Commissions de musique
+        one: Commission de musique
         many: Commissions de musique
         other: Commissions de musique
       group/mitgliederverband_arbeitsgruppe:
-        one: Groupes de travail
+        one: Groupe de travail
         many: Groupes de travail
         other: Groupes de travail
       group/mitgliederverband_ehrenmitglieder:
@@ -88,7 +88,7 @@ fr:
         many: Membres d'honneur
         other: Membres d'honneur
       group/mitgliederverband_veteranen:
-        one: Vétérans
+        one: Vétéran
         many: Vétérans
         other: Vétérans
       group/mitgliederverband_veteranen/veteran:
@@ -146,27 +146,27 @@ fr:
         many: Associations régionales
         other: Associations régionales
       group/regionalverband_geschaeftsstelle:
-        one: Secrétariats
+        one: Secrétariat
         many: Secrétariats
         other: Secrétariats
       group/regionalverband_vorstand:
-        one: Comités
+        one: Comité
         many: Comités
         other: Comités
       group/regionalverband_musikkommission:
-        one: Commissions de musique
+        one: Commission de musique
         many: Commissions de musique
         other: Commissions de musique
       group/regionalverband_arbeitsgruppe:
-        one: Groupes de travail
+        one: Groupe de travail
         many: Groupes de travail
         other: Groupes de travail
       group/regionalverband_ehrenmitglieder:
-        one: Membres d'honneur
+        one: Membre d'honneur
         many: Membres d'honneur
         other: Membres d'honneur
       group/regionalverband_kontakte:
-        one: Contacts
+        one: Contact
         many: Contacts
         other: Contacts
       group/regionalverband/suisa_admin:
@@ -179,15 +179,15 @@ fr:
         many: Sociétés
         other: Sociétés
       group/verein_vorstand:
-        one: Comités
+        one: Comité
         many: Comités
         other: Comités
       group/verein_musikkommission:
-        one: Commissions de musique
+        one: Commission de musique
         many: Commissions de musique
         other: Commissions de musique
       group/verein_arbeitsgruppe:
-        one: Groupes de travail
+        one: Groupe de travail
         many: Groupes de travail
         other: Groupes de travail
       group/verein_mitglieder:
