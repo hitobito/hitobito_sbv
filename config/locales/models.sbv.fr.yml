@@ -191,7 +191,7 @@ fr:
         many: Groupes de travail
         other: Groupes de travail
       group/verein_mitglieder:
-        one: Membres
+        one: Membre
         oter: Membres
       group/verein_kontakte:
         one: Contact
@@ -317,7 +317,7 @@ fr:
         other: Membres passifs
 
       song:
-        one: Oeuvre
+        one: Œuvre
         many: Œuvres
         other: Œuvres
 
@@ -340,9 +340,9 @@ fr:
         other: Listes
 
       invoice_item/membership_fee:
-        one: Frais de membre
+        one: Cotisation
         many: Frais des membres
-        other: Frais des membres
+        other: Cotisations
 
     attributes:
       person:
