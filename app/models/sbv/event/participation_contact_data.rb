@@ -9,8 +9,8 @@ module Sbv::Event::ParticipationContactData
   extend ActiveSupport::Concern
 
   included do
-    Event::ParticipationContactData.contact_attrs << :correspondence_language
+    Event.possible_contact_attrs << :correspondence_language
 
-    delegate(*Event::ParticipationContactData.contact_attrs, to: :person)
+    delegate(*Event.possible_contact_attrs, to: :person)
   end
 end
