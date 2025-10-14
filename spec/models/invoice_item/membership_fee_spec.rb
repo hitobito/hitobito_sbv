@@ -27,10 +27,14 @@ describe InvoiceItem::MembershipFee do
     end
 
     context "with vorstands kassier as recipient" do
-      let(:recipient) { Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand).person }
+      let(:recipient) {
+        Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand).person
+      }
 
       context "using manually_counted_members" do
-        before { vorstand.layer_group.update(manually_counted_members: true, manual_member_count: 20) }
+        before {
+          vorstand.layer_group.update(manually_counted_members: true, manual_member_count: 20)
+        }
 
         it "returns correct amount" do
           expect(invoice_item.dynamic_cost).to eq(200) # 10 * 20
@@ -38,8 +42,22 @@ describe InvoiceItem::MembershipFee do
       end
 
       context "using automatic member count" do
-        let!(:member_groups) { (1..3).map { Fabricate(Group::VereinMitglieder.sti_name.to_sym, parent: verein) } }
-        let!(:member_roles) { member_groups.flat_map { |g| (1..20).map { Fabricate(Group::VereinMitglieder::Mitglied.sti_name.to_sym, group: g) } } }
+        let!(:member_groups) {
+          (1..3).map {
+         # rubocop:todo Layout/IndentationWidth
+         Fabricate(Group::VereinMitglieder.sti_name.to_sym, parent: verein)
+            # rubocop:enable Layout/IndentationWidth
+          }
+        }
+        let!(:member_roles) {
+          member_groups.flat_map { |g|
+                                (1..20).map { # rubocop:todo Layout/IndentationWidth
+         # rubocop:todo Layout/IndentationWidth
+         Fabricate(Group::VereinMitglieder::Mitglied.sti_name.to_sym, group: g)
+                                  # rubocop:enable Layout/IndentationWidth
+                                }
+          }
+        }
 
         it "returns correct amount" do
           expect(invoice_item.dynamic_cost).to eq(600) # 3 * 20 * 10
@@ -53,10 +71,14 @@ describe InvoiceItem::MembershipFee do
     end
 
     context "with vorstands praesident as recipient" do
-      let(:recipient) { Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand).person }
+      let(:recipient) {
+        Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand).person
+      }
 
       context "using manually_counted_members" do
-        before { vorstand.layer_group.update(manually_counted_members: true, manual_member_count: 20) }
+        before {
+          vorstand.layer_group.update(manually_counted_members: true, manual_member_count: 20)
+        }
 
         it "returns correct amount" do
           expect(invoice_item.dynamic_cost).to eq(200) # 10 * 20
@@ -64,8 +86,22 @@ describe InvoiceItem::MembershipFee do
       end
 
       context "using automatic member count" do
-        let!(:member_groups) { (1..3).map { Fabricate(Group::VereinMitglieder.sti_name.to_sym, parent: verein) } }
-        let!(:member_roles) { member_groups.flat_map { |g| (1..20).map { Fabricate(Group::VereinMitglieder::Mitglied.sti_name.to_sym, group: g) } } }
+        let!(:member_groups) {
+          (1..3).map {
+         # rubocop:todo Layout/IndentationWidth
+         Fabricate(Group::VereinMitglieder.sti_name.to_sym, parent: verein)
+            # rubocop:enable Layout/IndentationWidth
+          }
+        }
+        let!(:member_roles) {
+          member_groups.flat_map { |g|
+                                (1..20).map { # rubocop:todo Layout/IndentationWidth
+         # rubocop:todo Layout/IndentationWidth
+         Fabricate(Group::VereinMitglieder::Mitglied.sti_name.to_sym, group: g)
+                                  # rubocop:enable Layout/IndentationWidth
+                                }
+          }
+        }
 
         it "returns correct amount" do
           expect(invoice_item.dynamic_cost).to eq(600) # 3 * 20 * 10
@@ -82,7 +118,9 @@ describe InvoiceItem::MembershipFee do
       let(:recipient) { Fabricate(Group::Verein::Admin.sti_name.to_sym, group: verein).person }
 
       context "using manually_counted_members" do
-        before { vorstand.layer_group.update(manually_counted_members: true, manual_member_count: 20) }
+        before {
+          vorstand.layer_group.update(manually_counted_members: true, manual_member_count: 20)
+        }
 
         it "returns correct amount" do
           expect(invoice_item.dynamic_cost).to eq(200) # 10 * 20
@@ -90,8 +128,22 @@ describe InvoiceItem::MembershipFee do
       end
 
       context "using automatic member count" do
-        let!(:member_groups) { (1..3).map { Fabricate(Group::VereinMitglieder.sti_name.to_sym, parent: verein) } }
-        let!(:member_roles) { member_groups.flat_map { |g| (1..20).map { Fabricate(Group::VereinMitglieder::Mitglied.sti_name.to_sym, group: g) } } }
+        let!(:member_groups) {
+          (1..3).map {
+         # rubocop:todo Layout/IndentationWidth
+         Fabricate(Group::VereinMitglieder.sti_name.to_sym, parent: verein)
+            # rubocop:enable Layout/IndentationWidth
+          }
+        }
+        let!(:member_roles) {
+          member_groups.flat_map { |g|
+                                (1..20).map { # rubocop:todo Layout/IndentationWidth
+         # rubocop:todo Layout/IndentationWidth
+         Fabricate(Group::VereinMitglieder::Mitglied.sti_name.to_sym, group: g)
+                                  # rubocop:enable Layout/IndentationWidth
+                                }
+          }
+        }
 
         it "returns correct amount" do
           expect(invoice_item.dynamic_cost).to eq(600) # 3 * 20 * 10

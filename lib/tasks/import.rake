@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:todo Lint/MissingCopEnableDirective
+# rubocop:disable Metrics/BlockLength # rubocop:todo Lint/MissingCopEnableDirective
+# rubocop:enable Lint/MissingCopEnableDirective
 namespace :import do
   desc "Import more historic roles"
   task roles: [:environment] do

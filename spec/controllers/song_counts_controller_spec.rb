@@ -20,13 +20,17 @@ describe SongCountsController do
 
     it "exports csv" do
       get :index, params: {group_id: verein}, format: :csv
+      # rubocop:todo Layout/LineLength
       expect(flash[:notice]).to eq "Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen."
+      # rubocop:enable Layout/LineLength
       expect(response).to redirect_to group_concerts_path(verein)
     end
 
     it "exports xlsx" do
       get :index, params: {group_id: group}, format: :xlsx
+      # rubocop:todo Layout/LineLength
       expect(flash[:notice]).to eq "Export wird im Hintergrund gestartet und nach Fertigstellung heruntergeladen."
+      # rubocop:enable Layout/LineLength
       expect(response).to redirect_to group_song_censuses_path(group)
     end
   end

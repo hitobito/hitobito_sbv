@@ -6,7 +6,9 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 require "spec_helper"
+# rubocop:todo Layout/LineLength
 migration_file_name = Dir[Wagons.find("sbv").root.join("db/migrate/*_add_correspondence_language_to_person_by_layer.rb")].first
+# rubocop:enable Layout/LineLength
 require migration_file_name
 
 describe AddCorrespondenceLanguageToPersonByLayer do
@@ -97,8 +99,10 @@ describe AddCorrespondenceLanguageToPersonByLayer do
 
     it "covers each case in one test" do
       # Fabricate groups with and without language
-      group_with_language = Fabricate(:group, {correspondence_language: "de", type: "Group::Verein"})
-      group_without_language = Fabricate(:group, {correspondence_language: nil, type: "Group::Verein"})
+      group_with_language = Fabricate(:group,
+        {correspondence_language: "de", type: "Group::Verein"})
+      group_without_language = Fabricate(:group,
+        {correspondence_language: nil, type: "Group::Verein"})
 
       # Fabricate people with or without self or layer language
       person_with_layer_and_own_language = fabricate_person(true, group_with_language)
@@ -110,9 +114,13 @@ describe AddCorrespondenceLanguageToPersonByLayer do
       expect(person_with_layer_and_own_language.correspondence_language).to eq("it")
       expect(person_with_layer_and_own_language.primary_group.correspondence_language).to eq("de")
       expect(person_without_own_but_layer_language.correspondence_language).to eq(nil)
+      # rubocop:todo Layout/LineLength
       expect(person_without_own_but_layer_language.primary_group.correspondence_language).to eq("de")
+      # rubocop:enable Layout/LineLength
       expect(person_with_but_layer_without_language.correspondence_language).to eq("it")
+      # rubocop:todo Layout/LineLength
       expect(person_with_but_layer_without_language.primary_group.correspondence_language).to eq(nil)
+      # rubocop:enable Layout/LineLength
       expect(person_and_layer_without_language.correspondence_language).to eq(nil)
       expect(person_and_layer_without_language.primary_group.correspondence_language).to eq(nil)
 
@@ -131,11 +139,15 @@ describe AddCorrespondenceLanguageToPersonByLayer do
 
       # Expect this case to update the person language according the layers one
       expect(person_without_own_but_layer_language.correspondence_language).to eq("de")
+      # rubocop:todo Layout/LineLength
       expect(person_without_own_but_layer_language.primary_group.correspondence_language).to eq("de")
+      # rubocop:enable Layout/LineLength
 
       # Expect language from person not to be overwritten by nil from the layer language
       expect(person_with_but_layer_without_language.correspondence_language).to eq("it")
+      # rubocop:todo Layout/LineLength
       expect(person_with_but_layer_without_language.primary_group.correspondence_language).to eq(nil)
+      # rubocop:enable Layout/LineLength
 
       # Expect nothing to change when neither layer nor person have languages
       expect(person_and_layer_without_language.correspondence_language).to eq(nil)

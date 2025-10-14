@@ -22,7 +22,9 @@ describe InvoiceLists::VereinMembershipFeeRecipientFinder do
 
     context "with verein vorstand" do
       context "with only kassier role" do
-        let!(:kassier_role) { Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand) }
+        let!(:kassier_role) {
+          Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand)
+        }
 
         it "finds kassier role" do
           expect(subject).to eq(kassier_role)
@@ -30,7 +32,9 @@ describe InvoiceLists::VereinMembershipFeeRecipientFinder do
       end
 
       context "with only praesident role" do
-        let!(:praesident_role) { Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand) }
+        let!(:praesident_role) {
+          Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand)
+        }
 
         it "finds praesident role" do
           expect(subject).to eq(praesident_role)
@@ -39,8 +43,12 @@ describe InvoiceLists::VereinMembershipFeeRecipientFinder do
 
       context "with admin, kassier and praesident role" do
         let!(:admin_role) { Fabricate(Group::Verein::Admin.sti_name.to_sym, group: verein) }
-        let!(:kassier_role) { Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand) }
-        let!(:praesident_role) { Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand) }
+        let!(:kassier_role) {
+          Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand)
+        }
+        let!(:praesident_role) {
+          Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand)
+        }
 
         it "finds kassier role" do
           expect(subject).to eq(kassier_role)
@@ -48,8 +56,12 @@ describe InvoiceLists::VereinMembershipFeeRecipientFinder do
       end
 
       context "with kassier and praesident role" do
-        let!(:kassier_role) { Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand) }
-        let!(:praesident_role) { Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand) }
+        let!(:kassier_role) {
+          Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand)
+        }
+        let!(:praesident_role) {
+          Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand)
+        }
 
         it "finds kassier role" do
           expect(subject).to eq(kassier_role)
@@ -58,7 +70,9 @@ describe InvoiceLists::VereinMembershipFeeRecipientFinder do
 
       context "with admin and kassier role" do
         let!(:admin_role) { Fabricate(Group::Verein::Admin.sti_name.to_sym, group: verein) }
-        let!(:kassier_role) { Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand) }
+        let!(:kassier_role) {
+          Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand)
+        }
 
         it "finds kassier role" do
           expect(subject).to eq(kassier_role)
@@ -67,7 +81,9 @@ describe InvoiceLists::VereinMembershipFeeRecipientFinder do
 
       context "with admin and praesident role" do
         let!(:admin_role) { Fabricate(Group::Verein::Admin.sti_name.to_sym, group: verein) }
-        let!(:praesident_role) { Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand) }
+        let!(:praesident_role) {
+          Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand)
+        }
 
         it "finds praesident role" do
           expect(subject).to eq(praesident_role)
@@ -80,8 +96,12 @@ describe InvoiceLists::VereinMembershipFeeRecipientFinder do
     subject { InvoiceLists::VereinMembershipFeeRecipientFinder.find_verein(recipient.id) }
 
     let!(:admin_role) { Fabricate(Group::Verein::Admin.sti_name.to_sym, group: verein) }
-    let!(:kassier_role) { Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand) }
-    let!(:praesident_role) { Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand) }
+    let!(:kassier_role) {
+      Fabricate(Group::VereinVorstand::Kassier.sti_name.to_sym, group: vorstand)
+    }
+    let!(:praesident_role) {
+      Fabricate(Group::VereinVorstand::Praesident.sti_name.to_sym, group: vorstand)
+    }
 
     context "for admin role" do
       let(:recipient) { admin_role.person }

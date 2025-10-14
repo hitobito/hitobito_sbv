@@ -21,10 +21,14 @@ describe Group::Verein do
   end
 
   context "recognized_members" do
-    let(:verein) { described_class.create(name: "Dummy Verein", parent: Group::Root.first, created_at: Time.zone.now) }
+    let(:verein) {
+      described_class.create(name: "Dummy Verein", parent: Group::Root.first,
+        created_at: Time.zone.now)
+    }
 
     before do
-      mitglieder = Group::VereinMitglieder.create!(name: "dummy", parent: verein, deleted_at: Time.zone.now)
+      mitglieder = Group::VereinMitglieder.create!(name: "dummy", parent: verein,
+        deleted_at: Time.zone.now)
 
       10.times.each do |i|
         p = Fabricate(:person)
