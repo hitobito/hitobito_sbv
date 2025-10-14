@@ -31,7 +31,8 @@ describe SongCensusesController do
     before do
       sign_in(people(:suisa_admin))
 
-      Fabricate(Group::Regionalverband::SuisaAdmin.name.to_sym, group: group, person: people(:suisa_admin))
+      Fabricate(Group::Regionalverband::SuisaAdmin.name.to_sym, group: group,
+        person: people(:suisa_admin))
       2.times { Fabricate(Group::Verein::SuisaAdmin.name.to_sym, group: verein1) }
       Fabricate(Group::Verein::SuisaAdmin.name.to_sym, group: verein2)
     end

@@ -57,7 +57,8 @@ describe Export::Tabular::Groups::Row do
 
     describe "recognized_members" do
       before do
-        mitglieder = Group::VereinMitglieder.create!(name: "dummy", parent: group, deleted_at: Time.zone.now)
+        mitglieder = Group::VereinMitglieder.create!(name: "dummy", parent: group,
+          deleted_at: Time.zone.now)
 
         10.times.each do |i|
           p = Fabricate(:person)

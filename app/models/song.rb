@@ -23,8 +23,10 @@ class Song < ActiveRecord::Base
   scope :list, -> { order(:title) }
 
   validates_by_schema
+  # rubocop:todo Rails/UniqueValidationWithoutIndex
   validates :title, uniqueness: {scope: [:composed_by, :arranged_by, :published_by],
                                  case_sensitive: true}
+  # rubocop:enable Rails/UniqueValidationWithoutIndex
 
   def to_s
     title

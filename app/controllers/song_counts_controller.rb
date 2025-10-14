@@ -60,7 +60,9 @@ class SongCountsController < SimpleCrudController
       .joins(:concert, :song)
       .preload(:song)
       .group(:song_id)
+      # rubocop:todo Layout/LineLength
       .select("MAX(song_counts.id), song_id, MAX(song_counts.year), SUM(count) AS count, MAX(concert_id)")
+      # rubocop:enable Layout/LineLength
       .in(year)
       .order("MAX(songs.title)")
 

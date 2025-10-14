@@ -24,7 +24,8 @@ describe HistoryRolesController do
       post :create, params: {group_id: group.id, role: role_params}
     end.not_to change { leader.roles.count }
     expect(leader.reload.active_years).to be_nil
-    expect(flash[:alert].sort).to eq ["Austritt ist kein gültiges Datum", "Eintritt ist kein gültiges Datum"]
+    expect(flash[:alert].sort).to eq ["Austritt ist kein gültiges Datum",
+      "Eintritt ist kein gültiges Datum"]
   end
 
   it "POST#create is not allowed for normal members" do
@@ -126,7 +127,9 @@ describe HistoryRolesController do
 
     expect(role.person.active_years).to eq 0
 
+    # rubocop:todo Layout/LineLength
     expect(flash[:notice]).to match(/Verantwortlicher SUISA \(bis \d{2}\.\d{2}\.\d{4}\) wurde erfolgreich gelöscht./)
+    # rubocop:enable Layout/LineLength
     expect(response).to redirect_to(group_path(role.group))
   end
 end

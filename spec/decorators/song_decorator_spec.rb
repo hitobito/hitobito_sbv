@@ -18,7 +18,9 @@ describe SongDecorator, :draper_with_helpers do
 
     context "escapes js and does not show null value" do
       its(:full_label) do
+        # rubocop:todo Layout/LineLength
         is_expected.to eql "<strong>bar</strong> <span class=\"muted\">foo | &lt;script&gt;alert(&#39;test&#39;)&lt;/script&gt;</span>"
+        # rubocop:enable Layout/LineLength
       end
     end
   end

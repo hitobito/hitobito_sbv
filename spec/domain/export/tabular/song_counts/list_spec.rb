@@ -20,7 +20,8 @@ describe Export::Tabular::SongCounts::List do
     let(:list) { groups(:musikgesellschaft_aarberg).song_counts.order(:concert_id) }
 
     its(:headers) do
-      is_expected.to eql ["Anzahl", "Titel", "Komponist", "Arrangeur", "Verlag", "SUISA-ID", "Verein", "Vereins ID"]
+      is_expected.to eql ["Anzahl", "Titel", "Komponist", "Arrangeur", "Verlag", "SUISA-ID",
+        "Verein", "Vereins ID"]
     end
 
     it "has 2 items" do
@@ -58,7 +59,8 @@ describe Export::Tabular::SongCounts::List do
     let(:list) { groups(:hauptgruppe_1).song_counts.order(:concert_id) }
 
     its(:headers) do
-      is_expected.to eql ["Anzahl", "Titel", "Komponist", "Arrangeur", "Verlag", "SUISA-ID", "Verein und Ort"]
+      is_expected.to eql ["Anzahl", "Titel", "Komponist", "Arrangeur", "Verlag", "SUISA-ID",
+        "Verein und Ort"]
     end
 
     it "has 4 items" do

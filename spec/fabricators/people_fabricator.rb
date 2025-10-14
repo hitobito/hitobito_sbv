@@ -4,7 +4,8 @@
 #  https://github.com/hitobito/hitobito.
 
 # Rename person Faker for overwrite purpose
-Fabrication.manager.schematics[:person_without_birthday] = Fabrication.manager.schematics.delete(:person)
+Fabrication.manager.schematics[:person_without_birthday] =
+  Fabrication.manager.schematics.delete(:person)
 
 Fabricator(:person, from: :person_without_birthday) do
   birthday { Faker::Date.birthday }

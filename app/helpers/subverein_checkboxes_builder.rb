@@ -43,7 +43,8 @@ class SubvereinCheckboxesBuilder
 
   private
 
-  def vereine_nesting
+  # rubocop:todo Metrics/MethodLength
+  def vereine_nesting # rubocop:todo Metrics/AbcSize # rubocop:todo Metrics/MethodLength
     subvereine.without_deleted.includes([:parent])
       .group_by(&:parent_id)
       .values.each_with_object({}) do |vereine_by_parent, global_nesting|
@@ -63,6 +64,7 @@ class SubvereinCheckboxesBuilder
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def create_vereine_nesting(group)
     parent = Array.wrap(group).first.parent
@@ -79,7 +81,7 @@ class SubvereinCheckboxesBuilder
     end
   end
 
-  def nested_verein_checkboxes(hash)
+  def nested_verein_checkboxes(hash) # rubocop:todo Metrics/MethodLength
     safe_join(hash.map do |parent, vereine_or_nested_structure|
       content_tag(:div, class: "verein_fee_nesting mb-3") do
         content = ActiveSupport::SafeBuffer.new
@@ -99,7 +101,7 @@ class SubvereinCheckboxesBuilder
     end, "")
   end
 
-  def verein_checkbox(verein)
+  def verein_checkbox(verein) # rubocop:todo Metrics/MethodLength
     content_tag(:div, class: "control-group mb-1") do
       recipient = InvoiceLists::VereinMembershipFeeRecipientFinder.find_recipient(verein.id)
       info_key = recipient&.class&.sti_name&.parameterize || "no_recipient"
