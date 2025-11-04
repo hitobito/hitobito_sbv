@@ -6,5 +6,5 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 module HitobitoSbv
-  VERSION = "2.6.8"
+  VERSION = "2.7.0"
 end
