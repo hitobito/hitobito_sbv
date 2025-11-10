@@ -13,7 +13,7 @@ module Export::Tabular::Groups
       %w[
         name type mitgliederverband regionalverband
         secondary_parent tertiary_parent
-        email contact contact_email address zip_code town country
+        email contact contact_email address_care_of address postbox zip_code town country
         besetzung klasse unterhaltungsmusik
         correspondence_language subventionen founding_year recognized_members
         suisa_status
