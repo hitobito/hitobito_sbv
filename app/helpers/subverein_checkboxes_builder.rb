@@ -103,7 +103,7 @@ class SubvereinCheckboxesBuilder
 
   def verein_checkbox(verein) # rubocop:todo Metrics/MethodLength
     content_tag(:div, class: "control-group mb-1") do
-      recipient = InvoiceLists::VereinMembershipFeeRecipientFinder.find_recipient(verein.id)
+      recipient = InvoiceRuns::VereinMembershipFeeRecipientFinder.find_recipient(verein.id)
       info_key = recipient&.class&.sti_name&.parameterize || "no_recipient"
       info_text = I18n.t("#{I18N_PREFIX}.info.#{info_key}")
       label_tag(nil, class: "checkbox", title: info_text) do

@@ -31,7 +31,7 @@ class InvoiceItem::MembershipFee < InvoiceItem
   end
 
   def member_count_for_dynamic_cost(recipient_id, cutoff_date)
-    layer = InvoiceLists::VereinMembershipFeeRecipientFinder.find_verein(recipient_id)
+    layer = InvoiceRuns::VereinMembershipFeeRecipientFinder.find_verein(recipient_id)
 
     if layer.uses_manually_counted_members?
       layer.manual_member_count
