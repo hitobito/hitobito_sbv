@@ -84,7 +84,7 @@ de:
   groups:
     actions_show_sbv:
       export_lohnsummen: Export UV Lohnsummen
-      create_verein_invoice_list: Vereinsrechnungen erstellen
+      create_verein_invoice_run: Vereinsrechnungen erstellen
     subverein_select_modal:
       select_all: Alle Vereine an-/abwählen
       submit: Zum Rechnungsformular

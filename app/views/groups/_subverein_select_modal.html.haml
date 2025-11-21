@@ -8,10 +8,10 @@
     .modal-content
       .modal-header
         %h5.bold.modal-title
-          %b= t('groups.actions_show_sbv.create_verein_invoice_list')
+          %b= t('groups.actions_show_sbv.create_verein_invoice_run')
 
       = standard_form(entry,
-        url: new_group_invoice_list_path(group_id: entry) , method: :get) do |f|
+        url: new_group_invoice_run_path(group_id: entry) , method: :get) do |f|
         .modal-body
           .row-fluid
             = hidden_field_tag('invoice_items[]', [:membership_fee])
