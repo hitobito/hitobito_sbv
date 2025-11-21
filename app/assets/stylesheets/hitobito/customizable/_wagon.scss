@@ -75,7 +75,7 @@
 }
 
 #invoice_items_fields
-  input[name="invoice_list[invoice][invoice_items_attributes][0][dynamic_cost_parameters][amount]"] {
+  input[name="invoice_run[invoice][invoice_items_attributes][0][dynamic_cost_parameters][amount]"] {
   width: 56px;
 }
 

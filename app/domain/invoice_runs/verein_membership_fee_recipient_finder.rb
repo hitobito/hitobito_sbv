@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
 
-class InvoiceLists::VereinMembershipFeeRecipientFinder
+class InvoiceRuns::VereinMembershipFeeRecipientFinder
   def self.find_recipient(verein_id)
     vorstand_id = Group::VereinVorstand.find_by(parent_id: verein_id)&.id
     admin_role = Group::Verein::Admin.find_by(group_id: verein_id)
