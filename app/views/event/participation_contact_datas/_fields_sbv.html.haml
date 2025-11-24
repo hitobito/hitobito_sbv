@@ -6,7 +6,7 @@
 
 
 = field_set_tag do
-  - if entry.show_attr?(:correspondence_language)
+  - if event.show_contact_attr?(:correspondence_language)
     = f.labeled_collection_select(:correspondence_language,
                                   Settings.application.languages.to_hash,
                                   :first,
