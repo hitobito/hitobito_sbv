@@ -25,3 +25,6 @@ rubocop-results.xml
 .pry_history
 db/seeds/production/*.csv
 NOTES
+
+db/schema.rb
+db/schema.rb.diff
