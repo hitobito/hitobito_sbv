@@ -77,7 +77,7 @@ fr:
   groups:
     actions_show_sbv:
       export_lohnsummen: Export des salaires AA
-      create_verein_invoice_run: Préparer les factures de la société
+      create_verein_invoice_run: Vereinsrechnungen erstellen
     subverein_select_modal:
       select_all: Sélectionner/désélectionner toutes les sociétés
       submit: vers le formulaire de facture
