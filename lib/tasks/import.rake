@@ -111,7 +111,7 @@ namespace :import do
           town: choir["Ort"],
           zip_code: choir["PLZ"],
           country: choir["Land"],
-          correspondence_language: sprachen.key(choir["Sprache der Person"].titlecase)
+          language: sprachen.key(choir["Sprache der Person"].titlecase)
         }
 
         Group::Verein.seed_once(:name, :parent_id, vereins_attrs)

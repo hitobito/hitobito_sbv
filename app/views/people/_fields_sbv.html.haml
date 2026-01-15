@@ -4,7 +4,6 @@
 -#  https://github.com/hitobito/hitobito_sbv.
 
 = field_set_tag do
-  = f.labeled_collection_select :correspondence_language, Settings.application.correspondence_languages.to_hash, :first, :last, {}, class: 'form-select form-select-sm'
   = f.labeled_input_fields :profession
 
 = field_set_tag do

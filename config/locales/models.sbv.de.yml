@@ -274,7 +274,9 @@ de:
 
     attributes:
       person:
-        correspondence_language: Korrespondenzsprache
+        language: Korrespondenzsprache
+        languages:
+          rm: Rumantsch
         profession: Beruf
         active_years: Aktivjahre aktuell
         active_role: aktive Mitgliedschaft
@@ -328,7 +330,7 @@ de:
         dates: Daten
         start_on: Eintritt
         end_on: Austritt
-        correspondence_language: Korrespondenz Sprache
+        language: Korrespondenz Sprache
         class:
           permission:
             description:

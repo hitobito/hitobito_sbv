@@ -49,8 +49,7 @@ module HitobitoSbv
         :subventionen, :hostname,
         :buv_lohnsumme, :nbuv_lohnsumme, :manual_member_count]
 
-      PeopleController.permitted_attrs += [:profession, :correspondence_language,
-        :personal_data_usage]
+      PeopleController.permitted_attrs += [:profession, :personal_data_usage]
 
       Person::HistoryController.prepend Sbv::Person::HistoryController
       DeviseController.include HostnamedGroups

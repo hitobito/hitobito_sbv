@@ -27,8 +27,10 @@ module Sbv::GroupsHelper
   end
 
   def format_correspondence_language(verein)
-    Settings.application.correspondence_languages
-      .to_h.stringify_keys[verein.correspondence_language.to_s]
+    Settings.application.languages
+      .to_hash
+      .merge(Settings.application.additional_languages&.to_hash || {})
+      .stringify_keys[verein.correspondence_language.to_s]
   end
 
   def format_unterhaltungsmusik(verein)
