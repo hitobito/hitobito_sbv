@@ -30,8 +30,10 @@ module Sbv
           end
 
           def correspondence_language
-            Settings.application.correspondence_languages
-              .to_h.stringify_keys[entry.correspondence_language.to_s]
+            Settings.application.languages
+              .to_hash
+              .merge(Settings.application.additional_languages&.to_hash || {})
+              .stringify_keys[entry.correspondence_language.to_s]
           end
 
           def contact_email

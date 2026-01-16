@@ -21,6 +21,9 @@ module Sbv::RolesHelper
   private
 
   def supported_languages
-    Settings.application.correspondence_languages.to_hash.invert
+    Settings.application.languages
+      .to_hash
+      .merge(Settings.application.additional_languages&.to_hash || {})
+      .invert
   end
 end

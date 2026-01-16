@@ -11,22 +11,8 @@ module Sbv::Person
   included do
     include Person::ActiveYears
 
-    Person::PUBLIC_ATTRS << :correspondence_language << :personal_data_usage
-
-    # original validations, commented for https://github.com/hitobito/hitobito_sbv/issues/125
-    # revert commit later to restore original behaviour
-    #
-    # validates :first_name, :last_name, :birthday, :correspondence_language, presence: true
-    #
-    # validates :correspondence_language, inclusion: {
-    #   in: Settings.application.correspondence_languages.to_h.keys.map(&:to_s)
-    # }
+    Person::PUBLIC_ATTRS << :personal_data_usage
 
     validates :first_name, :last_name, presence: true
-
-    validates :correspondence_language, inclusion: {
-      in: Settings.application.correspondence_languages.to_h.keys.map(&:to_s),
-      allow_blank: true
-    }
   end
 end
