@@ -9,5 +9,5 @@ Fabrication.manager.schematics[:person_without_birthday] =
 
 Fabricator(:person, from: :person_without_birthday) do
   birthday { Faker::Date.birthday }
-  correspondence_language { "de" }
+  language { "de" }
 end
