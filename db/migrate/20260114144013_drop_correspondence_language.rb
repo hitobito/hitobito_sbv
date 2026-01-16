@@ -7,7 +7,8 @@ class DropCorrespondenceLanguage < ActiveRecord::Migration[8.0]
   def up
     execute <<-SQL
       UPDATE people
-      SET language = correspondence_language;
+      SET language = correspondence_language
+      WHERE correspondence_language IS NOT NULL;
     SQL
     remove_column :people, :correspondence_language
   end
