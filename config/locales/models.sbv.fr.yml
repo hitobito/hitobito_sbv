@@ -346,7 +346,9 @@ fr:
 
     attributes:
       person:
-        language: Langue de correspondance
+        language: Korrespondenzsprache
+        languages:
+          rm: Rumantsch
         profession: Profession
         active_years: Années d'activité actuelles
         active_role: adhésion active
@@ -400,7 +402,7 @@ fr:
         dates: Données
         start_on: Entrée
         end_on: Sortie
-        language: Langue de correspondance
+        language: Korrespondenz Sprache
         class:
           permission:
             description:
