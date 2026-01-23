@@ -22,7 +22,7 @@ class AddCorrespondenceLanguageToPersonByLayer < ActiveRecord::Migration[6.0]
 
   def people_without_language
     say_with_time('gathering people who do not have a language set') do
-      supported_languages = Settings.application.correspondence_languages.to_h.keys.map(&:to_s)
+      supported_languages = Settings.application.languages.to_hash.merge(Settings.application.additional_languages&.to_hash || {}).keys.map(&:to_s)
       Person.where("people.correspondence_language NOT IN (?) OR people.correspondence_language IS NULL", supported_languages)
     end
   end
