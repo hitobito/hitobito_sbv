@@ -35,7 +35,7 @@ app.SongCounts = {
     $(":input[data-updater='SongCounts.add']")[0].value = ''
 
   new: (song) ->
-    $('.add_nested_fields').first().click() # add new lineitem
+    document.querySelector('[data-action="nested-form#add"]').click() # add new lineitem
     fields = $('#song_counts_fields .fields').last().find('input, label')
     fields.each (idx, elm) ->
       if elm.name
