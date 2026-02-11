@@ -36,7 +36,7 @@
 
 #song-counts-form {
   position: relative;
-  .add_nested_fields {
+  [data-action="nested-form#add"] {
     display: none;
   }
   .dec_song_count,
