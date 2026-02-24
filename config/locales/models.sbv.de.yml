@@ -275,8 +275,6 @@ de:
     attributes:
       person:
         language: Korrespondenzsprache
-        languages:
-          rm: Rumantsch
         profession: Beruf
         active_years: Aktivjahre aktuell
         active_role: aktive Mitgliedschaft

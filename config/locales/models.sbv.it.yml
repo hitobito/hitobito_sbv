@@ -334,8 +334,6 @@ it:
     attributes:
       person:
         language: Korrespondenzsprache
-        languages:
-          rm: Rumantsch
         profession: Lavoro
         active_years: Anni attivi fino ad oggi
         active_role: appartenenza attiva
