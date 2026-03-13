@@ -29,11 +29,11 @@ module Sbv
             translated_label(:unterhaltungsmusik)
           end
 
-          def correspondence_language
+          def language
             Settings.application.languages
               .to_hash
               .merge(Settings.application.additional_languages&.to_hash || {})
-              .stringify_keys[entry.correspondence_language.to_s]
+              .stringify_keys[entry.language.to_s]
           end
 
           def contact_email

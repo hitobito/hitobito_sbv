@@ -348,7 +348,7 @@ it:
         besetzung_value: Formazione
         unterhaltungsmusik: Musica d'intrattenimento
         unterhaltungsmusik_value: Musica d'intrattenimento
-        correspondence_language: Lingua di corrispondenza
+        language: Lingua di corrispondenza
         subventionen: Sovvenzioni
         recognized_members: Membri recensiti
         manual_member_count: Mitglieder (manuell)
