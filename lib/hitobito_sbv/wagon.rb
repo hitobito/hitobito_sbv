@@ -43,8 +43,7 @@ module HitobitoSbv
 
       ### controllers
       GroupsController.permitted_attrs += [:vereinssitz, :founding_year,
-        :correspondence_language, :besetzung,
-        :klasse, :unterhaltungsmusik,
+        :besetzung, :klasse, :unterhaltungsmusik,
         :secondary_parent_id, :tertiary_parent_id,
         :subventionen, :hostname,
         :buv_lohnsumme, :nbuv_lohnsumme, :manual_member_count]

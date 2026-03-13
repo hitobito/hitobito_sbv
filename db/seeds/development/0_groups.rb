@@ -35,7 +35,7 @@ def build_verein_attrs(parent_id, name, besetzung, lang)
     housenumber: Faker::Address.building_number,
     zip_code: Faker::Address.zip[0..3],
     town: Faker::Address.city,
-    correspondence_language: lang,
+    language: lang.downcase
   }
 
   if besetzung

@@ -11,18 +11,11 @@ describe Sbv::RolesHelper do
   describe "#default_language_for_person" do
     let(:group) { groups(:hauptgruppe_1) }
 
-    it "returns predefined language for group if preset" do
-      group.correspondence_language = "de"
+    it "returns group language" do
+      group.language = "rm"
       language = default_language_for_person(group)
 
-      expect(language).to eq("de")
-    end
-
-    it "returns predefined languages if language not set" do
-      group.correspondence_language = nil
-      language = default_language_for_person(group)
-
-      expect(language).to eq(["Deutsch", :de])
+      expect(language).to eq("rm")
     end
   end
 end

@@ -13,9 +13,7 @@ module Sbv::RolesHelper
   end
 
   def default_language_for_person(group)
-    return supported_languages.first if group.correspondence_language.nil?
-
-    group.correspondence_language
+    group.language
   end
 
   private

@@ -32,7 +32,6 @@
 #  require_person_add_requests :boolean          default(FALSE), not null
 #  vereinssitz                 :string(255)
 #  founding_year               :integer
-#  correspondence_language     :string(5)
 #  besetzung                   :string(255)
 #  klasse                      :string(255)
 #  unterhaltungsmusik          :string(255)
@@ -61,7 +60,6 @@ class Group::Verein < ::Group
     Group::VereinKontakte
 
   self.used_attributes += [:founding_year,
-    :correspondence_language,
     :besetzung,
     :klasse,
     :unterhaltungsmusik,

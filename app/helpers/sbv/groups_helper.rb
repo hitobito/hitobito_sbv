@@ -26,11 +26,11 @@ module Sbv::GroupsHelper
     field_set_tag(title, class: "group-fields", style: element_visible(visible)) { yield }
   end
 
-  def format_correspondence_language(verein)
+  def format_language(verein)
     Settings.application.languages
       .to_hash
       .merge(Settings.application.additional_languages&.to_hash || {})
-      .stringify_keys[verein.correspondence_language.to_s]
+      .stringify_keys[verein.language.to_s]
   end
 
   def format_unterhaltungsmusik(verein)

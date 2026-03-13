@@ -18,8 +18,8 @@ describe Export::Tabular::Groups::Row do
       expect(row.fetch(:unterhaltungsmusik)).to be_blank
     end
 
-    it "returns nil for correspondence_language" do
-      expect(row.fetch(:correspondence_language)).to be_blank
+    it "returns default language for language" do
+      expect(row.fetch(:language)).to eq "Deutsch"
     end
   end
 
@@ -32,8 +32,8 @@ describe Export::Tabular::Groups::Row do
       expect(row.fetch(:unterhaltungsmusik)).to eq "unbekannt"
     end
 
-    it "returns nil for correspondence_language" do
-      expect(row.fetch(:correspondence_language)).to be_blank
+    it "returns default language for language" do
+      expect(row.fetch(:language)).to eq "Deutsch"
     end
   end
 
@@ -42,7 +42,7 @@ describe Export::Tabular::Groups::Row do
       Group::Verein.new(klasse: :erste,
         unterhaltungsmusik: :oberstufe,
         besetzung: :brass_band,
-        correspondence_language: :de)
+        language: :fr)
     }
 
     it "returns translated values for I18nEnum attributes" do
@@ -51,8 +51,8 @@ describe Export::Tabular::Groups::Row do
       expect(row.fetch(:unterhaltungsmusik)).to eq "Oberstufe"
     end
 
-    it "returns Deutsch for correspondence_language" do
-      expect(row.fetch(:correspondence_language)).to eq "Deutsch"
+    it "returns french for language" do
+      expect(row.fetch(:language)).to eq "Französisch"
     end
 
     describe "recognized_members" do
