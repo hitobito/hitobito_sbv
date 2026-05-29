@@ -27,7 +27,7 @@ module Sbv
           end
 
           included do
-            alias_method :"person_attributes_without_instrument", :person_attributes
+            alias_method :person_attributes_without_instrument, :person_attributes
             alias_method :person_attributes, :person_attributes_with_instrument
           end
 

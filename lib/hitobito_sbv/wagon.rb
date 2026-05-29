@@ -85,10 +85,16 @@ module HitobitoSbv
 
       Export::Tabular::Groups::Row.include Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.prepend Sbv::Export::Tabular::Groups::List
-      Export::Tabular::People::PeopleAddress.include Sbv::Export::Tabular::People::InstrumentAttribute
-      Export::Tabular::People::Households.include Sbv::Export::Tabular::People::InstrumentAttribute
+      Export::Tabular::People::PeopleAddress.include(
+        Sbv::Export::Tabular::People::InstrumentAttribute
+      )
+      Export::Tabular::People::Households.include(
+        Sbv::Export::Tabular::People::InstrumentAttribute
+      )
       Export::Tabular::People::PeopleFull.include Sbv::Export::Tabular::People::PeopleFull
-      Export::Tabular::People::TableDisplays.prepend Sbv::Export::Tabular::People::TableDisplaysExtension
+      Export::Tabular::People::TableDisplays.prepend(
+        Sbv::Export::Tabular::People::TableDisplaysExtension
+      )
 
       MailRelay::Lists.prepend Sbv::MailRelay::Lists
 

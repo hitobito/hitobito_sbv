@@ -25,8 +25,9 @@ describe Export::Pdf::List::People do
 
   it "renders the instrument column" do
     people.first.update!(instrument: "Trompete")
-    expect(PDF::Inspector::Text.analyze(Export::Pdf::List.render(people, group)).show_text.compact.join(" "))
-      .to include(::Person.human_attribute_name(:instrument), "Trompete")
+    pdf = Export::Pdf::List.render(people, group)
+    text = PDF::Inspector::Text.analyze(pdf).show_text.compact.join(" ")
+    expect(text).to include(::Person.human_attribute_name(:instrument), "Trompete")
   end
 
   it "creates a pdf" do
