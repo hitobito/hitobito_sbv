@@ -335,6 +335,7 @@ it:
       person:
         language: Korrespondenzsprache
         profession: Lavoro
+        instrument: Strumento
         active_years: Anni attivi fino ad oggi
         active_role: appartenenza attiva
         prognostic_active_years: Stima anni attivi

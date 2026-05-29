@@ -23,6 +23,12 @@ describe Export::Pdf::List::People do
     expect(pdf_text).to match(/My Member/)
   end
 
+  it "renders the instrument column" do
+    people.first.update!(instrument: "Trompete")
+    expect(PDF::Inspector::Text.analyze(Export::Pdf::List.render(people, group)).show_text.compact.join(" "))
+      .to include(::Person.human_attribute_name(:instrument), "Trompete")
+  end
+
   it "creates a pdf" do
     is_expected.to start_with("%PDF-1.3")
   end

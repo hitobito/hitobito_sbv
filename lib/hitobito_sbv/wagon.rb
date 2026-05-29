@@ -48,7 +48,7 @@ module HitobitoSbv
         :subventionen, :hostname,
         :buv_lohnsumme, :nbuv_lohnsumme, :manual_member_count]
 
-      PeopleController.permitted_attrs += [:profession, :personal_data_usage]
+      PeopleController.permitted_attrs += [:profession, :instrument, :personal_data_usage]
 
       Person::HistoryController.prepend Sbv::Person::HistoryController
       DeviseController.include HostnamedGroups
@@ -85,17 +85,19 @@ module HitobitoSbv
 
       Export::Tabular::Groups::Row.include Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.prepend Sbv::Export::Tabular::Groups::List
+      Export::Tabular::People::PeopleAddress.include Sbv::Export::Tabular::People::InstrumentAttribute
+      Export::Tabular::People::Households.include Sbv::Export::Tabular::People::InstrumentAttribute
       Export::Tabular::People::PeopleFull.include Sbv::Export::Tabular::People::PeopleFull
+      Export::Tabular::People::TableDisplays.prepend Sbv::Export::Tabular::People::TableDisplaysExtension
 
       MailRelay::Lists.prepend Sbv::MailRelay::Lists
 
-      additional_person_attrs = [
-        :active_years
-      ]
+      # :instrument is registered via Person::PUBLIC_ATTRS in config/initializers/table_displays.rb
+      TableDisplay.register_column(Person, TableDisplays::ShowDetailsColumn, :active_years)
 
-      TableDisplay.register_column(Person,
-        TableDisplays::ShowDetailsColumn,
-        additional_person_attrs)
+      TableDisplay.register_column(Event::Participation,
+        TableDisplays::Event::Participations::ShowDetailsOrEventLeaderColumn,
+        ["participant.instrument"])
 
       ### abilities
       RoleAbility.include Sbv::RoleAbility

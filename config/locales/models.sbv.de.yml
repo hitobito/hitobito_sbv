@@ -276,6 +276,7 @@ de:
       person:
         language: Korrespondenzsprache
         profession: Beruf
+        instrument: Instrument
         active_years: Aktivjahre aktuell
         active_role: aktive Mitgliedschaft
         prognostic_active_years: Aktivjahre Prognose

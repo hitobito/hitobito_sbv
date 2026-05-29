@@ -348,6 +348,7 @@ fr:
       person:
         language: Korrespondenzsprache
         profession: Profession
+        instrument: Instrument
         active_years: Années d'activité actuelles
         active_role: adhésion active
         prognostic_active_years: Années d'activité - projection

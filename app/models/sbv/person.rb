@@ -11,7 +11,7 @@ module Sbv::Person
   included do
     include Person::ActiveYears
 
-    Person::PUBLIC_ATTRS << :personal_data_usage
+    Person::PUBLIC_ATTRS << :personal_data_usage << :instrument
 
     validates :first_name, :last_name, presence: true
   end

@@ -11,7 +11,7 @@ namespace :export do
     dachverband = Group.find(1)
 
     extractor = DataExtraction.new("tmp/all-members.csv", ENV["RAILS_DB_NAME"])
-    extractor.headers = "vorname,nachname,hauptgruppe,email,korrespondenzsprache"
+    extractor.headers = "vorname,nachname,instrument,hauptgruppe,email,korrespondenzsprache"
 
     language_sql = Settings.application.languages.to_h
       .merge(Settings.application.additional_languages&.to_hash || {})
@@ -22,6 +22,7 @@ namespace :export do
     extractor.query("people", <<-FIELD_SQL, <<-CONDITION_SQL)
       people.first_name,
       people.last_name,
+      people.instrument,
       layer_groups.name AS primary_group,
       people.email,
       CASE people.language

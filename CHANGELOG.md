@@ -1,5 +1,9 @@
 # Hitobito SBV Changelog
 
+## Version 1.28
+
+* Neues Personenfeld «Instrument» in allen Personen-Exporten mit Namen (inkl. Spaltenauswahl und Alle Angaben)
+
 ## Version 1.27
 
 * Neue Rolle Jugendverantwortlicher auf Verein (hitobito_sbv#115)
