@@ -13,7 +13,14 @@ module Sbv
       end
 
       def person_row(person)
-        super.dup.tap { |row| row.insert(1, person.instrument.to_s) }
+        [
+          person.full_name, # person_name without nickname
+          person.instrument.to_s,
+          address(person),
+          person.email,
+          phone_numbers(person, %w[Privat]),
+          phone_numbers(person, %w[Mobil])
+        ]
       end
     end
   end
