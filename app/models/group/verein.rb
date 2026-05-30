@@ -59,7 +59,8 @@ class Group::Verein < ::Group
     Group::VereinArbeitsgruppe,
     Group::VereinKontakte
 
-  self.used_attributes += [:founding_year,
+  self.used_attributes += [:vereinssitz,
+    :founding_year,
     :besetzung,
     :klasse,
     :unterhaltungsmusik,

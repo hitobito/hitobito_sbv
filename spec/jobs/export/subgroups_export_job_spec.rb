@@ -46,6 +46,7 @@ describe Export::SubgroupsExportJob do
       "Unterhaltungsmusik",
       "Korrespondenzsprache",
       "Subventionen",
+      "Vereinssitz",
       "Gründungsjahr",
       "Erfasste Mitglieder",
       "SUISA Status"
