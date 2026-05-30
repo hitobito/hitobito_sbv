@@ -15,7 +15,7 @@ module Export::Tabular::Groups
         secondary_parent tertiary_parent
         email contact contact_email address_care_of address postbox zip_code town country
         besetzung klasse unterhaltungsmusik
-        language subventionen founding_year recognized_members
+        language subventionen vereinssitz founding_year recognized_members
         suisa_status
       ]
     end
