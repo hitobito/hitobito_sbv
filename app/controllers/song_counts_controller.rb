@@ -7,7 +7,7 @@
 
 class SongCountsController < SimpleCrudController
   include YearBasedPaging
-  include AsyncDownload
+  include ExportableRedirect
 
   self.nesting = Group
   self.permitted_attrs = [:song_id, :year, :count]
@@ -37,14 +37,12 @@ class SongCountsController < SimpleCrudController
 
   def render_tabular_in_background(format)
     target = verein? ? group_concerts_path(@group) : group_song_censuses_path(@group)
-    with_async_download_cookie(format, export_filename(format),
-      redirection_target: target) do |filename|
-      Export::SongCountsExportJob.new(format,
-        current_person.id,
-        parent.id,
-        year,
-        filename: filename).enqueue!
-    end
+    Export::SongCountsExportJob.new(format,
+      current_person.id,
+      parent.id,
+      year,
+      filename: export_filename(format)).enqueue!
+    redirect_after_enqueued_export(target)
   end
 
   def export_filename(_format)
