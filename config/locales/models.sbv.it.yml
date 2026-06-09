@@ -445,3 +445,6 @@ it:
     messages:
       cannot_be_later_than_today: non può essere più tardi di oggi
       cannot_be_later_than_end_on: muss vor oder am selben Tag wie der Austritt sein
+
+  delayed_job:
+    export/song_counts_export_job: Werkmeldungs-Export

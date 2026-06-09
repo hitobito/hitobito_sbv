@@ -94,7 +94,7 @@ fr:
       role_only_public: >
         Le rôle %{role} du groupe %{group} ne peut voir que des données publiques (groupes, manifestations et listes; aucune autre personne).
   song_counts:
-    export_enqueued: 'L’exportation est lancée en arrière-plan et sera téléchargée une fois terminée.'
+    export_enqueued: "Export wird im Hintergrund gestartet und kann nach Fertigstellung auf der Jobübersicht heruntergeladen werden: %{overview_link}"
 
   subscriber:
       group:

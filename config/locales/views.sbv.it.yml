@@ -94,7 +94,7 @@ it:
       role_only_public: >
         Il ruolo %{role} nel gruppo %{group}può visionare solo dati pubblici (gruppi, eventi ed elenchi, nessuna altra persona).
   song_counts:
-    export_enqueued: 'L’esportazione avverrà in background e sarà scaricata al termine.'
+    export_enqueued: "Export wird im Hintergrund gestartet und kann nach Fertigstellung auf der Jobübersicht heruntergeladen werden: %{overview_link}"
 
   subscriber:
       group:
