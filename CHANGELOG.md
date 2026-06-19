@@ -2,7 +2,7 @@
 
 ## Version 1.28
 
-* Neues Personenfeld «Instrument» in allen Personen-Exporten mit Namen (inkl. Spaltenauswahl und Alle Angaben)
+* Instrument pro Verein auf der Rolle «Mitglied» (Enum-Dropdown), mit Datenmigration von `people.instrument` und passenden `role.label`-Werten; Anzeige im Personenprofil, Exporte und JSON-API (`RoleResource`)
 * Feld «Verwendung der Adressdaten» in Personenansicht, Editor und Exporten ausgeblendet (Daten bleiben erhalten)
 * Tab «Aufträge» auf Personen ausgeblendet
 
