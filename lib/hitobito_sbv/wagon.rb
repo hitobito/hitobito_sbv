@@ -21,8 +21,6 @@ module HitobitoSbv
     ]
 
     config.to_prepare do # rubocop:disable Metrics/BlockLength
-      Sbv::Instruments::Catalog.register_i18n!
-
       JobManager.wagon_jobs += [RefreshActiveYearsJob]
 
       # extend application classes here

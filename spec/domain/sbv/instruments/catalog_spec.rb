@@ -49,5 +49,13 @@ describe Sbv::Instruments::Catalog do
       expect(I18n.t("activerecord.attributes.role.instruments.saxophon_alt", locale: :de))
         .to eq "Alt-Saxophon"
     end
+
+    it "survives I18n.reload!" do
+      described_class.register_i18n!
+      I18n.reload!
+
+      expect(I18n.t("activerecord.attributes.role.instruments.schlagzeug", locale: :de))
+        .to eq "Schlagzeug"
+    end
   end
 end
