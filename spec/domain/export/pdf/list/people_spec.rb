@@ -24,10 +24,10 @@ describe Export::Pdf::List::People do
   end
 
   it "renders the instrument column" do
-    people.first.update!(instrument: "Trompete")
+    people.first.roles.find_by(group: group).update!(instrument: "trompete")
     pdf = Export::Pdf::List.render(people, group)
     text = PDF::Inspector::Text.analyze(pdf).show_text.compact.join(" ")
-    expect(text).to include(::Person.human_attribute_name(:instrument), "Trompete")
+    expect(text).to include(Role.human_attribute_name(:instrument), "Trompete")
   end
 
   it "creates a pdf" do

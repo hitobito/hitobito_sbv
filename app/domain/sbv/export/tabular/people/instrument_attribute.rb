@@ -36,6 +36,10 @@ module Sbv
               person_attributes_without_instrument
             )
           end
+
+          def instrument_label
+            Role.human_attribute_name(:instrument)
+          end
         end
       end
     end

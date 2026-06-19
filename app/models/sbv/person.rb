@@ -11,9 +11,25 @@ module Sbv::Person
   included do
     include Person::ActiveYears
 
-    # personal_data_usage: kept in DB, hidden from UI and exports (see PeopleFull, views)
-    Person::PUBLIC_ATTRS << :instrument
-
     validates :first_name, :last_name, presence: true
+  end
+
+  def mitglied_role_in(group)
+    return nil unless group
+
+    group_ids = group.self_and_descendants.pluck(:id)
+    roles.find { |role| role.is_a?(Role::MitgliederMitglied) && group_ids.include?(role.group_id) }
+  end
+
+  def instrument_for_group(group)
+    mitglied_role_in(group)&.instrument_label
+  end
+
+  def instrument
+    instrument_for_group(primary_group)
+  end
+
+  def mitglied_roles_with_instrument
+    roles.select { |role| role.is_a?(Role::MitgliederMitglied) && role.instrument.present? }
   end
 end

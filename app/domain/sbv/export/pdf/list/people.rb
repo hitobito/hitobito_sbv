@@ -9,18 +9,22 @@ module Sbv
   module Export::Pdf::List
     module People
       def table_header
-        super.dup.tap { |row| row.insert(1, ::Person.human_attribute_name(:instrument)) }
+        super.dup.tap { |row| row.insert(1, Role.human_attribute_name(:instrument)) }
       end
 
       def person_row(person)
         [
           person.full_name, # person_name without nickname
-          person.instrument.to_s,
+          instrument_for(person),
           address(person),
           person.email,
           phone_numbers(person, %w[Privat]),
           phone_numbers(person, %w[Mobil])
         ]
+      end
+
+      def instrument_for(person)
+        person.instrument_for_group(title).to_s
       end
     end
   end

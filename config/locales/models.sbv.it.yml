@@ -335,7 +335,6 @@ it:
       person:
         language: Korrespondenzsprache
         profession: Lavoro
-        instrument: Strumento
         active_years: Anni attivi fino ad oggi
         active_role: appartenenza attiva
         prognostic_active_years: Stima anni attivi
@@ -389,6 +388,23 @@ it:
         start_on: Eintritt
         end_on: Austritt
         language: Korrespondenz Sprache
+        instrument: Strumento
+        instruments:
+          _nil: sconosciuto
+          trompete: Tromba
+          fluegelhorn: Flicorno
+          horn: Corno
+          posaune: Trombone
+          bariton: Baritono
+          bassposaune: Trombone basso
+          tuba: Tuba / Basso
+          klarinette: Clarinetto
+          saxophon: Sassofono
+          oboe: Oboe
+          fagott: Fagotto
+          floete: Flauto
+          schlagzeug: Batteria
+          sonstiges: Altro
         class:
           permission:
             description:

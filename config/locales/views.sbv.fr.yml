@@ -73,6 +73,9 @@ fr:
   people:
     fields_sbv:
       allow_personal_data_usage: J'accepte l'utilisation de mes données d'adresse
+    instruments_sbv:
+      remove_instrument: Supprimer l'instrument
+      confirm_remove_instrument: Voulez-vous vraiment supprimer l'instrument? Le rôle reste inchangé.
 
   groups:
     actions_show_sbv:

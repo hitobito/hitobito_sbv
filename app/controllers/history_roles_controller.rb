@@ -55,7 +55,7 @@ class HistoryRolesController < ApplicationController
     Group::VereinMitglieder::Mitglied.new(
       group: group,
       person_id: params[:role][:person_id],
-      label: params[:role][:label],
+      instrument: params[:role][:instrument],
       start_on: params[:role][:start_on],
       end_on: params[:role][:end_on],
       historic_membership: true

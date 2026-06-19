@@ -17,7 +17,7 @@ describe Export::Tabular::People::TableDisplays do
   subject(:export) { described_class.new(list, ability, table_display, group) }
 
   before do
-    person.update!(instrument: "Trompete")
+    person.roles.find_by(group: group).update!(instrument: "trompete")
     table_display.update!(selected: %i[instrument])
   end
 

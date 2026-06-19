@@ -276,7 +276,6 @@ de:
       person:
         language: Korrespondenzsprache
         profession: Beruf
-        instrument: Instrument
         active_years: Aktivjahre aktuell
         active_role: aktive Mitgliedschaft
         prognostic_active_years: Aktivjahre Prognose
@@ -330,6 +329,23 @@ de:
         start_on: Eintritt
         end_on: Austritt
         language: Korrespondenz Sprache
+        instrument: Instrument
+        instruments:
+          _nil: unbekannt
+          trompete: Trompete
+          fluegelhorn: Flügelhorn
+          horn: Horn
+          posaune: Posaune
+          bariton: Bariton
+          bassposaune: Baßposaune
+          tuba: Tuba / Baß
+          klarinette: Klarinette
+          saxophon: Saxophon
+          oboe: Oboe
+          fagott: Fagott
+          floete: Flöte
+          schlagzeug: Schlagzeug
+          sonstiges: Sonstiges
         class:
           permission:
             description:

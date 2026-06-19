@@ -80,6 +80,9 @@ de:
   people:
     fields_sbv:
       allow_personal_data_usage: Ich akzeptiere eine Verwendung meiner Adressdaten
+    instruments_sbv:
+      remove_instrument: Instrument entfernen
+      confirm_remove_instrument: Soll das Instrument wirklich entfernt werden? Die Rolle bleibt bestehen.
 
   groups:
     actions_show_sbv:

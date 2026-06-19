@@ -14,7 +14,7 @@ describe Export::PeopleExportJob do
   let(:filename) { AsyncDownloadFile.create_name("people_export", user.id) }
 
   before do
-    person.update!(instrument: "Trompete")
+    person.roles.find_by(group: group).update!(instrument: "trompete")
   end
 
   context "full export" do
