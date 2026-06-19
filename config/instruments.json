@@ -1,0 +1,214 @@
+{
+  "nil_label": {
+    "de": "unbekannt",
+    "fr": "Inconnu",
+    "it": "sconosciuto"
+  },
+  "instruments": [
+    {
+      "key": "querfloete",
+      "labels": {
+        "de": "Querflöte",
+        "fr": "Flûte traversière",
+        "it": "Flauto traverso"
+      },
+      "aliases": ["floete"],
+      "legacy_labels": ["Flöte", "Flute", "Flûte", "Flauto"]
+    },
+    {
+      "key": "piccolo",
+      "labels": {
+        "de": "Piccolo",
+        "fr": "Piccolo",
+        "it": "Ottavino"
+      }
+    },
+    {
+      "key": "oboe",
+      "labels": {
+        "de": "Oboe",
+        "fr": "Hautbois",
+        "it": "Oboe"
+      }
+    },
+    {
+      "key": "englischhorn",
+      "labels": {
+        "de": "Englischhorn",
+        "fr": "Cor anglais",
+        "it": "Corno inglese"
+      }
+    },
+    {
+      "key": "fagott",
+      "labels": {
+        "de": "Fagott",
+        "fr": "Basson",
+        "it": "Fagotto"
+      }
+    },
+    {
+      "key": "es_klarinette",
+      "labels": {
+        "de": "Es-Klarinette",
+        "fr": "Clarinette en mi bémol",
+        "it": "Clarinetto in mi bemolle"
+      }
+    },
+    {
+      "key": "klarinette",
+      "labels": {
+        "de": "Klarinette (B)",
+        "fr": "Clarinette (si bémol)",
+        "it": "Clarinetto (si bemolle)"
+      }
+    },
+    {
+      "key": "bassklarinette",
+      "labels": {
+        "de": "Bassklarinette",
+        "fr": "Clarinette basse",
+        "it": "Clarinetto basso"
+      }
+    },
+    {
+      "key": "saxophon_sopran",
+      "labels": {
+        "de": "Sopran-Saxophon",
+        "fr": "Saxophone soprano",
+        "it": "Sassofono soprano"
+      }
+    },
+    {
+      "key": "saxophon_alt",
+      "labels": {
+        "de": "Alt-Saxophon",
+        "fr": "Saxophone alto",
+        "it": "Sassofono contralto"
+      },
+      "aliases": ["saxophon"]
+    },
+    {
+      "key": "saxophon_tenor",
+      "labels": {
+        "de": "Tenor-Saxophon",
+        "fr": "Saxophone ténor",
+        "it": "Sassofono tenore"
+      }
+    },
+    {
+      "key": "saxophon_bariton",
+      "labels": {
+        "de": "Bariton-Saxophon",
+        "fr": "Saxophone baryton",
+        "it": "Sassofono baritono"
+      }
+    },
+    {
+      "key": "saxophon_bass",
+      "labels": {
+        "de": "Bass-Saxophon",
+        "fr": "Saxophone basse",
+        "it": "Sassofono basso"
+      }
+    },
+    {
+      "key": "trompete",
+      "labels": {
+        "de": "Trompete",
+        "fr": "Trompette",
+        "it": "Tromba"
+      }
+    },
+    {
+      "key": "fluegelhorn",
+      "labels": {
+        "de": "Flügelhorn",
+        "fr": "Bugle",
+        "it": "Flicorno"
+      }
+    },
+    {
+      "key": "waldhorn",
+      "labels": {
+        "de": "Waldhorn",
+        "fr": "Cor d'harmonie",
+        "it": "Corno"
+      },
+      "aliases": ["horn"],
+      "legacy_labels": ["Horn"]
+    },
+    {
+      "key": "tenorhorn",
+      "labels": {
+        "de": "Tenorhorn",
+        "fr": "Cor alto",
+        "it": "Flicorno tenore"
+      }
+    },
+    {
+      "key": "posaune",
+      "labels": {
+        "de": "Posaune",
+        "fr": "Trombone",
+        "it": "Trombone"
+      }
+    },
+    {
+      "key": "bariton",
+      "labels": {
+        "de": "Baritonhorn",
+        "fr": "Baryton",
+        "it": "Baritono"
+      }
+    },
+    {
+      "key": "euphonium",
+      "labels": {
+        "de": "Euphonium",
+        "fr": "Euphonium",
+        "it": "Euphonium"
+      }
+    },
+    {
+      "key": "bassposaune",
+      "labels": {
+        "de": "Bassposaune",
+        "fr": "Trombone basse",
+        "it": "Trombone basso"
+      }
+    },
+    {
+      "key": "tuba",
+      "labels": {
+        "de": "Tuba / Bass",
+        "fr": "Tuba / Basse",
+        "it": "Tuba / Basso"
+      }
+    },
+    {
+      "key": "kontrabass",
+      "labels": {
+        "de": "Kontrabass",
+        "fr": "Contrebasse",
+        "it": "Contrabbasso"
+      }
+    },
+    {
+      "key": "schlagzeug",
+      "labels": {
+        "de": "Schlagzeug",
+        "fr": "Batterie",
+        "it": "Batteria"
+      }
+    },
+    {
+      "key": "sonstiges",
+      "labels": {
+        "de": "Sonstiges",
+        "fr": "Autre",
+        "it": "Altro"
+      }
+    }
+  ]
+}

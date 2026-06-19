@@ -404,20 +404,6 @@ fr:
         instrument: Instrument
         instruments:
           _nil: Inconnu
-          trompete: Trompette
-          fluegelhorn: Bugle
-          horn: Cor
-          posaune: Trombone
-          bariton: Baryton
-          bassposaune: Trombone basse
-          tuba: Tuba / Basse
-          klarinette: Clarinette
-          saxophon: Saxophone
-          oboe: Hautbois
-          fagott: Basson
-          floete: Flûte
-          schlagzeug: Batterie
-          sonstiges: Autre
         class:
           permission:
             description:

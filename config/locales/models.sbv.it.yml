@@ -391,20 +391,6 @@ it:
         instrument: Strumento
         instruments:
           _nil: sconosciuto
-          trompete: Tromba
-          fluegelhorn: Flicorno
-          horn: Corno
-          posaune: Trombone
-          bariton: Baritono
-          bassposaune: Trombone basso
-          tuba: Tuba / Basso
-          klarinette: Clarinetto
-          saxophon: Sassofono
-          oboe: Oboe
-          fagott: Fagotto
-          floete: Flauto
-          schlagzeug: Batteria
-          sonstiges: Altro
         class:
           permission:
             description:

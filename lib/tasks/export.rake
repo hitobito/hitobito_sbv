@@ -19,7 +19,7 @@ namespace :export do
       "WHEN '#{code}' THEN '#{long_name}'"
     end.join(" ")
 
-    instrument_sql = Sbv::Role::Instrument::INSTRUMENTS.map do |key|
+    instrument_sql = Sbv::Instruments::Catalog.keys.map do |key|
       label = I18n.t("#{Sbv::Role::Instrument::I18N_PREFIX}.#{key}").gsub("'", "''")
       "WHEN mitglied_roles.instrument = '#{key}' THEN '#{label}'"
     end.join("\n        ")

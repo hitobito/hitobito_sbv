@@ -15,6 +15,12 @@ describe Sbv::Role::InstrumentMapper do
 
     it "maps exact translated labels" do
       expect(described_class.map("Trompete")).to eq "trompete"
+      expect(described_class.map("Alt-Saxophon")).to eq "saxophon_alt"
+    end
+
+    it "maps legacy saxophon alias to alt saxophon" do
+      expect(described_class.map("saxophon")).to eq "saxophon_alt"
+      expect(described_class.map("Saxophon")).to eq "saxophon_alt"
     end
 
     it "returns nil for non-matching values" do
@@ -34,13 +40,13 @@ describe Role::MitgliederMitglied do
   end
 
   it "accepts valid instruments" do
-    subject.instrument = "trompete"
+    subject.instrument = "saxophon_tenor"
     expect(subject).to be_valid
   end
 
   it "translates instrument labels" do
-    subject.instrument = "trompete"
-    expect(subject.instrument_label).to eq "Trompete"
+    subject.instrument = "saxophon_sopran"
+    expect(subject.instrument_label).to eq "Sopran-Saxophon"
   end
 end
 

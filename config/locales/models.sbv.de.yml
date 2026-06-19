@@ -332,20 +332,6 @@ de:
         instrument: Instrument
         instruments:
           _nil: unbekannt
-          trompete: Trompete
-          fluegelhorn: Flügelhorn
-          horn: Horn
-          posaune: Posaune
-          bariton: Bariton
-          bassposaune: Baßposaune
-          tuba: Tuba / Baß
-          klarinette: Klarinette
-          saxophon: Saxophon
-          oboe: Oboe
-          fagott: Fagott
-          floete: Flöte
-          schlagzeug: Schlagzeug
-          sonstiges: Sonstiges
         class:
           permission:
             description:
