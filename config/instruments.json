@@ -129,6 +129,14 @@
       }
     },
     {
+      "key": "cornet",
+      "labels": {
+        "de": "Cornet",
+        "fr": "Cornet",
+        "it": "Cornet"
+      }
+    },
+    {
       "key": "waldhorn",
       "labels": {
         "de": "Waldhorn",
