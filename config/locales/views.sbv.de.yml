@@ -6,6 +6,10 @@
 de:
   global:
     last_change: "Letzte Änderung: %{date}"
+  version:
+    association_change:
+      role:
+        create_with_attributes: "%{model} <i>%{label}</i> wurde hinzugefügt: %{changeset}"
   navigation:
     help: Hilfe
   group:

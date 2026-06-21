@@ -81,6 +81,37 @@ describe "instrument role history", versioning: true do
     expect(text).to include("Instrument wurde auf <i>Oboe</i> gesetzt.")
     expect(text).not_to match(/aktualisiert: ,/)
   end
+
+  it "logs instrument when role is created with instrument" do
+    role.destroy!
+    new_role = Role::MitgliederMitglied.create!(
+      person: person,
+      group: group,
+      start_on: Time.zone.today,
+      instrument: "piccolo"
+    )
+
+    version = PaperTrail::Version.where(item: new_role, event: "create").last
+    text = PaperTrail::VersionAssociationChangePresenter.new(version, view_context).render
+
+    expect(text).to include("wurde hinzugefügt:")
+    expect(text).to include("Instrument wurde auf <i>Piccolo</i> gesetzt.")
+  end
+
+  it "does not show a dangling colon when role is created without instrument" do
+    role.destroy!
+    new_role = Role::MitgliederMitglied.create!(
+      person: person,
+      group: group,
+      start_on: Time.zone.today
+    )
+
+    version = PaperTrail::Version.where(item: new_role, event: "create").last
+    text = PaperTrail::VersionAssociationChangePresenter.new(version, view_context).render
+
+    expect(text).to include("wurde hinzugefügt.")
+    expect(text).not_to include("hinzugefügt:")
+  end
 end
 
 describe Person do

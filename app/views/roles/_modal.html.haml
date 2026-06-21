@@ -7,6 +7,7 @@
 - action_path = entry.persisted? ? [@original_group || group, entry] : [group, entry]
 
 = standard_form action_path, controller: :roles, action: action, remote: true  do |f|
+  = hidden_field_tag :role_form_context, 'modal'
   = f.error_messages
   - if @group_selection.present? && @group_selection.size > 1
     = f.labeled(:group_id) do
@@ -26,13 +27,14 @@
       = render "type_select"
 
   #role_instrument_field
-    = render "instrument_field", f: f, entry: entry, group: @group
+    = render "instrument_field", f: f, entry: entry, group: @group, modal: true
 
-  - unless mitglied_role_type?(role_type_class(entry, @group))
+  #role_label_field{ class: ('d-none' if mitglied_role_type?(role_type_class(entry, @group))) }
     = f.labeled(:label) do
-      = f.input_field(:label,
-                      help: t('roles.label.help_optional_label'),
-                      data: { provide: :typeahead, source: entry.klass.available_labels })
+      .shown.ms-0
+        = f.input_field(:label,
+                        help: t('roles.label.help_optional_label'),
+                        data: { provide: :typeahead, source: entry.klass.available_labels })
 
   - if @person_id
     = f.hidden_field :person_id, value: @person_id

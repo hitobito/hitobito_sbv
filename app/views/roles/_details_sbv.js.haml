@@ -4,4 +4,9 @@
 - #  https://github.com/hitobito/hitobito_sbv.
 
 - if @type
-  $('#role_instrument_field').html('#{j render("roles/instrument_field", role_type: @type, group: @group, entry: entry)}');
+  - modal = params[:role_form_context] == 'modal'
+  $('#role_instrument_field').html('#{j render("roles/instrument_field", role_type: @type, group: @group, entry: entry, modal: modal)}');
+  - if mitglied_role_type?(@type)
+    $('#role_label_field').addClass('d-none');
+  - else
+    $('#role_label_field').removeClass('d-none');

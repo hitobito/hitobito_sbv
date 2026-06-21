@@ -6,6 +6,10 @@
 it:
   global:
     last_change: "Ultima modifica: %{date}"
+  version:
+    association_change:
+      role:
+        create_with_attributes: "%{model} <i>%{label}</i> è stato aggiunto: %{changeset}"
   navigation:
     help: Auito
   group:
