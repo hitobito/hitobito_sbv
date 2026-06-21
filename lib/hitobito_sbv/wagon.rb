@@ -68,6 +68,9 @@ module HitobitoSbv
       GroupsHelper.include Sbv::GroupsHelper
       RolesHelper.include Sbv::RolesHelper
       GroupDecorator.prepend Sbv::GroupDecorator
+      PaperTrail::VersionAssociationChangePresenter.prepend(
+        Sbv::PaperTrail::VersionAssociationChangePresenter
+      )
       StandardFormBuilder.include Sbv::StandardFormBuilder
       Dropdown::InvoiceNew.prepend Sbv::Dropdown::InvoiceNew
 

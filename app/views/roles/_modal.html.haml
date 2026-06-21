@@ -28,10 +28,11 @@
   #role_instrument_field
     = render "instrument_field", f: f, entry: entry, group: @group
 
-  = f.labeled(:label) do
-    = f.input_field(:label,
-                    help: t('roles.label.help_optional_label'),
-                    data: { provide: :typeahead, source: entry.klass.available_labels })
+  - unless mitglied_role_type?(role_type_class(entry, @group))
+    = f.labeled(:label) do
+      = f.input_field(:label,
+                      help: t('roles.label.help_optional_label'),
+                      data: { provide: :typeahead, source: entry.klass.available_labels })
 
   - if @person_id
     = f.hidden_field :person_id, value: @person_id

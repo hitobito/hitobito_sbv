@@ -48,6 +48,39 @@ describe Role::MitgliederMitglied do
     subject.instrument = "saxophon_sopran"
     expect(subject.instrument_label).to eq "Sopran-Saxophon"
   end
+
+  it "does not track label changes in paper trail", versioning: true do
+    subject.update!(instrument: nil, label: nil)
+
+    expect { subject.update!(instrument: "oboe", label: "") }
+      .to change { PaperTrail::Version.count }.by(1)
+
+    changes = PaperTrail::Version.last.changeset.keys
+    expect(changes).to eq(["instrument"])
+  end
+end
+
+describe "instrument role history", versioning: true do
+  let(:person) { people(:member) }
+  let(:group) { groups(:musikverband_hastdutoene) }
+  let(:role) { person.roles.find_by(group: group) }
+  let(:view_context) { ActionController::Base.new.view_context }
+
+  before do
+    view_context.extend(FormatHelper)
+    role.update!(instrument: nil, label: nil)
+    PaperTrail.request.whodunnit = people(:admin).id.to_s
+  end
+
+  it "logs initial instrument assignment without a spurious leading comma" do
+    role.update!(instrument: "oboe", label: "")
+
+    version = PaperTrail::Version.where(main_id: person.id).order(:id).last
+    text = PaperTrail::VersionAssociationChangePresenter.new(version, view_context).render
+
+    expect(text).to include("Instrument wurde auf <i>Oboe</i> gesetzt.")
+    expect(text).not_to match(/aktualisiert: ,/)
+  end
 end
 
 describe Person do

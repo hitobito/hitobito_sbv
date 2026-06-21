@@ -14,6 +14,7 @@ module Sbv::Role::Instrument
     include I18nEnums
 
     self.used_attributes += [:instrument]
+    paper_trail_options[:skip] |= [:label]
 
     i18n_enum :instrument, ->(_) { Sbv::Instruments::Catalog.keys },
       key: :instruments,
