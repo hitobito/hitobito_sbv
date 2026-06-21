@@ -458,3 +458,7 @@ fr:
     messages:
       cannot_be_later_than_today: ne peut pas être postérieur à aujourd'hui
       cannot_be_later_than_end_on: doit être avant ou au même jour que la sortie
+
+  delayed_job:
+    export/pdf_address_list_job: Liste PDF adresses
+    export/song_counts_export_job: Werkmeldungs-Export
