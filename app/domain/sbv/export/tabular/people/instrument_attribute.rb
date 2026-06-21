@@ -38,7 +38,7 @@ module Sbv
           end
 
           def instrument_label
-            Role.human_attribute_name(:instrument)
+            ::Role.human_attribute_name(:instrument)
           end
         end
       end

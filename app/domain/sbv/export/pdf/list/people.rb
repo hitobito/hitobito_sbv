@@ -9,7 +9,7 @@ module Sbv
   module Export::Pdf::List
     module People
       def table_header
-        super.dup.tap { |row| row.insert(1, Role.human_attribute_name(:instrument)) }
+        super.dup.tap { |row| row.insert(1, ::Role.human_attribute_name(:instrument)) }
       end
 
       def person_row(person)
