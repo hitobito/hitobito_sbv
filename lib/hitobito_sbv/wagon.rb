@@ -75,6 +75,7 @@ module HitobitoSbv
       Sheet::Group.include Sbv::Sheet::Group
 
       ### jobs
+      Export::LabelsJob.prepend Sbv::Export::LabelsJob
       Export::SubgroupsExportJob.prepend Sbv::Export::SubgroupsExportJob
 
       ### mailers

@@ -59,6 +59,11 @@ describe Person do
     expect(person.instrument_for_group(group)).to eq "Posaune"
   end
 
+  it "ignores non-group values for group context lookup" do
+    person.roles.find_by(group: group).update!(instrument: "posaune")
+    expect(person.instrument_for_group(group.name)).to be_nil
+  end
+
   it "returns instrument via primary group" do
     person.roles.find_by(group: group).update!(instrument: "posaune")
     expect(person.instrument).to eq "Posaune"

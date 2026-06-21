@@ -24,7 +24,15 @@ module Sbv
       end
 
       def instrument_for(person)
-        person.instrument_for_group(title).to_s
+        person.instrument_for_group(export_group, group_ids: export_group_ids).to_s
+      end
+
+      def export_group
+        @export_group ||= title.is_a?(Group) ? title : nil
+      end
+
+      def export_group_ids
+        @export_group_ids ||= export_group&.self_and_descendants&.pluck(:id)
       end
     end
   end

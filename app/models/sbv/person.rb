@@ -14,15 +14,15 @@ module Sbv::Person
     validates :first_name, :last_name, presence: true
   end
 
-  def mitglied_role_in(group)
-    return nil unless group
+  def mitglied_role_in(group, group_ids: nil)
+    return nil unless group.is_a?(Group)
 
-    group_ids = group.self_and_descendants.pluck(:id)
-    roles.find { |role| role.is_a?(Role::MitgliederMitglied) && group_ids.include?(role.group_id) }
+    ids = group_ids || group.self_and_descendants.pluck(:id)
+    roles.find { |role| role.is_a?(Role::MitgliederMitglied) && ids.include?(role.group_id) }
   end
 
-  def instrument_for_group(group)
-    mitglied_role_in(group)&.instrument_label
+  def instrument_for_group(group, group_ids: nil)
+    mitglied_role_in(group, group_ids: group_ids)&.instrument_label
   end
 
   def instrument
