@@ -388,6 +388,9 @@ it:
         start_on: Eintritt
         end_on: Austritt
         language: Korrespondenz Sprache
+        instrument: Strumento
+        instruments:
+          _nil: sconosciuto
         class:
           permission:
             description:

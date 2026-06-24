@@ -1,0 +1,12 @@
+- #  Copyright (c) 2026, Schweizer Blasmusikverband. This file is part of
+- #  hitobito_sbv and licensed under the Affero General Public License version 3
+- #  or later. See the COPYING file at the top-level directory or at
+- #  https://github.com/hitobito/hitobito_sbv.
+
+- if @type
+  - modal = params[:role_form_context] == 'modal'
+  $('#role_instrument_field').html('#{j render("roles/instrument_field", role_type: @type, group: @group, entry: entry, modal: modal)}');
+  - if mitglied_role_type?(@type)
+    $('#role_label_field').addClass('d-none');
+  - else
+    $('#role_label_field').removeClass('d-none');

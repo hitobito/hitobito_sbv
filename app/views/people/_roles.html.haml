@@ -1,0 +1,9 @@
+-#  Copyright (c) 2026, Schweizer Blasmusikverband. This file is part of
+-#  hitobito_sbv and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_sbv.
+
+= render "people/instruments_sbv", entry: entry
+= render "roles_aside", title: t(".title"), grouped_roles: entry.current_roles_grouped, primary_group_link: true
+- if entry.future_roles_grouped.any?
+  = render "roles_aside", title: t(".convertable_title"), grouped_roles: entry.future_roles_grouped

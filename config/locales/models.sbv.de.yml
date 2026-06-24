@@ -329,6 +329,9 @@ de:
         start_on: Eintritt
         end_on: Austritt
         language: Korrespondenz Sprache
+        instrument: Instrument
+        instruments:
+          _nil: unbekannt
         class:
           permission:
             description:

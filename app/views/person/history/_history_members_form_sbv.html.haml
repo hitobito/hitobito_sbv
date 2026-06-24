@@ -21,8 +21,13 @@
               = swappable_group_add_fieldset(:create_deleted_verein, :select_existing_verein) do
                 = f.labeled(:verein, t('.verein')) do
                   = f.group_field :group, search_params: { historic: true }
-                = f.labeled_input_field(:label,
-                                        data: { provide: :typeahead, source: Role.available_labels })
+                = f.labeled_collection_select(:instrument,
+                                              Role::MitgliederMitglied.instrument_labels.to_a,
+                                              :first,
+                                              :last,
+                                              { include_blank: "" },
+                                              name: 'role[instrument]',
+                                              class: 'form-select form-select-sm')
 
               = swappable_group_add_fieldset(:select_existing_verein, :create_deleted_verein) do
                 = f.fields_for(:group, Group.new) do |fields|

@@ -48,7 +48,7 @@ module HitobitoSbv
         :subventionen, :hostname,
         :buv_lohnsumme, :nbuv_lohnsumme, :manual_member_count]
 
-      PeopleController.permitted_attrs += [:profession, :personal_data_usage]
+      PeopleController.permitted_attrs += [:profession]
 
       Person::HistoryController.prepend Sbv::Person::HistoryController
       DeviseController.include HostnamedGroups
@@ -66,7 +66,11 @@ module HitobitoSbv
       )
 
       GroupsHelper.include Sbv::GroupsHelper
+      RolesHelper.include Sbv::RolesHelper
       GroupDecorator.prepend Sbv::GroupDecorator
+      PaperTrail::VersionAssociationChangePresenter.prepend(
+        Sbv::PaperTrail::VersionAssociationChangePresenter
+      )
       StandardFormBuilder.include Sbv::StandardFormBuilder
       Dropdown::InvoiceNew.prepend Sbv::Dropdown::InvoiceNew
 
@@ -74,6 +78,7 @@ module HitobitoSbv
       Sheet::Group.include Sbv::Sheet::Group
 
       ### jobs
+      Export::LabelsJob.prepend Sbv::Export::LabelsJob
       Export::SubgroupsExportJob.prepend Sbv::Export::SubgroupsExportJob
 
       ### mailers
@@ -85,22 +90,35 @@ module HitobitoSbv
 
       Export::Tabular::Groups::Row.include Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.prepend Sbv::Export::Tabular::Groups::List
+      Export::Tabular::People::PeopleAddress.include(
+        Sbv::Export::Tabular::People::InstrumentAttribute
+      )
+      Export::Tabular::People::Households.include(
+        Sbv::Export::Tabular::People::InstrumentAttribute
+      )
       Export::Tabular::People::PeopleFull.include Sbv::Export::Tabular::People::PeopleFull
+      Export::Tabular::People::TableDisplays.prepend(
+        Sbv::Export::Tabular::People::TableDisplaysExtension
+      )
 
       MailRelay::Lists.prepend Sbv::MailRelay::Lists
 
-      additional_person_attrs = [
-        :active_years
-      ]
+      # :instrument is registered via TableDisplays::People::InstrumentColumn
+      TableDisplay.register_column(Person, TableDisplays::People::InstrumentColumn, :instrument)
+      TableDisplay.register_column(Person, TableDisplays::ShowDetailsColumn, :active_years)
 
-      TableDisplay.register_column(Person,
-        TableDisplays::ShowDetailsColumn,
-        additional_person_attrs)
+      TableDisplay.register_column(Event::Participation,
+        TableDisplays::Event::Participations::ShowDetailsOrEventLeaderColumn,
+        ["participant.instrument"])
 
       ### abilities
       RoleAbility.include Sbv::RoleAbility
       GroupAbility.include Sbv::GroupAbility
       PersonAbility.include Sbv::PersonAbility
+
+      RoleResource.class_eval do
+        attribute :instrument, :string
+      end
 
       # uv_lohnsumme allows to manage the salary amount for the accident insurance
       Role::Permissions << :uv_lohnsumme

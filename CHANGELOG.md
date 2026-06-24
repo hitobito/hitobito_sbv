@@ -1,5 +1,11 @@
 # Hitobito SBV Changelog
 
+## Version 1.28
+
+* Instrument pro Verein auf der Rolle «Mitglied» (Enum-Dropdown), mit Datenmigration von `people.instrument` und passenden `role.label`-Werten; Anzeige im Personenprofil, Exporte und JSON-API (`RoleResource`)
+* Feld «Verwendung der Adressdaten» in Personenansicht, Editor und Exporten ausgeblendet (Daten bleiben erhalten)
+* Tab «Aufträge» auf Personen ausgeblendet
+
 ## Version 1.27
 
 * Neue Rolle Jugendverantwortlicher auf Verein (hitobito_sbv#115)

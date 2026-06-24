@@ -6,6 +6,10 @@
 de:
   global:
     last_change: "Letzte Änderung: %{date}"
+  version:
+    association_change:
+      role:
+        create_with_attributes: "%{model} <i>%{label}</i> wurde hinzugefügt: %{changeset}"
   navigation:
     help: Hilfe
   group:
@@ -80,6 +84,9 @@ de:
   people:
     fields_sbv:
       allow_personal_data_usage: Ich akzeptiere eine Verwendung meiner Adressdaten
+    instruments_sbv:
+      remove_instrument: Instrument entfernen
+      confirm_remove_instrument: Soll das Instrument wirklich entfernt werden? Die Rolle bleibt bestehen.
 
   groups:
     actions_show_sbv:

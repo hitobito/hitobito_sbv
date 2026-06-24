@@ -16,8 +16,16 @@ module Sbv
             alias_method_chain :person_attributes, :active_years
           end
 
+          def excluded_person_attributes
+            super + [:personal_data_usage]
+          end
+
           def person_attributes_with_active_years
-            person_attributes_without_active_years + [:active_years]
+            attrs = InstrumentAttribute.insert_instrument_after_name_attribute(
+              person_attributes_without_active_years
+            )
+            attrs << :active_years unless attrs.include?(:active_years)
+            attrs
           end
         end
       end

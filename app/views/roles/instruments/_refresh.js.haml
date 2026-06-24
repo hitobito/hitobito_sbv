@@ -1,0 +1,16 @@
+- #  Copyright (c) 2026, Schweizer Blasmusikverband. This file is part of
+- #  hitobito_sbv and licensed under the Affero General Public License version 3
+- #  or later. See the COPYING file at the top-level directory or at
+- #  https://github.com/hitobito/hitobito_sbv.
+
+- instruments_html = render(partial: "people/instruments_sbv", locals: { entry: person })
+- if instruments_html.present?
+  var instrumentsHtml = '#{j(instruments_html)}';
+  var $instruments = $('section.instruments');
+  if ($instruments.length) {
+  $instruments.replaceWith(instrumentsHtml);
+  } else {
+  $('section.roles').before(instrumentsHtml);
+  }
+- else
+  $('section.instruments').remove();

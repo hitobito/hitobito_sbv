@@ -8,6 +8,25 @@
 require "spec_helper"
 
 describe Sbv::RolesHelper do
+  describe "#role_type_class" do
+    let(:group) { groups(:musikverband_hastdutoene) }
+    let(:entry) { Role.new(group: group) }
+
+    it "uses the group standard role when entry has no type yet" do
+      expect(role_type_class(entry, group)).to eq Group::VereinMitglieder::Mitglied
+    end
+  end
+
+  describe "#mitglied_role_type?" do
+    it "is true for mitglied role types" do
+      expect(mitglied_role_type?(Group::VereinMitglieder::Mitglied)).to be true
+    end
+
+    it "is false for other role types" do
+      expect(mitglied_role_type?(Group::Verein::Admin)).to be false
+    end
+  end
+
   describe "#default_language_for_person" do
     let(:group) { groups(:hauptgruppe_1) }
 

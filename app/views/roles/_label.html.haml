@@ -1,0 +1,11 @@
+-#  Copyright (c) 2026, Schweizer Blasmusikverband. This file is part of
+-#  hitobito_sbv and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_sbv.
+
+#role_label_field{ class: ('d-none' if mitglied_role_type?(role_type_class(entry, @group))) }
+  = f.labeled(:label) do
+    .col-6
+      = f.input_field(:label,
+                      data: { provide: :typeahead, source: entry.klass.available_labels },
+                      help: t('.help_optional_label'))

@@ -401,6 +401,9 @@ fr:
         start_on: Entrée
         end_on: Sortie
         language: Korrespondenz Sprache
+        instrument: Instrument
+        instruments:
+          _nil: Inconnu
         class:
           permission:
             description:
