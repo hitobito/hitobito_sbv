@@ -346,7 +346,7 @@ fr:
 
     attributes:
       person:
-        language: Korrespondenzsprache
+        language: Langue de correspondance
         profession: Profession
         active_years: Années d'activité actuelles
         active_role: adhésion active
@@ -361,7 +361,7 @@ fr:
         besetzung_value: Instrumentation
         unterhaltungsmusik: Musique de divertissement
         unterhaltungsmusik_value: Musique de divertissement
-        language: Korrespondenzsprache
+        language: Langue de correspondance
         subventionen: Subventions
         recognized_members: Membres saisis
         manual_member_count: Membres (manuel)
@@ -400,7 +400,7 @@ fr:
         dates: Données
         start_on: Entrée
         end_on: Sortie
-        language: Korrespondenz Sprache
+        language: Langue de correspondance
         class:
           permission:
             description:
@@ -460,4 +460,4 @@ fr:
       cannot_be_later_than_end_on: doit être avant ou au même jour que la sortie
 
   delayed_job:
-    export/song_counts_export_job: Werkmeldungs-Export
+    export/song_counts_export_job: Exportation des notifications
