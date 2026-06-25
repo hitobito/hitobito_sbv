@@ -59,8 +59,9 @@ it:
         many: Contatti
         other: Contatti
       group/root/suisa_admin:
-        one: Verantwortlicher SUISA
-        other: Verantwortliche SUISA
+        one: Responsabile SUISA
+        many: Responsabili SUISA
+        other: Responsabili SUISA
 
       group/mitgliederverband:
         one: Membro dell'associazione
@@ -103,33 +104,42 @@ it:
         many: Contatti
         other: Contatti
       group/mitgliederverband/suisa_admin:
-        one: Verantwortlicher SUISA
-        other: Verantwortliche SUISA
+        one: Responsabile SUISA
+        many: Responsabili SUISA
+        other: Responsabili SUISA
 
       group/kreis:
-        one: Kreis
-        other: Kreise
+        one: Cercho
+        many: Cerchi
+        other: Cerchi
       group/kreis_geschaeftsstelle:
-        one: Geschäftsstelle
-        other: Geschäftsstellen
+        one: Sede amministrativa
+        many: Sede amministrative
+        other: Sede amministrative
       group/kreis_vorstand:
-        one: Vorstand
-        other: Vorstände
+        one: Comitato
+        many: Comitati
+        other: Comitati
       group/kreis_musikkommission:
-        one: Musikkommission
-        other: Musikkommissionen
+        one: Commissione musicale
+        many: Commissioni musicali
+        other: Commissioni musicali
       group/kreis_arbeitsgruppe:
-        one: Arbeitsgruppe
-        other: Arbeitsgruppen
+        one: Gruppo di lavoro
+        many: Gruppi di lavoro
+        other: Gruppi di lavoro
       group/kreis_ehrenmitglieder:
-        one: Ehrenmitglieder
-        other: Ehrenmitglieder
+        one: Membro onoraro
+        many: Membri onorari
+        other: Membri onorari
       group/kreis_kontakte:
-        one: Kontakte
-        other: Kontakte
+        one: Contatto
+        many: Contatti
+        other: Contatti
       group/kreis/suisa_admin:
-        one: Verantwortlicher SUISA
-        other: Verantwortliche SUISA
+        one: Responsabile SUISA
+        many: Responsabili SUISA
+        other: Responsabili SUISA
 
       group/regionalverband:
         one: Associazione regionale
@@ -160,8 +170,9 @@ it:
         many: Contatti
         other: Contatti
       group/regionalverband/suisa_admin:
-        one: Verantwortlicher SUISA
-        other: Verantwortliche SUISA
+        one: Responsabile SUISA
+        many: Responsabili SUISA
+        other: Responsabili SUISA
 
       group/verein:
         one: Società bandistica
@@ -195,8 +206,9 @@ it:
         many: Agente giovanile
         other: Agente giovanile
       group/verein/suisa_admin:
-        one: Verantwortlicher SUISA
-        other: Verantwortliche SUISA
+        one: Responsabile SUISA
+        many: Responsabili SUISA
+        other: Responsabili SUISA
 
       ### ROLES FOR ALL LAYERS
 
@@ -328,12 +340,13 @@ it:
         other: Elenchi
 
       invoice_item/membership_fee:
-        one: Mitgliederbeitrag
-        other: Mitgliederbeiträge
+        one: Quota associativa
+        many: Quote associative
+        other: Quote associative
 
     attributes:
       person:
-        language: Korrespondenzsprache
+        language: Lingua di corrispondenza
         profession: Lavoro
         active_years: Anni attivi fino ad oggi
         active_role: appartenenza attiva
@@ -348,11 +361,11 @@ it:
         besetzung_value: Formazione
         unterhaltungsmusik: Musica d'intrattenimento
         unterhaltungsmusik_value: Musica d'intrattenimento
-        language: Korrespondenzsprache
+        language: Lingua di corrispondenza
         subventionen: Sovvenzioni
         recognized_members: Membri recensiti
-        manual_member_count: Mitglieder (manuell)
-        manually_counted_members: Mitglieder manuell erfasst
+        manual_member_count: Membri (manuale)
+        manually_counted_members: Membri registrati manualmente
         besetzungen:
           _nil: sconosciuto
           brass_band: Brass Band
@@ -382,12 +395,12 @@ it:
         buv_lohnsumme: Salario AIP
         nbuv_lohnsumme: Salario AINP
         contact_email: indirizzo e-mail della persona di contatto
-        suisa_status: SUISA Status
+        suisa_status: Stato SUISA
       role:
         dates: Dati
-        start_on: Eintritt
-        end_on: Austritt
-        language: Korrespondenz Sprache
+        start_on: Entrata
+        end_on: Uscita
+        language: Lingua di corrispondenza
         class:
           permission:
             description:
@@ -397,8 +410,8 @@ it:
               uv_lohnsumme: Può gestire il salario AINF.
 
       invoice_item:
-        amount: Betrag
-        cutoff_date: Stichdatum
+        amount: Montante
+        cutoff_date: Data di riferimento
 
       song:
         title: Titolo
@@ -444,7 +457,7 @@ it:
   errors:
     messages:
       cannot_be_later_than_today: non può essere più tardi di oggi
-      cannot_be_later_than_end_on: muss vor oder am selben Tag wie der Austritt sein
+      cannot_be_later_than_end_on: deve avvenire prima o lo stesso giorno del uscita
 
   delayed_job:
-    export/song_counts_export_job: Werkmeldungs-Export
+    export/song_counts_export_job: Esportazione dei notifiche

@@ -77,24 +77,24 @@ it:
   groups:
     actions_show_sbv:
       export_lohnsummen: Esportare i salari AINF
-      create_verein_invoice_run: Vereinsrechnungen erstellen
+      create_verein_invoice_run: Emettere le fatture delle società
     subverein_select_modal:
-      select_all: Alle Vereine an-/abwählen
-      submit: Zum Rechnungsformular
-      no_entries: Keine Subvereine vorhanden
-      invoice_config_invalid: "Rechnungen können nicht erstellt werden, da Ihre Rechnungseinstellungen invalide sind."
+      select_all: Selezionare/deselezionare tutte le società
+      submit: Dal formulare di fatturazione
+      no_entries: Non sono presenti società affiliate
+      invoice_config_invalid: Non è possibile emettere fatture poiché le impostazioni di fatturazione non sono valide.
       info: 
-        group-vereinvorstand-kassier: Rechnung wird an den/die Kassier*in des Vorstandes gesendet
-        group-vereinvorstand-praesident: Rechnung wird an den/die Präsident*in des Vorstandes gesendet
-        group-verein-admin: Rechnung wird an den/die Administrator*in des Vorstandes gesendet
-        no_recipient: "Rechnung kann nicht gestellt werden, da kein Empfänger gefunden wurde"
+        group-vereinvorstand-kassier: La fattura verrà inviata al/alla tesoriere/a del comitato
+        group-vereinvorstand-praesident: La fattura verrà inviata al/alla presidente del comitato
+        group-verein-admin: La fattura verrà inviata all'amministratore/all'amministratrice del comitato
+        no_recipient: "Non è possibile emettere la fattura, poiché non è stato individuato alcun destinatario"
 
   roles:
     info:
       role_only_public: >
         Il ruolo %{role} nel gruppo %{group}può visionare solo dati pubblici (gruppi, eventi ed elenchi, nessuna altra persona).
   song_counts:
-    export_enqueued: "Export wird im Hintergrund gestartet und kann nach Fertigstellung auf der Jobübersicht heruntergeladen werden: %{overview_link}"
+    export_enqueued: "L'esportazione viene avviata in background e una volta completata, può essere scaricata dalla panoramica dei lavori: %{overview_link}"
 
   subscriber:
       group:
@@ -117,7 +117,7 @@ it:
     csv: CSV
     xlsx: Excel
   dropdown/invoice_new:
-    membership_fee: Mitgliederbeitrag
+    membership_fee: Quota associativa
 
   concerts:
     index:
