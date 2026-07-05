@@ -51,6 +51,7 @@ module HitobitoSbv
       PeopleController.permitted_attrs += [:profession]
 
       Person::HistoryController.prepend Sbv::Person::HistoryController
+      Event::ParticipationsController.prepend Sbv::Event::ParticipationsController
       DeviseController.include HostnamedGroups
 
       ### helpers
@@ -108,7 +109,7 @@ module HitobitoSbv
       TableDisplay.register_column(Person, TableDisplays::ShowDetailsColumn, :active_years)
 
       TableDisplay.register_column(Event::Participation,
-        TableDisplays::Event::Participations::ShowDetailsOrEventLeaderColumn,
+        TableDisplays::Event::Participations::InstrumentColumn,
         ["participant.instrument"])
 
       ### abilities
