@@ -7,6 +7,8 @@
 
 module TableDisplays::Event::Participations
   class InstrumentColumn < ShowDetailsOrEventLeaderColumn
+    include TableDisplays::InstrumentGroupContext
+
     def label(_attr)
       Role.human_attribute_name(:instrument)
     end
@@ -24,14 +26,7 @@ module TableDisplays::Event::Participations
     private
 
     def instrument_for(participation)
-      person = participation.participant
-      return unless person.is_a?(Person)
-
-      person.instrument_for_group(context_group)
-    end
-
-    def context_group
-      table&.try(:selected_group) || template&.try(:group)
+      instrument_for_person(participation.participant)
     end
   end
 end

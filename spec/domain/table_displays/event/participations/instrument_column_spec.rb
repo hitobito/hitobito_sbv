@@ -32,6 +32,12 @@ describe TableDisplays::Event::Participations::InstrumentColumn do
   it "resolves instrument from the export group context" do
     expect(subject.send(:instrument_for, participation)).to eq "Trompete"
   end
+
+  it "loads descendant group ids only once per column instance" do
+    expect(group).to receive(:self_and_descendants).once.and_call_original
+
+    3.times { subject.send(:instrument_for, participation) }
+  end
 end
 
 describe Event::ParticipationsController do

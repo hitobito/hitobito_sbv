@@ -7,6 +7,8 @@
 
 module TableDisplays::People
   class InstrumentColumn < TableDisplays::Column
+    include TableDisplays::InstrumentGroupContext
+
     def required_permission(_attr)
       :show
     end
@@ -16,8 +18,7 @@ module TableDisplays::People
     end
 
     def allowed_value_for(object, _attr, &_block)
-      group = table&.try(:selected_group) || table&.template&.parent
-      object.instrument_for_group(group)
+      instrument_for_person(object)
     end
 
     def render(attr)

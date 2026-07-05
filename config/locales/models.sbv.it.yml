@@ -450,4 +450,4 @@ it:
       cannot_be_later_than_end_on: muss vor oder am selben Tag wie der Austritt sein
 
   delayed_job:
-    export/song_counts_export_job: Werkmeldungs-Export
+    export/song_counts_export_job: Export annunci brani
