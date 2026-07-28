@@ -56,7 +56,7 @@ module HitobitoSbv
       ### helpers
       NavigationHelper::ADMIN_GROUPS[:concerts_sbv] = {
         heading: "admins.show.concerts",
-        items: [{model: Song, path: :songs_path}]
+        items: [NavigationHelper::Item.new(model: Song, path: :songs_path)]
       }
 
       index_admin = NavigationHelper::MAIN.index { |opts| opts[:label] == :admin }
