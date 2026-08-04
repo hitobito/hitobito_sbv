@@ -54,8 +54,10 @@ module HitobitoSbv
       DeviseController.include HostnamedGroups
 
       ### helpers
-      admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
-      admin[:active_for] << "songs"
+      NavigationHelper::ADMIN_GROUPS[:concerts_sbv] = {
+        heading: "admins.show.concerts",
+        items: [NavigationHelper::Item.new(model: Song, path: :songs_path)]
+      }
 
       index_admin = NavigationHelper::MAIN.index { |opts| opts[:label] == :admin }
       NavigationHelper::MAIN.insert(
