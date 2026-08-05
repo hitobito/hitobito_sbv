@@ -4,6 +4,10 @@
 #  https://github.com/hitobito/hitobito_sbv.
 
 fr:
+  admins:
+    show:
+      concerts: Aufführungen
+
   global:
     last_change: "Dernière modification: %{date}"
   navigation:
