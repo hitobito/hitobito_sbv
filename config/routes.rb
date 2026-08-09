@@ -31,6 +31,9 @@ Rails.application.routes.draw do
       resource :roles, only: [] do
         post 'create_history_member'
       end
+      resources :roles, only: [] do
+        resource :instrument, only: [:destroy], controller: "roles/instruments"
+      end
       resources :history_roles, only: [:create, :destroy]
     end
     get '/groups/query' => 'groups/query#index', as: :query_groups

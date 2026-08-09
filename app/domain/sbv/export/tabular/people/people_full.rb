@@ -17,7 +17,11 @@ module Sbv
           end
 
           def person_attributes_with_active_years
-            person_attributes_without_active_years + [:active_years]
+            attrs = InstrumentAttribute.insert_instrument_after_name_attribute(
+              person_attributes_without_active_years
+            )
+            attrs << :active_years unless attrs.include?(:active_years)
+            attrs
           end
         end
       end

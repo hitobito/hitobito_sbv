@@ -1,0 +1,30 @@
+-#  Copyright (c) 2026, Schweizer Blasmusikverband. This file is part of
+-#  hitobito_sbv and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_sbv.
+
+- role_type = local_assigns.fetch(:role_type) { role_type_class(entry, group) }
+- if mitglied_role_type?(role_type)
+  - instruments = Role::MitgliederMitglied.instrument_labels.to_a
+  - select_classes = 'form-select form-select-sm'
+  - wrapper_class = local_assigns[:modal] ? 'shown ms-0' : 'col-6 shown'
+  - if local_assigns[:f]
+    = f.labeled(:instrument) do
+      %div{class: wrapper_class}
+        = f.collection_select(:instrument,
+                              instruments,
+                              :first,
+                              :last,
+                              { include_blank: "" },
+                              class: select_classes)
+  - else
+    .row.mb-2
+      %label.col-md-3.col-xl-2.col-form-label.text-md-end.pb-1{ for: "role_instrument" }
+        = Role.human_attribute_name(:instrument)
+      .labeled.col-md-9.col-lg-8.col-xl-8.mw-63ch.mw-md-47ch.mw-lg-63ch
+        %div{class: wrapper_class}
+          = select_tag("role[instrument]",
+                       options_for_select(instruments.map(&:reverse), entry&.instrument),
+                       include_blank: true,
+                       class: select_classes,
+                       id: "role_instrument")

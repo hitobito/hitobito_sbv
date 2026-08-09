@@ -347,6 +347,9 @@ it:
     attributes:
       person:
         language: Lingua di corrispondenza
+        instrument: Strumento
+        instruments:
+          _nil: sconosciuto
         profession: Lavoro
         active_years: Anni attivi fino ad oggi
         active_role: appartenenza attiva

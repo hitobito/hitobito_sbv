@@ -20,6 +20,8 @@
 #
 
 class Role::MitgliederMitglied < Role
+  include Sbv::Role::Instrument
+
   self.permissions = [:layer_read]
 
   attr_accessor :historic_membership

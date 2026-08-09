@@ -1,5 +1,9 @@
 # Hitobito SBV Changelog
 
+## Version 1.28
+
+* Instrument pro Verein auf der Rolle «Mitglied» (Enum-Dropdown); Anzeige im Personenprofil, Exporte und JSON-API (`RoleResource`)
+
 ## Version 1.27
 
 * Neue Rolle Jugendverantwortlicher auf Verein (hitobito_sbv#115)

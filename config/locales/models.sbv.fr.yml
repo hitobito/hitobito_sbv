@@ -347,6 +347,9 @@ fr:
     attributes:
       person:
         language: Langue de correspondance
+        instrument: Instrument
+        instruments:
+          _nil: Inconnu
         profession: Profession
         active_years: Années d'activité actuelles
         active_role: adhésion active
