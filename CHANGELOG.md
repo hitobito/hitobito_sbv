@@ -1,5 +1,9 @@
 # Hitobito SBV Changelog
 
+## Version 1.28
+
+* Feld «Verwendung der Adressdaten» in Personenansicht, Editor und Exporten ausgeblendet (Daten bleiben erhalten)
+
 ## Version 1.27
 
 * Neue Rolle Jugendverantwortlicher auf Verein (hitobito_sbv#115)

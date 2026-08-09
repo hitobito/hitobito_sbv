@@ -16,6 +16,10 @@ module Sbv
             alias_method_chain :person_attributes, :active_years
           end
 
+          def excluded_person_attributes
+            super + [:personal_data_usage]
+          end
+
           def person_attributes_with_active_years
             person_attributes_without_active_years + [:active_years]
           end
