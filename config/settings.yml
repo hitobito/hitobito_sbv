@@ -37,4 +37,4 @@ messages:
   enable_writing: true
 
 assignments:
-  enabled: true
+  enabled: false
