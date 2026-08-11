@@ -1,5 +1,9 @@
 # Hitobito SBV Changelog
 
+## Version 1.28
+
+* Tab «Aufträge» auf Personen ausgeblendet
+
 ## Version 1.27
 
 * Neue Rolle Jugendverantwortlicher auf Verein (hitobito_sbv#115)
