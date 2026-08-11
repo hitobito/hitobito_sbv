@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe Export::Tabular::People::PeopleFull do
-  let(:person) { people(:top_leader) }
+  let(:person) { people(:leader) }
   let(:export) { described_class.new(Person.where(id: person.id)) }
 
   it "excludes personal_data_usage from alle angaben export" do

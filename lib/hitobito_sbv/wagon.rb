@@ -87,7 +87,7 @@ module HitobitoSbv
 
       Export::Tabular::Groups::Row.include Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.prepend Sbv::Export::Tabular::Groups::List
-      Export::Tabular::People::PeopleFull.include Sbv::Export::Tabular::People::PeopleFull
+      Export::Tabular::People::PeopleFull.prepend Sbv::Export::Tabular::People::PeopleFull
 
       MailRelay::Lists.prepend Sbv::MailRelay::Lists
 
