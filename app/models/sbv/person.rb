@@ -11,8 +11,6 @@ module Sbv::Person
   included do
     include Person::ActiveYears
 
-    # personal_data_usage: kept in DB, hidden from UI and exports (see PeopleFull, views)
-
     validates :first_name, :last_name, presence: true
   end
 end
