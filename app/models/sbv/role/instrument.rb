@@ -8,7 +8,36 @@
 module Sbv::Role::Instrument
   extend ActiveSupport::Concern
 
-  I18N_PREFIX = Sbv::Instruments::Catalog::I18N_PREFIX
+  INSTRUMENTS = %w[
+    querfloete
+    piccolo
+    oboe
+    englischhorn
+    fagott
+    es_klarinette
+    klarinette
+    bassklarinette
+    saxophon_sopran
+    saxophon_alt
+    saxophon_tenor
+    saxophon_bariton
+    saxophon_bass
+    trompete
+    fluegelhorn
+    cornet
+    waldhorn
+    tenorhorn
+    posaune
+    bariton
+    euphonium
+    bassposaune
+    tuba
+    kontrabass
+    schlagzeug
+    sonstiges
+  ].freeze
+
+  I18N_PREFIX = "activerecord.attributes.role.instruments"
 
   included do
     include I18nEnums
@@ -16,7 +45,7 @@ module Sbv::Role::Instrument
     self.used_attributes += [:instrument]
     paper_trail_options[:skip] |= [:label]
 
-    i18n_enum :instrument, ->(_) { Sbv::Instruments::Catalog.keys },
+    i18n_enum :instrument, INSTRUMENTS,
       key: :instruments,
       i18n_prefix: I18N_PREFIX
   end
@@ -26,12 +55,8 @@ module Sbv::Role::Instrument
       descendants.map(&:sti_name) + [sti_name]
     end
 
-    def map_instrument_value(raw_value)
-      Sbv::Role::InstrumentMapper.map(raw_value)
-    end
-
     def instruments
-      Sbv::Instruments::Catalog.keys
+      INSTRUMENTS
     end
   end
 

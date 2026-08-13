@@ -347,9 +347,6 @@ it:
     attributes:
       person:
         language: Lingua di corrispondenza
-        instrument: Strumento
-        instruments:
-          _nil: sconosciuto
         profession: Lavoro
         active_years: Anni attivi fino ad oggi
         active_role: appartenenza attiva
@@ -404,6 +401,35 @@ it:
         start_on: Entrata
         end_on: Uscita
         language: Lingua di corrispondenza
+        instrument: Strumento
+        instruments:
+          _nil: sconosciuto
+          querfloete: Flauto traverso
+          piccolo: Ottavino
+          oboe: Oboe
+          englischhorn: Corno inglese
+          fagott: Fagotto
+          es_klarinette: Clarinetto in mi bemolle
+          klarinette: Clarinetto (si bemolle)
+          bassklarinette: Clarinetto basso
+          saxophon_sopran: Sassofono soprano
+          saxophon_alt: Sassofono contralto
+          saxophon_tenor: Sassofono tenore
+          saxophon_bariton: Sassofono baritono
+          saxophon_bass: Sassofono basso
+          trompete: Tromba
+          fluegelhorn: Flicorno
+          cornet: Cornet
+          waldhorn: Corno
+          tenorhorn: Flicorno tenore
+          posaune: Trombone
+          bariton: Baritono
+          euphonium: Euphonium
+          bassposaune: Trombone basso
+          tuba: Tuba / Basso
+          kontrabass: Contrabbasso
+          schlagzeug: Batteria
+          sonstiges: Altro
         class:
           permission:
             description:

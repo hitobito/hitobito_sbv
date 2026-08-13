@@ -347,9 +347,6 @@ fr:
     attributes:
       person:
         language: Langue de correspondance
-        instrument: Instrument
-        instruments:
-          _nil: Inconnu
         profession: Profession
         active_years: Années d'activité actuelles
         active_role: adhésion active
@@ -404,6 +401,35 @@ fr:
         start_on: Entrée
         end_on: Sortie
         language: Langue de correspondance
+        instrument: Instrument
+        instruments:
+          _nil: Inconnu
+          querfloete: Flûte traversière
+          piccolo: Piccolo
+          oboe: Hautbois
+          englischhorn: Cor anglais
+          fagott: Basson
+          es_klarinette: Clarinette en mi bémol
+          klarinette: Clarinette (si bémol)
+          bassklarinette: Clarinette basse
+          saxophon_sopran: Saxophone soprano
+          saxophon_alt: Saxophone alto
+          saxophon_tenor: Saxophone ténor
+          saxophon_bariton: Saxophone baryton
+          saxophon_bass: Saxophone basse
+          trompete: Trompette
+          fluegelhorn: Bugle
+          cornet: Cornet
+          waldhorn: Cor d'harmonie
+          tenorhorn: Cor alto
+          posaune: Trombone
+          bariton: Baryton
+          euphonium: Euphonium
+          bassposaune: Trombone basse
+          tuba: Tuba / Basse
+          kontrabass: Contrebasse
+          schlagzeug: Batterie
+          sonstiges: Autre
         class:
           permission:
             description:

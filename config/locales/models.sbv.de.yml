@@ -332,6 +332,32 @@ de:
         instrument: Instrument
         instruments:
           _nil: unbekannt
+          querfloete: Querflöte
+          piccolo: Piccolo
+          oboe: Oboe
+          englischhorn: Englischhorn
+          fagott: Fagott
+          es_klarinette: Es-Klarinette
+          klarinette: Klarinette (B)
+          bassklarinette: Bassklarinette
+          saxophon_sopran: Sopran-Saxophon
+          saxophon_alt: Alt-Saxophon
+          saxophon_tenor: Tenor-Saxophon
+          saxophon_bariton: Bariton-Saxophon
+          saxophon_bass: Bass-Saxophon
+          trompete: Trompete
+          fluegelhorn: Flügelhorn
+          cornet: Cornet
+          waldhorn: Waldhorn
+          tenorhorn: Tenorhorn
+          posaune: Posaune
+          bariton: Baritonhorn
+          euphonium: Euphonium
+          bassposaune: Bassposaune
+          tuba: Tuba / Bass
+          kontrabass: Kontrabass
+          schlagzeug: Schlagzeug
+          sonstiges: Sonstiges
         class:
           permission:
             description:
