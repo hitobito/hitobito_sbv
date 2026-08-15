@@ -2,6 +2,7 @@
 
 ## Version 1.28
 
+* Instrument pro Verein auf der Rolle «Mitglied» (Enum-Dropdown); Anzeige im Personenprofil, Exporte und JSON-API (`RoleResource`)
 * Tab «Aufträge» auf Personen ausgeblendet
 
 ## Version 1.27

@@ -401,6 +401,43 @@ it:
         start_on: Entrata
         end_on: Uscita
         language: Lingua di corrispondenza
+        instrument: Strumento
+        instruments:
+          _nil: sconosciuto
+          piccolo: Ottavino
+          querfloete: Flauto traverso
+          oboe: Oboe
+          englischhorn: Corno inglese
+          fagott: Fagotto
+          es_klarinette: Clarinetto (mi bemolle)
+          klarinette: Clarinetto (si bemolle)
+          bassklarinette: Clarinetto basso
+          saxophon_sopran: Sassofono soprano
+          saxophon_alt: Sassofono contralto
+          saxophon_tenor: Sassofono tenore
+          saxophon_bariton: Sassofono baritono
+          saxophon_bass: Sassofono basso
+          trompete: Tromba
+          cornet_es: Cornet (mi bemolle / soprano)
+          cornet_b: Cornet (si bemolle)
+          fluegelhorn: Flicorno
+          waldhorn: Corno (fa)
+          althorn: Genis / Corno in mi bemolle
+          tenorhorn: Flicorno tenore
+          bariton: Baritono
+          euphonium: Euphonium
+          posaune: Trombone
+          bassposaune: Trombone basso
+          tuba_es: Tuba / Basso mi bemolle
+          tuba_b: Tuba / Basso si bemolle
+          schlagzeug: Batteria (drumset)
+          kleine_trommel: Rullante / Tamburo
+          pauken: Timpani
+          stabspiele: Tastiere a percussione / Mallets
+          perkussion: Percussioni (altre)
+          kontrabass: Contrabbasso
+          e_bass: Basso elettrico
+          klavier: Pianoforte / Keyboard
         class:
           permission:
             description:

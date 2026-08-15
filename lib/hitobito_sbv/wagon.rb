@@ -51,6 +51,7 @@ module HitobitoSbv
       PeopleController.permitted_attrs += [:profession, :personal_data_usage]
 
       Person::HistoryController.prepend Sbv::Person::HistoryController
+      Event::ParticipationsController.prepend Sbv::Event::ParticipationsController
       DeviseController.include HostnamedGroups
 
       ### helpers
@@ -68,7 +69,12 @@ module HitobitoSbv
       )
 
       GroupsHelper.include Sbv::GroupsHelper
+      RolesHelper.include Sbv::RolesHelper
       GroupDecorator.prepend Sbv::GroupDecorator
+      RoleDecorator.prepend Sbv::RoleDecorator
+      PaperTrail::VersionAssociationChangePresenter.prepend(
+        Sbv::PaperTrail::VersionAssociationChangePresenter
+      )
       StandardFormBuilder.include Sbv::StandardFormBuilder
       Dropdown::InvoiceNew.prepend Sbv::Dropdown::InvoiceNew
 
@@ -76,6 +82,7 @@ module HitobitoSbv
       Sheet::Group.include Sbv::Sheet::Group
 
       ### jobs
+      Export::LabelsJob.prepend Sbv::Export::LabelsJob
       Export::SubgroupsExportJob.prepend Sbv::Export::SubgroupsExportJob
 
       ### mailers
@@ -87,22 +94,40 @@ module HitobitoSbv
 
       Export::Tabular::Groups::Row.include Sbv::Export::Tabular::Groups::Row
       Export::Tabular::Groups::List.prepend Sbv::Export::Tabular::Groups::List
+      Export::Tabular::People::PeopleAddress.include(
+        Sbv::Export::Tabular::People::InstrumentAttribute
+      )
+      Export::Tabular::People::Households.include(
+        Sbv::Export::Tabular::People::InstrumentAttribute
+      )
+      # PeopleFull overrides person_attributes; include InstrumentAttribute on it
+      # directly so «Alle Angaben» keeps the instrument column.
+      Export::Tabular::People::PeopleFull.include(
+        Sbv::Export::Tabular::People::InstrumentAttribute
+      )
       Export::Tabular::People::PeopleFull.include Sbv::Export::Tabular::People::PeopleFull
+      Export::Tabular::People::TableDisplays.prepend(
+        Sbv::Export::Tabular::People::TableDisplaysExtension
+      )
 
       MailRelay::Lists.prepend Sbv::MailRelay::Lists
 
-      additional_person_attrs = [
-        :active_years
-      ]
+      # :instrument is registered via TableDisplays::People::InstrumentColumn
+      TableDisplay.register_column(Person, TableDisplays::People::InstrumentColumn, :instrument)
+      TableDisplay.register_column(Person, TableDisplays::ShowDetailsColumn, :active_years)
 
-      TableDisplay.register_column(Person,
-        TableDisplays::ShowDetailsColumn,
-        additional_person_attrs)
+      TableDisplay.register_column(Event::Participation,
+        TableDisplays::Event::Participations::InstrumentColumn,
+        ["participant.instrument"])
 
       ### abilities
       RoleAbility.include Sbv::RoleAbility
       GroupAbility.include Sbv::GroupAbility
       PersonAbility.include Sbv::PersonAbility
+
+      RoleResource.class_eval do
+        attribute :instrument, :string
+      end
 
       # uv_lohnsumme allows to manage the salary amount for the accident insurance
       Role::Permissions << :uv_lohnsumme

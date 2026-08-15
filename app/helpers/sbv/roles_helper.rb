@@ -16,6 +16,25 @@ module Sbv::RolesHelper
     group.language
   end
 
+  def role_type_class(entry, group = nil)
+    if entry.type.present?
+      entry.type.constantize
+    elsif @type.present?
+      @type
+    elsif group&.standard_role
+      group.standard_role
+    else
+      entry.class
+    end
+  end
+
+  def mitglied_role_type?(role_type)
+    return false if role_type.blank?
+
+    # Class#<= returns nil for unrelated classes; coerce to boolean.
+    !!(role_type <= Role::MitgliederMitglied)
+  end
+
   private
 
   def supported_languages

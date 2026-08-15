@@ -15,4 +15,21 @@ module Sbv::Person
 
     validates :first_name, :last_name, presence: true
   end
+
+  def mitglied_role_in(group, group_ids: nil)
+    return nil unless group.is_a?(Group)
+
+    ids = group_ids || group.self_and_descendants.pluck(:id)
+    roles.find { |role| role.is_a?(Role::MitgliederMitglied) && ids.include?(role.group_id) }
+  end
+
+  def instrument_for_group(group, group_ids: nil)
+    mitglied_role_in(group, group_ids: group_ids)&.instrument_label
+  end
+
+  def instrument
+    instrument_for_group(primary_group).presence ||
+      roles.find { |role| role.is_a?(Role::MitgliederMitglied) && role.instrument.present? }
+        &.instrument_label
+  end
 end

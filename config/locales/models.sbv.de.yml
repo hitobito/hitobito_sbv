@@ -329,6 +329,43 @@ de:
         start_on: Eintritt
         end_on: Austritt
         language: Korrespondenz Sprache
+        instrument: Instrument
+        instruments:
+          _nil: unbekannt
+          piccolo: Piccolo
+          querfloete: Querflöte
+          oboe: Oboe
+          englischhorn: Englischhorn
+          fagott: Fagott
+          es_klarinette: Klarinette (Es)
+          klarinette: Klarinette (B)
+          bassklarinette: Bassklarinette
+          saxophon_sopran: Sopransaxophon
+          saxophon_alt: Altsaxophon
+          saxophon_tenor: Tenorsaxophon
+          saxophon_bariton: Baritonsaxophon
+          saxophon_bass: Basssaxophon
+          trompete: Trompete
+          cornet_es: Cornet (Es / Sopran)
+          cornet_b: Cornet (B)
+          fluegelhorn: Flügelhorn
+          waldhorn: Waldhorn (F)
+          althorn: Althorn / Es-Horn
+          tenorhorn: Tenorhorn
+          bariton: Bariton
+          euphonium: Euphonium
+          posaune: Posaune
+          bassposaune: Bassposaune
+          tuba_es: Tuba / Es-Bass
+          tuba_b: Tuba / B-Bass
+          schlagzeug: Schlagzeug (Drumset)
+          kleine_trommel: Kleine Trommel / Tambour
+          pauken: Pauken
+          stabspiele: Stabspiele / Mallets
+          perkussion: Perkussion (übrige)
+          kontrabass: Kontrabass
+          e_bass: E-Bass
+          klavier: Klavier / Keyboard
         class:
           permission:
             description:
