@@ -11,7 +11,9 @@ module Sbv
       module People
         module TableDisplaysExtension
           # Standard columns for «Spaltenauswahl», plus additionally selected columns.
-          BASE_PERSON_ATTRS = %i[last_name first_name nickname roles email zip_code town].freeze
+          BASE_PERSON_ATTRS = %i[
+            last_name first_name instrument nickname roles email zip_code town
+          ].freeze
 
           def build_attribute_labels
             base_export_attribute_labels.merge(additional_selected_labels)

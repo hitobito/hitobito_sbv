@@ -18,25 +18,25 @@ describe Export::Tabular::People::TableDisplays do
 
   before do
     person.roles.find_by(group: group).update!(instrument: "trompete")
-    table_display.update!(selected: %i[instrument])
   end
 
-  it "always includes the base columns" do
+  it "always includes the base columns including instrument" do
     expect(export.attributes).to include(
-      :last_name, :first_name, :nickname, :roles, :email, :zip_code, :town
+      :last_name, :first_name, :instrument, :nickname, :roles, :email, :zip_code, :town
     )
     expect(export.attributes).to include(:phone_number_privat)
     expect(export.attributes).to include(:additional_email_privat)
   end
 
-  it "includes additionally selected columns such as instrument" do
-    expect(export.attributes).to include(:instrument)
+  it "exports instrument values for the selected group" do
     idx = export.attributes.index(:instrument)
     expect(export.data_rows.first[idx]).to eq "Trompete"
   end
 
-  it "does not include instrument when it is not selected" do
+  it "keeps instrument in the export even when it is not selected in the table" do
     table_display.update!(selected: [])
-    expect(export.attributes).not_to include(:instrument)
+    expect(export.attributes).to include(:instrument)
+    idx = export.attributes.index(:instrument)
+    expect(export.data_rows.first[idx]).to eq "Trompete"
   end
 end
