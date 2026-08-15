@@ -9,7 +9,7 @@
   - select_classes = 'form-select form-select-sm'
   - wrapper_class = local_assigns[:modal] ? 'shown ms-0' : 'col-6 shown'
   - if local_assigns[:f]
-    = f.labeled(:instrument) do
+    = f.labeled(:instrument, label_class: 'col-md-3 col-xl-2 text-nowrap') do
       %div{class: wrapper_class}
         = f.collection_select(:instrument,
                               instruments,
@@ -19,7 +19,7 @@
                               class: select_classes)
   - else
     .row.mb-2
-      %label.col-md-3.col-xl-2.col-form-label.text-md-end.pb-1{ for: "role_instrument" }
+      %label.col-md-3.col-xl-2.col-form-label.text-md-end.pb-1.text-nowrap{ for: "role_instrument" }
         = Role.human_attribute_name(:instrument)
       .labeled.col-md-9.col-lg-8.col-xl-8.mw-63ch.mw-md-47ch.mw-lg-63ch
         %div{class: wrapper_class}
