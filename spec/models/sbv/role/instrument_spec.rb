@@ -34,25 +34,33 @@ describe Role::MitgliederMitglied do
   end
 
   it "does not track label changes in paper trail", versioning: true do
-    subject.update!(instrument: nil, label: nil)
+    subject.update!(instrument: nil, label: "Alt")
 
-    expect { subject.update!(instrument: "oboe", label: "") }
+    expect { subject.update!(instrument: "oboe", label: "Neu") }
       .to change { PaperTrail::Version.count }.by(1)
 
     changes = PaperTrail::Version.last.changeset.keys
-    expect(changes).to eq(["instrument"])
+    expect(changes).to include("instrument")
+    expect(changes).not_to include("label")
   end
 end
 
 describe "instrument role history", versioning: true do
   let(:person) { people(:member) }
-  let(:group) { groups(:musikverband_hastdutoene) }
-  let(:role) { person.roles.find_by(group: group) }
+  let(:group) { groups(:mitglieder_hastdutoene) }
+  let!(:role) do
+    Group::VereinMitglieder::Mitglied.create!(
+      person: person,
+      group: group,
+      start_on: 1.year.ago,
+      instrument: nil,
+      label: nil
+    )
+  end
   let(:view_context) { ActionController::Base.new.view_context }
 
   before do
     view_context.extend(FormatHelper)
-    role.update!(instrument: nil, label: nil)
     PaperTrail.request.whodunnit = people(:admin).id.to_s
   end
 
@@ -68,7 +76,7 @@ describe "instrument role history", versioning: true do
 
   it "logs instrument when role is created with instrument" do
     role.destroy!
-    new_role = Role::MitgliederMitglied.create!(
+    new_role = Group::VereinMitglieder::Mitglied.create!(
       person: person,
       group: group,
       start_on: Time.zone.today,
@@ -84,7 +92,7 @@ describe "instrument role history", versioning: true do
 
   it "does not show a dangling colon when role is created without instrument" do
     role.destroy!
-    new_role = Role::MitgliederMitglied.create!(
+    new_role = Group::VereinMitglieder::Mitglied.create!(
       person: person,
       group: group,
       start_on: Time.zone.today

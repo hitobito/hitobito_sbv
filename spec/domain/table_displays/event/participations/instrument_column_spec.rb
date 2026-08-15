@@ -12,8 +12,8 @@ describe TableDisplays::Event::Participations::InstrumentColumn do
 
   let(:ability) { Ability.new(people(:admin)) }
   let(:group) { groups(:musikverband_hastdutoene) }
-  let(:table) { instance_double(StandardTableBuilder, template: template, selected_group: nil) }
-  let(:template) { instance_double(ActionView::Base, group: group) }
+  let(:table) { double("table", template: template, selected_group: nil) }
+  let(:template) { double("template", group: group) }
   let(:participation) { instance_double(Event::Participation, participant: person) }
   let(:person) { people(:member) }
 

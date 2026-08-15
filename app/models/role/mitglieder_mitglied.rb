@@ -65,7 +65,10 @@ class Role::MitgliederMitglied < Role
   self.permissions = [:layer_read]
   self.used_attributes += [:instrument]
 
-  paper_trail_options[:skip] |= [:label]
+  # PaperTrail compares skipped attrs as strings against changeset keys.
+  self.paper_trail_options = paper_trail_options.deep_dup
+  paper_trail_options[:skip] =
+    Array(paper_trail_options[:skip]).map(&:to_s) | %w[label updated_at]
 
   i18n_enum :instrument, INSTRUMENTS,
     key: :instruments,

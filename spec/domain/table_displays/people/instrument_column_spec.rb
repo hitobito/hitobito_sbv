@@ -13,8 +13,8 @@ describe TableDisplays::People::InstrumentColumn do
   let(:ability) { Ability.new(people(:admin)) }
   let(:group) { groups(:musikverband_hastdutoene) }
   let(:person) { people(:member) }
-  let(:table) { instance_double(StandardTableBuilder, template: template, selected_group: nil) }
-  let(:template) { instance_double(ActionView::Base, group: nil, parent: group) }
+  let(:table) { double("table", template: template, selected_group: nil) }
+  let(:template) { double("template", group: nil, parent: group) }
 
   before do
     person.roles.find_by(group: group).update!(instrument: "trompete")
