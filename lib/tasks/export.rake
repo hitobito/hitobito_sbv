@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2020, Schweizer Blasmusikverband. This file is part of
+#  Copyright (c) 2020-2026, Schweizer Blasmusikverband. This file is part of
 #  hitobito_sbv and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_sbv.
@@ -19,9 +19,11 @@ namespace :export do
       "WHEN '#{code}' THEN '#{long_name}'"
     end.join(" ")
 
-    instrument_sql = Role::MitgliederMitglied.instruments.map do |key|
-      label = I18n.t("#{Sbv::Role::Instrument::I18N_PREFIX}.#{key}").gsub("'", "''")
-      "WHEN mitglied_roles.instrument = '#{key}' THEN '#{label}'"
+    # Match Person#instrument: Mitglied role in primary_group or its descendants
+    # (role lives on VereinMitglieder, primary_group is often the Verein).
+    instrument_sql = Role::MitgliederMitglied.instrument_labels.map do |key, label|
+      escaped = label.to_s.gsub("'", "''")
+      "WHEN mitglied_roles.instrument = '#{key}' THEN '#{escaped}'"
     end.join("\n        ")
 
     extractor.query("people", <<-FIELD_SQL, <<-CONDITION_SQL)
@@ -40,9 +42,14 @@ namespace :export do
       INNER JOIN groups AS layer_groups ON layer_groups.id = groups.layer_group_id
       LEFT JOIN roles AS mitglied_roles ON mitglied_roles.person_id = people.id
         AND mitglied_roles.type = 'Group::VereinMitglieder::Mitglied'
-        AND mitglied_roles.group_id = people.primary_group_id
         AND mitglied_roles.deleted_at IS NULL
         AND mitglied_roles.end_on IS NULL
+        AND mitglied_roles.group_id IN (
+          SELECT descendants.id
+          FROM groups AS descendants
+          WHERE descendants.lft >= groups.lft
+            AND descendants.rgt <= groups.rgt
+        )
       WHERE people.id IN (#{Role.where(group: dachverband.descendants).select(:person_id).uniq.to_sql.delete("`")})
     CONDITION_SQL
 
