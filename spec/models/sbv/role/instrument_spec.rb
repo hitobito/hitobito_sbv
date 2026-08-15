@@ -23,8 +23,14 @@ describe Role::MitgliederMitglied do
 
   it "translates instrument labels via i18n_enum" do
     subject.instrument = "saxophon_sopran"
-    expect(subject.instrument_label).to eq "Sopran-Saxophon"
-    expect(described_class.instrument_labels[:saxophon_alt]).to eq "Alt-Saxophon"
+    expect(subject.instrument_label).to eq "Sopransaxophon"
+    expect(described_class.instrument_labels[:saxophon_alt]).to eq "Altsaxophon"
+  end
+
+  it "keeps catalog order for select options" do
+    expect(described_class.instruments.first).to eq "piccolo"
+    expect(described_class.instruments).to include("althorn", "klavier")
+    expect(described_class.instruments).not_to include("sonstiges", "cornet", "tuba")
   end
 
   it "does not track label changes in paper trail", versioning: true do

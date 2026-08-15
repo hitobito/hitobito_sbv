@@ -8,9 +8,10 @@
 module Sbv::Role::Instrument
   extend ActiveSupport::Concern
 
+  # Order follows woodwind → saxophone → brass → percussion → other
   INSTRUMENTS = %w[
-    querfloete
     piccolo
+    querfloete
     oboe
     englischhorn
     fagott
@@ -23,18 +24,26 @@ module Sbv::Role::Instrument
     saxophon_bariton
     saxophon_bass
     trompete
+    cornet_es
+    cornet_b
     fluegelhorn
-    cornet
     waldhorn
+    althorn
     tenorhorn
-    posaune
     bariton
     euphonium
+    posaune
     bassposaune
-    tuba
-    kontrabass
+    tuba_es
+    tuba_b
     schlagzeug
-    sonstiges
+    kleine_trommel
+    pauken
+    stabspiele
+    perkussion
+    kontrabass
+    e_bass
+    klavier
   ].freeze
 
   I18N_PREFIX = "activerecord.attributes.role.instruments"

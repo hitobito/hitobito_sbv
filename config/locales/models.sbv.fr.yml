@@ -404,12 +404,12 @@ fr:
         instrument: Instrument
         instruments:
           _nil: Inconnu
-          querfloete: Flûte traversière
           piccolo: Piccolo
+          querfloete: Flûte traversière
           oboe: Hautbois
           englischhorn: Cor anglais
           fagott: Basson
-          es_klarinette: Clarinette en mi bémol
+          es_klarinette: Clarinette (mi bémol)
           klarinette: Clarinette (si bémol)
           bassklarinette: Clarinette basse
           saxophon_sopran: Saxophone soprano
@@ -418,18 +418,26 @@ fr:
           saxophon_bariton: Saxophone baryton
           saxophon_bass: Saxophone basse
           trompete: Trompette
+          cornet_es: Cornet (mi bémol / soprano)
+          cornet_b: Cornet (si bémol)
           fluegelhorn: Bugle
-          cornet: Cornet
-          waldhorn: Cor d'harmonie
-          tenorhorn: Cor alto
-          posaune: Trombone
+          waldhorn: Cor d'harmonie (fa)
+          althorn: Cor alto / Cor mi bémol
+          tenorhorn: Saxhorn ténor
           bariton: Baryton
           euphonium: Euphonium
+          posaune: Trombone
           bassposaune: Trombone basse
-          tuba: Tuba / Basse
+          tuba_es: Tuba / Basse mi bémol
+          tuba_b: Tuba / Basse si bémol
+          schlagzeug: Batterie (drumset)
+          kleine_trommel: Caisse claire / Tambour
+          pauken: Timbales
+          stabspiele: Jeux de barres / Mallets
+          perkussion: Percussion (autres)
           kontrabass: Contrebasse
-          schlagzeug: Batterie
-          sonstiges: Autre
+          e_bass: Basse électrique
+          klavier: Piano / Clavier
         class:
           permission:
             description:

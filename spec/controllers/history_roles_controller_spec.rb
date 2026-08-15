@@ -58,13 +58,13 @@ describe HistoryRolesController do
       group_id: group.id,
       start_on: 2.years.ago.to_date,
       end_on: Date.yesterday,
-      instrument: "saxophon"
+      instrument: "saxophon_alt"
     }
     expect do
       post :create, params: {group_id: group.id, role: role_params}
     end.to change { leader.roles.with_inactive.count }.by(1)
     expect(leader.reload.active_years).to eq 2
-    expect(leader.roles.with_inactive).to be_any { |role| role.instrument == "saxophon" }
+    expect(leader.roles.with_inactive).to be_any { |role| role.instrument == "saxophon_alt" }
   end
 
   it "POST#create creates new role and deleted mitglieder verein in hidden verein group" do
