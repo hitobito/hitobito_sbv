@@ -28,7 +28,9 @@ describe Export::PeopleExportJob do
 
   context "full export" do
     subject do
-      Export::PeopleExportJob.new(:csv, user.id, group.id, {}, full: true, filename: "people_export")
+      Export::PeopleExportJob.new(
+        :csv, user.id, group.id, {}, full: true, filename: "people_export"
+      )
     end
 
     it "includes the instrument column" do
@@ -58,7 +60,7 @@ describe Export::PeopleExportJob do
       )
       headers = csv.headers.map { |h| h.to_s.delete("\uFEFF") }
       expect(headers).to include("Nachname", "Vorname", "Instrument")
-      expect(csv.map { |row| row["Instrument"] }).to include("Trompete")
+      expect(csv["Instrument"]).to include("Trompete")
     end
   end
 end
