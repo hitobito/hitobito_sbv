@@ -30,8 +30,4 @@ module Sbv::Person
   def instrument
     instrument_for_group(primary_group)
   end
-
-  def mitglied_roles_with_instrument
-    roles.select { |role| role.is_a?(Role::MitgliederMitglied) && role.instrument.present? }
-  end
 end

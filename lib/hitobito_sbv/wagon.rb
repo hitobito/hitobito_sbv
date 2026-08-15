@@ -71,6 +71,7 @@ module HitobitoSbv
       GroupsHelper.include Sbv::GroupsHelper
       RolesHelper.include Sbv::RolesHelper
       GroupDecorator.prepend Sbv::GroupDecorator
+      RoleDecorator.prepend Sbv::RoleDecorator
       PaperTrail::VersionAssociationChangePresenter.prepend(
         Sbv::PaperTrail::VersionAssociationChangePresenter
       )
