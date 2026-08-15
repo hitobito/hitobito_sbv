@@ -28,6 +28,8 @@ module Sbv::Person
   end
 
   def instrument
-    instrument_for_group(primary_group)
+    instrument_for_group(primary_group).presence ||
+      roles.find { |role| role.is_a?(Role::MitgliederMitglied) && role.instrument.present? }
+        &.instrument_label
   end
 end

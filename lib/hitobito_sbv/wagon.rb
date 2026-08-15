@@ -100,6 +100,11 @@ module HitobitoSbv
       Export::Tabular::People::Households.include(
         Sbv::Export::Tabular::People::InstrumentAttribute
       )
+      # PeopleFull overrides person_attributes; include InstrumentAttribute on it
+      # directly so «Alle Angaben» keeps the instrument column.
+      Export::Tabular::People::PeopleFull.include(
+        Sbv::Export::Tabular::People::InstrumentAttribute
+      )
       Export::Tabular::People::PeopleFull.include Sbv::Export::Tabular::People::PeopleFull
       Export::Tabular::People::TableDisplays.prepend(
         Sbv::Export::Tabular::People::TableDisplaysExtension
