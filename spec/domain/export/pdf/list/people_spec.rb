@@ -8,10 +8,11 @@
 require "spec_helper"
 
 describe Export::Pdf::List::People do
-  subject { Export::Pdf::List.render(people, group) }
+  subject { Export::Pdf::List.render(list_people, group) }
 
-  let(:people) { group.people }
+  let(:list_people) { group.people }
   let(:group) { groups(:musikverband_hastdutoene) }
+  let(:member) { people(:member) }
 
   let(:pdf_text) { PDF::Inspector::Text.analyze(subject).show_text.compact.join(" ") }
 
@@ -24,8 +25,10 @@ describe Export::Pdf::List::People do
   end
 
   it "renders the instrument column" do
-    people.first.roles.find_by(group: group).update!(instrument: "trompete")
-    pdf = Export::Pdf::List.render(people, group)
+    member.roles
+      .find_by(type: Group::VereinMitglieder::Mitglied.sti_name)
+      .update!(instrument: "trompete")
+    pdf = Export::Pdf::List.render(group.people.reload, group)
     text = PDF::Inspector::Text.analyze(pdf).show_text.compact.join(" ")
     expect(text).to include(Role.human_attribute_name(:instrument), "Trompete")
   end
@@ -35,10 +38,12 @@ describe Export::Pdf::List::People do
   end
 
   context "when title is the group name (legacy render path)" do
-    subject { Export::Pdf::List.render(people, group.name) }
+    subject { Export::Pdf::List.render(list_people, group.name) }
 
     it "does not error and renders the instrument column" do
-      people.first.roles.find_by(group: group).update!(instrument: "trompete")
+      member.roles
+        .find_by(type: Group::VereinMitglieder::Mitglied.sti_name)
+        .update!(instrument: "trompete")
       text = PDF::Inspector::Text.analyze(subject).show_text.compact.join(" ")
       expect(text).to include(Role.human_attribute_name(:instrument))
     end

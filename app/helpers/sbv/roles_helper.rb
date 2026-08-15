@@ -29,7 +29,10 @@ module Sbv::RolesHelper
   end
 
   def mitglied_role_type?(role_type)
-    role_type.present? && role_type <= Role::MitgliederMitglied
+    return false if role_type.blank?
+
+    # Class#<= returns nil for unrelated classes; coerce to boolean.
+    !!(role_type <= Role::MitgliederMitglied)
   end
 
   private

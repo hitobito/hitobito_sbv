@@ -8,14 +8,11 @@
 require "spec_helper"
 
 describe Export::LabelsJob do
+  include JobObservationSpecHelper
+
   let(:user) { people(:admin) }
   let(:group) { groups(:musikverband_hastdutoene) }
   let(:person) { people(:member) }
-  let(:filename) { AsyncDownloadFile.create_name("people_export", user.id) }
-
-  before do
-    person.roles.find_by(group: group).update!(instrument: "trompete")
-  end
 
   subject do
     Export::LabelsJob.new(
@@ -23,13 +20,19 @@ describe Export::LabelsJob do
       user.id,
       [person.id],
       group.id,
-      filename: filename
+      {filename: "people_export"}
     )
+  end
+
+  before do
+    person.roles.find_by(type: Group::VereinMitglieder::Mitglied.sti_name)
+      .update!(instrument: "trompete")
+    subject.enqueue!
   end
 
   it "renders a pdf with the instrument column" do
     subject.perform
-    pdf = AsyncDownloadFile.from_filename(filename, :pdf).read
+    pdf = read_data_from_generated_file(subject.job_observation)
     text = PDF::Inspector::Text.analyze(pdf).show_text.compact.join(" ")
     expect(text).to include(Role.human_attribute_name(:instrument), "Trompete")
     expect(pdf).to start_with("%PDF-1.3")

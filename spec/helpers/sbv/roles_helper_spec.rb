@@ -9,7 +9,7 @@ require "spec_helper"
 
 describe Sbv::RolesHelper do
   describe "#role_type_class" do
-    let(:group) { groups(:musikverband_hastdutoene) }
+    let(:group) { groups(:mitglieder_hastdutoene) }
     let(:entry) { Role.new(group: group) }
 
     it "uses the group standard role when entry has no type yet" do

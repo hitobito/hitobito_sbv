@@ -8,30 +8,41 @@
 require "spec_helper"
 
 describe Export::PeopleExportJob do
+  include JobObservationSpecHelper
+
   let(:user) { people(:admin) }
-  let(:group) { groups(:musikverband_hastdutoene) }
-  let(:person) { people(:member) }
-  let(:filename) { AsyncDownloadFile.create_name("people_export", user.id) }
+  let(:group) { groups(:musikgesellschaft_alterswil) }
+  let(:mitglieder) { groups(:mitglieder_38) }
+  let(:person) { people(:leader) }
+  let(:file) { subject.job_observation }
 
   before do
-    person.roles.find_by(group: group).update!(instrument: "trompete")
+    Fabricate(
+      Group::VereinMitglieder::Mitglied.sti_name.to_sym,
+      group: mitglieder,
+      person: person,
+      instrument: "trompete"
+    )
+    subject.enqueue!
   end
 
   context "full export" do
     subject do
-      Export::PeopleExportJob.new(:csv, user.id, group.id, {}, full: true, filename: filename)
+      Export::PeopleExportJob.new(:csv, user.id, group.id, {}, full: true, filename: "people_export")
     end
 
     it "includes the instrument column" do
       subject.perform
-      header = AsyncDownloadFile.from_filename(filename, :csv).read.lines.first
+      header = read_data_from_generated_file(file).lines.first
       expect(header).to include("Instrument")
     end
   end
 
   context "selection export" do
     subject do
-      Export::PeopleExportJob.new(:csv, user.id, group.id, {}, selection: true, filename: filename)
+      Export::PeopleExportJob.new(
+        :csv, user.id, group.id, {}, selection: true, filename: "people_export"
+      )
     end
 
     before do
@@ -41,12 +52,13 @@ describe Export::PeopleExportJob do
     it "includes base columns and instrument when selected" do
       subject.perform
       csv = CSV.parse(
-        AsyncDownloadFile.from_filename(filename, :csv).read,
+        read_data_from_generated_file(file),
         col_sep: Settings.csv.separator.strip,
         headers: true
       )
-      expect(csv.headers).to include("Nachname", "Vorname", "Instrument")
-      expect(csv.first["Instrument"]).to eq "Trompete"
+      headers = csv.headers.map { |h| h.to_s.delete("\uFEFF") }
+      expect(headers).to include("Nachname", "Vorname", "Instrument")
+      expect(csv.map { |row| row["Instrument"] }).to include("Trompete")
     end
   end
 end
