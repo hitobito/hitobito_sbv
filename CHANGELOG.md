@@ -2,6 +2,7 @@
 
 ## Version 1.28
 
+* Feld «Verwendung der Adressdaten» in Personenansicht, Editor und Exporten ausgeblendet (Daten bleiben erhalten)
 * Tab «Aufträge» auf Personen ausgeblendet
 
 ## Version 1.27
