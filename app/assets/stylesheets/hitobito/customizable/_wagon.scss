@@ -82,3 +82,12 @@
 .verein_fee_nesting {
   padding-left: 0.5rem;
 }
+
+// Compact "add role" so "Mitglied (Instrument)" has room in the aside.
+#content section.roles td .float-end .btn {
+  font-size: 0;
+
+  i {
+    font-size: 0.875rem;
+  }
+}
