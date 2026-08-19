@@ -51,7 +51,6 @@ module HitobitoSbv
       PeopleController.permitted_attrs += [:profession, :personal_data_usage]
 
       Person::HistoryController.prepend Sbv::Person::HistoryController
-      Event::ParticipationsController.prepend Sbv::Event::ParticipationsController
       DeviseController.include HostnamedGroups
 
       ### helpers

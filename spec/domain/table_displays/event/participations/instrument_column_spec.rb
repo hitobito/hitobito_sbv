@@ -39,24 +39,3 @@ describe TableDisplays::Event::Participations::InstrumentColumn do
     3.times { subject.send(:instrument_for, participation) }
   end
 end
-
-describe Event::ParticipationsController do
-  subject(:controller) { described_class.new }
-
-  let(:person) { people(:admin) }
-  let(:event) { events(:top_course) }
-
-  before do
-    TableDisplay.for(person, Event::Participation).update!(selected: ["participant.instrument"])
-    allow(controller).to receive(:current_person).and_return(person)
-    allow(controller).to receive(:filter_entries)
-      .and_return(Event::Participation.where(event: event).includes(event: :questions))
-  end
-
-  it "does not register participant.instrument as sortable" do
-    mappings = controller.send(:sort_mappings_with_indifferent_access)
-
-    expect(mappings).not_to have_key("participant.instrument")
-    expect(controller.send(:sortable?, "participant.instrument")).to be false
-  end
-end
