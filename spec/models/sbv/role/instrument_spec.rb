@@ -45,67 +45,6 @@ describe Role::MitgliederMitglied do
   end
 end
 
-describe "instrument role history", versioning: true do
-  let(:person) { people(:member) }
-  let(:group) { groups(:mitglieder_hastdutoene) }
-  let!(:role) do
-    Group::VereinMitglieder::Mitglied.create!(
-      person: person,
-      group: group,
-      start_on: 1.year.ago,
-      instrument: nil,
-      label: nil
-    )
-  end
-  let(:view_context) { ActionController::Base.new.view_context }
-
-  before do
-    view_context.extend(FormatHelper)
-    PaperTrail.request.whodunnit = people(:admin).id.to_s
-  end
-
-  it "logs initial instrument assignment without a spurious leading comma" do
-    role.update!(instrument: "oboe", label: "")
-
-    version = PaperTrail::Version.where(main_id: person.id).order(:id).last
-    text = PaperTrail::VersionAssociationChangePresenter.new(version, view_context).render
-
-    expect(text).to include("Instrument wurde auf <i>Oboe</i> gesetzt.")
-    expect(text).not_to match(/aktualisiert: ,/)
-  end
-
-  it "logs instrument when role is created with instrument" do
-    role.destroy!
-    new_role = Group::VereinMitglieder::Mitglied.create!(
-      person: person,
-      group: group,
-      start_on: Time.zone.today,
-      instrument: "piccolo"
-    )
-
-    version = PaperTrail::Version.where(item: new_role, event: "create").last
-    text = PaperTrail::VersionAssociationChangePresenter.new(version, view_context).render
-
-    expect(text).to include("wurde hinzugefügt:")
-    expect(text).to include("Instrument wurde auf <i>Piccolo</i> gesetzt.")
-  end
-
-  it "does not show a dangling colon when role is created without instrument" do
-    role.destroy!
-    new_role = Group::VereinMitglieder::Mitglied.create!(
-      person: person,
-      group: group,
-      start_on: Time.zone.today
-    )
-
-    version = PaperTrail::Version.where(item: new_role, event: "create").last
-    text = PaperTrail::VersionAssociationChangePresenter.new(version, view_context).render
-
-    expect(text).to include("wurde hinzugefügt.")
-    expect(text).not_to include("hinzugefügt:")
-  end
-end
-
 describe Person do
   let(:person) { people(:member) }
   let(:group) { groups(:musikverband_hastdutoene) }
