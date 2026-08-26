@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe People::Merger do
   let(:person) { Fabricate(:person) }
-  let(:duplicate) { Fabricate(:person_with_address_and_phone) }
+  let(:duplicate) { Fabricate(:person) }
   let(:actor) { people(:admin) }
   let(:person_roles) { person.roles.with_inactive }
 
