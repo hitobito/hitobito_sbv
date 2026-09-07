@@ -202,9 +202,9 @@ fr:
         many: Directeur-trice-s
         other: Directeur-trice-s
       group/verein/jugendverantwortlicher:
-        one: responsable jeunesse
-        many: responsables jeunesse
-        other: responsable jeunesse
+        one: Responsable jeunesse
+        many: Responsables jeunesse
+        other: Responsable jeunesse
       group/verein/suisa_admin:
         one: Responsable SUISA
         many: Responsables SUISA
