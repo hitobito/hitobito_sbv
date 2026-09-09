@@ -35,7 +35,7 @@ describe Export::SubgroupsExportJob do
       "Haupt-E-Mail",
       "Kontaktperson",
       "E-Mailadresse Kontaktperson",
-      "zusätzliche Adresszeile",
+      "c/o-Adresse",
       "Adresse",
       "Postfach",
       "PLZ",
