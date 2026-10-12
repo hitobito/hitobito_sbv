@@ -14,4 +14,12 @@ Dir[HitobitoSbv::Wagon.root.join("spec/support/**/*.rb")].sort.each { |f| requir
 
 RSpec.configure do |config|
   config.fixture_paths = [File.expand_path("../fixtures", __FILE__)]
+
+  config.seeds << {
+    paths: [
+      Rails.root.join("db", "seeds"),
+      HitobitoSbv::Wagon.root.join("db", "seeds")
+    ],
+    filter: /custom_contents/
+  }
 end
