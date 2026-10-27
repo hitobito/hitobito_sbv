@@ -6,7 +6,7 @@
 fr:
   admins:
     show:
-      concerts: Aufführungen
+      concerts: Interprétations
 
   global:
     last_change: "Dernière modification: %{date}"
@@ -32,7 +32,7 @@ fr:
     totals:
       submitted: envoyé
       not_submitted: pas envoyé
-      censuses_submitted: "%{submitted} sur %{total} envoyé"
+      censuses_submitted: "%{submitted} sur %{total} envoyé(s)"
       joint_play: Association d’ensembles
       not_playable: Pas d'exécution musicale cette année
       otherwise_billed: SUISA facturé à un tiers
@@ -121,7 +121,7 @@ fr:
     csv: CSV
     xlsx: Excel
   dropdown/invoice_new:
-    membership_fee: Frais de cotisation
+    membership_fee: Cotisation de membres
 
   concerts:
     index:

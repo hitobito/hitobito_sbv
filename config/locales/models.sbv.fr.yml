@@ -172,7 +172,7 @@ fr:
       group/regionalverband/suisa_admin:
         one: Responsable SUISA
         many: Responsables SUISA
-        other: Responsables SUISA
+        other: Responsable SUISA
 
       group/verein:
         one: Société
