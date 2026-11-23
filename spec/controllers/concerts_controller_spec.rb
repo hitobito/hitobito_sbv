@@ -27,6 +27,44 @@ describe ConcertsController do
     end
   end
 
+  context "create" do
+    let(:own_verein) { admin.primary_group }
+
+    def create_unplayed_concert(year:, **attrs)
+      Concert.create!(verein: own_verein, year:, name: "Nicht gespielt",
+        reason: "not_playable", **attrs)
+    end
+
+    def create_concert(year:)
+      post :create, params: {
+        group_id: own_verein.id,
+        concert: {name: "Jahreskonzert", year:, reason: "_nil", verein_id: own_verein.id}
+      }
+    end
+
+    it "removes unplayed concert of the same year" do
+      unplayed = create_unplayed_concert(year: 2019)
+
+      expect { create_concert(year: 2019) }.not_to change(Concert, :count)
+      expect(Concert.with_deleted.where(id: unplayed.id)).not_to exist
+    end
+
+    it "keeps unplayed concert of another year" do
+      unplayed = create_unplayed_concert(year: 2018)
+
+      expect { create_concert(year: 2019) }.to change(Concert, :count).by(1)
+      expect(Concert.where(id: unplayed.id)).to exist
+    end
+
+    it "keeps unplayed concert locked by a finished census" do
+      locked = create_unplayed_concert(year: 2018, song_census: song_censuses(:two_o_18))
+      locked.update_column(:editable, false)
+
+      expect { create_concert(year: 2018) }.to change(Concert, :count).by(1)
+      expect(Concert.where(id: locked.id)).to exist
+    end
+  end
+
   context "submit" do
     before do
       concerts(:third_concert).update(song_census: nil)
