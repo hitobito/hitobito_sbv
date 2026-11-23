@@ -38,7 +38,8 @@ class ConcertsController < SimpleCrudController
   private
 
   def remove_existing_unplayed_concerts
-    (entry.verein.concerts.not_played - [entry]).each(&:really_destroy!)
+    entry.verein.concerts.not_played.in(entry.year).where(editable: true)
+      .where.not(id: entry.id).find_each(&:really_destroy!)
   end
 
   def assign_attributes
